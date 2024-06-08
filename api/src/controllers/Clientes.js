@@ -32,6 +32,8 @@ const createCliente = async (req, res) => {
   }
 };
 
+//TRAE TODOS LOS CLIENTES SI EL USUARIO ES ADMIN, SINO SOLO LOS CLIENTES QUE CARGO ESE USUARIO //
+
 const getClientes = async (req, res) => {
   try {
     // Verifica si se proporciona el ID de usuario
@@ -52,11 +54,24 @@ const getClientes = async (req, res) => {
 
     // Si el usuario tiene el rol para ver todos los clientes
     if (usuario.rol === true) {
-      clientes = await Clientes.findAll();
+      clientes = await Clientes.findAll({
+        include: [
+          {
+            model: Usuarios,
+            attributes: ["nombre", "apellido"],
+          },
+        ],
+      });
     } else {
       // Si el usuario solo puede ver sus propios clientes
       clientes = await Clientes.findAll({
         where: { idUsuario },
+        include: [
+          {
+            model: Usuarios,
+            attributes: ["nombre", "apellido"],
+          },
+        ],
       });
     }
 

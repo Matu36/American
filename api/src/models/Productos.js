@@ -52,7 +52,7 @@ module.exports = (sequelize) => {
       },
       cantidadTotal: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       precio: {
         type: DataTypes.INTEGER,
@@ -60,7 +60,7 @@ module.exports = (sequelize) => {
       },
       codigo: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       potencia: {
         type: DataTypes.STRING,
@@ -84,7 +84,7 @@ module.exports = (sequelize) => {
       },
     },
     {
-      timestamps: false,
+      timestamps: true,
     }
   );
 };

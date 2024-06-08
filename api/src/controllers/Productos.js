@@ -2,70 +2,58 @@ const { Productos } = require("../db.js");
 
 const getProductos = async (req, res) => {
   try {
-    let com = await Productos.findAll();
+    let productos = await Productos.findAll();
 
-    return !com
+    return !productos
       ? res.status(404).send("No hay Productos")
       : res.send(
-          com.map(
+          productos.map(
             ({
               id,
-              nombre,
+              familia,
               marca,
+              modelo,
               imagen,
               imagen1,
               imagen2,
               imagen3,
+              imagen4,
+              imagen5,
+              imagen6,
+              cantidadTotal,
               precio,
               codigo,
-              talle,
-              cantidadTotal,
+              potencia,
+              motor,
+              capacidadDeCarga,
+              capacidadDeBalde,
+              detalles,
             }) => ({
               id,
-              nombre,
+              familia,
               marca,
+              modelo,
               imagen,
               imagen1,
               imagen2,
               imagen3,
+              imagen4,
+              imagen5,
+              imagen6,
+              cantidadTotal,
               precio,
               codigo,
-              talle,
-              cantidadTotal,
+              potencia,
+              motor,
+              capacidadDeCarga,
+              capacidadDeBalde,
+              detalles,
             })
           )
         );
   } catch (error) {
     console.log(error);
     return res.status(404).send("Error 404");
-  }
-};
-
-const getProductosVentas = async (req, res) => {
-  try {
-    const productos = await Productos.findAll({
-      attributes: ["id", "marca", "codigo", "precio", "imagen"],
-    });
-
-    if (!productos.length) {
-      return res.status(404).send("No hay Productos");
-    }
-
-    // Mapea los productos para devolver solo los campos requeridos
-    const productosFiltrados = productos.map(
-      ({ id, marca, codigo, precio, imagen }) => ({
-        id,
-        marca,
-        codigo,
-        precio,
-        imagen,
-      })
-    );
-
-    return res.send(productosFiltrados);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send("Error interno del servidor");
   }
 };
 
@@ -82,16 +70,23 @@ const getProductoById = async (req, res) => {
     // Devolver el producto encontrado
     return res.send({
       id: producto.id,
-      nombre: producto.nombre,
+      familia: producto.familia,
       marca: producto.marca,
+      modelo: producto.modelo,
       imagen: producto.imagen,
       imagen1: producto.imagen1,
       imagen2: producto.imagen2,
       imagen3: producto.imagen3,
+      imagen4: producto.imagen4,
+      imagen5: producto.imagen5,
+      imagen6: producto.imagen6,
       precio: producto.precio,
       codigo: producto.codigo,
-      talle: producto.talle,
+      potencia: producto.potencia,
       cantidadTotal: producto.cantidadTotal,
+      motor: producto.motor,
+      capacidadDeCarga: producto.capacidadDeCarga,
+      capacidadDeBalde: producto.capacidadDeBalde,
     });
   } catch (error) {
     console.log(error);
@@ -135,13 +130,10 @@ const putProductos = async (req, res) => {
 const createProducto = async (req, res) => {
   try {
     if (
+      !req.body?.familia ||
       !req.body?.marca ||
-      !req.body?.precio ||
-      !req.body?.imagen ||
-      !req.body?.imagen1 ||
-      !req.body?.codigo ||
-      !req.body?.talle ||
-      !req.body?.cantidadTotal
+      !req.body?.modelo ||
+      !req.body?.precio
     )
       throw "No body params";
 
@@ -184,5 +176,4 @@ module.exports = {
   createProducto,
   deleteProducto,
   getProductoById,
-  getProductosVentas,
 };

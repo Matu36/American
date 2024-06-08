@@ -15,12 +15,13 @@ const {
   putProductos,
   createProducto,
   deleteProducto,
-  getProductosVentas,
 } = require("../controllers/Productos");
 
 const {
   createCotizacion,
   getCotizaciones,
+  getCantidadCotizacionesPorUsuario,
+  putCotizaciones,
 } = require("../controllers/Cotizaciones");
 
 const { createCliente, getClientes } = require("../controllers/Clientes");
@@ -43,13 +44,14 @@ router.get("/usuarios/lastFive", getLastLoggedInUsers);
 router.get("/usuarios/all", check.auth, getAllUsers);
 router.put("/usuarios/recoverpass", resetPassword);
 router.get("/productos", getProductos);
-router.get("/productos/ventas", getProductosVentas);
 router.get("/productos/:id", getProductoById);
-router.post("/productos/create", check.auth, createProducto);
-router.put("/productos/edit", check.auth, putProductos);
+router.post("/productos/create", createProducto);
+router.put("/productos/edit", putProductos);
 router.delete("/productos/delete", check.auth, deleteProducto);
 router.post("/cotizaciones/create", createCotizacion);
 router.get("/cotizaciones/get", getCotizaciones);
+router.get("/countCotizaciones/get", getCantidadCotizacionesPorUsuario);
+router.put("/cotizaciones/edit", putCotizaciones);
 router.post("/cliente/create", createCliente);
 router.get("/clientes/get", getClientes);
 
