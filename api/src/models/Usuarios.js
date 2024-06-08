@@ -4,6 +4,11 @@ module.exports = (sequelize) => {
   sequelize.define(
     "Usuarios",
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,

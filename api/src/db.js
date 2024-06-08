@@ -5,7 +5,7 @@ const path = require("path");
 const { DB_URL, DATABASE_URL } = process.env;
 
 const sequelize = new Sequelize(
-  DATABASE_URL,
+  DB_URL,
 
   {
     logging: false,
@@ -40,15 +40,37 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Usuarios, Productos, Mensajes, MercPago, Ofertas, Ventas } =
-  sequelize.models;
+const {
+  Usuarios,
+  Productos,
+  Mensajes,
+  Clientes,
+  Cotizaciones,
+  Garantia,
+  Solicitantes,
+} = sequelize.models;
 
-// Aca vendrian las relaciones
-// Ofertas;
-// MercPago;
-// Productos;
-// Usuarios;
-// Mensajes;
+Clientes.belongsTo(Usuarios, {
+  foreignKey: "idUsuario",
+});
+
+Usuarios.hasMany(Clientes, {
+  foreignKey: "idUsuario",
+});
+
+Cotizaciones.belongsTo(Usuarios, {
+  foreignKey: "idUsuario",
+});
+Usuarios.hasMany(Cotizaciones, {
+  foreignKey: "idUsuario",
+});
+
+Cotizaciones.belongsTo(Clientes, {
+  foreignKey: "idCliente",
+});
+Clientes.hasMany(Cotizaciones, {
+  foreignKey: "idCliente",
+});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

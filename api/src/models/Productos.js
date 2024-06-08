@@ -10,23 +10,43 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      familia: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       marca: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      modelo: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       imagen: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       imagen1: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       imagen2: {
         type: DataTypes.TEXT,
         allowNull: true,
       },
       imagen3: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      imagen4: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      imagen5: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      imagen6: {
         type: DataTypes.TEXT,
         allowNull: true,
       },
@@ -42,9 +62,25 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      talle: {
-        type: DataTypes.JSONB,
-        allowNull: false,
+      potencia: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      motor: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      capacidadDeCarga: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      capacidadDeBalde: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      detalles: {
+        type: DataTypes.TEXT,
+        allowNull: true,
       },
     },
     {

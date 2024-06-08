@@ -1,5 +1,5 @@
 const { Router } = require("express");
-// const {getComidas, putComidas, createComida, deleteComida} = require ("../controllers/ComidasCont");
+
 const {
   login,
   registro,
@@ -19,16 +19,11 @@ const {
 } = require("../controllers/Productos");
 
 const {
-  Payment,
-  postVentaMercadoPago,
-  getMercadoPago,
-} = require("../controllers/MercadoPago");
+  createCotizacion,
+  getCotizaciones,
+} = require("../controllers/Cotizaciones");
 
-const {
-  getAllVentas,
-  createVenta,
-  getLastVentas,
-} = require("../controllers/Ventas");
+const { createCliente, getClientes } = require("../controllers/Clientes");
 
 const check = require("../middlewares/auth");
 
@@ -53,11 +48,9 @@ router.get("/productos/:id", getProductoById);
 router.post("/productos/create", check.auth, createProducto);
 router.put("/productos/edit", check.auth, putProductos);
 router.delete("/productos/delete", check.auth, deleteProducto);
-router.post("/payment", Payment);
-router.post("/paymentDBLOCAL", postVentaMercadoPago);
-router.get("/paymentDBLOCAL", getMercadoPago);
-router.get("/ventas", getAllVentas);
-router.post("/ventas/create", createVenta);
-router.get("/ventas/lastFive", getLastVentas);
+router.post("/cotizaciones/create", createCotizacion);
+router.get("/cotizaciones/get", getCotizaciones);
+router.post("/cliente/create", createCliente);
+router.get("/clientes/get", getClientes);
 
 module.exports = router;
