@@ -10,8 +10,7 @@ const createCliente = async (req, res) => {
       !req.body?.nombre ||
       !req.body?.apellido ||
       !req.body?.mail ||
-      !req.body?.telefono ||
-      !req.body?.usuarioDeCreacion
+      !req.body?.telefono
     )
       throw "Faltan parámetros en el cuerpo de la solicitud";
 
@@ -29,6 +28,23 @@ const createCliente = async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(400).send(error);
+  }
+};
+
+//TRAE TODOS LOS CLIENTES SIN EXCEPCION //
+
+const getClientesAll = async (req, res) => {
+  try {
+    const clientes = await Clientes.findAll();
+
+    if (clientes.length === 0) {
+      return res.status(404).send("No hay clientes");
+    }
+
+    return res.status(200).json(clientes);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Error al obtener los clientes");
   }
 };
 
@@ -82,7 +98,60 @@ const getClientes = async (req, res) => {
   }
 };
 
+// MODIFICACION DE LOS DATOS DEL CLIENTE //
+
+const updateCliente = async (req, res) => {
+  try {
+    if (!req.body?.id) {
+      throw "Se requiere el ID del cliente";
+    }
+
+    const id = req.body.id;
+
+    // Verifica que al menos uno de los campos para actualizar esté presente en el cuerpo de la solicitud
+    const { idUsuario, CUIT, domicilio, nombre, apellido, mail, telefono } =
+      req.body;
+
+    if (
+      !idUsuario &&
+      !CUIT &&
+      !domicilio &&
+      !nombre &&
+      !apellido &&
+      !mail &&
+      !telefono
+    ) {
+      throw "No hay parámetros para actualizar";
+    }
+
+    // Busca el cliente por ID
+    let cliente = await Clientes.findByPk(id);
+
+    if (!cliente) {
+      return res.status(404).send("Cliente no encontrado");
+    }
+
+    // Actualiza los campos del cliente
+    await cliente.update({
+      idUsuario: idUsuario ?? cliente.idUsuario,
+      CUIT: CUIT ?? cliente.CUIT,
+      domicilio: domicilio ?? cliente.domicilio,
+      nombre: nombre ?? cliente.nombre,
+      apellido: apellido ?? cliente.apellido,
+      mail: mail ?? cliente.mail,
+      telefono: telefono ?? cliente.telefono,
+    });
+
+    return res.status(200).send(cliente);
+  } catch (error) {
+    console.error(error);
+    return res.status(400).send(error);
+  }
+};
+
 module.exports = {
+  getClientesAll,
   createCliente,
   getClientes,
+  updateCliente,
 };

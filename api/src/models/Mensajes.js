@@ -9,30 +9,16 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      nombre: {
-        type: DataTypes.STRING,
+      idUsuario: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-      apellidos: {
-        type: DataTypes.STRING,
+      idDestino: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          isEmail: true,
-        },
-      },
-      telefono: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      direccion: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      consulta: {
+
+      Mensaje: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
@@ -49,7 +35,7 @@ module.exports = (sequelize) => {
     },
     {
       tableName: "Mensajes",
-      timestamps: false, // Desactiva los timestamps automáticos (createdAt, updatedAt)
+      timestamps: false,
     }
   );
 };

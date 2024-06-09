@@ -72,6 +72,22 @@ Clientes.hasMany(Cotizaciones, {
   foreignKey: "idCliente",
 });
 
+Cotizaciones.belongsTo(Productos, {
+  foreignKey: "idProducto",
+});
+
+Productos.hasMany(Cotizaciones, {
+  foreignKey: "idProducto",
+});
+
+Mensajes.belongsTo(Usuarios, {
+  foreignKey: "idUsuario",
+});
+
+Usuarios.hasMany(Mensajes, {
+  foreignKey: "idUsuario",
+});
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');

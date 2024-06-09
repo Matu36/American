@@ -17,6 +17,10 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      idProducto: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       anticipo: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
@@ -64,10 +68,15 @@ module.exports = (sequelize) => {
         allowNull: true,
         defaultValue: DataTypes.NOW,
       },
+      fechaVenta: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: DataTypes.NOW,
+      },
     },
     {
       tableName: "Cotizaciones",
-      timestamps: false, // Desactiva los timestamps automáticos (createdAt, updatedAt)
+      timestamps: false,
     }
   );
 };

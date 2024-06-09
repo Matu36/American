@@ -72,7 +72,7 @@ module.exports = (sequelize) => {
     },
     {
       tableName: "Garantia",
-      timestamps: false, // Desactiva los timestamps automáticos (createdAt, updatedAt)
+      timestamps: false,
     }
   );
 };

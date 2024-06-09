@@ -1,6 +1,7 @@
 const { Cotizaciones } = require("../db.js");
 const { Usuarios } = require("../db.js");
 const { Clientes } = require("../db.js");
+const { Productos } = require("../db.js");
 const { conn } = require("../db.js");
 
 // Ruta POST para crear una nueva cotización
@@ -9,6 +10,7 @@ const createCotizacion = async (req, res) => {
     if (
       !req.body?.idUsuario ||
       !req.body?.idCliente ||
+      !req.body?.idProducto ||
       !req.body?.anticipo ||
       !req.body?.saldoAFinanciar ||
       !req.body?.IVA ||
@@ -64,6 +66,7 @@ const getCotizaciones = async (req, res) => {
         include: [
           { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
+          { model: Productos, attributes: ["familia", "marca", "modelo"] },
         ],
       });
     } else {
@@ -73,6 +76,7 @@ const getCotizaciones = async (req, res) => {
         include: [
           { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
+          { model: Productos, attributes: ["familia", "marca", "modelo"] },
         ],
       });
     }

@@ -28,13 +28,13 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isUrl: true, // Agrega esta validación si quieres asegurarte de que la URL sea válida
+          isUrl: true,
         },
       },
     },
     {
       tableName: "Solicitantes",
-      timestamps: false, // Desactiva los timestamps automáticos (createdAt, updatedAt)
+      timestamps: true,
     }
   );
 };

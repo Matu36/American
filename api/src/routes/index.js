@@ -24,7 +24,14 @@ const {
   putCotizaciones,
 } = require("../controllers/Cotizaciones");
 
-const { createCliente, getClientes } = require("../controllers/Clientes");
+const {
+  createCliente,
+  getClientes,
+  updateCliente,
+  getClientesAll,
+} = require("../controllers/Clientes");
+
+const { getContactos, createContacto } = require("../controllers/Contacto");
 
 const check = require("../middlewares/auth");
 
@@ -54,5 +61,9 @@ router.get("/countCotizaciones/get", getCantidadCotizacionesPorUsuario);
 router.put("/cotizaciones/edit", putCotizaciones);
 router.post("/cliente/create", createCliente);
 router.get("/clientes/get", getClientes);
+router.get("/clientesAll/get", getClientesAll);
+router.put("/clientes/edit", updateCliente);
+router.get("/contacto/get", getContactos);
+router.post("/contacto/create", createContacto);
 
 module.exports = router;

@@ -2,38 +2,25 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Clientes",
+    "Contacto",
     {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      idUsuario: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      CUIT: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      domicilio: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       nombre: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      apellido: {
+      apellidos: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      mail: {
+      email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        unique: true, // Aquí añadimos la propiedad unique
         validate: {
           isEmail: true,
         },
@@ -42,20 +29,18 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      fechaDeCreacion: {
-        type: DataTypes.DATE,
+      direccion: {
+        type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: DataTypes.NOW,
       },
-
-      fechaModi: {
-        type: DataTypes.DATE,
-        allowNull: true,
-        defaultValue: DataTypes.NOW,
+      consulta: {
+        type: DataTypes.TEXT,
+        allowNull: false,
       },
     },
     {
-      timestamps: false,
+      tableName: "Contacto",
+      timestamps: true,
     }
   );
 };
