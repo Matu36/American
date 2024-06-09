@@ -32,6 +32,7 @@ const {
 } = require("../controllers/Clientes");
 
 const { getContactos, createContacto } = require("../controllers/Contacto");
+const { getDescuentos, createDescuento } = require("../controllers/Descuentos");
 
 const check = require("../middlewares/auth");
 
@@ -65,5 +66,7 @@ router.get("/clientesAll/get", getClientesAll);
 router.put("/clientes/edit", updateCliente);
 router.get("/contacto/get", getContactos);
 router.post("/contacto/create", createContacto);
+router.get("/descuento/get", getDescuentos);
+router.post("/descuento/create", createDescuento);
 
 module.exports = router;

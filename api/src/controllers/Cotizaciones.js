@@ -4,7 +4,7 @@ const { Clientes } = require("../db.js");
 const { Productos } = require("../db.js");
 const { conn } = require("../db.js");
 
-// Ruta POST para crear una nueva cotización
+// FUNCION PARA CREAR UNA COTIZACION //
 const createCotizacion = async (req, res) => {
   try {
     if (
@@ -44,23 +44,20 @@ const createCotizacion = async (req, res) => {
 
 const getCotizaciones = async (req, res) => {
   try {
-    // Verifica si se proporciona el ID de usuario
-    if (!req.body?.idUsuario) {
+    // Verificar si se proporciona el ID de usuario
+    const idUsuario = req.body?.idUsuario;
+    if (!idUsuario) {
       throw "Se requiere el ID de usuario";
     }
 
-    const idUsuario = req.body.idUsuario;
-
-    // Busca el usuario en la base de datos
+    // Buscar el usuario en la base de datos
     const usuario = await Usuarios.findByPk(idUsuario);
-
     if (!usuario) {
       throw "Usuario no encontrado";
     }
 
+    // Obtener las cotizaciones según el rol del usuario
     let cotizaciones;
-
-    // Si el usuario tiene el rol para ver todas las cotizaciones
     if (usuario.rol === true) {
       cotizaciones = await Cotizaciones.findAll({
         include: [
@@ -70,7 +67,6 @@ const getCotizaciones = async (req, res) => {
         ],
       });
     } else {
-      // Si el usuario solo puede ver sus propias cotizaciones
       cotizaciones = await Cotizaciones.findAll({
         where: { idUsuario },
         include: [
@@ -81,16 +77,17 @@ const getCotizaciones = async (req, res) => {
       });
     }
 
+    // Devolver las cotizaciones
     return res.status(200).json(cotizaciones);
   } catch (error) {
-    console.error(error);
+    console.error("Error al obtener cotizaciones:", error);
     return res.status(400).send(error);
   }
 };
 
-// Esto solo lo ve el Administrador //
+// SOLO LO VE EL ADMINISTRADOR //
 
-// Muestra la cantidad de Cotizaciones de cada vendedor //
+// FUNCION QUE MUESTRA LA CANTIDAD DE COTIZACIONES DEL VENDEDOR//
 
 const getCantidadCotizacionesPorUsuario = async (req, res) => {
   try {
@@ -113,32 +110,28 @@ const getCantidadCotizacionesPorUsuario = async (req, res) => {
   }
 };
 
+// FUNCION PARA MODIFICAR COTIZACIONES //
+
 const putCotizaciones = async (req, res) => {
   try {
     const { id, ...updatedFields } = req.body;
 
-    // Validar que el ID sea un valor válido
     if (!id) {
       return res
         .status(400)
         .send("Se requiere un ID válido para actualizar la cotizacion.");
     }
 
-    // Buscar la cotizacion por ID
     let cotizacion = await Cotizaciones.findOne({ where: { id } });
 
-    // Verificar si se encontró la cotizacion
     if (!cotizacion) {
       return res.status(404).send("No se encontró el producto.");
     }
 
-    // Actualizar la cotizacion con los campos actualizados
     await cotizacion.update(updatedFields);
 
-    // Recargar la cotizacion actualizada
     await cotizacion.reload();
 
-    // Enviar la cotizacion actualizada como respuesta
     return res.send(cotizacion);
   } catch (error) {
     console.log(error);
