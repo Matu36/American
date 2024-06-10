@@ -108,16 +108,31 @@ const login = async (req, res) => {
   }
 };
 
+// FUNCION PARA TRAER TODOS LOS USUARIOS
 const getAllUsers = async (req, res) => {
   try {
-    // Consulta a la base de datos para obtener todos los usuarios
     const allUsers = await Usuarios.findAll();
 
-    // Devuelve la lista de usuarios en la respuesta
     return res.status(200).json({ allUsers });
   } catch (error) {
     console.error("Error al obtener todos los usuarios:", error);
-    // Devuelve un mensaje de error en caso de fallo
+
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+
+// FUNCION QUE ME VA A SERVIR PARA SELECCIONAR EN LA MENSAJERIA INTERNA
+
+const getAllUsersMensajes = async (req, res) => {
+  try {
+    const allUsers = await Usuarios.findAll({
+      attributes: ["id", "email", "nombre", "apellido"],
+    });
+
+    return res.status(200).json({ allUsers });
+  } catch (error) {
+    console.error("Error al obtener todos los usuarios:", error);
+
     return res.status(500).json({ error: "Error interno del servidor" });
   }
 };
@@ -234,6 +249,29 @@ const resetPassword = async (req, res) => {
   }
 };
 
+//FUNCION QUE VERIFICA SI EL USUARIO ES ADMIN O NO
+
+const verificarRol = async (req, res) => {
+  try {
+    const idUsuario = req.body.idUsuario;
+
+    const usuario = await Usuarios.findByPk(idUsuario);
+
+    if (!usuario) {
+      throw "Usuario no encontrado";
+    }
+
+    if (usuario.rol === true) {
+      return res.status(200).send("Rol true");
+    } else {
+      return res.status(400).send("Rol false");
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(400).send(error);
+  }
+};
+
 module.exports = {
   login,
   registro,
@@ -241,4 +279,6 @@ module.exports = {
   resetPassword,
   getAllUsers,
   getLastLoggedInUsers,
+  verificarRol,
+  getAllUsersMensajes,
 };

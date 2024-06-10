@@ -71,7 +71,6 @@ module.exports = (sequelize) => {
       fechaVenta: {
         type: DataTypes.DATE,
         allowNull: true,
-        defaultValue: DataTypes.NOW,
       },
     },
     {

@@ -139,9 +139,101 @@ const putCotizaciones = async (req, res) => {
   }
 };
 
+//SETEAR EL ESTADO EN 2 (ESTO QUIERE DECIR QUE LA COTIZACION SE CONCRETO) //
+//VENTAS//
+
+const updateCotizacionEstado = async (req, res) => {
+  try {
+    if (!req.body?.id) {
+      throw "Se requiere el ID de la cotización";
+    }
+
+    const { id } = req.body;
+
+    let cotizacion = await Cotizaciones.findByPk(id, {
+      include: [
+        { model: Productos, attributes: ["modelo"] },
+        { model: Usuarios, attributes: ["nombre", "apellido"] },
+        { model: Clientes, attributes: ["nombre", "apellido"] },
+      ],
+    });
+
+    if (!cotizacion) {
+      throw "Cotización no encontrada";
+    }
+
+    await cotizacion.update({ estado: 2, fechaVenta: new Date() });
+
+    return res.status(200).send(cotizacion);
+  } catch (error) {
+    console.error(error);
+    return res.status(400).send(error);
+  }
+};
+
+// SUMA EL PRECIO FINAL DE TODAS LAS COTIZACIONES DISCRIMINADO EN PESOS Y DOLARES //
+
+const sumarPreciosFinales = async (req, res) => {
+  try {
+    const sumaPreciosFinalesUSD = await Cotizaciones.sum("PrecioFinal", {
+      where: { moneda: "USD" },
+    });
+
+    const sumaPreciosFinalesARS = await Cotizaciones.sum("PrecioFinal", {
+      where: { moneda: "$" },
+    });
+
+    return res.status(200).json({
+      sumaPreciosFinalesUSD,
+      sumaPreciosFinalesARS,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(400).send(error);
+  }
+};
+
+//ESTA FUNCION SUMA LAS VENTAS TOTALES, LE TRAE EL TOTAL AL ADMIN, Y EL TOTAL DE SUS VENTAS AL VENDEDOR //
+
+const sumarPreciosFinalesPorMonedaYEstado = async (req, res) => {
+  try {
+    const idUsuario = req.body.idUsuario;
+    const usuario = await Usuarios.findByPk(idUsuario);
+    const esRolTrue = usuario.rol === true;
+
+    let whereCondition = { estado: 2 };
+
+    // Si el usuario no tiene rol true, limita la búsqueda a sus propias cotizaciones
+    if (!esRolTrue) {
+      whereCondition.idUsuario = idUsuario;
+    }
+
+    // Suma los valores de PrecioFinal para USD
+    const sumaPreciosFinalesUSD = await Cotizaciones.sum("PrecioFinal", {
+      where: { ...whereCondition, moneda: "USD" },
+    });
+
+    // Suma los valores de PrecioFinal para ARS
+    const sumaPreciosFinalesARS = await Cotizaciones.sum("PrecioFinal", {
+      where: { ...whereCondition, moneda: "$" },
+    });
+
+    return res.status(200).json({
+      sumaPreciosFinalesUSD,
+      sumaPreciosFinalesARS,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(400).send(error);
+  }
+};
+
 module.exports = {
   createCotizacion,
   getCotizaciones,
   getCantidadCotizacionesPorUsuario,
   putCotizaciones,
+  updateCotizacionEstado,
+  sumarPreciosFinales,
+  sumarPreciosFinalesPorMonedaYEstado,
 };

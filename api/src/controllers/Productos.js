@@ -57,12 +57,13 @@ const getProductos = async (req, res) => {
   }
 };
 
+// FUNCION PARA VER EL DETALLE DEL PRODUCTO //
+
 const getProductoById = async (req, res) => {
   try {
-    const { id } = req.params; // Obtener el ID del parámetro de la URL
-    const producto = await Productos.findByPk(id); // Buscar el producto por su ID
+    const { id } = req.params;
+    const producto = await Productos.findByPk(id);
 
-    // Verificar si se encontró el producto
     if (!producto) {
       return res.status(404).send("Producto no encontrado");
     }
@@ -94,32 +95,28 @@ const getProductoById = async (req, res) => {
   }
 };
 
+// FUNCION PARA MODIFICAR LOS PRODUCTOS  //
+
 const putProductos = async (req, res) => {
   try {
     const { id, ...updatedFields } = req.body;
 
-    // Validar que el ID sea un valor válido
     if (!id) {
       return res
         .status(400)
         .send("Se requiere un ID válido para actualizar el producto.");
     }
 
-    // Buscar el producto por ID
     let producto = await Productos.findOne({ where: { id } });
 
-    // Verificar si se encontró el producto
     if (!producto) {
       return res.status(404).send("No se encontró el producto.");
     }
 
-    // Actualizar el producto con los campos actualizados
     await producto.update(updatedFields);
 
-    // Recargar el producto actualizado
     await producto.reload();
 
-    // Enviar el producto actualizado como respuesta
     return res.send(producto);
   } catch (error) {
     console.log(error);
@@ -153,6 +150,8 @@ const createProducto = async (req, res) => {
     return res.status(400).send(e);
   }
 };
+
+// FUNCION PARA ELIMINAR EL PRODUCTO //
 
 const deleteProducto = async (req, res) => {
   try {

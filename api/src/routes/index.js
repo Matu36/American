@@ -7,6 +7,8 @@ const {
   resetPassword,
   getAllUsers,
   getLastLoggedInUsers,
+  verificarRol,
+  getAllUsersMensajes,
 } = require("../controllers/Usuarios");
 
 const {
@@ -22,6 +24,9 @@ const {
   getCotizaciones,
   getCantidadCotizacionesPorUsuario,
   putCotizaciones,
+  updateCotizacionEstado,
+  sumarPreciosFinales,
+  sumarPreciosFinalesPorMonedaYEstado,
 } = require("../controllers/Cotizaciones");
 
 const {
@@ -33,6 +38,22 @@ const {
 
 const { getContactos, createContacto } = require("../controllers/Contacto");
 const { getDescuentos, createDescuento } = require("../controllers/Descuentos");
+const {
+  getAllGarantias,
+  getGarantiaById,
+  createGarantia,
+} = require("../controllers/Garantia");
+
+const {
+  createMessage,
+  updateMessageState,
+  getMessagesByUserAndDestination,
+} = require("../controllers/Mensajes");
+
+const {
+  getAllSolicitantes,
+  createSolicitante,
+} = require("../controllers/Solicitaciones");
 
 const check = require("../middlewares/auth");
 
@@ -47,6 +68,7 @@ const router = Router();
 
 router.post("/usuarios/login", login);
 router.post("/usuarios/registro", registro);
+router.post("/usuarios/rol", verificarRol);
 router.put("/usuarios", check.auth, putUser);
 router.get("/usuarios/lastFive", getLastLoggedInUsers);
 router.get("/usuarios/all", check.auth, getAllUsers);
@@ -68,5 +90,16 @@ router.get("/contacto/get", getContactos);
 router.post("/contacto/create", createContacto);
 router.get("/descuento/get", getDescuentos);
 router.post("/descuento/create", createDescuento);
-
+router.put("/cotizaciones/state", updateCotizacionEstado);
+router.get("/cotizaciones/suma", sumarPreciosFinales);
+router.get("/cotizaciones/sumaVentas", sumarPreciosFinalesPorMonedaYEstado);
+router.get("/usuarios/mensajes", getAllUsersMensajes);
+router.post("/mensajes/create", createMessage);
+router.put("/mensajes/put", updateMessageState);
+router.get("/mensajes/get", getMessagesByUserAndDestination);
+router.get("/solicitaciones/get", getAllSolicitantes);
+router.post("/solicitaciones/create", createSolicitante);
+router.get("/garantiasById/:id", getGarantiaById);
+router.get("/garantias/getAll", getAllGarantias);
+router.post("/garantias/create", createGarantia);
 module.exports = router;
