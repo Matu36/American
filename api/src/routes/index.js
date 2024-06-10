@@ -48,6 +48,7 @@ const {
   createMessage,
   updateMessageState,
   getMessagesByUserAndDestination,
+  countMessagesByDestination,
 } = require("../controllers/Mensajes");
 
 const {
@@ -97,6 +98,7 @@ router.get("/usuarios/mensajes", getAllUsersMensajes);
 router.post("/mensajes/create", createMessage);
 router.put("/mensajes/put", updateMessageState);
 router.get("/mensajes/get", getMessagesByUserAndDestination);
+router.get("/mensajes/count", countMessagesByDestination);
 router.get("/solicitaciones/get", getAllSolicitantes);
 router.post("/solicitaciones/create", createSolicitante);
 router.get("/garantiasById/:id", getGarantiaById);

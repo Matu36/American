@@ -47,6 +47,32 @@ const getMessagesByUserAndDestination = async (req, res) => {
   }
 };
 
+// FUNCION QUE CUENTA LOS MENSAJES NO LEIDOS DE CADA USUARIO SI EL ESTADO ES 1 (NO LEIDO)
+
+const countMessagesByDestination = async (req, res) => {
+  try {
+    const { idUsuario } = req.body;
+
+    if (!idUsuario) {
+      throw "Se requiere el ID de usuario";
+    }
+
+    const count = await Mensajes.count({
+      where: {
+        estado: 1,
+        idDestino: idUsuario,
+      },
+    });
+
+    return res.status(200).json({ count });
+  } catch (error) {
+    console.error("Error al contar mensajes por destino:", error);
+    return res
+      .status(400)
+      .json({ error: "Error al contar mensajes por destino" });
+  }
+};
+
 // ESTADO 1= NO LEIDO    ESTADO 2: LEIDO
 
 const updateMessageState = async (req, res) => {
@@ -78,4 +104,5 @@ module.exports = {
   createMessage,
   getMessagesByUserAndDestination,
   updateMessageState,
+  countMessagesByDestination,
 };

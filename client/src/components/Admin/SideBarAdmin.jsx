@@ -1,23 +1,62 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaHome } from "react-icons/fa";
+
+import { Link, useLocation } from "react-router-dom";
 import {
-  MdShoppingBasket,
-  MdPerson,
-  MdAttachMoney,
-  MdMail,
-  MdOutlineEditCalendar,
-} from "react-icons/md";
+  FaHome,
+  FaUsers,
+  FaBox,
+  FaFileInvoiceDollar,
+  FaShoppingCart,
+  FaShieldAlt,
+  FaPercentage,
+  FaPhone,
+  FaAngleDown,
+} from "react-icons/fa";
+import { MdPerson, MdMail } from "react-icons/md";
 
 const SideBarAdmin = () => {
-  const categories = [
-    { label: "Productos", icon: MdShoppingBasket },
-    { label: "Usuarios", icon: MdPerson },
-    { label: "Ventas", icon: MdAttachMoney },
-    { label: "Calendario", icon: MdOutlineEditCalendar },
-  ];
+  const location = useLocation();
+  const [activeCategory, setActiveCategory] = useState(null);
 
-  const [activeCategory, setActiveCategory] = useState(categories[0]);
+  const categories = [
+    { label: "Usuarios", icon: MdPerson, subCategories: [] },
+    {
+      label: "Clientes",
+      icon: FaUsers,
+      subCategories: [
+        { label: "Cargar clientes", path: "/admin/clientes/cargar" },
+        { label: "Ver clientes", path: "/admin/clientes/ver" },
+      ],
+    },
+    {
+      label: "Productos",
+      icon: FaBox,
+      subCategories: [
+        { label: "Cargar productos", path: "/admin/productos/cargar" },
+        { label: "Ver productos", path: "/admin/productos/ver" },
+      ],
+    },
+    {
+      label: "Cotizaciones",
+      icon: FaFileInvoiceDollar,
+      subCategories: [
+        { label: "Crear Cotizacion", path: "/admin/cotizaciones/crear" },
+        { label: "Ver Cotizaciones", path: "/admin/cotizaciones/ver" },
+      ],
+    },
+    { label: "Ventas", icon: FaShoppingCart, subCategories: [] },
+    { label: "Garantia", icon: FaShieldAlt, subCategories: [] },
+    { label: "Contacto", icon: FaPhone, subCategories: [] },
+    { label: "Descuentos", icon: FaPercentage, subCategories: [] },
+    {
+      label: "Mensajes",
+      icon: MdMail,
+      subCategories: [
+        { label: "Nuevo", path: "/admin/mensajes/nuevo" },
+        { label: "Ver mensajes", path: "/admin/mensajes/ver" },
+      ],
+    },
+  ];
 
   return (
     <div className="sidebarAdmin">
@@ -29,23 +68,63 @@ const SideBarAdmin = () => {
           }`}
         >
           <FaHome className="icon" />
-          Inicio
+          Home
         </Link>
 
         {categories.map((category) => (
-          <Link
-            key={category.label}
-            to={`/admin/${category.label.toLowerCase()}`}
-            className={`sidebarAdmin__button ${
-              location.pathname === `/admin/${category.label.toLowerCase()}`
-                ? "active"
-                : ""
-            }`}
-            onClick={() => setActiveCategory(category)}
-          >
-            <category.icon className="icon" />
-            {category.label}
-          </Link>
+          <div key={category.label}>
+            {category.subCategories.length > 0 ? (
+              <div>
+                <a
+                  aria-controls={`collapse${category.label}`}
+                  aria-expanded={activeCategory === category ? "true" : "false"}
+                  data-bs-toggle="collapse"
+                  href={`#collapse${category.label}`}
+                  role="button"
+                  onClick={() =>
+                    setActiveCategory(
+                      activeCategory === category ? null : category
+                    )
+                  }
+                >
+                  <category.icon className="icon" />
+                  {category.label}
+                  <FaAngleDown className="arrow-icon" />
+                </a>
+                <div
+                  className={`collapse ${
+                    activeCategory === category ? "show" : ""
+                  }`}
+                  id={`collapse${category.label}`}
+                >
+                  {category.subCategories.map((subCategory) => (
+                    <Link
+                      key={subCategory.label}
+                      to={subCategory.path}
+                      className={`sidebarAdmin__button ${
+                        location.pathname === subCategory.path ? "active" : ""
+                      }`}
+                    >
+                      {subCategory.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <Link
+                to={`/admin/${category.label.toLowerCase()}`}
+                className={`sidebarAdmin__button ${
+                  location.pathname === `/admin/${category.label.toLowerCase()}`
+                    ? "active"
+                    : ""
+                }`}
+                onClick={() => setActiveCategory(null)}
+              >
+                <category.icon className="icon" />
+                {category.label}
+              </Link>
+            )}
+          </div>
         ))}
       </div>
     </div>

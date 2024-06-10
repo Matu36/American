@@ -47,10 +47,15 @@ const AdminLayout = () => {
         {/* <div className="content"> */}
         <Routes>
           <Route index element={<AppAdmin />} />
-          <Route path="/Productos" element={<Productos />} />
           <Route path="/Usuarios" element={<Usuarios />} />
+          <Route path="/Clientes" element={<Ventas />} />
+          <Route path="/Productos" element={<Productos />} />
+          <Route path="/Cotizaciones" element={<Ventas />} />
           <Route path="/ventas" element={<Ventas />} />
-          <Route path="/Calendario" element={<Calendario />} />
+          <Route path="/Garantía" element={<Ventas />} />
+          <Route path="/Contacto" element={<Ventas />} />
+          <Route path="/Descuentos" element={<Ventas />} />
+          <Route path="/Mensajes" element={<Ventas />} />
         </Routes>
         {/* </div> */}
       </div>

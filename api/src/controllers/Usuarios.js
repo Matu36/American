@@ -2,6 +2,7 @@ const { Usuarios } = require("../db.js");
 const bcrypt = require("bcrypt");
 const sendEmailWithTemplate = require("../mailer/sendEmailWithTemplate");
 const jwt = require("../services/jwt.js");
+const { Op } = require("sequelize");
 
 const registro = async (req, res) => {
   try {
@@ -121,12 +122,18 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-// FUNCION QUE ME VA A SERVIR PARA SELECCIONAR EN LA MENSAJERIA INTERNA
+// FUNCION QUE ME VA A SERVIR PARA SELECCIONAR EN LA MENSAJERIA INTERNA - TRAE LOS
+// USUARIOS QUE NO SON NULL //
 
 const getAllUsersMensajes = async (req, res) => {
   try {
     const allUsers = await Usuarios.findAll({
       attributes: ["id", "email", "nombre", "apellido"],
+      where: {
+        rol: {
+          [Op.ne]: null,
+        },
+      },
     });
 
     return res.status(200).json({ allUsers });
