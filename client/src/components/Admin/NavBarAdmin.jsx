@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaUser, FaBell } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import logo from "../../assets/img/logoAmerican.png";
 
 export default function NavBarAdmin() {
   const navigate = useNavigate();
@@ -15,11 +16,7 @@ export default function NavBarAdmin() {
     <nav className="navbarAdmin">
       <div className="sidebarAdmin__header">
         <button onClick={handleButtonClick} className="topadmin__button">
-          <img
-            src="https://res.cloudinary.com/dmfzplfra/image/upload/v1711678602/VENICE/LOGO_1-removebg-preview_j1tfcu.png"
-            alt="chef"
-            className="sidebarAdmin__image"
-          />
+          <img src={logo} alt="chef" className="sidebarAdmin__image" />
         </button>
       </div>
 

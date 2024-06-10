@@ -1827,10 +1827,12 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 10px 10px 0 0;
-  background-color: grey;
-  color: white;
+  height: auto;
+  background-color: rgb(220, 249, 4);
+  color: black;
   max-width: 100%;
+  height: 140px;
+  
 }
 
 .navbarAdmin__title {
@@ -1850,13 +1852,13 @@ button:focus-visible {
 
 .navbarAdmin__icons > button,
 .navbarAdmin__icons > div {
-  margin-right: 10px; /* Añade espacio entre el botón y el contenedor de texto */
+  margin-right: 10px; 
   background: none;
 }
 
 .navbarAdmin__icons > div {
   display: flex;
-  flex-direction: column; /* Establece la dirección del contenedor como columna */
+  flex-direction: column; 
 }
 
 @media (max-width: 777px) {
@@ -1936,8 +1938,8 @@ button:focus-visible {
 }
 
 .sidebarAdmin__image {
-  width: 150px;
-  height: 100px;
+  /* width: 150px;
+  height: 100px; */
 
   /* display: block; */
 }
@@ -2553,7 +2555,7 @@ button:focus-visible {
 }
 
 .appadmin {
-  margin-left: 3rem;
+  margin-left: 1rem;
   justify-content: center;
   width: 80%;
 }
