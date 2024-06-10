@@ -1943,16 +1943,16 @@ button:focus-visible {
   /* display: block; */
 }
 
-.sidebarAdmin__content {
+/* .sidebarAdmin__content {
   overflow-y: auto;
   align-items: center;
   width: 100%;
-}
+} */
 
 .sidebarAdmin__button {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
   padding: 10px 0;
   border-radius: 4px;
   transition: background-color 0.2s;
@@ -2551,4 +2551,10 @@ button:focus-visible {
 .image-container {
   position: relative;
 
+}
+
+.appadmin {
+  margin-left: 3rem;
+  justify-content: center;
+  width: 80%;
 }

@@ -59,15 +59,15 @@ const SideBarAdmin = () => {
   ];
 
   return (
-    <div className="sidebarAdmin">
-      <div className="sidebarAdmin__content">
+    <div className="sidebarAdmin bg-dark" style={{ width: "190px" }}>
+      <div className="text-start">
         <Link
           to="/admin"
           className={`sidebarAdmin__button ${
             location.pathname === "/admin" ? "active" : ""
           }`}
         >
-          <FaHome className="icon" />
+          <FaHome className="icon me-2" />
           Home
         </Link>
 
@@ -86,10 +86,17 @@ const SideBarAdmin = () => {
                       activeCategory === category ? null : category
                     )
                   }
+                  className="sidebarAdmin__button d-flex align-items-center justify-content-between"
                 >
-                  <category.icon className="icon" />
-                  {category.label}
-                  <FaAngleDown className="arrow-icon" />
+                  <div className="d-flex align-items-center">
+                    <category.icon className="icon me-2" />
+                    <span>{category.label}</span>
+                  </div>
+                  <FaAngleDown
+                    className={`arrow-icon ${
+                      activeCategory === category ? "show" : ""
+                    }`}
+                  />
                 </a>
                 <div
                   className={`collapse ${
@@ -120,7 +127,7 @@ const SideBarAdmin = () => {
                 }`}
                 onClick={() => setActiveCategory(null)}
               >
-                <category.icon className="icon" />
+                <category.icon className="icon me-2" />
                 {category.label}
               </Link>
             )}
