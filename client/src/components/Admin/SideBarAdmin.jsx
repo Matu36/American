@@ -59,7 +59,7 @@ const SideBarAdmin = () => {
   ];
 
   return (
-    <div className="sidebarAdmin bg-dark" style={{ width: "190px" }}>
+    <div className="sidebarAdmin bg-dark">
       <div className="text-start">
         <Link
           to="/admin"

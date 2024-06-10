@@ -1913,10 +1913,9 @@ button:focus-visible {
 
 .sidebarAdmin {
   display: block;
-  background-color: black;
   color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  width: 150px;
+  width: 190px;
 }
 
 @media (max-width: 500px) {
