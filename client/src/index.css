@@ -1933,7 +1933,7 @@ button:focus-visible {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
-  height: 80px;
+  
   padding: 20px 0;
 }
 
@@ -2280,14 +2280,17 @@ button:focus-visible {
 }
 
 .userListContainer {
-  border: 2px solid #4a90e2;
-  border-radius: 10px;
+  border: 4px solid #6c6b66; /* Borde amarillo */
+  border-left: 4px solid #000000; /* Borde izquierdo negro */
+  border-right: 4px solid #000000; /* Borde derecho negro */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #f0f8ff;
+  background-color: #faeb88; /* Fondo amarillo */
   padding: 20px;
   margin-top: 1rem;
   margin-left: 1rem;
+  color: #000000; /* Letras negras */
 }
+
 
 .userListContainer span {
   display: block;
