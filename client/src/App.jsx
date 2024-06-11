@@ -1,11 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import NavBar from "./components/Navbar";
 import Card from "./components/Card";
-import VENICEEXPERIENCE from "../src/assets/img/rubiofrase.png";
 import Filtros from "./components/Filtros";
 import { Slide, toast } from "react-toastify";
-import CargandoStock from "./components/CargandoStock";
-import Videos from "./components/Videos";
 import useAuth from "./hooks/useAuth";
 import Layout from "./pages/Layout";
 import { useProducto } from "./hooks/useProductos";
@@ -158,17 +155,7 @@ function App() {
   return (
     <Layout onSearchByMarca={handleSearchByMarca}>
       <div className="container">
-        {/* {showLoading && <CargandoStock onClose={closeLoading} />} */}
-        <div>
-          <Videos />
-        </div>
-
-        {!filteredCamisas?.length > 0 && (
-          <div className="frasemarcas">
-            <h2>NUESTRAS MARCAS DESTACADAS</h2>
-          </div>
-        )}
-        {!filteredCamisas?.length > 0 && (
+        {/* {!filteredCamisas?.length > 0 && (
           <div className="filtrosTodos">
             <h4>Filtrá por talle o precio</h4>
             <select
@@ -193,14 +180,14 @@ function App() {
               Omitir Filtros
             </button>
           </div>
-        )}
+        )} */}
         <div className="eleganzaContainer">
           <div className="navBarDiv">
-            {!filteredCamisas?.length > 0 && !talle?.length > 0 && (
+            {/* {!filteredCamisas?.length > 0 && !talle?.length > 0 && (
               <h3 style={{ color: "black" }}>
                 <span>Seleccioná alguna de nuestras Marcas</span>
               </h3>
-            )}
+            )} */}
             {!filteredCamisas?.length > 0 && !talle?.length > 0 && (
               <NavBar
                 onSelectMarca={setSelectedMarca}
@@ -255,12 +242,6 @@ function App() {
               ))}
             </div>
           )}
-        </div>
-
-        {/* <div className="frase">California dressing</div> */}
-
-        <div className="camisasContainer">
-          <img src={VENICEEXPERIENCE} alt="camisas" className="camisasImg" />
         </div>
       </div>
     </Layout>

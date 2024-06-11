@@ -1,9 +1,9 @@
 import React from "react";
 import "../App.css";
-import nike from "../assets/img/logos/nike.jpg";
-import adidas from "../assets/img/logos/adidas.png";
-import calvin from "../assets/img/logos/calvin.jpg";
-import columbia from "../assets/img/logos/columbia.png";
+import AUTOELEVADOR2 from "../assets/img/FAMILIAS/AUTOELEVADOR2-4.jpg";
+import AUTOELEVADOR5 from "../assets/img/FAMILIAS/AUTOELEVADOR5-10.jpg";
+import AUTOELEVADOR10 from "../assets/img/FAMILIAS/AUTOELEVADOR10.jpg";
+import BOMBAHORMIGON from "../assets/img/FAMILIAS/BOMBAHORMIGON.jpg";
 import hollister from "../assets/img/logos/hollister.png";
 import jordan from "../assets/img/logos/jordanm.jpg";
 import timberland from "../assets/img/logos/timberland.png";
@@ -36,7 +36,7 @@ export default function NavBar({ onSelectMarca, onInicio }) {
           className="marca"
           onClick={() => handleMarcaClick("Adidas")}
         >
-          <img src={adidas} alt="" />
+          <img src={AUTOELEVADOR5} alt="" />
         </a>
       </button>
       <button className="marca">
@@ -45,7 +45,7 @@ export default function NavBar({ onSelectMarca, onInicio }) {
           className="marca"
           onClick={() => handleMarcaClick("Hollister")}
         >
-          <img src={hollister} alt="" />
+          <img src={BOMBAHORMIGON} alt="" />
         </a>
       </button>
       <button className="marca">
@@ -54,7 +54,7 @@ export default function NavBar({ onSelectMarca, onInicio }) {
           className="marca"
           onClick={() => handleMarcaClick("Calvin")}
         >
-          <img src={calvin} alt="" />
+          <img src={AUTOELEVADOR10} alt="" />
         </a>
       </button>
 
@@ -64,7 +64,7 @@ export default function NavBar({ onSelectMarca, onInicio }) {
           className="marca"
           onClick={() => handleMarcaClick("Columbia")}
         >
-          <img src={columbia} alt="" />
+          <img src={BOMBAHORMIGON} alt="" />
         </a>
       </button>
       <button className="marca">
@@ -73,7 +73,7 @@ export default function NavBar({ onSelectMarca, onInicio }) {
           className="marca"
           onClick={() => handleMarcaClick("Nike")}
         >
-          <img src={nike} alt="" />
+          <img src={AUTOELEVADOR2} alt="" />
         </a>
       </button>
 

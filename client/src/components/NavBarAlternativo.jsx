@@ -181,9 +181,6 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
         </div>
       )}
       <div className="navbar-container">
-        <div className="black-bar">
-          <p>Prendas 100% ORIGINALES</p>
-        </div>
         <div className="white-bar">
           <img src={logo} alt="" />
           <div className="search-bar">
