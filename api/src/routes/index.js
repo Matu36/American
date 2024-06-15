@@ -27,6 +27,7 @@ const {
   updateCotizacionEstado,
   sumarPreciosFinales,
   sumarPreciosFinalesPorMonedaYEstado,
+  getCotizacionesEstadoDos,
 } = require("../controllers/Cotizaciones");
 
 const {
@@ -93,6 +94,7 @@ router.put("/productos/edit", putProductos);
 router.delete("/productos/delete", check.auth, deleteProducto);
 router.post("/cotizaciones/create", createCotizacion);
 router.get("/cotizaciones/get", getCotizaciones);
+router.get("/cotizaciones/getVentas/:idUsuario", getCotizacionesEstadoDos);
 router.get("/countCotizaciones/get", getCantidadCotizacionesPorUsuario);
 router.put("/cotizaciones/edit", putCotizaciones);
 router.post("/cliente/create", createCliente);

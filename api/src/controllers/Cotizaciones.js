@@ -228,6 +228,52 @@ const sumarPreciosFinalesPorMonedaYEstado = async (req, res) => {
   }
 };
 
+// FUNCION QUE MUESTRA LAS VENTAS DE CADA USUARIO Y TODAS SI EL USUARIO ES ADMIN //
+
+const getCotizacionesEstadoDos = async (req, res) => {
+  try {
+    const { idUsuario } = req.params;
+
+    if (!idUsuario) {
+      throw "Se requiere el ID de usuario";
+    }
+
+    // Buscar el usuario en la base de datos
+    const usuario = await Usuarios.findByPk(idUsuario);
+    if (!usuario) {
+      throw "Usuario no encontrado";
+    }
+
+    // Obtener las cotizaciones con estado 2 según el rol del usuario
+    let cotizaciones;
+    if (usuario.rol === true) {
+      cotizaciones = await Cotizaciones.findAll({
+        where: { estado: 2 },
+        include: [
+          { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
+          { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
+          { model: Productos, attributes: ["familia", "marca", "modelo"] },
+        ],
+      });
+    } else {
+      cotizaciones = await Cotizaciones.findAll({
+        where: { idUsuario, estado: 2 },
+        include: [
+          { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
+          { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
+          { model: Productos, attributes: ["familia", "marca", "modelo"] },
+        ],
+      });
+    }
+
+    // Devolver las cotizaciones
+    return res.status(200).json(cotizaciones);
+  } catch (error) {
+    console.error("Error al obtener cotizaciones con estado 2:", error);
+    return res.status(400).send(error);
+  }
+};
+
 module.exports = {
   createCotizacion,
   getCotizaciones,
@@ -236,4 +282,5 @@ module.exports = {
   updateCotizacionEstado,
   sumarPreciosFinales,
   sumarPreciosFinalesPorMonedaYEstado,
+  getCotizacionesEstadoDos,
 };
