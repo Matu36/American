@@ -31,6 +31,11 @@ module.exports = (sequelize) => {
           isUrl: true,
         },
       },
+      estado: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+      },
     },
     {
       tableName: "Solicitantes",

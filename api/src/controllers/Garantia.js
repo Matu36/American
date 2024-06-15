@@ -64,7 +64,7 @@ const createGarantia = async (req, res) => {
 const getAllGarantias = async (req, res) => {
   try {
     const garantias = await Garantia.findAll({
-      attributes: ["empresa", "email", "modelo", "falla", "fechaCrea"],
+      attributes: ["id", "empresa", "email", "modelo", "falla", "fechaCrea"],
     });
 
     return res.status(200).json(garantias);
@@ -99,8 +99,52 @@ const getGarantiaById = async (req, res) => {
   }
 };
 
+const updateGarantiaState = async (req, res) => {
+  try {
+    const { idGarantia } = req.body;
+
+    if (!idGarantia) {
+      throw "Se requiere el ID de la garantía";
+    }
+
+    const garantia = await Garantia.findByPk(idGarantia);
+
+    if (!garantia) {
+      throw "Garantía no encontrada";
+    }
+
+    await garantia.update({ estado: 2 });
+
+    return res.status(200).json({ garantia });
+  } catch (error) {
+    console.error("Error al actualizar el estado de la garantía:", error);
+    return res
+      .status(400)
+      .json({ error: "Error al actualizar el estado de la garantía" });
+  }
+};
+
+const countActiveGarantias = async (req, res) => {
+  try {
+    const activeGarantiasCount = await Garantia.count({
+      where: {
+        estado: 1,
+      },
+    });
+
+    return res.status(200).json({ activeGarantiasCount });
+  } catch (error) {
+    console.error("Error al contar las garantías activas:", error);
+    return res
+      .status(500)
+      .json({ error: "Error al contar las garantías activas" });
+  }
+};
+
 module.exports = {
   createGarantia,
   getAllGarantias,
   getGarantiaById,
+  updateGarantiaState,
+  countActiveGarantias,
 };

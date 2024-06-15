@@ -1,22 +1,16 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useDescuento } from "../../hooks/useDescuento";
 import DataTable from "react-data-table-component";
-import useAuth from "../../hooks/useAuth";
-import { useUsuario } from "../../hooks/useUsuarios";
 
-export default function Usuarios() {
+export default function Descuentos() {
+  const { data, isLoading } = useDescuento().descuentoQuery;
   const [search, setSearch] = useState("");
-
-  const { auth, setAuth } = useAuth();
-  const { data, isLoading } = useUsuario().usuariosQuery;
-
-  const allUsers = data?.allUsers;
-
-  const [usuarios, setUsuarios] = useState(allUsers);
+  const [descuentos, setDescuentos] = useState(data);
 
   //-------------------------------- SEARCHBAR --------------------------- //
 
   useEffect(() => {
-    filterByEmailAndApellido(search);
+    filterByEmailAndNombreCompleto(search);
   }, [search]);
 
   const handleOnChange = (e) => {
@@ -24,16 +18,16 @@ export default function Usuarios() {
     setSearch(e.target.value);
   };
 
-  const filterByEmailAndApellido = (value) => {
+  const filterByEmailAndNombreCompleto = (value) => {
     if (!value) {
-      setUsuarios(allUsers);
+      setDescuentos(data);
     } else {
-      const arrayCache = allUsers?.filter(
+      const arrayCache = data?.filter(
         (oper) =>
-          oper.apellido.toLowerCase().includes(value.toLowerCase()) ||
+          oper.nombreCompleto.toLowerCase().includes(value.toLowerCase()) ||
           oper.email.toLowerCase().includes(value.toLowerCase())
       );
-      setUsuarios(arrayCache);
+      setDescuentos(arrayCache);
     }
   };
 
@@ -41,8 +35,12 @@ export default function Usuarios() {
 
   const columns = [
     { name: "Email", selector: (row) => row.email, sortable: true },
-    { name: "Nombre", selector: (row) => row.nombre, sortable: true },
-    { name: "Apellido", selector: (row) => row.apellido, sortable: true },
+    {
+      name: "Nombre Completo",
+      selector: (row) => row.nombreCompleto,
+      sortable: true,
+    },
+
     {
       name: "Dirección",
       selector: (row) => row.direccion || "N/A",
@@ -50,19 +48,19 @@ export default function Usuarios() {
     },
     {
       name: "Teléfono",
-      selector: (row) => row.telefono || "N/A",
+      selector: (row) => row.telefonoCelular || "N/A",
       sortable: true,
     },
     {
-      name: "Fecha de Creación",
-      selector: (row) => new Date(row.createdAt).toLocaleString(),
+      name: "Fecha de Registro",
+      selector: (row) => new Date(row.fechaDeRegistro).toLocaleString(),
       sortable: true,
     },
   ];
 
   return (
-    <div className="productos">
-      {auth && auth.rol !== null ? (
+    <div>
+      <div className="productos">
         <>
           <div className="productos">
             <div
@@ -80,14 +78,10 @@ export default function Usuarios() {
               />
             </div>
 
-            <DataTable columns={columns} data={usuarios} pagination striped />
+            <DataTable columns={columns} data={descuentos} pagination striped />
           </div>
         </>
-      ) : (
-        <span style={{ color: "black" }}>
-          Ud No está autorizado a ver estos datos
-        </span>
-      )}
+      </div>
     </div>
   );
 }

@@ -2087,8 +2087,9 @@ button:focus-visible {
 
 /* Productos */
 .productos {
-  width: 90%;
-  margin: auto;
+  width: 100%;
+  margin-left: 4rem;
+  margin-top: 4rem;
 }
 
 @media (max-width: 800px) {
@@ -2561,4 +2562,51 @@ button:focus-visible {
   margin-left: 1rem;
   justify-content: center;
   width: 80%;
+}
+
+.cellConsulta {
+  white-space: normal; 
+  overflow: visible; 
+  word-break: break-word; 
+}
+
+.garantia-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.garantia-detail h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.garantia-detail-card {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.garantia-detail-card h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ced4da;
+  padding-bottom: 10px;
+}
+
+.garantia-detail-card p {
+  margin-bottom: 10px;
+}
+
+.garantia-detail-card strong {
+  font-weight: bold;
+}
+
+.garantia-detail-card .machine-details {
+  margin-top: 20px;
+}
+
+.garantia-detail-card .failure-details {
+  margin-top: 20px;
 }

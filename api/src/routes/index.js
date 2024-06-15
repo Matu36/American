@@ -36,12 +36,24 @@ const {
   getClientesAll,
 } = require("../controllers/Clientes");
 
-const { getContactos, createContacto } = require("../controllers/Contacto");
-const { getDescuentos, createDescuento } = require("../controllers/Descuentos");
+const {
+  getContactos,
+  createContacto,
+  countActiveContactos,
+  updateContactoState,
+} = require("../controllers/Contacto");
+const {
+  getDescuentos,
+  createDescuento,
+  updateDescuentoState,
+  countActiveDiscounts,
+} = require("../controllers/Descuentos");
 const {
   getAllGarantias,
   getGarantiaById,
   createGarantia,
+  updateGarantiaState,
+  countActiveGarantias,
 } = require("../controllers/Garantia");
 
 const {
@@ -88,9 +100,13 @@ router.get("/clientes/get", getClientes);
 router.get("/clientesAll/get", getClientesAll);
 router.put("/clientes/edit", updateCliente);
 router.get("/contacto/get", getContactos);
+router.get("/contacto/getNoLeidosCount", countActiveContactos);
+router.put("/contacto/put", updateContactoState);
 router.post("/contacto/create", createContacto);
 router.get("/descuento/get", getDescuentos);
+router.get("/descuento/getActivosCount", countActiveDiscounts);
 router.post("/descuento/create", createDescuento);
+router.put("/descuento/put", updateDescuentoState);
 router.put("/cotizaciones/state", updateCotizacionEstado);
 router.get("/cotizaciones/suma", sumarPreciosFinales);
 router.get("/cotizaciones/sumaVentas", sumarPreciosFinalesPorMonedaYEstado);
@@ -101,7 +117,9 @@ router.get("/mensajes/get", getMessagesByUserAndDestination);
 router.get("/mensajes/count", countMessagesByDestination);
 router.get("/solicitaciones/get", getAllSolicitantes);
 router.post("/solicitaciones/create", createSolicitante);
-router.get("/garantiasById/:id", getGarantiaById);
+router.get("/garantias/garantiasById/:id", getGarantiaById);
 router.get("/garantias/getAll", getAllGarantias);
 router.post("/garantias/create", createGarantia);
+router.put("/garantias/put", updateGarantiaState);
+router.get("/garantias/getNoLeidosCount", countActiveGarantias);
 module.exports = router;

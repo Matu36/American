@@ -6,24 +6,13 @@ const getProductos = async () => {
   return data;
 };
 
-const getProductosVentas = async () => {
-  const { data } = await ProductosAPI.get("/ventas");
-  return data;
-};
-
 export const useProducto = () => {
   const productosQuery = useQuery({
     queryKey: ["productos"],
     queryFn: () => getProductos(),
   });
 
-  const productosventasQuery = useQuery({
-    queryKey: ["productosventas"],
-    queryFn: () => getProductosVentas(),
-  });
-
   return {
     productosQuery,
-    productosventasQuery,
   };
 };

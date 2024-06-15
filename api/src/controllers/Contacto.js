@@ -51,7 +51,51 @@ const getContactos = async (req, res) => {
   }
 };
 
+const updateContactoState = async (req, res) => {
+  try {
+    const { idContacto } = req.body;
+
+    if (!idContacto) {
+      throw "Se requiere el ID del contacto";
+    }
+
+    const contacto = await Contacto.findByPk(idContacto);
+
+    if (!contacto) {
+      throw "Contacto no encontrado";
+    }
+
+    await contacto.update({ estado: 2 });
+
+    return res.status(200).json({ contacto });
+  } catch (error) {
+    console.error("Error al actualizar el estado del contacto:", error);
+    return res
+      .status(400)
+      .json({ error: "Error al actualizar el estado del contacto" });
+  }
+};
+
+const countActiveContactos = async (req, res) => {
+  try {
+    const activeContactosCount = await Contacto.count({
+      where: {
+        estado: 1,
+      },
+    });
+
+    return res.status(200).json({ activeContactosCount });
+  } catch (error) {
+    console.error("Error al contar los contactos activos:", error);
+    return res
+      .status(500)
+      .json({ error: "Error al contar los contactos activos" });
+  }
+};
+
 module.exports = {
   createContacto,
   getContactos,
+  updateContactoState,
+  countActiveContactos,
 };
