@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import Detalle from "../components/Detalle";
 import Calendario from "../components/Admin/Calendario";
 import Ventas from "../components/Admin/Ventas";
+import Cotizador from "../components/Admin/Cotizador";
 
 const AppRouter = () => {
   return (
@@ -51,6 +52,7 @@ const AdminLayout = () => {
           <Route path="/Clientes" element={<Ventas />} />
           <Route path="/Productos/cargar" element={<Productos />} />
           <Route path="/Cotizaciones" element={<Ventas />} />
+          <Route path="/Cotizaciones/crear" element={<Cotizador />} />
           <Route path="/ventas" element={<Ventas />} />
           <Route path="/Garantía" element={<Ventas />} />
           <Route path="/Contacto" element={<Ventas />} />
