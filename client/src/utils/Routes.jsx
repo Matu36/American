@@ -15,6 +15,7 @@ import Descuentos from "../components/Admin/Descuentos";
 import Contacto from "../components/Admin/Contacto";
 import Garantia from "../components/Admin/Garantia";
 import GarantiaDetail from "../components/Admin/GarantiaDetail";
+import Ventas from "../components/Admin/Ventas";
 
 const AppRouter = () => {
   return (
@@ -55,7 +56,7 @@ const AdminLayout = () => {
           <Route path="/Productos/cargar" element={<Productos />} />
           <Route path="/Cotizaciones" element={<Cotizador />} />
           <Route path="/Cotizaciones/crear" element={<Cotizador />} />
-          <Route path="/ventas" element={<Cotizador />} />
+          <Route path="/ventas" element={<Ventas />} />
           <Route path="/Garantia" element={<Garantia />} />
           <Route path="/garantias/garantia/:id" element={<GarantiaDetail />} />
           <Route path="/Contacto" element={<Contacto />} />

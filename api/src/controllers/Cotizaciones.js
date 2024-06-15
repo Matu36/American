@@ -259,7 +259,6 @@ const getCotizacionesEstadoDos = async (req, res) => {
       cotizaciones = await Cotizaciones.findAll({
         where: { idUsuario, estado: 2 },
         include: [
-          { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
           { model: Productos, attributes: ["familia", "marca", "modelo"] },
         ],
