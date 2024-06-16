@@ -333,16 +333,15 @@ const Cotizador = () => {
           className="form-input"
         />
       </div>
-      <div className="form-group">
-        <label className="form-label">Saldo con Interés:</label>
-        <input
-          type="number"
-          name="saldoConInteres"
-          value={formData.saldoConInteres}
-          disabled
-          className="form-input"
-        />
-      </div>
+
+      <input
+        type="number"
+        name="saldoConInteres"
+        value={formData.saldoConInteres}
+        hidden
+        className="form-input"
+      />
+
       <div className="form-group">
         <label className="form-label">Precio Final:</label>
         <input
