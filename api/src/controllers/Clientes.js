@@ -149,9 +149,23 @@ const updateCliente = async (req, res) => {
   }
 };
 
+const getClientesParaCotizar = async (req, res) => {
+  try {
+    const clientes = await Clientes.findAll({
+      attributes: ["id", "nombre", "apellido", "mail", "CUIT"],
+    });
+
+    res.json(clientes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener los clientes" });
+  }
+};
+
 module.exports = {
   getClientesAll,
   createCliente,
   getClientes,
   updateCliente,
+  getClientesParaCotizar,
 };

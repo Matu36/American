@@ -17,6 +17,7 @@ const {
   putProductos,
   createProducto,
   deleteProducto,
+  getProductosParaCotizar,
 } = require("../controllers/Productos");
 
 const {
@@ -36,6 +37,7 @@ const {
   getClientes,
   updateCliente,
   getClientesAll,
+  getClientesParaCotizar,
 } = require("../controllers/Clientes");
 
 const {
@@ -89,6 +91,7 @@ router.get("/usuarios/lastFive", getLastLoggedInUsers);
 router.get("/usuarios/all", check.auth, getAllUsers);
 router.put("/usuarios/recoverpass", resetPassword);
 router.get("/productos", getProductos);
+router.get("/productos/getParaCotizar", getProductosParaCotizar);
 router.get("/productos/:id", getProductoById);
 router.post("/productos/create", createProducto);
 router.put("/productos/edit", putProductos);
@@ -98,8 +101,9 @@ router.get("/cotizaciones/get", getCotizaciones);
 router.get("/cotizaciones/getVentas/:idUsuario", getCotizacionesEstadoDos);
 router.get("/countCotizaciones/get", getCantidadCotizacionesPorUsuario);
 router.put("/cotizaciones/edit", putCotizaciones);
-router.post("/cliente/create", createCliente);
+router.post("/clientes/create", createCliente);
 router.get("/clientes/get", getClientes);
+router.get("/clientes/getParaCotizar", getClientesParaCotizar);
 router.get("/clientesAll/get", getClientesAll);
 router.put("/clientes/edit", updateCliente);
 router.get("/contacto/get", getContactos);

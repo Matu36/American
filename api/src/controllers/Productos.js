@@ -169,10 +169,23 @@ const deleteProducto = async (req, res) => {
   }
 };
 
+const getProductosParaCotizar = async (req, res) => {
+  try {
+    const productos = await Productos.findAll({
+      attributes: ["id", "familia", "marca", "modelo"],
+    });
+    res.json(productos);
+  } catch (error) {
+    console.error("Error al obtener los productos:", error);
+    res.status(500).json({ message: "Error al obtener los productos" });
+  }
+};
+
 module.exports = {
   getProductos,
   putProductos,
   createProducto,
   deleteProducto,
   getProductoById,
+  getProductosParaCotizar,
 };

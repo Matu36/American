@@ -6,13 +6,24 @@ const getProductos = async () => {
   return data;
 };
 
+const getProductosParaCotizar = async () => {
+  const { data } = await ProductosAPI.get("/getParaCotizar");
+  return data;
+};
+
 export const useProducto = () => {
   const productosQuery = useQuery({
     queryKey: ["productos"],
     queryFn: () => getProductos(),
   });
 
+  const productosParaCotizarQuery = useQuery({
+    queryKey: ["productoscoti"],
+    queryFn: () => getProductosParaCotizar(),
+  });
+
   return {
     productosQuery,
+    productosParaCotizarQuery,
   };
 };

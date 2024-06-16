@@ -2643,3 +2643,78 @@ button:focus-visible {
   display: inline-block;
   width: 150px;
 }
+
+.form-container {
+  width: 80%; /* Ancho del formulario */
+  margin: 2rem auto; /* Centrar el formulario con un margen izquierdo y derecho */
+  padding: 20px; /* Espaciado interior */
+  background-color: #000; /* Fondo negro */
+  color: #ffcc00; /* Texto amarillo */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  display: grid; /* Usar CSS Grid */
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
+  gap: 20px; /* Espacio entre las filas y columnas del grid */
+}
+
+/* Estilos para los campos de entrada y select */
+.form-group {
+  margin-bottom: 15px; /* Espacio inferior entre grupos de elementos */
+}
+
+.form-group label {
+  display: block; /* Mostrar etiquetas en bloque */
+  margin-bottom: 5px; /* Espacio inferior entre etiqueta y campo */
+  font-weight: bold; /* Texto en negrita */
+}
+
+.form-group input,
+.form-group select {
+  width: 100%; /* Ancho completo */
+  padding: 8px; /* Espaciado interior */
+  border: 1px solid #ffcc00; /* Borde amarillo */
+  border-radius: 5px; /* Bordes redondeados */
+  background-color: #000; /* Fondo negro */
+  color: #ffcc00; /* Texto amarillo */
+}
+
+/* Estilos para el botón de enviar */
+.form-submit {
+  background-color: #ffcc00; /* Fondo amarillo */
+  color: #000; /* Texto negro */
+  padding: 10px 20px; /* Espaciado interior */
+  border: none; /* Sin borde */
+  cursor: pointer; /* Cambiar cursor a puntero */
+  border-radius: 5px; /* Bordes redondeados */
+  margin-top: 10px; /* Espacio superior */
+  align-self: flex-end; /* Alinear al final del contenedor */
+}
+
+.form-submit:hover {
+  background-color: #ffd966;
+}
+
+/* Estilos específicos para los campos de nombre, apellido y CUIT */
+.form-client-info {
+  margin-top: 15px; /* Espacio superior */
+}
+
+.form-client-info input {
+  width: calc(50% - 10px); /* Ancho del 50% menos el espacio entre ellos */
+  margin-right: 10px; /* Margen derecho */
+  margin-bottom: 10px; /* Espacio inferior */
+}
+
+.form-input.small {
+  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+}
+
+.cliente-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cliente-detail {
+  flex-basis: 100%; /* Ocupar todo el ancho */
+  margin-bottom: 0.5rem; /* Espacio entre campos */
+}
