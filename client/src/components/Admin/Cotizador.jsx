@@ -64,11 +64,45 @@ const Cotizador = () => {
     <form onSubmit={handleSubmit}>
       <div>
         <div>
-          <label>Moneda:</label>
-          <select name="moneda" value={formData.moneda} onChange={handleChange}>
-            <option value="$">$</option>
-            <option value="USD">USD</option>
-          </select>
+          <label>Vendedor</label>
+          <input
+            type="number"
+            name="idUsuario"
+            placeholder={`${auth?.nombre} ${auth?.apellido}`}
+            onChange={handleChange}
+            readOnly
+          />
+          <div>
+            <label>Cliente</label>
+            <input
+              type="number"
+              name="idCliente"
+              value={formData.idCliente}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Producto</label>
+            <input
+              type="number"
+              name="idProducto"
+              value={formData.idProducto}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Moneda:</label>
+            <select
+              name="moneda"
+              value={formData.moneda}
+              onChange={handleChange}
+            >
+              <option value="$">$</option>
+              <option value="USD">USD</option>
+            </select>
+          </div>
         </div>
         <div>
           <label>Precio:</label>
@@ -80,35 +114,8 @@ const Cotizador = () => {
             required
           />
         </div>
-        <label>Vendedor</label>
-        <input
-          type="number"
-          name="idUsuario"
-          placeholder={`${auth?.nombre} ${auth?.apellido}`}
-          onChange={handleChange}
-          readOnly
-        />
       </div>
-      <div>
-        <label>Cliente ID:</label>
-        <input
-          type="number"
-          name="idCliente"
-          value={formData.idCliente}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Producto ID:</label>
-        <input
-          type="number"
-          name="idProducto"
-          value={formData.idProducto}
-          onChange={handleChange}
-          required
-        />
-      </div>
+
       <div>
         <label>Anticipo:</label>
         <input
