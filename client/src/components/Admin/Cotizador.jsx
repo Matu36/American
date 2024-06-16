@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const Cotizador = () => {
+  const { auth } = useAuth();
+  const idUsuario = auth?.id;
+
   const [formData, setFormData] = useState({
-    idUsuario: "",
+    idUsuario: idUsuario,
     idCliente: "",
     idProducto: "",
+    precio: "",
     anticipo: "",
     saldoAFinanciar: "",
     IVA: 10.5,
     moneda: "",
-    interes: 4, // 4% por cada cuota
+    interes: 4,
     saldo: "",
     saldoConInteres: "",
     PrecioFinal: "",
@@ -29,18 +34,25 @@ const Cotizador = () => {
   };
 
   useEffect(() => {
-    const { anticipo, saldoAFinanciar, interes, cuotas } = formData;
+    const { precio, anticipo, saldoAFinanciar, interes, cuotas, moneda } =
+      formData;
     const iva = 10.5;
     const saldo = parseFloat(anticipo) + parseFloat(saldoAFinanciar);
     const saldoConInteres = saldo + saldo * (interes / 100) * cuotas;
-    const PrecioFinal = saldoConInteres + saldoConInteres * (iva / 100);
+    let PrecioFinal =
+      parseFloat(precio) + saldoConInteres + saldoConInteres * (iva / 100);
     setFormData((prevData) => ({
       ...prevData,
       saldo,
       saldoConInteres,
       PrecioFinal,
     }));
-  }, [formData.anticipo, formData.saldoAFinanciar, formData.cuotas]);
+  }, [
+    formData.precio,
+    formData.anticipo,
+    formData.saldoAFinanciar,
+    formData.cuotas,
+  ]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,13 +63,30 @@ const Cotizador = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Usuario ID:</label>
+        <div>
+          <label>Moneda:</label>
+          <select name="moneda" value={formData.moneda} onChange={handleChange}>
+            <option value="$">$</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
+        <div>
+          <label>Precio:</label>
+          <input
+            type="number"
+            name="precio"
+            value={formData.precio}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <label>Vendedor</label>
         <input
           type="number"
           name="idUsuario"
-          value={formData.idUsuario}
+          placeholder={`${auth?.nombre} ${auth?.apellido}`}
           onChange={handleChange}
-          required
+          readOnly
         />
       </div>
       <div>

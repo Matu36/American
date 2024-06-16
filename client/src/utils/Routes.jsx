@@ -16,6 +16,7 @@ import Contacto from "../components/Admin/Contacto";
 import Garantia from "../components/Admin/Garantia";
 import GarantiaDetail from "../components/Admin/GarantiaDetail";
 import Ventas from "../components/Admin/Ventas";
+import VentasDetail from "../components/Admin/VentasDetail";
 
 const AppRouter = () => {
   return (
@@ -59,6 +60,7 @@ const AdminLayout = () => {
           <Route path="/ventas" element={<Ventas />} />
           <Route path="/Garantia" element={<Garantia />} />
           <Route path="/garantias/garantia/:id" element={<GarantiaDetail />} />
+          <Route path="/ventas/:id" element={<VentasDetail />} />
           <Route path="/Contacto" element={<Contacto />} />
           <Route path="/Descuentos" element={<Descuentos />} />
           <Route path="/Mensajes" element={<Cotizador />} />

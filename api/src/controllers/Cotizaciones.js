@@ -249,8 +249,9 @@ const getCotizacionesEstadoDos = async (req, res) => {
     if (usuario.rol === true) {
       cotizaciones = await Cotizaciones.findAll({
         where: { estado: 2 },
+        attributes: ["id", "PrecioFinal", "fechaDeCreacion"],
         include: [
-          { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
+          { model: Usuarios, attributes: ["nombre", "apellido"] },
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
           { model: Productos, attributes: ["familia", "marca", "modelo"] },
         ],
@@ -258,7 +259,9 @@ const getCotizacionesEstadoDos = async (req, res) => {
     } else {
       cotizaciones = await Cotizaciones.findAll({
         where: { idUsuario, estado: 2 },
+        attributes: ["id", "PrecioFinal", "fechaDeCreacion"],
         include: [
+          { model: Usuarios, attributes: ["nombre", "apellido"] },
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
           { model: Productos, attributes: ["familia", "marca", "modelo"] },
         ],
@@ -273,6 +276,34 @@ const getCotizacionesEstadoDos = async (req, res) => {
   }
 };
 
+const getVentaById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      throw "Se requiere el ID de la cotización";
+    }
+
+    const cotizacion = await Cotizaciones.findByPk(id, {
+      include: [
+        { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
+        { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
+        { model: Productos, attributes: ["familia", "marca", "modelo"] },
+      ],
+    });
+
+    if (!cotizacion) {
+      throw "Cotización no encontrada";
+    }
+
+    // Devolver la cotización
+    return res.status(200).json(cotizacion);
+  } catch (error) {
+    console.error("Error al obtener la cotización:", error);
+    return res.status(400).send(error);
+  }
+};
+
 module.exports = {
   createCotizacion,
   getCotizaciones,
@@ -282,4 +313,5 @@ module.exports = {
   sumarPreciosFinales,
   sumarPreciosFinalesPorMonedaYEstado,
   getCotizacionesEstadoDos,
+  getVentaById,
 };

@@ -2610,3 +2610,36 @@ button:focus-visible {
 .garantia-detail-card .failure-details {
   margin-top: 20px;
 }
+
+.ventas-detail {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.ventas-detail h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.ventas-detail-section {
+  margin-bottom: 20px;
+}
+
+.ventas-detail-section h3 {
+  margin-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.ventas-detail-section p {
+  margin: 5px 0;
+}
+
+.ventas-detail-section strong {
+  display: inline-block;
+  width: 150px;
+}

@@ -28,6 +28,7 @@ const {
   sumarPreciosFinales,
   sumarPreciosFinalesPorMonedaYEstado,
   getCotizacionesEstadoDos,
+  getVentaById,
 } = require("../controllers/Cotizaciones");
 
 const {
@@ -124,4 +125,5 @@ router.get("/garantias/getAll", getAllGarantias);
 router.post("/garantias/create", createGarantia);
 router.put("/garantias/put", updateGarantiaState);
 router.get("/garantias/getNoLeidosCount", countActiveGarantias);
+router.get("/cotizaciones/getVentasById/:id", getVentaById);
 module.exports = router;
