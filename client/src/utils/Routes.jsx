@@ -17,6 +17,11 @@ import Garantia from "../components/Admin/Garantia";
 import GarantiaDetail from "../components/Admin/GarantiaDetail";
 import Ventas from "../components/Admin/Ventas";
 import VentasDetail from "../components/Admin/VentasDetail";
+import Cotizaciones from "../components/Admin/Cotizaciones";
+import CotizacionDetail from "../components/Admin/CotizacionDetail";
+import CargaClientes from "../components/Admin/CargaClientes";
+import Clientes from "../components/Admin/Clientes";
+import ClientesDetail from "../components/Admin/ClientesDetail";
 
 const AppRouter = () => {
   return (
@@ -53,9 +58,12 @@ const AdminLayout = () => {
         <Routes>
           <Route index element={<AppAdmin />} />
           <Route path="/Usuarios" element={<Usuarios />} />
-          <Route path="/Clientes" element={<Cotizador />} />
+          <Route path="/Clientes/ver" element={<Clientes />} />
+          <Route path="/Clientes/ver/:id" element={<ClientesDetail />} />
+          <Route path="/Clientes/cargar" element={<CargaClientes />} />
           <Route path="/Productos/cargar" element={<Productos />} />
-          <Route path="/Cotizaciones" element={<Cotizador />} />
+          <Route path="/Cotizaciones/ver" element={<Cotizaciones />} />
+          <Route path="/Cotizaciones/ver/:id" element={<CotizacionDetail />} />
           <Route path="/Cotizaciones/crear" element={<Cotizador />} />
           <Route path="/ventas" element={<Ventas />} />
           <Route path="/Garantia" element={<Garantia />} />

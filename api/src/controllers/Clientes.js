@@ -31,33 +31,16 @@ const createCliente = async (req, res) => {
   }
 };
 
-//TRAE TODOS LOS CLIENTES SIN EXCEPCION //
-
-const getClientesAll = async (req, res) => {
-  try {
-    const clientes = await Clientes.findAll();
-
-    if (clientes.length === 0) {
-      return res.status(404).send("No hay clientes");
-    }
-
-    return res.status(200).json(clientes);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send("Error al obtener los clientes");
-  }
-};
-
 //TRAE TODOS LOS CLIENTES SI EL USUARIO ES ADMIN, SINO SOLO LOS CLIENTES QUE CARGO ESE USUARIO //
 
-const getClientes = async (req, res) => {
+const getClientesPorIdDeUsuario = async (req, res) => {
   try {
-    // Verifica si se proporciona el ID de usuario
-    if (!req.body?.idUsuario) {
+    // Verifica si se proporciona el ID de usuario desde los parámetros de la ruta
+    if (!req.params.idUsuario) {
       throw "Se requiere el ID de usuario";
     }
 
-    const idUsuario = req.body.idUsuario;
+    const idUsuario = req.params.idUsuario;
 
     // Busca el usuario en la base de datos
     const usuario = await Usuarios.findByPk(idUsuario);
@@ -71,10 +54,11 @@ const getClientes = async (req, res) => {
     // Si el usuario tiene el rol para ver todos los clientes
     if (usuario.rol === true) {
       clientes = await Clientes.findAll({
+        attributes: ["id", "nombre", "apellido", "mail", "fechaDeCreacion"],
         include: [
           {
             model: Usuarios,
-            attributes: ["nombre", "apellido"],
+            attributes: [],
           },
         ],
       });
@@ -82,18 +66,51 @@ const getClientes = async (req, res) => {
       // Si el usuario solo puede ver sus propios clientes
       clientes = await Clientes.findAll({
         where: { idUsuario },
+        attributes: ["id", "nombre", "apellido", "mail", "fechaDeCreacion"],
         include: [
           {
             model: Usuarios,
-            attributes: ["nombre", "apellido"],
+            attributes: [],
           },
         ],
       });
     }
 
+    // Devuelve los clientes encontrados
     return res.status(200).json(clientes);
   } catch (error) {
-    console.error(error);
+    console.error("Error al obtener clientes:", error);
+    return res.status(400).send(error);
+  }
+};
+
+const getClientePorId = async (req, res) => {
+  try {
+    // Verifica si se proporciona el ID del cliente desde los parámetros de la ruta
+    if (!req.params.idCliente) {
+      throw "Se requiere el ID de cliente";
+    }
+
+    const idCliente = req.params.idCliente;
+
+    // Busca el cliente en la base de datos por su ID
+    const cliente = await Clientes.findByPk(idCliente, {
+      include: [
+        {
+          model: Usuarios,
+          attributes: ["nombre", "apellido"],
+        },
+      ],
+    });
+
+    if (!cliente) {
+      throw "Cliente no encontrado";
+    }
+
+    // Devuelve la información del cliente encontrado
+    return res.status(200).json(cliente);
+  } catch (error) {
+    console.error("Error al obtener cliente:", error);
     return res.status(400).send(error);
   }
 };
@@ -163,9 +180,9 @@ const getClientesParaCotizar = async (req, res) => {
 };
 
 module.exports = {
-  getClientesAll,
   createCliente,
-  getClientes,
+  getClientesPorIdDeUsuario,
   updateCliente,
   getClientesParaCotizar,
+  getClientePorId,
 };

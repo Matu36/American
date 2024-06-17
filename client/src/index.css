@@ -2657,6 +2657,19 @@ button:focus-visible {
   gap: 20px; /* Espacio entre las filas y columnas del grid */
 }
 
+.form-container1 {
+  width: 50%; /* Ancho del formulario */
+  margin: 2rem auto; /* Centrar el formulario con un margen izquierdo y derecho */
+  padding: 20px; /* Espaciado interior */
+  background-color: #000; /* Fondo negro */
+  color: #ffcc00; /* Texto amarillo */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
+  gap: 20px; /* Espacio entre las filas y columnas del grid */
+}
+
 /* Estilos para los campos de entrada y select */
 .form-group {
   margin-bottom: 15px; /* Espacio inferior entre grupos de elementos */
@@ -2678,43 +2691,132 @@ button:focus-visible {
   color: #ffcc00; /* Texto amarillo */
 }
 
-/* Estilos para el botón de enviar */
+/* Estilos para el botón de guardar cotización */
 .form-submit {
-  background-color: #ffcc00; /* Fondo amarillo */
-  color: #000; /* Texto negro */
-  padding: 10px 20px; /* Espaciado interior */
-  border: none; /* Sin borde */
-  cursor: pointer; /* Cambiar cursor a puntero */
-  border-radius: 5px; /* Bordes redondeados */
-  margin-top: 10px; /* Espacio superior */
-  align-self: flex-end; /* Alinear al final del contenedor */
+  background-color: #ffcc00; 
+  color: #000; 
+  padding: 10px 20px; 
+  border: none; 
+  cursor: pointer; 
+  border-radius: 5px; 
+  margin-top: 2rem; 
+  align-self: flex-end; 
 }
 
 .form-submit:hover {
   background-color: #ffd966;
 }
 
-/* Estilos específicos para los campos de nombre, apellido y CUIT */
+
 .form-client-info {
-  margin-top: 15px; /* Espacio superior */
+  margin-top: 15px; 
 }
 
 .form-client-info input {
-  width: calc(50% - 10px); /* Ancho del 50% menos el espacio entre ellos */
-  margin-right: 10px; /* Margen derecho */
-  margin-bottom: 10px; /* Espacio inferior */
+  width: calc(50% - 10px); 
+  margin-right: 10px; 
+  margin-bottom: 10px; 
 }
 
 .form-input.small {
-  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+  font-size: 0.9rem; 
 }
 
 .cliente-info {
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
 .cliente-detail {
-  flex-basis: 100%; /* Ocupar todo el ancho */
-  margin-bottom: 0.5rem; /* Espacio entre campos */
+ margin-top: 1rem;
+  margin-bottom: 0.5rem; 
+}
+
+
+/* DETALLE COTIZACION  */
+
+.cotizacion-detail {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+  color: #FFD700; /* Amarillo */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.seccion {
+  margin-bottom: 20px;
+}
+
+.seccion h3 {
+  color: #000; /* Negro */
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.seccion p {
+  margin: 5px 0;
+}
+
+.loader {
+  text-align: center;
+  margin-top: 50px;
+}
+
+
+/* CotizacionesTable.css */
+
+.acciones-container {
+  display: flex;
+  align-items: center;
+}
+
+.detalle-btn,
+.modificar-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: all 0.15s ease-in-out;
+}
+
+.detalle-btn {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.detalle-btn:hover {
+  color: #fff;
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.modificar-btn {
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.modificar-btn:hover {
+  color: #212529;
+  background-color: #e0a800;
+  border-color: #d39e00;
 }

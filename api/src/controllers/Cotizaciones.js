@@ -11,17 +11,12 @@ const createCotizacion = async (req, res) => {
       !req.body?.idUsuario ||
       !req.body?.idCliente ||
       !req.body?.idProducto ||
-      !req.body?.anticipo ||
-      !req.body?.saldoAFinanciar ||
       !req.body?.IVA ||
       !req.body?.moneda ||
-      !req.body?.interes ||
-      !req.body?.saldo ||
-      !req.body?.saldoConInteres ||
-      !req.body?.PrecioFinal ||
-      !req.body?.estado
-    )
+      !req.body?.PrecioFinal
+    ) {
       throw "Faltan parámetros en el cuerpo de la solicitud";
+    }
 
     const generateNewId = async () => {
       const maxId = await Cotizaciones.max("id");
@@ -30,8 +25,19 @@ const createCotizacion = async (req, res) => {
     };
 
     let id = await generateNewId();
+    const idUsuario = req.body.idUsuario;
 
-    let nuevaCotizacion = await Cotizaciones.create({ id, ...req.body });
+    // Formatear idUsuario y idCotizacion
+    const formattedIdUsuario = String(idUsuario).padStart(3, "0");
+    const formattedIdCotizacion = String(id).padStart(5, "0");
+    const numeroCotizacion = `${formattedIdUsuario} - ${formattedIdCotizacion}`;
+
+    let nuevaCotizacion = await Cotizaciones.create({
+      id,
+      ...req.body,
+      estado: 1,
+      numeroCotizacion,
+    });
 
     return res.status(201).send(nuevaCotizacion);
   } catch (error) {
@@ -44,8 +50,8 @@ const createCotizacion = async (req, res) => {
 
 const getCotizaciones = async (req, res) => {
   try {
-    // Verificar si se proporciona el ID de usuario
-    const idUsuario = req.body?.idUsuario;
+    // Verificar si se proporciona el ID de usuario desde los parámetros de la ruta
+    const idUsuario = req.params.idUsuario;
     if (!idUsuario) {
       throw "Se requiere el ID de usuario";
     }
@@ -60,6 +66,7 @@ const getCotizaciones = async (req, res) => {
     let cotizaciones;
     if (usuario.rol === true) {
       cotizaciones = await Cotizaciones.findAll({
+        attributes: ["numeroCotizacion", "PrecioFinal", "fechaDeCreacion"],
         include: [
           { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
@@ -69,6 +76,12 @@ const getCotizaciones = async (req, res) => {
     } else {
       cotizaciones = await Cotizaciones.findAll({
         where: { idUsuario },
+        attributes: [
+          "id",
+          "numeroCotizacion",
+          "PrecioFinal",
+          "fechaDeCreacion",
+        ],
         include: [
           { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
@@ -81,6 +94,38 @@ const getCotizaciones = async (req, res) => {
     return res.status(200).json(cotizaciones);
   } catch (error) {
     console.error("Error al obtener cotizaciones:", error);
+    return res.status(400).send(error);
+  }
+};
+
+// DETALLE DE LA COTIZACION POR ID DE COTI //
+
+const getCotizacionDetalle = async (req, res) => {
+  try {
+    // Verificar si se proporciona el ID de cotización desde los parámetros de la ruta
+    const idCotizacion = req.params.idCotizacion;
+    if (!idCotizacion) {
+      throw "Se requiere el ID de cotización";
+    }
+
+    // Buscar la cotización en la base de datos
+    const cotizacion = await Cotizaciones.findByPk(idCotizacion, {
+      include: [
+        { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
+        { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
+        { model: Productos, attributes: ["familia", "marca", "modelo"] },
+      ],
+    });
+
+    // Verificar si se encontró la cotización
+    if (!cotizacion) {
+      throw "Cotización no encontrada";
+    }
+
+    // Devolver la cotización completa
+    return res.status(200).json(cotizacion);
+  } catch (error) {
+    console.error("Error al obtener detalle de cotización:", error);
     return res.status(400).send(error);
   }
 };
@@ -308,6 +353,7 @@ module.exports = {
   createCotizacion,
   getCotizaciones,
   getCantidadCotizacionesPorUsuario,
+  getCotizacionDetalle,
   putCotizaciones,
   updateCotizacionEstado,
   sumarPreciosFinales,

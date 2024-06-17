@@ -3,9 +3,11 @@ import useAuth from "../../hooks/useAuth";
 import { useClientes } from "../../hooks/useClientes";
 import { useProducto } from "../../hooks/useProductos";
 import Select from "react-select";
+import { useCotizaciones } from "../../hooks/useCotizaciones";
 
 const Cotizador = () => {
   const { auth } = useAuth();
+  const { mutate: cotizacionCreate } = useCotizaciones().cotizacionMutation;
   const idUsuario = auth?.id;
   const [selectedCliente, setSelectedCliente] = useState(null);
 
@@ -19,7 +21,6 @@ const Cotizador = () => {
   const [selectedProducto, setSelectedProducto] = useState(null);
 
   const { data: clientes, isLoading } = useClientes().clienteoQuery;
-
   const { data: productos } = useProducto().productosParaCotizarQuery;
 
   useEffect(() => {
@@ -83,11 +84,7 @@ const Cotizador = () => {
     saldo: "",
     saldoConInteres: "",
     PrecioFinal: "",
-    estado: 1,
-    fechaDeCreacion: new Date().toISOString().split("T")[0],
-    fechaModi: new Date().toISOString().split("T")[0],
-    fechaVenta: "",
-    cuotas: 12,
+    cuotas: 1,
   });
 
   useEffect(() => {
@@ -115,15 +112,38 @@ const Cotizador = () => {
   };
 
   useEffect(() => {
-    const { precio, anticipo, saldoAFinanciar, interes, cuotas, moneda } =
-      formData;
+    const { precio, anticipo, saldoAFinanciar, cuotas } = formData;
     const iva = 10.5;
-    const saldo = parseFloat(anticipo) + parseFloat(saldoAFinanciar);
-    const saldoConInteres = saldo + saldo * (interes / 100) * cuotas;
-    let PrecioFinal =
-      parseFloat(precio) + saldoConInteres + saldoConInteres * (iva / 100);
+    let interes = 0; // Inicialmente el interés se establece en 0
+
+    // Si las cuotas son mayores a 1, se calcula el interés basado en el valor en formData
+    if (cuotas > 1) {
+      interes = formData.interes;
+    }
+
+    let saldo = parseFloat(anticipo) + parseFloat(saldoAFinanciar);
+    let saldoConInteres = saldo;
+    let PrecioFinal = parseFloat(precio) + saldo + saldo * (iva / 100);
+
+    if (cuotas > 1) {
+      saldoConInteres = saldo + saldo * (interes / 100) * (cuotas - 1);
+      PrecioFinal =
+        parseFloat(precio) + saldoConInteres + saldoConInteres * (iva / 100);
+    } else {
+      // Si es contado, los valores de saldo, anticipo, saldo a financiar, saldo con interés son 0
+      saldo = 0;
+      saldoConInteres = 0;
+      PrecioFinal = parseFloat(precio) + parseFloat(precio) * (iva / 100);
+      setFormData((prevData) => ({
+        ...prevData,
+        anticipo: 0,
+        saldoAFinanciar: 0,
+      }));
+    }
+
     setFormData((prevData) => ({
       ...prevData,
+      interes,
       saldo,
       saldoConInteres,
       PrecioFinal,
@@ -133,12 +153,13 @@ const Cotizador = () => {
     formData.anticipo,
     formData.saldoAFinanciar,
     formData.cuotas,
+    formData.interes,
   ]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    // Aquí enviarías los datos al backend
+    cotizacionCreate(formData);
   };
 
   const clienteOptions = clientes
@@ -255,38 +276,20 @@ const Cotizador = () => {
           onChange={handleChange}
           className="form-input"
         >
+          <option value="" disabled>
+            Seleccionar
+          </option>
           <option value="$">$</option>
           <option value="USD">USD</option>
         </select>
       </div>
+
       <div className="form-group">
         <label className="form-label">Precio:</label>
         <input
           type="number"
           name="precio"
           value={formData.precio}
-          onChange={handleChange}
-          required
-          className="form-input"
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label">Anticipo:</label>
-        <input
-          type="number"
-          name="anticipo"
-          value={formData.anticipo}
-          onChange={handleChange}
-          required
-          className="form-input"
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label">Saldo a Financiar:</label>
-        <input
-          type="number"
-          name="saldoAFinanciar"
-          value={formData.saldoAFinanciar}
           onChange={handleChange}
           required
           className="form-input"
@@ -300,13 +303,41 @@ const Cotizador = () => {
           onChange={handleChange}
           className="form-input"
         >
-          {Array.from({ length: 12 }, (_, i) => i + 1).map((num) => (
+          <option value={1}>Contado</option>
+          {Array.from({ length: 11 }, (_, i) => i + 2).map((num) => (
             <option key={num} value={num}>
               {num}
             </option>
           ))}
         </select>
       </div>
+      {formData.cuotas > 1 && (
+        <>
+          <div className="form-group">
+            <label className="form-label">Anticipo:</label>
+            <input
+              type="number"
+              name="anticipo"
+              value={formData.anticipo}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Saldo a Financiar:</label>
+            <input
+              type="number"
+              name="saldoAFinanciar"
+              value={formData.saldoAFinanciar}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
+        </>
+      )}
       <div className="form-group">
         <label className="form-label">IVA (10.5%):</label>
         <input

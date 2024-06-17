@@ -30,13 +30,14 @@ const {
   sumarPreciosFinalesPorMonedaYEstado,
   getCotizacionesEstadoDos,
   getVentaById,
+  getCotizacionDetalle,
 } = require("../controllers/Cotizaciones");
 
 const {
   createCliente,
-  getClientes,
+  getClientesPorIdDeUsuario,
   updateCliente,
-  getClientesAll,
+  getClientePorId,
   getClientesParaCotizar,
 } = require("../controllers/Clientes");
 
@@ -97,14 +98,15 @@ router.post("/productos/create", createProducto);
 router.put("/productos/edit", putProductos);
 router.delete("/productos/delete", check.auth, deleteProducto);
 router.post("/cotizaciones/create", createCotizacion);
-router.get("/cotizaciones/get", getCotizaciones);
+router.get("/cotizaciones/get/:idUsuario", getCotizaciones);
+router.get("/cotizaciones/getDetalle/:idCotizacion", getCotizacionDetalle);
 router.get("/cotizaciones/getVentas/:idUsuario", getCotizacionesEstadoDos);
 router.get("/countCotizaciones/get", getCantidadCotizacionesPorUsuario);
 router.put("/cotizaciones/edit", putCotizaciones);
 router.post("/clientes/create", createCliente);
-router.get("/clientes/get", getClientes);
+router.get("/clientes/get/:idUsuario", getClientesPorIdDeUsuario);
+router.get("/clientes/getDetalle/:idCliente", getClientePorId);
 router.get("/clientes/getParaCotizar", getClientesParaCotizar);
-router.get("/clientesAll/get", getClientesAll);
 router.put("/clientes/edit", updateCliente);
 router.get("/contacto/get", getContactos);
 router.get("/contacto/getNoLeidosCount", countActiveContactos);

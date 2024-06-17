@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
-import { useVentas } from "../../hooks/useCotizaciones";
+import { useCotizaciones } from "../../hooks/useCotizaciones";
 import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
 
-export default function Ventas() {
+export default function Cotizaciones() {
   const { auth } = useAuth();
   const [search, setSearch] = useState("");
   const idUsuario = auth?.id;
 
-  const { ventasQueryById } = useVentas(idUsuario);
-  const [ventas, setVentas] = useState(ventasQueryById.data);
+  const { cotizacionesQueryById } = useCotizaciones(idUsuario);
+  const [cotizaciones, setCotizaciones] = useState(cotizacionesQueryById.data);
 
   useEffect(() => {
-    if (ventasQueryById.data) {
-      setVentas(ventasQueryById.data);
+    if (cotizacionesQueryById.data) {
+      setCotizaciones(cotizacionesQueryById.data);
     }
-  }, [ventasQueryById.data]);
+  }, [cotizacionesQueryById.data]);
 
   useEffect(() => {
     filterByEmailAndEmpresa(search);
-  }, [search, ventasQueryById.data]);
+  }, [search, cotizacionesQueryById.data]);
 
   const handleOnChange = (e) => {
     e.preventDefault();
@@ -29,23 +29,27 @@ export default function Ventas() {
 
   const filterByEmailAndEmpresa = (value) => {
     if (!value) {
-      setVentas(ventasQueryById.data);
+      setCotizaciones(cotizacionesQueryById.data);
     } else {
-      const arrayCache = ventasQueryById.data.filter(
+      const arrayCache = cotizacionesQueryById.data.filter(
         (oper) =>
-          oper.Cliente.apellido.toLowerCase().includes(value.toLowerCase()) ||
+          oper.numeroCotizacion.toLowerCase().includes(value.toLowerCase()) ||
           oper.Producto.modelo.toLowerCase().includes(value.toLowerCase()) ||
           oper.Usuario.apellido.toLowerCase().includes(value.toLowerCase())
       );
-      setVentas(arrayCache);
+      setCotizaciones(arrayCache);
     }
   };
 
   const columns = [
     {
+      name: "Nro Cotización",
+      selector: (row) => row.numeroCotizacion,
+      sortable: true,
+    },
+    {
       name: "Producto",
-      selector: (row) =>
-        `${row.Producto.familia} ${row.Producto.marca} ${row.Producto.modelo}`,
+      selector: (row) => row.Producto.modelo,
       sortable: true,
     },
     {
@@ -54,7 +58,7 @@ export default function Ventas() {
       sortable: true,
     },
     {
-      name: "Fecha de Venta",
+      name: "Fecha de Cotización",
       selector: (row) => new Date(row.fechaDeCreacion).toLocaleDateString(),
       sortable: true,
     },
@@ -76,9 +80,20 @@ export default function Ventas() {
     {
       name: "Acciones",
       cell: (row) => (
-        <Link to={`/admin/ventas/${row.id}`} className="custom-link">
-          <button className="detalle">Detalle</button>
-        </Link>
+        <div className="acciones-container">
+          <Link
+            to={`/admin/cotizaciones/ver/${row.id}`}
+            className="detalle-btn"
+          >
+            Detalle
+          </Link>
+          <Link
+            to={`/admin/cotizaciones/modificar/${row.id}`}
+            className="modificar-btn ml-2"
+          >
+            Modificar
+          </Link>
+        </div>
       ),
     },
   ];
@@ -93,15 +108,15 @@ export default function Ventas() {
           <input
             type="text"
             className="form-control"
-            placeholder="Buscar por APELLIDO DE CLIENTE - VENDEDOR O MODELO"
+            placeholder="Buscar por Nro, VENDEDOR O MODELO"
             onChange={handleOnChange}
             value={search}
             autoComplete="off"
-            disabled={!ventasQueryById.data}
+            disabled={!cotizacionesQueryById.data}
           />
         </div>
-        {ventasQueryById.data ? (
-          <DataTable columns={columns} data={ventas} pagination striped />
+        {cotizacionesQueryById.data ? (
+          <DataTable columns={columns} data={cotizaciones} pagination striped />
         ) : (
           <p>Cargando datos...</p>
         )}

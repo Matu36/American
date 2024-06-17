@@ -21,17 +21,22 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      numeroCotizacion: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       precio: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
       },
+
       anticipo: {
         type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
+        allowNull: true,
       },
       saldoAFinanciar: {
         type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
+        allowNull: true,
       },
       IVA: {
         type: DataTypes.DECIMAL(10, 2),
@@ -43,15 +48,15 @@ module.exports = (sequelize) => {
       },
       interes: {
         type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
+        allowNull: true,
       },
       saldo: {
         type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
+        allowNull: true,
       },
       saldoConInteres: {
         type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
+        allowNull: true,
       },
       PrecioFinal: {
         type: DataTypes.DECIMAL(10, 2),
@@ -70,7 +75,6 @@ module.exports = (sequelize) => {
       fechaModi: {
         type: DataTypes.DATE,
         allowNull: true,
-        defaultValue: DataTypes.NOW,
       },
       fechaVenta: {
         type: DataTypes.DATE,
