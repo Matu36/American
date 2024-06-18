@@ -45,11 +45,7 @@ export default function FooterAlternativo() {
           </div>
         </div>
       </div>
-      <div className="marca">
-        <h3 style={{ color: "black" }}>Aceptamos</h3>
-        <img src={mercadoPago} alt="mp" />
-        <h4 style={{ color: "black" }}>Transferencia / Depósito bancario</h4>
-      </div>
+
       {contact && (
         <div className="modal">
           {/* <div className="modal-content"> */}

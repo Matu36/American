@@ -69,7 +69,7 @@ button:focus-visible {
 }
 
 .navbar {
-  background-color: rgb(245, 245, 7);
+  background-color: #febb00;
   padding-left: 2rem;
   padding-right: 2rem;
 }
@@ -263,6 +263,14 @@ button:focus-visible {
   background-color: white;
   height: 300px;
   border: solid 1px black;
+}
+
+.footerAlternativo {
+  background-color: #febb00;
+}
+
+.principal-footer {
+  background-color: #febb00;
 }
 
 .footerImage {
@@ -1132,7 +1140,7 @@ button:focus-visible {
   z-index: 100;
   padding-top: 40px;
   padding-bottom: 10px;
-  background-color: #f2f2f2;
+  background-color: #febb00;
   margin-top: 40px;
 }
 
