@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import logo from "../assets/img/logos/LOGO 1.jpeg";
+import logo from "../assets/img/AMERICAN.jpg";
 import { FiSearch, FiShoppingCart } from "react-icons/fi";
 import { FaUser } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
