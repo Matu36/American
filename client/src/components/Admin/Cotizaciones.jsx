@@ -33,9 +33,14 @@ export default function Cotizaciones() {
     } else {
       const arrayCache = cotizacionesQueryById.data.filter(
         (oper) =>
-          oper.numeroCotizacion.toLowerCase().includes(value.toLowerCase()) ||
-          oper.Producto.modelo.toLowerCase().includes(value.toLowerCase()) ||
-          oper.Usuario.apellido.toLowerCase().includes(value.toLowerCase())
+          (oper.numeroCotizacion &&
+            oper.numeroCotizacion
+              .toLowerCase()
+              .includes(value.toLowerCase())) ||
+          (oper.Producto.modelo &&
+            oper.Producto.modelo.toLowerCase().includes(value.toLowerCase())) ||
+          (oper.Usuario.apellido &&
+            oper.Usuario.apellido.toLowerCase().includes(value.toLowerCase()))
       );
       setCotizaciones(arrayCache);
     }

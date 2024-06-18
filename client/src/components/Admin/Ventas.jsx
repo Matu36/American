@@ -33,9 +33,14 @@ export default function Ventas() {
     } else {
       const arrayCache = ventasQueryById.data.filter(
         (oper) =>
-          oper.Cliente.apellido.toLowerCase().includes(value.toLowerCase()) ||
-          oper.Producto.modelo.toLowerCase().includes(value.toLowerCase()) ||
-          oper.Usuario.apellido.toLowerCase().includes(value.toLowerCase())
+          (oper.Cliente.apellido &&
+            oper.Cliente.apellido
+              .toLowerCase()
+              .includes(value.toLowerCase())) ||
+          (oper.Producto.modelo &&
+            oper.Producto.modelo.toLowerCase().includes(value.toLowerCase())) ||
+          (oper.Usuario.apellido &&
+            oper.Usuario.apellido.toLowerCase().includes(value.toLowerCase()))
       );
       setVentas(arrayCache);
     }

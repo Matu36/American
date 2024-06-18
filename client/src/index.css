@@ -1958,7 +1958,7 @@ button:focus-visible {
   border-radius: 4px;
   transition: background-color 0.2s;
   margin-bottom: 10px;
-  background-color: black;
+  /* background-color: black; */
   width: 100%;
 }
 
@@ -2212,6 +2212,7 @@ button:focus-visible {
   margin-left: 1rem;
   margin-top: 1rem;
   width: 100%;
+  margin-bottom: 1rem;
 }
 
 @media screen and (max-width: 777px) {
@@ -2820,3 +2821,5 @@ button:focus-visible {
   background-color: #e0a800;
   border-color: #d39e00;
 }
+
+

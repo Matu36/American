@@ -33,9 +33,9 @@ export default function Clientes() {
     } else {
       const arrayCache = clientesQueryById.data.filter(
         (oper) =>
-          oper.numeroCotizacion.toLowerCase().includes(value.toLowerCase()) ||
-          oper.Producto.modelo.toLowerCase().includes(value.toLowerCase()) ||
-          oper.Usuario.apellido.toLowerCase().includes(value.toLowerCase())
+          (oper.apellido &&
+            oper.apellido.toLowerCase().includes(value.toLowerCase())) ||
+          (oper.mail && oper.mail.toLowerCase().includes(value.toLowerCase()))
       );
       setClientes(arrayCache);
     }
@@ -81,16 +81,13 @@ export default function Clientes() {
     },
   ];
   return (
-    <div>
-      <div className="productos">
-        <div
-          className="input-group mb-3 inputSearch"
-          style={{ maxWidth: "40%" }}
-        >
+    <div className="form-container">
+      <div>
+        <div className="form-group">
           <input
             type="text"
-            className="form-control"
-            placeholder="Buscar por Nro, VENDEDOR O MODELO"
+            className="form-input"
+            placeholder="Buscar por Apellido o Email"
             onChange={handleOnChange}
             value={search}
             autoComplete="off"

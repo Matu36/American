@@ -5,19 +5,22 @@ import { useUsuario } from "../../hooks/useUsuarios";
 
 export default function Usuarios() {
   const [search, setSearch] = useState("");
-
-  const { auth, setAuth } = useAuth();
+  const { auth } = useAuth();
   const { data, isLoading } = useUsuario().usuariosQuery;
 
-  const allUsers = data?.allUsers;
+  const allUsers = data?.allUsers || [];
 
   const [usuarios, setUsuarios] = useState(allUsers);
 
-  //-------------------------------- SEARCHBAR --------------------------- //
+  useEffect(() => {
+    if (!isLoading) {
+      setUsuarios(allUsers);
+    }
+  }, [allUsers, isLoading]);
 
   useEffect(() => {
     filterByEmailAndApellido(search);
-  }, [search]);
+  }, [search, allUsers]);
 
   const handleOnChange = (e) => {
     e.preventDefault();
@@ -28,16 +31,15 @@ export default function Usuarios() {
     if (!value) {
       setUsuarios(allUsers);
     } else {
-      const arrayCache = allUsers?.filter(
+      const arrayCache = allUsers.filter(
         (oper) =>
-          oper.apellido.toLowerCase().includes(value.toLowerCase()) ||
-          oper.email.toLowerCase().includes(value.toLowerCase())
+          (oper.apellido &&
+            oper.apellido.toLowerCase().includes(value.toLowerCase())) ||
+          (oper.email && oper.email.toLowerCase().includes(value.toLowerCase()))
       );
       setUsuarios(arrayCache);
     }
   };
-
-  //-------------------------------- FIN SEARCHBAR --------------------------- //
 
   const columns = [
     { name: "Email", selector: (row) => row.email, sortable: true },
@@ -61,33 +63,25 @@ export default function Usuarios() {
   ];
 
   return (
-    <div className="productos">
-      {auth && auth.rol !== null ? (
-        <>
-          <div className="productos">
-            <div
-              className="input-group mb-3 inputSearch"
-              style={{ maxWidth: "40%" }}
-            >
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Buscar por APELLIDO O EMAIL"
-                onChange={handleOnChange}
-                value={search}
-                autoComplete="off"
-                disabled={!data}
-              />
-            </div>
-
+    <div className="form-container">
+      <>
+        <div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Buscar por APELLIDO O EMAIL"
+              onChange={handleOnChange}
+              value={search}
+              autoComplete="off"
+              disabled={!data}
+            />
+          </div>
+          <div className="dataTable">
             <DataTable columns={columns} data={usuarios} pagination striped />
           </div>
-        </>
-      ) : (
-        <span style={{ color: "black" }}>
-          Ud No está autorizado a ver estos datos
-        </span>
-      )}
+        </div>
+      </>
     </div>
   );
 }
