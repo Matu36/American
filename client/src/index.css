@@ -69,7 +69,7 @@ button:focus-visible {
 }
 
 .navbar {
-  background-color: yellow;
+  background-color: rgb(245, 245, 7);
   padding-left: 2rem;
   padding-right: 2rem;
 }
@@ -111,27 +111,14 @@ button:focus-visible {
 }
 
 @media (max-width: 732px) {
-  .marca {
-    padding: 1rem;
-  }
-}
-
-@media (max-width: 732px) {
   .marca img {
-    width: 70px;
-  }
-}
-
-@media (max-width: 645px) {
-  .marca img {
-    width: 70px;
+    width: 400px;
   }
 }
 
 @media (max-width: 454px) {
   .marca img {
-    width: 100px;
-    padding: 3px;
+    width: 300px;
   }
 }
 
