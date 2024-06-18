@@ -3,6 +3,7 @@ import { useForm } from "../../hooks/useForm";
 import Registro from "./Registro";
 import RecoverPass from "./RecoverPass";
 import { useNavigate, useLocation } from "react-router-dom";
+import logo from "../../assets/img/AMERICAN.jpg";
 
 export default function Login({ handleCerrarModalLogin }) {
   const { form, changed } = useForm({});
@@ -118,7 +119,7 @@ export default function Login({ handleCerrarModalLogin }) {
               <strong style={{ color: "red" }}>{errorMessage}</strong>
             )}
 
-            <input type="submit" value="Ingresar" className="btn btn-success" />
+            <input type="submit" value="Ingresar" className="form-submit" />
           </form>
           <button onClick={handleMostrarModalRecover}>
             <span style={{ color: "blue" }}>¿Olvidaste tu contraeña?</span>
@@ -135,16 +136,13 @@ export default function Login({ handleCerrarModalLogin }) {
 
           {showWelcomeMessage && (
             <div className="welcome-message">
-              <img
-                src="https://res.cloudinary.com/dmfzplfra/image/upload/v1711678602/VENICE/LOGO_1-removebg-preview_j1tfcu.png"
-                alt=""
-              />
-              <p>Bienvenido a Comunidad Venice!</p>
+              <img src={logo} alt="" />
+              <p>Bienvenido a American Vial!</p>
             </div>
           )}
           <div>
             <span style={{ color: "blue" }}>
-              ¿Aún no pertenecés a Comunidad Venice?
+              ¿Aún no pertenecés a American Vial?
             </span>
           </div>
           <button onClick={handleMostrarModalRegistro}>Registráte</button>

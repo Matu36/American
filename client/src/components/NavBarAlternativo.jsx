@@ -155,14 +155,14 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
 
   return (
     <div>
-      {modalCarrito && (
+      {/* {modalCarrito && (
         <div>
           <CarritoModal
             handleCerrarModalCarrito={handleCerrarModalCarrito}
             actualizarContadorCarrito={actualizarContadorCarrito}
           />
         </div>
-      )}
+      )} */}
 
       {login && (
         <div>
@@ -254,14 +254,14 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
               >
                 <FaUser />
               </button>
-
+              {/* 
               <button
                 className="shoppingButton"
                 onClick={handleMostrarModalCarrito}
               >
                 <FiShoppingCart />
                 {carritoC > 0 && <span className="badge">{carritoC}</span>}
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

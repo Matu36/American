@@ -7,16 +7,6 @@ import useAuth from "./hooks/useAuth";
 import Layout from "./pages/Layout";
 import { useProducto } from "./hooks/useProductos";
 
-// const request = await fetch(`${import.meta.env.VITE_BACKEND_URL}productos`, {
-//   method: "GET",
-//   body: JSON.stringify(),
-//   headers: {
-//     "Content-type": "application/json",
-//   },
-// });
-
-// const data = await request.json();
-
 function App() {
   const [selectedMarca, setSelectedMarca] = useState();
   const [filtroPrecio, setFiltroPrecio] = useState();

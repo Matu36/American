@@ -68,16 +68,25 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.navbar {
+  background-color: yellow;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .marca {
+  margin-top: 2rem;
   margin-bottom: 2rem;
-  flex-wrap: wrap;
-  padding: 5px;
-  padding: 2rem;
+  padding: 15px 2rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  background-color: #000;
 }
 
 .marca:not(:last-child) {
-  border-right: 1px solid #ddd;
+  border-right: none;
+  border-bottom: 1px solid #ddd;
 }
 
 .marca button,
@@ -89,14 +98,16 @@ button:focus-visible {
 }
 
 .marca img {
-  width: 100px;
+  width: 500px;
   height: auto;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-@media (max-width: 732px) {
-  .marca img {
-    width: 90px;
-  }
+.marca img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 732px) {
@@ -1575,12 +1586,6 @@ button:focus-visible {
   justify-content: flex-end;
 }
 
-.datos {
-  color: #000;
-  display: flex;
-  justify-content: center;
-}
-
 .login-form {
   display: flex;
   flex-direction: column;
@@ -1611,17 +1616,38 @@ button:focus-visible {
   padding: 12px;
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #5bb75b;
-  background-image: linear-gradient(to bottom, #62c462, #51a351);
-  background-repeat: repeat-x;
-  border: 1px solid #387038;
+  background-color: #f0ad4e;
+  border: 1px solid #eea236;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 20px;
 }
 
 .login-form input[type="submit"]:hover {
-  background-color: #51a351;
+  background-color: #ec971f;
+}
+
+.login-form input[type="submit"]:active {
+  background-color: #d58512;
+}
+
+.button-close-login button {
+  color: #000;
+  font-size: 16px;
+}
+
+.modal {
+  display: none;
+}
+
+.welcome-message {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.welcome-message img {
+  width: 100px;
+  height: auto;
 }
 
 /* ESTILOS PARA EL FORMULARIO DE REGISTRO DE USUARIO */
@@ -1833,7 +1859,6 @@ button:focus-visible {
   color: black;
   max-width: 100%;
   height: 140px;
-  
 }
 
 .navbarAdmin__title {
@@ -1853,13 +1878,13 @@ button:focus-visible {
 
 .navbarAdmin__icons > button,
 .navbarAdmin__icons > div {
-  margin-right: 10px; 
+  margin-right: 10px;
   background: none;
 }
 
 .navbarAdmin__icons > div {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 @media (max-width: 777px) {
@@ -1934,7 +1959,7 @@ button:focus-visible {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
-  
+
   padding: 20px 0;
 }
 
@@ -2294,7 +2319,6 @@ button:focus-visible {
   color: #000000; /* Letras negras */
 }
 
-
 .userListContainer span {
   display: block;
   font-weight: bold;
@@ -2554,10 +2578,8 @@ button:focus-visible {
   color: black;
 }
 
-
 .image-container {
   position: relative;
-
 }
 
 .appadmin {
@@ -2567,9 +2589,9 @@ button:focus-visible {
 }
 
 .cellConsulta {
-  white-space: normal; 
-  overflow: visible; 
-  word-break: break-word; 
+  white-space: normal;
+  overflow: visible;
+  word-break: break-word;
 }
 
 .garantia-detail {
@@ -2695,33 +2717,32 @@ button:focus-visible {
 
 /* Estilos para el botón de guardar cotización */
 .form-submit {
-  background-color: #ffcc00; 
-  color: #000; 
-  padding: 10px 20px; 
-  border: none; 
-  cursor: pointer; 
-  border-radius: 5px; 
-  margin-top: 2rem; 
-  align-self: flex-end; 
+  background-color: #ffcc00;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 2rem;
+  align-self: flex-end;
 }
 
 .form-submit:hover {
   background-color: #ffd966;
 }
 
-
 .form-client-info {
-  margin-top: 15px; 
+  margin-top: 15px;
 }
 
 .form-client-info input {
-  width: calc(50% - 10px); 
-  margin-right: 10px; 
-  margin-bottom: 10px; 
+  width: calc(50% - 10px);
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .form-input.small {
-  font-size: 0.9rem; 
+  font-size: 0.9rem;
 }
 
 .cliente-info {
@@ -2731,10 +2752,9 @@ button:focus-visible {
 }
 
 .cliente-detail {
- margin-top: 1rem;
-  margin-bottom: 0.5rem; 
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
-
 
 /* DETALLE COTIZACION  */
 
@@ -2750,7 +2770,7 @@ button:focus-visible {
 }
 
 .titulo {
-  color: #FFD700; /* Amarillo */
+  color: #ffd700; /* Amarillo */
   text-align: center;
   margin-bottom: 20px;
 }
@@ -2773,7 +2793,6 @@ button:focus-visible {
   text-align: center;
   margin-top: 50px;
 }
-
 
 /* CotizacionesTable.css */
 
@@ -2822,5 +2841,3 @@ button:focus-visible {
   background-color: #e0a800;
   border-color: #d39e00;
 }
-
-
