@@ -1603,19 +1603,19 @@ button:focus-visible {
   padding: 12px;
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #f0ad4e;
-  border: 1px solid #eea236;
+  background-color: #ffcc00;
+
   border-radius: 4px;
   cursor: pointer;
   margin-top: 20px;
 }
 
 .login-form input[type="submit"]:hover {
-  background-color: #ec971f;
+  background-color: #ffd966;
 }
 
 .login-form input[type="submit"]:active {
-  background-color: #d58512;
+  background-color: #ffd966;
 }
 
 .button-close-login button {
