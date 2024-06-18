@@ -25,6 +25,18 @@ const getCotizacionDetalle = async (id) => {
   return data;
 };
 
+const getUltimasCotizaciones = async (idUsuario) => {
+  const { data } = await CotizacionesAPI.get(`/ultimas/${idUsuario}`);
+  return data;
+};
+
+const getInfoAdmin = async (idUsuario) => {
+  const { data } = await CotizacionesAPI.get(
+    `/getCotizacionesSum/${idUsuario}`
+  );
+  return data;
+};
+
 export const useVentas = (idUsuario, id) => {
   const ventasQueryById = useQuery({
     queryKey: ["venta", { ventaId: idUsuario }],
@@ -65,5 +77,29 @@ export const useCotizaciones = (idUsuario, id) => {
     cotizacionMutation,
     cotizacionesQueryById,
     cotizacionDetalleQuery,
+  };
+};
+
+export const useUltimasCotizaciones = (idUsuario) => {
+  const ultimasCotizacionesQuery = useQuery({
+    queryKey: ["ultimascoti", { ultimasCotizacionesId: idUsuario }],
+    queryFn: () => getUltimasCotizaciones(idUsuario),
+    enabled: idUsuario !== undefined && idUsuario !== null,
+  });
+
+  return {
+    ultimasCotizacionesQuery,
+  };
+};
+
+export const useInfoHomeAdmin = (idUsuario) => {
+  const infoAdminQuery = useQuery({
+    queryKey: ["ultimascoti", { infoAdminId: idUsuario }],
+    queryFn: () => getInfoAdmin(idUsuario),
+    enabled: idUsuario !== undefined && idUsuario !== null,
+  });
+
+  return {
+    infoAdminQuery,
   };
 };

@@ -349,6 +349,118 @@ const getVentaById = async (req, res) => {
   }
 };
 
+// ULTIMAS 5 COTIZACIONES PARA MOSTRAR EN EL ADMIN HOME //
+
+const getUltimasCotizaciones = async (req, res) => {
+  try {
+    const { idUsuario } = req.params;
+
+    if (!idUsuario) {
+      return res.status(400).json({ error: "Se requiere el ID de usuario" });
+    }
+
+    // Buscar el usuario en la base de datos
+    const usuario = await Usuarios.findByPk(idUsuario);
+
+    if (!usuario) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    // Definir las condiciones de búsqueda
+    let whereCondition = {};
+    if (!usuario.rol) {
+      whereCondition = { idUsuario };
+    }
+
+    // Obtener las últimas 5 cotizaciones
+    const cotizaciones = await Cotizaciones.findAll({
+      where: whereCondition,
+      order: [["fechaDeCreacion", "DESC"]],
+      limit: 5,
+      include: [
+        {
+          model: Clientes,
+          attributes: ["nombre", "apellido"],
+        },
+        {
+          model: Productos,
+          attributes: ["modelo"],
+        },
+      ],
+      attributes: ["PrecioFinal"],
+    });
+
+    return res.status(200).json(cotizaciones);
+  } catch (error) {
+    console.error("Error al obtener cotizaciones:", error);
+    return res.status(500).json({ error: "Error al obtener cotizaciones" });
+  }
+};
+
+// FUNCION PARA EL ADMIN HOME QUE MUESTRA LA  SUMATORIA DE LAS COTIZACIONES, VENTAS Y CANTIDAD TOTAL
+// DE COTIZACIONES (TODAS SI ES ADMIN Y POR VENDEDOR)
+
+const getCotizacionesSum = async (req, res) => {
+  try {
+    const { idUsuario } = req.params;
+
+    if (!idUsuario) {
+      return res.status(400).json({ error: "Se requiere el ID de usuario" });
+    }
+
+    const usuario = await Usuarios.findByPk(idUsuario);
+
+    if (!usuario) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    let cotizaciones;
+    if (usuario.rol === true) {
+      cotizaciones = await Cotizaciones.findAll();
+    } else {
+      cotizaciones = await Cotizaciones.findAll({
+        where: { idUsuario },
+      });
+    }
+
+    const result = {
+      COTIZACIONES: {
+        totalPesos: 0,
+        totalUSD: 0,
+      },
+      VENTAS: {
+        totalPesos: 0,
+        totalUSD: 0,
+      },
+      CANTIDADTOTAL: cotizaciones.length,
+    };
+
+    cotizaciones.forEach((cotizacion) => {
+      const { PrecioFinal, moneda, estado } = cotizacion;
+      const precioFinal = parseFloat(PrecioFinal);
+
+      if (estado === 1) {
+        if (moneda === "$") {
+          result.COTIZACIONES.totalPesos += precioFinal;
+        } else if (moneda === "USD") {
+          result.COTIZACIONES.totalUSD += precioFinal;
+        }
+      } else if (estado === 2) {
+        if (moneda === "$") {
+          result.VENTAS.totalPesos += precioFinal;
+        } else if (moneda === "USD") {
+          result.VENTAS.totalUSD += precioFinal;
+        }
+      }
+    });
+
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("Error al obtener las sumatorias de cotizaciones:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+
 module.exports = {
   createCotizacion,
   getCotizaciones,
@@ -360,4 +472,6 @@ module.exports = {
   sumarPreciosFinalesPorMonedaYEstado,
   getCotizacionesEstadoDos,
   getVentaById,
+  getUltimasCotizaciones,
+  getCotizacionesSum,
 };

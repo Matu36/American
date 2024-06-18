@@ -31,6 +31,8 @@ const {
   getCotizacionesEstadoDos,
   getVentaById,
   getCotizacionDetalle,
+  getUltimasCotizaciones,
+  getCotizacionesSum,
 } = require("../controllers/Cotizaciones");
 
 const {
@@ -99,6 +101,7 @@ router.put("/productos/edit", putProductos);
 router.delete("/productos/delete", check.auth, deleteProducto);
 router.post("/cotizaciones/create", createCotizacion);
 router.get("/cotizaciones/get/:idUsuario", getCotizaciones);
+router.get("/cotizaciones/getCotizacionesSum/:idUsuario", getCotizacionesSum);
 router.get("/cotizaciones/getDetalle/:idCotizacion", getCotizacionDetalle);
 router.get("/cotizaciones/getVentas/:idUsuario", getCotizacionesEstadoDos);
 router.get("/countCotizaciones/get", getCantidadCotizacionesPorUsuario);
@@ -118,6 +121,7 @@ router.post("/descuento/create", createDescuento);
 router.put("/descuento/put", updateDescuentoState);
 router.put("/cotizaciones/state", updateCotizacionEstado);
 router.get("/cotizaciones/suma", sumarPreciosFinales);
+router.get("/cotizaciones/ultimas/:idUsuario", getUltimasCotizaciones);
 router.get("/cotizaciones/sumaVentas", sumarPreciosFinalesPorMonedaYEstado);
 router.get("/usuarios/mensajes", getAllUsersMensajes);
 router.post("/mensajes/create", createMessage);

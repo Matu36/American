@@ -1,30 +1,46 @@
 import React, { useState, useEffect } from "react";
+import { useInfoHomeAdmin } from "../../../hooks/useCotizaciones";
+import useAuth from "../../../hooks/useAuth";
 
 export default function FeaturedInfo() {
+  const { auth } = useAuth();
+  const idUsuario = auth?.id;
+
+  const { data, isLoading } = useInfoHomeAdmin(idUsuario).infoAdminQuery;
+
+  if (isLoading) {
+    return <div className="loader">Loading...</div>;
+  }
+
   return (
     <div className="featuredInfo">
       <div className="infoBlock">
-        <span>Ganancias</span>
+        <span>Cotizaciones</span>
         <div>
-          <span>$ Ganancias</span> {/* Ejemplo de valor de ganancias */}
+          <span>$ {data.COTIZACIONES.totalPesos}</span>
         </div>
-        <span>Ganancias totales</span>
+        <div>
+          <span>USD {data.COTIZACIONES.totalUSD}</span>
+        </div>
+        <span>Cotizaciones totales</span>
       </div>
 
       <div className="infoBlock">
         <span>Ventas</span>
         <div>
-          <span>$ Ventas</span> {/* Ejemplo de valor de ventas */}
+          <span>$ {data.VENTAS.totalPesos}</span>
+        </div>
+        <div>
+          <span>USD {data.VENTAS.totalUSD}</span>
         </div>
         <span>Ventas totales</span>
       </div>
 
       <div className="infoBlock">
-        <span>Cotis</span>
+        <span>Cantidad de Cotizaciones</span>
         <div>
-          <span>$ Cotizaciones</span> {/* Ejemplo de valor de costos */}
+          <span>{data.CANTIDADTOTAL}</span>
         </div>
-        <span>Cotis</span>
       </div>
     </div>
   );
