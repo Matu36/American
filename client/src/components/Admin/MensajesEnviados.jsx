@@ -1,0 +1,94 @@
+import React, { useEffect, useState } from "react";
+import { useMensajes } from "../../hooks/useMensajes";
+import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import DataTable from "react-data-table-component";
+
+export default function MensajesEnviados() {
+  const { auth } = useAuth();
+  const idUsuario = auth?.id;
+
+  const { data: mensajes } = useMensajes(idUsuario).MensajesEnviadosQuery;
+
+  const [search, setSearch] = useState("");
+  const [enviados, setEnviados] = useState([]);
+
+  //-------------------------------- SEARCHBAR --------------------------- //
+
+  useEffect(() => {
+    setEnviados(mensajes);
+  }, [mensajes]);
+
+  useEffect(() => {
+    filterByEmailAndEmpresa(search);
+  }, [search, mensajes]);
+
+  const handleOnChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const filterByEmailAndEmpresa = (value) => {
+    if (!value) {
+      setEnviados(mensajes);
+    } else {
+      const arrayCache = mensajes?.filter((oper) => {
+        const email = oper.Usuario?.email?.toLowerCase() || "";
+        return email.includes(value.toLowerCase());
+      });
+      setEnviados(arrayCache);
+    }
+  };
+
+  const columns = [
+    { name: "Email", selector: (row) => row.Usuario.email, sortable: true },
+    { name: "Mensaje", selector: (row) => row.Mensaje, sortable: true },
+    {
+      name: "Fecha de Envío",
+      selector: (row) => new Date(row.fechaDeEnvio).toLocaleDateString(),
+      sortable: true,
+    },
+
+    {
+      name: "Ver",
+      cell: (row) => (
+        <DropdownButton
+          id={`dropdown-acciones-${row.id}`}
+          variant="secondary"
+          size="sm"
+          className="acciones-dropdown"
+        >
+          <Dropdown.Item
+            as={Link}
+            to={`/admin/mensajes/enviados/${row.id}`}
+            className="dropdown-item dropdown-item-ver"
+          >
+            Ver Mensaje
+          </Dropdown.Item>
+        </DropdownButton>
+      ),
+    },
+  ];
+
+  return (
+    <div className="form-container">
+      <div>
+        <div className="form-group" style={{ maxWidth: "60%" }}>
+          <h2 className="tituloCompo">Mensajes Enviados</h2> <br />
+          <input
+            type="text"
+            className="form-input"
+            placeholder="Buscar por EMAIL"
+            onChange={handleOnChange}
+            value={search}
+            autoComplete="off"
+            disabled={!mensajes}
+          />
+        </div>
+
+        <DataTable columns={columns} data={enviados} pagination striped />
+      </div>
+    </div>
+  );
+}

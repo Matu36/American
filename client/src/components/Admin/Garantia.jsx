@@ -65,7 +65,7 @@ export default function Garantia() {
             to={`/admin/garantias/garantia/${row.id}`}
             className="dropdown-item dropdown-item-ver"
           >
-            Ver Venta
+            Ver Garantía
           </Dropdown.Item>
         </DropdownButton>
       ),

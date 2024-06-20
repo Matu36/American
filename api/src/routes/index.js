@@ -68,6 +68,7 @@ const {
   updateMessageState,
   getMessagesByUserAndDestination,
   countMessagesByDestination,
+  getMensajesByUsuario,
 } = require("../controllers/Mensajes");
 
 const {
@@ -128,6 +129,7 @@ router.post("/mensajes/create", createMessage);
 router.put("/mensajes/put", updateMessageState);
 router.get("/mensajes/get", getMessagesByUserAndDestination);
 router.get("/mensajes/count/:idUsuario", countMessagesByDestination);
+router.get("/mensajes/enviados/:idUsuario", getMensajesByUsuario);
 router.get("/solicitaciones/get", getAllSolicitantes);
 router.post("/solicitaciones/create", createSolicitante);
 router.get("/garantias/garantiasById/:id", getGarantiaById);

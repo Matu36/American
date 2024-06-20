@@ -1,4 +1,4 @@
-const { Mensajes } = require("../db.js");
+const { Mensajes, Usuarios } = require("../db.js");
 const { Op } = require("sequelize");
 
 const createMessage = async (req, res) => {
@@ -100,9 +100,41 @@ const updateMessageState = async (req, res) => {
   }
 };
 
+const getMensajesByUsuario = async (req, res) => {
+  try {
+    const { idUsuario } = req.params;
+
+    if (!idUsuario) {
+      return res.status(400).json({ error: "Se requiere el ID de usuario" });
+    }
+
+    const mensajes = await Mensajes.findAll({
+      where: {
+        idUsuario: idUsuario,
+      },
+      include: [
+        {
+          model: Usuarios,
+
+          attributes: ["email"],
+        },
+      ],
+    });
+
+    if (!mensajes || mensajes.length === 0) {
+      return res.status(404).json({ error: "No se encontraron mensajes" });
+    }
+
+    return res.status(200).json(mensajes);
+  } catch (error) {
+    console.error("Error al obtener los mensajes:", error);
+    return res.status(500).json({ error: "Error al obtener los mensajes" });
+  }
+};
 module.exports = {
   createMessage,
   getMessagesByUserAndDestination,
   updateMessageState,
   countMessagesByDestination,
+  getMensajesByUsuario,
 };

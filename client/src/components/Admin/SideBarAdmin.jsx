@@ -52,8 +52,9 @@ const SideBarAdmin = () => {
       label: "Mensajes",
       icon: MdMail,
       subCategories: [
-        { label: "Nuevo", path: "/admin/mensajes/nuevo" },
+        { label: "Nuevo Correo", path: "/admin/mensajes/nuevo" },
         { label: "Ver mensajes", path: "/admin/mensajes/ver" },
+        { label: "Ver enviados", path: "/admin/mensajes/enviados" },
       ],
     },
   ];

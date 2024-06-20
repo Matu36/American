@@ -23,6 +23,8 @@ import CargaClientes from "../components/Admin/CargaClientes";
 import Clientes from "../components/Admin/Clientes";
 import ClientesDetail from "../components/Admin/ClientesDetail";
 import FormProduct from "../components/Admin/FormProduct";
+import FormMensaje from "../components/Admin/FormMensaje";
+import MensajesEnviados from "../components/Admin/MensajesEnviados";
 
 const AppRouter = () => {
   return (
@@ -73,7 +75,8 @@ const AdminLayout = () => {
           <Route path="/ventas/:id" element={<VentasDetail />} />
           <Route path="/Contacto" element={<Contacto />} />
           <Route path="/Descuentos" element={<Descuentos />} />
-          <Route path="/Mensajes" element={<Cotizador />} />
+          <Route path="/Mensajes/nuevo" element={<FormMensaje />} />
+          <Route path="/Mensajes/enviados" element={<MensajesEnviados />} />
         </Routes>
         {/* </div> */}
       </div>

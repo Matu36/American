@@ -6,6 +6,11 @@ const getUsuarios = async () => {
   return data;
 };
 
+const getUsuariosMensajes = async () => {
+  const { data } = await UsuariosAPI.get("/mensajes");
+  return data;
+};
+
 const getLastFive = async () => {
   const { data } = await UsuariosAPI.get("/lastfive");
   return data;
@@ -22,8 +27,14 @@ export const useUsuario = () => {
     queryFn: () => getLastFive(),
   });
 
+  const usuariosMensajesQuery = useQuery({
+    queryKey: ["usuariosMensajes"],
+    queryFn: () => getUsuariosMensajes(),
+  });
+
   return {
     usuariosQuery,
     fiveQuery,
+    usuariosMensajesQuery,
   };
 };
