@@ -98,7 +98,7 @@ button:focus-visible {
 }
 
 .marca img {
-  width: 500px;
+  width: 400px;
   height: auto;
   transition:
     transform 0.3s ease,
@@ -1850,7 +1850,7 @@ button:focus-visible {
   align-items: center;
   justify-content: space-between;
   height: auto;
-  background-color: rgb(220, 249, 4);
+  background-color: #febb00;
   color: black;
   max-width: 100%;
   height: 140px;
@@ -2303,15 +2303,15 @@ button:focus-visible {
 }
 
 .userListContainer {
-  border: 4px solid #6c6b66; /* Borde amarillo */
-  border-left: 4px solid #000000; /* Borde izquierdo negro */
-  border-right: 4px solid #000000; /* Borde derecho negro */
+  border: 4px solid #6c6b66; 
+  border-left: 4px solid #000000; 
+  border-right: 4px solid #000000; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #faeb88; /* Fondo amarillo */
+  background-color: #febb00;
   padding: 20px;
   margin-top: 1rem;
   margin-left: 1rem;
-  color: #000000; /* Letras negras */
+  color: #000000; 
 }
 
 .userListContainer span {
@@ -2755,39 +2755,41 @@ button:focus-visible {
 
 .cotizacion-detail {
   font-family: Arial, sans-serif;
-  max-width: 800px;
+  max-width: 1000px; /* Aumentamos el ancho máximo */
   margin: auto;
-  padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 40px; /* Aumentamos el padding para más espacio interno */
+  background-color: #ffffff;
+  border: 2px solid #000000; /* Borde negro más grueso */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más suave */
 }
 
 .titulo {
-  color: #ffd700; /* Amarillo */
+  color: #ffcc00; /* Amarillo */
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* Aumentamos el espacio inferior */
+  font-size: 24px; /* Aumentamos el tamaño del título */
 }
 
 .seccion {
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* Aumentamos el espacio entre secciones */
 }
 
 .seccion h3 {
-  color: #000; /* Negro */
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+  color: #000000; /* Negro */
+  font-size: 1.4rem; /* Aumentamos el tamaño del título de sección */
+  margin-bottom: 15px; /* Aumentamos el espacio inferior */
 }
 
 .seccion p {
-  margin: 5px 0;
+  margin: 8px 0; /* Aumentamos el espacio vertical entre párrafos */
 }
 
 .loader {
   text-align: center;
   margin-top: 50px;
 }
+
 
 /* CotizacionesTable.css */
 
@@ -2797,10 +2799,10 @@ button:focus-visible {
 }
 
 .detalle-btn,
-.modificar-btn {
-  display: inline-block;
+.modificar-btn,
+.concretar-btn {
   padding: 8px 16px;
-  margin-bottom: 0;
+  margin-right: 10px;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
@@ -2820,7 +2822,6 @@ button:focus-visible {
 }
 
 .detalle-btn:hover {
-  color: #fff;
   background-color: #0056b3;
   border-color: #0056b3;
 }
@@ -2832,7 +2833,70 @@ button:focus-visible {
 }
 
 .modificar-btn:hover {
-  color: #212529;
   background-color: #e0a800;
   border-color: #d39e00;
 }
+
+.concretar-btn {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.concretar-btn:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+/* Estilos personalizados */
+.acciones-dropdown {
+  font-size: 14px; /* Reducir el tamaño del dropdown */
+}
+
+.acciones-dropdown .dropdown-item {
+  font-size: 14px; /* Reducir el tamaño de los elementos del dropdown */
+  padding: 8px 16px; /* Ajustar el padding de los elementos */
+}
+
+/* Estilos para botón Ver Cotización */
+.acciones-dropdown .dropdown-item-ver {
+  color: #007bff; /* Color azul */
+  background-color: transparent; /* Fondo transparente */
+  border: none; /* Sin borde */
+}
+
+.acciones-dropdown .dropdown-item-ver:hover {
+  background-color: #007bff; /* Fondo azul al pasar el mouse */
+  color: #fff; /* Texto blanco al pasar el mouse */
+}
+
+/* Estilos para botón Modificar */
+.acciones-dropdown .dropdown-item-modificar {
+  color: #ffc107; /* Color amarillo */
+  background-color: transparent; /* Fondo transparente */
+  border: none; /* Sin borde */
+}
+
+.acciones-dropdown .dropdown-item-modificar:hover {
+  background-color: #ffc107; /* Fondo amarillo al pasar el mouse */
+  color: #212529; /* Texto negro al pasar el mouse */
+}
+
+/* Estilos para botón Concretar Venta */
+.acciones-dropdown .dropdown-item-concretar {
+  color: #28a745; /* Color verde */
+  background-color: transparent; /* Fondo transparente */
+  border: none; /* Sin borde */
+}
+
+.acciones-dropdown .dropdown-item-concretar:hover {
+  background-color: #28a745; /* Fondo verde al pasar el mouse */
+  color: #fff; /* Texto blanco al pasar el mouse */
+}
+
+
+
+
+
+
+

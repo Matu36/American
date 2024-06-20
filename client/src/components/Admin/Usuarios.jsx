@@ -66,7 +66,7 @@ export default function Usuarios() {
     <div className="form-container">
       <>
         <div>
-          <div className="form-group">
+          <div className="form-group" style={{ maxWidth: "40%" }}>
             <input
               type="text"
               className="form-input"
@@ -75,6 +75,7 @@ export default function Usuarios() {
               value={search}
               autoComplete="off"
               disabled={!data}
+              style={{ height: "2rem" }}
             />
           </div>
           <div className="dataTable">

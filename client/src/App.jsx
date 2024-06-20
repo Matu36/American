@@ -25,23 +25,23 @@ function App() {
     }
   }, [setAuth]);
 
-  useEffect(() => {
-    toast.info("Prendas 100% ORIGINALES", {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: true,
-      newestOnTop: false,
-      closeOnClick: false,
-      rtl: false,
-      draggable: true,
-      transition: Slide,
-      pauseOnHover: true,
-      pauseOnFocusLoss: false,
-      closeButton: false,
-      icon: false,
-      theme: "dark",
-    });
-  }, []);
+  // useEffect(() => {
+  //   toast.info("Prendas 100% ORIGINALES", {
+  //     position: "bottom-right",
+  //     autoClose: 5000,
+  //     hideProgressBar: true,
+  //     newestOnTop: false,
+  //     closeOnClick: false,
+  //     rtl: false,
+  //     draggable: true,
+  //     transition: Slide,
+  //     pauseOnHover: true,
+  //     pauseOnFocusLoss: false,
+  //     closeButton: false,
+  //     icon: false,
+  //     theme: "dark",
+  //   });
+  // }, []);
 
   const filtrarPorTalleYPrecio = () => {
     let camisasFiltradas = data;

@@ -3,6 +3,8 @@ import useAuth from "../../hooks/useAuth";
 import { useClientes } from "../../hooks/useClientes";
 import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 export default function Clientes() {
   const { auth } = useAuth();
@@ -61,29 +63,44 @@ export default function Clientes() {
       name: "Fecha de Carga",
       selector: (row) => new Date(row.fechaDeCreacion).toLocaleDateString(),
       sortable: true,
+      cell: (row) => (
+        <div style={{ width: "15rem" }}>
+          {new Date(row.fechaDeCreacion).toLocaleDateString()}
+        </div>
+      ),
     },
 
     {
       name: "Acciones",
       cell: (row) => (
-        <div className="acciones-container">
-          <Link to={`/admin/clientes/ver/${row.id}`} className="detalle-btn">
+        <DropdownButton
+          id={`dropdown-acciones-${row.id}`}
+          variant="secondary"
+          size="sm"
+          className="acciones-dropdown"
+        >
+          <Dropdown.Item
+            as={Link}
+            to={`/admin/clientes/ver/${row.id}`}
+            className="dropdown-item dropdown-item-ver"
+          >
             Detalle
-          </Link>
-          <Link
+          </Dropdown.Item>
+          <Dropdown.Item
+            as={Link}
             to={`/admin/clientes/modificar/${row.id}`}
-            className="modificar-btn ml-2"
+            className="dropdown-item dropdown-item-modificar"
           >
             Modificar
-          </Link>
-        </div>
+          </Dropdown.Item>
+        </DropdownButton>
       ),
     },
   ];
   return (
     <div className="form-container">
       <div>
-        <div className="form-group">
+        <div className="form-group" style={{ maxWidth: "40%" }}>
           <input
             type="text"
             className="form-input"

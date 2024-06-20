@@ -3,11 +3,28 @@ import useAuth from "../../hooks/useAuth";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
 import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 export default function Cotizaciones() {
   const { auth } = useAuth();
   const [search, setSearch] = useState("");
   const idUsuario = auth?.id;
+
+  const [clicked, setClicked] = useState({ isClicked: false });
+
+  const { mutate: cotizacionState2 } =
+    useCotizaciones().cotizacionMutationState2;
+
+  const handleConcretarVenta = async (id) => {
+    try {
+      const data = { id };
+
+      await cotizacionState2(data);
+    } catch (error) {
+      console.error("Error al concretar venta:", error);
+    }
+  };
 
   const { cotizacionesQueryById } = useCotizaciones(idUsuario);
   const [cotizaciones, setCotizaciones] = useState(cotizacionesQueryById.data);
@@ -77,47 +94,54 @@ export default function Cotizaciones() {
       selector: (row) => `${row.Cliente.nombre} ${row.Cliente.apellido}`,
       sortable: true,
     },
-    {
-      name: "Correo del Cliente",
-      selector: (row) => row.Cliente.mail,
-      sortable: true,
-    },
+
     {
       name: "Acciones",
       cell: (row) => (
-        <div className="acciones-container">
-          <Link
+        <DropdownButton
+          id={`dropdown-acciones-${row.id}`}
+          variant="secondary"
+          size="sm"
+          className="acciones-dropdown"
+        >
+          <Dropdown.Item
+            as={Link}
             to={`/admin/cotizaciones/ver/${row.id}`}
-            className="detalle-btn"
+            className="dropdown-item dropdown-item-ver"
           >
-            Detalle
-          </Link>
-          <Link
+            Ver Cotización
+          </Dropdown.Item>
+          <Dropdown.Item
+            as={Link}
             to={`/admin/cotizaciones/modificar/${row.id}`}
-            className="modificar-btn ml-2"
+            className="dropdown-item dropdown-item-modificar"
           >
             Modificar
-          </Link>
-        </div>
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => handleConcretarVenta(row.id)}
+            className="dropdown-item dropdown-item-concretar"
+          >
+            Concretar Venta
+          </Dropdown.Item>
+        </DropdownButton>
       ),
     },
   ];
 
   return (
-    <div>
-      <div className="productos">
-        <div
-          className="input-group mb-3 inputSearch"
-          style={{ maxWidth: "40%" }}
-        >
+    <div className="form-container">
+      <div>
+        <div className="form-group" style={{ maxWidth: "40%" }}>
           <input
             type="text"
-            className="form-control"
+            className="form-input"
             placeholder="Buscar por Nro, VENDEDOR O MODELO"
             onChange={handleOnChange}
             value={search}
             autoComplete="off"
             disabled={!cotizacionesQueryById.data}
+            style={{ height: "2rem" }}
           />
         </div>
         {cotizacionesQueryById.data ? (

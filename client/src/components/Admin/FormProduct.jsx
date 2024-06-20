@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
 
-export default function FormProduct({ handleCerrarFormulario }) {
+export default function FormProduct() {
   //CLOUDDINARY//
 
   const [images, setImages] = useState([]);
@@ -44,6 +44,15 @@ export default function FormProduct({ handleCerrarFormulario }) {
       case 3:
         setProducto({ ...producto, imagen3: uploadedImages[0] });
         break;
+      case 4:
+        setProducto({ ...producto, imagen4: uploadedImages[0] });
+        break;
+      case 5:
+        setProducto({ ...producto, imagen5: uploadedImages[0] });
+        break;
+      case 6:
+        setProducto({ ...producto, imagen6: uploadedImages[0] });
+        break;
       default:
         break;
     }
@@ -51,17 +60,25 @@ export default function FormProduct({ handleCerrarFormulario }) {
 
   //CLOUDDINARY//
 
-  //CREACION DE PRODUCTO //
   const [producto, setProducto] = useState({
+    familia: "",
     marca: "",
+    modelo: "",
+    precio: "",
     imagen: "",
     imagen1: "",
     imagen2: "",
     imagen3: "",
+    imagen4: "",
+    imagen5: "",
+    imagen6: "",
     cantidadTotal: "",
-    precio: "",
     codigo: "",
-    talle: "M:, L:, XL:, XXL:",
+    potencia: "",
+    motor: "",
+    capacidadDeCarga: "",
+    capacidadDeBalde: "",
+    detalles: "",
   });
 
   console.log(producto);
@@ -84,7 +101,6 @@ export default function FormProduct({ handleCerrarFormulario }) {
       const data = await request.json();
       console.log("Producto creado:", data);
 
-      // Mostrar SweetAlert de éxito
       await Swal.fire({
         position: "center",
         icon: "success",
@@ -92,9 +108,6 @@ export default function FormProduct({ handleCerrarFormulario }) {
         showConfirmButton: false,
         timer: 2000,
       });
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
 
       setProducto({
         marca: "",
@@ -109,7 +122,7 @@ export default function FormProduct({ handleCerrarFormulario }) {
       });
     } catch (error) {
       console.error("Error al crear el producto:", error);
-      // Mostrar SweetAlert de error
+
       await Swal.fire({
         position: "center",
         icon: "error",
@@ -123,81 +136,76 @@ export default function FormProduct({ handleCerrarFormulario }) {
   //FIN EDITAR COSTOS
 
   return (
-    <div className="FormProducto">
-      <div className="formCerrarProducto">
-        <button onClick={handleCerrarFormulario}>x</button>
-      </div>
+    <div className="form-container1">
       <form onSubmit={saveProduct}>
-        <div>
-          <label style={{ color: "black" }} htmlFor="marca">
-            Marca
-          </label>
+        <div className="form-group">
+          <label htmlFor="familia">Categoría</label>
           <input
             type="text"
-            id="marca"
-            name="marca"
-            value={producto.marca}
+            id="familia"
+            name="familia"
+            value={producto.familia}
             autoComplete="off"
-            placeholder="Marca"
+            placeholder="Familia"
             onChange={(e) =>
-              setProducto({ ...producto, marca: e.target.value })
+              setProducto({ ...producto, familia: e.target.value })
             }
           />
         </div>
 
-        <div>
-          <label htmlFor="precio">Precio</label>
-          {/* <select */}
+        <div className="form-group">
+          <label htmlFor="marca">Marca</label>
+
           <input
-            id="precio"
-            name="precio"
-            type="number"
-            value={producto.precio}
+            id="amrca"
+            name="marca"
+            type="text"
+            value={producto.marca}
             onChange={(e) =>
               setProducto({
                 ...producto,
-                precio: parseInt(e.target.value) || "",
+                marca: e.target.value,
               })
             }
-            placeholder="Precio"
+            placeholder="Marca"
           />
         </div>
 
-        <div>
-          <label htmlFor="codigo">Código</label>
+        <div className="form-group">
+          <label htmlFor="modelo">Modelo</label>
           <div>
             <input
               type="text"
-              id="codigo"
-              name="codigo"
-              value={producto.codigo}
+              id="modelo"
+              name="modelo"
+              value={producto.modelo}
               autoComplete="off"
-              placeholder="Código"
+              placeholder="Modelo"
               onChange={(e) =>
-                setProducto({ ...producto, codigo: e.target.value })
+                setProducto({ ...producto, modelo: e.target.value })
               }
             />
           </div>
         </div>
 
-        <div>
-          <label htmlFor="talle">Talle</label>
+        <div className="form-group">
+          <label htmlFor="precio">Precio</label>
           <div>
             <input
-              type="text"
-              id="talle"
-              name="talle"
-              value={producto.talle}
+              type="number"
+              id="precio"
+              name="precio"
+              value={producto.precio}
               autoComplete="off"
-              placeholder="Talle"
+              placeholder="Precio"
               onChange={(e) =>
-                setProducto({ ...producto, talle: e.target.value })
+                setProducto({ ...producto, precio: e.target.value })
               }
             />
           </div>
         </div>
 
-        <div>
+        <div className="form-group">
           <label htmlFor="imagen">Imagen</label>
           <input
             type="file"
@@ -207,7 +215,7 @@ export default function FormProduct({ handleCerrarFormulario }) {
             onChange={(e) => uploadImage(e, 0)}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="imagen">Imagen 1</label>
           <input
             type="file"
@@ -217,7 +225,7 @@ export default function FormProduct({ handleCerrarFormulario }) {
             onChange={(e) => uploadImage(e, 1)}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="imagen">Imagen 2</label>
           <input
             type="file"
@@ -227,7 +235,7 @@ export default function FormProduct({ handleCerrarFormulario }) {
             onChange={(e) => uploadImage(e, 2)}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="imagen">Imagen 3</label>
           <input
             type="file"
@@ -237,29 +245,160 @@ export default function FormProduct({ handleCerrarFormulario }) {
             onChange={(e) => uploadImage(e, 3)}
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="imagen">Imagen 4</label>
+          <input
+            type="file"
+            id="imagen4"
+            name="file"
+            accept="image/png, image/jpeg, image/jpg"
+            onChange={(e) => uploadImage(e, 4)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="imagen">Imagen 5</label>
+          <input
+            type="file"
+            id="imagen5"
+            name="file"
+            accept="image/png, image/jpeg, image/jpg"
+            onChange={(e) => uploadImage(e, 5)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="imagen">Imagen 6</label>
+          <input
+            type="file"
+            id="imagen6"
+            name="file"
+            accept="image/png, image/jpeg, image/jpg"
+            onChange={(e) => uploadImage(e, 6)}
+          />
+        </div>
 
-        <div>
-          <label htmlFor="cantidadTotal">Cantidad Toal</label>
+        <div className="form-group">
+          <label htmlFor="cantidadTotal">Cantidad Total</label>
           <div>
             <input
-              type="number"
+              type="text"
               id="cantidadTotal"
               name="cantidadTotal"
-              value={producto.cantidadTotal}
+              value={producto.cantidadTotal || ""}
               autoComplete="off"
               placeholder="Cantidad Total"
               onChange={(e) =>
-                setProducto({
-                  ...producto,
-                  cantidadTotal: parseInt(e.target.value) || "",
-                })
+                setProducto({ ...producto, cantidadTotal: e.target.value })
               }
             />
           </div>
         </div>
 
+        <div className="form-group">
+          <label htmlFor="codigo">Código</label>
+          <div>
+            <input
+              type="text"
+              id="codigo"
+              name="codigo"
+              value={producto.codigo || ""}
+              autoComplete="off"
+              placeholder="Código"
+              onChange={(e) =>
+                setProducto({ ...producto, codigo: e.target.value })
+              }
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="potencia">Potencia</label>
+          <div>
+            <input
+              type="text"
+              id="potencia"
+              name="potencia"
+              value={producto.potencia || ""}
+              autoComplete="off"
+              placeholder="Potencia"
+              onChange={(e) =>
+                setProducto({ ...producto, potencia: e.target.value })
+              }
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="motor">Motor</label>
+          <div>
+            <input
+              type="text"
+              id="motor"
+              name="motor"
+              value={producto.motor || ""}
+              autoComplete="off"
+              placeholder="Motor"
+              onChange={(e) =>
+                setProducto({ ...producto, motor: e.target.value })
+              }
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="capacidadDeCarga">Capacidad de Carga</label>
+          <div>
+            <input
+              type="text"
+              id="capacidadDeCarga"
+              name="capacidadDeCarga"
+              value={producto.capacidadDeCarga || ""}
+              autoComplete="off"
+              placeholder="Capacidad de Carga"
+              onChange={(e) =>
+                setProducto({ ...producto, capacidadDeCarga: e.target.value })
+              }
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="capacidadDeBalde">Capacidad de Balde</label>
+          <div>
+            <input
+              type="text"
+              id="capacidadDeBalde"
+              name="capacidadDeBalde"
+              value={producto.capacidadDeBalde || ""}
+              autoComplete="off"
+              placeholder="Capacidad de Balde"
+              onChange={(e) =>
+                setProducto({ ...producto, capacidadDeBalde: e.target.value })
+              }
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="detalles">Detalles</label>
+          <div>
+            <textarea
+              id="detalles"
+              name="detalles"
+              value={producto.detalles || ""}
+              autoComplete="off"
+              placeholder="Detalles"
+              onChange={(e) =>
+                setProducto({ ...producto, detalles: e.target.value })
+              }
+              style={{ width: "100%", height: "150px", padding: "8px" }}
+            />
+          </div>
+        </div>
+
         <div className="agregarProducto">
-          <button type="submit">Agregar Producto</button>
+          <button className="form-submit" type="submit">
+            Agregar Producto
+          </button>
         </div>
       </form>
     </div>

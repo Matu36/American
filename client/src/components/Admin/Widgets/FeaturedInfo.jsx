@@ -37,9 +37,13 @@ export default function FeaturedInfo() {
       </div>
 
       <div className="infoBlock">
-        <span>Cantidad de Cotizaciones</span>
+        <span>Cotizaciones Totales</span>
         <div>
-          <span>{data.CANTIDADTOTAL}</span>
+          <span>{data.COTIZACIONES.CANTIDADTOTAL}</span>
+        </div>
+        <span>Ventas Totales</span>
+        <div>
+          <span>{data.VENTAS.CANTIDADTOTAL}</span>
         </div>
       </div>
     </div>

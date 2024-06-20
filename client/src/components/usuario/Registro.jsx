@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Global } from "../../helpers/Global";
+import logo from "../../assets/img/AMERICAN.jpg";
 
 export default function Registro({ handleCerrarModalRegistro }) {
   const { form, changed } = useForm({});
@@ -104,10 +105,7 @@ export default function Registro({ handleCerrarModalRegistro }) {
       <br />
       {showWelcomeMessage && (
         <div className="welcome-message">
-          <img
-            src="https://res.cloudinary.com/dmfzplfra/image/upload/v1711678602/VENICE/LOGO_1-removebg-preview_j1tfcu.png"
-            alt=""
-          />
+          <img src={logo} alt="" />
           <p>Ya estas registrado en VENICE!</p>
         </div>
       )}

@@ -22,6 +22,7 @@ import CotizacionDetail from "../components/Admin/CotizacionDetail";
 import CargaClientes from "../components/Admin/CargaClientes";
 import Clientes from "../components/Admin/Clientes";
 import ClientesDetail from "../components/Admin/ClientesDetail";
+import FormProduct from "../components/Admin/FormProduct";
 
 const AppRouter = () => {
   return (
@@ -42,7 +43,7 @@ const AdminLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (auth.rol !== false) {
+    if (auth.rol === null) {
       navigate("/");
     }
   }, [auth, navigate]);
@@ -61,7 +62,8 @@ const AdminLayout = () => {
           <Route path="/Clientes/ver" element={<Clientes />} />
           <Route path="/Clientes/ver/:id" element={<ClientesDetail />} />
           <Route path="/Clientes/cargar" element={<CargaClientes />} />
-          <Route path="/Productos/cargar" element={<Productos />} />
+          <Route path="/Productos/ver" element={<Productos />} />
+          <Route path="/Productos/cargar" element={<FormProduct />} />
           <Route path="/Cotizaciones/ver" element={<Cotizaciones />} />
           <Route path="/Cotizaciones/ver/:id" element={<CotizacionDetail />} />
           <Route path="/Cotizaciones/crear" element={<Cotizador />} />

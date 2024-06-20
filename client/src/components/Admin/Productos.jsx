@@ -11,17 +11,6 @@ export default function Productos() {
   const [search, setSearch] = useState("");
   const [productos, setProductos] = useState(data);
 
-  //MOSTRANDO EL FORMULARIO DE CREACION //
-
-  const [mostrarFormulario, setMostrarFormulario] = useState(false);
-  function handleMostrarFormulario() {
-    setMostrarFormulario(true);
-  }
-
-  function handleCerrarFormulario() {
-    setMostrarFormulario(false);
-  }
-
   //-------------------------------- SEARCHBAR --------------------------- //
 
   useEffect(() => {
@@ -39,8 +28,10 @@ export default function Productos() {
     } else {
       const arrayCache = data?.filter(
         (oper) =>
-          oper.marca.toLowerCase().includes(value.toLowerCase()) ||
-          oper.codigo.toLowerCase().includes(value.toLowerCase())
+          (oper.marca &&
+            oper.marca.toLowerCase().includes(value.toLowerCase())) ||
+          (oper.modelo &&
+            oper.modelo.toLowerCase().includes(value.toLowerCase()))
       );
       setProductos(arrayCache);
     }
@@ -50,8 +41,22 @@ export default function Productos() {
 
   const isEditing = (id) => id === editIndex;
   const columns = [
+    { name: "familia", selector: (row) => row.familia, sortable: true },
     { name: "Marca", selector: (row) => row.marca, sortable: true },
-    { name: "Codigo", selector: (row) => row.codigo, sortable: true },
+    {
+      name: "Modelo",
+      cell: (row) =>
+        editIndex === row.id ? (
+          <input
+            type="text"
+            value={editTalle !== null ? editTalle : row.modelo}
+            onChange={(e) => handleTalleChange(e.target.value)}
+          />
+        ) : (
+          row.modelo
+        ),
+      sortable: true,
+    },
     {
       name: "Precio",
       cell: (row) =>
@@ -66,36 +71,7 @@ export default function Productos() {
         ),
       sortable: true,
     },
-    {
-      name: "Talle",
-      cell: (row) =>
-        editIndex === row.id ? (
-          <input
-            type="text"
-            value={editTalle !== null ? editTalle : row.talle}
-            onChange={(e) => handleTalleChange(e.target.value)}
-          />
-        ) : (
-          row.talle
-        ),
-      sortable: true,
-    },
-    {
-      name: "Cantidad Total",
-      cell: (row) =>
-        editIndex === row.id ? (
-          <input
-            type="number"
-            value={
-              editCantidadTotal !== null ? editCantidadTotal : row.cantidadTotal
-            }
-            onChange={(e) => handleCantidadTotalChange(e.target.value)}
-          />
-        ) : (
-          row.cantidadTotal
-        ),
-      sortable: true,
-    },
+
     {
       name: "Acciones",
       cell: (row) => (
@@ -112,60 +88,12 @@ export default function Productos() {
                   handleEdit(row.id, row.talle, row.precio, row.cantidadTotal)
                 }
               />
-              <MdDelete
-                onClick={() => handleDelete(row.id)}
-                style={{ cursor: "pointer", marginLeft: "10px" }}
-              />
             </>
           )}
         </div>
       ),
     },
   ];
-
-  //ELIMINAR PRODUCTO //
-
-  const handleDelete = async (id) => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}productos/delete`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: localStorage.getItem("token"),
-          },
-          body: JSON.stringify({ id }),
-        }
-      );
-
-      if (response.ok) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Producto eliminado exitosamente",
-          showConfirmButton: false,
-          // timer: 2000,
-        });
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      } else {
-        // Si hay algún problema al eliminar el producto, mostrar un mensaje de error
-        throw new Error("Error al eliminar el producto");
-      }
-    } catch (error) {
-      console.error("Error al eliminar el producto:", error);
-      // Mostrar un mensaje de error
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Hubo un error al eliminar el producto",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-    }
-  };
 
   const [editIndex, setEditIndex] = useState(null);
   const [editPrice, setEditPrice] = useState(null);
@@ -250,35 +178,28 @@ export default function Productos() {
 
   return (
     <>
-      <div className="productos">
-        <div
-          className="input-group mb-3 inputSearch"
-          style={{ maxWidth: "40%" }}
-        >
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Buscar por CODIGO O MARCA"
-            onChange={handleOnChange}
-            value={search}
-            autoComplete="off"
-            disabled={!data}
+      <div className="form-container">
+        <div>
+          <div className="form-group" style={{ maxWidth: "50%" }}>
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Buscar por MARCA o MODELO"
+              onChange={handleOnChange}
+              value={search}
+              autoComplete="off"
+              disabled={!data}
+            />
+          </div>
+
+          <DataTable
+            columns={columns}
+            data={productos}
+            pagination
+            striped
+            responsive
           />
         </div>
-        <button onClick={handleMostrarFormulario}>Agregar Producto</button>
-
-        {mostrarFormulario && (
-          <div>
-            <FormProduct handleCerrarFormulario={handleCerrarFormulario} />
-          </div>
-        )}
-        <DataTable
-          columns={columns}
-          data={productos}
-          pagination
-          striped
-          responsive
-        />
       </div>
     </>
   );

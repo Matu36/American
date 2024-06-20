@@ -76,13 +76,10 @@ const Cotizador = () => {
     idCliente: "",
     idProducto: "",
     precio: "",
-    anticipo: "",
+    anticipo: 0,
     saldoAFinanciar: "",
     IVA: 10.5,
     moneda: "",
-    interes: 4,
-    saldo: "",
-    saldoConInteres: "",
     PrecioFinal: "",
     cuotas: 1,
   });
@@ -112,49 +109,61 @@ const Cotizador = () => {
   };
 
   useEffect(() => {
-    const { precio, anticipo, saldoAFinanciar, cuotas } = formData;
+    const { precio, anticipo, cuotas } = formData;
     const iva = 10.5;
-    let interes = 0; // Inicialmente el interés se establece en 0
+    let interesBase = 0;
 
-    // Si las cuotas son mayores a 1, se calcula el interés basado en el valor en formData
-    if (cuotas > 1) {
-      interes = formData.interes;
+    switch (parseInt(cuotas)) {
+      case 2:
+        interesBase = 8;
+        break;
+      case 3:
+        interesBase = 12;
+        break;
+      case 4:
+        interesBase = 16;
+        break;
+      case 5:
+        interesBase = 20;
+        break;
+      case 6:
+        interesBase = 24;
+        break;
+      case 7:
+        interesBase = 28;
+        break;
+      case 8:
+        interesBase = 32;
+        break;
+      case 9:
+        interesBase = 36;
+        break;
+      case 10:
+        interesBase = 40;
+        break;
+      case 11:
+        interesBase = 44;
+        break;
+      case 12:
+        interesBase = 48;
+        break;
+      default:
+        interesBase = 0;
     }
 
-    let saldo = parseFloat(anticipo) + parseFloat(saldoAFinanciar);
-    let saldoConInteres = saldo;
-    let PrecioFinal = parseFloat(precio) + saldo + saldo * (iva / 100);
-
-    if (cuotas > 1) {
-      saldoConInteres = saldo + saldo * (interes / 100) * (cuotas - 1);
-      PrecioFinal =
-        parseFloat(precio) + saldoConInteres + saldoConInteres * (iva / 100);
-    } else {
-      // Si es contado, los valores de saldo, anticipo, saldo a financiar, saldo con interés son 0
-      saldo = 0;
-      saldoConInteres = 0;
-      PrecioFinal = parseFloat(precio) + parseFloat(precio) * (iva / 100);
-      setFormData((prevData) => ({
-        ...prevData,
-        anticipo: 0,
-        saldoAFinanciar: 0,
-      }));
-    }
+    const precioNum = parseFloat(precio) || 0;
+    const anticipoNum = parseFloat(anticipo) || 0;
+    const saldoAFinanciar = precioNum - anticipoNum;
+    const totalInteres = saldoAFinanciar * (interesBase / 100);
+    const precioConIVA = precioNum * (1 + iva / 100);
+    const PrecioFinal = precioConIVA + totalInteres;
 
     setFormData((prevData) => ({
       ...prevData,
-      interes,
-      saldo,
-      saldoConInteres,
+      saldoAFinanciar,
       PrecioFinal,
     }));
-  }, [
-    formData.precio,
-    formData.anticipo,
-    formData.saldoAFinanciar,
-    formData.cuotas,
-    formData.interes,
-  ]);
+  }, [formData.precio, formData.anticipo, formData.cuotas]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -296,7 +305,7 @@ const Cotizador = () => {
         />
       </div>
       <div className="form-group">
-        <label className="form-label">Cuotas:</label>
+        <label className="form-label">Cuotas</label>
         <select
           name="cuotas"
           value={formData.cuotas}
@@ -320,7 +329,6 @@ const Cotizador = () => {
               name="anticipo"
               value={formData.anticipo}
               onChange={handleChange}
-              required
               className="form-input"
             />
           </div>
@@ -348,30 +356,6 @@ const Cotizador = () => {
           className="form-input"
         />
       </div>
-      <input
-        type="hidden"
-        name="interes"
-        value={formData.interes}
-        className="form-input"
-      />
-      <div className="form-group">
-        <label className="form-label">Saldo:</label>
-        <input
-          type="number"
-          name="saldo"
-          value={formData.saldo}
-          disabled
-          className="form-input"
-        />
-      </div>
-
-      <input
-        type="number"
-        name="saldoConInteres"
-        value={formData.saldoConInteres}
-        hidden
-        className="form-input"
-      />
 
       <div className="form-group">
         <label className="form-label">Precio Final:</label>

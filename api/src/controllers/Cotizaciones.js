@@ -66,7 +66,12 @@ const getCotizaciones = async (req, res) => {
     let cotizaciones;
     if (usuario.rol === true) {
       cotizaciones = await Cotizaciones.findAll({
-        attributes: ["numeroCotizacion", "PrecioFinal", "fechaDeCreacion"],
+        attributes: [
+          "id",
+          "numeroCotizacion",
+          "PrecioFinal",
+          "fechaDeCreacion",
+        ],
         include: [
           { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
@@ -195,13 +200,7 @@ const updateCotizacionEstado = async (req, res) => {
 
     const { id } = req.body;
 
-    let cotizacion = await Cotizaciones.findByPk(id, {
-      include: [
-        { model: Productos, attributes: ["modelo"] },
-        { model: Usuarios, attributes: ["nombre", "apellido"] },
-        { model: Clientes, attributes: ["nombre", "apellido"] },
-      ],
-    });
+    let cotizacion = await Cotizaciones.findByPk(id);
 
     if (!cotizacion) {
       throw "Cotización no encontrada";
@@ -209,10 +208,10 @@ const updateCotizacionEstado = async (req, res) => {
 
     await cotizacion.update({ estado: 2, fechaVenta: new Date() });
 
-    return res.status(200).send(cotizacion);
+    return res.status(200).send("La cotización se concretó con éxito.");
   } catch (error) {
     console.error(error);
-    return res.status(400).send(error);
+    return res.status(400).send(error.toString());
   }
 };
 
@@ -294,7 +293,7 @@ const getCotizacionesEstadoDos = async (req, res) => {
     if (usuario.rol === true) {
       cotizaciones = await Cotizaciones.findAll({
         where: { estado: 2 },
-        attributes: ["id", "PrecioFinal", "fechaDeCreacion"],
+        attributes: ["id", "PrecioFinal", "fechaDeCreacion", "moneda"],
         include: [
           { model: Usuarios, attributes: ["nombre", "apellido"] },
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
@@ -304,7 +303,7 @@ const getCotizacionesEstadoDos = async (req, res) => {
     } else {
       cotizaciones = await Cotizaciones.findAll({
         where: { idUsuario, estado: 2 },
-        attributes: ["id", "PrecioFinal", "fechaDeCreacion"],
+        attributes: ["id", "PrecioFinal", "fechaDeCreacion", "moneda"],
         include: [
           { model: Usuarios, attributes: ["nombre", "apellido"] },
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
@@ -414,12 +413,22 @@ const getCotizacionesSum = async (req, res) => {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
 
-    let cotizaciones;
+    let cotizacionesCotizaciones;
+    let cotizacionesVentas;
+
     if (usuario.rol === true) {
-      cotizaciones = await Cotizaciones.findAll();
+      cotizacionesCotizaciones = await Cotizaciones.findAll({
+        where: { estado: 1 },
+      });
+      cotizacionesVentas = await Cotizaciones.findAll({
+        where: { estado: 2 },
+      });
     } else {
-      cotizaciones = await Cotizaciones.findAll({
-        where: { idUsuario },
+      cotizacionesCotizaciones = await Cotizaciones.findAll({
+        where: { idUsuario, estado: 1 },
+      });
+      cotizacionesVentas = await Cotizaciones.findAll({
+        where: { idUsuario, estado: 2 },
       });
     }
 
@@ -427,30 +436,34 @@ const getCotizacionesSum = async (req, res) => {
       COTIZACIONES: {
         totalPesos: 0,
         totalUSD: 0,
+        CANTIDADTOTAL: cotizacionesCotizaciones.length,
       },
       VENTAS: {
         totalPesos: 0,
         totalUSD: 0,
+        CANTIDADTOTAL: cotizacionesVentas.length,
       },
-      CANTIDADTOTAL: cotizaciones.length,
     };
 
-    cotizaciones.forEach((cotizacion) => {
-      const { PrecioFinal, moneda, estado } = cotizacion;
+    cotizacionesCotizaciones.forEach((cotizacion) => {
+      const { PrecioFinal, moneda } = cotizacion;
       const precioFinal = parseFloat(PrecioFinal);
 
-      if (estado === 1) {
-        if (moneda === "$") {
-          result.COTIZACIONES.totalPesos += precioFinal;
-        } else if (moneda === "USD") {
-          result.COTIZACIONES.totalUSD += precioFinal;
-        }
-      } else if (estado === 2) {
-        if (moneda === "$") {
-          result.VENTAS.totalPesos += precioFinal;
-        } else if (moneda === "USD") {
-          result.VENTAS.totalUSD += precioFinal;
-        }
+      if (moneda === "$") {
+        result.COTIZACIONES.totalPesos += precioFinal;
+      } else if (moneda === "USD") {
+        result.COTIZACIONES.totalUSD += precioFinal;
+      }
+    });
+
+    cotizacionesVentas.forEach((cotizacion) => {
+      const { PrecioFinal, moneda } = cotizacion;
+      const precioFinal = parseFloat(PrecioFinal);
+
+      if (moneda === "$") {
+        result.VENTAS.totalPesos += precioFinal;
+      } else if (moneda === "USD") {
+        result.VENTAS.totalUSD += precioFinal;
       }
     });
 

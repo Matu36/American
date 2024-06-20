@@ -15,6 +15,10 @@ const postCotizacion = async (data) => {
   return await CotizacionesAPI.post(`create`, data);
 };
 
+const postCotizacionState2 = async (data) => {
+  return await CotizacionesAPI.put(`state`, { id: data.id });
+};
+
 const getCotizacionesById = async (idUsuario) => {
   const { data } = await CotizacionesAPI.get(`/get/${idUsuario}`);
   return data;
@@ -62,7 +66,7 @@ export const useCotizaciones = (idUsuario, id) => {
     mutationFn: (data) => postCotizacion(data),
   });
   const cotizacionesQueryById = useQuery({
-    queryKey: ["venta", { cotizacionId: idUsuario }],
+    queryKey: ["coti", { cotizacionId: idUsuario }],
     queryFn: () => getCotizacionesById(idUsuario),
     enabled: idUsuario !== undefined && idUsuario !== null,
   });
@@ -73,10 +77,16 @@ export const useCotizaciones = (idUsuario, id) => {
     enabled: id !== undefined && id !== null,
   });
 
+  const cotizacionMutationState2 = useMutation({
+    mutationKey: ["cotizacionState2-mutation"],
+    mutationFn: (data) => postCotizacionState2(data),
+  });
+
   return {
     cotizacionMutation,
     cotizacionesQueryById,
     cotizacionDetalleQuery,
+    cotizacionMutationState2,
   };
 };
 

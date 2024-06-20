@@ -3,6 +3,8 @@ import useAuth from "../../hooks/useAuth";
 import { useVentas } from "../../hooks/useCotizaciones";
 import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 export default function Ventas() {
   const { auth } = useAuth();
@@ -55,8 +57,8 @@ export default function Ventas() {
     },
     {
       name: "Precio Final",
-      selector: (row) => row.PrecioFinal,
       sortable: true,
+      selector: (row) => `${row.moneda} ${row.PrecioFinal}`,
     },
     {
       name: "Fecha de Venta",
@@ -73,32 +75,36 @@ export default function Ventas() {
       selector: (row) => `${row.Cliente.nombre} ${row.Cliente.apellido}`,
       sortable: true,
     },
-    {
-      name: "Correo del Cliente",
-      selector: (row) => row.Cliente.mail,
-      sortable: true,
-    },
+
     {
       name: "Acciones",
       cell: (row) => (
-        <Link to={`/admin/ventas/${row.id}`} className="custom-link">
-          <button className="detalle">Detalle</button>
-        </Link>
+        <DropdownButton
+          id={`dropdown-acciones-${row.id}`}
+          variant="secondary"
+          size="sm"
+          className="acciones-dropdown"
+        >
+          <Dropdown.Item
+            as={Link}
+            to={`/admin/ventas/${row.id}`}
+            className="dropdown-item dropdown-item-ver"
+          >
+            Ver Venta
+          </Dropdown.Item>
+        </DropdownButton>
       ),
     },
   ];
 
   return (
-    <div>
-      <div className="productos">
-        <div
-          className="input-group mb-3 inputSearch"
-          style={{ maxWidth: "40%" }}
-        >
+    <div className="form-container">
+      <div>
+        <div className="form-group" style={{ maxWidth: "60%" }}>
           <input
             type="text"
-            className="form-control"
-            placeholder="Buscar por APELLIDO DE CLIENTE - VENDEDOR O MODELO"
+            className="form-input"
+            placeholder="Buscar por APELLIDO DE CLIENTE - VENDEDOR o MODELO"
             onChange={handleOnChange}
             value={search}
             autoComplete="off"
