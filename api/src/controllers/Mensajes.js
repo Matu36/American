@@ -51,7 +51,7 @@ const getMessagesByUserAndDestination = async (req, res) => {
 
 const countMessagesByDestination = async (req, res) => {
   try {
-    const { idUsuario } = req.body;
+    const { idUsuario } = req.params;
 
     if (!idUsuario) {
       throw "Se requiere el ID de usuario";

@@ -3,10 +3,15 @@ import { FaUser, FaBell } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/img/logoAmerican.png";
+import { useMensajes } from "../../hooks/useMensajes";
 
 export default function NavBarAdmin() {
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
+  const idUsuario = auth?.id;
+  const { data, isLoading } = useMensajes(idUsuario).MensajesCountQuery;
+
+  console.log(data);
 
   const handleButtonClick = () => {
     navigate("/");
@@ -32,14 +37,14 @@ export default function NavBarAdmin() {
           </div>
           <button
             className="navbarAdmin__icon-button"
-            // onClick={() => {
-            //   alert(`Tiene ${mensajeNoLeido} mensajes sin leer.`);
-            // }}
+            onClick={() => {
+              alert(`Tiene ${data.count} mensajes sin leer.`);
+            }}
           >
             <FaBell className="navbarAdmin__icon" />
-            {/* {mensajeNoLeido > 0 && (
-              <span className="navbarAdmin__badge">{mensajeNoLeido}</span>
-            )} */}
+            {data.count > 0 && (
+              <span className="navbarAdmin__badge">{data.count}</span>
+            )}
           </button>
         </div>
       </div>
