@@ -50,6 +50,16 @@ h1 {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "merri";
+  src: url("../src/assets/fonts/Merriweather-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.tituloCompo {
+  font-family: "merri";
+}
 
 button {
   border-radius: 8px;

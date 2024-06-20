@@ -133,6 +133,7 @@ export default function Cotizaciones() {
     <div className="form-container">
       <div>
         <div className="form-group" style={{ maxWidth: "40%" }}>
+          <h2 className="tituloCompo">Cotizaciones</h2> <br />
           <input
             type="text"
             className="form-input"

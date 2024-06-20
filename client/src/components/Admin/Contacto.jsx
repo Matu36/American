@@ -61,41 +61,30 @@ export default function Contacto() {
       cell: (row) => <div className="cellConsulta">{row.consulta}</div>,
     },
     {
-      name: "Fecha de Envío",
+      name: "Fecha",
       selector: (row) => new Date(row.createdAt).toLocaleString(),
       sortable: true,
     },
   ];
 
   return (
-    <div>
-      {" "}
+    <div className="form-container">
       <div>
-        <div className="productos">
+        <div>
           <>
-            <div className="productos">
-              <div
-                className="input-group mb-3 inputSearch"
-                style={{ maxWidth: "40%" }}
-              >
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Buscar por APELLIDO O EMAIL"
-                  onChange={handleOnChange}
-                  value={search}
-                  autoComplete="off"
-                  disabled={!data}
-                />
-              </div>
-
-              <DataTable
-                columns={columns}
-                data={contactos}
-                pagination
-                striped
+            <div className="form-group" style={{ maxWidth: "60%" }}>
+              <h2 className="tituloCompo">Contacto</h2> <br />
+              <input
+                type="text"
+                className="form-input"
+                placeholder="Buscar por APELLIDO O EMAIL"
+                onChange={handleOnChange}
+                value={search}
+                autoComplete="off"
+                disabled={!data}
               />
             </div>
+            <DataTable columns={columns} data={contactos} pagination striped />
           </>
         </div>
       </div>

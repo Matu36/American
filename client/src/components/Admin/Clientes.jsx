@@ -101,6 +101,7 @@ export default function Clientes() {
     <div className="form-container">
       <div>
         <div className="form-group" style={{ maxWidth: "40%" }}>
+          <h2 className="tituloCompo">Clientes</h2> <br />
           <input
             type="text"
             className="form-input"

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { useGarantia } from "../../hooks/useGarantia";
 import { Link } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 export default function Garantia() {
   const [search, setSearch] = useState("");
@@ -52,38 +54,42 @@ export default function Garantia() {
     {
       name: "Ver",
       cell: (row) => (
-        <Link
-          to={`/admin/garantias/garantia/${row.id}`}
-          className="custom-link"
+        <DropdownButton
+          id={`dropdown-acciones-${row.id}`}
+          variant="secondary"
+          size="sm"
+          className="acciones-dropdown"
         >
-          <button className="detalle">Detalle</button>
-        </Link>
+          <Dropdown.Item
+            as={Link}
+            to={`/admin/garantias/garantia/${row.id}`}
+            className="dropdown-item dropdown-item-ver"
+          >
+            Ver Venta
+          </Dropdown.Item>
+        </DropdownButton>
       ),
     },
   ];
 
   return (
-    <div>
-      <div className="productos">
+    <div className="form-container">
+      <div>
         <>
-          <div className="productos">
-            <div
-              className="input-group mb-3 inputSearch"
-              style={{ maxWidth: "40%" }}
-            >
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Buscar por EMPRESA O EMAIL"
-                onChange={handleOnChange}
-                value={search}
-                autoComplete="off"
-                disabled={!data}
-              />
-            </div>
-
-            <DataTable columns={columns} data={garantia} pagination striped />
+          <div className="form-group" style={{ maxWidth: "60%" }}>
+            <h2 className="tituloCompo">Garantía</h2> <br />
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Buscar por EMPRESA O EMAIL"
+              onChange={handleOnChange}
+              value={search}
+              autoComplete="off"
+              disabled={!data}
+            />
           </div>
+
+          <DataTable columns={columns} data={garantia} pagination striped />
         </>
       </div>
     </div>

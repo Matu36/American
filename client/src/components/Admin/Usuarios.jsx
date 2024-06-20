@@ -67,6 +67,7 @@ export default function Usuarios() {
       <>
         <div>
           <div className="form-group" style={{ maxWidth: "40%" }}>
+            <h2 className="tituloCompo">Usuarios</h2> <br />
             <input
               type="text"
               className="form-input"

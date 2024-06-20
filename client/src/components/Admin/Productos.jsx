@@ -41,7 +41,7 @@ export default function Productos() {
 
   const isEditing = (id) => id === editIndex;
   const columns = [
-    { name: "familia", selector: (row) => row.familia, sortable: true },
+    { name: "Categorìa", selector: (row) => row.familia, sortable: true },
     { name: "Marca", selector: (row) => row.marca, sortable: true },
     {
       name: "Modelo",
@@ -180,7 +180,8 @@ export default function Productos() {
     <>
       <div className="form-container">
         <div>
-          <div className="form-group" style={{ maxWidth: "50%" }}>
+          <div className="form-group" style={{ maxWidth: "60%" }}>
+            <h2 className="tituloCompo"> Productos</h2> <br />
             <input
               type="text"
               className="form-input"

@@ -59,7 +59,7 @@ export default function CargaClientes() {
 
   return (
     <div className="form-container1">
-      <h3>Carga de Clientes</h3>
+      <h2 className="tituloCompo">Cargar Clientes</h2> <br />
       <br />
       <form onSubmit={handleSubmit}>
         <div className="form-group">

@@ -101,6 +101,7 @@ export default function Ventas() {
     <div className="form-container">
       <div>
         <div className="form-group" style={{ maxWidth: "60%" }}>
+          <h2 className="tituloCompo">Ventas</h2> <br />
           <input
             type="text"
             className="form-input"

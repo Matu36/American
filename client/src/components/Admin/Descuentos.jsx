@@ -59,27 +59,22 @@ export default function Descuentos() {
   ];
 
   return (
-    <div>
-      <div className="productos">
+    <div className="form-container">
+      <div>
         <>
-          <div className="productos">
-            <div
-              className="input-group mb-3 inputSearch"
-              style={{ maxWidth: "40%" }}
-            >
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Buscar por APELLIDO O EMAIL"
-                onChange={handleOnChange}
-                value={search}
-                autoComplete="off"
-                disabled={!data}
-              />
-            </div>
-
-            <DataTable columns={columns} data={descuentos} pagination striped />
+          <div className="form-group" style={{ maxWidth: "60%" }}>
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Buscar por APELLIDO O EMAIL"
+              onChange={handleOnChange}
+              value={search}
+              autoComplete="off"
+              disabled={!data}
+            />
           </div>
+
+          <DataTable columns={columns} data={descuentos} pagination striped />
         </>
       </div>
     </div>

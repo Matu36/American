@@ -184,6 +184,11 @@ const Cotizador = () => {
 
   return (
     <form onSubmit={handleSubmit} className="form-container">
+      <div>
+        {" "}
+        <h2 className="tituloCompo">Cotizador</h2> <br />
+      </div>
+      <div></div>
       <div className="form-group">
         <label className="form-label">Vendedor</label>
         <input
@@ -292,7 +297,6 @@ const Cotizador = () => {
           <option value="USD">USD</option>
         </select>
       </div>
-
       <div className="form-group">
         <label className="form-label">Precio:</label>
         <input
@@ -356,7 +360,6 @@ const Cotizador = () => {
           className="form-input"
         />
       </div>
-
       <div className="form-group">
         <label className="form-label">Precio Final:</label>
         <input
@@ -367,6 +370,7 @@ const Cotizador = () => {
           className="form-input"
         />
       </div>
+      <div></div>
       <div>
         <button type="submit" className="form-submit">
           Guardar Cotización

@@ -137,6 +137,7 @@ export default function FormProduct() {
 
   return (
     <div className="form-container1">
+      <h2 className="tituloCompo">Cargar Producto</h2> <br />
       <form onSubmit={saveProduct}>
         <div className="form-group">
           <label htmlFor="familia">Categoría</label>
