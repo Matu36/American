@@ -29,6 +29,7 @@
     "react-transition-group": "^4.4.5",
     "recharts": "^2.12.6",
     "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.11",
     "sweetalert2": "^11.10.8",
     "typeface-cormorant-garamond": "^1.1.13",
     "video-react": "^0.16.0",

@@ -10,6 +10,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 a {
@@ -1938,7 +1939,7 @@ button:focus-visible {
   }
 
   .navbarAdmin__icons {
-    margin-top: 1rem; /* Agrega un espacio entre los botones y el texto */
+    margin-top: 1rem; 
   }
 }
 
@@ -1949,6 +1950,7 @@ button:focus-visible {
   color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   width: 190px;
+ 
 }
 
 @media (max-width: 500px) {
@@ -2760,6 +2762,54 @@ button:focus-visible {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
 }
+.clientes-detail-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.clientes-detail-container h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.detail-item strong {
+  min-width: 150px;
+  color: #ffc107;
+  text-align: right;
+  margin-right: 30px;
+}
+
+.detail-item span {
+  color: #ccc;
+  flex: 1;
+}
+
+.detail-item.usuario strong {
+  color: #ffc107;
+}
+
+.detail-item.usuario span {
+  color: #fff;
+}
+
+
 
 /* DETALLE COTIZACION  */
 
@@ -2894,17 +2944,31 @@ button:focus-visible {
 
 /* Estilos para botón Concretar Venta */
 .acciones-dropdown .dropdown-item-concretar {
-  color: #28a745; /* Color verde */
-  background-color: transparent; /* Fondo transparente */
-  border: none; /* Sin borde */
+  color: #28a745; 
+  background-color: transparent; 
+  border: none; 
 }
 
 .acciones-dropdown .dropdown-item-concretar:hover {
-  background-color: #28a745; /* Fondo verde al pasar el mouse */
-  color: #fff; /* Texto blanco al pasar el mouse */
+  background-color: #28a745; 
+  color: #fff; 
 }
 
+.acciones-dropdown-custom {
+  background-color: #ffc107;
+  color: black; 
+  border-color: #ffc107;
+}
 
+.acciones-dropdown-custom .dropdown-toggle {
+  background-color: #ffc107;
+  color: black; /* Para asegurarte de que el texto sea legible */
+  border-color: #ffc107;
+}
+
+.acciones-dropdown-custom .dropdown-menu {
+  background-color: white; /* O el color que prefieras */
+}
 
 
 

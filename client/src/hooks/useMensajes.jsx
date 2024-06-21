@@ -11,8 +11,17 @@ const getCountMensajesEnviados = async (idUsuario) => {
   return data;
 };
 
+const getMensajesRecibidos = async (idUsuario) => {
+  const { data } = await mensajesAPI.get(`/recibidos/${idUsuario}`);
+  return data;
+};
+
 const postMensaje = async (data) => {
   return await mensajesAPI.post(`create`, data);
+};
+
+const putMensajeState2 = async (data) => {
+  return await mensajesAPI.put(`put`, { idMensaje: data.id });
 };
 
 export const useMensajes = (idUsuario) => {
@@ -32,9 +41,22 @@ export const useMensajes = (idUsuario) => {
     queryFn: () => getCountMensajesEnviados(idUsuario),
     enabled: idUsuario !== undefined && idUsuario !== null,
   });
+
+  const MensajesRecibidosQuery = useQuery({
+    queryKey: ["mensajesRecibidos", { mensajeRecibidoId: idUsuario }],
+    queryFn: () => getMensajesRecibidos(idUsuario),
+    enabled: idUsuario !== undefined && idUsuario !== null,
+  });
+
+  const mensajeMutationState2 = useMutation({
+    mutationKey: ["mensajeState2-mutation"],
+    mutationFn: (data) => putMensajeState2(data),
+  });
   return {
     MensajesCountQuery,
     mensajesMutation,
     MensajesEnviadosQuery,
+    MensajesRecibidosQuery,
+    mensajeMutationState2,
   };
 };

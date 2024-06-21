@@ -61,7 +61,7 @@ const SideBarAdmin = () => {
 
   return (
     <div className="sidebarAdmin bg-dark">
-      <div className="text-start">
+      <div className="text-start px-3">
         <Link
           to="/admin"
           className={`sidebarAdmin__button ${

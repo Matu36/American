@@ -47,10 +47,10 @@ export default function ClientesDetail() {
         <strong>Teléfono:</strong> {telefono}
       </div>
       <div className="detail-item">
-        <strong>Fecha de Creación:</strong> {fechaDeCreacion}
+        <strong>Creado:</strong> {fechaDeCreacion}
       </div>
       <div className="detail-item">
-        <strong>Fecha de Modificación:</strong> {fechaModi}
+        <strong>Modificado:</strong> {fechaModi}
       </div>
       <div className="detail-item">
         <strong>Usuario:</strong> {Usuario.nombre} {Usuario.apellido}

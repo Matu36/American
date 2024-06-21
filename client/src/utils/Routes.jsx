@@ -25,6 +25,7 @@ import ClientesDetail from "../components/Admin/ClientesDetail";
 import FormProduct from "../components/Admin/FormProduct";
 import FormMensaje from "../components/Admin/FormMensaje";
 import MensajesEnviados from "../components/Admin/MensajesEnviados";
+import MensajesRecibidos from "../components/Admin/MensajesRecibidos";
 
 const AppRouter = () => {
   return (
@@ -77,6 +78,7 @@ const AdminLayout = () => {
           <Route path="/Descuentos" element={<Descuentos />} />
           <Route path="/Mensajes/nuevo" element={<FormMensaje />} />
           <Route path="/Mensajes/enviados" element={<MensajesEnviados />} />
+          <Route path="/Mensajes/ver" element={<MensajesRecibidos />} />
         </Routes>
         {/* </div> */}
       </div>

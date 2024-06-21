@@ -56,7 +56,7 @@ export default function Usuarios() {
       sortable: true,
     },
     {
-      name: "Fecha de Creación",
+      name: "Creado",
       selector: (row) => new Date(row.createdAt).toLocaleString(),
       sortable: true,
     },

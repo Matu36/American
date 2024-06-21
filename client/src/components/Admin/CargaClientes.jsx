@@ -27,34 +27,21 @@ export default function CargaClientes() {
     }));
   };
 
-  // Enviar formulario al backend
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      // Agregar el idUsuario al formData antes de enviar al backend
-      const data = { ...formData, idUsuario };
 
-      // Llamar a la función clienteCreate para enviar los datos al backend
-      await clienteCreate(data);
+    const data = { ...formData, idUsuario };
 
-      // Limpiar el formulario después de enviar los datos
-      setFormData({
-        CUIT: "",
-        domicilio: "",
-        nombre: "",
-        apellido: "",
-        mail: "",
-        telefono: "",
-      });
+    await clienteCreate(data);
 
-      // Mostrar mensaje de éxito o realizar alguna acción adicional si es necesario
-      alert("Cliente creado exitosamente");
-    } catch (error) {
-      console.error("Error al crear cliente:", error);
-      alert(
-        "Hubo un error al crear el cliente. Por favor, intenta nuevamente."
-      );
-    }
+    setFormData({
+      CUIT: "",
+      domicilio: "",
+      nombre: "",
+      apellido: "",
+      mail: "",
+      telefono: "",
+    });
   };
 
   return (

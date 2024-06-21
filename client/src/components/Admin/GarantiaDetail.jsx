@@ -27,55 +27,58 @@ export default function GarantiaDetail() {
   } = garantiaData;
 
   return (
-    <div className="garantia-detail">
+    <div className="clientes-detail-container">
       <h1>Detalles de la Garantía</h1>
-      <div className="garantia-detail-card">
+
+      <div className="detail-section">
         <h2>Información del Cliente</h2>
-        <p>
+        <div className="detail-item">
           <strong>Nombre:</strong> {nombre}
-        </p>
-        <p>
-          <strong>Apellido:</strong> {apellido}
-        </p>
-        <p>
-          <strong>Empresa:</strong> {empresa}
-        </p>
-        <p>
-          <strong>Email:</strong> {email}
-        </p>
-        <p>
-          <strong>Teléfono:</strong> {telefono}
-        </p>
-
-        <div className="machine-details">
-          <h2>Detalles de la Máquina</h2>
-          <p>
-            <strong>Tipo de Máquina:</strong> {tipoDeMaquina}
-          </p>
-          <p>
-            <strong>Marca:</strong> {marca}
-          </p>
-          <p>
-            <strong>Modelo:</strong> {modelo}
-          </p>
-          <p>
-            <strong>Número de Chasis:</strong> {numeroDeChasis}
-          </p>
-          <p>
-            <strong>Fecha de Entrega del Equipo:</strong>{" "}
-            {new Date(fechaEntregaDelEquipo).toLocaleDateString()}
-          </p>
-          <p>
-            <strong>Ubicación:</strong> {ubicacion}
-          </p>
-          <p>
-            <strong>Cantidad de Horas (Horómetro):</strong>{" "}
-            {cantidadHorasHorometro}
-          </p>
         </div>
+        <div className="detail-item">
+          <strong>Apellido:</strong> {apellido}
+        </div>
+        <div className="detail-item">
+          <strong>Empresa:</strong> {empresa}
+        </div>
+        <div className="detail-item">
+          <strong>Email:</strong> {email}
+        </div>
+        <div className="detail-item">
+          <strong>Teléfono:</strong> {telefono}
+        </div>
+      </div>
 
-        <div className="failure-details">
-          <h2>Detalle de la Falla</h2>
+      <div className="detail-section">
+        <h2>Detalles de la Máquina</h2>
+        <div className="detail-item">
+          <strong>Tipo de Máquina:</strong> {tipoDeMaquina}
+        </div>
+        <div className="detail-item">
+          <strong>Marca:</strong> {marca}
+        </div>
+        <div className="detail-item">
+          <strong>Modelo:</strong> {modelo}
+        </div>
+        <div className="detail-item">
+          <strong>Número de Chasis:</strong> {numeroDeChasis}
+        </div>
+        <div className="detail-item">
+          <strong>Fecha de Entrega del Equipo:</strong>{" "}
+          {new Date(fechaEntregaDelEquipo).toLocaleDateString()}
+        </div>
+        <div className="detail-item">
+          <strong>Ubicación:</strong> {ubicacion}
+        </div>
+        <div className="detail-item">
+          <strong>Cantidad de Horas (Horómetro):</strong>{" "}
+          {cantidadHorasHorometro}
+        </div>
+      </div>
+
+      <div className="detail-section">
+        <h2>Detalle de la Falla</h2>
+        <div className="detail-item">
           <p>{falla}</p>
         </div>
       </div>

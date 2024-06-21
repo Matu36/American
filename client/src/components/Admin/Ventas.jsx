@@ -83,7 +83,7 @@ export default function Ventas() {
           id={`dropdown-acciones-${row.id}`}
           variant="secondary"
           size="sm"
-          className="acciones-dropdown"
+          className="acciones-dropdown acciones-dropdown-custom"
         >
           <Dropdown.Item
             as={Link}

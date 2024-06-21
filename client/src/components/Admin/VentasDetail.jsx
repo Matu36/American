@@ -15,87 +15,86 @@ export default function VentasDetail() {
   }
 
   return (
-    <div className="ventas-detail">
+    <div className="clientes-detail-container">
       <h2>Detalle de la Venta</h2>
-      <div className="ventas-detail-section">
-        <h3>Información del Producto</h3>
-        <p>
-          <strong>Familia:</strong> {VentaData.Producto.familia}
-        </p>
-        <p>
-          <strong>Marca:</strong> {VentaData.Producto.marca}
-        </p>
-        <p>
-          <strong>Modelo:</strong> {VentaData.Producto.modelo}
-        </p>
-      </div>
-      <div className="ventas-detail-section">
-        <h3>Información del Cliente</h3>
-        <p>
-          <strong>Nombre:</strong> {VentaData.Cliente.nombre}{" "}
-          {VentaData.Cliente.apellido}
-        </p>
-        <p>
-          <strong>Email:</strong> {VentaData.Cliente.mail}
-        </p>
-      </div>
-      <div className="ventas-detail-section">
-        <h3>Información del Vendedor</h3>
-        <p>
-          <strong>Nombre:</strong> {VentaData.Usuario.nombre}{" "}
-          {VentaData.Usuario.apellido}
-        </p>
-        <p>
-          <strong>Email:</strong> {VentaData.Usuario.email}
-        </p>
-      </div>
-      <div className="ventas-detail-section">
-        <h3>Detalles Financieros</h3>
-        <p>
-          <strong>Precio:</strong> {VentaData.moneda}
-          {VentaData.precio}
-        </p>
-        <p>
-          <strong>Anticipo:</strong> {VentaData.moneda}
-          {VentaData.anticipo}
-        </p>
-        <p>
-          <strong>Saldo a Financiar:</strong> {VentaData.moneda}
-          {VentaData.saldoAFinanciar}
-        </p>
-        <p>
-          <strong>IVA:</strong> {VentaData.moneda}
-          {VentaData.IVA}
-        </p>
-        <p>
-          <strong>Interés:</strong> {VentaData.interes * 100}%
-        </p>
-        <p>
-          <strong>Saldo:</strong> {VentaData.moneda}
-          {VentaData.saldo}
-        </p>
-        <p>
-          <strong>Saldo con Interés:</strong> {VentaData.moneda}
-          {VentaData.saldoConInteres}
-        </p>
-        <p>
-          <strong>Precio Final:</strong> {VentaData.moneda}
-          {VentaData.PrecioFinal}
-        </p>
-      </div>
-      <div className="ventas-detail-section">
-        <h3>Información de la Venta</h3>
 
-        <p>
+      <div className="detail-section">
+        <h3>Información del Producto</h3>
+        <div className="detail-item">
+          <strong>Familia:</strong> {VentaData.Producto.familia}
+        </div>
+        <div className="detail-item">
+          <strong>Marca:</strong> {VentaData.Producto.marca}
+        </div>
+        <div className="detail-item">
+          <strong>Modelo:</strong> {VentaData.Producto.modelo}
+        </div>
+      </div>
+
+      <div className="detail-section">
+        <h3>Información del Cliente</h3>
+        <div className="detail-item">
+          <strong>Nombre:</strong>{" "}
+          {`${VentaData.Cliente.nombre} ${VentaData.Cliente.apellido}`}
+        </div>
+        <div className="detail-item">
+          <strong>Email:</strong> {VentaData.Cliente.mail}
+        </div>
+      </div>
+
+      <div className="detail-section">
+        <h3>Información del Vendedor</h3>
+        <div className="detail-item">
+          <strong>Nombre:</strong>{" "}
+          {`${VentaData.Usuario.nombre} ${VentaData.Usuario.apellido}`}
+        </div>
+        <div className="detail-item">
+          <strong>Email:</strong> {VentaData.Usuario.email}
+        </div>
+      </div>
+
+      <div className="detail-section">
+        <h3>Detalles Financieros</h3>
+        <div className="detail-item">
+          <strong>Precio:</strong> {VentaData.moneda} {VentaData.precio}
+        </div>
+        <div className="detail-item">
+          <strong>Anticipo:</strong> {VentaData.moneda} {VentaData.anticipo}
+        </div>
+        <div className="detail-item">
+          <strong>Saldo a Financiar:</strong> {VentaData.moneda}{" "}
+          {VentaData.saldoAFinanciar}
+        </div>
+        <div className="detail-item">
+          <strong>IVA:</strong> {VentaData.moneda} {VentaData.IVA}
+        </div>
+        <div className="detail-item">
+          <strong>Interés:</strong> {VentaData.interes * 100}%
+        </div>
+        <div className="detail-item">
+          <strong>Saldo:</strong> {VentaData.moneda} {VentaData.saldo}
+        </div>
+        <div className="detail-item">
+          <strong>Saldo con Interés:</strong> {VentaData.moneda}{" "}
+          {VentaData.saldoConInteres}
+        </div>
+        <div className="detail-item">
+          <strong>Precio Final:</strong> {VentaData.moneda}{" "}
+          {VentaData.PrecioFinal}
+        </div>
+      </div>
+
+      <div className="detail-section">
+        <h3>Información de la Venta</h3>
+        <div className="detail-item">
           <strong>Fecha de Cotización:</strong>{" "}
           {new Date(VentaData.fechaDeCreacion).toLocaleDateString()}
-        </p>
-
+        </div>
         {VentaData.fechaVenta && (
-          <p>
+          <div className="detail-item">
             <strong>Fecha de Venta:</strong>{" "}
             {new Date(VentaData.fechaVenta).toLocaleDateString()}
-          </p>
+          </div>
         )}
       </div>
     </div>
