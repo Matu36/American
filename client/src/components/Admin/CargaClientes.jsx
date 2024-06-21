@@ -94,7 +94,7 @@ export default function CargaClientes() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="mail">Mail</label>
+          <label htmlFor="mail">Email</label>
           <input
             type="email"
             id="mail"
@@ -107,7 +107,7 @@ export default function CargaClientes() {
         <div className="form-group">
           <label htmlFor="telefono">Teléfono</label>
           <input
-            type="tel"
+            type="number"
             id="telefono"
             name="telefono"
             value={formData.telefono}
