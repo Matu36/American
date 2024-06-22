@@ -15,7 +15,7 @@ export default function VentasDetail() {
   }
 
   return (
-    <div className="clientes-detail-container">
+    <div className="form-container1">
       <h2>Detalle de la Venta</h2>
 
       <div className="detail-section">

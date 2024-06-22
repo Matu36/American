@@ -4,12 +4,19 @@ import FormProduct from "./FormProduct";
 import Swal from "sweetalert2";
 import { MdModeEdit, MdDelete } from "react-icons/md";
 import { useProducto } from "../../hooks/useProductos";
+import Spinner from "../../UI/Spinner";
 
 export default function Productos() {
   const { data, isLoading } = useProducto().productosQuery;
 
   const [search, setSearch] = useState("");
   const [productos, setProductos] = useState(data);
+
+  useEffect(() => {
+    if (data) {
+      setProductos(data);
+    }
+  }, [data]);
 
   //-------------------------------- SEARCHBAR --------------------------- //
 
@@ -94,6 +101,22 @@ export default function Productos() {
       ),
     },
   ];
+
+  //---------------------------------SPINNER ------------------------------------//
+
+  const [showSpinner, setShowSpinner] = useState(true);
+
+  useEffect(() => {
+    setShowSpinner(true);
+
+    const timer = setTimeout(() => {
+      setShowSpinner(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
+  //---------------------------------FIN SPINNER ------------------------------------//
 
   const [editIndex, setEditIndex] = useState(null);
   const [editPrice, setEditPrice] = useState(null);
@@ -192,14 +215,17 @@ export default function Productos() {
               disabled={!data}
             />
           </div>
-
-          <DataTable
-            columns={columns}
-            data={productos}
-            pagination
-            striped
-            responsive
-          />
+          {!showSpinner ? (
+            <DataTable
+              columns={columns}
+              data={productos}
+              pagination
+              striped
+              responsive
+            />
+          ) : (
+            <Spinner loading={isLoading} />
+          )}
         </div>
       </div>
     </>

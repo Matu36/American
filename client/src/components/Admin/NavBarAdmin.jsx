@@ -9,7 +9,7 @@ export default function NavBarAdmin() {
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
   const idUsuario = auth?.id;
-  const { data, isLoading } = useMensajes(idUsuario).MensajesCountQuery;
+  const { data } = useMensajes(idUsuario).MensajesCountQuery;
 
   const handleButtonClick = () => {
     navigate("/");

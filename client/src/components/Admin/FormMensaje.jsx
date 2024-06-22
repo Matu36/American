@@ -4,6 +4,7 @@ import { useMensajes } from "../../hooks/useMensajes";
 import useAuth from "../../hooks/useAuth";
 import Select from "react-select";
 import { useUsuario } from "../../hooks/useUsuarios";
+import Swal from "sweetalert2";
 
 export default function FormMensaje() {
   const { auth } = useAuth();
@@ -33,18 +34,65 @@ export default function FormMensaje() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     crearMensaje(formData, {
       onSuccess: () => {
-        alert("Mensaje enviado con éxito");
+        Swal.fire({
+          position: "center",
+          icon: "info",
+          title: "Tu mensaje se envió corréctamente",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "#ffffff",
+          iconColor: "#ffc107",
+          customClass: {
+            title: "text-dark",
+          },
+        });
         setFormData({
-          idUsuario: "",
+          idUsuario: idUsuario,
           idDestino: "",
           Mensaje: "",
         });
       },
       onError: (error) => {
-        console.error("Error al enviar el mensaje:", error);
+        if (error.response) {
+          switch (error.response.status) {
+            case 400:
+              Swal.fire({
+                position: "center",
+                icon: "info",
+                title: "No se pudo enviar el mensaje. Intente más tarde",
+                background: "#ffffff",
+                iconColor: "#ffc107",
+                customClass: {
+                  title: "text-dark",
+                },
+                showConfirmButton: false,
+                timer: 5000,
+              });
+              break;
+
+            default:
+              Swal.fire({
+                position: "center",
+                icon: "info",
+                title: "Ocurrió un error inesperado, intente más tarde",
+                background: "#ffffff",
+                iconColor: "#dc3545",
+                customClass: {
+                  title: "text-dark",
+                },
+                showConfirmButton: false,
+                timer: 5000,
+              });
+              break;
+          }
+        }
+        setFormData({
+          idUsuario: idUsuario,
+          idDestino: "",
+          Mensaje: "",
+        });
       },
     });
   };
@@ -60,6 +108,7 @@ export default function FormMensaje() {
           options={userOptions}
           onChange={handleSelectChange}
           className="form-control"
+          required
         />
       </div>
       <div className="form-group">
@@ -71,6 +120,7 @@ export default function FormMensaje() {
           onChange={handleChange}
           className="form-control"
           rows="4"
+          required
         />
       </div>
       <button type="submit" className="form-submit">

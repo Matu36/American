@@ -115,11 +115,11 @@ export default function CotizacionDetail() {
   );
 
   return (
-    <div className="cotizacion-detail">
-      <h2 className="titulo">Detalles de Cotización</h2>
+    <div className="form-container1">
+      <h2>Detalles de Cotización</h2>
+      <br />
 
-      <div className="seccion">
-        <h3>Información de Cotización</h3>
+      <div>
         <p>
           <strong>Número de Cotización:</strong>{" "}
           {numeroCotizacion ? numeroCotizacion : null}
@@ -129,7 +129,7 @@ export default function CotizacionDetail() {
           {new Date(fechaDeCreacion).toLocaleString()}
         </p>
       </div>
-      <div className="seccion">
+      <div>
         <h3>Producto</h3>
         <p>
           <strong>Categoría:</strong> {Producto.familia}
@@ -142,7 +142,7 @@ export default function CotizacionDetail() {
         </p>
       </div>
 
-      <div className="seccion">
+      <div>
         <h3>Detalle de la Cotización</h3>
         <p>
           <strong>Precio:</strong> {moneda} {parseFloat(precio).toFixed(2)}
@@ -173,7 +173,7 @@ export default function CotizacionDetail() {
         </p>
       </div>
 
-      <div className="seccion">
+      <div>
         <h3>Vendedor</h3>
         <p>
           <strong>Nombre:</strong> {Usuario.nombre} {Usuario.apellido}
@@ -183,7 +183,7 @@ export default function CotizacionDetail() {
         </p>
       </div>
 
-      <div className="seccion">
+      <div>
         <h3>Cliente</h3>
         <p>
           <strong>Nombre:</strong> {Cliente.nombre} {Cliente.apellido}

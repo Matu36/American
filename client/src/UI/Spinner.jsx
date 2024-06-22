@@ -1,17 +1,44 @@
 import React from "react";
+import PacmanLoader from "react-spinners/PacmanLoader";
 
-const Spinner = () => {
+function Spinner({ loading }) {
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <div
-        className="spinner-border spinner-border-lg text-primary"
-        style={{ width: "5rem", height: "5rem" }}
-        role="status"
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "70%",
+        transform: "translate(-50%, -50%)",
+      }}
+    >
+      <PacmanLoader
+        color="#ffc107"
+        cssOverride={{
+          position: "relative",
+          display: "block",
+          margin: "0 auto",
+          borderColor: "red",
+          zIndex: 9999,
+        }}
+        loading={true}
+        size={40}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+
+      <span
+        style={{
+          display: "block",
+          fontSize: "20px",
+          textAlign: "center",
+          marginTop: "10px",
+          marginLeft: "5rem",
+        }}
       >
-        <span className="visually-hidden">Cargando...</span>
-      </div>
+        Cargando...
+      </span>
     </div>
   );
-};
+}
 
 export default Spinner;

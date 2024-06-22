@@ -2,8 +2,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { ClientesAPI } from "../components/api/ClientesApi";
 import Swal from "sweetalert2";
 
-const getClientesParaCotizar = async () => {
-  const { data } = await ClientesAPI.get("/getParaCotizar");
+const getClientesParaCotizar = async (idUsuario) => {
+  const { data } = await ClientesAPI.get(`/getParaCotizar/${idUsuario}`);
   return data;
 };
 
@@ -23,8 +23,9 @@ const getClientesDetalle = async (id) => {
 
 export const useClientes = (idUsuario, id) => {
   const clienteoQuery = useQuery({
-    queryKey: ["clientes"],
-    queryFn: () => getClientesParaCotizar(),
+    queryKey: ["clientes", { clienteId: idUsuario }],
+    queryFn: () => getClientesParaCotizar(idUsuario),
+    enabled: idUsuario !== undefined && idUsuario !== null,
   });
 
   const clientesMutation = useMutation({
@@ -37,15 +38,14 @@ export const useClientes = (idUsuario, id) => {
         title: "El Cliente fue cargado Exitósamente",
         showConfirmButton: false,
         timer: 2000,
-        background: "#ffffff", // Fondo blanco
-        iconColor: "#ffc107", // Icono color amarillo oscuro
+        background: "#ffffff",
+        iconColor: "#ffc107",
         customClass: {
-          title: "text-dark", // Texto del título en color negro
+          title: "text-dark",
         },
       });
     },
     onError: (error) => {
-      // Manejar errores de manera diferente según el status de la respuesta
       if (error.response) {
         switch (error.response.status) {
           case 400:

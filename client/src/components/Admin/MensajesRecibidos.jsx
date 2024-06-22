@@ -5,14 +5,17 @@ import { Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import DataTable from "react-data-table-component";
-import styled from "styled-components";
+import Spinner from "../../UI/Spinner";
 
 export default function MensajesRecibidos() {
   const { auth } = useAuth();
   const idUsuario = auth?.id;
 
-  const { data: mensajes, refetch } =
-    useMensajes(idUsuario).MensajesRecibidosQuery;
+  const {
+    data: mensajes,
+    refetch,
+    isLoading,
+  } = useMensajes(idUsuario).MensajesRecibidosQuery;
   const { mutate: mensajeEstado2 } = useMensajes().mensajeMutationState2;
 
   const [search, setSearch] = useState("");
@@ -58,7 +61,7 @@ export default function MensajesRecibidos() {
   };
 
   const columns = [
-    { name: "Email", selector: (row) => row.Usuario.email, sortable: true },
+    { name: "Emisor", selector: (row) => row.Usuario.email, sortable: true },
     { name: "Mensaje", selector: (row) => row.Mensaje, sortable: true },
     {
       name: "Fecha de Envío",
@@ -94,12 +97,27 @@ export default function MensajesRecibidos() {
     },
   ];
 
-  // Estilos condicionales para filas leídas
+  //---------------------------------SPINNER ------------------------------------//
+
+  const [showSpinner, setShowSpinner] = useState(true);
+
+  useEffect(() => {
+    setShowSpinner(true);
+
+    const timer = setTimeout(() => {
+      setShowSpinner(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
+  //---------------------------------FIN SPINNER ------------------------------------//
+
   const conditionalRowStyles = [
     {
       when: (row) => row.estado === 2,
       style: {
-        backgroundColor: "#d3d3d3", // Gris claro
+        backgroundColor: "#d3d3d3",
       },
     },
   ];
@@ -119,14 +137,17 @@ export default function MensajesRecibidos() {
             disabled={!mensajes}
           />
         </div>
-
-        <DataTable
-          columns={columns}
-          data={recibidos}
-          pagination
-          striped
-          conditionalRowStyles={conditionalRowStyles}
-        />
+        {!showSpinner ? (
+          <DataTable
+            columns={columns}
+            data={recibidos}
+            pagination
+            striped
+            conditionalRowStyles={conditionalRowStyles}
+          />
+        ) : (
+          <Spinner loading={isLoading} />
+        )}
       </div>
     </div>
   );

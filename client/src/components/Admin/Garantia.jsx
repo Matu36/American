@@ -4,6 +4,7 @@ import { useGarantia } from "../../hooks/useGarantia";
 import { Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import Spinner from "../../UI/Spinner";
 
 export default function Garantia() {
   const [search, setSearch] = useState("");
@@ -11,6 +12,12 @@ export default function Garantia() {
   const { data, isLoading } = useGarantia().GarantiaQuery;
 
   const [garantia, setGarantias] = useState(data);
+
+  useEffect(() => {
+    if (data) {
+      setGarantias(data);
+    }
+  }, [data]);
 
   //-------------------------------- SEARCHBAR --------------------------- //
 
@@ -72,6 +79,22 @@ export default function Garantia() {
     },
   ];
 
+  //---------------------------------SPINNER ------------------------------------//
+
+  const [showSpinner, setShowSpinner] = useState(true);
+
+  useEffect(() => {
+    setShowSpinner(true);
+
+    const timer = setTimeout(() => {
+      setShowSpinner(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
+  //---------------------------------FIN SPINNER ------------------------------------//
+
   return (
     <div className="form-container">
       <div>
@@ -88,8 +111,11 @@ export default function Garantia() {
               disabled={!data}
             />
           </div>
-
-          <DataTable columns={columns} data={garantia} pagination striped />
+          {!showSpinner ? (
+            <DataTable columns={columns} data={garantia} pagination striped />
+          ) : (
+            <Spinner loading={isLoading} />
+          )}
         </>
       </div>
     </div>

@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import Spinner from "../../UI/Spinner";
 
 export default function Clientes() {
   const { auth } = useAuth();
   const [search, setSearch] = useState("");
   const idUsuario = auth?.id;
 
-  const { clientesQueryById } = useClientes(idUsuario);
+  const { clientesQueryById, isLoading } = useClientes(idUsuario);
   const [clientes, setClientes] = useState(clientesQueryById.data);
 
   useEffect(() => {
@@ -97,6 +98,22 @@ export default function Clientes() {
       ),
     },
   ];
+
+  //---------------------------------SPINNER ------------------------------------//
+
+  const [showSpinner, setShowSpinner] = useState(true);
+
+  useEffect(() => {
+    setShowSpinner(true);
+
+    const timer = setTimeout(() => {
+      setShowSpinner(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
+  //---------------------------------FIN SPINNER ------------------------------------//
   return (
     <div className="form-container">
       <div>
@@ -112,10 +129,10 @@ export default function Clientes() {
             disabled={!clientesQueryById.data}
           />
         </div>
-        {clientesQueryById.data ? (
+        {!showSpinner ? (
           <DataTable columns={columns} data={clientes} pagination striped />
         ) : (
-          <p>Cargando datos...</p>
+          <Spinner loading={isLoading} />
         )}
       </div>
     </div>

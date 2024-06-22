@@ -279,6 +279,44 @@ const verificarRol = async (req, res) => {
   }
 };
 
+const obtenerDetalleUsuario = async (req, res) => {
+  try {
+    const idUsuario = req.params.idUsuario;
+
+    const usuario = await Usuarios.findByPk(idUsuario, {
+      attributes: [
+        "id",
+        "email",
+        "nombre",
+        "apellido",
+        "direccion",
+        "telefono",
+        "createdAt",
+      ],
+    });
+
+    if (!usuario) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    // Formatear la respuesta deseada
+    const detalleUsuario = {
+      id: usuario.id,
+      email: usuario.email,
+      nombre: usuario.nombre,
+      apellido: usuario.apellido,
+      direccion: usuario.direccion || "N/A",
+      telefono: usuario.telefono || "N/A",
+      fechaDeRegistro: new Date(usuario.createdAt).toLocaleString(),
+    };
+
+    return res.status(200).json(detalleUsuario);
+  } catch (error) {
+    console.error("Error al obtener detalle de usuario:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+
 module.exports = {
   login,
   registro,
@@ -288,4 +326,5 @@ module.exports = {
   getLastLoggedInUsers,
   verificarRol,
   getAllUsersMensajes,
+  obtenerDetalleUsuario,
 };

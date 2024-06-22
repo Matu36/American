@@ -81,8 +81,6 @@ export default function FormProduct() {
     detalles: "",
   });
 
-  console.log(producto);
-
   const saveProduct = async (e) => {
     e.preventDefault();
 
@@ -101,12 +99,17 @@ export default function FormProduct() {
       const data = await request.json();
       console.log("Producto creado:", data);
 
-      await Swal.fire({
+      Swal.fire({
         position: "center",
-        icon: "success",
-        title: "El producto ha sido creado",
+        icon: "info",
+        title: "El Producto ha sido creado corréctamente",
         showConfirmButton: false,
         timer: 2000,
+        background: "#ffffff",
+        iconColor: "#ffc107",
+        customClass: {
+          title: "text-dark",
+        },
       });
 
       setProducto({
@@ -123,12 +126,17 @@ export default function FormProduct() {
     } catch (error) {
       console.error("Error al crear el producto:", error);
 
-      await Swal.fire({
+      Swal.fire({
         position: "center",
-        icon: "error",
-        title: "Hubo un error al crear el producto",
+        icon: "info",
+        title: "El producto no pudo crearse. Intente más tarde  ",
         showConfirmButton: false,
-        timer: 2000, // 2 segundos
+        timer: 2000,
+        background: "#ffffff",
+        iconColor: "#ffc107",
+        customClass: {
+          title: "text-dark",
+        },
       });
     }
   };
@@ -151,6 +159,7 @@ export default function FormProduct() {
             onChange={(e) =>
               setProducto({ ...producto, familia: e.target.value })
             }
+            required
           />
         </div>
 
@@ -169,6 +178,7 @@ export default function FormProduct() {
               })
             }
             placeholder="Marca"
+            required
           />
         </div>
 
@@ -185,6 +195,7 @@ export default function FormProduct() {
               onChange={(e) =>
                 setProducto({ ...producto, modelo: e.target.value })
               }
+              required
             />
           </div>
         </div>
@@ -202,6 +213,7 @@ export default function FormProduct() {
               onChange={(e) =>
                 setProducto({ ...producto, precio: e.target.value })
               }
+              required
             />
           </div>
         </div>

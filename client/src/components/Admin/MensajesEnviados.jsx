@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import DataTable from "react-data-table-component";
+import Spinner from "../../UI/Spinner";
 
 export default function MensajesEnviados() {
   const { auth } = useAuth();
   const idUsuario = auth?.id;
 
-  const { data: mensajes } = useMensajes(idUsuario).MensajesEnviadosQuery;
+  const { data: mensajes, isLoading } =
+    useMensajes(idUsuario).MensajesEnviadosQuery;
 
   const [search, setSearch] = useState("");
   const [enviados, setEnviados] = useState([]);
@@ -71,6 +73,22 @@ export default function MensajesEnviados() {
     },
   ];
 
+  //---------------------------------SPINNER ------------------------------------//
+
+  const [showSpinner, setShowSpinner] = useState(true);
+
+  useEffect(() => {
+    setShowSpinner(true);
+
+    const timer = setTimeout(() => {
+      setShowSpinner(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
+  //---------------------------------FIN SPINNER ------------------------------------//
+
   return (
     <div className="form-container">
       <div>
@@ -86,8 +104,11 @@ export default function MensajesEnviados() {
             disabled={!mensajes}
           />
         </div>
-
-        <DataTable columns={columns} data={enviados} pagination striped />
+        {!showSpinner ? (
+          <DataTable columns={columns} data={enviados} pagination striped />
+        ) : (
+          <Spinner loading={isLoading} />
+        )}
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ const Cotizador = () => {
   const [selectedModelo, setSelectedModelo] = useState(null);
   const [selectedProducto, setSelectedProducto] = useState(null);
 
-  const { data: clientes, isLoading } = useClientes().clienteoQuery;
+  const { data: clientes, isLoading } = useClientes(idUsuario).clienteoQuery;
   const { data: productos } = useProducto().productosParaCotizarQuery;
 
   useEffect(() => {
@@ -167,8 +167,24 @@ const Cotizador = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     cotizacionCreate(formData);
+    setFormData({
+      idUsuario: idUsuario,
+      idCliente: "",
+      idProducto: "",
+      precio: "",
+      anticipo: 0,
+      saldoAFinanciar: "",
+      IVA: 10.5,
+      moneda: "",
+      PrecioFinal: "",
+      cuotas: 1,
+    });
+    setSelectedCliente(null);
+    setSelectedFamilia(null);
+    setSelectedMarca(null);
+    setSelectedModelo(null);
+    setSelectedProducto(null);
   };
 
   const clienteOptions = clientes
@@ -214,6 +230,7 @@ const Cotizador = () => {
           isLoading={isLoading}
           isClearable
           className="form-input"
+          required
         />
         {selectedCliente && (
           <div className="cliente-info">
@@ -258,6 +275,7 @@ const Cotizador = () => {
           onChange={setSelectedFamilia}
           placeholder="Seleccionar familia"
           className="form-input"
+          required
         />
       </div>
       <div className="form-group">
@@ -269,6 +287,7 @@ const Cotizador = () => {
           placeholder="Seleccionar marca"
           isDisabled={!selectedFamilia}
           className="form-input"
+          required
         />
       </div>
       <div className="form-group">
@@ -280,6 +299,7 @@ const Cotizador = () => {
           placeholder="Seleccionar modelo"
           isDisabled={!selectedMarca}
           className="form-input"
+          required
         />
       </div>
       <div className="form-group">
@@ -289,6 +309,7 @@ const Cotizador = () => {
           value={formData.moneda}
           onChange={handleChange}
           className="form-input"
+          required
         >
           <option value="" disabled>
             Seleccionar

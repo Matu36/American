@@ -163,6 +163,31 @@ const getMensajesByDestino = async (req, res) => {
     return res.status(500).json({ error: "Error al obtener los mensajes" });
   }
 };
+
+const obtenerMensajePorId = async (req, res) => {
+  try {
+    const { idMensaje } = req.params;
+
+    if (!idMensaje) {
+      throw "Se requiere el ID del mensaje";
+    }
+
+    const mensaje = await Mensajes.findByPk(idMensaje, {
+      attributes: ["id", "Mensaje", "fechaDeEnvio"],
+    });
+
+    if (!mensaje) {
+      throw "Mensaje no encontrado";
+    }
+
+    return res.status(200).json({ mensaje });
+  } catch (error) {
+    console.error("Error al obtener el mensaje por ID:", error);
+    return res
+      .status(400)
+      .json({ error: "Error al obtener el mensaje por ID" });
+  }
+};
 module.exports = {
   createMessage,
   getMessagesByUserAndDestination,
@@ -170,4 +195,5 @@ module.exports = {
   countMessagesByDestination,
   getMensajesByUsuario,
   getMensajesByDestino,
+  obtenerMensajePorId,
 };

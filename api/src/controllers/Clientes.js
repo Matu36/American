@@ -168,14 +168,35 @@ const updateCliente = async (req, res) => {
 
 const getClientesParaCotizar = async (req, res) => {
   try {
-    const clientes = await Clientes.findAll({
-      attributes: ["id", "nombre", "apellido", "mail", "CUIT"],
-    });
+    const idUsuario = req.params.idUsuario;
+
+    const usuario = await Usuarios.findByPk(idUsuario, { attributes: ["rol"] });
+
+    if (!usuario) {
+      throw "Usuario no encontrado";
+    }
+
+    let clientes;
+
+    if (usuario.rol === true) {
+      clientes = await Clientes.findAll({
+        attributes: ["id", "nombre", "apellido", "mail", "CUIT"],
+      });
+    } else {
+      clientes = await Clientes.findAll({
+        where: {
+          idUsuario: idUsuario,
+        },
+        attributes: ["id", "nombre", "apellido", "mail", "CUIT"],
+      });
+    }
 
     res.json(clientes);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error al obtener los clientes" });
+    res
+      .status(500)
+      .json({ error: "Error al obtener los clientes para cotizar" });
   }
 };
 

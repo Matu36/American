@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import { useContacto } from "../../hooks/useContacto";
 import DataTable from "react-data-table-component";
+import Spinner from "../../UI/Spinner";
 
 export default function Contacto() {
   const { data, isLoading } = useContacto().contactoQuery;
   const [search, setSearch] = useState("");
   const [contactos, setContactos] = useState(data);
+
+  useEffect(() => {
+    if (data) {
+      setContactos(data);
+    }
+  }, [data]);
 
   //-------------------------------- SEARCHBAR --------------------------- //
 
@@ -67,6 +74,22 @@ export default function Contacto() {
     },
   ];
 
+  //---------------------------------SPINNER ------------------------------------//
+
+  const [showSpinner, setShowSpinner] = useState(true);
+
+  useEffect(() => {
+    setShowSpinner(true);
+
+    const timer = setTimeout(() => {
+      setShowSpinner(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
+  //---------------------------------FIN SPINNER ------------------------------------//
+
   return (
     <div className="form-container">
       <div>
@@ -84,7 +107,16 @@ export default function Contacto() {
                 disabled={!data}
               />
             </div>
-            <DataTable columns={columns} data={contactos} pagination striped />
+            {!showSpinner ? (
+              <DataTable
+                columns={columns}
+                data={contactos}
+                pagination
+                striped
+              />
+            ) : (
+              <Spinner loading={isLoading} />
+            )}
           </>
         </div>
       </div>

@@ -9,6 +9,7 @@ const {
   getLastLoggedInUsers,
   verificarRol,
   getAllUsersMensajes,
+  obtenerDetalleUsuario,
 } = require("../controllers/Usuarios");
 
 const {
@@ -70,6 +71,7 @@ const {
   countMessagesByDestination,
   getMensajesByUsuario,
   getMensajesByDestino,
+  obtenerMensajePorId,
 } = require("../controllers/Mensajes");
 
 const {
@@ -93,6 +95,7 @@ router.post("/usuarios/registro", registro);
 router.post("/usuarios/rol", verificarRol);
 router.put("/usuarios", check.auth, putUser);
 router.get("/usuarios/lastFive", getLastLoggedInUsers);
+router.get("/usuarios/detail/:idUsuario", obtenerDetalleUsuario);
 router.get("/usuarios/all", check.auth, getAllUsers);
 router.put("/usuarios/recoverpass", resetPassword);
 router.get("/productos", getProductos);
@@ -111,7 +114,7 @@ router.put("/cotizaciones/edit", putCotizaciones);
 router.post("/clientes/create", createCliente);
 router.get("/clientes/get/:idUsuario", getClientesPorIdDeUsuario);
 router.get("/clientes/getDetalle/:idCliente", getClientePorId);
-router.get("/clientes/getParaCotizar", getClientesParaCotizar);
+router.get("/clientes/getParaCotizar/:idUsuario", getClientesParaCotizar);
 router.put("/clientes/edit", updateCliente);
 router.get("/contacto/get", getContactos);
 router.get("/contacto/getNoLeidosCount", countActiveContactos);
@@ -131,6 +134,7 @@ router.put("/mensajes/put", updateMessageState);
 router.get("/mensajes/get", getMessagesByUserAndDestination);
 router.get("/mensajes/count/:idUsuario", countMessagesByDestination);
 router.get("/mensajes/enviados/:idUsuario", getMensajesByUsuario);
+router.get("/mensajes/detail/:idMensaje", obtenerMensajePorId);
 router.get("/mensajes/recibidos/:idUsuario", getMensajesByDestino);
 router.get("/solicitaciones/get", getAllSolicitantes);
 router.post("/solicitaciones/create", createSolicitante);

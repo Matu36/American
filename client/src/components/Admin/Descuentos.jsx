@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import { useDescuento } from "../../hooks/useDescuento";
 import DataTable from "react-data-table-component";
+import Spinner from "../../UI/Spinner";
 
 export default function Descuentos() {
   const { data, isLoading } = useDescuento().descuentoQuery;
   const [search, setSearch] = useState("");
   const [descuentos, setDescuentos] = useState(data);
+
+  useEffect(() => {
+    if (data) {
+      setDescuentos(data);
+    }
+  }, [data]);
 
   //-------------------------------- SEARCHBAR --------------------------- //
 
@@ -58,6 +65,22 @@ export default function Descuentos() {
     },
   ];
 
+  //---------------------------------SPINNER ------------------------------------//
+
+  const [showSpinner, setShowSpinner] = useState(true);
+
+  useEffect(() => {
+    setShowSpinner(true);
+
+    const timer = setTimeout(() => {
+      setShowSpinner(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
+  //---------------------------------FIN SPINNER ------------------------------------//
+
   return (
     <div className="form-container">
       <div>
@@ -73,8 +96,11 @@ export default function Descuentos() {
               disabled={!data}
             />
           </div>
-
-          <DataTable columns={columns} data={descuentos} pagination striped />
+          {!showSpinner ? (
+            <DataTable columns={columns} data={descuentos} pagination striped />
+          ) : (
+            <Spinner loading={isLoading} />
+          )}
         </>
       </div>
     </div>

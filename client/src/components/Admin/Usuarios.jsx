@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import useAuth from "../../hooks/useAuth";
 import { useUsuario } from "../../hooks/useUsuarios";
+import Spinner from "../../UI/Spinner";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import { Link } from "react-router-dom";
 
 export default function Usuarios() {
   const [search, setSearch] = useState("");
@@ -60,7 +64,42 @@ export default function Usuarios() {
       selector: (row) => new Date(row.createdAt).toLocaleString(),
       sortable: true,
     },
+    {
+      name: "Acciones",
+      cell: (row) => (
+        <DropdownButton
+          id={`dropdown-acciones-${row.id}`}
+          variant="secondary"
+          size="sm"
+          className="acciones-dropdown acciones-dropdown-custom"
+        >
+          <Dropdown.Item
+            as={Link}
+            to={`/admin/usuarios/${row.id}`}
+            className="dropdown-item dropdown-item-ver"
+          >
+            Ver Detalle
+          </Dropdown.Item>
+        </DropdownButton>
+      ),
+    },
   ];
+
+  //---------------------------------SPINNER ------------------------------------//
+
+  const [showSpinner, setShowSpinner] = useState(true);
+
+  useEffect(() => {
+    setShowSpinner(true);
+
+    const timer = setTimeout(() => {
+      setShowSpinner(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
+  //---------------------------------FIN SPINNER ------------------------------------//
 
   return (
     <div className="form-container">
@@ -79,9 +118,11 @@ export default function Usuarios() {
               style={{ height: "2rem" }}
             />
           </div>
-          <div className="dataTable">
+          {!showSpinner ? (
             <DataTable columns={columns} data={usuarios} pagination striped />
-          </div>
+          ) : (
+            <Spinner loading={isLoading} />
+          )}
         </div>
       </>
     </div>

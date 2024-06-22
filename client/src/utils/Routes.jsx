@@ -26,6 +26,8 @@ import FormProduct from "../components/Admin/FormProduct";
 import FormMensaje from "../components/Admin/FormMensaje";
 import MensajesEnviados from "../components/Admin/MensajesEnviados";
 import MensajesRecibidos from "../components/Admin/MensajesRecibidos";
+import MensajesDetail from "../components/Admin/MensajesDetail";
+import UsuariosDetail from "../components/Admin/UsuariosDetail";
 
 const AppRouter = () => {
   return (
@@ -62,6 +64,7 @@ const AdminLayout = () => {
         <Routes>
           <Route index element={<AppAdmin />} />
           <Route path="/Usuarios" element={<Usuarios />} />
+          <Route path="/Usuarios/:id" element={<UsuariosDetail />} />
           <Route path="/Clientes/ver" element={<Clientes />} />
           <Route path="/Clientes/ver/:id" element={<ClientesDetail />} />
           <Route path="/Clientes/cargar" element={<CargaClientes />} />
@@ -78,7 +81,9 @@ const AdminLayout = () => {
           <Route path="/Descuentos" element={<Descuentos />} />
           <Route path="/Mensajes/nuevo" element={<FormMensaje />} />
           <Route path="/Mensajes/enviados" element={<MensajesEnviados />} />
+          <Route path="/Mensajes/enviados/:id" element={<MensajesDetail />} />
           <Route path="/Mensajes/ver" element={<MensajesRecibidos />} />
+          <Route path="/Mensajes/ver/:id" element={<MensajesDetail />} />
         </Routes>
         {/* </div> */}
       </div>

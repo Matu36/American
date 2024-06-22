@@ -1,5 +1,6 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CotizacionesAPI } from "../components/api/CotizacionesApi";
+import Swal from "sweetalert2";
 
 const getVentaById = async (idUsuario) => {
   const { data } = await CotizacionesAPI.get(`/getVentas/${idUsuario}`);
@@ -61,10 +62,61 @@ export const useVentas = (idUsuario, id) => {
 };
 
 export const useCotizaciones = (idUsuario, id) => {
+  const queryClient = useQueryClient();
   const cotizacionMutation = useMutation({
     mutationKey: ["cotizacion-mutation"],
     mutationFn: (data) => postCotizacion(data),
+    onSuccess: () => {
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "La cotización se guardó correctamente",
+        showConfirmButton: false,
+        timer: 2000,
+        background: "#ffffff",
+        iconColor: "#ffc107",
+        customClass: {
+          title: "text-dark",
+        },
+      });
+    },
+    onError: (error) => {
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "No se pudo guardar la cotización; intente más tarde",
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+
+          default:
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "Ocurrió un error inesperado, intente más tarde",
+              background: "#ffffff",
+              iconColor: "#dc3545",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+        }
+      }
+    },
   });
+
   const cotizacionesQueryById = useQuery({
     queryKey: ["coti", { cotizacionId: idUsuario }],
     queryFn: () => getCotizacionesById(idUsuario),
@@ -80,6 +132,57 @@ export const useCotizaciones = (idUsuario, id) => {
   const cotizacionMutationState2 = useMutation({
     mutationKey: ["cotizacionState2-mutation"],
     mutationFn: (data) => postCotizacionState2(data),
+    onSuccess: () => {
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "Felicitaciones! Tu venta se concretó satisfactoriamente!",
+        showConfirmButton: false,
+        timer: 2000,
+        background: "#ffffff",
+        iconColor: "#ffc107",
+        customClass: {
+          title: "text-dark",
+        },
+      });
+      queryClient.invalidateQueries(["coti", { cotizacionId: idUsuario }]);
+    },
+
+    onError: (error) => {
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "No se pudo guardar la venta. Intente más tarde",
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+
+          default:
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "Ocurrió un error inesperado, intente más tarde",
+              background: "#ffffff",
+              iconColor: "#dc3545",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+        }
+      }
+    },
   });
 
   return {

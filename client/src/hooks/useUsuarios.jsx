@@ -16,10 +16,21 @@ const getLastFive = async () => {
   return data;
 };
 
-export const useUsuario = () => {
+const getUsuarioDetail = async (idUsuario) => {
+  const { data } = await UsuariosAPI.get(`/detail/${idUsuario}`);
+  return data;
+};
+
+export const useUsuario = (idUsuario) => {
   const usuariosQuery = useQuery({
     queryKey: ["usuarios"],
     queryFn: () => getUsuarios(),
+  });
+
+  const UsuarioDetailQuery = useQuery({
+    queryKey: ["usuarioDetail", { id: idUsuario }],
+    queryFn: () => getUsuarioDetail(idUsuario),
+    enabled: idUsuario !== undefined && idUsuario !== null,
   });
 
   const fiveQuery = useQuery({
@@ -36,5 +47,6 @@ export const useUsuario = () => {
     usuariosQuery,
     fiveQuery,
     usuariosMensajesQuery,
+    UsuarioDetailQuery,
   };
 };
