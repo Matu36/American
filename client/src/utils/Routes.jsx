@@ -28,6 +28,7 @@ import MensajesEnviados from "../components/Admin/MensajesEnviados";
 import MensajesRecibidos from "../components/Admin/MensajesRecibidos";
 import MensajesDetail from "../components/Admin/MensajesDetail";
 import UsuariosDetail from "../components/Admin/UsuariosDetail";
+import ClientesEdit from "../components/Admin/ClientesEdit";
 
 const AppRouter = () => {
   return (
@@ -67,6 +68,7 @@ const AdminLayout = () => {
           <Route path="/Usuarios/:id" element={<UsuariosDetail />} />
           <Route path="/Clientes/ver" element={<Clientes />} />
           <Route path="/Clientes/ver/:id" element={<ClientesDetail />} />
+          <Route path="/Clientes/editar/:id" element={<ClientesEdit />} />
           <Route path="/Clientes/cargar" element={<CargaClientes />} />
           <Route path="/Productos/ver" element={<Productos />} />
           <Route path="/Productos/cargar" element={<FormProduct />} />
