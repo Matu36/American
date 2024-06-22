@@ -3,6 +3,7 @@ import { useCotizaciones } from "../../hooks/useCotizaciones";
 import { useParams } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
 import Logo from "../../assets/img/logoAmerican.png";
+import Empresa from "../../assets/img/EmpresaPDF.jpg";
 
 import {
   PDFDownloadLink,
@@ -109,6 +110,25 @@ export default function CotizacionDetail() {
             <Text style={styles.label}>Email: </Text>
             {Cliente.mail}
           </Text>
+        </View>
+        <View style={styles.contactContainer}>
+          <Image src={Empresa} style={styles.empresaImage} />
+          <View style={styles.contactTextContainer}>
+            <Text style={styles.contactHeader}>Contacto</Text>
+            <Text style={[styles.contactText, styles.boldText]}>Ventas</Text>
+            <Text style={styles.contactText}>4748-5900</Text>
+            <Text style={styles.contactText}>11 5924-9700</Text>
+            <Text style={[styles.contactText, styles.boldText]}>
+              Servicio Post Venta
+            </Text>
+            <Text style={styles.contactText}>4748-5900</Text>
+            <Text style={styles.contactText}>11 3928-4834</Text>
+            <Text style={styles.contactText}>servicios@americanvial.com</Text>
+            <Text style={[styles.contactText, styles.boldText]}>Repuestos</Text>
+            <Text style={styles.contactText}>4748-5900</Text>
+            <Text style={styles.contactText}>11 5146-9600</Text>
+            <Text style={styles.contactText}>repuestos@americanvial.com</Text>
+          </View>
         </View>
       </Page>
     </Document>

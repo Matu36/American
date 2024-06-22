@@ -88,4 +88,23 @@ export const styles = StyleSheet.create({
     color: "#ffcc00",
     opacity: 0.2,
   },
+  contactContainer: {
+    padding: 10,
+    flexDirection: "row",
+  },
+
+  contactHeader: {
+    fontSize: 10,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  contactText: {
+    fontSize: 8,
+    marginBottom: 3,
+  },
+  empresaImage: { height: "200px", marginRight: 20 },
+
+  boldText: {
+    fontWeight: "bold",
+  },
 });
