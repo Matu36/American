@@ -20,6 +20,10 @@ const postCotizacionState2 = async (data) => {
   return await CotizacionesAPI.put(`state`, { id: data.id });
 };
 
+const editCotizacion = async (data) => {
+  return await CotizacionesAPI.put(`edit`, data);
+};
+
 const getCotizacionesById = async (idUsuario) => {
   const { data } = await CotizacionesAPI.get(`/get/${idUsuario}`);
   return data;
@@ -117,6 +121,72 @@ export const useCotizaciones = (idUsuario, id) => {
     },
   });
 
+  const cotizacionEditMutation = useMutation({
+    mutationKey: ["edit-cotizacion"],
+    mutationFn: (data) => editCotizacion(data),
+    onSuccess: () => {
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "Los datos de la cotización se actualizaron corréctamente",
+        showConfirmButton: false,
+        timer: 2000,
+        background: "#ffffff",
+        iconColor: "#ffc107",
+        customClass: {
+          title: "text-dark",
+        },
+      });
+    },
+    onError: (error) => {
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "No se pudieron actualizar los datos. Intente más tarde",
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+          default:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "Hubo un error",
+              showConfirmButton: false,
+              timer: 2000,
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+            });
+            break;
+        }
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Hubo un error al procesar la solicitud",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "#ffffff",
+          iconColor: "#ffc107",
+          customClass: {
+            title: "text-dark",
+          },
+        });
+      }
+    },
+  });
+
   const cotizacionesQueryById = useQuery({
     queryKey: ["coti", { cotizacionId: idUsuario }],
     queryFn: () => getCotizacionesById(idUsuario),
@@ -190,6 +260,7 @@ export const useCotizaciones = (idUsuario, id) => {
     cotizacionesQueryById,
     cotizacionDetalleQuery,
     cotizacionMutationState2,
+    cotizacionEditMutation,
   };
 };
 

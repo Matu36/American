@@ -169,14 +169,16 @@ const putCotizaciones = async (req, res) => {
     if (!id) {
       return res
         .status(400)
-        .send("Se requiere un ID válido para actualizar la cotizacion.");
+        .send("Se requiere un ID válido para actualizar la cotización.");
     }
 
     let cotizacion = await Cotizaciones.findOne({ where: { id } });
 
     if (!cotizacion) {
-      return res.status(404).send("No se encontró el producto.");
+      return res.status(404).send("No se encontró la cotización.");
     }
+
+    updatedFields.fechaModi = new Date();
 
     await cotizacion.update(updatedFields);
 

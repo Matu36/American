@@ -29,6 +29,8 @@ import MensajesRecibidos from "../components/Admin/MensajesRecibidos";
 import MensajesDetail from "../components/Admin/MensajesDetail";
 import UsuariosDetail from "../components/Admin/UsuariosDetail";
 import ClientesEdit from "../components/Admin/ClientesEdit";
+import CotizacionEdit from "../components/Admin/CotizacionEdit";
+import ProductosEdit from "../components/Admin/ProductosEdit";
 
 const AppRouter = () => {
   return (
@@ -68,12 +70,17 @@ const AdminLayout = () => {
           <Route path="/Usuarios/:id" element={<UsuariosDetail />} />
           <Route path="/Clientes/ver" element={<Clientes />} />
           <Route path="/Clientes/ver/:id" element={<ClientesDetail />} />
-          <Route path="/Clientes/editar/:id" element={<ClientesEdit />} />
+          <Route path="/Clientes/modificar/:id" element={<ClientesEdit />} />
           <Route path="/Clientes/cargar" element={<CargaClientes />} />
           <Route path="/Productos/ver" element={<Productos />} />
           <Route path="/Productos/cargar" element={<FormProduct />} />
+          <Route path="/productos/modificar/:id" element={<ProductosEdit />} />
           <Route path="/Cotizaciones/ver" element={<Cotizaciones />} />
           <Route path="/Cotizaciones/ver/:id" element={<CotizacionDetail />} />
+          <Route
+            path="/Cotizaciones/modificar/:id"
+            element={<CotizacionEdit />}
+          />
           <Route path="/Cotizaciones/crear" element={<Cotizador />} />
           <Route path="/ventas" element={<Ventas />} />
           <Route path="/Garantia" element={<Garantia />} />
