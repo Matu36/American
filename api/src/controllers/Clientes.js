@@ -157,6 +157,7 @@ const updateCliente = async (req, res) => {
       apellido: apellido ?? cliente.apellido,
       mail: mail ?? cliente.mail,
       telefono: telefono ?? cliente.telefono,
+      fechaModi: new Date(),
     });
 
     return res.status(200).send(cliente);

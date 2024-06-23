@@ -51,7 +51,6 @@ module.exports = (sequelize) => {
       fechaModi: {
         type: DataTypes.DATE,
         allowNull: true,
-        defaultValue: DataTypes.NOW,
       },
     },
     {
