@@ -49,12 +49,14 @@ const {
   createContacto,
   countActiveContactos,
   updateContactoState,
+  getContactoById,
 } = require("../controllers/Contacto");
 const {
   getDescuentos,
   createDescuento,
   updateDescuentoState,
   countActiveDiscounts,
+  getDescuentoById,
 } = require("../controllers/Descuentos");
 const {
   getAllGarantias,
@@ -101,6 +103,8 @@ router.put("/usuarios/recoverpass", resetPassword);
 router.get("/productos", getProductos);
 router.get("/productos/getParaCotizar", getProductosParaCotizar);
 router.get("/productos/:id", getProductoById);
+router.get("/descuento/detalle/:id", getDescuentoById);
+router.get("/contacto/detalle/:id", getContactoById);
 router.post("/productos/create", createProducto);
 router.put("/productos/edit", putProductos);
 router.delete("/productos/delete", check.auth, deleteProducto);

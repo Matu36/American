@@ -33,6 +33,27 @@ const getDescuentos = async (req, res) => {
   }
 };
 
+const getDescuentoById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).send("Se requiere el ID del descuento");
+    }
+
+    const descuento = await Descuentos.findByPk(id);
+
+    if (!descuento) {
+      return res.status(404).send("descuento no encontrado");
+    }
+
+    return res.status(200).json(descuento);
+  } catch (error) {
+    console.error("Error al obtener el descuento:", error);
+    return res.status(500).send("Error al obtener el descuento");
+  }
+};
+
 // ESTADO "activo"= NO LEIDO    ESTADO "expirado": LEIDO
 
 const updateDescuentoState = async (req, res) => {
@@ -82,4 +103,5 @@ module.exports = {
   getDescuentos,
   updateDescuentoState,
   countActiveDiscounts,
+  getDescuentoById,
 };

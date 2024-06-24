@@ -17,10 +17,10 @@ export default function FeaturedInfo() {
       <div className="infoBlock">
         <span>Cotizaciones</span>
         <div>
-          <span>$ {data.COTIZACIONES.totalPesos}</span>
+          <span>$ {data?.COTIZACIONES.totalPesos}</span>
         </div>
         <div>
-          <span>USD {data.COTIZACIONES.totalUSD}</span>
+          <span>USD {data?.COTIZACIONES.totalUSD}</span>
         </div>
         <span>Cotizaciones totales</span>
       </div>
@@ -28,10 +28,10 @@ export default function FeaturedInfo() {
       <div className="infoBlock">
         <span>Ventas</span>
         <div>
-          <span>$ {data.VENTAS.totalPesos}</span>
+          <span>$ {data?.VENTAS.totalPesos}</span>
         </div>
         <div>
-          <span>USD {data.VENTAS.totalUSD}</span>
+          <span>USD {data?.VENTAS.totalUSD}</span>
         </div>
         <span>Ventas totales</span>
       </div>
@@ -39,11 +39,11 @@ export default function FeaturedInfo() {
       <div className="infoBlock">
         <span>Cotizaciones Totales</span>
         <div>
-          <span>{data.COTIZACIONES.CANTIDADTOTAL}</span>
+          <span>{data?.COTIZACIONES.CANTIDADTOTAL}</span>
         </div>
         <span>Ventas Totales</span>
         <div>
-          <span>{data.VENTAS.CANTIDADTOTAL}</span>
+          <span>{data?.VENTAS.CANTIDADTOTAL}</span>
         </div>
       </div>
     </div>

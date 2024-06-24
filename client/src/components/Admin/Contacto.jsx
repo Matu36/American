@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useContacto } from "../../hooks/useContacto";
 import DataTable from "react-data-table-component";
 import Spinner from "../../UI/Spinner";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import { Link } from "react-router-dom";
 
 export default function Contacto() {
   const { data, isLoading } = useContacto().contactoQuery;
@@ -71,6 +74,25 @@ export default function Contacto() {
       name: "Fecha",
       selector: (row) => new Date(row.createdAt).toLocaleString(),
       sortable: true,
+    },
+    {
+      name: "Acciones",
+      cell: (row) => (
+        <DropdownButton
+          id={`dropdown-acciones-${row.id}`}
+          variant="secondary"
+          size="sm"
+          className="acciones-dropdown acciones-dropdown-custom"
+        >
+          <Dropdown.Item
+            as={Link}
+            to={`/admin/contacto/ver/${row.id}`}
+            className="dropdown-item dropdown-item-ver"
+          >
+            Detalle
+          </Dropdown.Item>
+        </DropdownButton>
+      ),
     },
   ];
 

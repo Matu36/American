@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useDescuento } from "../../hooks/useDescuento";
 import DataTable from "react-data-table-component";
 import Spinner from "../../UI/Spinner";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import { Link } from "react-router-dom";
 
 export default function Descuentos() {
   const { data, isLoading } = useDescuento().descuentoQuery;
@@ -62,6 +65,25 @@ export default function Descuentos() {
       name: "Fecha de Registro",
       selector: (row) => new Date(row.fechaDeRegistro).toLocaleString(),
       sortable: true,
+    },
+    {
+      name: "Acciones",
+      cell: (row) => (
+        <DropdownButton
+          id={`dropdown-acciones-${row.id}`}
+          variant="secondary"
+          size="sm"
+          className="acciones-dropdown acciones-dropdown-custom"
+        >
+          <Dropdown.Item
+            as={Link}
+            to={`/admin/descuento/ver/${row.id}`}
+            className="dropdown-item dropdown-item-ver"
+          >
+            Detalle
+          </Dropdown.Item>
+        </DropdownButton>
+      ),
     },
   ];
 

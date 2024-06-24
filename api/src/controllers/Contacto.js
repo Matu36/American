@@ -51,6 +51,27 @@ const getContactos = async (req, res) => {
   }
 };
 
+const getContactoById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).send("Se requiere el ID del contacto");
+    }
+
+    const contacto = await Contacto.findByPk(id);
+
+    if (!contacto) {
+      return res.status(404).send("Contacto no encontrado");
+    }
+
+    return res.status(200).json(contacto);
+  } catch (error) {
+    console.error("Error al obtener el contacto:", error);
+    return res.status(500).send("Error al obtener el contacto");
+  }
+};
+
 const updateContactoState = async (req, res) => {
   try {
     const { idContacto } = req.body;
@@ -98,4 +119,5 @@ module.exports = {
   getContactos,
   updateContactoState,
   countActiveContactos,
+  getContactoById,
 };
