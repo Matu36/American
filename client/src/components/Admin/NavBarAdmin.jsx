@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/img/logoAmerican.png";
 import { useMensajes } from "../../hooks/useMensajes";
+import gruagif from "../../assets/img/GRUAGIF.GIF";
 
 export default function NavBarAdmin() {
   const navigate = useNavigate();
@@ -46,6 +47,7 @@ export default function NavBarAdmin() {
           </button>
         </div>
       </div>
+      <img src={gruagif} alt="" style={{ width: "300px" }} />
     </nav>
   );
 }
