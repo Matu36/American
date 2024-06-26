@@ -57,8 +57,9 @@ export default function Historial() {
               onChange={handleVendedorChange}
             />
           </div>
+          <br />
           <div>
-            <label htmlFor="numeroCotizacion">Número de Cotización:</label>
+            <label htmlFor="numeroCotizacion">Número de Cotización: </label>
             <input
               type="number"
               id="numeroCotizacion"
@@ -66,10 +67,13 @@ export default function Historial() {
               onChange={handleNumeroCotizacionChange}
             />
           </div>
-          <button type="submit">Enviar</button>
+          <button className="form-submit" type="submit">
+            Enviar
+          </button>
         </form>
       )}
-
+      <br />
+      <br />
       <div>
         <h3>Historial de Cotizaciones</h3>
         {isLoadingHistorial ? (
@@ -83,35 +87,20 @@ export default function Historial() {
                 <strong>Detalles de la Cotización:</strong>
               </p>
               <ul>
-                <li>
-                  Número de Cotización: {detalle.Cotizacione.numeroCotizacion}
-                </li>
-                <li>Precio: {detalle.Cotizacione.precio}</li>
-                <li>Anticipo: {detalle.Cotizacione.anticipo}</li>
-                <li>
-                  Saldo a Financiar: {detalle.Cotizacione.saldoAFinanciar}
-                </li>
-                <li>IVA: {detalle.Cotizacione.IVA}</li>
-                <li>Moneda: {detalle.Cotizacione.moneda}</li>
-                <li>Precio Final: {detalle.Cotizacione.PrecioFinal}</li>
-                <li>Estado: {detalle.Cotizacione.estado}</li>
-                <li>
-                  Fecha de Creación: {detalle.Cotizacione.fechaDeCreacion}
-                </li>
-                <li>Fecha de Modificación: {detalle.Cotizacione.fechaModi}</li>
-                <li>
-                  <strong>Vendedor:</strong>{" "}
-                  {detalle.Cotizacione.Usuario.nombre}{" "}
-                  {detalle.Cotizacione.Usuario.apellido}
-                </li>
-                <li>
-                  <strong>Producto:</strong>{" "}
-                  {detalle.Cotizacione.Producto.modelo}
-                </li>
-                <li>
-                  <strong>Cliente:</strong> {detalle.Cotizacione.Cliente.nombre}{" "}
-                  {detalle.Cotizacione.Cliente.apellido}
-                </li>
+                Número de Cotización: {detalle.Cotizacione.numeroCotizacion}
+                Precio: {detalle.Cotizacione.precio}
+                Anticipo: {detalle.Cotizacione.anticipo}
+                Saldo a Financiar: {detalle.Cotizacione.saldoAFinanciar}
+                IVA: {detalle.Cotizacione.IVA}
+                Moneda: {detalle.Cotizacione.moneda}
+                Precio Final: {detalle.Cotizacione.PrecioFinal}
+                Fecha de Creación: {detalle.Cotizacione.fechaDeCreacion}
+                Fecha de Modificación: {detalle.Cotizacione.fechaModi}
+                <strong>Vendedor:</strong> {detalle.Cotizacione.Usuario.nombre}{" "}
+                {detalle.Cotizacione.Usuario.apellido}
+                <strong>Producto:</strong> {detalle.Cotizacione.Producto.modelo}
+                <strong>Cliente:</strong> {detalle.Cotizacione.Cliente.nombre}{" "}
+                {detalle.Cotizacione.Cliente.apellido}
               </ul>
             </div>
           ))
