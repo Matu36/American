@@ -33,6 +33,7 @@ import CotizacionEdit from "../components/Admin/CotizacionEdit";
 import ProductosEdit from "../components/Admin/ProductosEdit";
 import DescuentoDetail from "../components/Admin/DescuentoDetail";
 import ContactoDetail from "../components/Admin/ContactoDetail";
+import Historial from "../components/Admin/Historial";
 
 const AppRouter = () => {
   return (
@@ -85,6 +86,7 @@ const AdminLayout = () => {
             path="/Cotizaciones/modificar/:id"
             element={<CotizacionEdit />}
           />
+          <Route path="/Cotizaciones/historial" element={<Historial />} />
           <Route path="/Cotizaciones/crear" element={<Cotizador />} />
           <Route path="/ventas" element={<Ventas />} />
           <Route path="/Garantia" element={<Garantia />} />

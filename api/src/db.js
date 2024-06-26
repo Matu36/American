@@ -48,6 +48,8 @@ const {
   Cotizaciones,
   Garantia,
   Solicitantes,
+  Contacto,
+  HistorialCotizacion,
 } = sequelize.models;
 
 Clientes.belongsTo(Usuarios, {
@@ -94,6 +96,21 @@ Mensajes.belongsTo(Usuarios, {
 
 Usuarios.hasMany(Mensajes, {
   foreignKey: "idDestino",
+});
+
+Contacto.belongsTo(Productos, {
+  foreignKey: "idProducto",
+});
+
+Productos.hasMany(Contacto, {
+  foreignKey: "idProducto",
+});
+
+HistorialCotizacion.belongsTo(Cotizaciones, {
+  foreignKey: "idCotizacion",
+});
+Cotizaciones.hasMany(HistorialCotizacion, {
+  foreignKey: "idCotizacion",
 });
 
 module.exports = {

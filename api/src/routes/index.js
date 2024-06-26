@@ -10,6 +10,7 @@ const {
   verificarRol,
   getAllUsersMensajes,
   obtenerDetalleUsuario,
+  getUsuariosConRolFalse,
 } = require("../controllers/Usuarios");
 
 const {
@@ -81,6 +82,10 @@ const {
   createSolicitante,
 } = require("../controllers/Solicitaciones");
 
+const {
+  getHistorialDetallePorUsuario,
+} = require("../controllers/HistorialCotizacion");
+
 const check = require("../middlewares/auth");
 
 //VAMOS A USAR ESTO CUANDO NECESITEMOS TENER LOS DATOS DE DE SESION DEL USUARIO O CUANDO NECESITEMOS SEGURIDAD.
@@ -94,32 +99,33 @@ const router = Router();
 
 router.post("/usuarios/login", login);
 router.post("/usuarios/registro", registro);
-router.post("/usuarios/rol", verificarRol);
+router.post("/usuarios/rol", check.auth, verificarRol);
 router.put("/usuarios", check.auth, putUser);
 router.get("/usuarios/lastFive", getLastLoggedInUsers);
 router.get("/usuarios/detail/:idUsuario", obtenerDetalleUsuario);
 router.get("/usuarios/all", check.auth, getAllUsers);
+router.get("/usuarios/vendedores", getUsuariosConRolFalse);
 router.put("/usuarios/recoverpass", resetPassword);
 router.get("/productos", getProductos);
 router.get("/productos/getParaCotizar", getProductosParaCotizar);
 router.get("/productos/:id", getProductoById);
 router.get("/descuento/detalle/:id", getDescuentoById);
 router.get("/contacto/detalle/:id", getContactoById);
-router.post("/productos/create", createProducto);
-router.put("/productos/edit", putProductos);
+router.post("/productos/create", check.auth, createProducto);
+router.put("/productos/edit", check.auth, putProductos);
 router.delete("/productos/delete", check.auth, deleteProducto);
-router.post("/cotizaciones/create", createCotizacion);
+router.post("/cotizaciones/create", check.auth, createCotizacion);
 router.get("/cotizaciones/get/:idUsuario", getCotizaciones);
 router.get("/cotizaciones/getCotizacionesSum/:idUsuario", getCotizacionesSum);
 router.get("/cotizaciones/getDetalle/:idCotizacion", getCotizacionDetalle);
 router.get("/cotizaciones/getVentas/:idUsuario", getCotizacionesEstadoDos);
 router.get("/countCotizaciones/get", getCantidadCotizacionesPorUsuario);
-router.put("/cotizaciones/edit", putCotizaciones);
-router.post("/clientes/create", createCliente);
+router.put("/cotizaciones/edit", check.auth, putCotizaciones);
+router.post("/clientes/create", check.auth, createCliente);
 router.get("/clientes/get/:idUsuario", getClientesPorIdDeUsuario);
 router.get("/clientes/getDetalle/:idCliente", getClientePorId);
 router.get("/clientes/getParaCotizar/:idUsuario", getClientesParaCotizar);
-router.put("/clientes/edit", updateCliente);
+router.put("/clientes/edit", check.auth, updateCliente);
 router.get("/contacto/get", getContactos);
 router.get("/contacto/getNoLeidosCount", countActiveContactos);
 router.put("/contacto/put", updateContactoState);
@@ -128,13 +134,13 @@ router.get("/descuento/get", getDescuentos);
 router.get("/descuento/getActivosCount", countActiveDiscounts);
 router.post("/descuento/create", createDescuento);
 router.put("/descuento/put", updateDescuentoState);
-router.put("/cotizaciones/state", updateCotizacionEstado);
+router.put("/cotizaciones/state", check.auth, updateCotizacionEstado);
 router.get("/cotizaciones/suma", sumarPreciosFinales);
 router.get("/cotizaciones/ultimas/:idUsuario", getUltimasCotizaciones);
 router.get("/cotizaciones/sumaVentas", sumarPreciosFinalesPorMonedaYEstado);
 router.get("/usuarios/mensajes", getAllUsersMensajes);
-router.post("/mensajes/create", createMessage);
-router.put("/mensajes/put", updateMessageState);
+router.post("/mensajes/create", check.auth, createMessage);
+router.put("/mensajes/put", check.auth, updateMessageState);
 router.get("/mensajes/get", getMessagesByUserAndDestination);
 router.get("/mensajes/count/:idUsuario", countMessagesByDestination);
 router.get("/mensajes/enviados/:idUsuario", getMensajesByUsuario);
@@ -148,4 +154,5 @@ router.post("/garantias/create", createGarantia);
 router.put("/garantias/put", updateGarantiaState);
 router.get("/garantias/getNoLeidosCount", countActiveGarantias);
 router.get("/cotizaciones/getVentasById/:id", getVentaById);
+router.get("/historial/detalle/:idUsuario", getHistorialDetallePorUsuario);
 module.exports = router;

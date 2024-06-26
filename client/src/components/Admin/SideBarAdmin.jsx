@@ -42,6 +42,10 @@ const SideBarAdmin = () => {
       subCategories: [
         { label: "Crear Cotizacion", path: "/admin/cotizaciones/crear" },
         { label: "Ver Cotizaciones", path: "/admin/cotizaciones/ver" },
+        {
+          label: "Historial Cotizaciones",
+          path: "/admin/cotizaciones/historial",
+        },
       ],
     },
     { label: "Ventas", icon: FaShoppingCart, subCategories: [] },

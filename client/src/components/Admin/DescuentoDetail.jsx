@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 
 export default function DescuentoDetail() {
   const { id } = useParams();
-  const { data: descuentoDetalle, isLoading } = useDescuento(id).descuentoQuery;
+  const { data: descuentoDetalle, isLoading } =
+    useDescuento(id).descuentoQueryById;
 
   if (isLoading) {
     return <div className="loader">Loading...</div>;

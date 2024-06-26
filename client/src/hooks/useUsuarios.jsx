@@ -16,6 +16,11 @@ const getLastFive = async () => {
   return data;
 };
 
+const getVendedores = async () => {
+  const { data } = await UsuariosAPI.get("/vendedores");
+  return data;
+};
+
 const getUsuarioDetail = async (idUsuario) => {
   const { data } = await UsuariosAPI.get(`/detail/${idUsuario}`);
   return data;
@@ -38,6 +43,11 @@ export const useUsuario = (idUsuario) => {
     queryFn: () => getLastFive(),
   });
 
+  const vendedoresQuery = useQuery({
+    queryKey: ["vendedores"],
+    queryFn: () => getVendedores(),
+  });
+
   const usuariosMensajesQuery = useQuery({
     queryKey: ["usuariosMensajes"],
     queryFn: () => getUsuariosMensajes(),
@@ -48,5 +58,6 @@ export const useUsuario = (idUsuario) => {
     fiveQuery,
     usuariosMensajesQuery,
     UsuarioDetailQuery,
+    vendedoresQuery,
   };
 };

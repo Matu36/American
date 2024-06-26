@@ -1880,17 +1880,35 @@ button:focus-visible {
 .navbarAdmin__icons {
   display: flex;
   align-items: center;
-}
-
-.navbarAdmin__icons > button,
-.navbarAdmin__icons > div {
-  margin-right: 10px;
+  font-size: 1.5rem;
   background: none;
 }
 
-.navbarAdmin__icons > div {
+.navbarAdmin__icon-button {
+  background: none; /* Eliminar fondo */
+  border: none; /* Eliminar borde */
+  cursor: pointer; /* Cambiar cursor a pointer */
+  padding: 0; /* Eliminar padding */
+  margin-left: 10px; /* Espaciado a la izquierda del botón */
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  position: relative; /* Para posicionar la badge */
+}
+
+.navbarAdmin__icon {
+  font-size: 1.5rem; /* Ajusta el tamaño del icono según sea necesario */
+  color: #666; /* Color del icono */
+}
+
+.navbarAdmin__badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 5px;
+  font-size: 0.75rem;
 }
 
 @media (max-width: 777px) {
@@ -1950,6 +1968,7 @@ button:focus-visible {
   color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   width: 190px;
+  height: 100%;
  
 }
 
@@ -1991,8 +2010,20 @@ button:focus-visible {
   border-radius: 4px;
   transition: background-color 0.2s;
   margin-bottom: 10px;
-  /* background-color: black; */
+  
   width: 100%;
+}
+
+.user__info {
+  display: flex;
+  align-items: center;
+  color: #efe4e4; 
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  padding: 10px 15px; 
+  
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 @media (max-width: 500px) {

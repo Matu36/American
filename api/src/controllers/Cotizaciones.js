@@ -2,6 +2,7 @@ const { Cotizaciones } = require("../db.js");
 const { Usuarios } = require("../db.js");
 const { Clientes } = require("../db.js");
 const { Productos } = require("../db.js");
+const { HistorialCotizacion } = require("../db.js");
 const { conn } = require("../db.js");
 
 // FUNCION PARA CREAR UNA COTIZACION //
@@ -38,6 +39,12 @@ const createCotizacion = async (req, res) => {
       estado: 1,
       numeroCotizacion,
     });
+
+    await HistorialCotizacion.create({
+      idCotizacion: id,
+    });
+
+    await nuevaCotizacion.reload();
 
     return res.status(201).send(nuevaCotizacion);
   } catch (error) {
@@ -181,6 +188,10 @@ const putCotizaciones = async (req, res) => {
     updatedFields.fechaModi = new Date();
 
     await cotizacion.update(updatedFields);
+
+    await HistorialCotizacion.create({
+      idCotizacion: id,
+    });
 
     await cotizacion.reload();
 

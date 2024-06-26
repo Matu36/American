@@ -317,6 +317,32 @@ const obtenerDetalleUsuario = async (req, res) => {
   }
 };
 
+//FUNCION QUE SOLO TRAE A LOS VENDEDORES PARA EL HISTORIAL DE VENTAS //
+
+const getUsuariosConRolFalse = async (req, res) => {
+  try {
+    const usuarios = await Usuarios.findAll({
+      attributes: ["id", "nombre", "apellido"],
+      where: {
+        rol: false,
+      },
+    });
+
+    if (!usuarios || usuarios.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "No se encontraron usuarios con rol false" });
+    }
+
+    return res.status(200).json(usuarios);
+  } catch (error) {
+    console.error("Error al obtener usuarios con rol false:", error);
+    return res
+      .status(500)
+      .json({ error: "Error al obtener usuarios con rol false" });
+  }
+};
+
 module.exports = {
   login,
   registro,
@@ -327,4 +353,5 @@ module.exports = {
   verificarRol,
   getAllUsersMensajes,
   obtenerDetalleUsuario,
+  getUsuariosConRolFalse,
 };

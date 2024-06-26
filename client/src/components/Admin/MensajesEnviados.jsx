@@ -44,7 +44,11 @@ export default function MensajesEnviados() {
   };
 
   const columns = [
-    { name: "Email", selector: (row) => row.Usuario.email, sortable: true },
+    {
+      name: "Destinatario",
+      selector: (row) => row.Usuario.email,
+      sortable: true,
+    },
     { name: "Mensaje", selector: (row) => row.Mensaje, sortable: true },
     {
       name: "Fecha de Envío",
