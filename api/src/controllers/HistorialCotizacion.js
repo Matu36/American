@@ -6,21 +6,35 @@ const {
   HistorialCotizacion,
 } = require("../db.js");
 
+function formatNumeroCotizacion(idUsuario, numeroCotizacion) {
+  // Convertimos idUsuario y numeroCotizacion a string
+  const usuarioString = idUsuario.toString().padStart(3, "0"); // Pone 0s delante para asegurarse de que tiene al menos 3 dígitos
+  const cotizacionString = numeroCotizacion.toString().padStart(5, "0"); // Pone 0s delante para asegurarse de que tiene al menos 5 dígitos
+
+  // Formateamos el número de cotización
+  return `${usuarioString} - ${cotizacionString}`;
+}
+
 const getHistorialDetallePorUsuario = async (req, res) => {
   try {
-    const { idUsuario } = req.params;
+    const { combinedValue } = req.body;
 
-    if (!idUsuario) {
-      return res.status(400).json({ error: "Se requiere el ID de usuario" });
+    if (!combinedValue) {
+      return res.status(400).json({ error: "Se requiere el valor combinado" });
     }
 
+    // Extract the user ID and the quotation number from the combined value
+    const idUsuario = combinedValue.slice(0, 1); // Assuming the user ID is always 1 digit
+    const numeroCotizacion = combinedValue.slice(1); // The rest is the quotation number
+
     const detalle = await HistorialCotizacion.findAll({
-      where: {
-        idCotizacion: idUsuario, // Considerando que idUsuario está dentro de idCotizacion
-      },
       include: [
         {
           model: Cotizaciones,
+          where: {
+            numeroCotizacion: `00${idUsuario} - 0000${numeroCotizacion}`,
+          },
+          attributes: { exclude: ["createdAt", "updatedAt"] },
           include: [
             {
               model: Usuarios,

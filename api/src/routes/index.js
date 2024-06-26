@@ -154,5 +154,5 @@ router.post("/garantias/create", createGarantia);
 router.put("/garantias/put", updateGarantiaState);
 router.get("/garantias/getNoLeidosCount", countActiveGarantias);
 router.get("/cotizaciones/getVentasById/:id", getVentaById);
-router.get("/historial/detalle/:idUsuario", getHistorialDetallePorUsuario);
+router.post("/historial/vendedor/", getHistorialDetallePorUsuario);
 module.exports = router;
