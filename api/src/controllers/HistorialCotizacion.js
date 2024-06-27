@@ -1,4 +1,5 @@
 const { HistorialCotizacion } = require("../db.js");
+const { Op } = require("sequelize");
 
 const getHistorialDetallePorUsuario = async (req, res) => {
   try {
@@ -33,10 +34,36 @@ const getHistorialDetallePorUsuario = async (req, res) => {
   }
 };
 
-module.exports = {
-  getHistorialDetallePorUsuario,
+const getCotizacionesPorModelo = async (req, res) => {
+  try {
+    const { modelo } = req.body;
+
+    if (!modelo) {
+      return res.status(400).json({ error: "El modelo es requerido" });
+    }
+
+    const cotizaciones = await HistorialCotizacion.findAll({
+      where: {
+        modelo: {
+          [Op.like]: `%${modelo}%`,
+        },
+      },
+    });
+
+    if (!cotizaciones || cotizaciones.length === 0) {
+      return res.status(404).json({
+        error: "No se encontraron cotizaciones para el modelo especificado",
+      });
+    }
+
+    return res.status(200).json(cotizaciones);
+  } catch (error) {
+    console.error("Error al obtener las cotizaciones por modelo:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
 };
 
 module.exports = {
   getHistorialDetallePorUsuario,
+  getCotizacionesPorModelo,
 };

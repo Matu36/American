@@ -84,6 +84,7 @@ const {
 
 const {
   getHistorialDetallePorUsuario,
+  getCotizacionesPorModelo,
 } = require("../controllers/HistorialCotizacion");
 
 const check = require("../middlewares/auth");
@@ -155,4 +156,5 @@ router.put("/garantias/put", updateGarantiaState);
 router.get("/garantias/getNoLeidosCount", countActiveGarantias);
 router.get("/cotizaciones/getVentasById/:id", getVentaById);
 router.post("/historial/vendedor/", getHistorialDetallePorUsuario);
+router.post("/historial/modelo/", getCotizacionesPorModelo);
 module.exports = router;
