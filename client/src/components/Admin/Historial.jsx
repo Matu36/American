@@ -14,12 +14,17 @@ export default function Historial() {
   const [numeroCotizacion, setNumeroCotizacion] = useState("");
   const {
     mutate: VendedorHistorial,
-    mutate: VendedorModelo,
-    data: ModeloData,
     data: historialData,
     reset: reselHistorial,
     isLoading: isLoadingHistorial,
   } = useHistorial().historialVendedorMutation;
+
+  const {
+    mutate: VendedorModelo,
+    data: ModeloData,
+    reset: resetModelo,
+    isLoading: isLoadingModelo,
+  } = useHistorial().historialModeloMutation;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,6 +49,7 @@ export default function Historial() {
     }
 
     const modelo = selectedProducto.value;
+
     VendedorModelo({ modelo: modelo });
   };
 
