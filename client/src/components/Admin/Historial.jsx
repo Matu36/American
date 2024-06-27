@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { useUsuario } from "../../hooks/useUsuarios";
 import { useHistorial } from "../../hooks/useHistorial";
+import { useProducto } from "../../hooks/useProductos";
 
 export default function Historial() {
   const { data: vendedoresData, isLoading: isLoadingVendedores } =
     useUsuario().vendedoresQuery;
+  const { data: productos } = useProducto().productosParaCotizarQuery;
+
   const [selectedVendedor, setSelectedVendedor] = useState(null);
   const [numeroCotizacion, setNumeroCotizacion] = useState("");
   const {
     mutate: VendedorHistorial,
+    mutate: VendedorModelo,
+    data: ModeloData,
     data: historialData,
     reset: reselHistorial,
     isLoading: isLoadingHistorial,
@@ -90,7 +95,6 @@ export default function Historial() {
       <br />
       <br />
       <div>
-        <h3>Historial de Cotizaciones</h3>
         {isLoadingHistorial ? (
           <p>Cargando historial...</p>
         ) : historialData &&
@@ -124,7 +128,7 @@ export default function Historial() {
             </div>
           ))
         ) : (
-          <p>No se encontraron detalles para este usuario.</p>
+          <p></p>
         )}
       </div>
     </div>
