@@ -8,6 +8,7 @@ export default function Historial() {
   const { data: vendedoresData, isLoading: isLoadingVendedores } =
     useUsuario().vendedoresQuery;
   const { data: productos } = useProducto().productosParaCotizarQuery;
+  const [selectedProducto, setSelectedProducto] = useState(null);
 
   const [selectedVendedor, setSelectedVendedor] = useState(null);
   const [numeroCotizacion, setNumeroCotizacion] = useState("");
@@ -34,6 +35,18 @@ export default function Historial() {
     VendedorHistorial({ combinedValue: combinedValue });
   };
 
+  const handleProductoSubmit = (e) => {
+    e.preventDefault();
+
+    if (!selectedProducto) {
+      alert("Por favor, seleccione un producto.");
+      return;
+    }
+
+    const modelo = selectedProducto.value;
+    VendedorModelo({ modelo: modelo });
+  };
+
   const handleVendedorChange = (selectedOption) => {
     setSelectedVendedor(selectedOption);
   };
@@ -52,6 +65,15 @@ export default function Historial() {
     setNumeroCotizacion("");
     reselHistorial();
   };
+
+  const handleProductoChange = (selectedOption) => {
+    setSelectedProducto(selectedOption);
+  };
+
+  const productoOptions = productos?.map((producto) => ({
+    value: producto.modelo,
+    label: `${producto.familia} ${producto.marca} ${producto.modelo}`,
+  }));
 
   return (
     <div className="form-container1">
@@ -131,6 +153,20 @@ export default function Historial() {
           <p></p>
         )}
       </div>
+      <form onSubmit={handleProductoSubmit}>
+        <div>
+          <label htmlFor="producto">Producto:</label>
+          <Select
+            id="producto"
+            options={productoOptions}
+            value={selectedProducto}
+            onChange={handleProductoChange}
+          />
+        </div>
+        <button className="form-submit" type="submit">
+          Buscar por Modelo
+        </button>
+      </form>
     </div>
   );
 }
