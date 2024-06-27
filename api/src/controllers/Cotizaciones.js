@@ -4,6 +4,7 @@ const { Clientes } = require("../db.js");
 const { Productos } = require("../db.js");
 const { HistorialCotizacion } = require("../db.js");
 const { conn } = require("../db.js");
+const { Op } = require("sequelize");
 
 // FUNCION PARA CREAR UNA COTIZACION //
 const createCotizacion = async (req, res) => {
@@ -584,6 +585,48 @@ const getCotizacionesSum = async (req, res) => {
   }
 };
 
+// FUNCION QUE FILTRA POR FECHAS //
+
+const filtrarCotizacionesPorFecha = async (req, res) => {
+  const { fechaDesde, fechaHasta } = req.body;
+
+  if (!fechaDesde || !fechaHasta) {
+    return res.status(400).json({ message: "Las fechas son requeridas" });
+  }
+
+  const startDate = new Date(fechaDesde);
+  const endDate = new Date(fechaHasta);
+  endDate.setDate(endDate.getDate() + 1);
+
+  try {
+    const cotizaciones = await Cotizaciones.findAll({
+      where: {
+        fechaDeCreacion: {
+          [Op.between]: [startDate, endDate],
+        },
+      },
+      include: [
+        {
+          model: Clientes,
+          attributes: ["nombre", "apellido"],
+        },
+        {
+          model: Usuarios,
+          attributes: ["nombre", "apellido"],
+        },
+        {
+          model: Productos,
+          attributes: ["marca", "modelo"],
+        },
+      ],
+    });
+
+    return res.status(200).json(cotizaciones);
+  } catch (error) {
+    console.error("Error al filtrar cotizaciones:", error);
+    return res.status(500).json({ message: "Error al filtrar cotizaciones" });
+  }
+};
 module.exports = {
   createCotizacion,
   getCotizaciones,
@@ -597,4 +640,5 @@ module.exports = {
   getVentaById,
   getUltimasCotizaciones,
   getCotizacionesSum,
+  filtrarCotizacionesPorFecha,
 };

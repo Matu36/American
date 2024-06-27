@@ -3,6 +3,7 @@ import Select from "react-select";
 import { useUsuario } from "../../hooks/useUsuarios";
 import { useHistorial } from "../../hooks/useHistorial";
 import { useProducto } from "../../hooks/useProductos";
+import { useCotizaciones } from "../../hooks/useCotizaciones";
 
 export default function Historial() {
   const { data: vendedoresData, isLoading: isLoadingVendedores } =
@@ -12,10 +13,20 @@ export default function Historial() {
 
   const [selectedVendedor, setSelectedVendedor] = useState(null);
   const [numeroCotizacion, setNumeroCotizacion] = useState("");
+  const [fechaDesde, setFechaDesde] = useState("");
+  const [fechaHasta, setFechaHasta] = useState("");
+
+  const {
+    mutate: CotisPorFecha,
+    data: fechasData,
+    reset: resetFechas,
+    isLoading: isLoadingFechas,
+  } = useCotizaciones().cotisPorFechaMutation;
+
   const {
     mutate: VendedorHistorial,
     data: historialData,
-    reset: reselHistorial,
+    reset: resetHistorial,
     isLoading: isLoadingHistorial,
   } = useHistorial().historialVendedorMutation;
 
@@ -25,6 +36,17 @@ export default function Historial() {
     reset: resetModelo,
     isLoading: isLoadingModelo,
   } = useHistorial().historialModeloMutation;
+
+  const handleSubmitFechas = (e) => {
+    e.preventDefault();
+
+    if (!fechaDesde || !fechaHasta) {
+      alert("Por favor, ingrese ambas fechas.");
+      return;
+    }
+
+    CotisPorFecha({ fechaDesde, fechaHasta });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,7 +91,12 @@ export default function Historial() {
   const handleClear = () => {
     setSelectedVendedor(null);
     setNumeroCotizacion("");
-    reselHistorial();
+    setSelectedProducto(null);
+    resetHistorial();
+    resetModelo();
+    setFechaDesde("");
+    setFechaHasta("");
+    resetFechas();
   };
 
   const handleProductoChange = (selectedOption) => {
@@ -108,7 +135,7 @@ export default function Historial() {
             />
           </div>
           <button className="form-submit" type="submit">
-            Enviar
+            Buscar por Vendedor
           </button>
           <button
             className="form-submit"
@@ -170,9 +197,128 @@ export default function Historial() {
           />
         </div>
         <button className="form-submit" type="submit">
-          Buscar por Modelo
+          Buscar por Producto
+        </button>
+        <button
+          className="form-submit"
+          type="button"
+          onClick={handleClear}
+          style={{ marginLeft: "10px" }}
+        >
+          Limpiar búsqueda
         </button>
       </form>
+      <div>
+        <br />
+        {isLoadingModelo ? (
+          <p>Cargando historial...</p>
+        ) : ModeloData && ModeloData.data && ModeloData.data.length > 0 ? (
+          ModeloData.data.map((detalle) => (
+            <div key={detalle.id}>
+              <p>
+                <strong>Detalles de la Cotización:</strong>
+              </p>
+              <br />
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                <span>Número de Cotización: {detalle.numeroCotizacion}</span>
+                <span>Precio: {detalle.precio}</span>
+                <span>Anticipo: {detalle.anticipo}</span>
+                <span>Saldo a Financiar: {detalle.saldoAFinanciar}</span>
+                <span>IVA: {detalle.IVA}</span>
+                <span>Precio Final: {detalle.PrecioFinal}</span>
+                <span>Fecha de Creación: {detalle.fechaDeCreacion}</span>
+                <span>Fecha de Modificación: {detalle.fechaModi}</span>
+                <span>
+                  <strong>Producto:</strong> {detalle.familia} {detalle.marca}{" "}
+                  {detalle.modelo}
+                </span>
+                <span>
+                  <strong>Cliente:</strong> {detalle.nombreCliente}{" "}
+                  {detalle.apellidoCliente}
+                </span>
+              </div>
+              <br />
+            </div>
+          ))
+        ) : (
+          <p></p>
+        )}
+      </div>
+      <h2>Filtrar Cotizaciones por Fecha</h2>
+      <form onSubmit={handleSubmitFechas}>
+        <div>
+          <label htmlFor="fechaDesde">Fecha Desde:</label>
+          <input
+            type="date"
+            id="fechaDesde"
+            value={fechaDesde}
+            onChange={(e) => setFechaDesde(e.target.value)}
+          />
+        </div>
+        <br />
+        <div>
+          <label htmlFor="fechaHasta">Fecha Hasta:</label>
+          <input
+            type="date"
+            id="fechaHasta"
+            value={fechaHasta}
+            onChange={(e) => setFechaHasta(e.target.value)}
+          />
+        </div>
+        <br />
+        <button className="form-submit" type="submit">
+          Enviar
+        </button>
+        <button
+          className="form-submit"
+          type="button"
+          onClick={handleClear}
+          style={{ marginLeft: "10px" }}
+        >
+          Limpiar búsqueda
+        </button>
+      </form>
+      <br />
+      <br />
+      <div>
+        {isLoadingFechas ? (
+          <p>Cargando cotizaciones...</p>
+        ) : fechasData && fechasData.data.length > 0 ? (
+          fechasData.data.map((cotizacion) => (
+            <div key={cotizacion.id}>
+              <p>
+                <strong>Detalles de la Cotización:</strong>
+              </p>
+              <br />
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                <span>Número de Cotización: {cotizacion.numeroCotizacion}</span>
+                <span>Precio: {cotizacion.precio}</span>
+                <span>Anticipo: {cotizacion.anticipo}</span>
+                <span>Saldo a Financiar: {cotizacion.saldoAFinanciar}</span>
+                <span>IVA: {cotizacion.IVA}</span>
+                <span>Precio Final: {cotizacion.PrecioFinal}</span>
+                <span>Fecha de Creación: {cotizacion.fechaDeCreacion}</span>
+                <span>Fecha de Modificación: {cotizacion.fechaModi}</span>
+                <span>
+                  <strong>Producto:</strong> {cotizacion.Producto?.marca}{" "}
+                  {cotizacion.Producto?.modelo}
+                </span>
+                <span>
+                  <strong>Cliente:</strong> {cotizacion.Cliente?.nombre}{" "}
+                  {cotizacion.Cliente?.apellido}
+                </span>
+                <span>
+                  <strong>Usuario:</strong> {cotizacion.Usuario?.nombre}{" "}
+                  {cotizacion.Usuario?.apellido}
+                </span>
+              </div>
+              <br />
+            </div>
+          ))
+        ) : (
+          <p></p>
+        )}
+      </div>
     </div>
   );
 }

@@ -35,6 +35,7 @@ const {
   getCotizacionDetalle,
   getUltimasCotizaciones,
   getCotizacionesSum,
+  filtrarCotizacionesPorFecha,
 } = require("../controllers/Cotizaciones");
 
 const {
@@ -157,4 +158,5 @@ router.get("/garantias/getNoLeidosCount", countActiveGarantias);
 router.get("/cotizaciones/getVentasById/:id", getVentaById);
 router.post("/historial/vendedor/", getHistorialDetallePorUsuario);
 router.post("/historial/modelo/", getCotizacionesPorModelo);
+router.post("/cotizaciones/fecha/", filtrarCotizacionesPorFecha);
 module.exports = router;

@@ -16,6 +16,10 @@ const postCotizacion = async (data) => {
   return await CotizacionesAPI.post(`create`, data);
 };
 
+const postCotisPorFecha = async (data) => {
+  return await CotizacionesAPI.post(`fecha`, data);
+};
+
 const postCotizacionState2 = async (data) => {
   return await CotizacionesAPI.put(`state`, { id: data.id });
 };
@@ -187,6 +191,61 @@ export const useCotizaciones = (idUsuario, id) => {
     },
   });
 
+  const cotisPorFechaMutation = useMutation({
+    mutationKey: ["cotisPorFecha-cotizacion"],
+    mutationFn: (data) => postCotisPorFecha(data),
+
+    onError: (error) => {
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title:
+                "No se encontraron Cotizaciones con los valores ingresados",
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+          default:
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title:
+                "No se encontraron Cotizaciones con los valores ingresados",
+              showConfirmButton: false,
+              timer: 2000,
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+            });
+            break;
+        }
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "info",
+          title: "Hubo un error al procesar la solicitud",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "#ffffff",
+          iconColor: "#ffc107",
+          customClass: {
+            title: "text-dark",
+          },
+        });
+      }
+    },
+  });
+
   const cotizacionesQueryById = useQuery({
     queryKey: ["coti", { cotizacionId: idUsuario }],
     queryFn: () => getCotizacionesById(idUsuario),
@@ -261,6 +320,7 @@ export const useCotizaciones = (idUsuario, id) => {
     cotizacionDetalleQuery,
     cotizacionMutationState2,
     cotizacionEditMutation,
+    cotisPorFechaMutation,
   };
 };
 
