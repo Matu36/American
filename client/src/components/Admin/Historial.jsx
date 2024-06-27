@@ -11,6 +11,7 @@ export default function Historial() {
   const {
     mutate: VendedorHistorial,
     data: historialData,
+    reset: reselHistorial,
     isLoading: isLoadingHistorial,
   } = useHistorial().historialVendedorMutation;
 
@@ -41,6 +42,12 @@ export default function Historial() {
     label: `${vendedor.nombre} ${vendedor.apellido}`,
   }));
 
+  const handleClear = () => {
+    setSelectedVendedor(null);
+    setNumeroCotizacion("");
+    reselHistorial();
+  };
+
   return (
     <div className="form-container1">
       <h2>Historial</h2>
@@ -70,6 +77,14 @@ export default function Historial() {
           <button className="form-submit" type="submit">
             Enviar
           </button>
+          <button
+            className="form-submit"
+            type="button"
+            onClick={handleClear}
+            style={{ marginLeft: "10px" }}
+          >
+            Limpiar búsqueda
+          </button>
         </form>
       )}
       <br />
@@ -86,21 +101,26 @@ export default function Historial() {
               <p>
                 <strong>Detalles de la Cotización:</strong>
               </p>
-              <ul>
-                Número de Cotización: {detalle.numeroCotizacion}
-                Precio: {detalle.precio}
-                Anticipo: {detalle.anticipo}
-                Saldo a Financiar: {detalle.saldoAFinanciar}
-                IVA: {detalle.IVA}
-                Precio Final: {detalle.PrecioFinal}
-                Fecha de Creación: {detalle.fechaDeCreacion}
-                Fecha de Modificación: {detalle.fechaModi}
-                <strong>Producto:</strong> {detalle.familia}
-                {detalle.marca}
-                {detalle.modelo}
-                <strong>Cliente:</strong> {detalle.nombreCliente}{" "}
-                {detalle.apellidoCliente}
-              </ul>
+              <br />
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                <span>Número de Cotización: {detalle.numeroCotizacion}</span>
+                <span>Precio: {detalle.precio}</span>
+                <span>Anticipo: {detalle.anticipo}</span>
+                <span>Saldo a Financiar: {detalle.saldoAFinanciar}</span>
+                <span>IVA: {detalle.IVA}</span>
+                <span>Precio Final: {detalle.PrecioFinal}</span>
+                <span>Fecha de Creación: {detalle.fechaDeCreacion}</span>
+                <span>Fecha de Modificación: {detalle.fechaModi}</span>
+                <span>
+                  <strong>Producto:</strong> {detalle.familia} {detalle.marca}{" "}
+                  {detalle.modelo}
+                </span>
+                <span>
+                  <strong>Cliente:</strong> {detalle.nombreCliente}{" "}
+                  {detalle.apellidoCliente}
+                </span>
+              </div>
+              <br />
             </div>
           ))
         ) : (
