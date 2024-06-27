@@ -106,13 +106,6 @@ Productos.hasMany(Contacto, {
   foreignKey: "idProducto",
 });
 
-HistorialCotizacion.belongsTo(Cotizaciones, {
-  foreignKey: "idCotizacion",
-});
-Cotizaciones.hasMany(HistorialCotizacion, {
-  foreignKey: "idCotizacion",
-});
-
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');

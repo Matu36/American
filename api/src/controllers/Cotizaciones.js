@@ -8,13 +8,34 @@ const { conn } = require("../db.js");
 // FUNCION PARA CREAR UNA COTIZACION //
 const createCotizacion = async (req, res) => {
   try {
+    const {
+      idUsuario,
+      idCliente,
+      idProducto,
+      IVA,
+      moneda,
+      PrecioFinal,
+      precio,
+      anticipo,
+      saldoAFinanciar,
+      interes,
+      saldo,
+      saldoConInteres,
+      nombreCliente,
+      apellidoCliente,
+      mailCliente,
+      familia,
+      marca,
+      modelo,
+    } = req.body;
+
     if (
-      !req.body?.idUsuario ||
-      !req.body?.idCliente ||
-      !req.body?.idProducto ||
-      !req.body?.IVA ||
-      !req.body?.moneda ||
-      !req.body?.PrecioFinal
+      !idUsuario ||
+      !idCliente ||
+      !idProducto ||
+      !IVA ||
+      !moneda ||
+      !PrecioFinal
     ) {
       throw "Faltan parámetros en el cuerpo de la solicitud";
     }
@@ -26,7 +47,6 @@ const createCotizacion = async (req, res) => {
     };
 
     let id = await generateNewId();
-    const idUsuario = req.body.idUsuario;
 
     // Formatear idUsuario y idCotizacion
     const formattedIdUsuario = String(idUsuario).padStart(3, "0");
@@ -35,16 +55,61 @@ const createCotizacion = async (req, res) => {
 
     let nuevaCotizacion = await Cotizaciones.create({
       id,
-      ...req.body,
-      estado: 1,
+      idUsuario,
+      idCliente,
+      idProducto,
       numeroCotizacion,
+      precio,
+      anticipo,
+      saldoAFinanciar,
+      IVA,
+      moneda,
+      interes,
+      saldo,
+      saldoConInteres,
+      PrecioFinal,
+      estado: 1,
+      fechaDeCreacion: new Date(),
+      fechaModi: new Date(),
+      fechaVenta: null,
     });
 
+    const cliente = await Clientes.findOne({
+      where: { id: idCliente },
+      attributes: ["nombre", "apellido", "mail"],
+    });
+
+    // Obtener datos del producto
+    const producto = await Productos.findOne({
+      where: { id: idProducto },
+      attributes: ["familia", "marca", "modelo"],
+    });
+
+    if (!cliente || !producto) {
+      throw "No se pudieron obtener los datos del cliente o del producto";
+    }
+
+    // Crear una nueva entrada en HistorialCotizacion
     await HistorialCotizacion.create({
-      idCotizacion: id,
+      numeroCotizacion: nuevaCotizacion.numeroCotizacion,
+      precio: nuevaCotizacion.precio,
+      anticipo: nuevaCotizacion.anticipo,
+      saldoAFinanciar: nuevaCotizacion.saldoAFinanciar,
+      IVA: nuevaCotizacion.IVA,
+      moneda: nuevaCotizacion.moneda,
+      interes: nuevaCotizacion.interes,
+      saldo: nuevaCotizacion.saldo,
+      saldoConInteres: nuevaCotizacion.saldoConInteres,
+      PrecioFinal: nuevaCotizacion.PrecioFinal,
+      fechaDeCreacion: nuevaCotizacion.fechaDeCreacion,
+      fechaModi: nuevaCotizacion.fechaModi,
+      nombreCliente: cliente.nombre,
+      apellidoCliente: cliente.apellido,
+      mailCliente: cliente.mail,
+      familia: producto.familia,
+      marca: producto.marca,
+      modelo: producto.modelo,
     });
-
-    await nuevaCotizacion.reload();
 
     return res.status(201).send(nuevaCotizacion);
   } catch (error) {
@@ -189,11 +254,43 @@ const putCotizaciones = async (req, res) => {
 
     await cotizacion.update(updatedFields);
 
-    await HistorialCotizacion.create({
-      idCotizacion: id,
+    // Obtener datos del cliente
+    const cliente = await Clientes.findOne({
+      where: { id: cotizacion.idCliente },
+      attributes: ["nombre", "apellido", "mail"],
     });
 
-    await cotizacion.reload();
+    // Obtener datos del producto
+    const producto = await Productos.findOne({
+      where: { id: cotizacion.idProducto },
+      attributes: ["familia", "marca", "modelo"],
+    });
+
+    if (!cliente || !producto) {
+      throw "No se pudieron obtener los datos del cliente o del producto";
+    }
+
+    // Crear una nueva entrada en HistorialCotizacion
+    await HistorialCotizacion.create({
+      numeroCotizacion: cotizacion.numeroCotizacion,
+      precio: cotizacion.precio,
+      anticipo: cotizacion.anticipo,
+      saldoAFinanciar: cotizacion.saldoAFinanciar,
+      IVA: cotizacion.IVA,
+      moneda: cotizacion.moneda,
+      interes: cotizacion.interes,
+      saldo: cotizacion.saldo,
+      saldoConInteres: cotizacion.saldoConInteres,
+      PrecioFinal: cotizacion.PrecioFinal,
+      fechaDeCreacion: cotizacion.fechaDeCreacion,
+      fechaModi: updatedFields.fechaModi,
+      nombreCliente: cliente.nombre,
+      apellidoCliente: cliente.apellido,
+      mailCliente: cliente.mail,
+      familia: producto.familia,
+      marca: producto.marca,
+      modelo: producto.modelo,
+    });
 
     return res.send(cotizacion);
   } catch (error) {
