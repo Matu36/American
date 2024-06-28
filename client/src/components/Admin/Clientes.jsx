@@ -79,6 +79,7 @@ export default function Clientes() {
           variant="secondary"
           size="sm"
           className="acciones-dropdown acciones-dropdown-custom"
+          style={{ zIndex: "999" }}
         >
           <Dropdown.Item
             as={Link}
@@ -130,7 +131,13 @@ export default function Clientes() {
           />
         </div>
         {!showSpinner ? (
-          <DataTable columns={columns} data={clientes} pagination striped />
+          <DataTable
+            columns={columns}
+            data={clientes}
+            pagination
+            striped
+            responsive
+          />
         ) : (
           <Spinner loading={isLoading} />
         )}

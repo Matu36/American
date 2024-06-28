@@ -15,6 +15,8 @@ export default function Ventas() {
   const { ventasQueryById, isLoading } = useVentas(idUsuario);
   const [ventas, setVentas] = useState(ventasQueryById.data);
 
+  console.log(ventasQueryById.data);
+
   useEffect(() => {
     if (ventasQueryById.data) {
       setVentas(ventasQueryById.data);
@@ -54,6 +56,11 @@ export default function Ventas() {
       name: "Producto",
       selector: (row) =>
         `${row.Producto.familia} ${row.Producto.marca} ${row.Producto.modelo}`,
+      sortable: true,
+    },
+    {
+      name: "Nro de Cotización",
+      selector: (row) => row.numeroCotizacion,
       sortable: true,
     },
     {

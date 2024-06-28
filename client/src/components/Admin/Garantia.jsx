@@ -111,11 +111,19 @@ export default function Garantia() {
               disabled={!data}
             />
           </div>
-          {!showSpinner ? (
-            <DataTable columns={columns} data={garantia} pagination striped />
-          ) : (
-            <Spinner loading={isLoading} />
-          )}
+          <div className="datatable">
+            {!showSpinner ? (
+              <DataTable
+                columns={columns}
+                data={garantia}
+                pagination
+                striped
+                responsive
+              />
+            ) : (
+              <Spinner loading={isLoading} />
+            )}
+          </div>
         </>
       </div>
     </div>

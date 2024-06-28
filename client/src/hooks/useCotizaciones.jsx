@@ -347,3 +347,19 @@ export const useInfoHomeAdmin = (idUsuario) => {
     infoAdminQuery,
   };
 };
+
+const getRanking = async () => {
+  const { data } = await CotizacionesAPI.get("/ranking");
+  return data;
+};
+
+export const useRanking = () => {
+  const rankingQuery = useQuery({
+    queryKey: ["ranking"],
+    queryFn: () => getRanking(),
+  });
+
+  return {
+    rankingQuery,
+  };
+};

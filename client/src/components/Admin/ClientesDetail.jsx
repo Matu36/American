@@ -23,6 +23,7 @@ export default function ClientesDetail() {
     fechaDeCreacion,
     fechaModi,
     Usuario,
+    razonSocial,
   } = clienteDetalle;
 
   return (
@@ -30,6 +31,9 @@ export default function ClientesDetail() {
       <h2>Detalles del Cliente</h2>
       <div className="detail-item">
         <strong>CUIT:</strong> {CUIT}
+      </div>
+      <div className="detail-item">
+        <strong>Razón Social:</strong> {razonSocial}
       </div>
       <div className="detail-item">
         <strong>Domicilio:</strong> {domicilio}

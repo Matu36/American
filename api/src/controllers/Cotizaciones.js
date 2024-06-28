@@ -110,6 +110,7 @@ const createCotizacion = async (req, res) => {
       familia: producto.familia,
       marca: producto.marca,
       modelo: producto.modelo,
+      estado: nuevaCotizacion.estado,
     });
 
     return res.status(201).send(nuevaCotizacion);
@@ -123,52 +124,31 @@ const createCotizacion = async (req, res) => {
 
 const getCotizaciones = async (req, res) => {
   try {
-    // Verificar si se proporciona el ID de usuario desde los parámetros de la ruta
     const idUsuario = req.params.idUsuario;
     if (!idUsuario) {
       throw "Se requiere el ID de usuario";
     }
 
-    // Buscar el usuario en la base de datos
     const usuario = await Usuarios.findByPk(idUsuario);
     if (!usuario) {
       throw "Usuario no encontrado";
     }
 
-    // Obtener las cotizaciones según el rol del usuario
-    let cotizaciones;
-    if (usuario.rol === true) {
-      cotizaciones = await Cotizaciones.findAll({
-        attributes: [
-          "id",
-          "numeroCotizacion",
-          "PrecioFinal",
-          "fechaDeCreacion",
-        ],
-        include: [
-          { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
-          { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
-          { model: Productos, attributes: ["familia", "marca", "modelo"] },
-        ],
-      });
-    } else {
-      cotizaciones = await Cotizaciones.findAll({
-        where: { idUsuario },
-        attributes: [
-          "id",
-          "numeroCotizacion",
-          "PrecioFinal",
-          "fechaDeCreacion",
-        ],
-        include: [
-          { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
-          { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
-          { model: Productos, attributes: ["familia", "marca", "modelo"] },
-        ],
-      });
+    let whereCondition = { estado: 1 };
+    if (!usuario.rol) {
+      whereCondition.idUsuario = idUsuario;
     }
 
-    // Devolver las cotizaciones
+    const cotizaciones = await Cotizaciones.findAll({
+      where: whereCondition,
+      attributes: ["id", "numeroCotizacion", "PrecioFinal", "fechaDeCreacion"],
+      include: [
+        { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
+        { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
+        { model: Productos, attributes: ["familia", "marca", "modelo"] },
+      ],
+    });
+
     return res.status(200).json(cotizaciones);
   } catch (error) {
     console.error("Error al obtener cotizaciones:", error);
@@ -283,6 +263,7 @@ const putCotizaciones = async (req, res) => {
       saldo: cotizacion.saldo,
       saldoConInteres: cotizacion.saldoConInteres,
       PrecioFinal: cotizacion.PrecioFinal,
+      estado: cotizacion.estado,
       fechaDeCreacion: cotizacion.fechaDeCreacion,
       fechaModi: updatedFields.fechaModi,
       nombreCliente: cliente.nombre,
@@ -317,7 +298,44 @@ const updateCotizacionEstado = async (req, res) => {
       throw "Cotización no encontrada";
     }
 
+    const cliente = await Clientes.findOne({
+      where: { id: cotizacion.idCliente },
+      attributes: ["nombre", "apellido", "mail"],
+    });
+
+    // Obtener datos del producto
+    const producto = await Productos.findOne({
+      where: { id: cotizacion.idProducto },
+      attributes: ["familia", "marca", "modelo"],
+    });
+
+    if (!cliente || !producto) {
+      throw "No se pudieron obtener los datos del cliente o del producto";
+    }
+
     await cotizacion.update({ estado: 2, fechaVenta: new Date() });
+
+    await HistorialCotizacion.create({
+      numeroCotizacion: cotizacion.numeroCotizacion,
+      precio: cotizacion.precio,
+      anticipo: cotizacion.anticipo,
+      saldoAFinanciar: cotizacion.saldoAFinanciar,
+      IVA: cotizacion.IVA,
+      moneda: cotizacion.moneda,
+      interes: cotizacion.interes,
+      saldo: cotizacion.saldo,
+      saldoConInteres: cotizacion.saldoConInteres,
+      PrecioFinal: cotizacion.PrecioFinal,
+      estado: cotizacion.estado,
+      fechaDeCreacion: cotizacion.fechaDeCreacion,
+      nombreCliente: cliente.nombre,
+      apellidoCliente: cliente.apellido,
+      mailCliente: cliente.mail,
+      familia: producto.familia,
+      marca: producto.marca,
+      modelo: producto.modelo,
+      fechaModi: new Date(),
+    });
 
     return res.status(200).send("La cotización se concretó con éxito.");
   } catch (error) {
@@ -404,7 +422,13 @@ const getCotizacionesEstadoDos = async (req, res) => {
     if (usuario.rol === true) {
       cotizaciones = await Cotizaciones.findAll({
         where: { estado: 2 },
-        attributes: ["id", "PrecioFinal", "fechaDeCreacion", "moneda"],
+        attributes: [
+          "id",
+          "PrecioFinal",
+          "fechaDeCreacion",
+          "moneda",
+          "numeroCotizacion",
+        ],
         include: [
           { model: Usuarios, attributes: ["nombre", "apellido"] },
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
@@ -414,7 +438,13 @@ const getCotizacionesEstadoDos = async (req, res) => {
     } else {
       cotizaciones = await Cotizaciones.findAll({
         where: { idUsuario, estado: 2 },
-        attributes: ["id", "PrecioFinal", "fechaDeCreacion", "moneda"],
+        attributes: [
+          "id",
+          "PrecioFinal",
+          "fechaDeCreacion",
+          "moneda",
+          "numeroCotizacion",
+        ],
         include: [
           { model: Usuarios, attributes: ["nombre", "apellido"] },
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
@@ -621,12 +651,152 @@ const filtrarCotizacionesPorFecha = async (req, res) => {
       ],
     });
 
+    if (!cotizaciones || cotizaciones.length === 0) {
+      return res.status(404).json({
+        error: "No se encontraron cotizaciones para la fecha especificada",
+      });
+    }
+
     return res.status(200).json(cotizaciones);
   } catch (error) {
     console.error("Error al filtrar cotizaciones:", error);
     return res.status(500).json({ message: "Error al filtrar cotizaciones" });
   }
 };
+
+const getCotizacionesPorModelo = async (req, res) => {
+  try {
+    const { modelo } = req.body;
+
+    if (!modelo) {
+      return res.status(400).json({ error: "El modelo es requerido" });
+    }
+
+    const cotizaciones = await Cotizaciones.findAll({
+      include: [
+        {
+          model: Productos,
+          attributes: ["familia", "marca", "modelo"],
+          where: {
+            modelo: {
+              [Op.like]: `%${modelo}%`,
+            },
+          },
+        },
+        {
+          model: Usuarios,
+          attributes: ["nombre", "apellido"],
+        },
+        {
+          model: Clientes,
+          attributes: ["nombre", "apellido"],
+        },
+      ],
+    });
+
+    if (!cotizaciones || cotizaciones.length === 0) {
+      return res.status(404).json({
+        error: "No se encontraron cotizaciones para el modelo especificado",
+      });
+    }
+
+    return res.status(200).json(cotizaciones);
+  } catch (error) {
+    console.error("Error al obtener las cotizaciones por modelo:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+
+// FUNCION DE RANKING DE COTIZACIONES Y VENTAS POR VENDEDOR Y MODELO //
+
+const getranking = async (req, res) => {
+  try {
+    // Usuario con más cotizaciones (estado 1)
+    const mostCotizacionesUser = await Cotizaciones.findOne({
+      where: { estado: 1 },
+      attributes: [
+        "idUsuario",
+        [conn.fn("COUNT", conn.col("Cotizaciones.id")), "countCotizaciones"],
+      ],
+      include: [{ model: Usuarios, attributes: ["nombre", "apellido"] }],
+      group: ["Cotizaciones.idUsuario", "Usuario.id"],
+      order: [[conn.literal('"countCotizaciones"'), "DESC"]],
+      limit: 1,
+    });
+
+    // Usuario con más ventas (estado 2)
+    const mostVentasUser = await Cotizaciones.findOne({
+      where: { estado: 2 },
+      attributes: [
+        "idUsuario",
+        [conn.fn("COUNT", conn.col("Cotizaciones.id")), "countVentas"],
+      ],
+      include: [{ model: Usuarios, attributes: ["nombre", "apellido"] }],
+      group: ["Cotizaciones.idUsuario", "Usuario.id"],
+      order: [[conn.literal('"countVentas"'), "DESC"]],
+      limit: 1,
+    });
+
+    // Producto con más cotizaciones (estado 1)
+    const mostCotizacionesProduct = await Cotizaciones.findOne({
+      where: { estado: 1 },
+      attributes: [
+        "idProducto",
+        [conn.fn("COUNT", conn.col("Cotizaciones.id")), "countCotizaciones"],
+      ],
+      include: [{ model: Productos, attributes: ["modelo"] }],
+      group: ["Cotizaciones.idProducto", "Producto.id"],
+      order: [[conn.literal('"countCotizaciones"'), "DESC"]],
+      limit: 1,
+    });
+
+    // Producto con más ventas (estado 2)
+    const mostVentasProduct = await Cotizaciones.findOne({
+      where: { estado: 2 },
+      attributes: [
+        "idProducto",
+        [conn.fn("COUNT", conn.col("Cotizaciones.id")), "countVentas"],
+      ],
+      include: [{ model: Productos, attributes: ["modelo"] }],
+      group: ["Cotizaciones.idProducto", "Producto.id"],
+      order: [[conn.literal('"countVentas"'), "DESC"]],
+      limit: 1,
+    });
+
+    return res.status(200).json({
+      VendedorMasCotizaciones: mostCotizacionesUser
+        ? {
+            nombre: mostCotizacionesUser.Usuario.nombre,
+            apellido: mostCotizacionesUser.Usuario.apellido,
+            count: mostCotizacionesUser.dataValues.countCotizaciones,
+          }
+        : null,
+      VendedorMasVentas: mostVentasUser
+        ? {
+            nombre: mostVentasUser.Usuario.nombre,
+            apellido: mostVentasUser.Usuario.apellido,
+            count: mostVentasUser.dataValues.countVentas,
+          }
+        : null,
+      ProductoMasCotizaciones: mostCotizacionesProduct
+        ? {
+            modelo: mostCotizacionesProduct.Producto.modelo,
+            count: mostCotizacionesProduct.dataValues.countCotizaciones,
+          }
+        : null,
+      ProductoMasVentas: mostVentasProduct
+        ? {
+            modelo: mostVentasProduct.Producto.modelo,
+            count: mostVentasProduct.dataValues.countVentas,
+          }
+        : null,
+    });
+  } catch (error) {
+    console.error("Error al obtener el resumen:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+
 module.exports = {
   createCotizacion,
   getCotizaciones,
@@ -641,4 +811,6 @@ module.exports = {
   getUltimasCotizaciones,
   getCotizacionesSum,
   filtrarCotizacionesPorFecha,
+  getCotizacionesPorModelo,
+  getranking,
 };

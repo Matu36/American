@@ -49,6 +49,7 @@ const {
   Garantia,
   Solicitantes,
   Contacto,
+  ContactoProducto,
   HistorialCotizacion,
 } = sequelize.models;
 
@@ -103,6 +104,14 @@ Contacto.belongsTo(Productos, {
 });
 
 Productos.hasMany(Contacto, {
+  foreignKey: "idProducto",
+});
+
+ContactoProducto.belongsTo(Productos, {
+  foreignKey: "idProducto",
+});
+
+Productos.hasMany(ContactoProducto, {
   foreignKey: "idProducto",
 });
 

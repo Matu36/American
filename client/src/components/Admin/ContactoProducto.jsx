@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { useDescuento } from "../../hooks/useDescuento";
+import { useContactoProducto } from "../../hooks/useContactoProducto";
 import DataTable from "react-data-table-component";
 import Spinner from "../../UI/Spinner";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link } from "react-router-dom";
 
-export default function Descuentos() {
-  const { data, isLoading } = useDescuento().descuentoQuery;
+export default function ContactoProducto() {
+  const { data, isLoading } = useContactoProducto().contactoProductoQuery;
   const [search, setSearch] = useState("");
-  const [descuentos, setDescuentos] = useState(data);
+  const [contactoProducto, setContactoProducto] = useState(data);
 
   useEffect(() => {
     if (data) {
-      setDescuentos(data);
+      setContactoProducto(data);
     }
   }, [data]);
 
@@ -30,14 +30,14 @@ export default function Descuentos() {
 
   const filterByEmailAndNombreCompleto = (value) => {
     if (!value) {
-      setDescuentos(data);
+      setContactoProducto(data);
     } else {
       const arrayCache = data?.filter(
         (oper) =>
-          oper.nombreCompleto.toLowerCase().includes(value.toLowerCase()) ||
+          oper.razonSocial.toLowerCase().includes(value.toLowerCase()) ||
           oper.email.toLowerCase().includes(value.toLowerCase())
       );
-      setDescuentos(arrayCache);
+      setContactoProducto(arrayCache);
     }
   };
 
@@ -46,21 +46,22 @@ export default function Descuentos() {
   const columns = [
     { name: "Email", selector: (row) => row.email, sortable: true },
     {
-      name: "Nombre Completo",
-      selector: (row) => row.nombreCompleto,
-      sortable: true,
-    },
-
-    {
-      name: "Dirección",
-      selector: (row) => row.direccion || "N/A",
+      name: "Razón Social",
+      selector: (row) => row.razonSocial,
       sortable: true,
     },
     {
-      name: "Teléfono",
-      selector: (row) => row.telefonoCelular || "N/A",
+      name: "Nombre",
+      selector: (row) => row.nombre,
       sortable: true,
     },
+    {
+      name: "Apellido",
+      selector: (row) => row.apellido,
+      sortable: true,
+    },
+    { name: "Marca", selector: (row) => row.Producto.marca, sortable: true },
+    { name: "Modelo", selector: (row) => row.Producto.modelo, sortable: true },
     {
       name: "Fecha de Registro",
       selector: (row) => new Date(row.fechaDeRegistro).toLocaleString(),
@@ -77,7 +78,7 @@ export default function Descuentos() {
         >
           <Dropdown.Item
             as={Link}
-            to={`/admin/descuento/ver/${row.id}`}
+            to={`/admin/ContacoProducto/ver/${row.id}`}
             className="dropdown-item dropdown-item-ver"
           >
             Detalle
@@ -119,7 +120,12 @@ export default function Descuentos() {
             />
           </div>
           {!showSpinner ? (
-            <DataTable columns={columns} data={descuentos} pagination striped />
+            <DataTable
+              columns={columns}
+              data={contactoProducto}
+              pagination
+              striped
+            />
           ) : (
             <Spinner loading={isLoading} />
           )}

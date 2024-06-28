@@ -2,21 +2,33 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Descuentos",
+    "ContactoProducto",
     {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      nombreCompleto: {
+      idProducto: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      nombre: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      apellido: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      razonSocial: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+
         validate: {
           isEmail: true,
         },
@@ -29,21 +41,30 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-
       fechaDeRegistro: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
       },
-
-      estado: {
-        type: DataTypes.ENUM("activo", "expirado"),
-        allowNull: false,
-        defaultValue: "activo",
+      pagoContado: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+      },
+      cuotas: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      anticipo: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+      },
+      moneda: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     {
-      tableName: "Descuentos",
+      tableName: "ContactoProducto",
       timestamps: false,
     }
   );

@@ -36,6 +36,8 @@ const {
   getUltimasCotizaciones,
   getCotizacionesSum,
   filtrarCotizacionesPorFecha,
+  getCotizacionesPorModelo,
+  getranking,
 } = require("../controllers/Cotizaciones");
 
 const {
@@ -54,12 +56,10 @@ const {
   getContactoById,
 } = require("../controllers/Contacto");
 const {
-  getDescuentos,
-  createDescuento,
-  updateDescuentoState,
-  countActiveDiscounts,
-  getDescuentoById,
-} = require("../controllers/Descuentos");
+  createContactoProducto,
+  getContactoProductoById,
+  getContactoProducto,
+} = require("../controllers/ContactoProducto");
 const {
   getAllGarantias,
   getGarantiaById,
@@ -85,7 +85,6 @@ const {
 
 const {
   getHistorialDetallePorUsuario,
-  getCotizacionesPorModelo,
 } = require("../controllers/HistorialCotizacion");
 
 const check = require("../middlewares/auth");
@@ -111,7 +110,7 @@ router.put("/usuarios/recoverpass", resetPassword);
 router.get("/productos", getProductos);
 router.get("/productos/getParaCotizar", getProductosParaCotizar);
 router.get("/productos/:id", getProductoById);
-router.get("/descuento/detalle/:id", getDescuentoById);
+router.get("/contactoProducto/detalle/:id", getContactoProductoById);
 router.get("/contacto/detalle/:id", getContactoById);
 router.post("/productos/create", check.auth, createProducto);
 router.put("/productos/edit", check.auth, putProductos);
@@ -122,6 +121,7 @@ router.get("/cotizaciones/getCotizacionesSum/:idUsuario", getCotizacionesSum);
 router.get("/cotizaciones/getDetalle/:idCotizacion", getCotizacionDetalle);
 router.get("/cotizaciones/getVentas/:idUsuario", getCotizacionesEstadoDos);
 router.get("/countCotizaciones/get", getCantidadCotizacionesPorUsuario);
+router.get("/Cotizaciones/ranking", getranking);
 router.put("/cotizaciones/edit", check.auth, putCotizaciones);
 router.post("/clientes/create", check.auth, createCliente);
 router.get("/clientes/get/:idUsuario", getClientesPorIdDeUsuario);
@@ -132,10 +132,8 @@ router.get("/contacto/get", getContactos);
 router.get("/contacto/getNoLeidosCount", countActiveContactos);
 router.put("/contacto/put", updateContactoState);
 router.post("/contacto/create", createContacto);
-router.get("/descuento/get", getDescuentos);
-router.get("/descuento/getActivosCount", countActiveDiscounts);
-router.post("/descuento/create", createDescuento);
-router.put("/descuento/put", updateDescuentoState);
+router.get("/contactoProducto/get", getContactoProducto);
+router.post("/contactoProducto/create", createContactoProducto);
 router.put("/cotizaciones/state", check.auth, updateCotizacionEstado);
 router.get("/cotizaciones/suma", sumarPreciosFinales);
 router.get("/cotizaciones/ultimas/:idUsuario", getUltimasCotizaciones);

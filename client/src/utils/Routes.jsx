@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Detalle from "../components/Detalle";
 import Cotizador from "../components/Admin/Cotizador";
-import Descuentos from "../components/Admin/Descuentos";
 import Contacto from "../components/Admin/Contacto";
 import Garantia from "../components/Admin/Garantia";
 import GarantiaDetail from "../components/Admin/GarantiaDetail";
@@ -31,9 +30,10 @@ import UsuariosDetail from "../components/Admin/UsuariosDetail";
 import ClientesEdit from "../components/Admin/ClientesEdit";
 import CotizacionEdit from "../components/Admin/CotizacionEdit";
 import ProductosEdit from "../components/Admin/ProductosEdit";
-import DescuentoDetail from "../components/Admin/DescuentoDetail";
+import ContactoProductoDetail from "../components/Admin/ContactoProductoDetail";
 import ContactoDetail from "../components/Admin/ContactoDetail";
 import Historial from "../components/Admin/Historial";
+import ContactoProducto from "../components/Admin/ContactoProducto";
 
 const AppRouter = () => {
   return (
@@ -76,7 +76,10 @@ const AdminLayout = () => {
           <Route path="/Clientes/modificar/:id" element={<ClientesEdit />} />
           <Route path="/Clientes/cargar" element={<CargaClientes />} />
           <Route path="/Productos/ver" element={<Productos />} />
-          <Route path="/descuento/ver/:id" element={<DescuentoDetail />} />
+          <Route
+            path="/ContacoProducto/ver/:id"
+            element={<ContactoProductoDetail />}
+          />
           <Route path="/contacto/ver/:id" element={<ContactoDetail />} />
           <Route path="/Productos/cargar" element={<FormProduct />} />
           <Route path="/productos/modificar/:id" element={<ProductosEdit />} />
@@ -93,7 +96,7 @@ const AdminLayout = () => {
           <Route path="/garantias/garantia/:id" element={<GarantiaDetail />} />
           <Route path="/ventas/:id" element={<VentasDetail />} />
           <Route path="/Contacto" element={<Contacto />} />
-          <Route path="/Descuentos" element={<Descuentos />} />
+          <Route path="/ContactoProducto" element={<ContactoProducto />} />
           <Route path="/Mensajes/nuevo" element={<FormMensaje />} />
           <Route path="/Mensajes/enviados" element={<MensajesEnviados />} />
           <Route path="/Mensajes/enviados/:id" element={<MensajesDetail />} />

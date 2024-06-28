@@ -51,7 +51,7 @@ const SideBarAdmin = () => {
     { label: "Ventas", icon: FaShoppingCart, subCategories: [] },
     { label: "Garantia", icon: FaShieldAlt, subCategories: [] },
     { label: "Contacto", icon: FaPhone, subCategories: [] },
-    { label: "Descuentos", icon: FaPercentage, subCategories: [] },
+    { label: "ContactoProducto", icon: FaPercentage, subCategories: [] },
     {
       label: "Mensajes",
       icon: MdMail,

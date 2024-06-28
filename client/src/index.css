@@ -1939,18 +1939,9 @@ button:focus-visible {
 }
 
 @media (max-width: 650px) {
-  .navbarAdmin {
-    flex-direction: column;
-    align-items: center;
-  }
+  
 
-  .navbarAdmin__left,
-  .navbarAdmin__right {
-    width: 100%; /* Asegura que ocupen todo el ancho disponible */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  
 
   .navbarAdmin__title {
     margin-bottom: 1rem;
@@ -1990,17 +1981,10 @@ button:focus-visible {
 }
 
 .sidebarAdmin__image {
-  /* width: 150px;
-  height: 100px; */
-
-  /* display: block; */
+max-width: 100%;
 }
 
-/* .sidebarAdmin__content {
-  overflow-y: auto;
-  align-items: center;
-  width: 100%;
-} */
+
 
 .sidebarAdmin__button {
   display: flex;
@@ -2355,6 +2339,7 @@ button:focus-visible {
   margin-top: 1rem;
   margin-left: 1rem;
   color: #000000; 
+  max-width: 100%;
 }
 
 .userListContainer span {
@@ -2707,29 +2692,31 @@ button:focus-visible {
 }
 
 .form-container {
-  width: 80%; /* Ancho del formulario */
-  margin: 2rem auto; /* Centrar el formulario con un margen izquierdo y derecho */
-  padding: 20px; /* Espaciado interior */
-  background-color: #000; /* Fondo negro */
-  color: #ffcc00; /* Texto amarillo */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-  display: grid; /* Usar CSS Grid */
-  grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
-  gap: 20px; /* Espacio entre las filas y columnas del grid */
+  width: 80%; 
+  margin: 2rem auto; 
+  padding: 20px; 
+  background-color: #000; 
+  color: #ffcc00; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px; 
+  
 }
 
 .form-container1 {
-  width: 50%; /* Ancho del formulario */
-  margin: 2rem auto; /* Centrar el formulario con un margen izquierdo y derecho */
-  padding: 20px; /* Espaciado interior */
-  background-color: #000; /* Fondo negro */
-  color: #ffcc00; /* Texto amarillo */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  width: 50%; 
+  margin: 2rem auto; 
+  padding: 20px; 
+  background-color: #000; 
+  color: #ffcc00;
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+ 
 
-  grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
-  gap: 20px; /* Espacio entre las filas y columnas del grid */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px;
 }
 
 /* Estilos para los campos de entrada y select */
@@ -3000,6 +2987,85 @@ button:focus-visible {
 .acciones-dropdown-custom .dropdown-menu {
   background-color: white; /* O el color que prefieras */
 }
+
+.datatable {
+  max-width: 100%;
+  overflow-x: auto; /* Permite que la tabla sea desplazable horizontalmente en pantallas pequeñas */
+}
+
+.datatable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.datatable th,
+.datatable td {
+  padding: 8px 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+@media screen and (max-width: 768px) {
+  .datatable th,
+  .datatable td {
+    padding: 6px 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .datatable th,
+  .datatable td {
+    padding: 4px 8px;
+    font-size: 12px; 
+  }
+}
+
+.ranking-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: #ffeb3b; /* Amarillo */
+  border: 2px solid #f44336; /* Rojo */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  z-index: 1000;
+  max-width: 300px;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  10%,
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.ranking-item {
+  margin-bottom: 20px;
+}
+
+.ranking-item h2 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: #d32f2f; 
+}
+
+.ranking-item p {
+  margin: 0;
+  font-size: 1em;
+  color: #000; 
+}
+
 
 
 

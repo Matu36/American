@@ -4,6 +4,7 @@ import { useUsuario } from "../../hooks/useUsuarios";
 import { useHistorial } from "../../hooks/useHistorial";
 import { useProducto } from "../../hooks/useProductos";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
+import HistorialRanking from "./HistorialRanking";
 
 export default function Historial() {
   const { data: vendedoresData, isLoading: isLoadingVendedores } =
@@ -110,6 +111,7 @@ export default function Historial() {
 
   return (
     <div className="form-container1">
+      <HistorialRanking />
       <h2>Historial</h2>
       {isLoadingVendedores ? (
         <p>Cargando...</p>
@@ -158,10 +160,21 @@ export default function Historial() {
           historialData.data.map((detalle) => (
             <div key={detalle.id}>
               <p>
-                <strong>Detalles de la Cotización:</strong>
+                <strong>
+                  {detalle.estado === 1
+                    ? "Detalles de la Cotización:"
+                    : "Cotización Concretada"}
+                </strong>
               </p>
               <br />
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "10px",
+                  color: detalle.estado === 2 ? "green" : "inherit",
+                }}
+              >
                 <span>Número de Cotización: {detalle.numeroCotizacion}</span>
                 <span>Precio: {detalle.precio}</span>
                 <span>Anticipo: {detalle.anticipo}</span>
@@ -216,10 +229,22 @@ export default function Historial() {
           ModeloData.data.map((detalle) => (
             <div key={detalle.id}>
               <p>
-                <strong>Detalles de la Cotización:</strong>
+                <strong>
+                  {" "}
+                  {detalle.estado === 1
+                    ? "Detalles de la Cotización:"
+                    : "Cotización Concretada"}
+                </strong>
               </p>
               <br />
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "10px",
+                  color: detalle.estado === 2 ? "green" : "inherit",
+                }}
+              >
                 <span>Número de Cotización: {detalle.numeroCotizacion}</span>
                 <span>Precio: {detalle.precio}</span>
                 <span>Anticipo: {detalle.anticipo}</span>
@@ -229,12 +254,12 @@ export default function Historial() {
                 <span>Fecha de Creación: {detalle.fechaDeCreacion}</span>
                 <span>Fecha de Modificación: {detalle.fechaModi}</span>
                 <span>
-                  <strong>Producto:</strong> {detalle.familia} {detalle.marca}{" "}
-                  {detalle.modelo}
+                  <strong>Producto:</strong> {detalle.Producto.familia}{" "}
+                  {detalle.Producto.marca} {detalle.Producto.modelo}
                 </span>
                 <span>
-                  <strong>Cliente:</strong> {detalle.nombreCliente}{" "}
-                  {detalle.apellidoCliente}
+                  <strong>Cliente:</strong> {detalle.Cliente.nombre}{" "}
+                  {detalle.Cliente.apellido}
                 </span>
               </div>
               <br />
@@ -244,7 +269,7 @@ export default function Historial() {
           <p></p>
         )}
       </div>
-      <h2>Filtrar Cotizaciones por Fecha</h2>
+      <h4> Filtrar por Fecha</h4>
       <form onSubmit={handleSubmitFechas}>
         <div>
           <label htmlFor="fechaDesde">Fecha Desde:</label>
@@ -267,7 +292,7 @@ export default function Historial() {
         </div>
         <br />
         <button className="form-submit" type="submit">
-          Enviar
+          Buscar por Fechas
         </button>
         <button
           className="form-submit"
@@ -287,10 +312,22 @@ export default function Historial() {
           fechasData.data.map((cotizacion) => (
             <div key={cotizacion.id}>
               <p>
-                <strong>Detalles de la Cotización:</strong>
+                <strong>
+                  {" "}
+                  {cotizacion.estado === 1
+                    ? "Detalles de la Cotización:"
+                    : "Cotización Concretada"}
+                </strong>
               </p>
               <br />
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "10px",
+                  color: cotizacion.estado === 2 ? "green" : "inherit",
+                }}
+              >
                 <span>Número de Cotización: {cotizacion.numeroCotizacion}</span>
                 <span>Precio: {cotizacion.precio}</span>
                 <span>Anticipo: {cotizacion.anticipo}</span>

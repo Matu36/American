@@ -16,6 +16,7 @@ export default function CargaClientes() {
     apellido: "",
     mail: "",
     telefono: "",
+    razonSocial: "",
   });
 
   // Manejar cambios en los campos del formulario
@@ -41,6 +42,7 @@ export default function CargaClientes() {
       apellido: "",
       mail: "",
       telefono: "",
+      razonSocial: "",
     });
   };
 
@@ -67,6 +69,17 @@ export default function CargaClientes() {
             id="domicilio"
             name="domicilio"
             value={formData.domicilio}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="nombre">Razón Social</label>
+          <input
+            type="text"
+            id="razonSocial"
+            name="razonSocial"
+            value={formData.razonSocial}
             onChange={handleChange}
             required
           />

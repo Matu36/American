@@ -30,6 +30,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      razonSocial: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       mail: {
         type: DataTypes.STRING,
         allowNull: false,
