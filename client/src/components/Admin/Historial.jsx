@@ -166,7 +166,7 @@ export default function Historial() {
                     : "Cotización Concretada"}
                 </strong>
               </p>
-              <br />
+
               <div
                 style={{
                   display: "flex",
@@ -236,7 +236,7 @@ export default function Historial() {
                     : "Cotización Concretada"}
                 </strong>
               </p>
-              <br />
+
               <div
                 style={{
                   display: "flex",
@@ -319,7 +319,7 @@ export default function Historial() {
                     : "Cotización Concretada"}
                 </strong>
               </p>
-              <br />
+
               <div
                 style={{
                   display: "flex",

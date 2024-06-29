@@ -50,10 +50,10 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      // fichaPDF: {
-      //   type: DataTypes.TEXT,
-      //   allowNull: true,
-      // },
+      fichaPDF: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
       cantidadTotal: {
         type: DataTypes.INTEGER,
         allowNull: true,

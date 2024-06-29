@@ -26,10 +26,19 @@ const getUsuarioDetail = async (idUsuario) => {
   return data;
 };
 
+const checkRol = async (data) => {
+  return await UsuariosAPI.post(`/rol`, data);
+};
+
 export const useUsuario = (idUsuario) => {
   const usuariosQuery = useQuery({
     queryKey: ["usuarios"],
     queryFn: () => getUsuarios(),
+  });
+
+  const CheckRolMutation = useMutation({
+    mutationKey: ["checkRol-mutation"],
+    mutationFn: (data) => checkRol(data),
   });
 
   const UsuarioDetailQuery = useQuery({
@@ -59,5 +68,6 @@ export const useUsuario = (idUsuario) => {
     usuariosMensajesQuery,
     UsuarioDetailQuery,
     vendedoresQuery,
+    CheckRolMutation,
   };
 };

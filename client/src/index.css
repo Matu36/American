@@ -2721,23 +2721,23 @@ max-width: 100%;
 
 /* Estilos para los campos de entrada y select */
 .form-group {
-  margin-bottom: 15px; /* Espacio inferior entre grupos de elementos */
+  margin-bottom: 15px; 
 }
 
 .form-group label {
-  display: block; /* Mostrar etiquetas en bloque */
-  margin-bottom: 5px; /* Espacio inferior entre etiqueta y campo */
-  font-weight: bold; /* Texto en negrita */
+  display: block; 
+  margin-bottom: 5px; 
+  font-weight: bold; 
 }
 
 .form-group input,
 .form-group select {
-  width: 100%; /* Ancho completo */
-  padding: 8px; /* Espaciado interior */
-  border: 1px solid #ffcc00; /* Borde amarillo */
-  border-radius: 5px; /* Bordes redondeados */
-  background-color: #000; /* Fondo negro */
-  color: #ffcc00; /* Texto amarillo */
+  width: 100%; 
+  padding: 8px; 
+  border: 1px solid #ffcc00; 
+  border-radius: 5px; 
+  background-color: #000; 
+  color: #ffcc00; 
 }
 
 /* Estilos para el botón de guardar cotización */
@@ -2833,20 +2833,20 @@ max-width: 100%;
 
 .cotizacion-detail {
   font-family: Arial, sans-serif;
-  max-width: 1000px; /* Aumentamos el ancho máximo */
+  max-width: 1000px; 
   margin: auto;
-  padding: 40px; /* Aumentamos el padding para más espacio interno */
+  padding: 40px; 
   background-color: #ffffff;
-  border: 2px solid #000000; /* Borde negro más grueso */
+  border: 2px solid #000000; 
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .titulo {
-  color: #ffcc00; /* Amarillo */
+  color: #ffcc00; 
   text-align: center;
-  margin-bottom: 30px; /* Aumentamos el espacio inferior */
-  font-size: 24px; /* Aumentamos el tamaño del título */
+  margin-bottom: 30px; 
+  font-size: 24px; 
 }
 
 .seccion {
@@ -2854,9 +2854,9 @@ max-width: 100%;
 }
 
 .seccion h3 {
-  color: #000000; /* Negro */
-  font-size: 1.4rem; /* Aumentamos el tamaño del título de sección */
-  margin-bottom: 15px; /* Aumentamos el espacio inferior */
+  color: #000000; 
+  font-size: 1.4rem; 
+  margin-bottom: 15px; 
 }
 
 .seccion p {

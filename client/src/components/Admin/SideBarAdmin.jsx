@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useUsuario } from "../../hooks/useUsuarios";
+import useAuth from "../../hooks/useAuth";
 
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -15,6 +17,20 @@ import {
 import { MdPerson, MdMail } from "react-icons/md";
 
 const SideBarAdmin = () => {
+  const { auth } = useAuth();
+  const idUsuario = auth?.id;
+
+  const { mutate: checkRol } = useUsuario().CheckRolMutation;
+
+  const handleCheckRol = () => {
+    checkRol({ idUsuario: idUsuario });
+    console.log({ idUsuario });
+  };
+
+  useEffect(() => {
+    handleCheckRol();
+  }, [idUsuario]);
+
   const location = useLocation();
   const [activeCategory, setActiveCategory] = useState(null);
 

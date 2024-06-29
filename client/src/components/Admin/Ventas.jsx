@@ -15,8 +15,6 @@ export default function Ventas() {
   const { ventasQueryById, isLoading } = useVentas(idUsuario);
   const [ventas, setVentas] = useState(ventasQueryById.data);
 
-  console.log(ventasQueryById.data);
-
   useEffect(() => {
     if (ventasQueryById.data) {
       setVentas(ventasQueryById.data);
