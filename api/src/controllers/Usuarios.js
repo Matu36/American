@@ -268,11 +268,17 @@ const verificarRol = async (req, res) => {
       throw "Usuario no encontrado";
     }
 
+    let rolDescripcion;
+
     if (usuario.rol === true) {
-      return res.status(200).send("Rol true");
+      rolDescripcion = "administrador";
+    } else if (usuario.rol === false) {
+      rolDescripcion = "vendedor";
     } else {
-      return res.status(400).send("Rol false");
+      rolDescripcion = "comun";
     }
+
+    return res.status(200).json({ rol: rolDescripcion });
   } catch (error) {
     console.error(error);
     return res.status(400).send(error);

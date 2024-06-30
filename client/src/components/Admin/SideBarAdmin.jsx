@@ -20,11 +20,13 @@ const SideBarAdmin = () => {
   const { auth } = useAuth();
   const idUsuario = auth?.id;
 
-  const { mutate: checkRol } = useUsuario().CheckRolMutation;
+  const { mutate: checkRol, data: rol } = useUsuario().CheckRolMutation;
 
   const handleCheckRol = () => {
     checkRol({ idUsuario: idUsuario });
   };
+
+  const role = rol?.data;
 
   useEffect(() => {
     handleCheckRol();
