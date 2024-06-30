@@ -34,6 +34,21 @@ export default function HistorialRanking() {
         </p>
       </div>
       <div className="ranking-item">
+        <h2>Cliente con más cotizaciones</h2>
+        <p>
+          {data.ClienteMasCotizaciones.nombre}{" "}
+          {data.ClienteMasCotizaciones.apellido} con{" "}
+          {data.ClienteMasCotizaciones.count} cotizaciones.
+        </p>
+      </div>
+      <div className="ranking-item">
+        <h2>Cliente con más ventas</h2>
+        <p>
+          {data.ClienteMasVentas.nombre} {data.ClienteMasVentas.apellido} con{" "}
+          {data.ClienteMasVentas.count} ventas.
+        </p>
+      </div>
+      <div className="ranking-item">
         <h2>Producto con más cotizaciones</h2>
         <p>
           Modelo {data.ProductoMasCotizaciones.modelo} con{" "}

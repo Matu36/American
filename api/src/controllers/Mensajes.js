@@ -1,5 +1,6 @@
 const { Mensajes, Usuarios } = require("../db.js");
 const { Op } = require("sequelize");
+const { conn } = require("../db.js");
 
 const createMessage = async (req, res) => {
   try {
@@ -147,7 +148,7 @@ const getMensajesByDestino = async (req, res) => {
       include: [
         {
           model: Usuarios,
-
+          as: "Emisor", // Alias para el emisor
           attributes: ["email"],
         },
       ],

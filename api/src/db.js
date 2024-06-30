@@ -85,10 +85,12 @@ Productos.hasMany(Cotizaciones, {
 
 Mensajes.belongsTo(Usuarios, {
   foreignKey: "idUsuario",
+  as: "Emisor",
 });
 
 Usuarios.hasMany(Mensajes, {
   foreignKey: "idUsuario",
+  as: "MensajesEnviados",
 });
 
 Mensajes.belongsTo(Usuarios, {

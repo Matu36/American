@@ -61,7 +61,7 @@ export default function MensajesRecibidos() {
   };
 
   const columns = [
-    { name: "Emisor", selector: (row) => row.Usuario.email, sortable: true },
+    { name: "Emisor", selector: (row) => row.Emisor.email, sortable: true },
     { name: "Mensaje", selector: (row) => row.Mensaje, sortable: true },
     {
       name: "Fecha de Envío",

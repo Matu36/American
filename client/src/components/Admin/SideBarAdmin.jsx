@@ -24,7 +24,6 @@ const SideBarAdmin = () => {
 
   const handleCheckRol = () => {
     checkRol({ idUsuario: idUsuario });
-    console.log({ idUsuario });
   };
 
   useEffect(() => {

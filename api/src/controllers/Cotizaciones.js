@@ -763,6 +763,32 @@ const getranking = async (req, res) => {
       limit: 1,
     });
 
+    // Cliente con más cotizaciones (estado 1)
+    const mostCotizacionesCliente = await Cotizaciones.findOne({
+      where: { estado: 1 },
+      attributes: [
+        "idCliente",
+        [conn.fn("COUNT", conn.col("Cotizaciones.id")), "countCotizaciones"],
+      ],
+      include: [{ model: Clientes, attributes: ["nombre", "apellido"] }],
+      group: ["Cotizaciones.idCliente", "Cliente.id"],
+      order: [[conn.literal('"countCotizaciones"'), "DESC"]],
+      limit: 1,
+    });
+
+    // Cliente con más ventas (estado 2)
+    const mostVentasCliente = await Cotizaciones.findOne({
+      where: { estado: 2 },
+      attributes: [
+        "idCliente",
+        [conn.fn("COUNT", conn.col("Cotizaciones.id")), "countVentas"],
+      ],
+      include: [{ model: Clientes, attributes: ["nombre", "apellido"] }],
+      group: ["Cotizaciones.idCliente", "Cliente.id"],
+      order: [[conn.literal('"countVentas"'), "DESC"]],
+      limit: 1,
+    });
+
     return res.status(200).json({
       VendedorMasCotizaciones: mostCotizacionesUser
         ? {
@@ -788,6 +814,20 @@ const getranking = async (req, res) => {
         ? {
             modelo: mostVentasProduct.Producto.modelo,
             count: mostVentasProduct.dataValues.countVentas,
+          }
+        : null,
+      ClienteMasCotizaciones: mostCotizacionesCliente
+        ? {
+            nombre: mostCotizacionesCliente.Cliente.nombre,
+            apellido: mostCotizacionesCliente.Cliente.apellido,
+            count: mostCotizacionesCliente.dataValues.countCotizaciones,
+          }
+        : null,
+      ClienteMasVentas: mostVentasCliente
+        ? {
+            nombre: mostVentasCliente.Cliente.nombre,
+            apellido: mostVentasCliente.Cliente.apellido,
+            count: mostVentasCliente.dataValues.countVentas,
           }
         : null,
     });
