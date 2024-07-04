@@ -27,11 +27,11 @@ export default function GarantiaDetail() {
   } = garantiaData;
 
   return (
-    <div className="clientes-detail-container">
-      <h1>Detalles de la Garantía</h1>
+    <div className="form-container1">
+      <h3>Detalles de la Garantía</h3>
 
       <div className="detail-section">
-        <h2>Información del Cliente</h2>
+        <h4>Información del Cliente</h4>
         <div className="detail-item">
           <strong>Nombre:</strong> {nombre}
         </div>
@@ -50,7 +50,7 @@ export default function GarantiaDetail() {
       </div>
 
       <div className="detail-section">
-        <h2>Detalles de la Máquina</h2>
+        <h4>Detalles de la Máquina</h4>
         <div className="detail-item">
           <strong>Tipo de Máquina:</strong> {tipoDeMaquina}
         </div>
@@ -77,7 +77,7 @@ export default function GarantiaDetail() {
       </div>
 
       <div className="detail-section">
-        <h2>Detalle de la Falla</h2>
+        <h4>Detalle de la Falla</h4>
         <div className="detail-item">
           <p>{falla}</p>
         </div>

@@ -34,6 +34,7 @@ import ContactoProductoDetail from "../components/Admin/ContactoProductoDetail";
 import ContactoDetail from "../components/Admin/ContactoDetail";
 import Historial from "../components/Admin/Historial";
 import ContactoProducto from "../components/Admin/ContactoProducto";
+import ErroPage from "../components/ErroPage";
 
 const AppRouter = () => {
   return (
@@ -42,6 +43,7 @@ const AppRouter = () => {
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/productos/:id" element={<Detalle />} />
+          <Route path="/Error" element={<ErroPage />} />
           <Route path="/admin/*" element={<AdminLayout />} />
         </Routes>
       </AuthProvider>
@@ -50,15 +52,6 @@ const AppRouter = () => {
 };
 
 const AdminLayout = () => {
-  const { auth } = useAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (auth.rol === null) {
-      navigate("/");
-    }
-  }, [auth, navigate]);
-
   return (
     <>
       <NavBarAdmin />

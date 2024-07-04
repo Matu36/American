@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useUsuario } from "../../hooks/useUsuarios";
 import useAuth from "../../hooks/useAuth";
-
 import { Link, useLocation } from "react-router-dom";
 import {
   FaHome,
@@ -19,66 +18,136 @@ import { MdPerson, MdMail } from "react-icons/md";
 const SideBarAdmin = () => {
   const { auth } = useAuth();
   const idUsuario = auth?.id;
-
-  const { mutate: checkRol, data: rol } = useUsuario().CheckRolMutation;
+  const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 
   const handleCheckRol = () => {
-    checkRol({ idUsuario: idUsuario });
+    checkRol({ idUsuario });
   };
 
-  const role = rol?.data;
-
   useEffect(() => {
-    handleCheckRol();
+    if (idUsuario) {
+      handleCheckRol();
+    }
   }, [idUsuario]);
 
   const location = useLocation();
   const [activeCategory, setActiveCategory] = useState(null);
+  const role = rolData?.data.rol;
 
   const categories = [
-    { label: "Usuarios", icon: MdPerson, subCategories: [] },
+    {
+      label: "Usuarios",
+      icon: MdPerson,
+      subCategories: [],
+      roles: ["administrador"],
+    },
     {
       label: "Clientes",
       icon: FaUsers,
       subCategories: [
-        { label: "Cargar clientes", path: "/admin/clientes/cargar" },
-        { label: "Ver clientes", path: "/admin/clientes/ver" },
+        {
+          label: "Cargar clientes",
+          path: "/admin/clientes/cargar",
+          roles: ["administrador", "vendedor"],
+        },
+        {
+          label: "Ver clientes",
+          path: "/admin/clientes/ver",
+          roles: ["administrador", "vendedor"],
+        },
       ],
+      roles: ["administrador", "vendedor"],
     },
     {
       label: "Productos",
       icon: FaBox,
       subCategories: [
-        { label: "Cargar productos", path: "/admin/productos/cargar" },
-        { label: "Ver productos", path: "/admin/productos/ver" },
+        {
+          label: "Cargar productos",
+          path: "/admin/productos/cargar",
+          roles: ["administrador"],
+        },
+        {
+          label: "Ver productos",
+          path: "/admin/productos/ver",
+          roles: ["administrador", "vendedor"],
+        },
       ],
+      roles: ["administrador", "vendedor"],
     },
     {
       label: "Cotizaciones",
       icon: FaFileInvoiceDollar,
       subCategories: [
-        { label: "Crear Cotizacion", path: "/admin/cotizaciones/crear" },
-        { label: "Ver Cotizaciones", path: "/admin/cotizaciones/ver" },
+        {
+          label: "Crear Cotizacion",
+          path: "/admin/cotizaciones/crear",
+          roles: ["administrador", "vendedor"],
+        },
+        {
+          label: "Ver Cotizaciones",
+          path: "/admin/cotizaciones/ver",
+          roles: ["administrador", "vendedor"],
+        },
         {
           label: "Historial Cotizaciones",
           path: "/admin/cotizaciones/historial",
+          roles: ["administrador"],
         },
       ],
+      roles: ["administrador", "vendedor"],
     },
-    { label: "Ventas", icon: FaShoppingCart, subCategories: [] },
-    { label: "Garantia", icon: FaShieldAlt, subCategories: [] },
-    { label: "Contacto", icon: FaPhone, subCategories: [] },
-    { label: "ContactoProducto", icon: FaPercentage, subCategories: [] },
+    {
+      label: "Ventas",
+      icon: FaShoppingCart,
+      subCategories: [],
+      roles: ["administrador", "vendedor"],
+    },
+    {
+      label: "Garantia",
+      icon: FaShieldAlt,
+      subCategories: [],
+      roles: ["administrador"],
+    },
+    {
+      label: "Contacto",
+      icon: FaPhone,
+      subCategories: [],
+      roles: ["administrador"],
+    },
+    {
+      label: "ContactoProducto",
+      icon: FaPercentage,
+      subCategories: [],
+      roles: ["administrador"],
+    },
     {
       label: "Mensajes",
       icon: MdMail,
       subCategories: [
-        { label: "Nuevo Correo", path: "/admin/mensajes/nuevo" },
-        { label: "Ver mensajes", path: "/admin/mensajes/ver" },
-        { label: "Ver enviados", path: "/admin/mensajes/enviados" },
+        {
+          label: "Nuevo Correo",
+          path: "/admin/mensajes/nuevo",
+          roles: ["administrador", "vendedor"],
+        },
+        {
+          label: "Ver mensajes",
+          path: "/admin/mensajes/ver",
+          roles: ["administrador", "vendedor"],
+        },
+        {
+          label: "Ver enviados",
+          path: "/admin/mensajes/enviados",
+          roles: ["administrador", "vendedor"],
+        },
       ],
+      roles: ["administrador", "vendedor"],
     },
   ];
+
+  const filteredCategories = categories.filter((category) =>
+    category.roles.includes(role)
+  );
 
   return (
     <div className="sidebarAdmin bg-dark">
@@ -93,7 +162,7 @@ const SideBarAdmin = () => {
           Home
         </Link>
 
-        {categories.map((category) => (
+        {filteredCategories.map((category) => (
           <div key={category.label}>
             {category.subCategories.length > 0 ? (
               <div>
@@ -126,17 +195,19 @@ const SideBarAdmin = () => {
                   }`}
                   id={`collapse${category.label}`}
                 >
-                  {category.subCategories.map((subCategory) => (
-                    <Link
-                      key={subCategory.label}
-                      to={subCategory.path}
-                      className={`sidebarAdmin__button ${
-                        location.pathname === subCategory.path ? "active" : ""
-                      }`}
-                    >
-                      {subCategory.label}
-                    </Link>
-                  ))}
+                  {category.subCategories
+                    .filter((subCategory) => subCategory.roles.includes(role))
+                    .map((subCategory) => (
+                      <Link
+                        key={subCategory.label}
+                        to={subCategory.path}
+                        className={`sidebarAdmin__button ${
+                          location.pathname === subCategory.path ? "active" : ""
+                        }`}
+                      >
+                        {subCategory.label}
+                      </Link>
+                    ))}
                 </div>
               </div>
             ) : (

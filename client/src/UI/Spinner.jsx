@@ -1,5 +1,5 @@
 import React from "react";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 
 function Spinner({ loading }) {
   return (
@@ -11,7 +11,7 @@ function Spinner({ loading }) {
         transform: "translate(-50%, -50%)",
       }}
     >
-      <PacmanLoader
+      <BeatLoader
         color="#ffc107"
         cssOverride={{
           position: "relative",
@@ -32,7 +32,6 @@ function Spinner({ loading }) {
           fontSize: "20px",
           textAlign: "center",
           marginTop: "10px",
-          marginLeft: "5rem",
         }}
       >
         Cargando...

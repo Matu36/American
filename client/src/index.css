@@ -1854,6 +1854,15 @@ button:focus-visible {
   display: flex;
 }
 
+@media screen and (max-width: 600px) {
+  .containerAdmin {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+  }
+}
+
+
 /* NAVBAR */
 
 .navbarAdmin {
@@ -1963,9 +1972,9 @@ button:focus-visible {
  
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .sidebarAdmin {
-    width: 100px;
+    display: none;
   }
 }
 
@@ -2001,14 +2010,14 @@ max-width: 100%;
 .user__info {
   display: flex;
   align-items: center;
-  color: #efe4e4; 
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); 
-  border: 1px solid #ccc; 
-  border-radius: 8px; 
-  padding: 10px 15px; 
-  
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  color: #efe4e4;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  margin-right: 0.5rem;
+  border-radius: 8px;
+  padding: 10px 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 
 @media (max-width: 500px) {
   .sidebarAdmin__button {
@@ -2259,7 +2268,7 @@ max-width: 100%;
   justify-content: space-between;
   margin-left: 1rem;
   margin-top: 1rem;
-  width: 100%;
+  max-width: 100%;
   margin-bottom: 1rem;
 }
 

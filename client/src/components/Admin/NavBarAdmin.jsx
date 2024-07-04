@@ -27,9 +27,7 @@ export default function NavBarAdmin() {
         </button>
       </div>
       <div className="user__info">
-        <h3>
-          {auth.nombre} {auth.apellido}
-        </h3>
+        {auth.nombre} {auth.apellido}
         <button
           className="navbarAdmin__icon-button"
           onClick={() => {
