@@ -349,6 +349,27 @@ const getUsuariosConRolFalse = async (req, res) => {
   }
 };
 
+const getUsuariosChart = async (req, res) => {
+  try {
+    const usuarios = await Usuarios.findAll({
+      attributes: ["createdAt"],
+    });
+
+    if (!usuarios || usuarios.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "No se encontraron usuarios en el Chart" });
+    }
+
+    return res.status(200).json(usuarios);
+  } catch (error) {
+    console.error("Error al obtener usuarios con fecha:", error);
+    return res
+      .status(500)
+      .json({ error: "Error al obtener usuarios con fecha" });
+  }
+};
+
 module.exports = {
   login,
   registro,
@@ -360,4 +381,5 @@ module.exports = {
   getAllUsersMensajes,
   obtenerDetalleUsuario,
   getUsuariosConRolFalse,
+  getUsuariosChart,
 };

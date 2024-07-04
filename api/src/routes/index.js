@@ -11,6 +11,7 @@ const {
   getAllUsersMensajes,
   obtenerDetalleUsuario,
   getUsuariosConRolFalse,
+  getUsuariosChart,
 } = require("../controllers/Usuarios");
 
 const {
@@ -103,6 +104,7 @@ router.post("/usuarios/registro", registro);
 router.post("/usuarios/rol", check.auth, verificarRol);
 router.put("/usuarios", check.auth, putUser);
 router.get("/usuarios/lastFive", getLastLoggedInUsers);
+router.get("/usuarios/chart", getUsuariosChart);
 router.get("/usuarios/detail/:idUsuario", obtenerDetalleUsuario);
 router.get("/usuarios/all", check.auth, getAllUsers);
 router.get("/usuarios/vendedores", getUsuariosConRolFalse);

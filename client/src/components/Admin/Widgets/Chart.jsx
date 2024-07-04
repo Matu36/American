@@ -1,3 +1,4 @@
+import React from "react";
 import {
   LineChart,
   Line,
@@ -9,19 +10,19 @@ import {
 import { useUsuario } from "../../../hooks/useUsuarios";
 
 export default function Chart({ title, dataKey, grid }) {
-  const { data, isLoading } = useUsuario().usuariosQuery;
+  const { data, isLoading } = useUsuario().usuariosChartQuery;
 
   if (isLoading) {
     return <div>Cargando...</div>;
   }
 
   // Verificar si hay datos
-  if (!data || !data.allUsers || data.allUsers.length === 0) {
+  if (!data || data.length === 0) {
     return <div>No hay datos de usuarios para mostrar.</div>;
   }
 
   // Agrupar usuarios por mes
-  const usuariosAgrupados = data.allUsers.reduce((acumulador, usuario) => {
+  const usuariosAgrupados = data.reduce((acumulador, usuario) => {
     const fecha = new Date(usuario.createdAt);
     const mes = fecha.toLocaleString("default", { month: "short" });
     const mesAbreviado = mes.slice(0, 3); // Obtener las primeras tres letras del nombre del mes

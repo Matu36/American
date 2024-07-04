@@ -16,6 +16,11 @@ const getLastFive = async () => {
   return data;
 };
 
+const getChart = async () => {
+  const { data } = await UsuariosAPI.get("/chart");
+  return data;
+};
+
 const getVendedores = async () => {
   const { data } = await UsuariosAPI.get("/vendedores");
   return data;
@@ -34,6 +39,11 @@ export const useUsuario = (idUsuario) => {
   const usuariosQuery = useQuery({
     queryKey: ["usuarios"],
     queryFn: () => getUsuarios(),
+  });
+
+  const usuariosChartQuery = useQuery({
+    queryKey: ["usuariosChart"],
+    queryFn: () => getChart(),
   });
 
   const CheckRolMutation = useMutation({
@@ -69,5 +79,6 @@ export const useUsuario = (idUsuario) => {
     UsuarioDetailQuery,
     vendedoresQuery,
     CheckRolMutation,
+    usuariosChartQuery,
   };
 };
