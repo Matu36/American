@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import logo from "../assets/img/AMERICAN.jpg";
-import { FiSearch, FiShoppingCart } from "react-icons/fi";
+import logo from "../assets/img/logoAmerican.png";
+import { FiSearch } from "react-icons/fi";
 import { FaUser } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
-import CarritoModal from "./CarritoModal";
 import Login from "./usuario/Login";
 import EditarUsuario from "./usuario/EditarUsuario";
 import { useNavigate } from "react-router-dom";
+import { useProducto } from "../hooks/useProductos";
 
 export default function NavBarAlternativo({ onSearchByMarca }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -18,6 +18,8 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
   const { auth, setAuth } = useAuth();
   const [edit, setEdit] = useState(false);
   const [login, setLogin] = useState(false);
+
+  const { data: categorias } = useProducto().productosCategoriasQuery;
 
   const navigate = useNavigate();
 
@@ -38,16 +40,6 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
   useEffect(() => {
     actualizarContadorCarrito();
   }, [modalCarrito, carritoC]);
-
-  const handleMostrarModalCarrito = () => {
-    setModalCarrito(true);
-    actualizarContadorCarrito();
-  };
-
-  const handleCerrarModalCarrito = () => {
-    setModalCarrito(false);
-    actualizarContadorCarrito();
-  };
 
   const handleMostrarModalLogin = () => {
     setLogin(true);
@@ -82,31 +74,17 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
     onSearchByMarca(suggestion);
     setSuggestions([]);
   };
-
   const getSuggestions = (value) => {
-    // Si el valor es vacío, no mostrar sugerencias
-    if (!value) {
+    if (!value || !categorias) {
       return [];
     }
-    // Lista completa de marcas
-    const allBrands = [
-      "calvin",
-      "columbia",
-      "nike",
-      "hollister",
-      "jordan",
-      "levis",
-      "puma",
-      "reebok",
-      "timberland",
-      "tommy",
-      "variadas",
-      "adidas",
-      "asics",
-    ];
-    // Filtrar las sugerencias basadas en el valor actual del input
-    return allBrands.filter((suggestion) =>
-      suggestion.toLowerCase().includes(value.toLowerCase())
+
+    const categoriasArray = categorias
+      .split(",")
+      .map((categoria) => categoria.trim());
+
+    return categoriasArray.filter((categoria) =>
+      categoria.toLowerCase().includes(value.toLowerCase())
     );
   };
 
@@ -155,15 +133,6 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
 
   return (
     <div>
-      {/* {modalCarrito && (
-        <div>
-          <CarritoModal
-            handleCerrarModalCarrito={handleCerrarModalCarrito}
-            actualizarContadorCarrito={actualizarContadorCarrito}
-          />
-        </div>
-      )} */}
-
       {login && (
         <div>
           <Login
@@ -185,7 +154,7 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
           <img src={logo} alt="" />
           <div className="search-bar">
             <button className="search-button" onClick={handleSearch}>
-              <FiSearch style={{ color: "black" }} />
+              <FiSearch style={{ color: "grey", marginTop: "2.5rem" }} />
             </button>
             <input
               className="inputnav"
@@ -201,7 +170,7 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
                   position: "sticky",
                   top: "calc(100% + 2px)",
                   left: 0,
-                  backgroundColor: "#fff",
+                  backgroundColor: "black",
 
                   borderRadius: "4px",
                   padding: "5px",
@@ -254,14 +223,6 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
               >
                 <FaUser />
               </button>
-              {/* 
-              <button
-                className="shoppingButton"
-                onClick={handleMostrarModalCarrito}
-              >
-                <FiShoppingCart />
-                {carritoC > 0 && <span className="badge">{carritoC}</span>}
-              </button> */}
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { ProductosAPI } from "../components/api/ProductosApi";
 import Swal from "sweetalert2";
 
 const getProductos = async () => {
-  const { data } = await ProductosAPI.get("/");
+  const { data } = await ProductosAPI.get("/getAll");
   return data;
 };
 
@@ -14,6 +14,11 @@ const productoById = async (id) => {
 
 const getProductosParaCotizar = async () => {
   const { data } = await ProductosAPI.get("/getParaCotizar");
+  return data;
+};
+
+const getProductosCategorias = async () => {
+  const { data } = await ProductosAPI.get("/getCategorias");
   return data;
 };
 
@@ -36,6 +41,11 @@ export const useProducto = (id) => {
   const productosParaCotizarQuery = useQuery({
     queryKey: ["productoscoti"],
     queryFn: () => getProductosParaCotizar(),
+  });
+
+  const productosCategoriasQuery = useQuery({
+    queryKey: ["productoscategorias"],
+    queryFn: () => getProductosCategorias(),
   });
 
   const productosEditMutation = useMutation({
@@ -109,5 +119,6 @@ export const useProducto = (id) => {
     productosParaCotizarQuery,
     productoQueryById,
     productosEditMutation,
+    productosCategoriasQuery,
   };
 };

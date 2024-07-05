@@ -53,7 +53,7 @@ export default function NavBar({ onSelectMarca, onInicio }) {
         <a
           href="#cards"
           className="marca"
-          onClick={() => handleMarcaClick("Nike")}
+          onClick={() => handleMarcaClick("Gruas")}
         >
           <img src={AUTOELEVADOR2} alt="" />
         </a>

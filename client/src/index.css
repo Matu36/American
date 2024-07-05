@@ -850,9 +850,10 @@ button:focus-visible {
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
   background: none;
-  color: black;
+  color: white;
   padding: 0px;
   margin: 30px;
+  
 }
 
 /* @media screen and (max-width: 584px) {
@@ -1370,7 +1371,7 @@ button:focus-visible {
 }
 
 .white-bar {
-  background-color: white;
+  background-color: black;
   padding: 10px 0;
   text-align: center;
   display: flex;
@@ -1387,12 +1388,12 @@ button:focus-visible {
   height: 120px;
 }
 
-.white-bar img {
+/* .white-bar img {
   max-width: 150px;
   height: auto;
   margin-top: 1rem;
   margin-left: 2rem;
-}
+} */
 
 @media screen and (max-width: 624px) {
   .white-bar img {
@@ -1411,21 +1412,26 @@ button:focus-visible {
 .search-bar {
   display: flex;
   align-items: center;
-  border-bottom: solid 1px #595959;
   transition: border-bottom 0.5s ease;
-  width: 45%;
+  width: 35%;
 }
 
 .inputnav {
-  padding: 5px 30px 5px 5px;
+  padding: 10px;
   font-size: 16px;
-  color: #333;
-  text-overflow: ellipsis;
-  letter-spacing: inherit;
+  color: #fff; 
+  background-color: #333; 
   border: none;
   outline: none;
-  width: 100%;
+  width: 80%;
+  border-radius: 5px; 
+  margin-top: 2.5rem;
 }
+
+.inputnav::placeholder {
+  color: #ccc; 
+}
+
 
 @media screen and (max-width: 550px) {
   .inputnav {

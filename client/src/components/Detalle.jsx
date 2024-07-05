@@ -6,16 +6,6 @@ import Layout from "../pages/Layout";
 import Card from "./Card";
 import { useProducto } from "../hooks/useProductos";
 
-// const request = await fetch(`${import.meta.env.VITE_BACKEND_URL}productos`, {
-//   method: "GET",
-//   body: JSON.stringify(),
-//   headers: {
-//     "Content-type": "application/json",
-//   },
-// });
-
-// const data = await request.json();
-
 export default function Detalle() {
   const [producto, setProducto] = useState(null);
   const { id } = useParams();
@@ -23,39 +13,7 @@ export default function Detalle() {
   const cardsContainerRef = useRef(null);
   const carouselRef = useRef(null);
 
-  const { data, isLoading } = useProducto().productosQuery;
-
-  useEffect(() => {
-    const fetchProducto = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}productos/${id}`
-        );
-        if (!response.ok) {
-          throw new Error("Error al obtener el producto");
-        }
-        const data = await response.json();
-
-        const tallesDisponibles = data.talle
-          .split(", ")
-          .map((item) => item.split(":"))
-          .filter(([talle, cantidad]) => parseInt(cantidad) > 0)
-          .map(([talle]) => talle);
-
-        const productoFiltrado = {
-          ...data,
-          talle: tallesDisponibles.join(", "),
-        };
-        setProducto(productoFiltrado);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    if (id) {
-      fetchProducto();
-    }
-  }, [id]);
+  const { data, isLoading } = useProducto(id).productoQueryById;
 
   const filteredCamisas = data?.filter((camisa) => {
     if (selectedMarca === "Todas las marcas") {

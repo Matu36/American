@@ -57,6 +57,32 @@ const getProductos = async (req, res) => {
   }
 };
 
+// FUNCION PARA TRAER SOLO LAS CATEGORIAS PARA EL INPUT QUE VA MOSTRANDO LAS CATEGORIAS //
+
+const getProductosPorCategoria = async (req, res) => {
+  try {
+    let familias = await Productos.findAll({
+      attributes: ["familia"],
+      group: ["familia"],
+    });
+
+    if (!familias || familias.length === 0) {
+      return res.status(404).send("No hay familias de productos");
+    }
+
+    // Obtener solo los nombres de las familias
+    const nombresFamilias = familias.map(({ familia }) => familia);
+
+    // Crear un string con las familias separadas por comas
+    const familiasString = nombresFamilias.join(", ");
+
+    return res.send(familiasString);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Error interno del servidor");
+  }
+};
+
 // FUNCION PARA VER EL DETALLE DEL PRODUCTO //
 
 const getProductoById = async (req, res) => {
@@ -88,6 +114,7 @@ const getProductoById = async (req, res) => {
       motor: producto.motor,
       capacidadDeCarga: producto.capacidadDeCarga,
       capacidadDeBalde: producto.capacidadDeBalde,
+      Detalles: producto.detalles,
     });
   } catch (error) {
     console.log(error);
@@ -188,4 +215,5 @@ module.exports = {
   deleteProducto,
   getProductoById,
   getProductosParaCotizar,
+  getProductosPorCategoria,
 };

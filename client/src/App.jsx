@@ -6,19 +6,15 @@ import { Slide, toast } from "react-toastify";
 import useAuth from "./hooks/useAuth";
 import Layout from "./pages/Layout";
 import { useProducto } from "./hooks/useProductos";
-import { useUsuario } from "./hooks/useUsuarios";
-import { useNavigate } from "react-router-dom";
 
 function App() {
   const [selectedMarca, setSelectedMarca] = useState();
-  const [filtroPrecio, setFiltroPrecio] = useState();
-  const [filtroPrecioTodos, setFiltroPrecioTodos] = useState("");
-  const [filtroTalle, setFiltroTalle] = useState("");
-  const [carritoC, setCarritoC] = useState(0);
+  const [filtroMarca, setFiltroMarca] = useState("");
+  const [filtroFamilia, setFiltroFamilia] = useState("");
   const cardsContainerRef = useRef(null);
   const { auth, setAuth } = useAuth();
 
-  const { data, isLoading } = useProducto().productosQuery;
+  const { data: productos, isLoading } = useProducto().productosQuery;
 
   useEffect(() => {
     const storedAuth = JSON.parse(localStorage.getItem("auth"));
@@ -27,110 +23,50 @@ function App() {
     }
   }, [setAuth]);
 
-  // useEffect(() => {
-  //   toast.info("Prendas 100% ORIGINALES", {
-  //     position: "bottom-right",
-  //     autoClose: 5000,
-  //     hideProgressBar: true,
-  //     newestOnTop: false,
-  //     closeOnClick: false,
-  //     rtl: false,
-  //     draggable: true,
-  //     transition: Slide,
-  //     pauseOnHover: true,
-  //     pauseOnFocusLoss: false,
-  //     closeButton: false,
-  //     icon: false,
-  //     theme: "dark",
-  //   });
-  // }, []);
+  const filtrarPorMaquinaYMarca = () => {
+    let productosFiltrados = productos;
 
-  const filtrarPorTalleYPrecio = () => {
-    let camisasFiltradas = data;
-
-    if (filtroTalle) {
-      camisasFiltradas = camisasFiltradas.filter((camisa) => {
-        const tallesDisponibles = camisa.talle
+    if (filtroFamilia) {
+      productosFiltrados = productosFiltrados.filter((maquina) => {
+        const familiasDisponibles = maquina.familia
           .split(", ")
           .map((item) => item.split(":"))
-          .map(([talle, cantidad]) => ({
-            talle,
+          .map(([familia, cantidad]) => ({
+            familia,
             cantidad: parseInt(cantidad),
           }));
 
-        return tallesDisponibles.some(
-          ({ talle, cantidad }) =>
-            talle.trim() === filtroTalle.trim() && cantidad > 0
+        return familiasDisponibles.some(
+          ({ familia }) => familia.trim() === filtroFamilia.trim()
         );
       });
     }
 
-    // Aplicar filtro por precio si está definido
-    if (filtroPrecioTodos) {
-      camisasFiltradas = camisasFiltradas.filter((camisa) => {
-        if (filtroPrecioTodos === "menorPrecio" && camisa.precio >= 0) {
-          return true;
-        } else if (filtroPrecioTodos === "mayorPrecio" && camisa.precio > 0) {
-          return true;
-        }
-        return false;
-      });
+    if (filtroMarca) {
+      productosFiltrados = productosFiltrados.filter(
+        (maquina) => maquina.marca.trim() === filtroMarca.trim()
+      );
     }
 
-    // Ordenar todas las camisas filtradas por precio
-    camisasFiltradas?.sort((a, b) => {
-      if (filtroPrecioTodos === "menorPrecio") {
-        return a.precio - b.precio;
-      } else if (filtroPrecioTodos === "mayorPrecio") {
-        return b.precio - a.precio;
-      } else {
-        return 0;
-      }
-    });
-
-    return filtroTalle || filtroPrecioTodos ? camisasFiltradas : [];
+    return productosFiltrados;
   };
 
-  const talle = filtrarPorTalleYPrecio();
+  const talle = filtrarPorMaquinaYMarca();
   const limpiarFiltros = () => {
-    setFiltroTalle("");
-    setFiltroPrecioTodos("");
+    setFiltroMarca("");
+    setFiltroFamilia("");
   };
 
-  const filteredCamisas = data?.filter((camisa) => {
+  const filteredCamisas = productos?.filter((producto) => {
     if (selectedMarca === "Todas las marcas") {
       return true;
     }
 
-    return camisa.marca === selectedMarca;
+    return producto.marca === selectedMarca;
   });
-
-  if (filtroPrecio === "menorPrecio") {
-    filteredCamisas.sort((a, b) => a.precio - b.precio);
-  }
-
-  if (filtroPrecio === "mayorPrecio") {
-    filteredCamisas.sort((a, b) => b.precio - a.precio);
-  }
-
-  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-  const carritoCount = carrito.length;
-
-  const actualizarContadorCarrito = () => {
-    const carritoActualizado =
-      JSON.parse(localStorage.getItem("carrito")) || [];
-    const count = carritoActualizado.length;
-    setCarritoC(count);
-  };
 
   const handleInicioClick = () => {
     setSelectedMarca(null);
-  };
-
-  const [showLoading, setShowLoading] = useState(true);
-
-  const closeLoading = () => {
-    setShowLoading(false);
   };
 
   const handleSearchByMarca = (marca) => {
@@ -146,41 +82,10 @@ function App() {
 
   return (
     <Layout onSearchByMarca={handleSearchByMarca}>
-      <div className="container">
-        {/* {!filteredCamisas?.length > 0 && (
-          <div className="filtrosTodos">
-            <h4>Filtrá por talle o precio</h4>
-            <select
-              value={filtroTalle}
-              onChange={(e) => setFiltroTalle(e.target.value)}
-            >
-              <option value="">Por Talle</option>
-              <option value="M">M</option>
-              <option value="L">L</option>
-              <option value="XL">XL</option>
-              <option value="XXL">XXL</option>
-            </select>
-            <select
-              value={filtroPrecioTodos}
-              onChange={(e) => setFiltroPrecioTodos(e.target.value)}
-            >
-              <option value="">Por Precio</option>
-              <option value="menorPrecio">Menor Precio</option>
-              <option value="mayorPrecio">Mayor Precio</option>
-            </select>
-            <button value="limpiarTodo" onClick={() => limpiarFiltros()}>
-              Omitir Filtros
-            </button>
-          </div>
-        )} */}
+      <div className="containerApp">
         <div className="eleganzaContainer">
           <div className="navBarDiv">
-            {/* {!filteredCamisas?.length > 0 && !talle?.length > 0 && (
-              <h3 style={{ color: "black" }}>
-                <span>Seleccioná alguna de nuestras Marcas</span>
-              </h3>
-            )} */}
-            {!filteredCamisas?.length > 0 && !talle?.length > 0 && (
+            {(!filteredCamisas?.length > 0 || !talle?.length > 0) && (
               <NavBar
                 onSelectMarca={setSelectedMarca}
                 onInicio={handleInicioClick}
@@ -194,15 +99,15 @@ function App() {
             <div className="top-bar">
               <div>
                 <Filtros
-                  filtroPrecio={filtroPrecio}
-                  setFiltroPrecio={setFiltroPrecio}
+                  filtroFamilia={filtroFamilia}
+                  setFiltroFamilia={setFiltroFamilia}
                   selectedMarca={selectedMarca}
                   setSelectedMarca={setSelectedMarca}
                 />
               </div>
 
               <div>
-                <h3>VENICE INDUMENTARIA</h3>
+                <h3>AMERICAN VIAL</h3>
               </div>
               <div>
                 <button className="buttonclose" onClick={handleInicioClick}>
@@ -214,23 +119,13 @@ function App() {
 
           <div ref={cardsContainerRef} className="cards-container" id="card">
             {filteredCamisas?.map((camisa) => (
-              <Card
-                id="cards"
-                key={camisa.id}
-                {...camisa}
-                actualizarContadorCarrito={actualizarContadorCarrito}
-              />
+              <Card id="cards" key={camisa.id} {...camisa} />
             ))}
           </div>
           {!filteredCamisas?.length > 0 && (
             <div className="cards-container" id="card">
-              {talle.map((camisa) => (
-                <Card
-                  id="cards"
-                  key={camisa.id}
-                  {...camisa}
-                  actualizarContadorCarrito={actualizarContadorCarrito}
-                />
+              {talle?.map((camisa) => (
+                <Card id="cards" key={camisa.id} {...camisa} />
               ))}
             </div>
           )}

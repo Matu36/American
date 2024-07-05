@@ -21,6 +21,7 @@ const {
   createProducto,
   deleteProducto,
   getProductosParaCotizar,
+  getProductosPorCategoria,
 } = require("../controllers/Productos");
 
 const {
@@ -109,8 +110,9 @@ router.get("/usuarios/detail/:idUsuario", obtenerDetalleUsuario);
 router.get("/usuarios/all", check.auth, getAllUsers);
 router.get("/usuarios/vendedores", getUsuariosConRolFalse);
 router.put("/usuarios/recoverpass", resetPassword);
-router.get("/productos", getProductos);
+router.get("/productos/getAll", getProductos);
 router.get("/productos/getParaCotizar", getProductosParaCotizar);
+router.get("/productos/getCategorias", getProductosPorCategoria);
 router.get("/productos/:id", getProductoById);
 router.get("/contactoProducto/detalle/:id", getContactoProductoById);
 router.get("/contacto/detalle/:id", getContactoById);
