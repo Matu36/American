@@ -18,6 +18,7 @@ export default function NavBarAdmin() {
 
   return (
     <nav className="navbarAdmin">
+      <img src={gruagif} alt="" style={{ width: "170px", height: "140px" }} />
       <div className="sidebarAdmin__header">
         <button onClick={handleButtonClick} className="topadmin__button">
           <img src={logo} alt="chef" className="sidebarAdmin__image" />
@@ -40,12 +41,6 @@ export default function NavBarAdmin() {
           )}
         </button>
       </div>
-
-      <img
-        src={gruagif}
-        alt=""
-        style={{ width: "170px", height: "140px", marginRight: "1rem" }}
-      />
     </nav>
   );
 }

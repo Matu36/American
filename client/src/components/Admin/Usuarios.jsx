@@ -118,11 +118,19 @@ export default function Usuarios() {
               style={{ height: "2rem" }}
             />
           </div>
-          {!showSpinner ? (
-            <DataTable columns={columns} data={usuarios} pagination striped />
-          ) : (
-            <Spinner loading={isLoading} />
-          )}
+          <div className="datatable-container">
+            {!showSpinner ? (
+              <DataTable
+                columns={columns}
+                data={usuarios}
+                pagination
+                striped
+                responsive
+              />
+            ) : (
+              <Spinner loading={isLoading} />
+            )}
+          </div>
         </div>
       </>
     </div>

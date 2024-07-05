@@ -12,10 +12,12 @@ import {
   FaPercentage,
   FaPhone,
   FaAngleDown,
+  FaBars,
 } from "react-icons/fa";
 import { MdPerson, MdMail } from "react-icons/md";
 
 const SideBarAdmin = () => {
+  const [isSidebarVisible, setSidebarVisible] = useState(false);
   const { auth } = useAuth();
   const idUsuario = auth?.id;
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
@@ -149,83 +151,97 @@ const SideBarAdmin = () => {
     category.roles.includes(role)
   );
 
-  return (
-    <div className="sidebarAdmin bg-dark">
-      <div className="text-start px-3">
-        <Link
-          to="/admin"
-          className={`sidebarAdmin__button ${
-            location.pathname === "/admin" ? "active" : ""
-          }`}
-        >
-          <FaHome className="icon me-2" />
-          Home
-        </Link>
+  const toggleSidebar = () => {
+    setSidebarVisible(!isSidebarVisible);
+  };
 
-        {filteredCategories.map((category) => (
-          <div key={category.label}>
-            {category.subCategories.length > 0 ? (
-              <div>
-                <a
-                  aria-controls={`collapse${category.label}`}
-                  aria-expanded={activeCategory === category ? "true" : "false"}
-                  data-bs-toggle="collapse"
-                  href={`#collapse${category.label}`}
-                  role="button"
-                  onClick={() =>
-                    setActiveCategory(
-                      activeCategory === category ? null : category
-                    )
-                  }
-                  className="sidebarAdmin__button d-flex align-items-center justify-content-between"
-                >
-                  <div className="d-flex align-items-center">
-                    <category.icon className="icon me-2" />
-                    <span>{category.label}</span>
-                  </div>
-                  <FaAngleDown
-                    className={`arrow-icon ${
+  return (
+    <div className="admin-layout">
+      <FaBars className="hamburger-icon" onClick={toggleSidebar} />
+      <div
+        className={`sidebarAdmin bg-dark ${isSidebarVisible ? "visible" : ""}`}
+      >
+        <div className="text-start px-3">
+          <Link
+            to="/admin"
+            className={`sidebarAdmin__button ${
+              location.pathname === "/admin" ? "active" : ""
+            }`}
+          >
+            <FaHome className="icon me-2" />
+            Home
+          </Link>
+
+          {filteredCategories.map((category) => (
+            <div key={category.label}>
+              {category.subCategories.length > 0 ? (
+                <div>
+                  <a
+                    aria-controls={`collapse${category.label}`}
+                    aria-expanded={
+                      activeCategory === category ? "true" : "false"
+                    }
+                    data-bs-toggle="collapse"
+                    href={`#collapse${category.label}`}
+                    role="button"
+                    onClick={() =>
+                      setActiveCategory(
+                        activeCategory === category ? null : category
+                      )
+                    }
+                    className="sidebarAdmin__button d-flex align-items-center justify-content-between"
+                  >
+                    <div className="d-flex align-items-center">
+                      <category.icon className="icon me-2" />
+                      <span>{category.label}</span>
+                    </div>
+                    <FaAngleDown
+                      className={`arrow-icon ${
+                        activeCategory === category ? "show" : ""
+                      }`}
+                    />
+                  </a>
+                  <div
+                    className={`collapse ${
                       activeCategory === category ? "show" : ""
                     }`}
-                  />
-                </a>
-                <div
-                  className={`collapse ${
-                    activeCategory === category ? "show" : ""
-                  }`}
-                  id={`collapse${category.label}`}
-                >
-                  {category.subCategories
-                    .filter((subCategory) => subCategory.roles.includes(role))
-                    .map((subCategory) => (
-                      <Link
-                        key={subCategory.label}
-                        to={subCategory.path}
-                        className={`sidebarAdmin__button ${
-                          location.pathname === subCategory.path ? "active" : ""
-                        }`}
-                      >
-                        {subCategory.label}
-                      </Link>
-                    ))}
+                    id={`collapse${category.label}`}
+                  >
+                    {category.subCategories
+                      .filter((subCategory) => subCategory.roles.includes(role))
+                      .map((subCategory) => (
+                        <Link
+                          key={subCategory.label}
+                          to={subCategory.path}
+                          className={`sidebarAdmin__button ${
+                            location.pathname === subCategory.path
+                              ? "active"
+                              : ""
+                          }`}
+                        >
+                          {subCategory.label}
+                        </Link>
+                      ))}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <Link
-                to={`/admin/${category.label.toLowerCase()}`}
-                className={`sidebarAdmin__button ${
-                  location.pathname === `/admin/${category.label.toLowerCase()}`
-                    ? "active"
-                    : ""
-                }`}
-                onClick={() => setActiveCategory(null)}
-              >
-                <category.icon className="icon me-2" />
-                {category.label}
-              </Link>
-            )}
-          </div>
-        ))}
+              ) : (
+                <Link
+                  to={`/admin/${category.label.toLowerCase()}`}
+                  className={`sidebarAdmin__button ${
+                    location.pathname ===
+                    `/admin/${category.label.toLowerCase()}`
+                      ? "active"
+                      : ""
+                  }`}
+                  onClick={() => setActiveCategory(null)}
+                >
+                  <category.icon className="icon me-2" />
+                  {category.label}
+                </Link>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
