@@ -5,58 +5,27 @@ import AUTOELEVADOR5 from "../assets/img/FAMILIAS/AUTOELEVADOR5-10.jpg";
 import AUTOELEVADOR10 from "../assets/img/FAMILIAS/AUTOELEVADOR10.jpg";
 import BOMBAHORMIGON from "../assets/img/FAMILIAS/BOMBAHORMIGON.jpg";
 
-export default function NavBar({ onSelectMarca, onInicio }) {
-  const handleMarcaClick = (marca) => {
-    onSelectMarca(marca);
+export default function NavBar({ onSelectFamilia }) {
+  const handleFamiliaClick = (familia) => {
+    onSelectFamilia(familia);
   };
 
   return (
     <div className="navbar">
-      <button className="marca">
-        <a
-          href="#cards"
-          className="marca"
-          onClick={() => handleMarcaClick("Adidas")}
-        >
-          <img src={AUTOELEVADOR5} alt="" />
-        </a>
+      <button
+        className="marca"
+        onClick={() => handleFamiliaClick("Elevadores")}
+      >
+        <img src={AUTOELEVADOR5} alt="Elevadores" />
       </button>
-      <button className="marca">
-        <a
-          href="#cards"
-          className="marca"
-          onClick={() => handleMarcaClick("Hollister")}
-        >
-          <img src={BOMBAHORMIGON} alt="" />
-        </a>
+      <button className="marca" onClick={() => handleFamiliaClick("Gruas")}>
+        <img src={AUTOELEVADOR2} alt="Gruas" />
       </button>
-      <button className="marca">
-        <a
-          href="#cards"
-          className="marca"
-          onClick={() => handleMarcaClick("Calvin")}
-        >
-          <img src={AUTOELEVADOR10} alt="" />
-        </a>
+      <button className="marca" onClick={() => handleFamiliaClick("Hollister")}>
+        <img src={BOMBAHORMIGON} alt="Hollister" />
       </button>
-
-      <button className="marca">
-        <a
-          href="#cards"
-          className="marca"
-          onClick={() => handleMarcaClick("Columbia")}
-        >
-          <img src={BOMBAHORMIGON} alt="" />
-        </a>
-      </button>
-      <button className="marca">
-        <a
-          href="#cards"
-          className="marca"
-          onClick={() => handleMarcaClick("Gruas")}
-        >
-          <img src={AUTOELEVADOR2} alt="" />
-        </a>
+      <button className="marca" onClick={() => handleFamiliaClick("Calvin")}>
+        <img src={AUTOELEVADOR10} alt="Calvin" />
       </button>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import logo from "../assets/img/logoAmerican.png";
+import logo from "../assets/img/LOGOAMERICANPRINCIPAL.png";
 import { FiSearch } from "react-icons/fi";
 import { FaUser } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
@@ -13,8 +13,6 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [modalCarrito, setModalCarrito] = useState(false);
-  const [carritoC, setCarritoC] = useState(0);
   const { auth, setAuth } = useAuth();
   const [edit, setEdit] = useState(false);
   const [login, setLogin] = useState(false);
@@ -29,17 +27,6 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
       setAuth(storedAuth);
     }
   }, [setAuth]);
-
-  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-  const actualizarContadorCarrito = () => {
-    const count = carrito.length;
-    setCarritoC(count);
-  };
-
-  useEffect(() => {
-    actualizarContadorCarrito();
-  }, [modalCarrito, carritoC]);
 
   const handleMostrarModalLogin = () => {
     setLogin(true);
@@ -60,7 +47,7 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
   const handleInputChange = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
-    // Filtrar las sugerencias basadas en el valor actual del input
+
     if (value.length >= 2) {
       const filteredSuggestions = getSuggestions(value);
       setSuggestions(filteredSuggestions);
@@ -96,10 +83,6 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
     if (event.key === "Enter") {
       handleSearch();
     }
-  };
-
-  const handleUserMenuToggle = () => {
-    setShowUserMenu(!showUserMenu);
   };
   const handleUserButtonClick = () => {
     if (Object.keys(auth).length === 0) {
