@@ -54,10 +54,19 @@ export default function Login({ handleCerrarModalLogin }) {
 
     const data = await request.json();
 
+    const loggedUser = {
+      apellido: data.loggedUser.apellido,
+      direccion: data.loggedUser.direccion,
+      email: data.loggedUser.email,
+      id: data.loggedUser.id,
+      nombre: data.loggedUser.nombre,
+      telefono: data.loggedUser.telefono,
+    };
+
     if (data.status == "success") {
       //Persistir los datos en el LocalStorage
       localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.loggedUser));
+      localStorage.setItem("user", JSON.stringify(loggedUser));
       setSaved("login");
       setShowWelcomeMessage(true);
     } else if (data.status === 43) {

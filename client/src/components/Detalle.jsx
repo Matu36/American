@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../pages/Layout";
 import { useProducto } from "../hooks/useProductos";
+import ContactoProducto from "./ContactoProducto";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Card from "./Card";
+import { GrClose } from "react-icons/gr";
 
 export default function Detalle() {
   const [producto, setProducto] = useState(null);
@@ -13,6 +15,7 @@ export default function Detalle() {
   const carouselRef = useRef(null);
   const [selectedMarca, setSelectedMarca] = useState("");
   const [busquedaActiva, setBusquedaActiva] = useState(false);
+  const [contactoProducto, setContactoProducto] = useState(false);
 
   const { data, isLoading } = useProducto(id).productoQueryById;
   const { data: productos } = useProducto().productosQuery;
@@ -87,6 +90,14 @@ export default function Detalle() {
     imagen5,
     imagen6,
   ].filter((img) => img);
+
+  const handleMostrarContactoProducto = () => {
+    setContactoProducto(true);
+  };
+
+  const handleCerrarContactoProducto = () => {
+    setContactoProducto(false);
+  };
 
   return (
     <Layout onSearchByMarca={handleSearchByMarca}>
@@ -196,6 +207,26 @@ export default function Detalle() {
               <strong>Detalles:</strong> {Detalles}
             </p>
           </div>
+          <div className="contact-button">
+            <button
+              onClick={handleMostrarContactoProducto}
+              className="button-contacto-producto"
+            >
+              Contactanos por este Producto
+            </button>
+          </div>
+
+          {contactoProducto && (
+            <div className="modal">
+              <div className="modal-content">
+                <ContactoProducto
+                  id={id}
+                  handleCerrarContactoProducto={handleCerrarContactoProducto}
+                />
+              </div>
+            </div>
+          )}
+
           <br />
           <br />
           {busquedaActiva && (

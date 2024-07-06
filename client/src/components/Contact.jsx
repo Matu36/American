@@ -52,11 +52,9 @@ export default function Contact({ handleCerrarModalContact }) {
       setDireccion("");
       setConsulta("");
 
-      // Cerrar el modal
       handleCerrarModalContact();
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
-      // Aquí puedes manejar el error de alguna manera, como mostrar un mensaje al usuario
     }
   };
 

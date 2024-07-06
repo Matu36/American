@@ -109,8 +109,9 @@ button:focus-visible {
 }
 
 .marca img {
-  width: 400px;
+  width: 500px;
   height: auto;
+  max-width: 100%;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
@@ -661,11 +662,42 @@ button:focus-visible {
 
 .contact-form {
   width: 100%;
+  display: flex;
+  flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
+  gap: 20px; /* Espacio entre los elementos */
 }
 
 .form-group {
-  margin-bottom: 15px; /* Espacio entre grupos de campos */
+  width: calc(50% - 20px); /* Ancho de cada input, restando el espacio entre ellos */
 }
+
+.form-group.full-width {
+  width: 100%; /* Ancho completo para los elementos de una sola columna */
+}
+
+.form-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.submit-button, .button-cerrar {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-button {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+.button-cerrar {
+  background-color: #ccc;
+  color: #000;
+}
+
 
 .form-group label {
   display: block;
@@ -1369,6 +1401,26 @@ button:focus-visible {
   align-items: center;
   z-index: 1000;
 }
+@media screen and (max-width: 850px) {
+  .white-bar {
+    flex-direction: column; /* Cambia la disposición a columna */
+    align-items: center; /* Centra los elementos */
+  }
+
+  .search-bar {
+    width: 100%; /* Ajusta el ancho de la barra de búsqueda al 100% */
+    margin-top: 10px; /* Añade margen superior para separación */
+  }
+
+  .inputnav {
+    width: calc(100% - 40px); /* Ajusta el ancho del input para tener margen */
+    margin-top: 10px; /* Ajusta el margen superior si es necesario */
+  }
+
+  .search-button {
+    margin-top: 10px; /* Ajusta el margen superior para alineación */
+  }
+}
 
 .white-bar.fixed {
   position: fixed;
@@ -1387,7 +1439,7 @@ button:focus-visible {
 
 @media screen and (max-width: 624px) {
   .white-bar img {
-    max-width: 70px;
+    max-width: 400px;
   }
 }
 
@@ -1404,6 +1456,12 @@ button:focus-visible {
   align-items: center;
   transition: border-bottom 0.5s ease;
   width: 35%;
+}
+@media screen and (max-width: 850px) {
+  .search-bar {
+   display: block;
+ 
+  }
 }
 
 .inputnav {
