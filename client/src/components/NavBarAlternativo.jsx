@@ -137,7 +137,7 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
           <img src={logo} alt="" />
           <div className="search-bar">
             <button className="search-button" onClick={handleSearch}>
-              <FiSearch style={{ color: "grey", marginTop: "2.5rem" }} />
+              <FiSearch style={{ color: "grey" }} />
             </button>
             <input
               className="inputnav"
@@ -198,15 +198,16 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
                   </button>
                 </span>
               </div>
-            ) : null}
-            <div className="fauser">
-              <button
-                className="shoppingButton"
-                onClick={handleUserButtonClick}
-              >
-                <FaUser />
-              </button>
-            </div>
+            ) : (
+              <div className="fauser">
+                <button
+                  className="shoppingButton"
+                  onClick={handleUserButtonClick}
+                >
+                  <FaUser />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

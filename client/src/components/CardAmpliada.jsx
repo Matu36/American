@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 
-export default function CardAmpliada({ imagen, imagen1, precio, onClose }) {
+export default function CardAmpliada({
+  imagen,
+  imagen1,
+  modelo,
+  marca,
+  familia,
+  onClose,
+}) {
   const [currentImage, setCurrentImage] = useState(imagen);
 
   // pasar mouse por arriba
@@ -33,9 +40,9 @@ export default function CardAmpliada({ imagen, imagen1, precio, onClose }) {
       </button>
       <img src={currentImage} alt="Imagen ampliada" />
       <div>
-        <span style={{ color: "black", fontWeight: "bold" }}>
-          $ {precio.toLocaleString()}
-        </span>
+        <span style={{ color: "black", fontWeight: "bold" }}>{familia}</span>
+        <span style={{ color: "black", fontWeight: "bold" }}>{marca}</span>
+        <span style={{ color: "black", fontWeight: "bold" }}>{modelo}</span>
       </div>
     </div>
   );
