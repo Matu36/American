@@ -304,6 +304,7 @@ button:focus-visible {
 
 .principal-footer {
   background-color: #febb00;
+ 
 }
 
 .footerImage {
@@ -1439,7 +1440,7 @@ button:focus-visible {
   top: 0;
   left: 0;
   width: 100%;
-  height: 150px;
+  height: 120px;
   display: flex;
  
 }
@@ -1456,18 +1457,21 @@ button:focus-visible {
 }
 
 
+
 @media screen and (max-width: 850px) {
   .white-bar img {
     max-width: 500px;
-    margin-top: 40px;
+    margin-top: 10px;
   }
 }
 
 @media screen and (max-width: 550px) {
   .white-bar img {
     max-width: 400px;
+    margin-top: 30px;
     
   }
+ 
 }
 
 
