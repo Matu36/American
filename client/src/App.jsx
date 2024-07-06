@@ -4,6 +4,7 @@ import Card from "./components/Card";
 import useAuth from "./hooks/useAuth";
 import Layout from "./pages/Layout";
 import { useProducto } from "./hooks/useProductos";
+import CarouselPrincipal from "./components/CarouselPrincipal";
 
 function App() {
   const [selectedFamilia, setSelectedFamilia] = useState(null);
@@ -45,6 +46,8 @@ function App() {
   return (
     <Layout onSearchByMarca={handleSearchByMarca}>
       <div className="containerApp">
+        <CarouselPrincipal />
+
         <div className="eleganzaContainer">
           <div className="navBarDiv">
             <NavBar onSelectFamilia={handleFamiliaClick} />

@@ -1,11 +1,10 @@
 import React from "react";
-import marca3 from "../assets/img/marca3.png";
 import { GrClose } from "react-icons/gr";
 
 export default function AboutUs({ handleCerrarModalAbout }) {
   return (
     <div className="about-container">
-      <img src={marca3} alt="" className="about-image" />
+      {/* <img sr alt="" className="about-image" /> */}
 
       <div className="about-content">
         <h2>Sobre Nosotros</h2>

@@ -6,7 +6,6 @@ import ContactoProducto from "./ContactoProducto";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Card from "./Card";
-import { GrClose } from "react-icons/gr";
 
 export default function Detalle() {
   const [producto, setProducto] = useState(null);
