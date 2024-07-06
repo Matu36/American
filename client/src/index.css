@@ -85,10 +85,16 @@ button:focus-visible {
   padding-right: 2rem;
 }
 
+.grid-container {
+  display: grid;
+  gap: 1rem; 
+  grid-template-columns: repeat(3, 1fr); 
+}
+
 .marca {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  padding: 15px 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 15px 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -109,13 +115,24 @@ button:focus-visible {
 }
 
 .marca img {
-  width: 500px;
+  width: 100%;
   height: auto;
   max-width: 100%;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+@media (max-width: 1000px) and (min-width: 501px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas entre 501px y 700px */
+  }
+}
+
+@media (max-width: 650px) {
+  .grid-container {
+    grid-template-columns: 1fr; /* 1 columna por debajo de 500px */
+  }
+}
+
 
 .marca img:hover {
   transform: scale(1.1);
@@ -332,6 +349,7 @@ button:focus-visible {
 .eleganzaContainer {
   display: flex;
   justify-content: center;
+  background-color: #febb00;
 }
 
 .eleganzaImgContainer {
@@ -667,7 +685,7 @@ button:focus-visible {
   gap: 20px; /* Espacio entre los elementos */
 }
 
-.form-group {
+.contact-form .form-group {
   width: calc(50% - 20px); /* Ancho de cada input, restando el espacio entre ellos */
 }
 
@@ -1464,9 +1482,18 @@ button:focus-visible {
   left: 0;
   width: 100%;
   height: 150px;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
 }
-.white-bar.fixed .inputnav {
+.white-bar.fixed .inputnav,
+.white-bar.fixed .search-button {
   display: none;
+}
+
+.white-bar.fixed .img {
+  max-width: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
+  margin: auto;
 }
 
 
