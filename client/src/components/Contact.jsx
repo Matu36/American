@@ -13,11 +13,9 @@ export default function Contact({ handleCerrarModalContact }) {
   const [direccion, setDireccion] = useState("");
   const [consulta, setConsulta] = useState("");
 
-  // Manejador para enviar el formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación básica (puedes agregar más validaciones según tus necesidades)
     if (
       !nombre ||
       !apellidos ||
@@ -30,7 +28,6 @@ export default function Contact({ handleCerrarModalContact }) {
       return;
     }
 
-    // Objeto con los datos del formulario
     const formData = {
       nombre,
       apellidos,
@@ -41,7 +38,6 @@ export default function Contact({ handleCerrarModalContact }) {
     };
 
     try {
-      // Llamar a la función para crear el contacto
       await createContacto(formData);
 
       // Limpiar los campos del formulario después de enviar

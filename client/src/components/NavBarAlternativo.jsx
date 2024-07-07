@@ -8,6 +8,7 @@ import Login from "./usuario/Login";
 import EditarUsuario from "./usuario/EditarUsuario";
 import { useNavigate } from "react-router-dom";
 import { useProducto } from "../hooks/useProductos";
+import { useUsuario } from "../hooks/useUsuarios";
 
 export default function NavBarAlternativo({ onSearchByMarca }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,6 +17,22 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
   const { auth, setAuth } = useAuth();
   const [edit, setEdit] = useState(false);
   const [login, setLogin] = useState(false);
+
+  const idUsuario = auth?.id;
+
+  const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
+
+  const handleCheckRol = () => {
+    checkRol({ idUsuario });
+  };
+
+  useEffect(() => {
+    if (idUsuario) {
+      handleCheckRol();
+    }
+  }, [idUsuario]);
+
+  const role = rolData?.data.rol;
 
   const { data: categorias } = useProducto().productosCategoriasQuery;
 
@@ -182,7 +199,7 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
             {Object.keys(auth).length > 0 ? (
               <div className="user-menu-container">
                 <span className="user-info">
-                  {auth.rol !== null ? (
+                  {role === "vendedor" || role === "administrador" ? (
                     <Link to="/admin">
                       <button style={{ color: "gray" }}>Admin</button>{" "}
                     </Link>

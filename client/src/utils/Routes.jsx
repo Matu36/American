@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import App from "../App";
 import NavBarAdmin from "../components/Admin/NavBarAdmin";
 import SideBarAdmin from "../components/Admin/SideBarAdmin";
@@ -7,8 +13,7 @@ import { AuthProvider } from "../context/AuthProvider";
 import Productos from "../components/Admin/Productos";
 import Usuarios from "../components/Admin/Usuarios";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Detalle from "../components/Detalle";
 import Cotizador from "../components/Admin/Cotizador";
 import Contacto from "../components/Admin/Contacto";
@@ -35,6 +40,8 @@ import ContactoDetail from "../components/Admin/ContactoDetail";
 import Historial from "../components/Admin/Historial";
 import ContactoProducto from "../components/Admin/ContactoProducto";
 import ErroPage from "../components/ErroPage";
+import { useUsuario } from "../hooks/useUsuarios";
+import Spinner from "../UI/Spinner";
 
 const AppRouter = () => {
   return (
@@ -52,6 +59,42 @@ const AppRouter = () => {
 };
 
 const AdminLayout = () => {
+  const { auth, setAuth } = useAuth();
+  const [loading, setLoading] = useState(true);
+
+  const idUsuario = auth?.id;
+
+  const navigate = useNavigate();
+
+  const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
+
+  const handleCheckRol = () => {
+    checkRol({ idUsuario });
+  };
+  useEffect(() => {
+    if (idUsuario) {
+      handleCheckRol();
+    }
+  }, [idUsuario]);
+
+  useEffect(() => {
+    if (rolData) {
+      setLoading(false);
+      const role = rolData?.data.rol;
+      if (!role) {
+        navigate("/error");
+      }
+    }
+  }, [rolData, navigate]);
+
+  if (loading) {
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
     <>
       <NavBarAdmin />
@@ -59,7 +102,7 @@ const AdminLayout = () => {
         <div className="sidebarAdmin">
           <SideBarAdmin />
         </div>
-        {/* <div className="content"> */}
+
         <Routes>
           <Route index element={<AppAdmin />} />
           <Route path="/Usuarios" element={<Usuarios />} />
@@ -96,7 +139,6 @@ const AdminLayout = () => {
           <Route path="/Mensajes/ver" element={<MensajesRecibidos />} />
           <Route path="/Mensajes/ver/:id" element={<MensajesDetail />} />
         </Routes>
-        {/* </div> */}
       </div>
     </>
   );

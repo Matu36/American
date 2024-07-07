@@ -1,26 +1,26 @@
 import React from "react";
 import { GrClose } from "react-icons/gr";
+import about from "../assets/img/about.png";
 
 export default function AboutUs({ handleCerrarModalAbout }) {
   return (
-    <div className="about-container">
-      {/* <img sr alt="" className="about-image" /> */}
-
-      <div className="about-content">
-        <h2>Sobre Nosotros</h2>
-        <span>
-          En Venice Indumentaria, nos destacamos por apostar a la originalidad
-          en la moda. Nos especializamos en la importación y venta de ropa de
-          marcas reconocidas con un fuerte enfoque en el estilo urbano. Nuestra
-          misión es ofrecerte prendas auténticas que reflejen tu individualidad
-          y te hagan destacar en cualquier entorno urbano. ¡Descubre tu estilo
-          único con Venice Indumentaria!
-        </span>
-      </div>
+    <div className="contact-container">
       <div className="about-button">
         <button onClick={handleCerrarModalAbout} className="button-cerrar">
           <GrClose />
         </button>
+      </div>
+      <img src={about} alt="" className="about-image" />
+
+      <div className="contact-content">
+        <br />
+        <h3>Sobre Nosotros</h3>
+        <span>
+          Con mas 10 años de trayectoria, American vial es una empresa dedicada
+          a prestar servicios de alquiler y venta de maquinaria para la
+          construcción. En la actualidad American Vial es un referente
+          indiscutido en el segmento de maquinas viales de origen Asia & Brasil.
+        </span>
       </div>
     </div>
   );

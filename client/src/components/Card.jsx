@@ -25,10 +25,6 @@ const Card = ({
     setShowModal(true);
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
   const handleMouseOver = () => {
     setCurrentImage(imagen1);
   };

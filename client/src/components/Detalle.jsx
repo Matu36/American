@@ -225,25 +225,24 @@ export default function Detalle() {
           )}
 
           <br />
-          <br />
-          {busquedaActiva && (
-            <div ref={cardsContainerRef} className="cards-container" id="card">
-              {filteredProductos.length > 0 ? (
-                filteredProductos.map((maquina) => (
-                  <Card
-                    id="cards"
-                    key={maquina.id}
-                    {...maquina}
-                    scrollToCarousel={scrollToCarousel}
-                  />
-                ))
-              ) : (
-                <p></p>
-              )}
-            </div>
-          )}
         </div>
       </div>
+      {busquedaActiva && (
+        <div ref={cardsContainerRef} className="cards-container" id="card">
+          {filteredProductos.length > 0 ? (
+            filteredProductos.map((maquina) => (
+              <Card
+                id="cards"
+                key={maquina.id}
+                {...maquina}
+                scrollToCarousel={scrollToCarousel}
+              />
+            ))
+          ) : (
+            <p></p>
+          )}
+        </div>
+      )}
     </Layout>
   );
 }
