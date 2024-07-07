@@ -54,20 +54,6 @@ const Card = ({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {showModal && (
-        <div className="modal1">
-          <div className="modal-content1">
-            <CardAmpliada
-              familia={familia}
-              modelo={modelo}
-              marca={marca}
-              imagen={imagen}
-              imagen1={imagen1}
-              onClose={closeModal}
-            />
-          </div>
-        </div>
-      )}
       <div className="image-container">
         <img
           src={currentImage}
@@ -86,6 +72,7 @@ const Card = ({
           Detalle
         </button>
       </div>
+
       <div className="card-content">
         <p>{familia ? familia : null} </p>
         <p style={{ fontSize: "14px" }}>{marca ? marca : null} </p>

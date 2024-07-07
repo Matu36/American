@@ -92,15 +92,7 @@ export default function CotizacionDetail() {
             <Text style={styles.label}>Precio Final: </Text>
             {moneda} {parseFloat(PrecioFinal).toFixed(2)}
           </Text>
-          <Text style={styles.subHeader}>Vendedor</Text>
-          <Text style={styles.text}>
-            <Text style={styles.label}>Nombre: </Text>
-            {Usuario.nombre} {Usuario.apellido}
-          </Text>
-          <Text style={styles.text}>
-            <Text style={styles.label}>Email: </Text>
-            {Usuario.email}
-          </Text>
+
           <Text style={styles.subHeader}>Cliente</Text>
           <Text style={styles.text}>
             <Text style={styles.label}>Nombre: </Text>
@@ -109,6 +101,23 @@ export default function CotizacionDetail() {
           <Text style={styles.text}>
             <Text style={styles.label}>Email: </Text>
             {Cliente.mail}
+          </Text>
+
+          <Text style={styles.subHeader}>Asesor Comercial </Text>
+
+          <Text style={styles.text}>
+            <Text style={styles.subHeader}>
+              {Usuario.nombre} {Usuario.apellido}{" "}
+            </Text>
+          </Text>
+
+          <Text style={styles.text}>
+            <Text style={styles.label}>Teléfono: </Text>
+            {Usuario.telefono}
+          </Text>
+          <Text style={styles.text}>
+            <Text style={styles.label}>Email: </Text>
+            {Usuario.email}
           </Text>
         </View>
         <View style={styles.contactContainer}>
@@ -194,9 +203,12 @@ export default function CotizacionDetail() {
       </div>
 
       <div>
-        <h3>Vendedor</h3>
+        <h3>Asesor Comercial</h3>
         <p>
           <strong>Nombre:</strong> {Usuario.nombre} {Usuario.apellido}
+        </p>
+        <p>
+          <strong>Teléfono:</strong> {Usuario.telefono}
         </p>
         <p>
           <strong>Email:</strong> {Usuario.email}

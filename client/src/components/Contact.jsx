@@ -107,7 +107,7 @@ export default function Contact({ handleCerrarModalContact }) {
           <div className="form-group">
             <label htmlFor="telefono">Teléfono:</label>
             <input
-              type="tel"
+              type="number"
               id="telefono"
               name="telefono"
               value={telefono}
@@ -126,7 +126,8 @@ export default function Contact({ handleCerrarModalContact }) {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="form-group"></div>
+          <div className="form-group" style={{ width: "100%" }}>
             <label htmlFor="consulta">Consulta:</label>
             <textarea
               id="consulta"
@@ -137,7 +138,15 @@ export default function Contact({ handleCerrarModalContact }) {
               required
             ></textarea>
           </div>
-          <div className="form-actions">
+
+          <div
+            className="form-actions"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "-20px",
+            }}
+          >
             <button type="submit" className="submit-button">
               Enviar
             </button>

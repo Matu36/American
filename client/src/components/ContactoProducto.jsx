@@ -33,6 +33,7 @@ export default function ContactoProducto({ id, handleCerrarContactoProducto }) {
     e.preventDefault();
 
     contactoProducto(formData);
+    handleCerrarContactoProducto();
   };
 
   return (
@@ -163,7 +164,14 @@ export default function ContactoProducto({ id, handleCerrarContactoProducto }) {
               <option value="$">$</option>
             </select>
           </div>
-          <div className="form-actions">
+          <div
+            className="form-actions"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "-40px",
+            }}
+          >
             <button type="submit" className="submit-button">
               Enviar
             </button>

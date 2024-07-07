@@ -102,7 +102,7 @@ export const styles = StyleSheet.create({
     fontSize: 8,
     marginBottom: 3,
   },
-  empresaImage: { height: "200px", marginRight: 20 },
+  empresaImage: { height: "180px", marginRight: 20 },
 
   boldText: {
     fontWeight: "bold",

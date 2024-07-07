@@ -46,7 +46,6 @@ export default function FooterAlternativo() {
           </div>
         </div>
       </div>
-
       {contact && (
         <div className="modal">
           <Contact handleCerrarModalContact={handleCerrarModalContact} />
@@ -57,10 +56,9 @@ export default function FooterAlternativo() {
           <AboutUs handleCerrarModalAbout={handleCerrarModalAbout} />
         </div>
       )}
-      <hr style={{ color: "grey", maxWidth: "100%" }} />
-      <span className="copy">
+      <div className="copy">
         Copyright © {currentYear} | American Vial Todos los derechos reservados
-      </span>
+      </div>
     </div>
   );
 }

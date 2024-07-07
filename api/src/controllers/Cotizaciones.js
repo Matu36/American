@@ -169,7 +169,10 @@ const getCotizacionDetalle = async (req, res) => {
     // Buscar la cotización en la base de datos
     const cotizacion = await Cotizaciones.findByPk(idCotizacion, {
       include: [
-        { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
+        {
+          model: Usuarios,
+          attributes: ["nombre", "apellido", "email", "telefono"],
+        },
         { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
         { model: Productos, attributes: ["familia", "marca", "modelo"] },
       ],

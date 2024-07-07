@@ -100,7 +100,7 @@ export default function Detalle() {
 
   return (
     <Layout onSearchByMarca={handleSearchByMarca}>
-      <div className="blue-bar">LA GARANTÍA DEL LIDER</div>
+      <div className="blue-bar">CONSTRUYENDO EL FUTURO</div>
 
       <div
         ref={carouselRef}
@@ -116,13 +116,13 @@ export default function Detalle() {
             arrows={false}
             autoPlaySpeed={3000}
             centerMode={false}
-            className=""
-            containerClass="container"
-            dotListClass=""
+            className="custom-carousel"
+            containerClass="custom-container"
+            dotListClass="custom-dot-list"
             draggable
             focusOnSelect={false}
             infinite
-            itemClass=""
+            itemClass="custom-item"
             keyBoardControl
             minimumTouchDrag={80}
             pauseOnHover
@@ -157,7 +157,7 @@ export default function Detalle() {
             rtl={false}
             shouldResetAutoplay
             showDots
-            sliderClass=""
+            sliderClass="custom-slider"
             slidesToSlide={1}
             swipeable
             autoPlay={true}
@@ -182,9 +182,6 @@ export default function Detalle() {
               <strong>Modelo:</strong> {modelo}
             </p>
             <p>
-              <strong>Precio:</strong> ${precio}
-            </p>
-            <p>
               <strong>Código:</strong> {codigo}
             </p>
             <p>
@@ -206,23 +203,24 @@ export default function Detalle() {
               <strong>Detalles:</strong> {Detalles}
             </p>
           </div>
-          <div className="contact-button">
+          <div
+            className="form-actions"
+            style={{ display: "flex", justifyContent: "center" }}
+          >
             <button
               onClick={handleMostrarContactoProducto}
-              className="button-contacto-producto"
+              className="form-submit-custom"
             >
-              Contactanos por este Producto
+              Contactános por este Producto
             </button>
           </div>
 
           {contactoProducto && (
             <div className="modal">
-              <div className="modal-content">
-                <ContactoProducto
-                  id={id}
-                  handleCerrarContactoProducto={handleCerrarContactoProducto}
-                />
-              </div>
+              <ContactoProducto
+                id={id}
+                handleCerrarContactoProducto={handleCerrarContactoProducto}
+              />
             </div>
           )}
 

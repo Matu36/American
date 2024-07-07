@@ -313,7 +313,7 @@ const obtenerDetalleUsuario = async (req, res) => {
       apellido: usuario.apellido,
       direccion: usuario.direccion || "N/A",
       telefono: usuario.telefono || "N/A",
-      fechaDeRegistro: new Date(usuario.createdAt).toLocaleString(),
+      fechaDeRegistro: new Date(usuario.createdAt),
     };
 
     return res.status(200).json(detalleUsuario);
