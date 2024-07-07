@@ -5,6 +5,7 @@ import useAuth from "./hooks/useAuth";
 import Layout from "./pages/Layout";
 import { useProducto } from "./hooks/useProductos";
 import CarouselPrincipal from "./components/CarouselPrincipal";
+import CarouselMarcas from "./components/CarouselMarcas";
 
 function App() {
   const [selectedFamilia, setSelectedFamilia] = useState(null);
@@ -62,6 +63,7 @@ function App() {
             <p></p>
           )}
         </div>
+        <CarouselMarcas />
       </div>
     </Layout>
   );

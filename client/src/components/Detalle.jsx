@@ -6,6 +6,7 @@ import ContactoProducto from "./ContactoProducto";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Card from "./Card";
+import Spinner from "../UI/Spinner";
 
 export default function Detalle() {
   const [producto, setProducto] = useState(null);
@@ -55,7 +56,11 @@ export default function Detalle() {
   }
 
   if (!producto) {
-    return <div>No se encontró el producto.</div>;
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   }
 
   const {
@@ -177,6 +182,9 @@ export default function Detalle() {
           <div className="detalle-info">
             <p>
               <strong>Categoría:</strong> {familia}
+            </p>
+            <p>
+              <strong>Marca:</strong> {marca}
             </p>
             <p>
               <strong>Modelo:</strong> {modelo}
