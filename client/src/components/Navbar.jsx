@@ -9,6 +9,26 @@ import CAMIONARTICULADO from "../assets/img/FAMILIAS/CAMIONARTICULADO.jpg";
 import CAMIONMINERO from "../assets/img/FAMILIAS/CAMIONMINERO.jpg";
 import EXCAVADORA from "../assets/img/FAMILIAS/EXCAVADORA.jpg";
 import EXCAVADORAMINERA from "../assets/img/FAMILIAS/EXCAVADORAMINERA.jpg";
+import FRESADORA from "../assets/img/FAMILIAS/FRESADORA.jpg";
+import GRUASRT from "../assets/img/FAMILIAS/GRUASRT.jpg";
+import GRUASSOBRECAMION from "../assets/img/FAMILIAS/GRUASSOBRECAMION.jpg";
+import GRUASTODOTORRENO from "../assets/img/FAMILIAS/GRUASTODOTERRENO.jpg";
+import MANIPULADORESMAGNI from "../assets/img/FAMILIAS/MANIPULADORESMAGNI.jpg";
+import MINICARGADORA from "../assets/img/FAMILIAS/MINICARGADORA.jpg";
+import MINIRODILLO from "../assets/img/FAMILIAS/MINIRODILLO.jpg";
+import MOTONIVELADORA from "../assets/img/FAMILIAS/MOTONIVELADORA.jpg";
+import PALACARGADORA from "../assets/img/FAMILIAS/PALACARGADORA.jpg";
+import PILOTERA from "../assets/img/FAMILIAS/PILOTERA.jpg";
+import PLATAFORMASARTICULADAS from "../assets/img/FAMILIAS/PLATAFORMASARTICULADAS.jpg";
+import PORTACONTENEDOR from "../assets/img/FAMILIAS/PORTACONTENEDOR.jpg";
+import RETROEXCAVADORA from "../assets/img/FAMILIAS/RETROEXCAVADORA.jpg";
+import RODILLOCOMPACTADOR from "../assets/img/FAMILIAS/RODILLOCOMPACTADOR.jpg";
+import RODILLODOBLELISO from "../assets/img/FAMILIAS/RODILLODOBLELISO.jpg";
+import RODILLONEUMATICO from "../assets/img/FAMILIAS/RODILLONEUMATICO.jpg";
+import TERMINADORAASFALTO from "../assets/img/FAMILIAS/TERMINADORAASFALTO.jpg";
+import TOPADORA from "../assets/img/FAMILIAS/TOPADORA.jpg";
+import TROMPOHORMIGONERO from "../assets/img/FAMILIAS/TROMPOHORMIGONERO.jpg";
+import TUNELERAHORIZONTAL from "../assets/img/FAMILIAS/TUNELERAHORIZONTAL.jpg";
 
 export default function NavBar({ onSelectFamilia }) {
   const handleFamiliaClick = (familia) => {
@@ -20,39 +40,174 @@ export default function NavBar({ onSelectFamilia }) {
       <div className="grid-container">
         <button
           className="marca"
-          onClick={() => handleFamiliaClick("Elevadores")}
+          onClick={() => handleFamiliaClick("AUTOELEVADOR2-4")}
         >
-          <img src={AUTOELEVADOR5} alt="Elevadores" />
-        </button>
-        <button className="marca" onClick={() => handleFamiliaClick("Gruas")}>
-          <img src={AUTOELEVADOR2} alt="Gruas" />
+          <img src={AUTOELEVADOR2} alt="AUTOELEVADOR2-4" />
         </button>
         <button
           className="marca"
-          onClick={() => handleFamiliaClick("Hollister")}
+          onClick={() => handleFamiliaClick("AUTOELEVADOR5-10")}
         >
-          <img src={BOMBAHORMIGON} alt="Hollister" />
+          <img src={AUTOELEVADOR5} alt="AUTOELEVADOR5-10" />
         </button>
-        <button className="marca" onClick={() => handleFamiliaClick("Calvin")}>
-          <img src={AUTOELEVADOR10} alt="Calvin" />
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("AUTOELEVADOR10")}
+        >
+          <img src={AUTOELEVADOR10} alt="AUTOELEVADOR10" />
         </button>
-        <button className="marca" onClick={() => handleFamiliaClick("Calvin")}>
-          <img src={BOMBAHORMIGONSOBRECAMION} alt="Calvin" />
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("BOMBAHORMIGON")}
+        >
+          <img src={BOMBAHORMIGON} alt="BOMBAHORMIGON" />
         </button>
-        <button className="marca" onClick={() => handleFamiliaClick("Calvin")}>
-          <img src={BOMBAHORMIGON} alt="Calvin" />
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("BOMBAHORMIGONSOBRECAMION")}
+        >
+          <img src={BOMBAHORMIGONSOBRECAMION} alt="BOMBAHORMIGONSOBRECAMION" />
         </button>
-        <button className="marca" onClick={() => handleFamiliaClick("Calvin")}>
-          <img src={CAMIONMINERO} alt="Calvin" />
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("CAMIONARTICULADO")}
+        >
+          <img src={CAMIONARTICULADO} alt="CAMIONARTICULADO" />
         </button>
-        <button className="marca" onClick={() => handleFamiliaClick("Calvin")}>
-          <img src={CAMIONARTICULADO} alt="Calvin" />
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("CAMIONMINERO")}
+        >
+          <img src={CAMIONMINERO} alt="CAMIONMINERO" />
         </button>
-        <button className="marca" onClick={() => handleFamiliaClick("Calvin")}>
-          <img src={EXCAVADORA} alt="Calvin" />
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("EXCAVADORA")}
+        >
+          <img src={EXCAVADORA} alt="EXCAVADORA" />
         </button>
-        <button className="marca" onClick={() => handleFamiliaClick("Calvin")}>
-          <img src={EXCAVADORAMINERA} alt="Calvin" />
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("EXCAVADORAMINERA")}
+        >
+          <img src={EXCAVADORAMINERA} alt="EXCAVADORAMINERA" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("FRESADORA")}
+        >
+          <img src={FRESADORA} alt="FRESADORA" />
+        </button>
+        <button className="marca" onClick={() => handleFamiliaClick("GRUASRT")}>
+          <img src={GRUASRT} alt="GRUASRT" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("GRUASSOBRECAMION")}
+        >
+          <img src={GRUASSOBRECAMION} alt="GRUASSOBRECAMION" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("GRUASTODOTORRENO")}
+        >
+          <img src={GRUASTODOTORRENO} alt="GRUASTODOTORRENO" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("MANIPULADORESMAGNI")}
+        >
+          <img src={MANIPULADORESMAGNI} alt="MANIPULADORESMAGNI" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("MINICARGADORA")}
+        >
+          <img src={MINICARGADORA} alt="MINICARGADORA" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("MINIRODILLO")}
+        >
+          <img src={MINIRODILLO} alt="MINIRODILLO" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("MOTONIVELADORA")}
+        >
+          <img src={MOTONIVELADORA} alt="MOTONIVELADORA" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("PALACARGADORA")}
+        >
+          <img src={PALACARGADORA} alt="PALACARGADORA" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("PILOTERA")}
+        >
+          <img src={PILOTERA} alt="PILOTERA" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("PLATAFORMASARTICULADAS")}
+        >
+          <img src={PLATAFORMASARTICULADAS} alt="PLATAFORMASARTICULADAS" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("PORTACONTENEDOR")}
+        >
+          <img src={PORTACONTENEDOR} alt="PORTACONTENEDOR" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("RETROEXCAVADORA")}
+        >
+          <img src={RETROEXCAVADORA} alt="RETROEXCAVADORA" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("RODILLOCOMPACTADOR")}
+        >
+          <img src={RODILLOCOMPACTADOR} alt="RODILLOCOMPACTADOR" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("RODILLODOBLELISO")}
+        >
+          <img src={RODILLODOBLELISO} alt="RODILLODOBLELISO" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("RODILLONEUMATICO")}
+        >
+          <img src={RODILLONEUMATICO} alt="RODILLONEUMATICO" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("TERMINADORAASFALTO")}
+        >
+          <img src={TERMINADORAASFALTO} alt="TERMINADORAASFALTO" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("TOPADORA")}
+        >
+          <img src={TOPADORA} alt="TOPADORA" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("TROMPOHORMIGONERO")}
+        >
+          <img src={TROMPOHORMIGONERO} alt="TROMPOHORMIGONERO" />
+        </button>
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("TUNELERAHORIZONTAL")}
+        >
+          <img src={TUNELERAHORIZONTAL} alt="TUNELERAHORIZONTAL" />
         </button>
       </div>
     </div>
