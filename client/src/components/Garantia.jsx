@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useGarantia } from "../hooks/useGarantia";
 
-export default function Garantia() {
+export default function Garantia({ handleCerrarModalGarantia }) {
   const { mutate: crearGarantia } = useGarantia().GarantiaMutation;
 
   const [formValues, setFormValues] = useState({
@@ -28,6 +28,7 @@ export default function Garantia() {
   const handleSubmit = (e) => {
     e.preventDefault();
     crearGarantia(formValues);
+    handleCerrarModalGarantia();
   };
 
   return (
