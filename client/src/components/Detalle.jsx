@@ -52,7 +52,11 @@ export default function Detalle() {
   };
 
   if (isLoading) {
-    return <div>Cargando...</div>;
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   }
 
   if (!producto) {

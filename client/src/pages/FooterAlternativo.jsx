@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import AboutUs from "../components/AboutUs";
 import Contact from "../components/Contact";
+import MAPS from "../assets/img/MAPS.png";
+import { FaXTwitter } from "react-icons/fa6";
 import {
-  FaTwitter,
   FaInstagram,
   FaFacebook,
   FaWhatsapp,
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import Modal from "react-modal";
+import Garantia from "../components/Garantia";
 
 Modal.setAppElement("#root");
 
@@ -16,6 +18,7 @@ export default function FooterAlternativo() {
   const [contact, setContact] = useState(false);
   const [modal, setModal] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [garantia, setGarantia] = useState(false);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -26,6 +29,14 @@ export default function FooterAlternativo() {
   };
 
   const currentYear = new Date().getFullYear();
+
+  const handleMostrarModalGarantia = () => {
+    setGarantia(true);
+  };
+
+  const handleCerrarModalGarantia = () => {
+    setGarantia(false);
+  };
 
   const handleMostrarModalAbout = () => {
     setModal(true);
@@ -54,15 +65,19 @@ export default function FooterAlternativo() {
             comentario, no dudes en ponerte en contacto con nosotros.
           </p>
         </div>
-
+        <br />
         <div className="footaltbespace">
-          {" "}
+          <div>
+            <button onClick={handleMostrarModalGarantia}>Garantía</button>
+          </div>
           <div>
             <button onClick={handleMostrarModalAbout}>Nosotros</button>
           </div>
           <div>
             <button onClick={handleMostrarModalContact}>Contacto</button>
           </div>
+          <br />
+          <br />
         </div>
         <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
           <a
@@ -70,7 +85,7 @@ export default function FooterAlternativo() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaTwitter size={40} color="#1DA1F2" />
+            <FaXTwitter size={40} color="#1DA1F2" />
           </a>
           <a
             href="https://instagram.com"
@@ -104,14 +119,16 @@ export default function FooterAlternativo() {
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             contentLabel="Location Modal"
+            className="contact-container"
             style={{
               overlay: {
                 backgroundColor: "rgba(0, 0, 0, 0.75)",
-                zIndex: 1000, // Asegurarse de que el overlay esté por encima de otros elementos
+                zIndex: 1000,
               },
               content: {
                 color: "black",
-                maxWidth: "500px",
+                maxWidth: "700px",
+                height: "400px",
                 width: "80%",
                 margin: "auto",
                 padding: "20px",
@@ -121,30 +138,37 @@ export default function FooterAlternativo() {
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                zIndex: 1001, // Asegurarse de que el contenido esté por encima del overlay
+                zIndex: 1001,
               },
             }}
           >
-            <h2>Ubicación</h2>
-            <p>Panamericana Km 28.250 – Paris 256 esq. Colectora Este,</p>
-            <p>(1611) Don Torcuato – Prov. de Buenos Aires – ARGENTINA</p>
-            <button
-              onClick={closeModal}
+            <div
+              className="form-actions"
               style={{
-                marginTop: "20px",
-                padding: "10px 20px",
-                backgroundColor: "#FF0000",
-                color: "white",
-                border: "none",
-                borderRadius: "4px",
-                cursor: "pointer",
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: "-10px",
               }}
             >
-              Close
-            </button>
+              <button onClick={closeModal} className="submit-button">
+                Cerrar
+              </button>
+            </div>
+            <img src={MAPS} style={{ height: "250px", width: "400px" }} />
+            <p style={{ fontWeight: "bold", marginTop: "0.5rem" }}>
+              Panamericana Km 28.250 – Paris 256 esq. Colectora Este,
+            </p>
+            <p style={{ fontWeight: "bold" }}>
+              (1611) Don Torcuato – Prov. de Buenos Aires – ARGENTINA
+            </p>
           </Modal>
         </div>
       </div>
+      {garantia && (
+        <div className="modal">
+          <Garantia handleCerrarModalGarantia={handleCerrarModalGarantia} />
+        </div>
+      )}
       {contact && (
         <div className="modal">
           <Contact handleCerrarModalContact={handleCerrarModalContact} />

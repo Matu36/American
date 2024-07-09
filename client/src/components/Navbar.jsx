@@ -98,19 +98,13 @@ export default function NavBar({ onSelectFamilia }) {
         >
           <img src={FRESADORA} alt="FRESADORA" />
         </button>
-        <button className="marca" onClick={() => handleFamiliaClick("GRUASRT")}>
+        <button className="marca" onClick={() => handleFamiliaClick("Gruas")}>
           <img src={GRUASRT} alt="GRUASRT" />
         </button>
-        <button
-          className="marca"
-          onClick={() => handleFamiliaClick("GRUASSOBRECAMION")}
-        >
+        <button className="marca" onClick={() => handleFamiliaClick("Gruas")}>
           <img src={GRUASSOBRECAMION} alt="GRUASSOBRECAMION" />
         </button>
-        <button
-          className="marca"
-          onClick={() => handleFamiliaClick("GRUASTODOTORRENO")}
-        >
+        <button className="marca" onClick={() => handleFamiliaClick("Gruas")}>
           <img src={GRUASTODOTORRENO} alt="GRUASTODOTORRENO" />
         </button>
         <button
