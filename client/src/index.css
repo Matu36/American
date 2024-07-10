@@ -1155,7 +1155,7 @@ button:focus-visible {
   position: relative;
   z-index: 100;
   padding-top: 40px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   background-color: black;
 }
 
@@ -3212,7 +3212,7 @@ button:focus-visible {
   justify-content: space-around;
   background-color: #f0f0f0;
   padding: 20px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 .grupoContacto {

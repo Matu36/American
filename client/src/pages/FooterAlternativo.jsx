@@ -9,11 +9,10 @@ import {
   FaFacebook,
   FaWhatsapp,
   FaMapMarkerAlt,
-  FaPhoneSquareAlt,
-  FaEnvelope,
 } from "react-icons/fa";
 import Modal from "react-modal";
 import Garantia from "../components/Garantia";
+import DatosContacto from "./DatosContacto";
 
 Modal.setAppElement("#root");
 
@@ -59,63 +58,7 @@ export default function FooterAlternativo() {
 
   return (
     <div className="principal-footer">
-      <div>
-        <div className="datosContacto">
-          <div className="grupoContacto">
-            <h3>Ventas</h3>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaPhoneSquareAlt size={40} color="#FF7F50" />
-              4748-5900
-            </a>
-            <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
-              <FaWhatsapp size={40} color="#25D366" />
-              11 5924-9700
-            </a>
-          </div>
-          <div className="grupoContacto">
-            <h3>Post Venta</h3>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaPhoneSquareAlt size={40} color="#FF7F50" />
-              4748-5900
-            </a>
-            <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
-              <FaWhatsapp size={40} color="#25D366" />
-              11 3928-4834
-            </a>
-            <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
-              <FaEnvelope size={40} color="#808080" />
-              servicios@americanvial.com
-            </a>
-          </div>
-          <div className="grupoContacto">
-            <h3>Repuestos</h3>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaPhoneSquareAlt size={40} color="#FF7F50" />
-              4748-5900
-            </a>
-            <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
-              <FaWhatsapp size={40} color="#25D366" />
-              11 5146-9600
-            </a>
-            <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
-              <FaEnvelope size={40} color="#808080" />
-              repuestos@americanvial.com
-            </a>
-          </div>
-        </div>
-      </div>
+      <div></div>
       <div className="footerAlternativo">
         <div className="faSpan">
           <h2>Contactános</h2>
@@ -128,14 +71,15 @@ export default function FooterAlternativo() {
         <br />
         <div className="footaltbespace">
           <div>
+            <button onClick={handleMostrarModalContact}>Contacto</button>
+          </div>
+          <div>
             <button onClick={handleMostrarModalGarantia}>Garantía</button>
           </div>
           <div>
             <button onClick={handleMostrarModalAbout}>Nosotros</button>
           </div>
-          <div>
-            <button onClick={handleMostrarModalContact}>Contacto</button>
-          </div>
+
           <br />
         </div>
         <br />
@@ -189,7 +133,7 @@ export default function FooterAlternativo() {
               content: {
                 color: "black",
                 maxWidth: "700px",
-                height: "400px",
+                height: "auto",
                 width: "80%",
                 margin: "auto",
                 padding: "20px",
@@ -222,6 +166,7 @@ export default function FooterAlternativo() {
                 </button>
               </div>
             </div>
+            <h4>Ubicación</h4>
             <img
               src={MAPS}
               style={{ height: "250px", width: "400px", marginBottom: "1rem" }}
@@ -232,6 +177,7 @@ export default function FooterAlternativo() {
             <p style={{ fontWeight: "bold" }}>
               (1611) Don Torcuato – Prov. de Buenos Aires – ARGENTINA
             </p>
+            <br />
           </Modal>
         </div>
       </div>
@@ -250,6 +196,8 @@ export default function FooterAlternativo() {
           <AboutUs handleCerrarModalAbout={handleCerrarModalAbout} />
         </div>
       )}
+
+      <DatosContacto />
 
       <div className="copy">
         Copyright © {currentYear} | American Vial Todos los derechos reservados
