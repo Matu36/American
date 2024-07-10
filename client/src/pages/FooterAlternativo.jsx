@@ -3,6 +3,7 @@ import AboutUs from "../components/AboutUs";
 import Contact from "../components/Contact";
 import MAPS from "../assets/img/MAPS.png";
 import { FaXTwitter } from "react-icons/fa6";
+import { GrClose } from "react-icons/gr";
 import {
   FaInstagram,
   FaFacebook,
@@ -146,15 +147,25 @@ export default function FooterAlternativo() {
               className="form-actions"
               style={{
                 display: "flex",
-                justifyContent: "flex-end",
+                justifyContent: "center",
                 marginTop: "-10px",
+                marginBottom: "1rem",
               }}
             >
-              <button onClick={closeModal} className="submit-button">
-                Cerrar
-              </button>
+              <div>
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  className="button-cerrar"
+                >
+                  <GrClose />
+                </button>
+              </div>
             </div>
-            <img src={MAPS} style={{ height: "250px", width: "400px" }} />
+            <img
+              src={MAPS}
+              style={{ height: "250px", width: "400px", marginBottom: "1rem" }}
+            />
             <p style={{ fontWeight: "bold", marginTop: "0.5rem" }}>
               Panamericana Km 28.250 – Paris 256 esq. Colectora Este,
             </p>
