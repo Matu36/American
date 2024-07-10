@@ -47,6 +47,20 @@ export default function ContactoProducto({ id, handleCerrarContactoProducto }) {
           <GrClose />
         </button>
       </div>
+      <div>
+        <h3>Horario de Atención</h3>
+        <h5>Lunes a Viernes 9 a 18 hs.</h5>
+        <br />
+        <div>
+          <p className="text-muted">
+            Consulte sobre nuestros Equipos y Servicios a través de nuestro
+            formulario.
+          </p>
+          <p style={{ color: "grey", fontWeight: "bold", marginTop: "-15pc" }}>
+            Un asesor de Ventas se contactará con usted de inmediato.
+          </p>
+        </div>
+      </div>
       <div className="contact-content">
         <form onSubmit={handleSubmit} className="contact-form">
           <div className="form-group">

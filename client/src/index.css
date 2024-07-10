@@ -10,7 +10,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
 }
 
 a {
@@ -91,8 +90,8 @@ button:focus-visible {
 
 .grid-container {
   display: grid;
-  gap: 1rem; 
-  grid-template-columns: repeat(3, 1fr); 
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .marca {
@@ -122,18 +121,20 @@ button:focus-visible {
   width: 100%;
   height: auto;
   max-width: 100%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 @media (max-width: 1000px) and (min-width: 501px) {
   .grid-container {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 650px) {
   .grid-container {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
 }
 
@@ -165,9 +166,8 @@ button:focus-visible {
   background-color: #febb00;
 }
 
-
 .card {
-  flex: 1 1 calc(45% - 20px); 
+  flex: 1 1 calc(45% - 20px);
   max-width: calc(45% - 20px);
   margin: 10px;
   padding: 20px 20px;
@@ -177,10 +177,9 @@ button:focus-visible {
   border: 5px solid black;
 }
 
-
 @media (max-width: 650px) {
   .card {
-    flex: 1 1 100%; 
+    flex: 1 1 100%;
     max-width: 95%;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -203,24 +202,21 @@ button:focus-visible {
   }
 }
 
-
-
 .card-topper {
   border: solid 5px black;
 }
 
 .card:hover {
   transform: scale(1.05);
-
 }
 
 .card-content {
   text-align: center;
-  background-color: #000; 
-  color: #ffcc00; 
+  background-color: #000;
+  color: #ffcc00;
   padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .card-content p {
@@ -232,12 +228,12 @@ button:focus-visible {
 
 .card-content p:first-child {
   font-size: 18px;
-  text-transform: uppercase; 
-  letter-spacing: 1px; 
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .card-content p:hover {
-  color: #fff; 
+  color: #fff;
 }
 
 /* Estilos del botón "Comprar" */
@@ -293,7 +289,6 @@ button:focus-visible {
 
 .principal-footer {
   background-color: #febb00;
- 
 }
 
 .footerImage {
@@ -659,37 +654,36 @@ button:focus-visible {
   max-width: 100%;
   margin: 0 auto;
   display: flex;
-  height: 500px;
+  height: auto;
   flex-direction: column;
   align-items: center;
   background-color: #f4f4f4;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: relative; 
-  
+  position: relative;
 }
 
 .contact-container::before,
 .contact-container::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 8px; 
-  pointer-events: none; 
+  border-radius: 8px;
+  pointer-events: none;
 }
 
 .contact-container::before {
   border: 4px solid black;
-  margin: -8px; 
+  margin: -8px;
 }
 
 .contact-container::after {
   border: 4px solid #ffcc00;
-  margin: -16px; 
+  margin: -16px;
 }
 
 @media screen and (max-width: 850px) {
@@ -698,24 +692,23 @@ button:focus-visible {
   }
 }
 .contact-content {
-  width: 100%; 
-  max-width: 600px; 
+  width: 100%;
+  max-width: 600px;
 }
 
 .contact-form {
   width: 100%;
   display: flex;
-  flex-wrap: wrap; 
-  gap: 20px; 
-  
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .contact-form .form-group {
-  width: calc(33% - 20px); 
+  width: calc(33% - 20px);
 }
 
 .form-group.full-width {
-  width: 100%; 
+  width: 100%;
 }
 
 .form-actions {
@@ -724,13 +717,14 @@ button:focus-visible {
   justify-content: flex-end;
 }
 
-.submit-button, .button-cerrar {
+.submit-button,
+.button-cerrar {
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   display: flex;
-  justify-content: flex-end
+  justify-content: flex-end;
 }
 
 .submit-button {
@@ -742,7 +736,6 @@ button:focus-visible {
   background-color: #ccc;
   color: #000;
 }
-
 
 .form-group label {
   display: block;
@@ -759,11 +752,11 @@ button:focus-visible {
 }
 
 .form-group textarea {
-  resize: vertical; 
+  resize: vertical;
 }
 
 .form-actions {
-  margin-top: 20px; 
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -778,20 +771,19 @@ button:focus-visible {
 }
 
 .submit-button {
-  background-color: #ffcc00; 
-  color: #fff; 
+  background-color: #ffcc00;
+  color: #fff;
 }
 
 .button-cerrar {
-  background-color: #666; 
-  color: #fff; 
+  background-color: #666;
+  color: #fff;
 }
 
 .button-cerrar:hover,
 .submit-button:hover {
-  opacity: 0.8; 
+  opacity: 0.8;
 }
-
 
 /* CARRITO */
 
@@ -920,9 +912,7 @@ button:focus-visible {
   color: white;
   padding: 0px;
   margin: 30px;
-  
 }
-
 
 /* MENSAJE EL PRODUCTO HA SIDO AÑADIDO AL CARRITO */
 
@@ -968,7 +958,6 @@ button:focus-visible {
   align-items: center;
   text-align: center;
 }
-
 
 .about-button {
   display: flex;
@@ -1168,7 +1157,6 @@ button:focus-visible {
   padding-top: 40px;
   padding-bottom: 10px;
   background-color: black;
- 
 }
 
 .footerAlternativo h2 {
@@ -1399,55 +1387,52 @@ button:focus-visible {
   align-items: flex-end;
   transition: border-bottom 0.5s ease;
   width: 35%;
-  
-  
 }
 
 .fauser {
   position: absolute;
   right: 0px;
-  top: 30px; 
+  top: 30px;
 }
 
 .inputnav {
   padding: 8px;
   font-size: 16px;
-  color: #fff; 
-  background-color: #333; 
+  color: #fff;
+  background-color: #333;
   border: none;
   outline: none;
   width: 80%;
-  border-radius: 5px; 
+  border-radius: 5px;
   margin-top: 2.5rem;
 }
 
 .inputnav::placeholder {
-  color: #ccc; 
+  color: #ccc;
 }
 @media screen and (max-width: 850px) {
   .white-bar {
-    flex-direction: column; 
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
   }
 
   .search-bar {
-    width: 80%; 
-    margin-left: 50px; 
+    width: 80%;
+    margin-left: 50px;
     margin-top: 0;
   }
 
   .inputnav {
-  
-    margin-top: 0px; 
+    margin-top: 0px;
   }
 
   .search-button {
-    margin-top: 10px; 
+    margin-top: 10px;
   }
   .fauser {
     position: absolute;
     right: 0px;
-    top: 0px; 
+    top: 0px;
   }
 }
 
@@ -1458,7 +1443,6 @@ button:focus-visible {
   width: 100%;
   height: 120px;
   display: flex;
- 
 }
 @media (max-width: 850px) {
   .white-bar.fixed .inputnav,
@@ -1468,11 +1452,8 @@ button:focus-visible {
 }
 
 .white-bar.fixed .img {
-  max-width: 100px; 
- 
+  max-width: 100px;
 }
-
-
 
 @media screen and (max-width: 850px) {
   .white-bar img {
@@ -1485,11 +1466,8 @@ button:focus-visible {
   .white-bar img {
     max-width: 400px;
     margin-top: 30px;
-    
   }
- 
 }
-
 
 .search-button {
   border: none;
@@ -1864,7 +1842,6 @@ button:focus-visible {
   right: 0;
 }
 
-
 .user-info button {
   margin-right: 5px;
   border: none;
@@ -1885,8 +1862,6 @@ button:focus-visible {
   color: inherit;
 }
 
-
-
 /* PANEL DE ADMIN */
 
 .containerAdmin {
@@ -1897,10 +1872,9 @@ button:focus-visible {
   .containerAdmin {
     justify-content: center;
     align-items: center;
-    flex-direction: column; 
+    flex-direction: column;
   }
 }
-
 
 /* NAVBAR */
 
@@ -1922,10 +1896,9 @@ button:focus-visible {
 
 @media (max-width: 600px) {
   .navbarAdmin__title {
-    font-size: 1rem; 
+    font-size: 1rem;
   }
 }
-
 
 .navbarAdmin__link {
   color: white;
@@ -1940,19 +1913,19 @@ button:focus-visible {
 }
 
 .navbarAdmin__icon-button {
-  background: none; 
-  border: none; 
-  cursor: pointer; 
-  padding: 0; 
-  margin-left: 10px; 
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 10px;
   display: flex;
   align-items: center;
-  position: relative; 
+  position: relative;
 }
 
 .navbarAdmin__icon {
-  font-size: 1.5rem; 
-  color: #666; 
+  font-size: 1.5rem;
+  color: #666;
 }
 
 .navbarAdmin__badge {
@@ -2000,16 +1973,12 @@ button:focus-visible {
 }
 
 @media (max-width: 650px) {
-  
-
-  
-
   .navbarAdmin__title {
     margin-bottom: 1rem;
   }
 
   .navbarAdmin__icons {
-    margin-top: 1rem; 
+    margin-top: 1rem;
   }
 }
 
@@ -2068,11 +2037,6 @@ button:focus-visible {
   }
 }
 
-
-
-
-
-
 .sidebarAdmin__header {
   display: flex;
   align-items: center;
@@ -2099,8 +2063,6 @@ button:focus-visible {
   width: 100%;
 }
 
-
-
 .main-content {
   flex-grow: 1;
   transition: margin-left 0.3s ease;
@@ -2117,7 +2079,6 @@ button:focus-visible {
   }
 }
 
-
 .user__info {
   display: flex;
   align-items: center;
@@ -2131,13 +2092,10 @@ button:focus-visible {
 
 @media (max-width: 600px) {
   .user__info {
-    font-size: 12px; 
-    padding: 5px 10px; 
-   
+    font-size: 12px;
+    padding: 5px 10px;
   }
 }
-
-
 
 @media (max-width: 500px) {
   .sidebarAdmin__button {
@@ -2158,9 +2116,8 @@ button:focus-visible {
 }
 
 .sidebarAdmin__label {
-  margin-left: 10px; 
+  margin-left: 10px;
 }
-
 
 .FaHome::before {
   content: "\f015";
@@ -2416,15 +2373,15 @@ button:focus-visible {
 }
 
 .infoBlock:nth-child(1) {
-  background-color: #ffcccc; 
+  background-color: #ffcccc;
 }
 
 .infoBlock:nth-child(2) {
-  background-color: #ccffcc; 
+  background-color: #ccffcc;
 }
 
 .infoBlock:nth-child(3) {
-  background-color: #ccccff; 
+  background-color: #ccccff;
 }
 
 .widgetsContainer {
@@ -2459,15 +2416,15 @@ button:focus-visible {
 }
 
 .userListContainer {
-  border: 4px solid #6c6b66; 
-  border-left: 4px solid #000000; 
-  border-right: 4px solid #000000; 
+  border: 4px solid #6c6b66;
+  border-left: 4px solid #000000;
+  border-right: 4px solid #000000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   background-color: #febb00;
   padding: 20px;
   margin-top: 1rem;
   margin-left: 1rem;
-  color: #000000; 
+  color: #000000;
   max-width: 100%;
 }
 
@@ -2524,22 +2481,20 @@ button:focus-visible {
 
 .DetalleCardContainer {
   max-width: 100%;
-  background-color:  #ffcc00; 
+  background-color: #ffcc00;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 60px;
-  
 }
 
 .DetalleCard {
-  background-color:whitesmoke; 
+  background-color: whitesmoke;
   margin: 20px;
   max-width: 800px;
   width: 800px;
   border: 5px solid black;
   font-family: "merri";
-  
 }
 .CarrouselImg {
   width: 100%;
@@ -2588,50 +2543,48 @@ button:focus-visible {
 }
 
 .detalle-info {
-  background-color: #f4f4f4; 
+  background-color: #f4f4f4;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .detalle-info p {
-  margin: 8px 0; 
-  font-size: 16px; 
+  margin: 8px 0;
+  font-size: 16px;
 }
 
 .detalle-info strong {
-  font-weight: bold; 
-  margin-right: 8px; 
-  width: 160px; 
-  display: inline-block; 
+  font-weight: bold;
+  margin-right: 8px;
+  width: 160px;
+  display: inline-block;
 }
 
 .detalle-info p:not(:last-child) {
-  border-bottom: 1px solid #ccc; 
-  padding-bottom: 8px; 
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
 }
 
-
 .form-submit-custom {
-  background-color: #000; 
-  color: #ffcc00; 
+  background-color: #000;
+  color: #ffcc00;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
   font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.3s ease; 
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .form-submit-custom:hover {
-  background-color: #e6bb0d; 
-  color: #000; 
-  transform: scale(1.05); 
+  background-color: #e6bb0d;
+  color: #000;
+  transform: scale(1.05);
 }
-
-
-
 
 .blue-bar {
   left: 0;
@@ -2649,10 +2602,8 @@ button:focus-visible {
   text-transform: uppercase;
   letter-spacing: 2px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  line-height: 60px; 
+  line-height: 60px;
 }
-
-
 
 .detalleMarca {
   font-weight: bold;
@@ -2776,7 +2727,6 @@ button:focus-visible {
 }
 
 .appadmin {
-
   justify-content: center;
   width: 80%;
   max-width: 100%;
@@ -2863,52 +2813,51 @@ button:focus-visible {
 }
 
 .form-container {
-  width: 80%; 
-  margin: 2rem auto; 
-  padding: 20px; 
-  background-color: #000; 
-  color: #ffcc00; 
-  border-radius: 10px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-  display: grid; 
-  grid-template-columns: repeat(2, 1fr); 
-  gap: 20px; 
+  width: 80%;
+  margin: 2rem auto;
+  padding: 20px;
+  background-color: #000;
+  color: #ffcc00;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
   overflow-x: auto;
 }
 
 .form-container1 {
-  width: 50%; 
-  margin: 2rem auto; 
-  padding: 20px; 
-  background-color: #000; 
+  width: 50%;
+  margin: 2rem auto;
+  padding: 20px;
+  background-color: #000;
   color: #ffcc00;
-  border-radius: 10px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
- 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
 /* Estilos para los campos de entrada y select */
 .form-group {
-  margin-bottom: 15px; 
+  margin-bottom: 15px;
 }
 
 .form-group label {
-  display: block; 
-  margin-bottom: 5px; 
-  font-weight: bold; 
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .form-group input,
 .form-group select {
-  width: 100%; 
-  padding: 8px; 
-  border: 1px solid #ffcc00; 
-  border-radius: 5px; 
-  background-color: #000; 
-  color: #ffcc00; 
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ffcc00;
+  border-radius: 5px;
+  background-color: #000;
+  color: #ffcc00;
 }
 
 /* Estilos para el botón de guardar cotización */
@@ -2998,47 +2947,44 @@ button:focus-visible {
   color: #fff;
 }
 
-
-
 /* DETALLE COTIZACION  */
 
 .cotizacion-detail {
   font-family: Arial, sans-serif;
-  max-width: 1000px; 
+  max-width: 1000px;
   margin: auto;
-  padding: 40px; 
+  padding: 40px;
   background-color: #ffffff;
-  border: 2px solid #000000; 
+  border: 2px solid #000000;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .titulo {
-  color: #ffcc00; 
+  color: #ffcc00;
   text-align: center;
-  margin-bottom: 30px; 
-  font-size: 24px; 
+  margin-bottom: 30px;
+  font-size: 24px;
 }
 
 .seccion {
-  margin-bottom: 30px; 
+  margin-bottom: 30px;
 }
 
 .seccion h3 {
-  color: #000000; 
-  font-size: 1.4rem; 
-  margin-bottom: 15px; 
+  color: #000000;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
 }
 
 .seccion p {
-  margin: 8px 0; 
+  margin: 8px 0;
 }
 
 .loader {
   text-align: center;
   margin-top: 50px;
 }
-
 
 /* CotizacionesTable.css */
 
@@ -3097,71 +3043,68 @@ button:focus-visible {
   border-color: #1e7e34;
 }
 
-
 .acciones-dropdown {
-  font-size: 14px; 
+  font-size: 14px;
 }
 
 .acciones-dropdown .dropdown-item {
-  font-size: 14px; 
-  padding: 8px 16px; 
+  font-size: 14px;
+  padding: 8px 16px;
 }
 
-
 .acciones-dropdown .dropdown-item-ver {
-  color: #007bff; 
-  background-color: transparent; 
-  border: none; 
+  color: #007bff;
+  background-color: transparent;
+  border: none;
 }
 
 .acciones-dropdown .dropdown-item-ver:hover {
-  background-color: #007bff; 
-  color: #fff; 
+  background-color: #007bff;
+  color: #fff;
 }
-
 
 .acciones-dropdown .dropdown-item-modificar {
   color: #ffc107;
-  background-color: transparent; 
-  border: none; 
+  background-color: transparent;
+  border: none;
 }
 
 .acciones-dropdown .dropdown-item-modificar:hover {
-  background-color: #ffc107; 
-  color: #212529; 
+  background-color: #ffc107;
+  color: #212529;
 }
 
 /* Estilos para botón Concretar Venta */
 .acciones-dropdown .dropdown-item-concretar {
-  color: #28a745; 
-  background-color: transparent; 
-  border: none; 
+  color: #28a745;
+  background-color: transparent;
+  border: none;
 }
 
 .acciones-dropdown .dropdown-item-concretar:hover {
-  background-color: #28a745; 
-  color: #fff; 
+  background-color: #28a745;
+  color: #fff;
 }
 
 .acciones-dropdown-custom {
   background-color: #ffc107;
-  color: black; 
+  color: black;
   border-color: #ffc107;
 }
 
 .acciones-dropdown-custom .dropdown-toggle {
   background-color: #ffc107;
-  color: black; 
+  color: black;
   border-color: #ffc107;
 }
 
 .acciones-dropdown-custom .dropdown-menu {
-  background-color: white; 
+  background-color: white;
 }
 
 .datatable {
   max-width: 100%;
-  overflow-x: auto; 
+  overflow-x: auto;
 }
 
 .datatable table {
@@ -3187,7 +3130,7 @@ button:focus-visible {
   .datatable th,
   .datatable td {
     padding: 4px 8px;
-    font-size: 12px; 
+    font-size: 12px;
   }
 }
 
@@ -3228,15 +3171,14 @@ button:focus-visible {
 .ranking-item h2 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
-  color: #d32f2f; 
+  color: #d32f2f;
 }
 
 .ranking-item p {
   margin: 0;
   font-size: 1em;
-  color: #000; 
+  color: #000;
 }
-
 
 .custom-carousel .custom-container {
   width: 100vw; /* Ocupa todo el ancho de la ventana */
@@ -3248,30 +3190,19 @@ button:focus-visible {
 }
 
 .custom-carousel .custom-item {
-  width: 100%; 
+  width: 100%;
 }
 
 .custom-carousel .custom-slide {
-  width: 100%; 
+  width: 100%;
   position: relative;
 }
 
 .custom-carousel .custom-slide img {
-  width: 100vw; 
+  width: 100vw;
   height: auto;
 }
 
 .custom-carousel .custom-slider-transition {
-  transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+  transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
-
-
-
-
-
-
-
-
-
-
-

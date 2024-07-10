@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { GrClose } from "react-icons/gr";
 import { useGarantia } from "../hooks/useGarantia";
 
 export default function Garantia({ handleCerrarModalGarantia }) {
@@ -20,6 +21,22 @@ export default function Garantia({ handleCerrarModalGarantia }) {
     falla: "",
   });
 
+  const labels = {
+    nombre: "Nombre",
+    apellido: "Apellido",
+    empresa: "Empresa",
+    email: "Email",
+    telefono: "Teléfono",
+    tipoDeMaquina: "Tipo de Máquina",
+    marca: "Marca",
+    modelo: "Modelo",
+    numeroDeChasis: "Número de Chasis",
+    fechaEntregaDelEquipo: "Fecha de Entrega del Equipo",
+    ubicacion: "Ubicación",
+    cantidadHorasHorometro: "Cantidad de Horas Horómetro",
+    falla: "Falla",
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -33,11 +50,36 @@ export default function Garantia({ handleCerrarModalGarantia }) {
 
   return (
     <div className="contact-container">
+      <div>
+        <button
+          type="button"
+          onClick={handleCerrarModalGarantia}
+          className="button-cerrar"
+        >
+          <GrClose />
+        </button>
+      </div>
+      <div>
+        <h3>RECLAMO DE GARANTÍA</h3>
+
+        <div>
+          <p className="text-muted">
+            Para realizar una solicitud de reparación por favor complete el
+            siguiente formulario con todos los datos requeridos.
+          </p>
+          <p style={{ color: "grey", fontWeight: "bold", marginTop: "-15pc" }}>
+            Un asesor de postVenta se contactará con usted de inmediato.
+          </p>
+        </div>
+      </div>
+
+      <br />
+      <br />
       <div className="contact-content">
         <form onSubmit={handleSubmit} className="contact-form">
           {Object.keys(formValues).map((key) => (
             <div key={key} className="form-group">
-              <label htmlFor={key}>{key}</label>
+              <label htmlFor={key}>{labels[key]}</label>
               <input
                 type={key === "fechaEntregaDelEquipo" ? "date" : "text"}
                 id={key}
@@ -47,7 +89,14 @@ export default function Garantia({ handleCerrarModalGarantia }) {
               />
             </div>
           ))}
-          <div className="form-actions">
+          <div
+            className="form-actions"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "-20px",
+            }}
+          >
             <button type="submit" className="submit-button">
               Enviar
             </button>
