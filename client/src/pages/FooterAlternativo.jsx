@@ -93,20 +93,24 @@ export default function FooterAlternativo() {
             <FaXTwitter size={40} color="#1DA1F2" />
           </a>
           <a
-            href="https://instagram.com"
+            href="https://instagram.com/americanvialgroup"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaInstagram size={40} color="#E4405F" />
           </a>
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/americanvial/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaFacebook size={40} color="#1877F2" />
           </a>
-          <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://wa.me/1159249700"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaWhatsapp size={40} color="#25D366" />
           </a>
           <div
