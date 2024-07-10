@@ -9,6 +9,8 @@ import {
   FaFacebook,
   FaWhatsapp,
   FaMapMarkerAlt,
+  FaPhoneSquareAlt,
+  FaEnvelope,
 } from "react-icons/fa";
 import Modal from "react-modal";
 import Garantia from "../components/Garantia";
@@ -57,6 +59,63 @@ export default function FooterAlternativo() {
 
   return (
     <div className="principal-footer">
+      <div>
+        <div className="datosContacto">
+          <div className="grupoContacto">
+            <h3>Ventas</h3>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaPhoneSquareAlt size={40} color="#FF7F50" />
+              4748-5900
+            </a>
+            <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
+              <FaWhatsapp size={40} color="#25D366" />
+              11 5924-9700
+            </a>
+          </div>
+          <div className="grupoContacto">
+            <h3>Post Venta</h3>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaPhoneSquareAlt size={40} color="#FF7F50" />
+              4748-5900
+            </a>
+            <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
+              <FaWhatsapp size={40} color="#25D366" />
+              11 3928-4834
+            </a>
+            <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
+              <FaEnvelope size={40} color="#808080" />
+              servicios@americanvial.com
+            </a>
+          </div>
+          <div className="grupoContacto">
+            <h3>Repuestos</h3>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaPhoneSquareAlt size={40} color="#FF7F50" />
+              4748-5900
+            </a>
+            <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
+              <FaWhatsapp size={40} color="#25D366" />
+              11 5146-9600
+            </a>
+            <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
+              <FaEnvelope size={40} color="#808080" />
+              repuestos@americanvial.com
+            </a>
+          </div>
+        </div>
+      </div>
       <div className="footerAlternativo">
         <div className="faSpan">
           <h2>Contactános</h2>
@@ -78,8 +137,9 @@ export default function FooterAlternativo() {
             <button onClick={handleMostrarModalContact}>Contacto</button>
           </div>
           <br />
-          <br />
         </div>
+        <br />
+        <br />
         <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
           <a
             href="https://twitter.com"

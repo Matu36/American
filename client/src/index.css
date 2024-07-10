@@ -3206,3 +3206,39 @@ button:focus-visible {
 .custom-carousel .custom-slider-transition {
   transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
+
+.datosContacto {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.grupoContacto {
+  text-align: center;
+  padding: 10px;
+}
+
+.grupoContacto h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #ffc107;
+  font-weight: bold;
+  font-family: "merri";
+}
+
+.grupoContacto a {
+  display: block;
+  margin-bottom: 5px;
+  text-decoration: none;
+  color: #333;
+}
+
+.grupoContacto a:hover {
+  color: #007bff;
+}
+
+.grupoContacto a svg {
+  margin-right: 10px;
+}
