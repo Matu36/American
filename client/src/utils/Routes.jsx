@@ -62,6 +62,16 @@ const AdminLayout = () => {
   const { auth, setAuth } = useAuth();
   const [loading, setLoading] = useState(true);
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const openSidebar = () => {
+    setSidebarOpen(true);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   const idUsuario = auth?.id;
 
   const navigate = useNavigate();
@@ -97,10 +107,10 @@ const AdminLayout = () => {
 
   return (
     <>
-      <NavBarAdmin />
+      <NavBarAdmin isOpen={sidebarOpen} onOpen={openSidebar} />
       <div className="containerAdmin">
         <div className="sidebarAdmin">
-          <SideBarAdmin />
+          <SideBarAdmin isOpen={sidebarOpen} onClose={closeSidebar} />
         </div>
 
         <Routes>

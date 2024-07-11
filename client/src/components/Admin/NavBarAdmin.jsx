@@ -5,8 +5,10 @@ import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/img/logoAmerican.png";
 import { useMensajes } from "../../hooks/useMensajes";
 import gruagif from "../../assets/img/GRUAGIF1.gif";
+import { FaBars } from "react-icons/fa";
+import SideBarAdmin from "./SideBarAdmin";
 
-export default function NavBarAdmin() {
+export default function NavBarAdmin({ isOpen, onClose, onOpen }) {
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
   const idUsuario = auth?.id;
@@ -16,9 +18,38 @@ export default function NavBarAdmin() {
     navigate("/");
   };
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <nav className="navbarAdmin">
       <img src={gruagif} alt="" style={{ width: "170px", height: "140px" }} />
+
+      <button
+        onClick={onOpen}
+        className="burguer"
+        style={{
+          position: "absolute",
+          left: "10px",
+          top: "100px",
+          background: "none",
+          display: window.innerWidth >= 600 ? "none" : "block",
+        }}
+      >
+        <FaBars className="burguer-icon" />
+      </button>
+
       <div className="sidebarAdmin__header">
         <button onClick={handleButtonClick} className="topadmin__button">
           <img src={logo} alt="chef" className="sidebarAdmin__image" />

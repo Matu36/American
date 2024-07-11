@@ -14,15 +14,15 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       precio: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL(12, 4),
         allowNull: false,
       },
       anticipo: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL(12, 4),
         allowNull: false,
       },
       saldoAFinanciar: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL(12, 4),
         allowNull: false,
       },
       IVA: {
