@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { useContactoProducto } from "../hooks/useContactoProducto";
 import { GrClose } from "react-icons/gr";
 
-export default function ContactoProducto({ id, handleCerrarContactoProducto }) {
+export default function ContactoProducto({
+  id,
+  handleCerrarContactoProducto,
+  familia,
+  marca,
+  modelo,
+}) {
   const { mutate: contactoProducto } =
     useContactoProducto().contactoProductoMutation;
 
@@ -52,17 +58,21 @@ export default function ContactoProducto({ id, handleCerrarContactoProducto }) {
         <h5>Lunes a Viernes 9 a 18 hs.</h5>
         <br />
         <div>
-          <p className="text-muted">
-            Consulte sobre nuestros Equipos y Servicios a través de nuestro
+          <p className="text-muted" style={{ fontSize: "16px" }}>
+            Consulte sobre {familia}, {marca}, {modelo} a través de nuestro
             formulario.
           </p>
-          <p style={{ color: "grey", fontWeight: "bold", marginTop: "-15pc" }}>
+          <p style={{ color: "grey", fontWeight: "bold", fontSize: "14px" }}>
             Un asesor de Ventas se contactará con usted de inmediato.
           </p>
         </div>
       </div>
       <div className="contact-content">
-        <form onSubmit={handleSubmit} className="contact-form">
+        <form
+          onSubmit={handleSubmit}
+          className="contact-form"
+          style={{ marginTop: "-20px" }}
+        >
           <div className="form-group">
             <label htmlFor="nombre">Nombre:</label>
             <input
@@ -107,7 +117,7 @@ export default function ContactoProducto({ id, handleCerrarContactoProducto }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="telefonoCelular">Teléfono Celular:</label>
+            <label htmlFor="telefonoCelular">Teléfono:</label>
             <input
               type="tel"
               id="telefonoCelular"
@@ -129,7 +139,7 @@ export default function ContactoProducto({ id, handleCerrarContactoProducto }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="pagoContado">Pago Contado:</label>
+            <label htmlFor="pagoContado">Contado:</label>
             <select
               id="pagoContado"
               name="pagoContado"
@@ -183,7 +193,7 @@ export default function ContactoProducto({ id, handleCerrarContactoProducto }) {
             style={{
               display: "flex",
               justifyContent: "center",
-              marginTop: "-40px",
+              marginTop: "-10px",
             }}
           >
             <button type="submit" className="submit-button">

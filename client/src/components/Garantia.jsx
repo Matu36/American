@@ -27,13 +27,13 @@ export default function Garantia({ handleCerrarModalGarantia }) {
     empresa: "Empresa",
     email: "Email",
     telefono: "Teléfono",
-    tipoDeMaquina: "Tipo de Máquina",
+    tipoDeMaquina: "Máquina",
     marca: "Marca",
     modelo: "Modelo",
-    numeroDeChasis: "Número de Chasis",
-    fechaEntregaDelEquipo: "Fecha de Entrega del Equipo",
+    numeroDeChasis: "Nro de Chasis",
+    fechaEntregaDelEquipo: "Fecha Entrega",
     ubicacion: "Ubicación",
-    cantidadHorasHorometro: "Cantidad de Horas Horómetro",
+    cantidadHorasHorometro: "Hs Horómetro",
     falla: "Falla",
   };
 
@@ -73,8 +73,6 @@ export default function Garantia({ handleCerrarModalGarantia }) {
         </div>
       </div>
 
-      <br />
-      <br />
       <div className="contact-content">
         <form onSubmit={handleSubmit} className="contact-form">
           {Object.keys(formValues).map((key) => (

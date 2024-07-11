@@ -9,6 +9,7 @@ import EditarUsuario from "./usuario/EditarUsuario";
 import { useNavigate } from "react-router-dom";
 import { useProducto } from "../hooks/useProductos";
 import { useUsuario } from "../hooks/useUsuarios";
+import LogOutMessage from "../pages/LogOutMessage";
 
 export default function NavBarAlternativo({ onSearchByMarca }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,6 +18,7 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
   const { auth, setAuth } = useAuth();
   const [edit, setEdit] = useState(false);
   const [login, setLogin] = useState(false);
+  const [showLogOutMessage, setShowLogOutMessage] = useState(false);
 
   const idUsuario = auth?.id;
 
@@ -128,7 +130,11 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
   const handleLogout = () => {
     localStorage.clear();
     setAuth({});
-    navigate("/");
+    setShowLogOutMessage(true);
+    setTimeout(() => {
+      setShowLogOutMessage(false);
+      navigate("/");
+    }, 3000);
   };
 
   return (
@@ -150,6 +156,7 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
         </div>
       )}
       <div className="navbar-container">
+        {showLogOutMessage && <LogOutMessage />}
         <div className="white-bar">
           <img src={logo} alt="" />
           <div className="search-bar">
@@ -210,6 +217,7 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
                   >
                     {auth ? auth.nombre : auth.email}
                   </button>
+
                   <button style={{ color: "gray" }} onClick={handleLogout}>
                     Cerrar sesión
                   </button>

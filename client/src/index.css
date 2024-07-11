@@ -493,18 +493,18 @@ button:focus-visible {
 .custom-slider {
   margin: 0 -50px;
 }
-@media (max-width: 800px) {
+/* @media (max-width: 800px) {
   .custom-slider {
     width: 100%;
     margin-left: 0.1rem;
   }
-}
+} */
 
-@media (max-width: 764px) {
+/* @media (max-width: 764px) {
   .custom-slider {
     margin-left: -0.5em;
   }
-}
+} */
 
 .slider-item {
   padding: 10px;
@@ -693,7 +693,8 @@ button:focus-visible {
 }
 .contact-content {
   width: 100%;
-  max-width: 600px;
+  margin-top: 3rem;
+  
 }
 
 .contact-form {
@@ -701,10 +702,11 @@ button:focus-visible {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  
 }
 
 .contact-form .form-group {
-  width: calc(33% - 20px);
+  width: calc(20% - 20px);
 }
 
 .form-group.full-width {
@@ -2489,13 +2491,33 @@ button:focus-visible {
 }
 
 .DetalleCard {
-  background-color: whitesmoke;
+  background-color: #f0f0f0;
   margin: 20px;
-  max-width: 800px;
-  width: 800px;
+  max-width: 900px; /* Tamaño máximo */
+  width: 100%; /* Ajuste para mantener el ancho dentro del tamaño máximo */
   border: 5px solid black;
   font-family: "merri";
 }
+
+
+@media (max-width: 1200px) {
+  .DetalleCard {
+    max-width: 800px; 
+  }
+}
+
+@media (max-width: 992px) {
+  .DetalleCard {
+    max-width: 600px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .DetalleCard {
+    max-width: 400px; 
+  }
+}
+
 .CarrouselImg {
   width: 100%;
   height: 100%;
@@ -2550,21 +2572,53 @@ button:focus-visible {
 }
 
 .detalle-info p {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   margin: 8px 0;
   font-size: 16px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+}
+
+.detalle-info p:last-child {
+  border-bottom: none;
 }
 
 .detalle-info strong {
   font-weight: bold;
   margin-right: 8px;
-  width: 160px;
-  display: inline-block;
+  flex-basis: 160px;
 }
 
-.detalle-info p:not(:last-child) {
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 8px;
+.detalle-info span {
+  flex-grow: 1;
 }
+
+.detalles-titulo {
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 204, 0, 0.7); 
+  margin-bottom: 8px;
+  display: inline-block;
+  font-size: x-large;
+}
+
+.detalles-list {
+  padding-left: 0;
+  margin-top: 8px;
+}
+
+.detalle-item {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.check-icon {
+  margin-right: 8px;
+  color: green;
+}
+
 
 .form-submit-custom {
   background-color: #000;
@@ -2609,7 +2663,7 @@ button:focus-visible {
   font-weight: bold;
   font-family: "merri";
   font-size: 3rem;
-  color: black;
+  color: #b2a369;
 }
 
 .precioDetalle {
@@ -3242,3 +3296,68 @@ button:focus-visible {
 .grupoContacto a svg {
   margin-right: 10px;
 }
+
+@media (max-width: 701px) {
+  .datosContacto {
+    flex-direction: column; /* Cambio a una columna en pantallas más pequeñas */
+    align-items: center;
+  }
+
+  .grupoContacto {
+    width: 100%; /* Ocupa el ancho completo en pantallas pequeñas */
+    margin: 10px 0;
+  }
+}
+
+.logout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 0, 0.9); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+}
+
+.logout span {
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: rgba(255, 255, 0, 1); 
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para destacar */
+}
+
+.whatsapp {
+  position: fixed;
+  bottom: 20px; 
+  left: 20px; 
+  z-index: 1000; 
+}
+
+.whatsapp a {
+  display: block;
+  width: 60px; 
+  height: 60px;
+  background-color: #25d366; 
+  text-align: center;
+  line-height: 60px;
+  border-radius: 50%; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  transition: background-color 0.3s ease; 
+}
+
+
+.whatsapp a:hover {
+  background-color: #128c7e; /* Cambio de color al pasar el mouse */
+}
+
+.whatsapp a:focus {
+  outline: none; /* Quita el contorno al hacer foco */
+}
+
+

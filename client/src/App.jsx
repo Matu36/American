@@ -6,6 +6,7 @@ import Layout from "./pages/Layout";
 import { useProducto } from "./hooks/useProductos";
 import CarouselPrincipal from "./components/CarouselPrincipal";
 import CarouselMarcas from "./components/CarouselMarcas";
+import { FaWhatsapp } from "react-icons/fa";
 
 function App() {
   const [selectedFamilia, setSelectedFamilia] = useState(null);
@@ -64,6 +65,15 @@ function App() {
           )}
         </div>
         <CarouselMarcas />
+      </div>
+      <div className="whatsapp">
+        <a
+          href="https://wa.me/1159249700"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaWhatsapp size={60} />
+        </a>
       </div>
     </Layout>
   );

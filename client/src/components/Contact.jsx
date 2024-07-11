@@ -80,7 +80,6 @@ export default function Contact({ handleCerrarModalContact }) {
         </div>
       </div>
 
-      <br />
       <div className="contact-content">
         <form className="contact-form" onSubmit={handleSubmit}>
           <div className="form-group">
@@ -139,7 +138,10 @@ export default function Contact({ handleCerrarModalContact }) {
             />
           </div>
           <div className="form-group"></div>
-          <div className="form-group" style={{ width: "100%" }}>
+          <div
+            className="form-group"
+            style={{ width: "100%", marginTop: "-3rem" }}
+          >
             <label htmlFor="consulta">Consulta:</label>
             <textarea
               id="consulta"

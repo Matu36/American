@@ -7,6 +7,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Card from "./Card";
 import Spinner from "../UI/Spinner";
+import { FaCheck, FaWhatsapp } from "react-icons/fa";
 
 export default function Detalle() {
   const [producto, setProducto] = useState(null);
@@ -107,6 +108,8 @@ export default function Detalle() {
     setContactoProducto(false);
   };
 
+  const detallesArray = Detalles.split("\n");
+
   return (
     <Layout onSearchByMarca={handleSearchByMarca}>
       <div className="blue-bar">CONSTRUYENDO EL FUTURO</div>
@@ -199,9 +202,7 @@ export default function Detalle() {
             <p>
               <strong>Potencia:</strong> {potencia}
             </p>
-            <p>
-              <strong>Cantidad Total:</strong> {cantidadTotal}
-            </p>
+
             <p>
               <strong>Motor:</strong> {motor}
             </p>
@@ -211,9 +212,16 @@ export default function Detalle() {
             <p>
               <strong>Capacidad de Balde:</strong> {capacidadDeBalde}
             </p>
-            <p>
-              <strong>Detalles:</strong> {Detalles}
-            </p>
+            <div>
+              <strong className="detalles-titulo">Detalles</strong>
+              <div className="detalles-list">
+                {detallesArray.map((detalle, index) => (
+                  <div key={index} className="detalle-item">
+                    <FaCheck className="check-icon" /> {detalle}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
           <div
             className="form-actions"
@@ -232,6 +240,9 @@ export default function Detalle() {
               <ContactoProducto
                 id={id}
                 handleCerrarContactoProducto={handleCerrarContactoProducto}
+                familia={familia}
+                marca={marca}
+                modelo={modelo}
               />
             </div>
           )}
@@ -255,6 +266,15 @@ export default function Detalle() {
           )}
         </div>
       )}
+      <div className="whatsapp">
+        <a
+          href="https://wa.me/1159249700"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaWhatsapp size={60} />
+        </a>
+      </div>
     </Layout>
   );
 }
