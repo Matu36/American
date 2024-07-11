@@ -231,7 +231,7 @@ export default function Detalle() {
               onClick={handleMostrarContactoProducto}
               className="form-submit-custom"
             >
-              Contactános por este Producto
+              Dejá tu consulta por este producto
             </button>
           </div>
 

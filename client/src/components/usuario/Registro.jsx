@@ -106,7 +106,7 @@ export default function Registro({ handleCerrarModalRegistro }) {
       {showWelcomeMessage && (
         <div className="welcome-message">
           <img src={logo} alt="" />
-          <p>Ya estas registrado en VENICE!</p>
+          <p>Ya estas registrado en AMERICAN VIAL!</p>
         </div>
       )}
       <span>{saved == "error" ? "Error al registrarse" : null}</span>

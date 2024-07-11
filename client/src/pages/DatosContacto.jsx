@@ -21,7 +21,7 @@ export default function DatosContacto() {
       </div>
       <div className="grupoContacto">
         <h3>Post Venta</h3>
-        <a href="tel:47485900" target="_blank" rel="noopener noreferrer">
+        <a target="_blank" rel="noopener noreferrer">
           <FaPhoneSquareAlt size={40} color="#FF7F50" />
           4748-5900
         </a>

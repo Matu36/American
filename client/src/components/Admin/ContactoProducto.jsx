@@ -5,11 +5,19 @@ import Spinner from "../../UI/Spinner";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link } from "react-router-dom";
+import { useUsuario } from "../../hooks/useUsuarios";
 
 export default function ContactoProducto() {
   const { data, isLoading } = useContactoProducto().contactoProductoQuery;
   const [search, setSearch] = useState("");
   const [contactoProducto, setContactoProducto] = useState(data);
+
+  const { data: usuariosADerivar } = useUsuario().usuariosMensajesQuery;
+
+  const userOptions = usuariosADerivar?.allUsers.map((user) => ({
+    value: user.id,
+    label: `${user.nombre} ${user.apellido} (${user.email})`,
+  }));
 
   useEffect(() => {
     if (data) {
@@ -82,6 +90,9 @@ export default function ContactoProducto() {
             className="dropdown-item dropdown-item-ver"
           >
             Detalle
+          </Dropdown.Item>
+          <Dropdown.Item className="dropdown-item dropdown-item-modificar">
+            Derivar
           </Dropdown.Item>
         </DropdownButton>
       ),

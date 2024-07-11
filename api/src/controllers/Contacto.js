@@ -97,6 +97,31 @@ const updateContactoState = async (req, res) => {
   }
 };
 
+const updateContactoUsuario = async (req, res) => {
+  try {
+    const { idContacto, idUsuario } = req.body;
+
+    if (!idContacto || !idUsuario) {
+      throw "Se requieren el ID del contacto y el ID del usuario";
+    }
+
+    const contacto = await Contacto.findByPk(idContacto);
+
+    if (!contacto) {
+      throw "Contacto no encontrado";
+    }
+
+    await contacto.update({ idUsuario });
+
+    return res.status(200).json({ contacto });
+  } catch (error) {
+    console.error("Error al actualizar el usuario del contacto:", error);
+    return res
+      .status(400)
+      .json({ error: "Error al actualizar el usuario del contacto" });
+  }
+};
+
 const countActiveContactos = async (req, res) => {
   try {
     const activeContactosCount = await Contacto.count({
@@ -120,4 +145,5 @@ module.exports = {
   updateContactoState,
   countActiveContactos,
   getContactoById,
+  updateContactoUsuario,
 };

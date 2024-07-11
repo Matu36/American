@@ -56,11 +56,13 @@ const {
   countActiveContactos,
   updateContactoState,
   getContactoById,
+  updateContactoUsuario,
 } = require("../controllers/Contacto");
 const {
   createContactoProducto,
   getContactoProductoById,
   getContactoProducto,
+  updateContactoProductoUsuario,
 } = require("../controllers/ContactoProducto");
 const {
   getAllGarantias,
@@ -135,9 +137,11 @@ router.put("/clientes/edit", check.auth, updateCliente);
 router.get("/contacto/get", getContactos);
 router.get("/contacto/getNoLeidosCount", countActiveContactos);
 router.put("/contacto/put", updateContactoState);
+router.put("/contacto/derivado", updateContactoUsuario);
 router.post("/contacto/create", createContacto);
 router.get("/contactoProducto/get", getContactoProducto);
 router.post("/contactoProducto/create", createContactoProducto);
+router.put("/contactoProducto/derivado", updateContactoProductoUsuario);
 router.put("/cotizaciones/state", check.auth, updateCotizacionEstado);
 router.get("/cotizaciones/suma", sumarPreciosFinales);
 router.get("/cotizaciones/ultimas/:idUsuario", getUltimasCotizaciones);

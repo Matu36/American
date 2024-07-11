@@ -12,7 +12,7 @@ const sendEmailWithTemplate = (to, template, props) => {
       emailOptions = {
         from: NODEMAILER_USER,
         to,
-        subject: "Bienvenido a VENICE INDUMENTARIA",
+        subject: "Bienvenido a AMERICAN VIAL",
         html: newUser({ email: to }),
       };
       break;
