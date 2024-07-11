@@ -268,17 +268,19 @@ const verificarRol = async (req, res) => {
       throw "Usuario no encontrado";
     }
 
-    let rolDescripcion;
+    let rolDescripcion = null;
 
     if (usuario.rol === true) {
       rolDescripcion = "administrador";
     } else if (usuario.rol === false) {
       rolDescripcion = "vendedor";
-    } else {
-      rolDescripcion = "comun";
     }
 
-    return res.status(200).json({ rol: rolDescripcion });
+    if (rolDescripcion) {
+      return res.status(200).json({ rol: rolDescripcion });
+    } else {
+      throw "El usuario no tiene un rol válido (ni administrador ni vendedor)";
+    }
   } catch (error) {
     console.error(error);
     return res.status(400).send(error);

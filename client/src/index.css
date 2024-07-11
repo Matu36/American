@@ -3361,3 +3361,8 @@ button:focus-visible {
 }
 
 
+  .carouselmarcaimage {
+    
+    max-width: 80%; 
+  }
+

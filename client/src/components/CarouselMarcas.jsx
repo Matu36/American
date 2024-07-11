@@ -63,11 +63,31 @@ export default function CarouselMarcas() {
       swipeable
       autoPlay={true}
     >
-      <img src={mst} style={{ marginTop: "20px" }} />
-      <img src={xcmg} />
-      <img src={crybsa} style={{ marginTop: "15px" }} />
-      <img src={magni} />
-      <img src={wecan} style={{ marginTop: "15px" }} />
+      <img
+        src={mst}
+        style={{ marginTop: "25px" }}
+        className="carouselmarcaimage"
+      />
+      <img
+        src={xcmg}
+        className="carouselmarcaimage"
+        style={{ marginTop: "10px" }}
+      />
+      <img
+        src={crybsa}
+        style={{ marginTop: "15px" }}
+        className="carouselmarcaimage"
+      />
+      <img
+        src={magni}
+        className="carouselmarcaimage"
+        style={{ marginTop: "10px" }}
+      />
+      <img
+        src={wecan}
+        style={{ marginTop: "20px" }}
+        className="carouselmarcaimage"
+      />
     </Carousel>
   );
 }
