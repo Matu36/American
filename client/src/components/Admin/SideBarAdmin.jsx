@@ -13,6 +13,7 @@ import {
   FaPhone,
   FaAngleDown,
   FaBars,
+  FaCogs,
 } from "react-icons/fa";
 import { MdPerson, MdMail } from "react-icons/md";
 
@@ -108,6 +109,12 @@ const SideBarAdmin = () => {
     {
       label: "Garantia",
       icon: FaShieldAlt,
+      subCategories: [],
+      roles: ["administrador"],
+    },
+    {
+      label: "Repuestos",
+      icon: FaCogs,
       subCategories: [],
       roles: ["administrador"],
     },

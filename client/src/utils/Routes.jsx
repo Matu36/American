@@ -42,6 +42,7 @@ import ContactoProducto from "../components/Admin/ContactoProducto";
 import ErroPage from "../components/ErroPage";
 import { useUsuario } from "../hooks/useUsuarios";
 import Spinner from "../UI/Spinner";
+import Repuestos from "../components/Admin/Repuestos";
 
 const AppRouter = () => {
   return (
@@ -142,6 +143,7 @@ const AdminLayout = () => {
           <Route path="/garantias/garantia/:id" element={<GarantiaDetail />} />
           <Route path="/ventas/:id" element={<VentasDetail />} />
           <Route path="/Contacto" element={<Contacto />} />
+          <Route path="/Repuestos" element={<Repuestos />} />
           <Route path="/ContactoProducto" element={<ContactoProducto />} />
           <Route path="/Mensajes/nuevo" element={<FormMensaje />} />
           <Route path="/Mensajes/enviados" element={<MensajesEnviados />} />
