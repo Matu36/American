@@ -1,5 +1,5 @@
 const { Contacto, Usuarios } = require("../db.js");
-// const sendEmailWithTemplate = require("../mailer/sendEmailWithTemplate");
+const sendEmailWithTemplate = require("../mailer/sendEmailWithTemplate");
 
 const createContacto = async (req, res) => {
   try {
@@ -26,6 +26,8 @@ const createContacto = async (req, res) => {
       direccion,
       consulta,
     });
+
+    await sendEmailWithTemplate(email, "Contacto");
 
     // Devuelve el contacto creado
     return res.status(201).json(nuevoContacto);

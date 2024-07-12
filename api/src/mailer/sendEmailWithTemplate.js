@@ -1,6 +1,7 @@
 const transporter = require("../mailer/mailer");
 const newUser = require("./templates/newUser");
 const newPassword = require("./templates/newPassword");
+const contacto = require("../mailer/templates/contacto");
 const { NODEMAILER_USER } = process.env;
 
 const sendEmailWithTemplate = (to, template, props) => {
@@ -23,6 +24,15 @@ const sendEmailWithTemplate = (to, template, props) => {
         to,
         subject: "Recuperación de contraseña",
         html: newPassword({ email: to, password: props.password }),
+      };
+      break;
+
+    case "Contacto":
+      emailOptions = {
+        from: NODEMAILER_USER,
+        to,
+        subject: "Gracias por Contactarnos!",
+        html: contacto({ email: to }),
       };
       break;
 

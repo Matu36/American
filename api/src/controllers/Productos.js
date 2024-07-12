@@ -1,4 +1,5 @@
 const { Productos } = require("../db.js");
+const sendEmailWithTemplate = require("../mailer/sendEmailWithTemplate");
 
 const getProductos = async (req, res) => {
   try {

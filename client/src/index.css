@@ -3377,3 +3377,44 @@ button:focus-visible {
   }
 
  
+  .contactoDerivado {
+    background-color:whitesmoke;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+.contactoDerivado h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333333;
+}
+
+.contactoDerivado p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #666666;
+}
+
+.contactoDerivado span {
+    font-weight: bold;
+    color: #333333;
+}
+
+.contactoDerivado .email {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.contactoDerivado .email:hover {
+    text-decoration: underline;
+}
+
+
+.detalle-descuento {
+  margin-bottom: 10px; 
+}

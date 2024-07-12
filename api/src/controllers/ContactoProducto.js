@@ -1,4 +1,5 @@
 const { ContactoProducto, Productos, Usuarios } = require("../db.js");
+const sendEmailWithTemplate = require("../mailer/sendEmailWithTemplate");
 
 const createContactoProducto = async (req, res) => {
   try {
@@ -44,6 +45,8 @@ const createContactoProducto = async (req, res) => {
       anticipo,
       moneda,
     });
+
+    await sendEmailWithTemplate(email, "Contacto");
 
     return res.status(201).json(nuevoContacto);
   } catch (error) {

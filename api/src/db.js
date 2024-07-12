@@ -51,6 +51,7 @@ const {
   Contacto,
   ContactoProducto,
   HistorialCotizacion,
+  Repuestos,
 } = sequelize.models;
 
 Clientes.belongsTo(Usuarios, {
@@ -130,6 +131,14 @@ Contacto.belongsTo(Usuarios, {
 });
 
 Usuarios.hasMany(Contacto, {
+  foreignKey: "idUsuario",
+});
+
+Repuestos.belongsTo(Usuarios, {
+  foreignKey: "idUsuario",
+});
+
+Usuarios.hasMany(Repuestos, {
   foreignKey: "idUsuario",
 });
 

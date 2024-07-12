@@ -83,6 +83,13 @@ const {
 } = require("../controllers/Mensajes");
 
 const {
+  createRepuesto,
+  getRepuestos,
+  getRepuestoById,
+  updateRepuestoUsuario,
+} = require("../controllers/Repuestos");
+
+const {
   getAllSolicitantes,
   createSolicitante,
 } = require("../controllers/Solicitaciones");
@@ -165,4 +172,8 @@ router.get("/cotizaciones/getVentasById/:id", getVentaById);
 router.post("/historial/vendedor/", getHistorialDetallePorUsuario);
 router.post("/historial/modelo/", getCotizacionesPorModelo);
 router.post("/cotizaciones/fecha/", filtrarCotizacionesPorFecha);
+router.post("/repuestos/create", createRepuesto);
+router.get("/repuestos/get", getRepuestos);
+router.get("/repuestos/detalle/:id", getRepuestoById);
+router.put("/repuestos/derivado", updateRepuestoUsuario);
 module.exports = router;

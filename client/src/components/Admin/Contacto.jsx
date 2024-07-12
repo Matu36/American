@@ -6,11 +6,18 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link } from "react-router-dom";
 import { useUsuario } from "../../hooks/useUsuarios";
+import Select from "react-select";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 export default function Contacto() {
   const { data, isLoading } = useContacto().contactoQuery;
+  const { mutate: modificarContacto } = useContacto().contactoEditMutation;
   const [search, setSearch] = useState("");
   const [contactos, setContactos] = useState(data);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedContactos, setSelectedContactos] = useState(null);
 
   const { data: usuariosADerivar } = useUsuario().usuariosMensajesQuery;
 
@@ -26,6 +33,21 @@ export default function Contacto() {
   }, [data]);
 
   //-------------------------------- SEARCHBAR --------------------------- //
+
+  const handleDerivar = (contactos) => {
+    setSelectedContactos(contactos);
+    setShowModal(true);
+  };
+
+  const handleSubmit = () => {
+    if (selectedUser && selectedContactos) {
+      modificarContacto({
+        idContacto: selectedContactos.id,
+        idUsuario: selectedUser.value,
+      });
+      setShowModal(false);
+    }
+  };
 
   useEffect(() => {
     filterByEmailAndNombreCompleto(search);
@@ -99,11 +121,25 @@ export default function Contacto() {
           >
             Detalle
           </Dropdown.Item>
-          <Dropdown.Item className="dropdown-item dropdown-item-modificar">
-            Derivar
-          </Dropdown.Item>
+          {!row.idUsuario && (
+            <Dropdown.Item
+              className="dropdown-item dropdown-item-modificar"
+              onClick={() => handleDerivar(row)}
+            >
+              Derivar
+            </Dropdown.Item>
+          )}
         </DropdownButton>
       ),
+    },
+  ];
+
+  const conditionalRowStyles = [
+    {
+      when: (row) => row.idUsuario,
+      style: {
+        backgroundColor: "#e6ffe6",
+      },
     },
   ];
 
@@ -146,6 +182,7 @@ export default function Contacto() {
                 data={contactos}
                 pagination
                 striped
+                conditionalRowStyles={conditionalRowStyles}
               />
             ) : (
               <Spinner loading={isLoading} />
@@ -153,6 +190,44 @@ export default function Contacto() {
           </>
         </div>
       </div>
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title style={{ textAlign: "center", width: "100%" }}>
+            Derivar Mensaje
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Select
+            options={userOptions}
+            onChange={(option) => setSelectedUser(option)}
+            placeholder="Seleccionar usuario"
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => setShowModal(false)}
+            style={{
+              backgroundColor: "#333",
+              color: "#FFD700",
+              borderColor: "#333",
+            }}
+          >
+            Cancelar
+          </Button>
+          <Button
+            variant="primary"
+            onClick={handleSubmit}
+            style={{
+              backgroundColor: "#FFD700",
+              color: "#333",
+              borderColor: "#FFD700",
+            }}
+          >
+            Derivar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

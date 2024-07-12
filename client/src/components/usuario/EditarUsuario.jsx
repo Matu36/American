@@ -61,12 +61,13 @@ export default function EditarUsuario({ handleCerrarModalEdit }) {
               name="email"
               onChange={changed}
               placeholder={auth.email}
+              disabled
             />
           </div>
 
           <div className="registroform">
             <label htmlFor="contraseña">Contraseña</label>
-            <input type="text" name="password" onChange={changed} />
+            <input type="password" name="password" onChange={changed} />
           </div>
 
           <div className="registroform">

@@ -42,17 +42,15 @@ const newPassword = (props) => {
       </style>
     </head>
     <body>
-        <img src="https://res.cloudinary.com/dmfzplfra/image/upload/v1711678602/VENICE/LOGO_1-removebg-preview_j1tfcu.png" alt="venice logo"/>
-        <h3>Buenas Prendas 🤙</h3>
-        
+       <img src="https://res.cloudinary.com/dmfzplfra/image/upload/v1720320478/Images/hyasokhgis5icxiu6q0g.jpg"/>
         <p><b>Hola ${props.email},</b></p>
-        <p>Te enviamos este mensaje porque solicitaste restablecer tu contraseña en Comunidad VENICE. Estamos acá para ayudarte a recuperar el acceso a tu cuenta de forma segura y sencilla.</p>
+        <p>Te enviamos este mensaje porque solicitaste restablecer tu contraseña en AMERICAN VIAL. Estamos acá para ayudarte a recuperar el acceso a tu cuenta de forma segura y sencilla.</p>
         <p>Sabemos lo importante que es para vos mantener la seguridad de tu cuenta, por eso creamos un proceso fácil y seguro para restablecer tu contraseña.</p>
         <p>Tu nueva contraseña es <b>${props.password}</b></p>
-        <p> Ingresá a nuestra página <a href="https://venice-nine.vercel.app/">Aquí</a>; y cambiala por una de tu agrado.</p>
+        <p> Ingresá a nuestra página <a href="https://americanvial.com/">Aquí</a>; y cambiala por una de tu agrado.</p>
         <p>¡Gracias por confiar en nosotros!</p>
         <p>Nos estamos viendo,</p>
-        <p><b>Comunidad VENICE</b></p>
+        <p><b>EQUIPO AMERICAN VIAL</b></p>
       </body>
     </html>`;
 };

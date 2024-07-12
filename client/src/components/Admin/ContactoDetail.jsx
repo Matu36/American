@@ -13,28 +13,44 @@ export default function ContactoDetail() {
   return (
     <div className="form-container1">
       <h2>Detalle</h2>
-      <div></div>
-      <div>
+
+      <div style={{ marginBottom: "10px" }}>
         <strong>Nombre:</strong> {contactoDetalle.nombre}
       </div>
-      <div>
+      <div style={{ marginBottom: "10px" }}>
         <strong>Apellidos:</strong> {contactoDetalle.apellidos}
       </div>
-      <div>
+      <div style={{ marginBottom: "10px" }}>
         <strong>Email:</strong> {contactoDetalle.email}
       </div>
-      <div>
+      <div style={{ marginBottom: "10px" }}>
         <strong>Teléfono:</strong> {contactoDetalle.telefono}
       </div>
-      <div>
+      <div style={{ marginBottom: "10px" }}>
         <strong>Dirección:</strong> {contactoDetalle.direccion}
       </div>
-      <div>
+      <div style={{ marginBottom: "10px" }}>
         <strong>Consulta:</strong> {contactoDetalle.consulta}
       </div>
-      <div>
+      <div style={{ marginBottom: "10px" }}>
         <strong>Fecha de Creación:</strong>{" "}
         {new Date(contactoDetalle.createdAt).toLocaleString()}
+      </div>
+      <br />
+      <div className="contactoDerivado">
+        <h2>Derivado a:</h2>
+        <p>
+          <span>Nombre:</span> {contactoDetalle.Usuario?.nombre}
+        </p>
+        <p>
+          <span>Apellido:</span> {contactoDetalle.Usuario?.apellido}
+        </p>
+        <p>
+          <span>Email:</span>{" "}
+          <a className="email" href="mailto:{contactoDetalle.Usuario.email}">
+            {contactoDetalle.Usuario?.email}
+          </a>
+        </p>
       </div>
     </div>
   );

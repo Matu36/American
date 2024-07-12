@@ -16,6 +16,10 @@ const postContactoProducto = async (data) => {
   return await ContactoProductoAPI.post(`create`, data);
 };
 
+const editContactoProducto = async (data) => {
+  return await ContactoProductoAPI.put(`derivado`, data);
+};
+
 export const useContactoProducto = (id) => {
   const contactoProductoQuery = useQuery({
     queryKey: ["contactoProducto"],
@@ -96,9 +100,77 @@ export const useContactoProducto = (id) => {
     },
   });
 
+  const contactoProductoEditMutation = useMutation({
+    mutationKey: ["edit-ContactoProducto"],
+    mutationFn: (data) => editContactoProducto(data),
+    onSuccess: () => {
+      contactoProductoQuery.refetch();
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "El contacto ha sido derivado corréctamente",
+        showConfirmButton: false,
+        timer: 2000,
+        background: "#ffffff",
+        iconColor: "#ffc107",
+        customClass: {
+          title: "text-dark",
+        },
+      });
+    },
+    onError: (error) => {
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "No se ha podido derivar el contacto. Intente más tarde",
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+          default:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "Hubo un error",
+              showConfirmButton: false,
+              timer: 2000,
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+            });
+            break;
+        }
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Hubo un error al procesar la solicitud",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "#ffffff",
+          iconColor: "#ffc107",
+          customClass: {
+            title: "text-dark",
+          },
+        });
+      }
+    },
+  });
+
   return {
     contactoProductoQuery,
     contactoProductoQueryById,
     contactoProductoMutation,
+    contactoProductoEditMutation,
   };
 };

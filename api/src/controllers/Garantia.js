@@ -1,4 +1,5 @@
 const { Garantia } = require("../db.js");
+const sendEmailWithTemplate = require("../mailer/sendEmailWithTemplate");
 
 // FUNCION PARA CREAR LA GARANCIA
 
@@ -53,6 +54,8 @@ const createGarantia = async (req, res) => {
       cantidadHorasHorometro,
       falla,
     });
+
+    await sendEmailWithTemplate(email, "Contacto");
 
     return res.status(201).json(nuevaGarantia);
   } catch (error) {
