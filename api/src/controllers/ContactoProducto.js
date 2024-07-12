@@ -1,4 +1,4 @@
-const { ContactoProducto, Productos } = require("../db.js");
+const { ContactoProducto, Productos, Usuarios } = require("../db.js");
 
 const createContactoProducto = async (req, res) => {
   try {
@@ -60,13 +60,17 @@ const getContactoProducto = async (req, res) => {
           model: Productos,
           attributes: ["familia", "marca", "modelo"],
         },
+        {
+          model: Usuarios,
+          attributes: ["email", "nombre", "apellido"],
+        },
       ],
     });
 
     return res.status(200).json(contactos);
   } catch (error) {
-    console.error(error);
-    return res.status(400).send(error);
+    console.error("Error al obtener los contactos de producto:", error);
+    return res.status(400).send("Error al obtener los contactos de producto");
   }
 };
 
@@ -84,6 +88,10 @@ const getContactoProductoById = async (req, res) => {
           model: Productos,
           attributes: ["familia", "marca", "modelo"],
         },
+        {
+          model: Usuarios,
+          attributes: ["email", "nombre", "apellido"],
+        },
       ],
     });
 
@@ -100,13 +108,13 @@ const getContactoProductoById = async (req, res) => {
 
 const updateContactoProductoUsuario = async (req, res) => {
   try {
-    const { idContacto, idUsuario } = req.body;
+    const { idContactoProducto, idUsuario } = req.body;
 
-    if (!idContacto || !idUsuario) {
+    if (!idContactoProducto || !idUsuario) {
       throw "Se requieren el ID del contactoProducto y el ID del usuario";
     }
 
-    const contacto = await Contacto.findByPk(idContacto);
+    const contacto = await ContactoProducto.findByPk(idContactoProducto);
 
     if (!contacto) {
       throw "Contacto no encontrado";

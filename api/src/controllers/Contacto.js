@@ -1,4 +1,4 @@
-const { Contacto } = require("../db.js");
+const { Contacto, Usuarios } = require("../db.js");
 // const sendEmailWithTemplate = require("../mailer/sendEmailWithTemplate");
 
 const createContacto = async (req, res) => {
@@ -38,7 +38,12 @@ const createContacto = async (req, res) => {
 // Función para obtener todos los contactos
 const getContactos = async (req, res) => {
   try {
-    const contactos = await Contacto.findAll();
+    const contactos = await Contacto.findAll({
+      include: {
+        model: Usuarios,
+        attributes: ["email", "nombre", "apellido"],
+      },
+    });
 
     if (!contactos || contactos.length === 0) {
       return res.status(404).send("No hay contactos");
@@ -46,7 +51,7 @@ const getContactos = async (req, res) => {
 
     return res.status(200).json(contactos);
   } catch (error) {
-    console.error(error);
+    console.error("Error al obtener los contactos:", error);
     return res.status(400).send(error);
   }
 };
@@ -59,7 +64,12 @@ const getContactoById = async (req, res) => {
       return res.status(400).send("Se requiere el ID del contacto");
     }
 
-    const contacto = await Contacto.findByPk(id);
+    const contacto = await Contacto.findByPk(id, {
+      include: {
+        model: Usuarios,
+        attributes: ["email", "nombre", "apellido"],
+      },
+    });
 
     if (!contacto) {
       return res.status(404).send("Contacto no encontrado");
