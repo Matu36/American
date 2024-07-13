@@ -5,6 +5,9 @@ import { useHistorial } from "../../hooks/useHistorial";
 import { useProducto } from "../../hooks/useProductos";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
 import HistorialRanking from "./HistorialRanking";
+import HistorialFechaExcel from "./Excel/HistorialFechaExcel";
+import HistorialProductoExcel from "./Excel/HistorialProductoExcel";
+import HistorialVendedorExcel from "./Excel/HistorialVendedorExcel";
 
 export default function Historial() {
   const { data: vendedoresData, isLoading: isLoadingVendedores } =
@@ -150,6 +153,9 @@ export default function Historial() {
         </form>
       )}
       <br />
+      <div>
+        <HistorialVendedorExcel data={historialData} />
+      </div>
       <br />
       <div>
         {isLoadingHistorial ? (
@@ -223,6 +229,9 @@ export default function Historial() {
       </form>
       <div>
         <br />
+        <div>
+          <HistorialProductoExcel data={ModeloData} />
+        </div>
         {isLoadingModelo ? (
           <p>Cargando historial...</p>
         ) : ModeloData && ModeloData.data && ModeloData.data.length > 0 ? (
@@ -304,6 +313,9 @@ export default function Historial() {
         </button>
       </form>
       <br />
+      <div>
+        <HistorialFechaExcel data={fechasData} />
+      </div>
       <br />
       <div>
         {isLoadingFechas ? (

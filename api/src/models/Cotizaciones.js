@@ -26,20 +26,32 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       precio: {
-        type: DataTypes.DECIMAL(12, 4),
+        type: DataTypes.DECIMAL,
         allowNull: false,
       },
 
       anticipo: {
-        type: DataTypes.DECIMAL(12, 4),
+        type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
+      cuotas: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      cuotaValor: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
+      contado: {
+        type: DataTypes.STRING,
         allowNull: true,
       },
       saldoAFinanciar: {
-        type: DataTypes.DECIMAL(12, 4),
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       IVA: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL,
         allowNull: false,
       },
       moneda: {
@@ -47,19 +59,19 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       interes: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       saldo: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       saldoConInteres: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       PrecioFinal: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL,
         allowNull: false,
       },
       estado: {

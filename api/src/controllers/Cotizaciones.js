@@ -141,7 +141,13 @@ const getCotizaciones = async (req, res) => {
 
     const cotizaciones = await Cotizaciones.findAll({
       where: whereCondition,
-      attributes: ["id", "numeroCotizacion", "PrecioFinal", "fechaDeCreacion"],
+      attributes: [
+        "id",
+        "numeroCotizacion",
+        "PrecioFinal",
+        "fechaDeCreacion",
+        "moneda",
+      ],
       include: [
         { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
         { model: Clientes, attributes: ["nombre", "apellido", "mail"] },

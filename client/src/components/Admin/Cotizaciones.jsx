@@ -6,6 +6,7 @@ import DataTable from "react-data-table-component";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "../../UI/Spinner";
+import CotizacionesExcel from "./Excel/CotizacionesExcel";
 
 export default function Cotizaciones() {
   const { auth } = useAuth();
@@ -166,6 +167,9 @@ export default function Cotizaciones() {
         ) : (
           <Spinner loading={isLoading} />
         )}
+        <div>
+          <CotizacionesExcel data={cotizacionesQueryById.data} />
+        </div>
       </div>
     </div>
   );

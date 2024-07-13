@@ -2,24 +2,26 @@ import React from "react";
 import * as XLSX from "xlsx";
 import { SiMicrosoftexcel } from "react-icons/si";
 
-const RepuestosExcel = ({ data }) => {
+const CotizacionesExcel = ({ data }) => {
   const handleExport = () => {
     // Crear un nuevo array con los elementos específicos
     const filteredData = data.map((item) => ({
-      nombre: item.nombre,
-      apellidos: item.apellidos,
-      email: item.email,
-      telefono: item.telefono,
-      direccion: item.direccion,
-      repuesto: item.repuesto,
-      fecharegistro: item.fechaDeCreacion,
+      Categoria: item.Producto.familia,
+      Marca: item.Producto.marca,
+      Modelo: item.Producto.modelo,
+      NroCotización: item.numeroCotizacion,
+      Moneda: item.moneda,
+      PrecioFinal: item.PrecioFinal,
+      FechaCotización: item.fechaDeCreacion,
+      Vendedor: `${item.Usuario.nombre} ${item.Usuario.apellido}`,
+      Cliente: `${item.Cliente.nombre} ${item.Cliente.apellido}`,
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(filteredData);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Datos");
 
-    XLSX.writeFile(workbook, "Repuestos.xlsx");
+    XLSX.writeFile(workbook, "Cotizaciones.xlsx");
   };
 
   return (
@@ -30,4 +32,4 @@ const RepuestosExcel = ({ data }) => {
   );
 };
 
-export default RepuestosExcel;
+export default CotizacionesExcel;

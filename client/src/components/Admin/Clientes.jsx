@@ -6,6 +6,7 @@ import DataTable from "react-data-table-component";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "../../UI/Spinner";
+import ClientesExcel from "./Excel/ClientesExcel";
 
 export default function Clientes() {
   const { auth } = useAuth();
@@ -53,6 +54,11 @@ export default function Clientes() {
     {
       name: "Apellido",
       selector: (row) => row.apellido,
+      sortable: true,
+    },
+    {
+      name: "Razón Social",
+      selector: (row) => row.razonSocial,
       sortable: true,
     },
     {
@@ -141,6 +147,9 @@ export default function Clientes() {
         ) : (
           <Spinner loading={isLoading} />
         )}
+        <div>
+          <ClientesExcel data={clientesQueryById.data} />
+        </div>
       </div>
     </div>
   );

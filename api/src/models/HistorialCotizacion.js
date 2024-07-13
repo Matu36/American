@@ -14,19 +14,19 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       precio: {
-        type: DataTypes.DECIMAL(12, 4),
+        type: DataTypes.DECIMAL,
         allowNull: false,
       },
       anticipo: {
-        type: DataTypes.DECIMAL(12, 4),
+        type: DataTypes.DECIMAL,
         allowNull: false,
       },
       saldoAFinanciar: {
-        type: DataTypes.DECIMAL(12, 4),
+        type: DataTypes.DECIMAL,
         allowNull: false,
       },
       IVA: {
-        type: DataTypes.DECIMAL(5, 2),
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       moneda: {
@@ -34,19 +34,19 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       interes: {
-        type: DataTypes.DECIMAL(5, 2),
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       saldo: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       saldoConInteres: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       PrecioFinal: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL,
         allowNull: false,
       },
       fechaDeCreacion: {

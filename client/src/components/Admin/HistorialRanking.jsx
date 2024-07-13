@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRanking } from "../../hooks/useCotizaciones";
+import Spinner from "../../UI/Spinner";
 
 export default function HistorialRanking() {
   const { data, isLoading } = useRanking().rankingQuery;
@@ -13,7 +14,12 @@ export default function HistorialRanking() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (isLoading) return <div>Cargando...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   if (!data || !showRanking) return null;
 
   return (
@@ -21,45 +27,45 @@ export default function HistorialRanking() {
       <div className="ranking-item">
         <h2>Vendedor con más cotizaciones</h2>
         <p>
-          {data.VendedorMasCotizaciones.nombre}{" "}
-          {data.VendedorMasCotizaciones.apellido} con{" "}
-          {data.VendedorMasCotizaciones.count} cotizaciones.
+          {data?.VendedorMasCotizaciones?.nombre}{" "}
+          {data?.VendedorMasCotizaciones?.apellido} con{" "}
+          {data?.VendedorMasCotizaciones?.count} cotizaciones.
         </p>
       </div>
       <div className="ranking-item">
         <h2>Vendedor con más ventas</h2>
         <p>
-          {data.VendedorMasVentas.nombre} {data.VendedorMasVentas.apellido} con{" "}
-          {data.VendedorMasVentas.count} ventas.
+          {data?.VendedorMasVentas?.nombre} {data?.VendedorMasVentas?.apellido}{" "}
+          con {data?.VendedorMasVentas?.count} ventas.
         </p>
       </div>
       <div className="ranking-item">
         <h2>Cliente con más cotizaciones</h2>
         <p>
-          {data.ClienteMasCotizaciones.nombre}{" "}
-          {data.ClienteMasCotizaciones.apellido} con{" "}
-          {data.ClienteMasCotizaciones.count} cotizaciones.
+          {data?.ClienteMasCotizaciones?.nombre}{" "}
+          {data?.ClienteMasCotizaciones?.apellido} con{" "}
+          {data?.ClienteMasCotizaciones?.count} cotizaciones.
         </p>
       </div>
       <div className="ranking-item">
         <h2>Cliente con más ventas</h2>
         <p>
-          {data.ClienteMasVentas.nombre} {data.ClienteMasVentas.apellido} con{" "}
-          {data.ClienteMasVentas.count} ventas.
+          {data?.ClienteMasVentas?.nombre} {data?.ClienteMasVentas?.apellido}{" "}
+          con {data?.ClienteMasVentas?.count} ventas.
         </p>
       </div>
       <div className="ranking-item">
         <h2>Producto con más cotizaciones</h2>
         <p>
-          Modelo {data.ProductoMasCotizaciones.modelo} con{" "}
-          {data.ProductoMasCotizaciones.count} cotizaciones.
+          Modelo {data?.ProductoMasCotizaciones?.modelo} con{" "}
+          {data.ProductoMasCotizaciones?.count} cotizaciones.
         </p>
       </div>
       <div className="ranking-item">
         <h2>Producto con más ventas</h2>
         <p>
-          Modelo {data.ProductoMasVentas.modelo} con{" "}
-          {data.ProductoMasVentas.count} ventas.
+          Modelo {data?.ProductoMasVentas?.modelo} con{" "}
+          {data?.ProductoMasVentas?.count} ventas.
         </p>
       </div>
     </div>

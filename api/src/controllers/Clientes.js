@@ -54,7 +54,15 @@ const getClientesPorIdDeUsuario = async (req, res) => {
     // Si el usuario tiene el rol para ver todos los clientes
     if (usuario.rol === true) {
       clientes = await Clientes.findAll({
-        attributes: ["id", "nombre", "apellido", "mail", "fechaDeCreacion"],
+        attributes: [
+          "id",
+          "nombre",
+          "apellido",
+          "mail",
+          "fechaDeCreacion",
+          "CUIT",
+          "razonSocial",
+        ],
         include: [
           {
             model: Usuarios,
@@ -66,7 +74,15 @@ const getClientesPorIdDeUsuario = async (req, res) => {
       // Si el usuario solo puede ver sus propios clientes
       clientes = await Clientes.findAll({
         where: { idUsuario },
-        attributes: ["id", "nombre", "apellido", "mail", "fechaDeCreacion"],
+        attributes: [
+          "id",
+          "nombre",
+          "apellido",
+          "mail",
+          "fechaDeCreacion",
+          "CUIT",
+          "razonSocial",
+        ],
         include: [
           {
             model: Usuarios,
