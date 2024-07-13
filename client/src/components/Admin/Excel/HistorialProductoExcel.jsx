@@ -16,13 +16,39 @@ const HistorialProductoExcel = ({ data }) => {
       "Fecha de Modificación": item.fechaModi,
       Producto: `${item.Producto.familia} ${item.Producto.marca} ${item.Producto.modelo}`,
       Cliente: `${item.Cliente.nombre} ${item.Cliente.apellido}`,
-      Vendedor: `${item.nombreUsuario} ${item.apellidoUsuario}`,
+      Vendedor: `${item.Usuario.nombre} ${item.Usuario.apellido}`,
     }));
 
-    const worksheet = XLSX.utils.json_to_sheet(filteredData);
+    // Obtener el nombre completo del producto
+    const producto = data.data[0]
+      ? `${data.data[0].Producto.familia} ${data.data[0].Producto.marca} ${data.data[0].Producto.modelo}`
+      : "Producto";
+
+    // Crear una hoja de trabajo vacía
+    const worksheet = XLSX.utils.json_to_sheet([]);
+
+    // Agregar el título y la fecha al principio de la hoja
+    const currentDate = new Date().toLocaleDateString();
+    XLSX.utils.sheet_add_aoa(
+      worksheet,
+      [[`REPORTE DE HISTORIAL DE PRODUCTO ${producto} AL DÍA ${currentDate}`]],
+      { origin: "A1" }
+    );
+
+    // Agregar una fila vacía después del título
+    XLSX.utils.sheet_add_aoa(worksheet, [[]], { origin: -1 });
+
+    // Agregar los datos del historial de ventas empezando en la tercera fila
+    XLSX.utils.sheet_add_json(worksheet, filteredData, {
+      origin: -1,
+      skipHeader: false,
+    });
+
+    // Crear un libro de trabajo y agregar la hoja
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Datos");
 
+    // Generar el archivo Excel y descargarlo
     XLSX.writeFile(workbook, "HistorialProducto.xlsx");
   };
 

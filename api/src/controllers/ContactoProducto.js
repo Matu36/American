@@ -68,6 +68,8 @@ const getContactoProducto = async (req, res) => {
           attributes: ["email", "nombre", "apellido"],
         },
       ],
+
+      order: [["fechaDeRegistro", "DESC"]],
     });
 
     return res.status(200).json(contactos);

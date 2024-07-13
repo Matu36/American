@@ -68,6 +68,8 @@ const getAllGarantias = async (req, res) => {
   try {
     const garantias = await Garantia.findAll({
       attributes: ["id", "empresa", "email", "modelo", "falla", "fechaCrea"],
+
+      order: [["fechaCrea", "DESC"]],
     });
 
     return res.status(200).json(garantias);

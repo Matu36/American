@@ -314,7 +314,11 @@ export default function Historial() {
       </form>
       <br />
       <div>
-        <HistorialFechaExcel data={fechasData} />
+        <HistorialFechaExcel
+          data={fechasData}
+          fechaDesde={fechaDesde}
+          fechaHasta={fechaHasta}
+        />
       </div>
       <br />
       <div>

@@ -2,7 +2,7 @@ import React from "react";
 import * as XLSX from "xlsx";
 import { SiMicrosoftexcel } from "react-icons/si";
 
-const HistorialFechaExcel = ({ data }) => {
+const HistorialFechaExcel = ({ data, fechaDesde, fechaHasta }) => {
   const handleExport = () => {
     // Crear un nuevo array con los elementos específicos
     const filteredData = data.data.map((item) => ({
@@ -16,13 +16,31 @@ const HistorialFechaExcel = ({ data }) => {
       "Fecha de Modificación": item.fechaModi,
       Producto: ` ${item.Producto.marca} ${item.Producto.modelo}`,
       Cliente: `${item.Cliente.nombre} ${item.Cliente.apellido}`,
-      Vendedor: `${item.nombreUsuario} ${item.apellidoUsuario}`,
+      Vendedor: `${item.Usuario.nombre} ${item.Usuario.apellido}`,
     }));
 
-    const worksheet = XLSX.utils.json_to_sheet(filteredData);
+    // Crear una hoja de trabajo vacía
+    const worksheet = XLSX.utils.json_to_sheet([]);
+
+    // Construir el título con las fechas desde y hasta
+    const currentDate = new Date().toLocaleDateString();
+    const title = `REPORTE DE HISTORIAL DESDE ${fechaDesde} HASTA ${fechaHasta} AL DÍA ${currentDate}`;
+    XLSX.utils.sheet_add_aoa(worksheet, [[title]], { origin: "A1" });
+
+    // Agregar una fila vacía después del título
+    XLSX.utils.sheet_add_aoa(worksheet, [[]], { origin: -1 });
+
+    // Agregar los datos del historial de ventas empezando en la tercera fila
+    XLSX.utils.sheet_add_json(worksheet, filteredData, {
+      origin: -1,
+      skipHeader: false,
+    });
+
+    // Crear un libro de trabajo y agregar la hoja
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Datos");
 
+    // Generar el archivo Excel y descargarlo
     XLSX.writeFile(workbook, "HistorialFecha.xlsx");
   };
 

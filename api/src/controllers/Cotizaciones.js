@@ -80,6 +80,11 @@ const createCotizacion = async (req, res) => {
       attributes: ["nombre", "apellido", "mail"],
     });
 
+    const usuario = await Usuarios.findOne({
+      where: { id: idUsuario },
+      attributes: ["nombre", "apellido"],
+    });
+
     // Obtener datos del producto
     const producto = await Productos.findOne({
       where: { id: idProducto },
@@ -111,6 +116,8 @@ const createCotizacion = async (req, res) => {
       marca: producto.marca,
       modelo: producto.modelo,
       estado: nuevaCotizacion.estado,
+      apellidoVendedor: usuario.apellido,
+      nombreVendedor: usuario.nombre,
     });
 
     return res.status(201).send(nuevaCotizacion);
@@ -153,6 +160,8 @@ const getCotizaciones = async (req, res) => {
         { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
         { model: Productos, attributes: ["familia", "marca", "modelo"] },
       ],
+
+      order: [["fechaDeCreacion", "DESC"]],
     });
 
     return res.status(200).json(cotizaciones);
@@ -443,6 +452,7 @@ const getCotizacionesEstadoDos = async (req, res) => {
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
           { model: Productos, attributes: ["familia", "marca", "modelo"] },
         ],
+        order: [["fechaVenta", "DESC"]],
       });
     } else {
       cotizaciones = await Cotizaciones.findAll({
@@ -459,6 +469,7 @@ const getCotizacionesEstadoDos = async (req, res) => {
           { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
           { model: Productos, attributes: ["familia", "marca", "modelo"] },
         ],
+        order: [["fechaVenta", "DESC"]],
       });
     }
 

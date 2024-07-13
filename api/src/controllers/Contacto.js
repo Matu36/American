@@ -45,6 +45,7 @@ const getContactos = async (req, res) => {
         model: Usuarios,
         attributes: ["email", "nombre", "apellido"],
       },
+      order: [["createdAt", "DESC"]],
     });
 
     if (!contactos || contactos.length === 0) {

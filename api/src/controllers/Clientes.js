@@ -69,6 +69,8 @@ const getClientesPorIdDeUsuario = async (req, res) => {
             attributes: [],
           },
         ],
+
+        order: [["fechaDeCreacion", "DESC"]],
       });
     } else {
       // Si el usuario solo puede ver sus propios clientes

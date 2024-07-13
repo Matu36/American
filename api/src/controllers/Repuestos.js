@@ -44,6 +44,7 @@ const getRepuestos = async (req, res) => {
         model: Usuarios,
         attributes: ["email", "nombre", "apellido"],
       },
+      order: [["createdAt", "DESC"]],
     });
 
     if (!repuestos || repuestos.length === 0) {
