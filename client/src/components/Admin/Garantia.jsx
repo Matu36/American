@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "../../UI/Spinner";
+import GarantiaExcel from "./Excel/GarantiaExcel";
 
 export default function Garantia() {
   const [search, setSearch] = useState("");
@@ -125,6 +126,9 @@ export default function Garantia() {
             )}
           </div>
         </>
+        <div>
+          <GarantiaExcel data={data} />
+        </div>
       </div>
     </div>
   );

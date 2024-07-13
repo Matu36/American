@@ -8,7 +8,7 @@ const getRepuestos = async () => {
 };
 
 const getRepuestoById = async (id) => {
-  const { data } = await RepuestosAPI.get(`/detalle//${id}`);
+  const { data } = await RepuestosAPI.get(`/detalle/${id}`);
   return data;
 };
 
@@ -104,7 +104,7 @@ export const useRepuesto = (id) => {
     mutationKey: ["edit-Contacto"],
     mutationFn: (data) => editRepuesto(data),
     onSuccess: () => {
-      contactoQuery.refetch();
+      repuestoQuery.refetch();
       Swal.fire({
         position: "center",
         icon: "info",

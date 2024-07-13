@@ -13,6 +13,7 @@ import {
 import Modal from "react-modal";
 import Garantia from "../components/Garantia";
 import DatosContacto from "./DatosContacto";
+import RepuestoForm from "../components/RepuestoForm";
 
 Modal.setAppElement("#root");
 
@@ -21,6 +22,7 @@ export default function FooterAlternativo() {
   const [modal, setModal] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [garantia, setGarantia] = useState(false);
+  const [repuesto, setRepuesto] = useState(false);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -56,6 +58,14 @@ export default function FooterAlternativo() {
     setContact(false);
   };
 
+  const handleMostrarModalRepuesto = () => {
+    setRepuesto(true);
+  };
+
+  const handleCerrarModalRepuesto = () => {
+    setRepuesto(false);
+  };
+
   return (
     <div className="principal-footer">
       <div></div>
@@ -72,6 +82,9 @@ export default function FooterAlternativo() {
         <div className="footaltbespace">
           <div>
             <button onClick={handleMostrarModalContact}>Contacto</button>
+          </div>
+          <div>
+            <button onClick={handleMostrarModalRepuesto}>Repuestos</button>
           </div>
           <div>
             <button onClick={handleMostrarModalGarantia}>Garantía</button>
@@ -198,6 +211,11 @@ export default function FooterAlternativo() {
       {modal && (
         <div className="modal">
           <AboutUs handleCerrarModalAbout={handleCerrarModalAbout} />
+        </div>
+      )}
+      {repuesto && (
+        <div className="modal">
+          <RepuestoForm handleCerrarModalRepuesto={handleCerrarModalRepuesto} />
         </div>
       )}
 

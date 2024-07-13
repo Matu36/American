@@ -9,12 +9,13 @@ import { useUsuario } from "../../hooks/useUsuarios";
 import Select from "react-select";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import RepuestosExcel from "./Excel/RepuestosExcel";
 
 export default function Repuestos() {
   const { data, isLoading } = useRepuesto().repuestoQuery;
   const { mutate: modificarContacto } = useRepuesto().repuestoEditMutation;
   const [search, setSearch] = useState("");
-  const [contactos, setContactos] = useState(data);
+  const [repuestos, setRepuestos] = useState(data);
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedContactos, setSelectedContactos] = useState(null);
@@ -28,7 +29,7 @@ export default function Repuestos() {
 
   useEffect(() => {
     if (data) {
-      setContactos(data);
+      setRepuestos(data);
     }
   }, [data]);
 
@@ -42,7 +43,7 @@ export default function Repuestos() {
   const handleSubmit = () => {
     if (selectedUser && selectedContactos) {
       modificarContacto({
-        idContacto: selectedContactos.id,
+        idRepuesto: selectedContactos.id,
         idUsuario: selectedUser.value,
       });
       setShowModal(false);
@@ -60,14 +61,14 @@ export default function Repuestos() {
 
   const filterByEmailAndNombreCompleto = (value) => {
     if (!value) {
-      setContactos(data);
+      setRepuestos(data);
     } else {
       const arrayCache = data?.filter(
         (oper) =>
           oper.apellidos.toLowerCase().includes(value.toLowerCase()) ||
           oper.email.toLowerCase().includes(value.toLowerCase())
       );
-      setContactos(arrayCache);
+      setRepuestos(arrayCache);
     }
   };
 
@@ -116,7 +117,7 @@ export default function Repuestos() {
         >
           <Dropdown.Item
             as={Link}
-            to={`/admin/repuesto/ver/${row.id}`}
+            to={`/admin/repuestos/ver/${row.id}`}
             className="dropdown-item dropdown-item-ver"
           >
             Detalle
@@ -179,7 +180,7 @@ export default function Repuestos() {
             {!showSpinner ? (
               <DataTable
                 columns={columns}
-                data={contactos}
+                data={repuestos}
                 pagination
                 striped
                 conditionalRowStyles={conditionalRowStyles}
@@ -188,6 +189,9 @@ export default function Repuestos() {
               <Spinner loading={isLoading} />
             )}
           </>
+        </div>
+        <div>
+          <RepuestosExcel data={data} />
         </div>
       </div>
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>

@@ -9,6 +9,7 @@ import { useUsuario } from "../../hooks/useUsuarios";
 import Select from "react-select";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import ContactoExcel from "./Excel/ContactoExcel";
 
 export default function Contacto() {
   const { data, isLoading } = useContacto().contactoQuery;
@@ -189,7 +190,11 @@ export default function Contacto() {
             )}
           </>
         </div>
+        <div>
+          <ContactoExcel data={data} />
+        </div>
       </div>
+
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title style={{ textAlign: "center", width: "100%" }}>

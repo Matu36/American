@@ -3418,3 +3418,8 @@ button:focus-visible {
 .detalle-descuento {
   margin-bottom: 10px; 
 }
+
+.excel {
+  background:none;
+  color:white;
+}

@@ -6,6 +6,7 @@ import DataTable from "react-data-table-component";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "../../UI/Spinner";
+import VentasExcel from "./Excel/VentasExcel";
 
 export default function Ventas() {
   const { auth } = useAuth();
@@ -139,6 +140,9 @@ export default function Ventas() {
         ) : (
           <Spinner loading={isLoading} />
         )}
+        <div>
+          <VentasExcel data={ventasQueryById.data} />
+        </div>
       </div>
     </div>
   );
