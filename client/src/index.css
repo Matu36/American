@@ -1904,9 +1904,9 @@ button:focus-visible {
   font-weight: bold;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .navbarAdmin__title {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -2033,9 +2033,15 @@ button:focus-visible {
 }
 
 
-
 .sidebarAdmin__image {
   max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  .sidebarAdmin__image {
+    max-width: 120%; 
+  margin-left: -2rem;
+  }
 }
 
 .sidebarAdmin__button {
@@ -3440,3 +3446,21 @@ button:focus-visible {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
+.grua-container{
+  max-width: 200px;
+  margin-left: 1rem;
+}
+
+.grua-img {
+  width: 200px;
+  height: 140px; 
+}
+
+@media (max-width: 500px) {
+  .grua-img {
+    width: 100px;
+    margin-left: 1rem;
+    height: 100px; 
+   
+  }
+}

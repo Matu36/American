@@ -34,7 +34,9 @@ export default function NavBarAdmin() {
 
   return (
     <nav className="navbarAdmin">
-      <img src={gruagif} alt="" style={{ width: "170px", height: "140px" }} />
+      <div className="grua-container">
+        <img src={gruagif} alt="" className="grua-img" />
+      </div>
 
       {!sidebar && (
         <button

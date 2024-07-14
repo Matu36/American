@@ -7,13 +7,17 @@ const getProductos = async (req, res) => {
     return !productos
       ? res.status(404).send("No hay Productos")
       : res.send(
-          productos.map(({ id, familia, marca, modelo, precio }) => ({
-            id,
-            familia,
-            marca,
-            modelo,
-            precio,
-          }))
+          productos.map(
+            ({ id, familia, marca, modelo, precio, imagen, imagen1 }) => ({
+              id,
+              familia,
+              marca,
+              modelo,
+              precio,
+              imagen,
+              imagen1,
+            })
+          )
         );
   } catch (error) {
     console.log(error);
