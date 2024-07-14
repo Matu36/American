@@ -259,6 +259,11 @@ const putCotizaciones = async (req, res) => {
       attributes: ["nombre", "apellido", "mail"],
     });
 
+    const usuario = await Usuarios.findOne({
+      where: { id: cotizacion.idCliente },
+      attributes: ["nombre", "apellido"],
+    });
+
     // Obtener datos del producto
     const producto = await Productos.findOne({
       where: { id: cotizacion.idProducto },
@@ -290,6 +295,8 @@ const putCotizaciones = async (req, res) => {
       familia: producto.familia,
       marca: producto.marca,
       modelo: producto.modelo,
+      apellidoVendedor: usuario.apellido,
+      nombreVendedor: usuario.nombre,
     });
 
     return res.send(cotizacion);

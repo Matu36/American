@@ -70,6 +70,7 @@ const {
   createGarantia,
   updateGarantiaState,
   countActiveGarantias,
+  updateGarantiaUsuario,
 } = require("../controllers/Garantia");
 
 const {
@@ -176,4 +177,5 @@ router.post("/repuestos/create", createRepuesto);
 router.get("/repuestos/get", getRepuestos);
 router.get("/repuestos/detalle/:id", getRepuestoById);
 router.put("/repuestos/derivado", updateRepuestoUsuario);
+router.put("/garantias/derivado", updateGarantiaUsuario);
 module.exports = router;

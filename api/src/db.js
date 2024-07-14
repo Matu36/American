@@ -142,6 +142,14 @@ Usuarios.hasMany(Repuestos, {
   foreignKey: "idUsuario",
 });
 
+Garantia.belongsTo(Usuarios, {
+  foreignKey: "idUsuario",
+});
+
+Usuarios.hasMany(Garantia, {
+  foreignKey: "idUsuario",
+});
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');

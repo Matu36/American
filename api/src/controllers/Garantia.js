@@ -1,4 +1,4 @@
-const { Garantia } = require("../db.js");
+const { Garantia, Usuarios } = require("../db.js");
 const sendEmailWithTemplate = require("../mailer/sendEmailWithTemplate");
 
 // FUNCION PARA CREAR LA GARANCIA
@@ -67,7 +67,15 @@ const createGarantia = async (req, res) => {
 const getAllGarantias = async (req, res) => {
   try {
     const garantias = await Garantia.findAll({
-      attributes: ["id", "empresa", "email", "modelo", "falla", "fechaCrea"],
+      attributes: [
+        "id",
+        "empresa",
+        "email",
+        "modelo",
+        "falla",
+        "fechaCrea",
+        "idUsuario",
+      ],
 
       order: [["fechaCrea", "DESC"]],
     });
@@ -89,7 +97,12 @@ const getGarantiaById = async (req, res) => {
       throw "Se requiere el ID de la garantía";
     }
 
-    const garantia = await Garantia.findByPk(id);
+    const garantia = await Garantia.findByPk(id, {
+      include: {
+        model: Usuarios,
+        attributes: ["email", "nombre", "apellido"],
+      },
+    });
 
     if (!garantia) {
       return res.status(404).json({ error: "Garantía no encontrada" });
@@ -146,10 +159,38 @@ const countActiveGarantias = async (req, res) => {
   }
 };
 
+const updateGarantiaUsuario = async (req, res) => {
+  try {
+    const { idGarantia, idUsuario } = req.body;
+
+    if (!idGarantia || !idUsuario) {
+      return res.status(400).json({
+        error: "Se requieren el ID de la garantía y el ID del usuario",
+      });
+    }
+
+    const garantia = await Garantia.findByPk(idGarantia);
+
+    if (!garantia) {
+      return res.status(404).json({ error: "Garantía no encontrada" });
+    }
+
+    await garantia.update({ idUsuario });
+
+    return res.status(200).json({ garantia });
+  } catch (error) {
+    console.error("Error al actualizar el usuario de la garantía:", error);
+    return res
+      .status(500)
+      .json({ error: "Error al actualizar el usuario de la garantía" });
+  }
+};
+
 module.exports = {
   createGarantia,
   getAllGarantias,
   getGarantiaById,
   updateGarantiaState,
   countActiveGarantias,
+  updateGarantiaUsuario,
 };

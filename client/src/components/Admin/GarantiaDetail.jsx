@@ -82,6 +82,21 @@ export default function GarantiaDetail() {
           <p>{falla}</p>
         </div>
       </div>
+      <div className="contactoDerivado">
+        <h2>Derivado a:</h2>
+        <p>
+          <span>Nombre:</span> {garantiaData.Usuario?.nombre}
+        </p>
+        <p>
+          <span>Apellido:</span> {garantiaData.Usuario?.apellido}
+        </p>
+        <p>
+          <span>Email:</span>{" "}
+          <a className="email" href="mailto:{contactoDetalle.Usuario.email}">
+            {garantiaData.Usuario?.email}
+          </a>
+        </p>
+      </div>
     </div>
   );
 }

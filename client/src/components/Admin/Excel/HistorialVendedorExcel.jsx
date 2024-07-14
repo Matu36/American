@@ -5,19 +5,30 @@ import { SiMicrosoftexcel } from "react-icons/si";
 const HistorialVendedorExcel = ({ data }) => {
   const handleExport = () => {
     // Crear un nuevo array con los elementos específicos
-    const filteredData = data.data.map((item) => ({
-      "Número de Cotización": item.numeroCotizacion,
-      Precio: item.precio,
-      Anticipo: item.anticipo,
-      "Saldo a Financiar": item.saldoAFinanciar,
-      IVA: item.IVA,
-      "Precio Final": item.PrecioFinal,
-      "Fecha de Creación": item.fechaDeCreacion,
-      "Fecha de Modificación": item.fechaModi,
-      Producto: `${item.familia} ${item.marca} ${item.modelo}`,
-      Cliente: `${item.nombreCliente} ${item.apellidoCliente}`,
-      Vendedor: `${item.nombreVendedor} ${item.apellidoVendedor}`,
-    }));
+    const filteredData = data.data.map((item) => {
+      let estado = "";
+
+      // Agregar condición para el estado aquí
+      // Por ejemplo, si el estado es 2, mostrar "Venta concretada"
+      if (item.estado === 2) {
+        estado = "Venta concretada";
+      }
+
+      return {
+        "Número de Cotización": item.numeroCotizacion,
+        Precio: item.precio,
+        Anticipo: item.anticipo,
+        "Saldo a Financiar": item.saldoAFinanciar,
+        IVA: item.IVA,
+        "Precio Final": item.PrecioFinal,
+        "Fecha de Creación": item.fechaDeCreacion,
+        "Fecha de Modificación": item.fechaModi,
+        Producto: `${item.familia} ${item.marca} ${item.modelo}`,
+        Cliente: `${item.nombreCliente} ${item.apellidoCliente}`,
+        Vendedor: `${item.nombreVendedor} ${item.apellidoVendedor}`,
+        Estado: estado,
+      };
+    });
 
     // Obtener el nombre y apellido del vendedor
     const vendedor = data.data[0]

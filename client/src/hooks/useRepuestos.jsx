@@ -125,7 +125,7 @@ export const useRepuesto = (id) => {
             Swal.fire({
               position: "center",
               icon: "warning",
-              title: "No se ha podido derivar el contacto. Intente más tarde",
+              title: "No se ha podido derivar el Repuesto. Intente más tarde",
               background: "#ffffff",
               iconColor: "#ffc107",
               customClass: {
