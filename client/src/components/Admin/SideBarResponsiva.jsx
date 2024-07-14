@@ -13,11 +13,11 @@ import {
   FaPhone,
   FaAngleDown,
   FaCogs,
+  FaArrowLeft,
 } from "react-icons/fa";
 import { MdPerson, MdMail } from "react-icons/md";
 
-const SideBarAdmin = () => {
-  const [isSidebarVisible, setSidebarVisible] = useState(false);
+const SideBarResponsiva = ({ handleCerrarModalSideBar }) => {
   const { auth } = useAuth();
   const idUsuario = auth?.id;
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
@@ -159,13 +159,23 @@ const SideBarAdmin = () => {
 
   return (
     <div className="admin-layout">
-      <div className="sidebarAdmin bg-dark">
+      <div className="sidebarAdminResponsiva bg-dark">
+        <div className="flechaizquierda">
+          <FaArrowLeft
+            onClick={handleCerrarModalSideBar}
+            className="botonflecha"
+          />
+        </div>
         <div className="text-start px-3">
           <Link
             to="/admin"
             className={`sidebarAdmin__button ${
               location.pathname === "/admin" ? "active" : ""
             }`}
+            onClick={() => {
+              setActiveCategory(null);
+              handleCerrarModalSideBar();
+            }}
           >
             <FaHome className="icon me-2" />
             Home
@@ -217,6 +227,10 @@ const SideBarAdmin = () => {
                               ? "active"
                               : ""
                           }`}
+                          onClick={() => {
+                            setActiveCategory(null);
+                            handleCerrarModalSideBar();
+                          }}
                         >
                           {subCategory.label}
                         </Link>
@@ -232,7 +246,10 @@ const SideBarAdmin = () => {
                       ? "active"
                       : ""
                   }`}
-                  onClick={() => setActiveCategory(null)}
+                  onClick={() => {
+                    setActiveCategory(null);
+                    handleCerrarModalSideBar();
+                  }}
                 >
                   <category.icon className="icon me-2" />
                   {category.label}
@@ -246,4 +263,4 @@ const SideBarAdmin = () => {
   );
 };
 
-export default SideBarAdmin;
+export default SideBarResponsiva;

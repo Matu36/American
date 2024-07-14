@@ -1890,12 +1890,14 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: auto;
   background-color: #febb00;
   color: black;
   max-width: 100%;
   height: 140px;
+  border: 1px solid rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
+
 
 .navbarAdmin__title {
   font-size: 1.25rem;
@@ -2009,42 +2011,13 @@ button:focus-visible {
 
 @media (max-width: 600px) {
   .sidebarAdmin {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: none;
-    transform: translateX(-100%);
-    z-index: 990;
+   display: none;
   }
-
-  .sidebarAdmin.visible {
-    transform: translateX(0);
-  }
-
- 
 }
 
-.hamburger-icon {
-  display: block;
-  position: fixed;
-  top: 20px;
-  right: 10px;
-  z-index: 1000;
-  color: black;
-  font-size: 1.5rem;
-}
-
-.hamburger-icon {
-  display: none;
-  color: black;
-  font-size: 1.5rem;
-}
-
-@media (max-width: 600px) {
-  .hamburger-icon {
-    display: block;
+@media (min-width: 600px) {
+  .burguer {
+    display: none;
   }
 }
 
@@ -3423,3 +3396,47 @@ button:focus-visible {
   background:none;
   color:white;
 }
+
+.sidebarAdminResponsiva {
+  color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 230px;
+  height: auto;
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+  position: absolute; 
+  top: 140px; 
+  left: 0; 
+  z-index: 1000; 
+}
+@media (min-width: 600px) {
+  .sidebarAdminResponsiva {
+    display: none;
+  }}
+
+.flechaizquierda {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.botonflecha {
+  color: gray;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  margin-right: 1.5rem;
+  font-size: 1.5rem; 
+  cursor: pointer; 
+  transition: color 0.3s ease, box-shadow 0.3s ease; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.botonflecha:hover {
+  color: white; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); 
+}
+
+.botonflecha:active {
+  color: lightgray; 
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); 
+}
+

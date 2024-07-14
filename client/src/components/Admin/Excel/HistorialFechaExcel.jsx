@@ -16,10 +16,15 @@ const HistorialFechaExcel = ({ data, fechaDesde, fechaHasta }) => {
 
       return {
         "Número de Cotización": item.numeroCotizacion,
-        Precio: item.precio,
-        Anticipo: item.anticipo,
-        "Saldo a Financiar": item.saldoAFinanciar,
-        IVA: item.IVA,
+        Moneda: item.moneda,
+        "Precio de Venta": item.precio,
+        "Saldo a Financiar": `${item.moneda} ${parseFloat(
+          item.saldoAFinanciar
+        ).toFixed(2)}`,
+        Cuotas: item.cuotas,
+        Financiación: `${item.moneda} ${parseFloat(item.cuotaValor).toFixed(
+          2
+        )}`,
         "Precio Final": item.PrecioFinal,
         "Fecha de Creación": item.fechaDeCreacion,
         "Fecha de Modificación": item.fechaModi,

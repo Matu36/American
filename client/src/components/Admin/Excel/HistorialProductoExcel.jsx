@@ -10,12 +10,22 @@ const HistorialProductoExcel = ({ data }) => {
       if (item.estado === 2) {
         estado = "Venta concretada";
       }
+      if (item.estado === 1) {
+        estado = "Venta No Concretada";
+      }
 
       return {
         "Número de Cotización": item.numeroCotizacion,
-        Precio: item.precio,
+        Moneda: item.moneda,
+        "Precio de Venta": item.precio,
+        "Saldo a Financiar": `${item.moneda} ${parseFloat(
+          item.saldoAFinanciar
+        ).toFixed(2)}`,
+        Cuotas: item.cuotas,
+        Financiación: `${item.moneda} ${parseFloat(item.cuotaValor).toFixed(
+          2
+        )}`,
         Anticipo: item.anticipo,
-        "Saldo a Financiar": item.saldoAFinanciar,
         IVA: item.IVA,
         "Precio Final": item.PrecioFinal,
         "Fecha de Creación": item.fechaDeCreacion,

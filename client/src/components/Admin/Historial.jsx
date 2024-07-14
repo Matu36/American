@@ -182,11 +182,22 @@ export default function Historial() {
                 }}
               >
                 <span>Número de Cotización: {detalle.numeroCotizacion}</span>
-                <span>Precio: {detalle.precio}</span>
-                <span>Anticipo: {detalle.anticipo}</span>
-                <span>Saldo a Financiar: {detalle.saldoAFinanciar}</span>
+                <span>
+                  Precio de Venta: {detalle.moneda} {detalle.precio}
+                </span>
+                <span>
+                  Anticipo:{detalle.moneda} {detalle.anticipo}
+                </span>
+                <span>
+                  Saldo a Financiar: {detalle.moneda} {detalle.saldoAFinanciar}
+                </span>
+                <strong>Financiación:</strong> {detalle.cuotas} Cuotas de{" "}
+                {detalle.moneda}
+                {detalle.cuotaValor}
                 <span>IVA: {detalle.IVA}</span>
-                <span>Precio Final: {detalle.PrecioFinal}</span>
+                <span>
+                  Precio Final:{detalle.moneda} {detalle.PrecioFinal}
+                </span>
                 <span>Fecha de Creación: {detalle.fechaDeCreacion}</span>
                 <span>Fecha de Modificación: {detalle.fechaModi}</span>
                 <span>
@@ -255,11 +266,22 @@ export default function Historial() {
                 }}
               >
                 <span>Número de Cotización: {detalle.numeroCotizacion}</span>
-                <span>Precio: {detalle.precio}</span>
-                <span>Anticipo: {detalle.anticipo}</span>
-                <span>Saldo a Financiar: {detalle.saldoAFinanciar}</span>
+                <span>
+                  Precio de Venta: {detalle.moneda} {detalle.precio}
+                </span>
+                <span>
+                  Anticipo: {detalle.moneda} {detalle.anticipo}
+                </span>
+                <span>
+                  Saldo a Financiar: {detalle.moneda} {detalle.saldoAFinanciar}
+                </span>
+                <strong>Financiación:</strong> {detalle.cuotas} Cuotas de{" "}
+                {detalle.moneda}
+                {detalle.cuotaValor}
                 <span>IVA: {detalle.IVA}</span>
-                <span>Precio Final: {detalle.PrecioFinal}</span>
+                <span>
+                  Precio Final: {detalle.moneda} {detalle.PrecioFinal}
+                </span>
                 <span>Fecha de Creación: {detalle.fechaDeCreacion}</span>
                 <span>Fecha de Modificación: {detalle.fechaModi}</span>
                 <span>
@@ -345,11 +367,23 @@ export default function Historial() {
                 }}
               >
                 <span>Número de Cotización: {cotizacion.numeroCotizacion}</span>
-                <span>Precio: {cotizacion.precio}</span>
-                <span>Anticipo: {cotizacion.anticipo}</span>
-                <span>Saldo a Financiar: {cotizacion.saldoAFinanciar}</span>
+                <span>
+                  Precio de Venta: {cotizacion.moneda} {cotizacion.precio}
+                </span>
+                <span>
+                  Anticipo:{cotizacion.moneda} {cotizacion.anticipo}
+                </span>
+                <span>
+                  Saldo a Financiar:{cotizacion.moneda}{" "}
+                  {cotizacion.saldoAFinanciar}
+                </span>
+                <strong>Financiación:</strong> {cotizacion.cuotas} Cuotas de{" "}
+                {cotizacion.moneda}
+                {cotizacion.cuotaValor}
                 <span>IVA: {cotizacion.IVA}</span>
-                <span>Precio Final: {cotizacion.PrecioFinal}</span>
+                <span>
+                  Precio Final:{cotizacion.moneda} {cotizacion.PrecioFinal}
+                </span>
                 <span>Fecha de Creación: {cotizacion.fechaDeCreacion}</span>
                 <span>Fecha de Modificación: {cotizacion.fechaModi}</span>
                 <span>

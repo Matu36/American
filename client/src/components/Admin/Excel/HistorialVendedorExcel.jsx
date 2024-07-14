@@ -8,18 +8,26 @@ const HistorialVendedorExcel = ({ data }) => {
     const filteredData = data.data.map((item) => {
       let estado = "";
 
-      // Agregar condición para el estado aquí
-      // Por ejemplo, si el estado es 2, mostrar "Venta concretada"
       if (item.estado === 2) {
         estado = "Venta concretada";
+      }
+      if (item.estado === 1) {
+        estado = "Venta No Concretada";
       }
 
       return {
         "Número de Cotización": item.numeroCotizacion,
-        Precio: item.precio,
+        Moneda: item.moneda,
         Anticipo: item.anticipo,
-        "Saldo a Financiar": item.saldoAFinanciar,
         IVA: item.IVA,
+        "Precio de Venta": item.precio,
+        "Saldo a Financiar": `${item.moneda} ${parseFloat(
+          item.saldoAFinanciar
+        ).toFixed(2)}`,
+        Cuotas: item.cuotas,
+        Financiación: `${item.moneda} ${parseFloat(item.cuotaValor).toFixed(
+          2
+        )}`,
         "Precio Final": item.PrecioFinal,
         "Fecha de Creación": item.fechaDeCreacion,
         "Fecha de Modificación": item.fechaModi,

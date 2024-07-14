@@ -17,9 +17,7 @@ const VentasExcel = ({ data }) => {
         item.saldoAFinanciar
       ).toFixed(2)}`,
       Cuotas: item.cuotas,
-      "Valor de las cuotas": `${item.moneda} ${parseFloat(
-        item.cuotaValor
-      ).toFixed(2)}`,
+      Financiación: `${item.moneda} ${parseFloat(item.cuotaValor).toFixed(2)}`,
       Anticipo: item.anticipo,
       PrecioFinal: item.PrecioFinal,
       FechaVenta: item.fechaDeCreacion,

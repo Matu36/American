@@ -76,7 +76,7 @@ export default function VentasDetail() {
         </div>
 
         <div className="detail-item">
-          <strong>Saldo:</strong> {VentaData.cuotas} Cuotas de{" "}
+          <strong>Financiación:</strong> {VentaData.cuotas} Cuotas de{" "}
           {VentaData.moneda}
           {VentaData.cuotaValor}
         </div>

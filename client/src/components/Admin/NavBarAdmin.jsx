@@ -6,51 +6,61 @@ import logo from "../../assets/img/logoAmerican.png";
 import { useMensajes } from "../../hooks/useMensajes";
 import gruagif from "../../assets/img/GRUAGIF1.gif";
 import { FaBars } from "react-icons/fa";
-import SideBarAdmin from "./SideBarAdmin";
+import SideBarResponsiva from "./SideBarResponsiva";
 
-export default function NavBarAdmin({ isOpen, onClose, onOpen }) {
+export default function NavBarAdmin() {
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
   const idUsuario = auth?.id;
   const { data } = useMensajes(idUsuario).MensajesCountQuery;
+  const [sidebar, setSideBar] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMostrarModalSideBar = () => {
+    setIsHovered(true);
+    setSideBar(true);
+  };
+
+  const handleCerrarModalSideBar = () => {
+    setSideBar(false);
+  };
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   const handleButtonClick = () => {
     navigate("/");
   };
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <nav className="navbarAdmin">
       <img src={gruagif} alt="" style={{ width: "170px", height: "140px" }} />
 
-      <button
-        onClick={onOpen}
-        className="burguer"
-        style={{
-          position: "absolute",
-          left: "10px",
-          top: "100px",
-          background: "none",
-          display: window.innerWidth >= 600 ? "none" : "block",
-        }}
-      >
-        <FaBars className="burguer-icon" />
-      </button>
-
+      {!sidebar && (
+        <button
+          onClick={handleMostrarModalSideBar}
+          onMouseLeave={handleMouseLeave}
+          onMouseEnter={handleMostrarModalSideBar}
+          className="burguer"
+          style={{
+            fontSize: "25px",
+            position: "absolute",
+            left: "0px",
+            top: "85px",
+            background: "none",
+          }}
+        >
+          <FaBars className="burguer-icon" />
+        </button>
+      )}
       <div className="sidebarAdmin__header">
+        {sidebar && (
+          <div className="sidebarAdminResponsivo">
+            <SideBarResponsiva
+              handleCerrarModalSideBar={handleCerrarModalSideBar}
+            />
+          </div>
+        )}
         <button onClick={handleButtonClick} className="topadmin__button">
           <img src={logo} alt="chef" className="sidebarAdmin__image" />
           <div>

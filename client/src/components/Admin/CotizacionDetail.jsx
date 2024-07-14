@@ -46,6 +46,8 @@ export default function CotizacionDetail() {
     Producto,
   } = cotizacionDetalle;
 
+  const cuotasNumber = Number(cuotas);
+
   const MyDocument = ({ cotizacionDetalle }) => (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -82,20 +84,23 @@ export default function CotizacionDetail() {
             <Text style={styles.label}>Anticipo: </Text>
             {moneda} {parseFloat(anticipo).toFixed(2)}
           </Text>
-          {cuotas > 1 && (
-            <Text style={styles.text}>
-              {cuotas} Cuotas de {moneda} {parseFloat(cuotaValor).toFixed(2)}
-            </Text>
-          )}
-          {cuotas <= 1 ||
-            (cuotas === null && (
+          <Text style={styles.text}>
+            <Text style={styles.label}>Financiación: </Text>
+            {(cuotasNumber === 1 || cuotasNumber === 0) && (
               <Text style={styles.text}>
                 {moneda} {parseFloat(PrecioFinal).toFixed(2)}
               </Text>
-            ))}
+            )}
+
+            {cuotasNumber > 1 && (
+              <Text style={styles.text}>
+                {cuotas} Cuotas de {moneda} {parseFloat(cuotaValor).toFixed(2)}
+              </Text>
+            )}
+          </Text>
           <Text style={styles.text}>
             <Text style={styles.label}>IVA: </Text>
-            {moneda} {parseFloat(IVA).toFixed(2)}
+            {parseFloat(IVA).toFixed(2)}
           </Text>
           <Text style={styles.text}>
             <Text style={styles.label}>Precio Final: </Text>
@@ -190,7 +195,7 @@ export default function CotizacionDetail() {
           <strong>Anticipo:</strong> {moneda} {parseFloat(anticipo).toFixed(2)}
         </p>
         <p>
-          <strong>Saldo: </strong>
+          <strong>Financiación: </strong>
           {cuotas} Cuotas de {moneda} {parseFloat(cuotaValor).toFixed(2)}
         </p>
         <p>

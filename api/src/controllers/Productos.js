@@ -1,5 +1,4 @@
 const { Productos } = require("../db.js");
-const sendEmailWithTemplate = require("../mailer/sendEmailWithTemplate");
 
 const getProductos = async (req, res) => {
   try {
@@ -8,13 +7,12 @@ const getProductos = async (req, res) => {
     return !productos
       ? res.status(404).send("No hay Productos")
       : res.send(
-          productos.map(({ id, familia, marca, modelo, imagen, imagen1 }) => ({
+          productos.map(({ id, familia, marca, modelo, precio }) => ({
             id,
             familia,
             marca,
             modelo,
-            imagen,
-            imagen1,
+            precio,
           }))
         );
   } catch (error) {
