@@ -4,15 +4,24 @@ import { SiMicrosoftexcel } from "react-icons/si";
 
 const CotizacionesExcel = ({ data }) => {
   const handleExport = () => {
-    // Crear un nuevo array con los elementos específicos
     const filteredData = data.map((item) => ({
       Categoria: item.Producto.familia,
       Marca: item.Producto.marca,
       Modelo: item.Producto.modelo,
       NroCotización: item.numeroCotizacion,
+
       Moneda: item.moneda,
+      "Precio de Venta": item.precio,
+      "Saldo a Financiar": `${item.moneda} ${parseFloat(
+        item.saldoAFinanciar
+      ).toFixed(2)}`,
+      Cuotas: item.cuotas,
+      "Valor de las cuotas": `${item.moneda} ${parseFloat(
+        item.cuotaValor
+      ).toFixed(2)}`,
+      Anticipo: item.anticipo,
       PrecioFinal: item.PrecioFinal,
-      FechaCotización: item.fechaDeCreacion,
+      FechaVenta: item.fechaDeCreacion,
       Vendedor: `${item.Usuario.nombre} ${item.Usuario.apellido}`,
       Cliente: `${item.Cliente.nombre} ${item.Cliente.apellido}`,
     }));

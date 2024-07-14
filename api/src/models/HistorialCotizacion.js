@@ -37,10 +37,7 @@ module.exports = (sequelize) => {
         type: DataTypes.DECIMAL,
         allowNull: true,
       },
-      saldo: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
+
       saldoConInteres: {
         type: DataTypes.DECIMAL,
         allowNull: true,
@@ -48,6 +45,14 @@ module.exports = (sequelize) => {
       PrecioFinal: {
         type: DataTypes.DECIMAL,
         allowNull: false,
+      },
+      cuotas: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      cuotaValor: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
       },
       fechaDeCreacion: {
         type: DataTypes.DATE,

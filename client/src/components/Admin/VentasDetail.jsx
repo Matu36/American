@@ -1,13 +1,18 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useVentas } from "../../hooks/useCotizaciones";
+import Spinner from "../../UI/Spinner";
 
 export default function VentasDetail() {
   const { id } = useParams();
   const { data: VentaData, isLoading } = useVentas(null, id).ventasQueryDetalle;
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   }
 
   if (!VentaData) {
@@ -56,7 +61,8 @@ export default function VentasDetail() {
       <div className="detail-section">
         <h3>Detalles Financieros</h3>
         <div className="detail-item">
-          <strong>Precio:</strong> {VentaData.moneda} {VentaData.precio}
+          <strong>Precio de Venta:</strong> {VentaData.moneda}{" "}
+          {VentaData.precio}
         </div>
         <div className="detail-item">
           <strong>Anticipo:</strong> {VentaData.moneda} {VentaData.anticipo}
@@ -66,17 +72,13 @@ export default function VentasDetail() {
           {VentaData.saldoAFinanciar}
         </div>
         <div className="detail-item">
-          <strong>IVA:</strong> {VentaData.moneda} {VentaData.IVA}
+          <strong>IVA:</strong> {VentaData.IVA}
         </div>
+
         <div className="detail-item">
-          <strong>Interés:</strong> {VentaData.interes * 100}%
-        </div>
-        <div className="detail-item">
-          <strong>Saldo:</strong> {VentaData.moneda} {VentaData.saldo}
-        </div>
-        <div className="detail-item">
-          <strong>Saldo con Interés:</strong> {VentaData.moneda}{" "}
-          {VentaData.saldoConInteres}
+          <strong>Saldo:</strong> {VentaData.cuotas} Cuotas de{" "}
+          {VentaData.moneda}
+          {VentaData.cuotaValor}
         </div>
         <div className="detail-item">
           <strong>Precio Final:</strong> {VentaData.moneda}{" "}

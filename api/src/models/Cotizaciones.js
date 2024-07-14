@@ -42,10 +42,7 @@ module.exports = (sequelize) => {
         type: DataTypes.DECIMAL,
         allowNull: true,
       },
-      contado: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
+
       saldoAFinanciar: {
         type: DataTypes.DECIMAL,
         allowNull: true,
@@ -62,10 +59,7 @@ module.exports = (sequelize) => {
         type: DataTypes.DECIMAL,
         allowNull: true,
       },
-      saldo: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
+
       saldoConInteres: {
         type: DataTypes.DECIMAL,
         allowNull: true,
