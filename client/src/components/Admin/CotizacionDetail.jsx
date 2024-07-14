@@ -34,6 +34,8 @@ export default function CotizacionDetail() {
     saldoAFinanciar,
     IVA,
     moneda,
+    cuotas,
+    cuotaValor,
     // interes,
     // saldo,
     // saldoConInteres,
@@ -73,17 +75,24 @@ export default function CotizacionDetail() {
           </Text>
           <Text style={styles.subHeader}>Detalle de la Cotización</Text>
           <Text style={styles.text}>
-            <Text style={styles.label}>Precio: </Text>
+            <Text style={styles.label}>Precio de Venta: </Text>
             {moneda} {parseFloat(precio).toFixed(2)}
           </Text>
           <Text style={styles.text}>
             <Text style={styles.label}>Anticipo: </Text>
             {moneda} {parseFloat(anticipo).toFixed(2)}
           </Text>
-          <Text style={styles.text}>
-            <Text style={styles.label}>Saldo a Financiar: </Text>
-            {moneda} {parseFloat(saldoAFinanciar).toFixed(2)}
-          </Text>
+          {cuotas > 1 && (
+            <Text style={styles.text}>
+              {cuotas} Cuotas de {moneda} {parseFloat(cuotaValor).toFixed(2)}
+            </Text>
+          )}
+          {cuotas <= 1 ||
+            (cuotas === null && (
+              <Text style={styles.text}>
+                {moneda} {parseFloat(PrecioFinal).toFixed(2)}
+              </Text>
+            ))}
           <Text style={styles.text}>
             <Text style={styles.label}>IVA: </Text>
             {moneda} {parseFloat(IVA).toFixed(2)}
@@ -174,28 +183,20 @@ export default function CotizacionDetail() {
       <div>
         <h3>Detalle de la Cotización</h3>
         <p>
-          <strong>Precio:</strong> {moneda} {parseFloat(precio).toFixed(2)}
+          <strong>Precio de Venta:</strong> {moneda}{" "}
+          {parseFloat(precio).toFixed(2)}
         </p>
         <p>
           <strong>Anticipo:</strong> {moneda} {parseFloat(anticipo).toFixed(2)}
         </p>
         <p>
-          <strong>Saldo a Financiar:</strong> {moneda}{" "}
-          {parseFloat(saldoAFinanciar).toFixed(2)}
+          <strong>Saldo: </strong>
+          {cuotas} Cuotas de {moneda} {parseFloat(cuotaValor).toFixed(2)}
         </p>
         <p>
           <strong>IVA:</strong> {moneda} {parseFloat(IVA).toFixed(2)}
         </p>
-        {/* <p>
-          <strong>Interés:</strong> {parseFloat(interes).toFixed(2)}%
-        </p>
-        <p>
-          <strong>Saldo:</strong> {moneda} {parseFloat(saldo).toFixed(2)}
-        </p>
-        <p>
-          <strong>Saldo con Interés:</strong> {moneda}{" "}
-          {parseFloat(saldoConInteres).toFixed(2)}
-        </p> */}
+
         <p>
           <strong>Precio Final:</strong> {moneda}{" "}
           {parseFloat(PrecioFinal).toFixed(2)}

@@ -4,11 +4,28 @@ import { useClientes } from "../../hooks/useClientes";
 import { useProducto } from "../../hooks/useProductos";
 import Select from "react-select";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
+import { useUsuario } from "../../hooks/useUsuarios";
 
 const Cotizador = () => {
   const { auth } = useAuth();
   const { mutate: cotizacionCreate } = useCotizaciones().cotizacionMutation;
   const idUsuario = auth?.id;
+
+  // CHEQUEAMOS EL ROL PARA EL INTERES //
+  const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
+
+  const handleCheckRol = () => {
+    checkRol({ idUsuario });
+  };
+
+  useEffect(() => {
+    if (idUsuario) {
+      handleCheckRol();
+    }
+  }, [idUsuario]);
+
+  const role = rolData?.data.rol;
+
   const [selectedCliente, setSelectedCliente] = useState(null);
 
   const [familias, setFamilias] = useState([]);
@@ -77,11 +94,13 @@ const Cotizador = () => {
     idProducto: "",
     precio: "",
     anticipo: 0,
-    saldoAFinanciar: "",
+    saldoAFinanciar: 0,
     IVA: 10.5,
     moneda: "",
     PrecioFinal: "",
     cuotas: 1,
+    cuotaValor: null,
+    interes: 0,
   });
 
   useEffect(() => {
@@ -109,64 +128,51 @@ const Cotizador = () => {
   };
 
   useEffect(() => {
-    const { precio, anticipo, cuotas } = formData;
-    const iva = 10.5;
-    let interesBase = 0;
-
-    switch (parseInt(cuotas)) {
-      case 2:
-        interesBase = 8;
-        break;
-      case 3:
-        interesBase = 12;
-        break;
-      case 4:
-        interesBase = 16;
-        break;
-      case 5:
-        interesBase = 20;
-        break;
-      case 6:
-        interesBase = 24;
-        break;
-      case 7:
-        interesBase = 28;
-        break;
-      case 8:
-        interesBase = 32;
-        break;
-      case 9:
-        interesBase = 36;
-        break;
-      case 10:
-        interesBase = 40;
-        break;
-      case 11:
-        interesBase = 44;
-        break;
-      case 12:
-        interesBase = 48;
-        break;
-      default:
-        interesBase = 0;
+    if (formData.cuotas > 1) {
+      setFormData((prevData) => ({
+        ...prevData,
+        interes: formData.cuotas * 3,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        interes: 0, // Deja vacío para una cuota
+      }));
     }
+  }, [formData.cuotas]);
 
-    const precioNum = parseFloat(precio) || 0;
-    const anticipoNum = parseFloat(anticipo) || 0;
-    const saldoAFinanciar = precioNum - anticipoNum;
-    const totalInteres = saldoAFinanciar * (interesBase / 100);
-    const precioConIVA = precioNum * (1 + iva / 100);
-    const PrecioFinal = precioConIVA + totalInteres;
+  useEffect(() => {
+    let precio = parseFloat(formData.precio) || 0;
+    let anticipo = parseFloat(formData.anticipo) || 0;
+    let IVA = parseFloat(formData.IVA) || 0;
+    let interes = parseFloat(formData.interes) || 0;
+    let saldoAFinanciar = (precio - anticipo) * (1 + IVA / 100);
+    let cuotaValor = null;
+    if (formData.cuotas > 0) {
+      cuotaValor = (saldoAFinanciar * (1 + interes / 100)) / formData.cuotas;
+    }
+    let PrecioFinal =
+      formData.cuotas === 1
+        ? precio * (1 + IVA / 100)
+        : saldoAFinanciar * (1 + interes / 100) + anticipo;
 
     setFormData((prevData) => ({
       ...prevData,
-      saldoAFinanciar,
-      PrecioFinal,
+      saldoAFinanciar: saldoAFinanciar.toFixed(2),
+      cuotaValor: cuotaValor !== null ? cuotaValor.toFixed(2) : null,
+      PrecioFinal: PrecioFinal.toFixed(2),
     }));
-  }, [formData.precio, formData.anticipo, formData.cuotas]);
+  }, [
+    formData.precio,
+    formData.anticipo,
+    formData.IVA,
+    formData.cuotas,
+    formData.interes,
+  ]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
     cotizacionCreate(formData);
     setFormData({
       idUsuario: idUsuario,
@@ -174,11 +180,12 @@ const Cotizador = () => {
       idProducto: "",
       precio: "",
       anticipo: 0,
-      saldoAFinanciar: "",
+      saldoAFinanciar: 0,
       IVA: 10.5,
       moneda: "",
       PrecioFinal: "",
-      cuotas: 1,
+      cuotas: 0,
+      cuotaValor: null,
     });
     setSelectedCliente(null);
     setSelectedFamilia(null);
@@ -319,7 +326,7 @@ const Cotizador = () => {
         </select>
       </div>
       <div className="form-group">
-        <label className="form-label">Precio:</label>
+        <label className="form-label">Precio de venta:</label>
         <input
           type="number"
           name="precio"
@@ -327,6 +334,17 @@ const Cotizador = () => {
           onChange={handleChange}
           required
           className="form-input"
+        />
+      </div>
+      <div className="form-group">
+        <label className="form-label">IVA (10.5%):</label>
+        <input
+          type="number"
+          name="IVA"
+          value={formData.IVA}
+          onChange={handleChange}
+          className="form-input"
+          disabled={role === "vendedor"}
         />
       </div>
       <div className="form-group">
@@ -359,6 +377,17 @@ const Cotizador = () => {
           </div>
 
           <div className="form-group">
+            <label className="form-label">Valor de Cuota:</label>
+            <input
+              type="number"
+              name="cuotaValor"
+              value={formData.cuotaValor}
+              onChange={handleChange}
+              className="form-input"
+            />
+          </div>
+
+          <div className="form-group">
             <label className="form-label">Saldo a Financiar:</label>
             <input
               type="number"
@@ -371,16 +400,23 @@ const Cotizador = () => {
           </div>
         </>
       )}
-      <div className="form-group">
-        <label className="form-label">IVA (10.5%):</label>
-        <input
-          type="number"
-          name="IVA"
-          value={formData.IVA}
-          disabled
-          className="form-input"
-        />
-      </div>
+      {role === "vendedor" ? (
+        <div className="form-group">
+          {/* Interés no visible para vendedores */}
+        </div>
+      ) : (
+        <div className="form-group">
+          <label className="form-label">Interés:</label>
+          <input
+            type="number"
+            name="interes"
+            value={formData.interes}
+            onChange={handleChange}
+            className="form-input"
+          />
+        </div>
+      )}
+
       <div className="form-group">
         <label className="form-label">Precio Final:</label>
         <input
