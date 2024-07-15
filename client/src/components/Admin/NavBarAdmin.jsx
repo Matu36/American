@@ -38,23 +38,6 @@ export default function NavBarAdmin() {
         <img src={gruagif} alt="" className="grua-img" />
       </div>
 
-      {!sidebar && (
-        <button
-          onClick={handleMostrarModalSideBar}
-          onMouseLeave={handleMouseLeave}
-          onMouseEnter={handleMostrarModalSideBar}
-          className="burguer"
-          style={{
-            fontSize: "25px",
-            position: "absolute",
-            left: "0px",
-            top: "85px",
-            background: "none",
-          }}
-        >
-          <FaBars className="burguer-icon" />
-        </button>
-      )}
       <div className="sidebarAdmin__header">
         {sidebar && (
           <div className="sidebarAdminResponsivo">
@@ -83,6 +66,23 @@ export default function NavBarAdmin() {
             <span className="navbarAdmin__badge">{data?.count}</span>
           )}
         </button>
+        {!sidebar && (
+          <button
+            onClick={handleMostrarModalSideBar}
+            onMouseLeave={handleMouseLeave}
+            onMouseEnter={handleMostrarModalSideBar}
+            className="burguer"
+            style={{
+              fontSize: "25px",
+              position: "absolute",
+              right: "0px",
+              top: "85px",
+              background: "none",
+            }}
+          >
+            <FaBars className="burguer-icon" />
+          </button>
+        )}
       </div>
     </nav>
   );

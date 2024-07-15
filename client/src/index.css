@@ -1899,6 +1899,7 @@ button:focus-visible {
 }
 
 
+
 .navbarAdmin__title {
   font-size: 1.25rem;
   font-weight: bold;
@@ -1907,6 +1908,11 @@ button:focus-visible {
 @media (max-width: 700px) {
   .navbarAdmin__title {
     font-size: 0.8rem;
+  }
+}
+@media (max-width: 500px) {
+  .navbarAdmin__title {
+    font-size: 0.6rem;
   }
 }
 
@@ -1932,6 +1938,8 @@ button:focus-visible {
   align-items: center;
   position: relative;
 }
+
+
 
 .navbarAdmin__icon {
   font-size: 1.5rem;
@@ -1962,6 +1970,9 @@ button:focus-visible {
   }
 }
 
+
+
+
 .navbarAdmin__badge {
   background-color: red;
   color: white;
@@ -1983,15 +1994,12 @@ button:focus-visible {
   cursor: pointer;
 }
 
-@media (max-width: 650px) {
-  .navbarAdmin__title {
-    margin-bottom: 1rem;
-  }
+
 
   .navbarAdmin__icons {
     margin-top: 1rem;
   }
-}
+
 
 /* SIDEBAR */
 
@@ -2039,8 +2047,10 @@ button:focus-visible {
 
 @media (max-width: 600px) {
   .sidebarAdmin__image {
-    max-width: 120%; 
-  margin-left: -2rem;
+    max-width: 140%; 
+    margin-top: 1.5rem;
+    margin-left: -1rem;
+  
   }
 }
 
@@ -2084,8 +2094,9 @@ button:focus-visible {
 
 @media (max-width: 600px) {
   .user__info {
-    font-size: 12px;
-    padding: 5px 10px;
+    font-size: 10px;
+    padding:.0 ;
+    margin-top: -6rem;
   }
 }
 
@@ -2878,11 +2889,15 @@ button:focus-visible {
   color: #ffcc00;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
+@media (max-width: 600px) {
+  .form-container1 {
+    width: 80%;
+  }
+}
 /* Estilos para los campos de entrada y select */
 .form-group {
   margin-bottom: 15px;
@@ -3406,7 +3421,7 @@ button:focus-visible {
 .sidebarAdminResponsiva {
   color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  width: 230px;
+  width: 100%;
   height: auto;
   transition: transform 0.3s ease;
   transform: translateX(0);
@@ -3447,8 +3462,7 @@ button:focus-visible {
 }
 
 .grua-container{
-  max-width: 200px;
-  margin-left: 1rem;
+  max-width: 100%;
 }
 
 .grua-img {
@@ -3456,11 +3470,17 @@ button:focus-visible {
   height: 140px; 
 }
 
-@media (max-width: 500px) {
+@media (max-width: 750px) {
   .grua-img {
     width: 100px;
-    margin-left: 1rem;
     height: 100px; 
    
+  }
+}
+
+
+@media (max-width: 500px) {
+  .navbarAdmin__icon {
+    font-size: small;
   }
 }

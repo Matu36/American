@@ -1,6 +1,7 @@
 import React from "react";
 import { useClientes } from "../../hooks/useClientes";
 import { useParams } from "react-router-dom";
+import Spinner from "../../UI/Spinner";
 
 export default function ClientesDetail() {
   const { id } = useParams();
@@ -10,7 +11,12 @@ export default function ClientesDetail() {
   ).clientesQueryDetalle;
 
   if (isLoading) {
-    return <div className="loader">Loading...</div>;
+    return (
+      <div>
+        {" "}
+        <Spinner />
+      </div>
+    );
   }
 
   const {
@@ -27,8 +33,9 @@ export default function ClientesDetail() {
   } = clienteDetalle;
 
   return (
-    <div className="clientes-detail-container">
+    <div className="form-container1">
       <h2>Detalles del Cliente</h2>
+      <br />
       <div className="detail-item">
         <strong>CUIT:</strong> {CUIT}
       </div>
@@ -57,7 +64,7 @@ export default function ClientesDetail() {
         <strong>Modificado:</strong> {fechaModi}
       </div>
       <div className="detail-item">
-        <strong>Usuario:</strong> {Usuario.nombre} {Usuario.apellido}
+        <strong>Cargado por:</strong> {Usuario.nombre} {Usuario.apellido}
       </div>
     </div>
   );
