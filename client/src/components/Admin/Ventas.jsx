@@ -136,7 +136,15 @@ export default function Ventas() {
           />
         </div>
         {!showSpinner ? (
-          <DataTable columns={columns} data={ventas} pagination striped />
+          <DataTable
+            columns={columns}
+            data={ventas}
+            pagination
+            striped
+            noDataComponent={
+              <div className="noData">Aún no hay registros ingresados</div>
+            }
+          />
         ) : (
           <Spinner loading={isLoading} />
         )}

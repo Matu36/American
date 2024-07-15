@@ -175,6 +175,9 @@ export default function ContactoProducto() {
               data={contactoProducto}
               pagination
               striped
+              noDataComponent={
+                <div className="noData">Aún no hay registros ingresados</div>
+              }
               conditionalRowStyles={conditionalRowStyles}
             />
           ) : (

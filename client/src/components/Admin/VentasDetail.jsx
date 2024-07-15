@@ -22,9 +22,9 @@ export default function VentasDetail() {
   return (
     <div className="form-container1">
       <h2>Detalle de la Venta</h2>
-
+      <br />
       <div className="detail-section">
-        <h3>Información del Producto</h3>
+        <h4>Producto</h4>
         <div className="detail-item">
           <strong>Familia:</strong> {VentaData.Producto.familia}
         </div>
@@ -35,9 +35,8 @@ export default function VentasDetail() {
           <strong>Modelo:</strong> {VentaData.Producto.modelo}
         </div>
       </div>
-
       <div className="detail-section">
-        <h3>Información del Cliente</h3>
+        <h4>Cliente</h4>
         <div className="detail-item">
           <strong>Nombre:</strong>{" "}
           {`${VentaData.Cliente.nombre} ${VentaData.Cliente.apellido}`}
@@ -46,9 +45,8 @@ export default function VentasDetail() {
           <strong>Email:</strong> {VentaData.Cliente.mail}
         </div>
       </div>
-
       <div className="detail-section">
-        <h3>Información del Vendedor</h3>
+        <h4>Vendedor</h4>
         <div className="detail-item">
           <strong>Nombre:</strong>{" "}
           {`${VentaData.Usuario.nombre} ${VentaData.Usuario.apellido}`}
@@ -57,9 +55,9 @@ export default function VentasDetail() {
           <strong>Email:</strong> {VentaData.Usuario.email}
         </div>
       </div>
-
+      <br />
       <div className="detail-section">
-        <h3>Detalles Financieros</h3>
+        <h4>Detalles Financieros</h4>
         <div className="detail-item">
           <strong>Precio de Venta:</strong> {VentaData.moneda}{" "}
           {VentaData.precio}
@@ -85,9 +83,9 @@ export default function VentasDetail() {
           {VentaData.PrecioFinal}
         </div>
       </div>
-
+      <br />
       <div className="detail-section">
-        <h3>Información de la Venta</h3>
+        <h4>Información de la Venta</h4>
         <div className="detail-item">
           <strong>Fecha de Cotización:</strong>{" "}
           {new Date(VentaData.fechaDeCreacion).toLocaleDateString()}

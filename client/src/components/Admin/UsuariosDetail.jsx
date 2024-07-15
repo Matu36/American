@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useUsuario } from "../../hooks/useUsuarios";
+import Spinner from "../../UI/Spinner";
 
 export default function UsuariosDetail() {
   const { id } = useParams();
@@ -8,7 +9,11 @@ export default function UsuariosDetail() {
   const { data: usuariosDetail, isLoading } = useUsuario(id).UsuarioDetailQuery;
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   }
 
   const { email, nombre, apellido, direccion, telefono, fechaDeRegistro } =

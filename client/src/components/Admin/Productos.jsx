@@ -112,6 +112,9 @@ export default function Productos() {
               pagination
               striped
               responsive
+              noDataComponent={
+                <div className="noData">Aún no hay registros ingresados</div>
+              }
             />
           ) : (
             <Spinner loading={isLoading} />

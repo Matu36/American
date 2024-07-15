@@ -163,7 +163,15 @@ export default function Cotizaciones() {
           />
         </div>
         {!showSpinner ? (
-          <DataTable columns={columns} data={cotizaciones} pagination striped />
+          <DataTable
+            columns={columns}
+            data={cotizaciones}
+            pagination
+            striped
+            noDataComponent={
+              <div className="noData">Aún no hay registros ingresados</div>
+            }
+          />
         ) : (
           <Spinner loading={isLoading} />
         )}

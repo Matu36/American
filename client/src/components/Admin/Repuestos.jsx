@@ -184,6 +184,9 @@ export default function Repuestos() {
                 pagination
                 striped
                 conditionalRowStyles={conditionalRowStyles}
+                noDataComponent={
+                  <div className="noData">Aún no hay registros ingresados</div>
+                }
               />
             ) : (
               <Spinner loading={isLoading} />

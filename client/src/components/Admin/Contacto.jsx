@@ -184,6 +184,9 @@ export default function Contacto() {
                 pagination
                 striped
                 conditionalRowStyles={conditionalRowStyles}
+                noDataComponent={
+                  <div className="noData">Aún no hay registros ingresados</div>
+                }
               />
             ) : (
               <Spinner loading={isLoading} />

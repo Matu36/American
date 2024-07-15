@@ -169,6 +169,9 @@ export default function Garantia() {
                 striped
                 responsive
                 conditionalRowStyles={conditionalRowStyles}
+                noDataComponent={
+                  <div className="noData">Aún no hay registros ingresados</div>
+                }
               />
             ) : (
               <Spinner loading={isLoading} />
