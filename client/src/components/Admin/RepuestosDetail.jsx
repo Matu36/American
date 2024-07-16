@@ -18,7 +18,7 @@ export default function RepuestosDetail() {
   }
   return (
     <div className="form-container1">
-      <h2>Detalle</h2>
+      <h2>Detalle del Repuesto</h2>
 
       <div style={{ marginBottom: "10px" }}>
         <strong>Nombre:</strong> {repuestoDetalle.nombre}

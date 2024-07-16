@@ -53,7 +53,7 @@ export default function MensajesRecibidos() {
       setRecibidos(mensajes);
     } else {
       const arrayCache = mensajes?.filter((oper) => {
-        const email = oper.Usuario?.email?.toLowerCase() || "";
+        const email = oper.Emisor?.email?.toLowerCase() || "";
         return email.includes(value.toLowerCase());
       });
       setRecibidos(arrayCache);
@@ -144,6 +144,9 @@ export default function MensajesRecibidos() {
             pagination
             striped
             conditionalRowStyles={conditionalRowStyles}
+            noDataComponent={
+              <div className="noData">Aún no hay registros ingresados</div>
+            }
           />
         ) : (
           <Spinner loading={isLoading} />

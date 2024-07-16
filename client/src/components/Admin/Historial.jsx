@@ -165,8 +165,16 @@ export default function Historial() {
           historialData.data.length > 0 ? (
           historialData.data.map((detalle) => (
             <div key={detalle.id}>
-              <p>
-                <strong>
+              <p style={{ fontSize: "larger" }}>
+                <strong
+                  style={{
+                    color: detalle.estado === 2 ? "lightgreen" : "inherit",
+                    textShadow:
+                      detalle.estado === 2
+                        ? "0 0 10px green, 0 0 20px green, 0 0 30px green"
+                        : "none",
+                  }}
+                >
                   {detalle.estado === 1
                     ? "Detalles de la Cotización:"
                     : "Cotización Concretada"}
@@ -178,28 +186,37 @@ export default function Historial() {
                   display: "flex",
                   flexWrap: "wrap",
                   gap: "10px",
-                  color: detalle.estado === 2 ? "green" : "inherit",
+                  color: detalle.estado === 2 ? "lightgreen" : "inherit",
                 }}
               >
-                <span>Número de Cotización: {detalle.numeroCotizacion}</span>
                 <span>
-                  Precio de Venta: {detalle.moneda} {detalle.precio}
+                  <strong>Precio de Venta:</strong> {detalle.moneda}{" "}
+                  {detalle.precio}
                 </span>
                 <span>
-                  Anticipo:{detalle.moneda} {detalle.anticipo}
+                  <strong>Anticipo:</strong> {detalle.moneda} {detalle.anticipo}
                 </span>
                 <span>
-                  Saldo a Financiar: {detalle.moneda} {detalle.saldoAFinanciar}
+                  <strong>Saldo a Financiar:</strong> {detalle.moneda}{" "}
+                  {detalle.saldoAFinanciar}
                 </span>
-                <strong>Financiación:</strong> {detalle.cuotas} Cuotas de{" "}
-                {detalle.moneda}
-                {detalle.cuotaValor}
-                <span>IVA: {detalle.IVA}</span>
                 <span>
-                  Precio Final:{detalle.moneda} {detalle.PrecioFinal}
+                  <strong>Financiación:</strong> {detalle.cuotas} Cuotas de{" "}
+                  {detalle.moneda} {detalle.cuotaValor}
                 </span>
-                <span>Fecha de Creación: {detalle.fechaDeCreacion}</span>
-                <span>Fecha de Modificación: {detalle.fechaModi}</span>
+                <span>
+                  <strong>IVA:</strong> {detalle.IVA}
+                </span>
+                <span>
+                  <strong>Precio Final:</strong> {detalle.moneda}{" "}
+                  {detalle.PrecioFinal}
+                </span>
+                <span>
+                  <strong>Fecha de Creación:</strong> {detalle.fechaDeCreacion}
+                </span>
+                <span>
+                  <strong>Fecha de Modificación:</strong> {detalle.fechaModi}
+                </span>
                 <span>
                   <strong>Producto:</strong> {detalle.familia} {detalle.marca}{" "}
                   {detalle.modelo}
@@ -248,8 +265,16 @@ export default function Historial() {
         ) : ModeloData && ModeloData.data && ModeloData.data.length > 0 ? (
           ModeloData.data.map((detalle) => (
             <div key={detalle.id}>
-              <p>
-                <strong>
+              <p style={{ fontSize: "larger" }}>
+                <strong
+                  style={{
+                    color: detalle.estado === 2 ? "lightgreen" : "inherit",
+                    textShadow:
+                      detalle.estado === 2
+                        ? "0 0 10px green, 0 0 20px green, 0 0 30px green"
+                        : "none",
+                  }}
+                >
                   {" "}
                   {detalle.estado === 1
                     ? "Detalles de la Cotización:"
@@ -262,28 +287,41 @@ export default function Historial() {
                   display: "flex",
                   flexWrap: "wrap",
                   gap: "10px",
-                  color: detalle.estado === 2 ? "green" : "inherit",
+                  color: detalle.estado === 2 ? "lightgreen" : "inherit",
                 }}
               >
-                <span>Número de Cotización: {detalle.numeroCotizacion}</span>
                 <span>
-                  Precio de Venta: {detalle.moneda} {detalle.precio}
+                  <strong>Número de Cotización:</strong>{" "}
+                  {detalle.numeroCotizacion}
                 </span>
                 <span>
-                  Anticipo: {detalle.moneda} {detalle.anticipo}
+                  <strong>Precio de Venta:</strong> {detalle.moneda}{" "}
+                  {detalle.precio}
                 </span>
                 <span>
-                  Saldo a Financiar: {detalle.moneda} {detalle.saldoAFinanciar}
+                  <strong>Anticipo:</strong> {detalle.moneda} {detalle.anticipo}
                 </span>
-                <strong>Financiación:</strong> {detalle.cuotas} Cuotas de{" "}
-                {detalle.moneda}
-                {detalle.cuotaValor}
-                <span>IVA: {detalle.IVA}</span>
                 <span>
-                  Precio Final: {detalle.moneda} {detalle.PrecioFinal}
+                  <strong>Saldo a Financiar:</strong> {detalle.moneda}{" "}
+                  {detalle.saldoAFinanciar}
                 </span>
-                <span>Fecha de Creación: {detalle.fechaDeCreacion}</span>
-                <span>Fecha de Modificación: {detalle.fechaModi}</span>
+                <span>
+                  <strong>Financiación:</strong> {detalle.cuotas} Cuotas de{" "}
+                  {detalle.moneda} {detalle.cuotaValor}
+                </span>
+                <span>
+                  <strong>IVA:</strong> {detalle.IVA}
+                </span>
+                <span>
+                  <strong>Precio Final:</strong> {detalle.moneda}{" "}
+                  {detalle.PrecioFinal}
+                </span>
+                <span>
+                  <strong>Fecha de Creación:</strong> {detalle.fechaDeCreacion}
+                </span>
+                <span>
+                  <strong>Fecha de Modificación:</strong> {detalle.fechaModi}
+                </span>
                 <span>
                   <strong>Producto:</strong> {detalle.Producto.familia}{" "}
                   {detalle.Producto.marca} {detalle.Producto.modelo}
@@ -349,11 +387,19 @@ export default function Historial() {
         ) : fechasData && fechasData.data.length > 0 ? (
           fechasData.data.map((cotizacion) => (
             <div key={cotizacion.id}>
-              <p>
-                <strong>
+              <p style={{ fontSize: "larger" }}>
+                <strong
+                  style={{
+                    color: cotizacion.estado === 2 ? "lightgreen" : "inherit",
+                    textShadow:
+                      cotizacion.estado === 2
+                        ? "0 0 10px green, 0 0 20px green, 0 0 30px green"
+                        : "none",
+                  }}
+                >
                   {" "}
                   {cotizacion.estado === 1
-                    ? "Detalles de la Cotización:"
+                    ? "Detalle de la Cotización:"
                     : "Cotización Concretada"}
                 </strong>
               </p>
@@ -363,29 +409,43 @@ export default function Historial() {
                   display: "flex",
                   flexWrap: "wrap",
                   gap: "10px",
-                  color: cotizacion.estado === 2 ? "green" : "inherit",
+                  color: cotizacion.estado === 2 ? "lightgreen" : "inherit",
                 }}
               >
-                <span>Número de Cotización: {cotizacion.numeroCotizacion}</span>
                 <span>
-                  Precio de Venta: {cotizacion.moneda} {cotizacion.precio}
+                  <strong>Número de Cotización:</strong>{" "}
+                  {cotizacion.numeroCotizacion}
                 </span>
                 <span>
-                  Anticipo:{cotizacion.moneda} {cotizacion.anticipo}
+                  <strong>Precio de Venta:</strong> {cotizacion.moneda}{" "}
+                  {cotizacion.precio}
                 </span>
                 <span>
-                  Saldo a Financiar:{cotizacion.moneda}{" "}
+                  <strong>Anticipo:</strong> {cotizacion.moneda}{" "}
+                  {cotizacion.anticipo}
+                </span>
+                <span>
+                  <strong>Saldo a Financiar:</strong> {cotizacion.moneda}{" "}
                   {cotizacion.saldoAFinanciar}
                 </span>
-                <strong>Financiación:</strong> {cotizacion.cuotas} Cuotas de{" "}
-                {cotizacion.moneda}
-                {cotizacion.cuotaValor}
-                <span>IVA: {cotizacion.IVA}</span>
                 <span>
-                  Precio Final:{cotizacion.moneda} {cotizacion.PrecioFinal}
+                  <strong>Financiación:</strong> {cotizacion.cuotas} Cuotas de{" "}
+                  {cotizacion.moneda} {cotizacion.cuotaValor}
                 </span>
-                <span>Fecha de Creación: {cotizacion.fechaDeCreacion}</span>
-                <span>Fecha de Modificación: {cotizacion.fechaModi}</span>
+                <span>
+                  <strong>IVA:</strong> {cotizacion.IVA}
+                </span>
+                <span>
+                  <strong>Precio Final:</strong> {cotizacion.moneda}{" "}
+                  {cotizacion.PrecioFinal}
+                </span>
+                <span>
+                  <strong>Fecha de Creación:</strong>{" "}
+                  {cotizacion.fechaDeCreacion}
+                </span>
+                <span>
+                  <strong>Fecha de Modificación:</strong> {cotizacion.fechaModi}
+                </span>
                 <span>
                   <strong>Producto:</strong> {cotizacion.Producto?.marca}{" "}
                   {cotizacion.Producto?.modelo}

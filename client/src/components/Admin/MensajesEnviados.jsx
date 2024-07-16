@@ -109,7 +109,15 @@ export default function MensajesEnviados() {
           />
         </div>
         {!showSpinner ? (
-          <DataTable columns={columns} data={enviados} pagination striped />
+          <DataTable
+            columns={columns}
+            data={enviados}
+            pagination
+            striped
+            noDataComponent={
+              <div className="noData">Aún no hay registros ingresados</div>
+            }
+          />
         ) : (
           <Spinner loading={isLoading} />
         )}

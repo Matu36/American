@@ -159,10 +159,11 @@ export default function ContactoProducto() {
       <div>
         <>
           <div className="form-group" style={{ maxWidth: "60%" }}>
+            <h2 className="tituloCompo">Contacto por Producto</h2> <br />
             <input
               type="text"
               className="form-input"
-              placeholder="Buscar por APELLIDO O EMAIL"
+              placeholder="Buscar por RAZÓN SOCIAL O EMAIL"
               onChange={handleOnChange}
               value={search}
               autoComplete="off"

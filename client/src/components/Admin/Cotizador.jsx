@@ -27,11 +27,9 @@ const Cotizador = () => {
   const role = rolData?.data.rol;
 
   const [selectedCliente, setSelectedCliente] = useState(null);
-
   const [familias, setFamilias] = useState([]);
   const [marcas, setMarcas] = useState([]);
   const [modelos, setModelos] = useState([]);
-
   const [selectedFamilia, setSelectedFamilia] = useState(null);
   const [selectedMarca, setSelectedMarca] = useState(null);
   const [selectedModelo, setSelectedModelo] = useState(null);
@@ -172,7 +170,6 @@ const Cotizador = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     cotizacionCreate(formData);
     setFormData({
       idUsuario: idUsuario,

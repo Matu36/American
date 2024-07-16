@@ -84,7 +84,7 @@ const login = async (req, res) => {
         !requestUser ||
         !(await bcrypt.compare(req.body.password, requestUser.password))
       ) {
-        res.status(403).send({ error: "Wrong email or password" });
+        return res.status(403).send({ error: "Wrong email or password" });
       }
     }
 
@@ -105,7 +105,7 @@ const login = async (req, res) => {
   } catch (error) {
     console.log(error);
     // Devolver un error con el estado 500 (Internal Server Error)
-    res.status(500).send({ error: error, status: "Error" });
+    return res.status(500).send({ error: error, status: "Error" });
   }
 };
 

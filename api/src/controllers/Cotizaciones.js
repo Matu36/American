@@ -264,7 +264,7 @@ const putCotizaciones = async (req, res) => {
     });
 
     const usuario = await Usuarios.findOne({
-      where: { id: cotizacion.idCliente },
+      where: { id: cotizacion.idUsuario },
       attributes: ["nombre", "apellido"],
     });
 
@@ -333,6 +333,11 @@ const updateCotizacionEstado = async (req, res) => {
       attributes: ["nombre", "apellido", "mail"],
     });
 
+    const usuario = await Usuarios.findOne({
+      where: { id: cotizacion.idUsuario },
+      attributes: ["nombre", "apellido"],
+    });
+
     // Obtener datos del producto
     const producto = await Productos.findOne({
       where: { id: cotizacion.idProducto },
@@ -351,6 +356,8 @@ const updateCotizacionEstado = async (req, res) => {
       anticipo: cotizacion.anticipo,
       saldoAFinanciar: cotizacion.saldoAFinanciar,
       IVA: cotizacion.IVA,
+      cuotas: cotizacion.cuotas,
+      cuotaValor: cotizacion.cuotaValor,
       moneda: cotizacion.moneda,
       interes: cotizacion.interes,
       saldo: cotizacion.saldo,
@@ -365,6 +372,8 @@ const updateCotizacionEstado = async (req, res) => {
       marca: producto.marca,
       modelo: producto.modelo,
       fechaModi: new Date(),
+      apellidoVendedor: usuario.apellido,
+      nombreVendedor: usuario.nombre,
     });
 
     return res.status(200).send("La cotización se concretó con éxito.");
@@ -690,6 +699,7 @@ const filtrarCotizacionesPorFecha = async (req, res) => {
           attributes: ["marca", "modelo"],
         },
       ],
+      order: [["numeroCotizacion", "ASC"]],
     });
 
     if (!cotizaciones || cotizaciones.length === 0) {
@@ -733,6 +743,7 @@ const getCotizacionesPorModelo = async (req, res) => {
           attributes: ["nombre", "apellido"],
         },
       ],
+      order: [["numeroCotizacion", "ASC"]],
     });
 
     if (!cotizaciones || cotizaciones.length === 0) {

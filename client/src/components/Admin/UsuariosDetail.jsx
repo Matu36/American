@@ -21,7 +21,7 @@ export default function UsuariosDetail() {
 
   return (
     <div className="form-container1">
-      <h2>Detalles del Usuario</h2>
+      <h2>Detalle del Usuario</h2>
       <br />
       <div>
         <strong>Email:</strong> {email}

@@ -12,7 +12,7 @@ export default function ContactoDetail() {
   }
   return (
     <div className="form-container1">
-      <h2>Detalle</h2>
+      <h2>Detalle del Contacto</h2>
 
       <div style={{ marginBottom: "10px" }}>
         <strong>Nombre:</strong> {contactoDetalle.nombre}

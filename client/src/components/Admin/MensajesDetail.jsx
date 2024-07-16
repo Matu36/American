@@ -1,6 +1,7 @@
 import React from "react";
 import { useMensajes } from "../../hooks/useMensajes";
 import { useParams } from "react-router-dom";
+import Spinner from "../../UI/Spinner";
 
 export default function MensajesDetail() {
   const { id } = useParams();
@@ -10,10 +11,15 @@ export default function MensajesDetail() {
   ).MensajesDetailQuery;
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   }
 
   const { Mensaje, fechaDeEnvio } = mensajesDetail.mensaje;
+
   return (
     <div className="form-container1">
       <h2>Detalles del Mensaje</h2>

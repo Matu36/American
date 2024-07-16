@@ -34,36 +34,36 @@ export default function ClientesDetail() {
 
   return (
     <div className="form-container1">
-      <h2>Detalles del Cliente</h2>
+      <h2>Detalle del Cliente</h2>
       <br />
-      <div className="detail-item">
+      <div style={{ marginBottom: "10px" }}>
         <strong>CUIT:</strong> {CUIT}
       </div>
-      <div className="detail-item">
+      <div style={{ marginBottom: "10px" }}>
         <strong>Razón Social:</strong> {razonSocial}
       </div>
-      <div className="detail-item">
+      <div style={{ marginBottom: "10px" }}>
         <strong>Domicilio:</strong> {domicilio}
       </div>
-      <div className="detail-item">
+      <div style={{ marginBottom: "10px" }}>
         <strong>Nombre:</strong> {nombre}
       </div>
-      <div className="detail-item">
+      <div style={{ marginBottom: "10px" }}>
         <strong>Apellido:</strong> {apellido}
       </div>
-      <div className="detail-item">
+      <div style={{ marginBottom: "10px" }}>
         <strong>Email:</strong> {mail}
       </div>
-      <div className="detail-item">
+      <div style={{ marginBottom: "10px" }}>
         <strong>Teléfono:</strong> {telefono}
       </div>
-      <div className="detail-item">
+      <div style={{ marginBottom: "10px" }}>
         <strong>Creado:</strong> {fechaDeCreacion}
       </div>
-      <div className="detail-item">
+      <div style={{ marginBottom: "10px" }}>
         <strong>Modificado:</strong> {fechaModi}
       </div>
-      <div className="detail-item">
+      <div style={{ marginBottom: "10px" }}>
         <strong>Cargado por:</strong> {Usuario.nombre} {Usuario.apellido}
       </div>
     </div>

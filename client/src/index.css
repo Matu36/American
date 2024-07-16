@@ -59,6 +59,7 @@ h1 {
 
 .tituloCompo {
   font-family: "merri";
+display: flex;
 }
 
 button {
@@ -1957,6 +1958,13 @@ button:focus-visible {
   font-size: 0.75rem;
 }
 
+@media (max-width: 600px) {
+  .navbarAdmin__badge {
+    font-size: 0.25rem;
+    right: -8px;
+  }
+}
+
 
 @media (max-width: 777px) {
   .navbarAdmin__icons {
@@ -2095,8 +2103,9 @@ button:focus-visible {
 @media (max-width: 600px) {
   .user__info {
     font-size: 10px;
-    padding:.0 ;
-    margin-top: -6rem;
+    padding:.0;
+    margin-right: 1.5rem;
+    margin-top: -4rem;
   }
 }
 
@@ -2893,6 +2902,9 @@ button:focus-visible {
   gap: 20px;
 }
 
+
+
+
 @media (max-width: 600px) {
   .form-container1 {
     width: 80%;
@@ -3496,3 +3508,4 @@ button:focus-visible {
   border: 1px solid #ffcc00;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
+

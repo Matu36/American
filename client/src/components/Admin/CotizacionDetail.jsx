@@ -159,7 +159,7 @@ export default function CotizacionDetail() {
 
   return (
     <div className="form-container1">
-      <h2>Detalles de Cotización</h2>
+      <h2>Detalle de Cotización</h2>
       <br />
 
       <div>
@@ -186,7 +186,7 @@ export default function CotizacionDetail() {
       </div>
 
       <div>
-        <h3>Detalle de la Cotización</h3>
+        <h3>Detalle Financiero</h3>
         <p>
           <strong>Precio de Venta:</strong> {moneda}{" "}
           {parseFloat(precio).toFixed(2)}

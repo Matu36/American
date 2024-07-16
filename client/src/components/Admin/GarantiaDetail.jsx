@@ -28,60 +28,54 @@ export default function GarantiaDetail() {
 
   return (
     <div className="form-container1">
-      <h3>Detalles de la Garantía</h3>
-
-      <div className="detail-section">
-        <h4>Información del Cliente</h4>
-        <div className="detail-item">
+      <h3>Detalle de la Garantía</h3>
+      <br />
+      <div style={{ marginBottom: "10px" }}>
+        <div style={{ marginBottom: "10px" }}>
           <strong>Nombre:</strong> {nombre}
         </div>
-        <div className="detail-item">
+        <div style={{ marginBottom: "10px" }}>
           <strong>Apellido:</strong> {apellido}
         </div>
-        <div className="detail-item">
+        <div style={{ marginBottom: "10px" }}>
           <strong>Empresa:</strong> {empresa}
         </div>
-        <div className="detail-item">
+        <div style={{ marginBottom: "10px" }}>
           <strong>Email:</strong> {email}
         </div>
-        <div className="detail-item">
+        <div style={{ marginBottom: "10px" }}>
           <strong>Teléfono:</strong> {telefono}
         </div>
       </div>
 
-      <div className="detail-section">
-        <h4>Detalles de la Máquina</h4>
-        <div className="detail-item">
-          <strong>Tipo de Máquina:</strong> {tipoDeMaquina}
-        </div>
-        <div className="detail-item">
-          <strong>Marca:</strong> {marca}
-        </div>
-        <div className="detail-item">
-          <strong>Modelo:</strong> {modelo}
-        </div>
-        <div className="detail-item">
-          <strong>Número de Chasis:</strong> {numeroDeChasis}
-        </div>
-        <div className="detail-item">
-          <strong>Fecha de Entrega del Equipo:</strong>{" "}
-          {new Date(fechaEntregaDelEquipo).toLocaleDateString()}
-        </div>
-        <div className="detail-item">
-          <strong>Ubicación:</strong> {ubicacion}
-        </div>
-        <div className="detail-item">
-          <strong>Cantidad de Horas (Horómetro):</strong>{" "}
-          {cantidadHorasHorometro}
-        </div>
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Tipo de Máquina:</strong> {tipoDeMaquina}
+      </div>
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Marca:</strong> {marca}
+      </div>
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Modelo:</strong> {modelo}
+      </div>
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Número de Chasis:</strong> {numeroDeChasis}
+      </div>
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Fecha de Entrega del Equipo:</strong>{" "}
+        {new Date(fechaEntregaDelEquipo).toLocaleDateString()}
+      </div>
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Ubicación:</strong> {ubicacion}
+      </div>
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Cantidad de Horas (Horómetro):</strong> {cantidadHorasHorometro}
+      </div>
+      <br />
+      <h5>Detalle de la Falla</h5>
+      <div style={{ marginBottom: "10px" }}>
+        <p>{falla}</p>
       </div>
 
-      <div className="detail-section">
-        <h4>Detalle de la Falla</h4>
-        <div className="detail-item">
-          <p>{falla}</p>
-        </div>
-      </div>
       <div className="contactoDerivado">
         <h2>Derivado a:</h2>
         <p>
