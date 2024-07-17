@@ -161,7 +161,7 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
           <img src={logo} alt="" />
           <div className="search-bar">
             <button className="search-button" onClick={handleSearch}>
-              <FiSearch style={{ color: "grey" }} />
+              <FiSearch style={{ color: "grey", fontSize: "22px" }} />
             </button>
             <input
               className="inputnav"

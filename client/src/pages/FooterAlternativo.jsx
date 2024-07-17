@@ -90,7 +90,7 @@ export default function FooterAlternativo() {
             <button onClick={handleMostrarModalGarantia}>Garantía</button>
           </div>
           <div>
-            <button onClick={handleMostrarModalAbout}>Nosotros</button>
+            <button onClick={handleMostrarModalAbout}>Empresa</button>
           </div>
 
           <br />

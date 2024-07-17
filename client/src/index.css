@@ -1199,6 +1199,8 @@ button:focus-visible {
   padding-left: 0;
   border: none;
   width: 40%;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
   margin: 0 auto;
   margin-top: 50px;
   font-size: 20px;
@@ -1393,6 +1395,7 @@ button:focus-visible {
 }
 .search-bar {
   display: flex;
+  justify-content: flex-end;
   align-items: flex-end;
   transition: border-bottom 0.5s ease;
   width: 35%;
@@ -1405,20 +1408,23 @@ button:focus-visible {
 }
 
 .inputnav {
-  padding: 8px;
+ 
+  padding: 10px;
   font-size: 16px;
   color: #fff;
   background-color: #333;
   border: none;
   outline: none;
-  width: 80%;
-  border-radius: 5px;
+  width: 40%;
+  border-radius: 20px;
   margin-top: 2.5rem;
 }
 
 .inputnav::placeholder {
   color: #ccc;
 }
+
+
 @media screen and (max-width: 850px) {
   .white-bar {
     flex-direction: column;
