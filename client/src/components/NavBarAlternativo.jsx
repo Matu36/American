@@ -159,7 +159,9 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
       <div className="navbar-container">
         {showLogOutMessage && <LogOutMessage />}
         <div className="white-bar">
-          <img src={logo} alt="" />
+          <div className="americanimg">
+            <img src={logo} alt="" />
+          </div>
           <HeaderNavBar />
           <div className="search-bar">
             <button className="search-button" onClick={handleSearch}>
