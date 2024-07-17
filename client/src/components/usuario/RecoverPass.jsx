@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Global } from "../../helpers/Global";
 
 const RecoverPass = ({ handleCerrarModalRecover }) => {
   const [email, setEmail] = useState("");
@@ -66,7 +65,7 @@ const RecoverPass = ({ handleCerrarModalRecover }) => {
           placeholder="Ingresa tu correo electrónico"
           required
         />
-        <button className="buttonrecover" type="submit">
+        <button className="button-registro" type="submit">
           Restablecer contraseña
         </button>
       </form>

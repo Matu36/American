@@ -57,7 +57,7 @@ const registro = async (req, res) => {
 const login = async (req, res) => {
   try {
     if (!req.body?.email || !req.body?.password)
-      throw { status: 43, message: "Missing email or password" };
+      throw { status: 43, message: "Faltan completar las credenciales" };
 
     // Verificar si la contraseña proporcionada es un hash o una contraseña en texto plano
     const isPasswordHash = req.body.password.length === 60;
@@ -84,7 +84,9 @@ const login = async (req, res) => {
         !requestUser ||
         !(await bcrypt.compare(req.body.password, requestUser.password))
       ) {
-        return res.status(403).send({ error: "Wrong email or password" });
+        return res
+          .status(403)
+          .send({ error: "Las credenciales son incorrectas" });
       }
     }
 

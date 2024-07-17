@@ -7,10 +7,30 @@ export default function Registro({ handleCerrarModalRegistro }) {
   const { form, changed } = useForm({});
   const [saved, setSaved] = useState("not_sended");
   const [showWelcomeMessage, setShowWelcomeMessage] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return regex.test(password);
+  };
 
   const saveUser = async (e) => {
     e.preventDefault();
-    let newUser = form;
+    if (!validatePassword(password)) {
+      setErrorMessage(
+        "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas y números."
+      );
+      return;
+    }
+    if (password !== confirmPassword) {
+      setErrorMessage("Las contraseñas no coinciden.");
+      return;
+    }
+
+    let newUser = { ...form, password };
+    setErrorMessage("");
 
     const request = await fetch(
       `${import.meta.env.VITE_BACKEND_URL}usuarios/registro`,
@@ -29,7 +49,7 @@ export default function Registro({ handleCerrarModalRegistro }) {
     }
     const data = await request.json();
 
-    if (data.status == "success") {
+    if (data.status === "success") {
       setSaved("saved");
       setShowWelcomeMessage(true);
     } else {
@@ -38,7 +58,6 @@ export default function Registro({ handleCerrarModalRegistro }) {
   };
 
   useEffect(() => {
-    // Después de 3 segundos, ocultar el mensaje de bienvenida
     if (showWelcomeMessage) {
       const timer = setTimeout(() => {
         setShowWelcomeMessage(false);
@@ -56,18 +75,24 @@ export default function Registro({ handleCerrarModalRegistro }) {
           X
         </button>
       </div>
-      <div className="datos">
-        <h4>Ingresá tus datos</h4>
-      </div>
-      <form className="registro" onSubmit={saveUser}>
-        <div className="columna">
-          <div className="registroform">
-            <label htmlFor="email">
-              Email<span className="required">*</span>
-            </label>
-            <input type="email" name="email" onChange={changed} required />
-          </div>
 
+      <h4>Ingresá tus datos</h4>
+
+      <br />
+      <form className="registro" onSubmit={saveUser}>
+        <div
+          className="registroform"
+          style={{ display: "block", justifyContent: "center" }}
+        >
+          <label
+            style={{ display: "flex", justifyContent: "center" }}
+            htmlFor="email"
+          >
+            Email<span className="required">*</span>
+          </label>
+          <input type="email" name="email" onChange={changed} required />
+        </div>
+        <div className="columna">
           <div className="registroform">
             <label htmlFor="contraseña">
               Contraseña<span className="required">*</span>
@@ -75,44 +100,68 @@ export default function Registro({ handleCerrarModalRegistro }) {
             <input
               type="password"
               name="password"
-              onChange={changed}
+              onChange={(e) => {
+                changed(e);
+                setPassword(e.target.value);
+              }}
               required
             />
           </div>
-
           <div className="registroform">
             <label htmlFor="nombre">Nombre</label>
             <input type="text" name="nombre" onChange={changed} />
-          </div>
-        </div>
-        <div className="columna">
-          <div className="registroform">
-            <label htmlFor="apellidos">Apellidos</label>
-            <input type="text" name="apellido" onChange={changed} />
-          </div>
-          <div className="registroform">
-            <label htmlFor="telefono">Teléfono</label>
-            <input type="text" name="telefono" onChange={changed} />
           </div>
           <div className="registroform">
             <label htmlFor="direccion">Dirección</label>
             <input type="text" name="direccion" onChange={changed} />
           </div>
         </div>
+        <div className="columna">
+          <div className="registroform">
+            <label htmlFor="confirmarContraseña">
+              Repetir Contraseña<span className="required">*</span>
+            </label>
+            <input
+              type="password"
+              name="confirmPassword"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="registroform">
+            <label htmlFor="apellidos">Apellidos</label>
+            <input type="text" name="apellido" onChange={changed} />
+          </div>
+          <div className="registroform">
+            <label htmlFor="telefono">Teléfono</label>
+            <input type="number" name="telefono" onChange={changed} />
+          </div>
+        </div>
+
+        {errorMessage && (
+          <div className="error-message">
+            <strong>{errorMessage}</strong>
+          </div>
+        )}
+        {saved === "error" && (
+          <div className="error-message">Error al registrarse</div>
+        )}
+        {saved === "400" && (
+          <div className="error-message">
+            El email ya se encuentra registrado
+          </div>
+        )}
 
         <input type="submit" value="Registrate" className="button-registro" />
       </form>
       <br />
       {showWelcomeMessage && (
         <div className="welcome-message">
-          <img src={logo} alt="" />
-          <p>Ya estas registrado en AMERICAN VIAL!</p>
+          <img src={logo} alt="Logo" />
+          <p>Ya estás registrado en AMERICAN VIAL!</p>
         </div>
       )}
-      <span>{saved == "error" ? "Error al registrarse" : null}</span>
-      <span>
-        {saved == "400" ? "El email ya se encuentra registrado" : null}
-      </span>
     </div>
   );
 }

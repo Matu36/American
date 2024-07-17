@@ -41,44 +41,46 @@ export default function Login({ handleCerrarModalLogin }) {
 
     //Peticion al backend
 
-    const request = await fetch(
-      `${import.meta.env.VITE_BACKEND_URL}usuarios/login`,
-      {
-        method: "POST",
-        body: JSON.stringify(userToLogin),
-        headers: {
-          "Content-type": "application/json",
-        },
-      }
-    );
-
-    const data = await request.json();
-
-    const loggedUser = {
-      apellido: data.loggedUser.apellido,
-      direccion: data.loggedUser.direccion,
-      email: data.loggedUser.email,
-      id: data.loggedUser.id,
-      nombre: data.loggedUser.nombre,
-      telefono: data.loggedUser.telefono,
-    };
-
-    if (data.status == "success") {
-      //Persistir los datos en el LocalStorage
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(loggedUser));
-      setSaved("login");
-      setShowWelcomeMessage(true);
-    } else if (data.status === 43) {
-      // Mostrar mensaje de error específico para código 403
-      setErrorMessage(
-        "Las credenciales son incorrectas. Por favor, verifícalas e inténtalo de nuevo."
+    try {
+      // Petición al backend
+      const request = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}usuarios/login`,
+        {
+          method: "POST",
+          body: JSON.stringify(userToLogin),
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
       );
-      setSaved("error");
-    } else {
-      // Otros códigos de error no manejados
+
+      const data = await request.json();
+
+      if (request.ok && data.status === "success") {
+        const loggedUser = {
+          apellido: data.loggedUser.apellido,
+          direccion: data.loggedUser.direccion,
+          email: data.loggedUser.email,
+          id: data.loggedUser.id,
+          nombre: data.loggedUser.nombre,
+          telefono: data.loggedUser.telefono,
+        };
+
+        // Persistir los datos en el LocalStorage
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(loggedUser));
+        setSaved("login");
+        setShowWelcomeMessage(true);
+      } else {
+        setErrorMessage(
+          data.error ||
+            "Las credenciales son incorrectas. Por favor, verifícalas e inténtalo de nuevo."
+        );
+        setSaved("error");
+      }
+    } catch (error) {
       setErrorMessage(
-        "Las credenciales son incorrectas. Por favor, verifícalas e inténtalo de nuevo."
+        "Error al conectarse al servidor. Por favor, inténtalo de nuevo más tarde."
       );
       setSaved("error");
     }
@@ -123,15 +125,17 @@ export default function Login({ handleCerrarModalLogin }) {
               <input type="password" name="password" onChange={changed} />
             </div>
 
-            <span>{saved == "error" ? "Error al registrarse" : null}</span>
             {saved === "error" && (
-              <strong style={{ color: "red" }}>{errorMessage}</strong>
+              <div className="errorLogin">
+                <span className="mainError">Error al Ingresar</span>
+                <strong className="detailedError">{errorMessage}</strong>
+              </div>
             )}
 
             <input type="submit" value="Ingresar" className="form-submit" />
           </form>
           <button onClick={handleMostrarModalRecover}>
-            <span style={{ color: "blue" }}>¿Olvidaste tu contraeña?</span>
+            <span style={{ color: "black" }}>¿Olvidaste tu contraeña?</span>
           </button>
           {recover && (
             <div className="modal">
@@ -149,12 +153,19 @@ export default function Login({ handleCerrarModalLogin }) {
               <p>Bienvenido a American Vial!</p>
             </div>
           )}
-          <div>
-            <span style={{ color: "blue" }}>
+
+          <div style={{ marginTop: "1rem" }}>
+            <span style={{ color: "#ffcc00", fontFamily: "merri" }}>
               ¿Aún no pertenecés a American Vial?
             </span>
           </div>
-          <button onClick={handleMostrarModalRegistro}>Registráte</button>
+
+          <button
+            style={{ fontSize: "larger", fontFamily: "merri" }}
+            onClick={handleMostrarModalRegistro}
+          >
+            Registráte
+          </button>
         </div>
       )}
 
