@@ -1397,10 +1397,11 @@ button:focus-visible {
   align-items: flex-end;
   transition: border-bottom 0.5s ease;
   width: 35%;
+  margin-top: 1.5rem;
 }
 
 .fauser {
-  margin-top: 2.5rem;
+  margin-top: 4rem;
 }
 
 .inputnav {
