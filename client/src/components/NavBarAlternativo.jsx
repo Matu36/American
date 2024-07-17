@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useProducto } from "../hooks/useProductos";
 import { useUsuario } from "../hooks/useUsuarios";
 import LogOutMessage from "../pages/LogOutMessage";
+import HeaderNavBar from "./HeaderNavBar";
 
 export default function NavBarAlternativo({ onSearchByMarca }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -159,6 +160,7 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
         {showLogOutMessage && <LogOutMessage />}
         <div className="white-bar">
           <img src={logo} alt="" />
+          <HeaderNavBar />
           <div className="search-bar">
             <button className="search-button" onClick={handleSearch}>
               <FiSearch style={{ color: "grey", fontSize: "22px" }} />
@@ -201,7 +203,6 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
               </div>
             )}
           </div>
-
           <div>
             {Object.keys(auth).length > 0 ? (
               <div className="user-menu-container">
