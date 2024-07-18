@@ -11,6 +11,9 @@ import { useProducto } from "../hooks/useProductos";
 import { useUsuario } from "../hooks/useUsuarios";
 import LogOutMessage from "../pages/LogOutMessage";
 import HeaderNavBar from "./HeaderNavBar";
+import Contact from "./Contact";
+import Garantia from "./Garantia";
+import AboutUs from "./AboutUs";
 
 export default function NavBarAlternativo({ onSearchByMarca }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,6 +23,33 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
   const [edit, setEdit] = useState(false);
   const [login, setLogin] = useState(false);
   const [showLogOutMessage, setShowLogOutMessage] = useState(false);
+  const [contact, setContact] = useState(false);
+  const [garantia, setGarantia] = useState(false);
+  const [modal, setModal] = useState(false);
+
+  const handleMostrarModalGarantia = () => {
+    setGarantia(true);
+  };
+
+  const handleCerrarModalGarantia = () => {
+    setGarantia(false);
+  };
+
+  const handleMostrarModalAbout = () => {
+    setModal(true);
+  };
+
+  const handleCerrarModalAbout = () => {
+    setModal(false);
+  };
+
+  const handleMostrarModalContact = () => {
+    setContact(true);
+  };
+
+  const handleCerrarModalContact = () => {
+    setContact(false);
+  };
 
   const idUsuario = auth?.id;
 
@@ -27,6 +57,10 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
 
   const handleCheckRol = () => {
     checkRol({ idUsuario });
+  };
+
+  const navigateToHome = () => {
+    navigate("/");
   };
 
   useEffect(() => {
@@ -156,13 +190,42 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
           />
         </div>
       )}
+
+      {garantia && (
+        <div className="modal">
+          <Garantia handleCerrarModalGarantia={handleCerrarModalGarantia} />
+        </div>
+      )}
+      {contact && (
+        <div className="modal">
+          <Contact handleCerrarModalContact={handleCerrarModalContact} />
+        </div>
+      )}
+      {modal && (
+        <div className="modal">
+          <AboutUs handleCerrarModalAbout={handleCerrarModalAbout} />
+        </div>
+      )}
       <div className="navbar-container">
         {showLogOutMessage && <LogOutMessage />}
         <div className="white-bar">
-          <div className="americanimg">
+          <div
+            className="americanimg"
+            onClick={navigateToHome}
+            style={{ cursor: "pointer" }}
+          >
             <img src={logo} alt="" />
           </div>
-          <HeaderNavBar />
+
+          <HeaderNavBar
+            handleMostrarModalAbout={handleMostrarModalAbout}
+            handleCerrarModalAbout={handleCerrarModalAbout}
+            handleMostrarModalContact={handleMostrarModalContact}
+            handleCerrarModalContact={handleCerrarModalContact}
+            handleMostrarModalGarantia={handleMostrarModalGarantia}
+            handleCerrarModalGarantia={handleCerrarModalGarantia}
+          />
+
           <div className="search-bar">
             <button className="search-button" onClick={handleSearch}>
               <FiSearch style={{ color: "grey", fontSize: "22px" }} />

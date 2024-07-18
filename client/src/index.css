@@ -1386,7 +1386,7 @@ button:focus-visible {
   padding: 10px 0;
   text-align: center;
   display: flex;
-  height: 180px;
+  height: 150px;
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
@@ -1402,7 +1402,7 @@ button:focus-visible {
 }
 
 .fauser {
-  /* margin-top: 4rem; */
+  margin-top: -0.5rem;
 }
 
 .inputnav {
@@ -1433,7 +1433,7 @@ button:focus-visible {
   top: 0;
   left: 0;
   width: 100%;
-  height: 120px;
+  height: 150px;
   display: flex;
 }
 
@@ -3508,12 +3508,12 @@ button:focus-visible {
 
 .headerNaBar {
   position: absolute;
-  top: 130px;
+  top: 110px;
   left: 50%;
   transform: translateX(-50%);
   color: white;
   font-family: "Merri", sans-serif;
-}
+  max-width: 100%}
 
 .headerNaBar button {
   margin-right: 20px;
