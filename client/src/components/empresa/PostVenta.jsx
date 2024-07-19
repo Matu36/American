@@ -65,12 +65,12 @@ export default function PostVenta() {
   return (
     <Layout onSearchByMarca={handleSearchByMarca}>
       <div className="postVentaContainer">
-        <img src={postventa} alt="PostVenta" className="postVentaImage" />
+        <img src={postventa} alt="PostVenta" className="large-images" />
         <h1 className="postVentaTitle">POSTVENTA</h1>
         <p className="postVentaText">
           Contamos con más de 15 años de respaldo en el Servicio de PostVenta.
         </p>
-        <img src={camioneta} alt="Camioneta" className="postVentaImage" />
+        <img src={camioneta} alt="Camioneta" className="large-images" />
         <h2 className="postVentaSubtitle">
           Por qué hacer su servicio de PostVenta con nosotros?
         </h2>
@@ -88,7 +88,7 @@ export default function PostVenta() {
             puntos estratégicos de todo el país.
           </li>
         </ul>
-        <img src={garantia} alt="Garantía" className="postVentaImage" />
+        <img src={garantia} alt="Garantía" style={{ width: "20%" }} />
         <div className="postVentaFooter">
           <h3>LLEVAMOS MAS DE 10000 MAQUINAS VENDIDAS</h3>
           <h3>CON MAS DE 25 MILLONES DE HORAS DE USO,</h3>

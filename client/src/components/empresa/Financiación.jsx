@@ -103,8 +103,8 @@ export default function Financiación() {
             )}
           </div>
         )}
-        <div>
-          <button className="button-submit" onClick={handleMostrarModalContact}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button className="submit-button" onClick={handleMostrarModalContact}>
             Contacto
           </button>
         </div>

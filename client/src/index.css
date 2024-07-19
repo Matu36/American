@@ -3570,8 +3570,8 @@ button:focus-visible {
 
 .postVentaContainer {
   padding: 20px;
-  background-color: black;
-  color: #ffc107;
+  background-color: white;
+  color: black;
   font-family: "Merri", sans-serif;
   text-align: center;
 }
@@ -3642,6 +3642,73 @@ button:focus-visible {
     font-size: 1rem;
   }
 }
+
+.american-repuestos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.large-images {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.large-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.grid-images {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+}
+
+.grid-image {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .grid-images {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-images {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.grid-imagesdist {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+}
+
+.grid-imagedist {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .grid-imagesdist {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-imagesdist {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 
 
 
