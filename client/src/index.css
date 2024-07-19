@@ -3506,17 +3506,142 @@ button:focus-visible {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
+
+
+  .headerNaBar button {
+    margin-right: 20px;
+    background: none;
+    color: white;
+    border: none; /* Asegúrate de que no haya borde */
+    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+    transition: background-color 0.3s; /* Suaviza la transición del hover */
+  }
+  
+  .headerNaBar button:hover {
+    background-color: #ffc107; /* Color de fondo al hacer hover */
+  } 
+
+
 .headerNaBar {
   position: absolute;
-  top: 110px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
   color: white;
   font-family: "Merri", sans-serif;
-  max-width: 100%}
-
-.headerNaBar button {
-  margin-right: 20px;
-  background: none;
-  color: white;
 }
+
+.empresaButtonWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownEmpresa {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: "Merri", sans-serif;
+}
+
+.dropdownEmpresa button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin: 0;
+  width: 100%;
+}
+
+.dropdownEmpresa button:hover {
+  background-color: #ffc107;
+}
+
+.postVentaContainer {
+  padding: 20px;
+  background-color: black;
+  color: #ffc107;
+  font-family: "Merri", sans-serif;
+  text-align: center;
+}
+
+.postVentaImage {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.postVentaTitle {
+  font-size: 2.5rem;
+  margin: 20px 0;
+}
+
+.postVentaText {
+  font-size: 1.2rem;
+  margin: 20px 0;
+}
+
+.postVentaSubtitle {
+  font-size: 2rem;
+  margin: 20px 0;
+}
+
+.postVentaList {
+  list-style: none;
+  padding: 0;
+  font-size: 1.2rem;
+  text-align: left;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.postVentaList li {
+  margin: 10px 0;
+}
+
+.postVentaFooter {
+  margin: 20px 0;
+}
+
+.postVentaFooter h3 {
+  margin: 10px 0;
+}
+
+.postVentaFooter p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .postVentaTitle {
+    font-size: 2rem;
+  }
+
+  .postVentaSubtitle {
+    font-size: 1.5rem;
+  }
+
+  .postVentaText,
+  .postVentaList li,
+  .postVentaFooter p {
+    font-size: 1rem;
+  }
+}
+
+
+

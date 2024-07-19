@@ -7,7 +7,6 @@ import { useProducto } from "./hooks/useProductos";
 import CarouselPrincipal from "./components/CarouselPrincipal";
 import CarouselMarcas from "./components/CarouselMarcas";
 import { FaWhatsapp } from "react-icons/fa";
-import HeaderNavBar from "./components/HeaderNavBar";
 
 function App() {
   const [selectedFamilia, setSelectedFamilia] = useState(null);
@@ -65,7 +64,6 @@ function App() {
             <p></p>
           )}
         </div>
-        <CarouselMarcas />
       </div>
       <div className="whatsapp">
         <a

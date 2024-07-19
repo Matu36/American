@@ -8,7 +8,7 @@ const getProductos = async (req, res) => {
       ? res.status(404).send("No hay Productos")
       : res.send(
           productos.map(
-            ({ id, familia, marca, modelo, precio, imagen, imagen1 }) => ({
+            ({
               id,
               familia,
               marca,
@@ -16,6 +16,16 @@ const getProductos = async (req, res) => {
               precio,
               imagen,
               imagen1,
+              division,
+            }) => ({
+              id,
+              familia,
+              marca,
+              modelo,
+              precio,
+              imagen,
+              imagen1,
+              division,
             })
           )
         );
@@ -77,6 +87,7 @@ const getProductoById = async (req, res) => {
       imagen6: producto.imagen6,
       precio: producto.precio,
       codigo: producto.codigo,
+      division: producto.division,
       potencia: producto.potencia,
       cantidadTotal: producto.cantidadTotal,
       motor: producto.motor,

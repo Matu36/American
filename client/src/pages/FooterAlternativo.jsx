@@ -14,6 +14,7 @@ import Modal from "react-modal";
 import Garantia from "../components/Garantia";
 import DatosContacto from "./DatosContacto";
 import RepuestoForm from "../components/RepuestoForm";
+import CarouselMarcas from "../components/CarouselMarcas";
 
 Modal.setAppElement("#root");
 
@@ -68,7 +69,11 @@ export default function FooterAlternativo() {
 
   return (
     <div className="principal-footer">
-      <div></div>
+      <div style={{ backgroundColor: "white" }}>
+        {" "}
+        <CarouselMarcas />
+      </div>
+
       <div className="footerAlternativo">
         <div className="faSpan">
           <h2>Contactános</h2>

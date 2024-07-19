@@ -10,6 +10,10 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      division: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       familia: {
         type: DataTypes.STRING,
         allowNull: false,

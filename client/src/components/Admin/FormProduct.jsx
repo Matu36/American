@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { useProducto } from "../../hooks/useProductos";
+import Select from "react-select";
 
 const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
 
@@ -59,11 +61,35 @@ export default function FormProduct() {
   };
 
   //CLOUDDINARY//
+  const [selectedFamilia, setSelectedFamilia] = useState(null);
+  const { data: productos } = useProducto().productosParaCotizarQuery;
+  const opcionesFamilias =
+    productos?.map((producto) => ({
+      value: producto.familia,
+      label: producto.familia,
+    })) || [];
+
+  const opcionesConNueva = [
+    ...opcionesFamilias,
+    { value: "nueva", label: "Agregar nueva" },
+  ];
+
+  const handleChange = (selectedOption) => {
+    if (selectedOption.value === "nueva") {
+      const nuevaFamilia = prompt("Ingrese la nueva Categoría:");
+      if (nuevaFamilia) {
+        setSelectedFamilia({ value: nuevaFamilia, label: nuevaFamilia });
+      }
+    } else {
+      setSelectedFamilia(selectedOption);
+    }
+  };
 
   const [producto, setProducto] = useState({
     familia: "",
     marca: "",
     modelo: "",
+    division: "",
     precio: "",
     imagen: "",
     imagen1: "",
@@ -114,6 +140,8 @@ export default function FormProduct() {
 
       setProducto({
         marca: "",
+        familia: "",
+        modelo: "",
         imagen: "",
         imagen1: "",
         imagen2: "",
@@ -121,7 +149,12 @@ export default function FormProduct() {
         cantidadTotal: "",
         precio: "",
         codigo: "",
-        talle: "",
+        division: "",
+        potencia: "",
+        motor: "",
+        capacidadDeCarga: "",
+        capacidadDeBalde: "",
+        detalles: "",
       });
     } catch (error) {
       console.error("Error al crear el producto:", error);
@@ -148,18 +181,33 @@ export default function FormProduct() {
       <h2 className="tituloCompo">Cargar Producto</h2> <br />
       <form onSubmit={saveProduct}>
         <div className="form-group">
+          <div className="form-group">
+            <label htmlFor="division">División</label>
+
+            <input
+              id="division"
+              name="division"
+              type="text"
+              value={producto.division}
+              onChange={(e) =>
+                setProducto({
+                  ...producto,
+                  marca: e.target.value,
+                })
+              }
+              placeholder="División"
+              required
+            />
+          </div>
           <label htmlFor="familia">Categoría</label>
-          <input
-            type="text"
+          <Select
             id="familia"
             name="familia"
-            value={producto.familia}
-            autoComplete="off"
-            placeholder="Familia"
-            onChange={(e) =>
-              setProducto({ ...producto, familia: e.target.value })
-            }
-            required
+            options={opcionesConNueva}
+            value={selectedFamilia}
+            onChange={handleChange}
+            placeholder="Selecciona o agrega una nueva categoría"
+            isClearable
           />
         </div>
 

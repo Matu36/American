@@ -44,6 +44,11 @@ import { useUsuario } from "../hooks/useUsuarios";
 import Spinner from "../UI/Spinner";
 import Repuestos from "../components/Admin/Repuestos";
 import RepuestosDetail from "../components/Admin/RepuestosDetail";
+import PostVenta from "../components/empresa/PostVenta";
+import Financiación from "../components/empresa/Financiación";
+import TrabajaConNosotros from "../components/empresa/TrabajaConNosotros";
+import Distribuidores from "../components/empresa/Distribuidores";
+import AmericanRepuestos from "../components/empresa/AmericanRepuestos";
 
 const AppRouter = () => {
   return (
@@ -51,6 +56,11 @@ const AppRouter = () => {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<App />} />
+          <Route path="/postventa" element={<PostVenta />} />
+          <Route path="/financiacion" element={<Financiación />} />
+          <Route path="/americanrepuestos" element={<AmericanRepuestos />} />
+          <Route path="/trabajaConNosotros" element={<TrabajaConNosotros />} />
+          <Route path="/distribuidores" element={<Distribuidores />} />
           <Route path="/productos/:id" element={<Detalle />} />
           <Route path="/Error" element={<ErroPage />} />
           <Route path="/admin/*" element={<AdminLayout />} />
