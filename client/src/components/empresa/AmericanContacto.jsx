@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function TrabajaConNosotros() {
+export default function AmericanContacto() {
   return <div></div>;
 }

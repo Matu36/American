@@ -1433,13 +1433,25 @@ button:focus-visible {
   top: 0;
   left: 0;
   width: 100%;
-  height: 150px;
+  height: 100px;
   display: flex;
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 10px 20px; 
 }
 
-.white-bar.fixed .img {
+.white-bar.fixed .americanimg {
   max-width: 100px;
+  margin-top: 10px; 
 }
+
+.white-bar.fixed .search-bar {
+  display: none; 
+}
+
+
+
+
 
 @media screen and (max-width: 850px) {
   .white-bar img {
@@ -3507,29 +3519,40 @@ button:focus-visible {
 }
 
 
-
-  .headerNaBar button {
+  .headerNavBar button {
     margin-right: 20px;
     background: none;
     color: white;
-    border: none; /* Asegúrate de que no haya borde */
-    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
-    transition: background-color 0.3s; /* Suaviza la transición del hover */
+    border: none; 
+    cursor: pointer; 
+    transition: background-color 0.3s;
   }
   
-  .headerNaBar button:hover {
-    background-color: #ffc107; /* Color de fondo al hacer hover */
+  .headerNavBar button:hover {
+    background-color: #ffc107; 
   } 
 
 
-.headerNaBar {
+
+
+.headerNavBar {
   position: absolute;
   top: 100px;
   left: 50%;
   transform: translateX(-50%);
   color: white;
   font-family: "Merri", sans-serif;
+  transition: top 0.3s ease, left 0.3s ease, transform 0.3s ease;
 }
+
+.white-bar.fixed .headerNavBar {
+  top: 50px; 
+  left: 60%; 
+  /* transform: translateX(-60%); */
+}
+
+
+
 
 .empresaButtonWrapper {
   position: relative;

@@ -46,9 +46,10 @@ import Repuestos from "../components/Admin/Repuestos";
 import RepuestosDetail from "../components/Admin/RepuestosDetail";
 import PostVenta from "../components/empresa/PostVenta";
 import Financiación from "../components/empresa/Financiación";
-import TrabajaConNosotros from "../components/empresa/TrabajaConNosotros";
+import TrabajaConNosotros from "../components/empresa/AmericanContacto";
 import Distribuidores from "../components/empresa/Distribuidores";
 import AmericanRepuestos from "../components/empresa/AmericanRepuestos";
+import AmericanContacto from "../components/empresa/AmericanContacto";
 
 const AppRouter = () => {
   return (
@@ -59,7 +60,7 @@ const AppRouter = () => {
           <Route path="/postventa" element={<PostVenta />} />
           <Route path="/financiacion" element={<Financiación />} />
           <Route path="/americanrepuestos" element={<AmericanRepuestos />} />
-          <Route path="/trabajaConNosotros" element={<TrabajaConNosotros />} />
+          <Route path="/americanContacto" element={<AmericanContacto />} />
           <Route path="/distribuidores" element={<Distribuidores />} />
           <Route path="/productos/:id" element={<Detalle />} />
           <Route path="/Error" element={<ErroPage />} />

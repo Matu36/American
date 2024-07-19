@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function HeaderNavBar({
-  handleMostrarModalGarantia,
-  handleMostrarModalContact,
-}) {
+export default function HeaderNavBar({ handleMostrarModalGarantia }) {
   const navigate = useNavigate();
 
   const navigateToHome = () => {
@@ -22,7 +19,7 @@ export default function HeaderNavBar({
   };
 
   return (
-    <div className="headerNaBar">
+    <div>
       <div>
         <button onClick={navigateToHome}>Home</button>
         <button>Equipos</button>
@@ -44,14 +41,13 @@ export default function HeaderNavBar({
               <button onClick={() => navigate("/americanrepuestos")}>
                 Repuestos
               </button>
-              <button onClick={() => navigate("/trabajaConNosotros")}>
-                Trabajá con Nosotros
+              <button onClick={() => navigate("/americanContacto")}>
+                Contacto
               </button>
             </div>
           )}
         </div>
         <button onClick={handleMostrarModalGarantia}>Garantía</button>
-        <button onClick={handleMostrarModalContact}>Contacto</button>
       </div>
     </div>
   );

@@ -216,15 +216,16 @@ export default function NavBarAlternativo({ onSearchByMarca }) {
           >
             <img src={logo} alt="" />
           </div>
-
-          <HeaderNavBar
-            handleMostrarModalAbout={handleMostrarModalAbout}
-            handleCerrarModalAbout={handleCerrarModalAbout}
-            handleMostrarModalContact={handleMostrarModalContact}
-            handleCerrarModalContact={handleCerrarModalContact}
-            handleMostrarModalGarantia={handleMostrarModalGarantia}
-            handleCerrarModalGarantia={handleCerrarModalGarantia}
-          />
+          <div className="headerNavBar">
+            <HeaderNavBar
+              handleMostrarModalAbout={handleMostrarModalAbout}
+              handleCerrarModalAbout={handleCerrarModalAbout}
+              handleMostrarModalContact={handleMostrarModalContact}
+              handleCerrarModalContact={handleCerrarModalContact}
+              handleMostrarModalGarantia={handleMostrarModalGarantia}
+              handleCerrarModalGarantia={handleCerrarModalGarantia}
+            />
+          </div>
 
           <div className="search-bar">
             <button className="search-button" onClick={handleSearch}>
