@@ -78,10 +78,13 @@ export default function FormProduct() {
     if (selectedOption.value === "nueva") {
       const nuevaFamilia = prompt("Ingrese la nueva Categoría:");
       if (nuevaFamilia) {
-        setSelectedFamilia({ value: nuevaFamilia, label: nuevaFamilia });
+        const newFamiliaOption = { value: nuevaFamilia, label: nuevaFamilia };
+        setSelectedFamilia(newFamiliaOption);
+        setProducto({ ...producto, familia: nuevaFamilia });
       }
     } else {
       setSelectedFamilia(selectedOption);
+      setProducto({ ...producto, familia: selectedOption.value });
     }
   };
 
@@ -192,7 +195,7 @@ export default function FormProduct() {
               onChange={(e) =>
                 setProducto({
                   ...producto,
-                  marca: e.target.value,
+                  division: e.target.value,
                 })
               }
               placeholder="División"
