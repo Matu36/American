@@ -37,14 +37,32 @@ export default function Financiación() {
       familia.charAt(0).toUpperCase() + familia.slice(1).toLowerCase();
     setSelectedMarca(marcaNormalized);
     setBusquedaActiva(true);
+  };
 
-    setTimeout(() => {
+  const handleFamiliaClick = (familia) => {
+    const familiaNormalized =
+      familia.charAt(0).toUpperCase() + familia.slice(1).toLowerCase();
+    setSelectedMarca(familiaNormalized);
+    setBusquedaActiva(true);
+  };
+
+  useEffect(() => {
+    if (busquedaActiva && cardsContainerRef.current) {
       const firstCard = cardsContainerRef.current.querySelector(".card");
       if (firstCard) {
         firstCard.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-    }, 0);
-  };
+    }
+  }, [busquedaActiva, selectedMarca]);
+
+  useEffect(() => {
+    if (busquedaActiva && carouselRef.current) {
+      carouselRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [busquedaActiva]);
 
   const filteredProductos = productos?.filter((producto) =>
     producto.familia.toLowerCase().includes(selectedMarca.toLowerCase())
@@ -73,7 +91,10 @@ export default function Financiación() {
   }
 
   return (
-    <Layout onSearchByMarca={handleSearchByMarca}>
+    <Layout
+      onSearchByMarca={handleSearchByMarca}
+      onSelectFamilia={handleFamiliaClick}
+    >
       <div className="postVentaContainer">
         <img
           src={FinanciacionImg}
@@ -99,7 +120,7 @@ export default function Financiación() {
                 />
               ))
             ) : (
-              <p></p>
+              <p>No se encontraron productos.</p>
             )}
           </div>
         )}

@@ -28,24 +28,36 @@ export default function PostVenta() {
       familia.charAt(0).toUpperCase() + familia.slice(1).toLowerCase();
     setSelectedMarca(marcaNormalized);
     setBusquedaActiva(true);
+  };
 
-    setTimeout(() => {
+  const handleFamiliaClick = (familia) => {
+    const familiaNormalized =
+      familia.charAt(0).toUpperCase() + familia.slice(1).toLowerCase();
+    setSelectedMarca(familiaNormalized);
+    setBusquedaActiva(true);
+  };
+
+  useEffect(() => {
+    if (busquedaActiva && cardsContainerRef.current) {
       const firstCard = cardsContainerRef.current.querySelector(".card");
       if (firstCard) {
         firstCard.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-    }, 0);
-  };
+    }
+  }, [busquedaActiva, selectedMarca]);
+
+  useEffect(() => {
+    if (busquedaActiva && carouselRef.current) {
+      carouselRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [busquedaActiva]);
 
   const filteredProductos = productos?.filter((producto) =>
     producto.familia.toLowerCase().includes(selectedMarca.toLowerCase())
   );
-
-  const scrollToCarousel = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   if (isLoading) {
     return (
@@ -62,8 +74,12 @@ export default function PostVenta() {
       </div>
     );
   }
+
   return (
-    <Layout onSearchByMarca={handleSearchByMarca}>
+    <Layout
+      onSearchByMarca={handleSearchByMarca}
+      onSelectFamilia={handleFamiliaClick}
+    >
       <div className="postVentaContainer">
         <img src={postventa} alt="PostVenta" className="large-images" />
         <h1 className="postVentaTitle">POSTVENTA</h1>
@@ -100,15 +116,10 @@ export default function PostVenta() {
           <div ref={cardsContainerRef} className="cards-container" id="card">
             {filteredProductos.length > 0 ? (
               filteredProductos.map((maquina) => (
-                <Card
-                  id="cards"
-                  key={maquina.id}
-                  {...maquina}
-                  scrollToCarousel={scrollToCarousel}
-                />
+                <Card id="cards" key={maquina.id} {...maquina} />
               ))
             ) : (
-              <p></p>
+              <p>No se encontraron productos.</p>
             )}
           </div>
         )}

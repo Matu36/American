@@ -227,6 +227,7 @@ export default function NavBarAlternativo({
               handleCerrarModalContact={handleCerrarModalContact}
               handleMostrarModalGarantia={handleMostrarModalGarantia}
               handleCerrarModalGarantia={handleCerrarModalGarantia}
+              onSelectFamilia={onSelectFamilia}
             />
           </div>
 

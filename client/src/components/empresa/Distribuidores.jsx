@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Distribuidores1 from "../../assets/img/DISTRIBUIDORES/Distribuidores.jpg";
 import julio from "../../assets/img/DISTRIBUIDORES/9julio.jpg";
 import catamarca from "../../assets/img/DISTRIBUIDORES/catamarca.jpg";
@@ -10,9 +10,15 @@ import santiago from "../../assets/img/DISTRIBUIDORES/santiago.jpg";
 import sanjuan from "../../assets/img/DISTRIBUIDORES/sanjuan.jpg";
 import Contact from "../Contact";
 import Layout from "../../pages/Layout";
+import { useProducto } from "../../hooks/useProductos";
+import Spinner from "../../UI/Spinner";
+import Card from "../Card";
 
 export default function Distribuidores() {
   const [contact, setContact] = useState(false);
+  const [busquedaActiva, setBusquedaActiva] = useState(false);
+  const [selectedMarca, setSelectedMarca] = useState("");
+  const cardsContainerRef = useRef(null);
 
   const handleMostrarModalContact = () => {
     setContact(true);
@@ -21,8 +27,49 @@ export default function Distribuidores() {
   const handleCerrarModalContact = () => {
     setContact(false);
   };
+
+  const { data: productos, isLoading } = useProducto().productosQuery;
+
+  const handleFamiliaClick = (familia) => {
+    const familiaNormalized =
+      familia.charAt(0).toUpperCase() + familia.slice(1).toLowerCase();
+    setSelectedMarca(familiaNormalized);
+    setBusquedaActiva(true);
+  };
+
+  const handleSearchByMarca = (familia) => {
+    const marcaNormalized =
+      familia.charAt(0).toUpperCase() + familia.slice(1).toLowerCase();
+    setSelectedMarca(marcaNormalized);
+    setBusquedaActiva(true);
+  };
+
+  useEffect(() => {
+    if (busquedaActiva && cardsContainerRef.current) {
+      const firstCard = cardsContainerRef.current.querySelector(".card");
+      if (firstCard) {
+        firstCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }, [busquedaActiva, selectedMarca]);
+
+  const filteredProductos = productos?.filter((producto) =>
+    producto.familia.toLowerCase().includes(selectedMarca.toLowerCase())
+  );
+
+  if (isLoading) {
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
-    <Layout>
+    <Layout
+      onSearchByMarca={handleSearchByMarca}
+      onSelectFamilia={handleFamiliaClick}
+    >
       <div className="american-repuestos">
         <div className="large-images">
           <img src={Distribuidores1} alt="Repuestos" className="large-image" />
@@ -40,6 +87,17 @@ export default function Distribuidores() {
           <img src={sanjuan} alt="Foto 8" className="grid-imagedist" />
         </div>
       </div>
+      {busquedaActiva && (
+        <div ref={cardsContainerRef} className="cards-container">
+          {filteredProductos.length > 0 ? (
+            filteredProductos.map((maquina) => (
+              <Card key={maquina.id} {...maquina} />
+            ))
+          ) : (
+            <p>No se encontraron productos.</p>
+          )}
+        </div>
+      )}
       <br />
       <br />
       <div style={{ display: "flex", justifyContent: "center" }}>

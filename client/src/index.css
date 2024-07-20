@@ -3799,3 +3799,96 @@ button:focus-visible {
   padding: 8px;
   box-sizing: border-box; 
 }
+
+/* Contact.css */
+
+.AmericanContactoContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Espacio entre las columnas */
+}
+
+.AmericanContacto {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px; /* Ajusta según el diseño */
+}
+
+.AmericanContacto h3, .AmericanContacto h5 {
+  margin: 0;
+}
+
+.AmericanContacto .text-muted {
+  color: #6c757d;
+}
+
+.AmericanContacto-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.datosAmericanContacto {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px; /* Ajusta según el diseño */
+}
+
+.grupoAmericanContacto, .grupoContacto {
+  margin-bottom: 20px;
+}
+
+.grupoAmericanContacto h3, .grupoContacto h3 {
+  margin: 0;
+}
+
+.grupoAmericanContacto a, .grupoContacto a {
+  display: flex;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.grupoAmericanContacto a:hover, .grupoContacto a:hover {
+  text-decoration: underline;
+}
+
+.grupoAmericanContacto a svg, .grupoContacto a svg {
+  margin-right: 10px;
+}
+
+/* Estilo responsivo */
+@media (max-width: 800px) {
+  .AmericanContactoContainer {
+    flex-direction: column;
+  }
+}
