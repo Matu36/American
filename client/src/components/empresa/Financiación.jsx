@@ -9,11 +9,11 @@ import { useProducto } from "../../hooks/useProductos";
 import Contact from "../Contact";
 
 export default function Financiación() {
-  const [producto, setProducto] = useState(null);
+  const [producto, setProducto] = useState([]);
   const cardsContainerRef = useRef(null);
   const carouselRef = useRef(null);
   const [busquedaActiva, setBusquedaActiva] = useState(false);
-  const [selectedMarca, setSelectedMarca] = useState("");
+  const [selectedMarca, setSelectedMarca] = useState(null);
   const [contact, setContact] = useState(false);
 
   const handleMostrarModalContact = () => {
@@ -24,7 +24,10 @@ export default function Financiación() {
     setContact(false);
   };
 
-  const { data: productos, isLoading } = useProducto().productosQuery;
+  const { data: productos, isLoading } = useProducto(
+    null,
+    selectedMarca
+  ).productoQueryByFamilia;
 
   useEffect(() => {
     if (productos) {
@@ -53,7 +56,7 @@ export default function Financiación() {
         firstCard.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
-  }, [busquedaActiva, selectedMarca]);
+  }, [busquedaActiva, productos]);
 
   useEffect(() => {
     if (busquedaActiva && carouselRef.current) {
@@ -62,11 +65,7 @@ export default function Financiación() {
         block: "start",
       });
     }
-  }, [busquedaActiva]);
-
-  const filteredProductos = productos?.filter((producto) =>
-    producto.familia.toLowerCase().includes(selectedMarca.toLowerCase())
-  );
+  }, [busquedaActiva, productos]);
 
   const scrollToCarousel = () => {
     if (carouselRef.current) {
@@ -75,14 +74,6 @@ export default function Financiación() {
   };
 
   if (isLoading) {
-    return (
-      <div>
-        <Spinner />
-      </div>
-    );
-  }
-
-  if (!producto) {
     return (
       <div>
         <Spinner />
@@ -109,19 +100,17 @@ export default function Financiación() {
         </p>
         <img src={PagoCuotas} alt="Pago Cuotas" className="postVentImage" />
         <img src={Tarjeta} alt="Tarjeta de Crédito" className="postVentImage" />
-        {busquedaActiva && (
+        {selectedMarca && (
           <div ref={cardsContainerRef} className="cards-container">
-            {filteredProductos.length > 0 ? (
-              filteredProductos.map((maquina) => (
-                <Card
-                  key={maquina.id}
-                  {...maquina}
-                  scrollToCarousel={scrollToCarousel}
-                />
-              ))
-            ) : (
-              <p>No se encontraron productos.</p>
-            )}
+            {productos && productos.length > 0
+              ? productos.map((maquina) => (
+                  <Card
+                    key={maquina.id}
+                    {...maquina}
+                    scrollToCarousel={scrollToCarousel}
+                  />
+                ))
+              : !isLoading && <p>No se encontraron productos.</p>}
           </div>
         )}
         <div style={{ display: "flex", justifyContent: "center" }}>

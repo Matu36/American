@@ -3848,7 +3848,7 @@ button:focus-visible {
 .datosAmericanContacto {
   flex: 1;
   min-width: 300px;
-  max-width: 600px; /* Ajusta según el diseño */
+  max-width: 600px; 
 }
 
 .grupoAmericanContacto, .grupoContacto {

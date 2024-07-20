@@ -15,13 +15,34 @@ export default function PostVenta() {
   const [busquedaActiva, setBusquedaActiva] = useState(false);
   const [selectedMarca, setSelectedMarca] = useState("");
 
-  const { data: productos, isLoading } = useProducto().productosQuery;
+  const { data: productos, isLoading } = useProducto(
+    null,
+    selectedMarca
+  ).productoQueryByFamilia;
 
   useEffect(() => {
     if (productos) {
       setProducto(productos);
     }
   }, [productos]);
+
+  useEffect(() => {
+    if (busquedaActiva && cardsContainerRef.current) {
+      const firstCard = cardsContainerRef.current.querySelector(".card");
+      if (firstCard) {
+        firstCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }, [busquedaActiva, producto]);
+
+  useEffect(() => {
+    if (busquedaActiva && carouselRef.current) {
+      carouselRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [busquedaActiva]);
 
   const handleSearchByMarca = (familia) => {
     const marcaNormalized =
@@ -37,37 +58,7 @@ export default function PostVenta() {
     setBusquedaActiva(true);
   };
 
-  useEffect(() => {
-    if (busquedaActiva && cardsContainerRef.current) {
-      const firstCard = cardsContainerRef.current.querySelector(".card");
-      if (firstCard) {
-        firstCard.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [busquedaActiva, selectedMarca]);
-
-  useEffect(() => {
-    if (busquedaActiva && carouselRef.current) {
-      carouselRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  }, [busquedaActiva]);
-
-  const filteredProductos = productos?.filter((producto) =>
-    producto.familia.toLowerCase().includes(selectedMarca.toLowerCase())
-  );
-
   if (isLoading) {
-    return (
-      <div>
-        <Spinner />
-      </div>
-    );
-  }
-
-  if (!producto) {
     return (
       <div>
         <Spinner />
@@ -113,11 +104,9 @@ export default function PostVenta() {
           <p>Buscamos la Excelencia de Servicio</p>
         </div>
         {busquedaActiva && (
-          <div ref={cardsContainerRef} className="cards-container" id="card">
-            {filteredProductos.length > 0 ? (
-              filteredProductos.map((maquina) => (
-                <Card id="cards" key={maquina.id} {...maquina} />
-              ))
+          <div ref={cardsContainerRef} className="cards-container">
+            {producto && producto.length > 0 ? (
+              producto.map((maquina) => <Card key={maquina.id} {...maquina} />)
             ) : (
               <p>No se encontraron productos.</p>
             )}

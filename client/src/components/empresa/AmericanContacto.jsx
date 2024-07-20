@@ -18,7 +18,10 @@ export default function AmericanContacto() {
   const [selectedMarca, setSelectedMarca] = useState("");
   const cardsContainerRef = useRef(null);
 
-  const { data: productos, isLoading } = useProducto().productosQuery;
+  const { data: productos, isLoading } = useProducto(
+    null,
+    selectedMarca
+  ).productoQueryByFamilia;
 
   const handleFamiliaClick = (familia) => {
     const familiaNormalized =
@@ -42,10 +45,6 @@ export default function AmericanContacto() {
       }
     }
   }, [busquedaActiva, selectedMarca]);
-
-  const filteredProductos = productos?.filter((producto) =>
-    producto.familia.toLowerCase().includes(selectedMarca.toLowerCase())
-  );
 
   if (isLoading) {
     return (
@@ -273,10 +272,8 @@ export default function AmericanContacto() {
       </div>
       {busquedaActiva && (
         <div ref={cardsContainerRef} className="cards-container">
-          {filteredProductos.length > 0 ? (
-            filteredProductos.map((maquina) => (
-              <Card key={maquina.id} {...maquina} />
-            ))
+          {productos.length > 0 ? (
+            productos.map((maquina) => <Card key={maquina.id} {...maquina} />)
           ) : (
             <p>No se encontraron productos.</p>
           )}

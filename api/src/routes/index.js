@@ -24,6 +24,7 @@ const {
   getProductosPorCategoria,
   getProductosPorMarca,
   getProductosPorDivision,
+  getProductosPorFamilia,
 } = require("../controllers/Productos");
 
 const {
@@ -128,6 +129,7 @@ router.get("/productos/getCategorias", getProductosPorCategoria);
 router.get("/productos/getMarcas", getProductosPorMarca);
 router.get("/productos/getDivisiones", getProductosPorDivision);
 router.get("/productos/:id", getProductoById);
+router.get("/productos/familia/:familia", getProductosPorFamilia);
 router.get("/contactoProducto/detalle/:id", getContactoProductoById);
 router.get("/contacto/detalle/:id", getContactoById);
 router.post("/productos/create", check.auth, createProducto);

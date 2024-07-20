@@ -35,6 +35,55 @@ const getProductos = async (req, res) => {
   }
 };
 
+// FILTRO POR CATEGORIAS PARA EL FRONT //
+
+const getProductosPorFamilia = async (req, res) => {
+  try {
+    const { familia } = req.params;
+
+    let productos;
+
+    if (familia) {
+      productos = await Productos.findAll({
+        where: {
+          familia: familia,
+        },
+      });
+    } else {
+      productos = await Productos.findAll();
+    }
+
+    return !productos || productos.length === 0
+      ? res.status(404).send("No hay Productos")
+      : res.send(
+          productos.map(
+            ({
+              id,
+              familia,
+              marca,
+              modelo,
+              precio,
+              imagen,
+              imagen1,
+              division,
+            }) => ({
+              id,
+              familia,
+              marca,
+              modelo,
+              precio,
+              imagen,
+              imagen1,
+              division,
+            })
+          )
+        );
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Error 500");
+  }
+};
+
 // FUNCION PARA TRAER SOLO LAS CATEGORIAS PARA EL INPUT QUE VA MOSTRANDO LAS CATEGORIAS //
 
 const getProductosPorCategoria = async (req, res) => {
@@ -243,4 +292,5 @@ module.exports = {
   getProductosPorCategoria,
   getProductosPorDivision,
   getProductosPorMarca,
+  getProductosPorFamilia,
 };

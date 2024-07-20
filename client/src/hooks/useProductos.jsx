@@ -12,6 +12,11 @@ const productoById = async (id) => {
   return data;
 };
 
+const productoByFamilia = async (familia) => {
+  const { data } = await ProductosAPI.get(`/familia/${familia}`);
+  return data;
+};
+
 const getProductosParaCotizar = async () => {
   const { data } = await ProductosAPI.get("/getParaCotizar");
   return data;
@@ -34,7 +39,7 @@ const editProducto = async (data) => {
   return await ProductosAPI.put(`edit`, data);
 };
 
-export const useProducto = (id) => {
+export const useProducto = (id, familia) => {
   const productosQuery = useQuery({
     queryKey: ["productos"],
     queryFn: () => getProductos(),
@@ -44,6 +49,12 @@ export const useProducto = (id) => {
     queryKey: ["productodetail", { productoId: id }],
     queryFn: () => productoById(id),
     enabled: id !== undefined && id !== null,
+  });
+
+  const productoQueryByFamilia = useQuery({
+    queryKey: ["productofamilia", { familia }],
+    queryFn: () => productoByFamilia(familia),
+    enabled: familia !== undefined && familia !== null,
   });
 
   const productosParaCotizarQuery = useQuery({
@@ -138,5 +149,6 @@ export const useProducto = (id) => {
     productosCategoriasQuery,
     productosMarcasQuery,
     productosDivisionesQuery,
+    productoQueryByFamilia,
   };
 };

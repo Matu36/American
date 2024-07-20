@@ -18,30 +18,31 @@ import Spinner from "../../UI/Spinner";
 
 export default function AmericanRepuestos() {
   const [contact, setContact] = useState(false);
-  const [producto, setProducto] = useState(null);
   const [selectedFamilia, setSelectedFamilia] = useState(null);
   const cardsContainerRef = useRef(null);
   const [busquedaActiva, setBusquedaActiva] = useState(false);
-  const { data: productos, isLoading } = useProducto().productosQuery;
+  const { data: productos, isLoading } = useProducto(
+    null,
+    selectedFamilia
+  ).productoQueryByFamilia;
 
   useEffect(() => {
-    if (productos) {
-      setProducto(productos);
+    if (selectedFamilia && productos?.length > 0) {
+      scrollToFirstCard();
     }
-  }, [productos]);
+  }, [selectedFamilia, productos]);
+
+  const handleFamiliaClick = (familia) => {
+    const familiaNormalized =
+      familia.charAt(0).toUpperCase() + familia.slice(1).toLowerCase();
+    setSelectedFamilia(familiaNormalized);
+  };
 
   const handleSearchByMarca = (familia) => {
     const marcaNormalized =
       familia.charAt(0).toUpperCase() + familia.slice(1).toLowerCase();
     setSelectedFamilia(marcaNormalized);
     setBusquedaActiva(true);
-
-    setTimeout(() => {
-      const firstCard = cardsContainerRef.current.querySelector(".card");
-      if (firstCard) {
-        firstCard.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 0);
   };
 
   const handleMostrarModalContact = () => {
@@ -52,33 +53,16 @@ export default function AmericanRepuestos() {
     setContact(false);
   };
 
-  const handleFamiliaClick = (familia) => {
-    setSelectedFamilia(familia);
-    scrollToFirstCard();
-  };
-
   const scrollToFirstCard = () => {
-    setTimeout(() => {
+    if (cardsContainerRef.current) {
       const firstCard = cardsContainerRef.current.querySelector(".card");
       if (firstCard) {
         firstCard.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-    }, 0);
+    }
   };
 
-  const productosFiltrados = selectedFamilia
-    ? productos?.filter((producto) => producto.familia === selectedFamilia)
-    : [];
-
   if (isLoading) {
-    return (
-      <div>
-        <Spinner />
-      </div>
-    );
-  }
-
-  if (!producto) {
     return (
       <div>
         <Spinner />
@@ -113,8 +97,8 @@ export default function AmericanRepuestos() {
       </div>
       {selectedFamilia && (
         <div ref={cardsContainerRef} className="cards-container">
-          {productosFiltrados.length > 0 ? (
-            productosFiltrados.map((producto) => (
+          {productos?.length > 0 ? (
+            productos.map((producto) => (
               <Card key={producto.id} {...producto} />
             ))
           ) : (
@@ -129,7 +113,6 @@ export default function AmericanRepuestos() {
           Contacto
         </button>
       </div>
-
       {contact && (
         <div className="modal">
           <Contact handleCerrarModalContact={handleCerrarModalContact} />
