@@ -21,6 +21,14 @@ const getProductosCategorias = async () => {
   const { data } = await ProductosAPI.get("/getCategorias");
   return data;
 };
+const getProductosMarcas = async () => {
+  const { data } = await ProductosAPI.get("/getMarcas");
+  return data;
+};
+const getProductosDivisiones = async () => {
+  const { data } = await ProductosAPI.get("/getDivisiones");
+  return data;
+};
 
 const editProducto = async (data) => {
   return await ProductosAPI.put(`edit`, data);
@@ -46,6 +54,14 @@ export const useProducto = (id) => {
   const productosCategoriasQuery = useQuery({
     queryKey: ["productoscategorias"],
     queryFn: () => getProductosCategorias(),
+  });
+  const productosMarcasQuery = useQuery({
+    queryKey: ["productosmarcas"],
+    queryFn: () => getProductosMarcas(),
+  });
+  const productosDivisionesQuery = useQuery({
+    queryKey: ["productosdivisiones"],
+    queryFn: () => getProductosDivisiones(),
   });
 
   const productosEditMutation = useMutation({
@@ -120,5 +136,7 @@ export const useProducto = (id) => {
     productoQueryById,
     productosEditMutation,
     productosCategoriasQuery,
+    productosMarcasQuery,
+    productosDivisionesQuery,
   };
 };

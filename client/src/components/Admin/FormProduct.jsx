@@ -62,19 +62,24 @@ export default function FormProduct() {
 
   //CLOUDDINARY//
   const [selectedFamilia, setSelectedFamilia] = useState(null);
+  const [selectedDivision, setSelectedDivision] = useState(null);
+  const [selectedMarca, setSelectedMarca] = useState(null);
   const { data: productos } = useProducto().productosParaCotizarQuery;
+  const { data: marcas } = useProducto().productosMarcasQuery;
+  const { data: divisiones } = useProducto().productosDivisionesQuery;
+
   const opcionesFamilias =
     productos?.map((producto) => ({
       value: producto.familia,
       label: producto.familia,
     })) || [];
 
-  const opcionesConNueva = [
+  const opcionesConNuevaFamilia = [
     ...opcionesFamilias,
     { value: "nueva", label: "Agregar nueva" },
   ];
 
-  const handleChange = (selectedOption) => {
+  const handleChangeFamilia = (selectedOption) => {
     if (selectedOption.value === "nueva") {
       const nuevaFamilia = prompt("Ingrese la nueva Categoría:");
       if (nuevaFamilia) {
@@ -88,12 +93,65 @@ export default function FormProduct() {
     }
   };
 
+  const opcionesDivisiones =
+    divisiones?.map((division) => ({
+      value: division,
+      label: division,
+    })) || [];
+
+  const opcionesConNuevaDivision = [
+    ...opcionesDivisiones,
+    { value: "nueva", label: "Agregar nueva" },
+  ];
+
+  const handleChangeDivision = (selectedOption) => {
+    if (selectedOption.value === "nueva") {
+      const nuevaDivision = prompt("Ingrese la nueva División:");
+      if (nuevaDivision) {
+        const newDivisionOption = {
+          value: nuevaDivision,
+          label: nuevaDivision,
+        };
+        setSelectedDivision(newDivisionOption);
+        setProducto({ ...producto, division: nuevaDivision });
+      }
+    } else {
+      setSelectedDivision(selectedOption);
+      setProducto({ ...producto, division: selectedOption.value });
+    }
+  };
+
+  const opcionesMarcas =
+    marcas?.map((marca) => ({
+      value: marca,
+      label: marca,
+    })) || [];
+
+  const opcionesConNuevaMarca = [
+    ...opcionesMarcas,
+    { value: "nueva", label: "Agregar nueva" },
+  ];
+
+  const handleChangeMarca = (selectedOption) => {
+    if (selectedOption.value === "nueva") {
+      const nuevaMarca = prompt("Ingrese la nueva Marca:");
+      if (nuevaMarca) {
+        const newMarcaOption = { value: nuevaMarca, label: nuevaMarca };
+        setSelectedMarca(newMarcaOption);
+        setProducto({ ...producto, marca: nuevaMarca });
+      }
+    } else {
+      setSelectedMarca(selectedOption);
+      setProducto({ ...producto, marca: selectedOption.value });
+    }
+  };
+
   const [producto, setProducto] = useState({
     familia: "",
     marca: "",
     modelo: "",
     division: "",
-    precio: "",
+    precio: 0,
     imagen: "",
     imagen1: "",
     imagen2: "",
@@ -101,7 +159,7 @@ export default function FormProduct() {
     imagen4: "",
     imagen5: "",
     imagen6: "",
-    cantidadTotal: "",
+    cantidadTotal: 0,
     codigo: "",
     potencia: "",
     motor: "",
@@ -185,50 +243,48 @@ export default function FormProduct() {
       <form onSubmit={saveProduct}>
         <div className="form-group">
           <div className="form-group">
-            <label htmlFor="division">División</label>
-
-            <input
+            <label htmlFor="division">
+              División <span className="obligatorio">*</span>
+            </label>
+            <Select
               id="division"
               name="division"
               type="text"
-              value={producto.division}
-              onChange={(e) =>
-                setProducto({
-                  ...producto,
-                  division: e.target.value,
-                })
-              }
-              placeholder="División"
-              required
+              options={opcionesConNuevaDivision}
+              value={selectedDivision}
+              onChange={handleChangeDivision}
+              placeholder="Selecciona o agrega una nueva división"
+              isClearable
             />
           </div>
-          <label htmlFor="familia">Categoría</label>
+          <label htmlFor="familia">
+            Categoría <span className="obligatorio">*</span>
+          </label>
           <Select
             id="familia"
             name="familia"
-            options={opcionesConNueva}
+            options={opcionesConNuevaFamilia}
             value={selectedFamilia}
-            onChange={handleChange}
+            onChange={handleChangeFamilia}
             placeholder="Selecciona o agrega una nueva categoría"
             isClearable
+            required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="marca">Marca</label>
+          <label htmlFor="marca">
+            Marca <span className="obligatorio">*</span>
+          </label>
 
-          <input
-            id="amrca"
+          <Select
+            id="marca"
             name="marca"
             type="text"
-            value={producto.marca}
-            onChange={(e) =>
-              setProducto({
-                ...producto,
-                marca: e.target.value,
-              })
-            }
-            placeholder="Marca"
+            options={opcionesConNuevaMarca}
+            value={selectedMarca}
+            onChange={handleChangeMarca}
+            placeholder="Selecciona o agrega una nueva marca"
             required
           />
         </div>
@@ -252,7 +308,9 @@ export default function FormProduct() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="precio">Precio</label>
+          <label htmlFor="precio">
+            Precio <span className="obligatorio">*</span>
+          </label>
           <div>
             <input
               type="number"

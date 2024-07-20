@@ -61,6 +61,52 @@ const getProductosPorCategoria = async (req, res) => {
   }
 };
 
+//FUNCION PARA MOSTRAR LAS DIVISIONES DE LOS PRODUCTOS //
+
+const getProductosPorDivision = async (req, res) => {
+  try {
+    let divisiones = await Productos.findAll({
+      attributes: ["division"],
+      group: ["division"],
+    });
+
+    if (!divisiones || divisiones.length === 0) {
+      return res.status(404).send("No hay divisiones de productos");
+    }
+
+    // Obtener solo los nombres de las familias
+    const nombresDivisiones = divisiones.map(({ division }) => division);
+
+    return res.send(nombresDivisiones);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Error interno del servidor");
+  }
+};
+
+//FUNCION PARA TRAER SOLO LAS MARCAS DE LOS PRODUCTOS PARA CREAR PRODUCTO //
+
+const getProductosPorMarca = async (req, res) => {
+  try {
+    let marcas = await Productos.findAll({
+      attributes: ["marca"],
+      group: ["marca"],
+    });
+
+    if (!marcas || marcas.length === 0) {
+      return res.status(404).send("No hay marcas de productos");
+    }
+
+    // Obtener solo los nombres de las familias
+    const nombresMarcas = marcas.map(({ marca }) => marca);
+
+    return res.send(nombresMarcas);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Error interno del servidor");
+  }
+};
+
 // FUNCION PARA VER EL DETALLE DEL PRODUCTO //
 
 const getProductoById = async (req, res) => {
@@ -195,4 +241,6 @@ module.exports = {
   getProductoById,
   getProductosParaCotizar,
   getProductosPorCategoria,
+  getProductosPorDivision,
+  getProductosPorMarca,
 };

@@ -52,7 +52,9 @@ export default function CargaClientes() {
       <br />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="CUIT">CUIT</label>
+          <label htmlFor="CUIT">
+            CUIT <span className="obligatorio">*</span>
+          </label>
           <input
             type="text"
             id="CUIT"
@@ -63,7 +65,9 @@ export default function CargaClientes() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="domicilio">Domicilio</label>
+          <label htmlFor="domicilio">
+            Domicilio<span className="obligatorio">*</span>
+          </label>
           <input
             type="text"
             id="domicilio"
@@ -85,7 +89,9 @@ export default function CargaClientes() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="nombre">Nombre</label>
+          <label htmlFor="nombre">
+            Nombre<span className="obligatorio">*</span>
+          </label>
           <input
             type="text"
             id="nombre"
@@ -96,7 +102,9 @@ export default function CargaClientes() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="apellido">Apellido</label>
+          <label htmlFor="apellido">
+            Apellido<span className="obligatorio">*</span>
+          </label>
           <input
             type="text"
             id="apellido"
@@ -107,7 +115,9 @@ export default function CargaClientes() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="mail">Email</label>
+          <label htmlFor="mail">
+            Email<span className="obligatorio">*</span>
+          </label>
           <input
             type="email"
             id="mail"
@@ -118,7 +128,9 @@ export default function CargaClientes() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="telefono">Teléfono</label>
+          <label htmlFor="telefono">
+            Teléfono<span className="obligatorio">*</span>
+          </label>
           <input
             type="number"
             id="telefono"

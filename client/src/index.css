@@ -1435,10 +1435,12 @@ button:focus-visible {
   width: 100%;
   height: 100px;
   display: flex;
-  align-items: center; 
-  justify-content: space-between; 
-  padding: 10px 20px; 
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.8); /* Negro con 80% de opacidad */
 }
+
 
 .white-bar.fixed .americanimg {
   max-width: 100px;
@@ -1448,10 +1450,6 @@ button:focus-visible {
 .white-bar.fixed .search-bar {
   display: none; 
 }
-
-
-
-
 
 @media screen and (max-width: 850px) {
   .white-bar img {
@@ -3533,8 +3531,6 @@ button:focus-visible {
   } 
 
 
-
-
 .headerNavBar {
   position: absolute;
   top: 100px;
@@ -3548,7 +3544,7 @@ button:focus-visible {
 .white-bar.fixed .headerNavBar {
   top: 50px; 
   left: 60%; 
-  /* transform: translateX(-60%); */
+  transform: translateX(-20%);
 }
 
 
@@ -3733,5 +3729,7 @@ button:focus-visible {
 }
 
 
-
+.obligatorio {
+  color: red;
+}
 
