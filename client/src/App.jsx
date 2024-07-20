@@ -5,7 +5,6 @@ import useAuth from "./hooks/useAuth";
 import Layout from "./pages/Layout";
 import { useProducto } from "./hooks/useProductos";
 import CarouselPrincipal from "./components/CarouselPrincipal";
-import CarouselMarcas from "./components/CarouselMarcas";
 import { FaWhatsapp } from "react-icons/fa";
 
 function App() {
@@ -46,7 +45,10 @@ function App() {
     : [];
 
   return (
-    <Layout onSearchByMarca={handleSearchByMarca}>
+    <Layout
+      onSearchByMarca={handleSearchByMarca}
+      onSelectFamilia={handleFamiliaClick}
+    >
       <div className="containerApp">
         <CarouselPrincipal />
 

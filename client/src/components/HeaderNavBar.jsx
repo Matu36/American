@@ -1,35 +1,59 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FiltrosFamiliasYMarcas from "../components/FiltrosFamiliasYMarcas";
 
-export default function HeaderNavBar({ handleMostrarModalGarantia }) {
+export default function HeaderNavBar({
+  handleMostrarModalGarantia,
+  onSelectFamilia,
+}) {
   const navigate = useNavigate();
 
   const navigateToHome = () => {
     navigate("/");
   };
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isEmpresaDropdownOpen, setIsEmpresaDropdownOpen] = useState(false);
+  const [isEquiposDropdownOpen, setIsEquiposDropdownOpen] = useState(false);
 
-  const handleMouseEnter = () => {
-    setIsDropdownOpen(true);
+  const handleEmpresaMouseEnter = () => {
+    setIsEmpresaDropdownOpen(true);
   };
 
-  const handleMouseLeave = () => {
-    setIsDropdownOpen(false);
+  const handleEmpresaMouseLeave = () => {
+    setIsEmpresaDropdownOpen(false);
+  };
+
+  const handleEquiposMouseEnter = () => {
+    setIsEquiposDropdownOpen(true);
+  };
+
+  const handleEquiposMouseLeave = () => {
+    setIsEquiposDropdownOpen(false);
   };
 
   return (
     <div>
       <div>
         <button onClick={navigateToHome}>Home</button>
-        <button>Equipos</button>
         <div
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onMouseEnter={handleEquiposMouseEnter}
+          onMouseLeave={handleEquiposMouseLeave}
+          className="empresaButtonWrapper"
+        >
+          <button>Equipos</button>
+          {isEquiposDropdownOpen && (
+            <div className="filtrosContainer">
+              <FiltrosFamiliasYMarcas onSelectFamilia={onSelectFamilia} />
+            </div>
+          )}
+        </div>
+        <div
+          onMouseEnter={handleEmpresaMouseEnter}
+          onMouseLeave={handleEmpresaMouseLeave}
           className="empresaButtonWrapper"
         >
           <button>Empresa</button>
-          {isDropdownOpen && (
+          {isEmpresaDropdownOpen && (
             <div className="dropdownEmpresa">
               <button onClick={() => navigate("/postventa")}>PostVenta</button>
               <button onClick={() => navigate("/distribuidores")}>

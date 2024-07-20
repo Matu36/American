@@ -15,7 +15,10 @@ import Contact from "./Contact";
 import Garantia from "./Garantia";
 import AboutUs from "./AboutUs";
 
-export default function NavBarAlternativo({ onSearchByMarca }) {
+export default function NavBarAlternativo({
+  onSearchByMarca,
+  onSelectFamilia,
+}) {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showUserMenu, setShowUserMenu] = useState(false);
