@@ -71,7 +71,7 @@ export default function HeaderNavBar({
             </div>
           )}
         </div>
-        <button onClick={handleMostrarModalGarantia}>Garantía</button>
+        <button onClick={() => navigate("/americanGarantia")}>Garantia</button>
       </div>
     </div>
   );

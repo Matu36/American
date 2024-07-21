@@ -46,10 +46,10 @@ import Repuestos from "../components/Admin/Repuestos";
 import RepuestosDetail from "../components/Admin/RepuestosDetail";
 import PostVenta from "../components/empresa/PostVenta";
 import Financiación from "../components/empresa/Financiación";
-import TrabajaConNosotros from "../components/empresa/AmericanContacto";
 import Distribuidores from "../components/empresa/Distribuidores";
 import AmericanRepuestos from "../components/empresa/AmericanRepuestos";
 import AmericanContacto from "../components/empresa/AmericanContacto";
+import AmericanGarantia from "../components/empresa/AmericanGarantia";
 
 const AppRouter = () => {
   return (
@@ -61,6 +61,7 @@ const AppRouter = () => {
           <Route path="/financiacion" element={<Financiación />} />
           <Route path="/americanrepuestos" element={<AmericanRepuestos />} />
           <Route path="/americanContacto" element={<AmericanContacto />} />
+          <Route path="/americanGarantia" element={<AmericanGarantia />} />
           <Route path="/distribuidores" element={<Distribuidores />} />
           <Route path="/productos/:id" element={<Detalle />} />
           <Route path="/Error" element={<ErroPage />} />
