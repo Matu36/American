@@ -19,7 +19,10 @@ export default function Detalle() {
   const [contactoProducto, setContactoProducto] = useState(false);
 
   const { data, isLoading } = useProducto(id).productoQueryById;
-  const { data: productos } = useProducto().productosQuery;
+  const { data: productos, isLoading: loading } = useProducto(
+    null,
+    selectedMarca
+  ).productoQueryByFamilia;
 
   useEffect(() => {
     if (data) {
@@ -34,17 +37,30 @@ export default function Detalle() {
     setBusquedaActiva(true);
 
     setTimeout(() => {
-      const firstCard = cardsContainerRef.current.querySelector(".card");
-      if (firstCard) {
-        firstCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (cardsContainerRef.current) {
+        cardsContainerRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       }
-    }, 0);
+    }, 100);
   };
 
-  // Dentro del retorno del componente
-  const filteredProductos = productos?.filter((producto) =>
-    producto.familia.toLowerCase().includes(selectedMarca.toLowerCase())
-  );
+  const handleFamiliaClick = (familia) => {
+    const familiaNormalized =
+      familia.charAt(0).toUpperCase() + familia.slice(1).toLowerCase();
+    setSelectedMarca(familiaNormalized);
+    setBusquedaActiva(true);
+
+    setTimeout(() => {
+      if (cardsContainerRef.current) {
+        cardsContainerRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 100);
+  };
 
   const scrollToCarousel = () => {
     if (carouselRef.current) {
@@ -79,17 +95,14 @@ export default function Detalle() {
     imagen4,
     imagen5,
     imagen6,
-    precio,
     codigo,
     potencia,
-    cantidadTotal,
     motor,
     capacidadDeCarga,
     capacidadDeBalde,
     Detalles,
   } = producto;
 
-  // Crear un arreglo de imágenes válidas
   const images = [
     imagen,
     imagen1,
@@ -111,7 +124,10 @@ export default function Detalle() {
   const detallesArray = Detalles.split("\n");
 
   return (
-    <Layout onSearchByMarca={handleSearchByMarca}>
+    <Layout
+      onSearchByMarca={handleSearchByMarca}
+      onSelectFamilia={handleFamiliaClick}
+    >
       <div className="blue-bar">CONSTRUYENDO EL FUTURO</div>
 
       <div
@@ -252,8 +268,8 @@ export default function Detalle() {
       </div>
       {busquedaActiva && (
         <div ref={cardsContainerRef} className="cards-container" id="card">
-          {filteredProductos.length > 0 ? (
-            filteredProductos.map((maquina) => (
+          {productos?.length > 0 ? (
+            productos.map((maquina) => (
               <Card
                 id="cards"
                 key={maquina.id}
@@ -262,7 +278,7 @@ export default function Detalle() {
               />
             ))
           ) : (
-            <p></p>
+            <p>No se encontraron productos.</p>
           )}
         </div>
       )}
