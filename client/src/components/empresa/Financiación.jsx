@@ -90,7 +90,7 @@ export default function Financiación() {
         <img
           src={FinanciacionImg}
           alt="Financiación"
-          className="postVentImage"
+          className="large-images"
         />
         <h1 className="postVentTitle">FINANCIACION</h1>
         <p className="postVentText">

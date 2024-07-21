@@ -13,7 +13,7 @@ export default function AboutUs({ handleCerrarModalAbout }) {
       <img src={about} alt="" className="about-image" />
 
       <div className="contact-content">
-        <h3 style={{ fontFamily: "merri" }}>Sobre Nosotros</h3>
+        <h4 style={{ fontFamily: "merri" }}>Sobre Nosotros</h4>
         <span>
           Con mas 10 años de trayectoria, American vial es una empresa dedicada
           a prestar servicios de alquiler y venta de maquinaria para la

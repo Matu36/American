@@ -109,10 +109,11 @@ export default function AmericanGarantia() {
         </div>
 
         <div className="form-wrapper">
-          <form onSubmit={handleSubmit} className="contact-form">
+          <form onSubmit={handleSubmit} className="contact-form-garantia">
             {Object.keys(formValues).map((key) => (
-              <div key={key} className="form-group">
+              <div key={key} className="form-group-garantia">
                 <label htmlFor={key}>{labels[key]}</label>
+
                 <input
                   type={key === "fechaEntregaDelEquipo" ? "date" : "text"}
                   id={key}

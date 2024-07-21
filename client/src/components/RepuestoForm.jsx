@@ -73,7 +73,7 @@ export default function RepuestoForm({ handleCerrarModalRepuesto }) {
             Consulte sobre nuestros Equipos y Servicios a través de nuestro
             formulario.
           </p>
-          <p style={{ color: "grey", fontWeight: "bold", marginTop: "-15pc" }}>
+          <p style={{ color: "grey", fontWeight: "bold" }}>
             Un asesor de Ventas se contactará con usted de inmediato.
           </p>
         </div>

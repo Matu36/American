@@ -43,7 +43,10 @@ export default function HeaderNavBar({
           <button>Equipos</button>
           {isEquiposDropdownOpen && (
             <div className="filtrosContainer">
-              <FiltrosFamiliasYMarcas onSelectFamilia={onSelectFamilia} />
+              <FiltrosFamiliasYMarcas
+                onSelectFamilia={onSelectFamilia}
+                onClose={() => setIsEquiposDropdownOpen(false)}
+              />
             </div>
           )}
         </div>

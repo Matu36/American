@@ -694,7 +694,8 @@ button:focus-visible {
 }
 .contact-content {
   width: 100%;
-  margin-top: 3rem;
+  margin-top: 2rem;
+  font-family: "merri";
 }
 
 .contact-form {
@@ -3913,27 +3914,31 @@ button:focus-visible {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.contact-form {
+.contact-form-garantia {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
 }
 
-.form-group {
+.form-group-garantia {
   flex: 1 1 calc(50% - 30px);
   display: flex;
   flex-direction: column;
 }
 
-.form-group label {
+.form-group-garantia label {
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-.form-group input {
+.form-group-garantia input {
+  width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: black;
+  color: #febb00;
 }
 
 .form-actions {
@@ -3942,20 +3947,7 @@ button:focus-visible {
   margin-top: 20px;
 }
 
-.cards-container {
-  margin-top: 20px;
-}
 
-.card {
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: box-shadow 0.3s;
-}
 
-.card:hover {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
+
 
