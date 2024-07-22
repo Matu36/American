@@ -1389,7 +1389,7 @@ button:focus-visible {
 }
 
 .fauser {
-  margin-top: 5rem;
+  margin-top: 4rem;
 }
 
 .inputnav {
@@ -1399,13 +1399,14 @@ button:focus-visible {
   background-color: #333;
   border: none;
   outline: none;
-  width: 30%;
+  width: 20%;
   border-radius: 20px;
   margin-top: 5rem;
+  margin-bottom: 0.5rem;
   
 }
 
-@media (max-width: 850px) {
+@media (max-width: 990px) {
   .inputnav {
     display: none;
   }
@@ -1460,22 +1461,48 @@ button:focus-visible {
 }
 
 .americanimg {
-  margin-top: -3rem;
+  margin-top: -4rem;
 }
+
+@media screen and (max-width: 725px) {
+  .americanimg img {
+    width: 100%;
+    height: auto; 
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .americanimg img {
+    width: 100%;
+    height: auto; 
+  }
+}
+
 
 .search-button {
   border: none;
   background: none;
   cursor: pointer;
-  margin-left: -10px;
+  margin-top: 5.5rem;
 }
 
-@media (max-width: 850px) {
-  .search-button {
-    margin-top: 2.5rem;
-    font-size: 24px;
-    width: 24px;
-    padding: 0;
+
+
+.burguer-icon-front {
+  display: none; 
+  background: none; 
+  background-color: none;
+  border: none; 
+  cursor: pointer;
+  margin-right: 20px; 
+  color: white;
+  font-size: 26px;
+}
+
+@media screen and (max-width: 990px) {
+  .burguer-icon-front {
+    display: block;
+    margin-top: 4.5rem;
   }
 }
 
@@ -3576,7 +3603,17 @@ button:focus-visible {
   transform: translateX(-20%);
 }
 
+@media screen and (max-width: 990px) {
+  .headerNavBar {
+    display: none;
+  }
+}
 
+@media screen and (max-width: 1100px) {
+  .white-bar.fixed .headerNavBar {
+    display: none;
+  }
+}
 
 
 .empresaButtonWrapper {
@@ -3617,8 +3654,8 @@ button:focus-visible {
 }
 
 .filtrosContainer {
-  position: relative; /* Necesario para que los elementos absolutos dentro se alineen correctamente */
-  width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+  position: relative; 
+  width: 100%; 
 }
 
 .dropdownEquipos {

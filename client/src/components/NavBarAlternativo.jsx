@@ -14,6 +14,7 @@ import HeaderNavBar from "./HeaderNavBar";
 import Contact from "./Contact";
 import Garantia from "./Garantia";
 import AboutUs from "./AboutUs";
+import { FaBars } from "react-icons/fa";
 
 export default function NavBarAlternativo({
   onSearchByMarca,
@@ -233,7 +234,13 @@ export default function NavBarAlternativo({
 
           <div className="search-bar">
             <button className="search-button" onClick={handleSearch}>
-              <FiSearch style={{ color: "grey", fontSize: "22px" }} />
+              <FiSearch
+                style={{
+                  color: "grey",
+                  fontSize: "26px",
+                  marginTop: "-1rem",
+                }}
+              />
             </button>
             <input
               className="inputnav"
@@ -273,6 +280,9 @@ export default function NavBarAlternativo({
               </div>
             )}
           </div>
+          <button style={{ background: "none" }}>
+            <FaBars className="burguer-icon-front" />
+          </button>
           <div>
             {Object.keys(auth).length > 0 ? (
               <div className="user-menu-container">
