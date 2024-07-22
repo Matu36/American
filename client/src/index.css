@@ -651,19 +651,20 @@ button:focus-visible {
 }
 
 .contact-container {
-  width: 700px;
-  max-width: 100%;
+  width: 100%; /* Hacer que el contenedor use el ancho completo disponible */
+  max-width: 700px; /* Máximo ancho del contenedor */
   margin: 20px auto; 
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #f4f4f4;
-  padding: 20px;
+  padding: 15px; /* Reducir el padding para hacer el contenedor más compacto */
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: relative;
   height: auto;
   box-sizing: border-box; 
+  overflow: hidden; /* Ocultar el desbordamiento */
 }
 
 .contact-container::before,
@@ -680,12 +681,12 @@ button:focus-visible {
 
 .contact-container::before {
   border: 4px solid black;
-  margin: -8px;
+  margin: -4px; /* Ajustar el margen para evitar el desbordamiento del borde */
 }
 
 .contact-container::after {
   border: 4px solid #ffcc00;
-  margin: -16px;
+  margin: -8px; /* Ajustar el margen para evitar el desbordamiento del borde */
 }
 
 @media screen and (max-width: 850px) {
@@ -2900,6 +2901,13 @@ button:focus-visible {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+}
+
+.form-group-consulta label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  width: 100%;
 }
 
 .form-group input,

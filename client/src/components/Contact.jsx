@@ -69,7 +69,7 @@ export default function Contact({ handleCerrarModalContact }) {
         <h3>Horario de Atención</h3>
         <h5>Lunes a Viernes 9 a 18 hs.</h5>
         <br />
-        <div>
+        <div style={{ marginTop: "-1rem" }}>
           <p className="text-muted">
             Consulte sobre nuestros Equipos y Servicios a través de nuestro
             formulario.
@@ -80,7 +80,7 @@ export default function Contact({ handleCerrarModalContact }) {
         </div>
       </div>
 
-      <div className="contact-content">
+      <div className="contact-content" style={{ marginTop: "-0.5rem" }}>
         <form className="contact-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="nombre">Nombre:</label>
