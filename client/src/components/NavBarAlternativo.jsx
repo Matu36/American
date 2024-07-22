@@ -242,6 +242,7 @@ export default function NavBarAlternativo({
                 }}
               />
             </button>
+
             <input
               className="inputnav"
               type="text"
@@ -250,20 +251,9 @@ export default function NavBarAlternativo({
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
             />
-            {suggestions.length > 0 && (
-              <div
-                style={{
-                  position: "sticky",
-                  top: "calc(100% + 2px)",
-                  left: 0,
-                  backgroundColor: "black",
 
-                  borderRadius: "4px",
-                  padding: "5px",
-                  zIndex: 1,
-                  width: "100%",
-                }}
-              >
+            {suggestions.length > 0 && (
+              <div>
                 {suggestions.map((suggestion, index) => (
                   <div
                     key={index}
@@ -280,7 +270,11 @@ export default function NavBarAlternativo({
               </div>
             )}
           </div>
-          <button style={{ background: "none" }}>
+          <button
+            style={{
+              background: "none",
+            }}
+          >
             <FaBars className="burguer-icon-front" />
           </button>
           <div>

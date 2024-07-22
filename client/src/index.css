@@ -1406,7 +1406,7 @@ button:focus-visible {
   
 }
 
-@media (max-width: 990px) {
+@media (max-width: 1100px) {
   .inputnav {
     display: none;
   }
@@ -1427,7 +1427,7 @@ button:focus-visible {
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  background-color: rgba(0, 0, 0, 0.8); /* Negro con 80% de opacidad */
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 
@@ -1437,14 +1437,20 @@ button:focus-visible {
 }
 
 
-
-.white-bar.fixed .search-bar {
-  display: none; 
-}
-
 .white-bar.fixed .fauser {
   margin-top:  30px; 
 }
+
+@media screen and (max-width: 1100px) {
+  .white-bar.fixed .burguer-icon-front  {
+   position: absolute;
+   right: 90px;
+   top:-15px
+  }
+}
+
+
+
 
 @media screen and (max-width: 850px) {
   .white-bar img {
@@ -1466,14 +1472,21 @@ button:focus-visible {
 
 @media screen and (max-width: 725px) {
   .americanimg img {
-    width: 100%;
+    width: 400px;
     height: auto; 
   }
 }
 
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 625px) {
   .americanimg img {
-    width: 100%;
+    width: 300px;
+    height: auto; 
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .americanimg img {
+    width: 200px;
     height: auto; 
   }
 }
@@ -1486,7 +1499,28 @@ button:focus-visible {
   margin-top: 5.5rem;
 }
 
+.white-bar.fixed .search-button  {
+  position: absolute;
+  right: 150px;
+  top:-35px
+ }
 
+
+.white-bar.fixed .search-button {
+  position: absolute;
+  right: 150px;
+  top: -35px;
+}
+
+@media screen and (min-width: 1100px) {
+  .white-bar.fixed .search-button {
+    right: 80px; 
+  }
+}
+
+ .white-bar.fixed .inputnav  {
+  display: none;
+ }
 
 .burguer-icon-front {
   display: none; 
@@ -1499,9 +1533,9 @@ button:focus-visible {
   font-size: 26px;
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 1100px) {
   .burguer-icon-front {
-    display: block;
+    display: flex;
     margin-top: 4.5rem;
   }
 }
