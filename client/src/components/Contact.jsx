@@ -74,7 +74,7 @@ export default function Contact({ handleCerrarModalContact }) {
             Consulte sobre nuestros Equipos y Servicios a través de nuestro
             formulario.
           </p>
-          <p style={{ color: "grey", fontWeight: "bold", marginTop: "-15pc" }}>
+          <p style={{ color: "grey", fontWeight: "bold" }}>
             Un asesor de Ventas se contactará con usted de inmediato.
           </p>
         </div>
@@ -138,10 +138,7 @@ export default function Contact({ handleCerrarModalContact }) {
             />
           </div>
           <div className="form-group"></div>
-          <div
-            className="form-group"
-            style={{ width: "100%", marginTop: "-3rem" }}
-          >
+          <div className="form-group" style={{ width: "100%" }}>
             <label htmlFor="consulta">Consulta:</label>
             <textarea
               id="consulta"

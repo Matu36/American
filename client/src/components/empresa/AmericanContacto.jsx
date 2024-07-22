@@ -206,7 +206,7 @@ export default function AmericanContacto() {
 
         <div className="datosAmericanContacto">
           <div className="grupoAmericanContacto">
-            <div className="grupoContacto">
+            <div className="grupoContactoAmerican">
               <h3>Ventas</h3>
               <a href="tel:47485900" target="_blank" rel="noopener noreferrer">
                 <FaPhoneSquareAlt size={40} color="#FF7F50" />
@@ -222,7 +222,7 @@ export default function AmericanContacto() {
               </a>
             </div>
           </div>
-          <div className="grupoContacto">
+          <div className="grupoContactoAmerican">
             <h3>Post Venta</h3>
             <a href="tel:47485900" target="_blank" rel="noopener noreferrer">
               <FaPhoneSquareAlt size={40} color="#FF7F50" />
@@ -245,7 +245,7 @@ export default function AmericanContacto() {
               servicios@americanvial.com
             </a>
           </div>
-          <div className="grupoContacto">
+          <div className="grupoContactoAmerican">
             <h3>Repuestos</h3>
             <a href="tel:47485900" target="_blank" rel="noopener noreferrer">
               <FaPhoneSquareAlt size={40} color="#FF7F50" />

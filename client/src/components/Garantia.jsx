@@ -67,7 +67,7 @@ export default function Garantia({ handleCerrarModalGarantia }) {
             Para realizar una solicitud de reparación por favor complete el
             siguiente formulario con todos los datos requeridos.
           </p>
-          <p style={{ color: "grey", fontWeight: "bold", marginTop: "-15pc" }}>
+          <p style={{ color: "grey", fontWeight: "bold" }}>
             Un asesor de postVenta se contactará con usted de inmediato.
           </p>
         </div>
