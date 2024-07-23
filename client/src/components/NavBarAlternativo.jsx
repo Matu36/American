@@ -30,7 +30,23 @@ export default function NavBarAlternativo({
   const [contact, setContact] = useState(false);
   const [garantia, setGarantia] = useState(false);
   const [modal, setModal] = useState(false);
+  const [headBar, setHeadBar] = useState(false);
+  const [searchBar, setSearchBar] = useState(false);
 
+  const handleMostrarModalheadBar = () => {
+    setHeadBar(true);
+  };
+
+  const handleCerrarModalHeadBar = () => {
+    setHeadBar(false);
+  };
+  const handleMostrarModalSearchBar = () => {
+    setSearchBar(true);
+  };
+
+  const handleCerrarModalSearchBar = () => {
+    setSearchBar(false);
+  };
   const handleMostrarModalGarantia = () => {
     setGarantia(true);
   };
@@ -118,6 +134,7 @@ export default function NavBarAlternativo({
     setSearchTerm(suggestion);
     onSearchByMarca(suggestion);
     setSuggestions([]);
+    handleCerrarModalSearchBar();
   };
   const getSuggestions = (value) => {
     if (!value || !categorias) {
@@ -232,6 +249,71 @@ export default function NavBarAlternativo({
             />
           </div>
 
+          {headBar && (
+            <div className="headerNavBarClick">
+              <button
+                className="button-cerrar"
+                onClick={handleCerrarModalHeadBar}
+              >
+                X
+              </button>
+              <HeaderNavBar
+                handleMostrarModalAbout={handleMostrarModalAbout}
+                handleCerrarModalAbout={handleCerrarModalAbout}
+                handleMostrarModalContact={handleMostrarModalContact}
+                handleCerrarModalContact={handleCerrarModalContact}
+                handleMostrarModalGarantia={handleMostrarModalGarantia}
+                handleCerrarModalGarantia={handleCerrarModalGarantia}
+                onSelectFamilia={onSelectFamilia}
+              />
+            </div>
+          )}
+
+          {searchBar && (
+            <div className="headerSearchBarClick">
+              <button onClick={handleCerrarModalSearchBar}>X</button>
+              <input
+                className="inputnavBar"
+                type="text"
+                placeholder="Buscar..."
+                value={searchTerm}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+              />
+
+              {suggestions.length > 0 && (
+                <div>
+                  {suggestions.map((suggestion, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleSuggestionClick(suggestion)}
+                      style={{
+                        color: "gray",
+                        cursor: "pointer",
+                        marginBottom: "5px",
+                      }}
+                    >
+                      {suggestion}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          <button
+            className="search-button-modal-open"
+            onClick={handleMostrarModalSearchBar}
+          >
+            <FiSearch
+              style={{
+                color: "grey",
+                fontSize: "26px",
+                marginTop: "-1rem",
+              }}
+            />
+          </button>
+
           <div className="search-bar">
             <button className="search-button" onClick={handleSearch}>
               <FiSearch
@@ -252,7 +334,7 @@ export default function NavBarAlternativo({
               onKeyPress={handleKeyPress}
             />
 
-            {suggestions.length > 0 && (
+            {!searchBar && suggestions.length > 0 && (
               <div>
                 {suggestions.map((suggestion, index) => (
                   <div
@@ -275,7 +357,10 @@ export default function NavBarAlternativo({
               background: "none",
             }}
           >
-            <FaBars className="burguer-icon-front" />
+            <FaBars
+              className="burguer-icon-front"
+              onClick={handleMostrarModalheadBar}
+            />
           </button>
           <div>
             {Object.keys(auth).length > 0 ? (

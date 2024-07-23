@@ -1499,21 +1499,49 @@ button:focus-visible {
   margin-top: 5.5rem;
 }
 
-.white-bar.fixed .search-button  {
+.search-button-modal-open {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-top: 5.5rem;
+  visibility: hidden; 
+}
+
+.white-bar.fixed .search-button-modal-open  {
   position: absolute;
   right: 150px;
-  top:-35px
+  top:-35px;
+  visibility: visible;
  }
 
+ .white-bar.fixed .search-button  {
+  display: none;
+ }
 
-.white-bar.fixed .search-button {
+.white-bar.fixed .search-button-modal-open {
   position: absolute;
   right: 150px;
   top: -35px;
 }
 
 @media screen and (min-width: 1100px) {
-  .white-bar.fixed .search-button {
+  .white-bar.fixed .search-button-modal-open {
+    right: 80px; 
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .white-bar .search-button-modal-open {
+    position: absolute;
+    right: 150px;
+    
+    visibility: visible;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .white-bar .search-button {
+    visibility: hidden;
     right: 80px; 
   }
 }
@@ -1539,6 +1567,7 @@ button:focus-visible {
     margin-top: 4.5rem;
   }
 }
+
 
 .filtrosTodos {
   display: flex;
@@ -4038,6 +4067,88 @@ button:focus-visible {
   justify-content: center;
   margin-top: 20px;
 }
+
+/* Estilo base para el contenedor de la barra de búsqueda */
+/* Contenedor de la barra de búsqueda */
+.headerSearchBarClick {
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  background: #ffffff;
+  border: 3px solid #000000; /* Borde negro */
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  z-index: 1000;
+  width: 600px;
+  height: 300px;
+  max-width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  border-image: linear-gradient(45deg, #ffcc00, #000000) 1; /* Borde doble amarillo y negro */
+}
+
+.headerSearchBarClick .inputnavBar {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #000000; /* Borde negro */
+  border-radius: 55px;
+  font-size: 18px;
+  box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-image: linear-gradient(45deg, #ffcc00, #000000) 1; /* Borde doble amarillo y negro */
+}
+
+
+.headerNavBarClick {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: #333;
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  z-index: 1000;
+  width: 50%; /* Ancho del menú */
+  height: 100%; /* Altura completa */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto; /* Permite el desplazamiento si el contenido es demasiado alto */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.headerNavBarClick button,
+.headerNavBarClick span {
+  width: 80%; /* Ocupa un ancho consistente */
+  max-width: 300px; /* Limita el ancho máximo */
+  padding: 15px; /* Espaciado interno */
+  margin-bottom: 15px; /* Espaciado entre los elementos */
+  background: #444;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center; /* Centra el texto */
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.headerNavBarClick button:hover,
+.headerNavBarClick span:hover {
+  background: #555;
+  transform: scale(1.05); /* Efecto de aumento en el hover */
+}
+
+
+
+
 
 
 
