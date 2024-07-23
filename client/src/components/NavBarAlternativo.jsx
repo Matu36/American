@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import logo from "../assets/img/LOGOAMERICANPRINCIPAL.png";
+import gruagif from "../assets/img/GRUAGIF1.gif";
 import { FiSearch } from "react-icons/fi";
 import { FaUser } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
@@ -15,6 +16,7 @@ import Contact from "./Contact";
 import Garantia from "./Garantia";
 import AboutUs from "./AboutUs";
 import { FaBars } from "react-icons/fa";
+import AmericanVial from "../assets/img/logoAmerican.png";
 
 export default function NavBarAlternativo({
   onSearchByMarca,
@@ -251,6 +253,9 @@ export default function NavBarAlternativo({
 
           {headBar && (
             <div className="headerNavBarClick">
+              <br />
+              <img className="americanTogle" src={AmericanVial} alt="" />
+              <img className="gif" src={gruagif} alt="" />
               <button
                 className="button-cerrar"
                 onClick={handleCerrarModalHeadBar}
@@ -271,7 +276,12 @@ export default function NavBarAlternativo({
 
           {searchBar && (
             <div className="headerSearchBarClick">
-              <button onClick={handleCerrarModalSearchBar}>X</button>
+              <button
+                onClick={handleCerrarModalSearchBar}
+                className="cerrar-searchbar"
+              >
+                X
+              </button>
               <input
                 className="inputnavBar"
                 type="text"

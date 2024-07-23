@@ -7,6 +7,7 @@ import { useRef } from "react";
 import Card from "../Card";
 import Spinner from "../../UI/Spinner";
 import { useProducto } from "../../hooks/useProductos";
+import Contact from "../Contact";
 
 export default function PostVenta() {
   const [producto, setProducto] = useState(null);
@@ -14,6 +15,15 @@ export default function PostVenta() {
   const carouselRef = useRef(null);
   const [busquedaActiva, setBusquedaActiva] = useState(false);
   const [selectedMarca, setSelectedMarca] = useState("");
+  const [contact, setContact] = useState(false);
+
+  const handleMostrarModalContact = () => {
+    setContact(true);
+  };
+
+  const handleCerrarModalContact = () => {
+    setContact(false);
+  };
 
   const { data: productos, isLoading } = useProducto(
     null,
@@ -112,7 +122,20 @@ export default function PostVenta() {
             )}
           </div>
         )}
+        <br />
+        <br />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button className="submit-button" onClick={handleMostrarModalContact}>
+            Contacto
+          </button>
+        </div>
       </div>
+      {contact && (
+        <div className="modal">
+          <Contact handleCerrarModalContact={handleCerrarModalContact} />
+        </div>
+      )}
+      <br />
     </Layout>
   );
 }

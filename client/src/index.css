@@ -4072,36 +4072,50 @@ button:focus-visible {
 /* Contenedor de la barra de búsqueda */
 .headerSearchBarClick {
   position: fixed;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
-  background: #ffffff;
-  border: 3px solid #000000; /* Borde negro */
-  border-radius: 8px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  padding: 20px;
+  top: 15%;
+  right: 0%;
+  background: #524c4c; /* Fondo blanco */
+  border: 5px solid #ffc107; /* Borde gris oscuro */
+  border-radius: 20px; /* Bordes redondeados */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+  padding: 20px; /* Espaciado interno */
   z-index: 1000;
-  width: 600px;
-  height: 300px;
+  width: 600px; /* Ancho del campo de búsqueda */
+  height: auto; /* Altura reducida */
   max-width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  border-image: linear-gradient(45deg, #ffcc00, #000000) 1; /* Borde doble amarillo y negro */
+  
 }
 
 .headerSearchBarClick .inputnavBar {
   width: 100%;
+  background: #524c4c;
   padding: 12px 16px;
-  border: 2px solid #000000; /* Borde negro */
-  border-radius: 55px;
-  font-size: 18px;
+  border: 2px solid #333; 
+  border-radius: 20px; 
+  font-size: 18px; 
   box-sizing: border-box;
   outline: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-image: linear-gradient(45deg, #ffcc00, #000000) 1; /* Borde doble amarillo y negro */
+  transition: border-color 0.3s ease; 
+  margin-right: 10px;
+  color: white;
 }
+
+.cerrar-searchbar {
+  background: none;
+  font-size: large;
+  color: white;
+  margin-right: 10px;
+}
+
+.headerSearchBarClick .inputnavBar:focus {
+  border-color: #ffc107; 
+}
+
 
 
 .headerNavBarClick {
@@ -4114,22 +4128,22 @@ button:focus-visible {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   padding: 20px;
   z-index: 1000;
-  width: 50%; /* Ancho del menú */
-  height: 100%; /* Altura completa */
+  width: 100%; 
+  height: 100%; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow-y: auto; /* Permite el desplazamiento si el contenido es demasiado alto */
+  overflow-y: auto; 
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .headerNavBarClick button,
 .headerNavBarClick span {
-  width: 80%; /* Ocupa un ancho consistente */
-  max-width: 300px; /* Limita el ancho máximo */
-  padding: 15px; /* Espaciado interno */
-  margin-bottom: 15px; /* Espaciado entre los elementos */
+  width: 450px; 
+  max-width: 100%; 
+  padding: 15px; 
+  margin-bottom: 15px; 
   background: #444;
   color: #fff;
   border: none;
@@ -4146,8 +4160,16 @@ button:focus-visible {
   transform: scale(1.05); /* Efecto de aumento en el hover */
 }
 
+.gif {
+  width: 300px;
+  max-width: 60%;
+}
 
-
+.americanTogle {
+  width: 300px;
+  max-width: 80%;
+  margin-top: 20px;
+}
 
 
 
