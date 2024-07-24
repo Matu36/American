@@ -75,14 +75,17 @@ export default function AmericanRepuestos() {
       onSelectFamilia={handleFamiliaClick}
       onSearchByMarca={handleSearchByMarca}
     >
-      <div className="american-repuestos">
+      <div className="postVentaContainer">
         <div className="large-images">
           <img src={repuestosimage} alt="Repuestos" className="large-image" />
-          REPUESTOS Respuestas para su equipo
+          <h1 className="postVentaTitle">REPUESTOS</h1>
+          {/* <h3 className="postVentaText">Respuestas para su equipo</h3> */}
           <img src={tinglado} alt="Tinglado" className="large-image" />
         </div>
-        Equipamiento Integral e Infraestructura para dar respuestas
-        satisfactorias.
+        <h3 className="postVentaSubtitle">
+          Equipamiento Integral e Infraestructura para dar respuestas
+          satisfactorias.
+        </h3>
         <div className="grid-images">
           <img src={foto1} alt="Foto 1" className="grid-image" />
           <img src={foto2} alt="Foto 2" className="grid-image" />
@@ -93,6 +96,13 @@ export default function AmericanRepuestos() {
           <img src={foto7} alt="Foto 7" className="grid-image" />
           <img src={foto8} alt="Foto 8" className="grid-image" />
           <img src={foto9} alt="Foto 9" className="grid-image" />
+        </div>
+        <br />
+        <br />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button className="submit-button" onClick={handleMostrarModalContact}>
+            Contacto
+          </button>
         </div>
       </div>
       {selectedFamilia && (
@@ -106,13 +116,7 @@ export default function AmericanRepuestos() {
           )}
         </div>
       )}
-      <br />
-      <br />
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <button className="submit-button" onClick={handleMostrarModalContact}>
-          Contacto
-        </button>
-      </div>
+
       {contact && (
         <div className="modal">
           <Contact handleCerrarModalContact={handleCerrarModalContact} />

@@ -3724,30 +3724,30 @@ button:focus-visible {
 .dropdownEquipos {
   position: absolute;
   top: 100%; 
-  left:0;
-  transform: translateX(-40%);
+  left: 50%; /* Centrar en la pantalla */
+  transform: translateX(-44%);
   background-color: #333;
   color: white;
   display: grid;
-  grid-template-columns: repeat(5, 2fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajustar columnas según el tamaño */
   gap: 10px;
   z-index: 1000;
-  width: 100vw; 
+  width: 100vw;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: "Merri", sans-serif;
   padding: 8px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 .dropdownEquipos button {
   background: none;
   border: none;
   color: white;
-  padding: 8px; 
+  padding: 8px;
   text-align: center;
   cursor: pointer;
-  font-size: 14px; 
-  letter-spacing: 0.5px; 
+  font-size: 14px;
+  letter-spacing: 0.5px;
   transition: background-color 0.3s;
   margin: 0;
   width: 100%;
@@ -3757,37 +3757,66 @@ button:focus-visible {
   background-color: #ffc107;
 }
 
+@media (max-width: 1200px) {
+  .dropdownEquipos {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .dropdownEquipos {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .dropdownEquipos {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .dropdownEquipos {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+}
+
 
 .postVentaContainer {
-  padding: 20px;
+  padding: 40px;
   background-color: white;
   color: black;
   font-family: "Merri", sans-serif;
   text-align: center;
-}
-
-.postVentaImage {
-  width: 100%;
-  max-width: 800px;
-  height: auto;
-  margin: 20px auto;
-  display: block;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  border-radius: 10px; 
+  border: 1px solid #ddd; 
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 1rem;
 }
 
 .postVentaTitle {
   font-size: 2.5rem;
   margin: 20px 0;
+  color: #333;
+  text-transform: uppercase; /* Mayúsculas para un efecto más impactante */
+  letter-spacing: 1px; /* Espaciado entre letras */
 }
 
 .postVentaText {
   font-size: 1.2rem;
   margin: 20px 0;
+  color: #555;
+  line-height: 1.6; /* Mejorar la legibilidad */
 }
 
 .postVentaSubtitle {
   font-size: 2rem;
   margin: 20px 0;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .postVentaList {
@@ -3797,27 +3826,49 @@ button:focus-visible {
   text-align: left;
   max-width: 800px;
   margin: 20px auto;
+  color: #555;
 }
 
 .postVentaList li {
   margin: 10px 0;
+  padding-left: 20px; /* Espaciado adicional */
+  position: relative;
+}
+
+.postVentaList li::before {
+  content: "•"; /* Puntos antes de cada elemento */
+  color: #ffcc00; /* Color amarillo para los puntos */
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.5rem;
 }
 
 .postVentaFooter {
   margin: 20px 0;
+  padding: 20px;
+  background-color: #f9f9f9; /* Fondo ligero para distinguir la sección */
+  border-radius: 10px;
+  border: 1px solid #ddd;
 }
 
 .postVentaFooter h3 {
   margin: 10px 0;
+  color: #333;
 }
 
 .postVentaFooter p {
   font-size: 1.2rem;
   margin: 10px 0;
+  color: #555;
 }
 
 /* Estilos responsivos */
 @media (max-width: 768px) {
+  .postVentaContainer {
+    padding: 20px;
+  }
+
   .postVentaTitle {
     font-size: 2rem;
   }
@@ -3831,7 +3882,16 @@ button:focus-visible {
   .postVentaFooter p {
     font-size: 1rem;
   }
+
+  .postVentaList {
+    padding-left: 0;
+  }
+
+  .postVentaList li::before {
+    left: -20px;
+  }
 }
+
 
 .american-repuestos {
   display: flex;
@@ -3965,36 +4025,72 @@ button:focus-visible {
   border-radius: 4px;
 }
 
-
-
 .datosAmericanContacto {
   flex: 1;
   min-width: 300px;
-  max-width: 600px; 
+  max-width: 600px;
+  padding: 20px;
+  background-color: #f9f9f9; /* Fondo claro para contraste */
+  border: 4px double #272726; /* Borde doble amarillo */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra prominente */
+  position: relative; /* Para asegurar que el borde externo se aplique correctamente */
 }
 
-.grupoAmericanContacto, .grupoContactoAmerican {
-  margin-bottom: 20px;
+.datosAmericanContacto::before {
+  content: '';
+  position: absolute;
+  top: -6px; 
+  left: -6px; 
+  right: -6px; 
+  bottom: -6px; 
+  border: 2px solid #000; 
+  border-radius: 10px; 
+  z-index: -1; 
 }
 
-.grupoAmericanContacto h3, .grupoContactoAmerican h3 {
-  margin: 0;
+
+.grupoAmericanContacto {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los elementos horizontalmente */
+  margin: 15px;
+  text-align: center;
 }
 
-.grupoAmericanContacto a, .grupoContactoAmerican a {
+.grupoContactoAmerican {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los elementos horizontalmente */
+  margin: 10px;
+}
+
+.grupoContactoAmerican h3 {
+  margin-bottom: 15px;
+  font-size: 2rem;
+  color: #ffcc00; 
+  
+}
+
+.grupoContactoAmerican a {
   display: flex;
   align-items: center;
-  color: black;
-  text-decoration: none;
-  margin-bottom: 10px;
+  color: #333; /* Color de texto predeterminado */
+  text-decoration: none; /* Sin subrayado */
+  margin: 10px 0;
+  font-size: 1rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-.grupoAmericanContacto a:hover, .grupoContactoAmerican a:hover {
-  text-decoration: underline;
+.grupoContactoAmerican a:hover {
+  color: #007bff; /* Azul de hover para el texto */
+  background-color: #e9ecef; /* Fondo claro para el hover */
+  border-radius: 5px; /* Bordes redondeados en hover */
+  padding: 10px; /* Espaciado interno en hover */
 }
 
-.grupoAmericanContacto a svg, .grupoContactoAmerican a svg {
-  margin-right: 10px;
+.grupoContactoAmerican a svg {
+  margin-right: 10px; /* Espacio entre el icono y el texto */
 }
 
 /* Estilo responsivo */
@@ -4011,6 +4107,7 @@ button:focus-visible {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 800px;
   margin: 0 auto;
+  margin-top: 1rem;
 }
 
 .form-header h3 {
@@ -4163,9 +4260,13 @@ button:focus-visible {
 .gif {
   width: 300px;
   max-width: 60%;
+  
+  
 }
 
 .americanTogle {
+  position: absolute;
+  top: 0px;
   width: 300px;
   max-width: 80%;
   margin-top: 20px;

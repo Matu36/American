@@ -255,7 +255,13 @@ export default function NavBarAlternativo({
             <div className="headerNavBarClick">
               <br />
               <img className="americanTogle" src={AmericanVial} alt="" />
-              <img className="gif" src={gruagif} alt="" />
+
+              <img
+                className="gif"
+                style={{ marginTop: "90px" }}
+                src={gruagif}
+                alt=""
+              />
               <button
                 className="button-cerrar"
                 onClick={handleCerrarModalHeadBar}

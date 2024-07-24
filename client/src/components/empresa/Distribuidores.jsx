@@ -69,10 +69,10 @@ export default function Distribuidores() {
       onSearchByMarca={handleSearchByMarca}
       onSelectFamilia={handleFamiliaClick}
     >
-      <div className="american-repuestos">
+      <div className="postVentaContainer">
         <div className="large-images">
           <img src={Distribuidores1} alt="Repuestos" className="large-image" />
-          Distribuidores
+          <h1 className="postVentaTitle">Distribuidores</h1>
         </div>
 
         <div className="grid-imagesdist">
@@ -85,6 +85,17 @@ export default function Distribuidores() {
           <img src={santiago} alt="Foto 7" className="grid-imagedist" />
           <img src={sanjuan} alt="Foto 8" className="grid-imagedist" />
         </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "2rem",
+          }}
+        >
+          <button className="submit-button" onClick={handleMostrarModalContact}>
+            Contacto
+          </button>
+        </div>
       </div>
       {busquedaActiva && (
         <div ref={cardsContainerRef} className="cards-container">
@@ -95,13 +106,6 @@ export default function Distribuidores() {
           )}
         </div>
       )}
-      <br />
-      <br />
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <button className="submit-button" onClick={handleMostrarModalContact}>
-          Contacto
-        </button>
-      </div>
 
       {contact && (
         <div className="modal">

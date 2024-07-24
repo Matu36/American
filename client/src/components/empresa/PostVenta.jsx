@@ -89,7 +89,7 @@ export default function PostVenta() {
         </p>
         <img src={camioneta} alt="Camioneta" className="large-images" />
         <h2 className="postVentaSubtitle">
-          Por qué hacer su servicio de PostVenta con nosotros?
+          ¿Por qué hacer su servicio de PostVenta con nosotros?
         </h2>
         <ul className="postVentaList">
           <li>Porque mantiene la vigencia de su garantía.</li>
