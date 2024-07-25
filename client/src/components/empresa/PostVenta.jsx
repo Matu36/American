@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import camioneta from "../../assets/img/POSTVENTA/camioneta.jpg";
 import garantia from "../../assets/img/POSTVENTA/garantia.png";
-import postventa from "../../assets/img/POSTVENTA/postventa.jpg";
+import postventa from "../../assets/img/POSTVENTA/POSTVENTA.png";
 import Layout from "../../pages/Layout";
 import { useRef } from "react";
 import Card from "../Card";
@@ -83,7 +83,7 @@ export default function PostVenta() {
     >
       <div className="postVentaContainer">
         <img src={postventa} alt="PostVenta" className="large-images" />
-        <h1 className="postVentaTitle">POSTVENTA</h1>
+
         <p className="postVentaText">
           Contamos con más de 15 años de respaldo en el Servicio de PostVenta.
         </p>

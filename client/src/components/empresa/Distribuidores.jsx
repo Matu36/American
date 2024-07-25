@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Distribuidores1 from "../../assets/img/DISTRIBUIDORES/Distribuidores.jpg";
+import Distribuidores1 from "../../assets/img/DISTRIBUIDORES/DISTRIBUIDORES.png";
 import julio from "../../assets/img/DISTRIBUIDORES/9julio.jpg";
 import catamarca from "../../assets/img/DISTRIBUIDORES/catamarca.jpg";
 import cordoba from "../../assets/img/DISTRIBUIDORES/cordoba.jpg";
@@ -72,7 +72,6 @@ export default function Distribuidores() {
       <div className="postVentaContainer">
         <div className="large-images">
           <img src={Distribuidores1} alt="Repuestos" className="large-image" />
-          <h1 className="postVentaTitle">Distribuidores</h1>
         </div>
 
         <div className="grid-imagesdist">

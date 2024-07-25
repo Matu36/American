@@ -4061,7 +4061,7 @@ button:focus-visible {
 .grupoContactoAmerican {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra los elementos horizontalmente */
+  align-items: center; 
   margin: 10px;
 }
 
@@ -4270,6 +4270,47 @@ button:focus-visible {
   width: 300px;
   max-width: 80%;
   margin-top: 20px;
+}
+
+.financiarText {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.financiarList {
+  padding: 0;
+  margin-bottom: 20px;
+  text-align: left;
+  list-style: none;
+}
+
+.financiarList li {
+  margin-bottom: 10px;
+  color: black; 
+  position: relative;
+  padding-left: 1.5em;
+}
+
+.financiarList li::before {
+  content: "\2022"; 
+  color: #febb00; 
+  margin-right: 1rem;
+  font-size: 2rem; 
+}
+
+.postVentImage {
+  display: block;
+  max-width: 50%;
+  height: 400px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+  .postVentImage {
+    max-width: 50%;
+    padding: 10px 0;
+  }
 }
 
 
