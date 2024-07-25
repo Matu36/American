@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GrClose } from "react-icons/gr";
+import { FaTimes } from "react-icons/fa";
 import { useGarantia } from "../hooks/useGarantia";
 
 export default function Garantia({ handleCerrarModalGarantia }) {
@@ -56,7 +56,7 @@ export default function Garantia({ handleCerrarModalGarantia }) {
           onClick={handleCerrarModalGarantia}
           className="button-cerrar"
         >
-          <GrClose />
+          <FaTimes />
         </button>
       </div>
       <div>
@@ -101,6 +101,7 @@ export default function Garantia({ handleCerrarModalGarantia }) {
           </div>
         </form>
       </div>
+      <br />
     </div>
   );
 }

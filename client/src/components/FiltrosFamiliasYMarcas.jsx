@@ -1,8 +1,13 @@
 import React from "react";
 
-export default function FiltrosFamiliasYMarcas({ onSelectFamilia, onClose }) {
+export default function FiltrosFamiliasYMarcas({
+  onSelectFamilia,
+  onClose,
+  handleCerrarModalHeadBar,
+}) {
   const handleFamiliaClick = (familia) => {
     onSelectFamilia(familia);
+    handleCerrarModalHeadBar();
     onClose();
   };
 

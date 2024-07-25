@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useContactoProducto } from "../hooks/useContactoProducto";
-import { GrClose } from "react-icons/gr";
+import { FaTimes } from "react-icons/fa";
 
 export default function ContactoProducto({
   id,
@@ -50,7 +50,7 @@ export default function ContactoProducto({
           onClick={handleCerrarContactoProducto}
           className="button-cerrar"
         >
-          <GrClose />
+          <FaTimes />
         </button>
       </div>
       <div>
@@ -202,6 +202,7 @@ export default function ContactoProducto({
           </div>
         </form>
       </div>
+      <br />
     </div>
   );
 }

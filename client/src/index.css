@@ -651,43 +651,47 @@ button:focus-visible {
 }
 
 .contact-container {
-  width: 100%; /* Hacer que el contenedor use el ancho completo disponible */
-  max-width: 700px; /* Máximo ancho del contenedor */
+  width: 100%; 
+  max-width: 700px; 
   margin: 20px auto; 
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #f4f4f4;
-  padding: 15px; /* Reducir el padding para hacer el contenedor más compacto */
+  padding: 15px; 
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: relative;
   height: auto;
   box-sizing: border-box; 
-  overflow: hidden; /* Ocultar el desbordamiento */
+  overflow: hidden;
 }
 
 .contact-container::before,
 .contact-container::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 4px;  
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
   border-radius: 8px;
   pointer-events: none;
+  box-sizing: border-box; 
 }
 
 .contact-container::before {
   border: 4px solid black;
-  margin: -4px; /* Ajustar el margen para evitar el desbordamiento del borde */
 }
 
 .contact-container::after {
   border: 4px solid #ffcc00;
-  margin: -8px; /* Ajustar el margen para evitar el desbordamiento del borde */
+  top: 8px; 
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
 }
+
 
 @media screen and (max-width: 850px) {
   .contact-container {
@@ -722,7 +726,33 @@ button:focus-visible {
     overflow-y: auto;
     height: 80vh;
     box-sizing: border-box;
+    border: 4px solid #ffcc00; /* Borde amarillo */
+    position: relative;
   }
+
+  .contact-container::before,
+  .contact-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 8px;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
+
+  .contact-container::before {
+    border: 4px solid black;
+    margin: -4px;
+  }
+
+  .contact-container::after {
+    border: 4px solid #ffcc00;
+    margin: -8px;
+  }
+
   
   .contact-form {
     display: block;
@@ -1444,13 +1474,10 @@ button:focus-visible {
 @media screen and (max-width: 1100px) {
   .white-bar.fixed .burguer-icon-front  {
    position: absolute;
-   right: 90px;
-   top:-15px
+   right: 85px;
+   top:-16px
   }
 }
-
-
-
 
 @media screen and (max-width: 850px) {
   .white-bar img {
@@ -1556,7 +1583,7 @@ button:focus-visible {
   background-color: none;
   border: none; 
   cursor: pointer;
-  margin-right: 20px; 
+  margin-right: 25px; 
   color: white;
   font-size: 26px;
 }
@@ -1941,6 +1968,11 @@ button:focus-visible {
   right: 0;
 }
 
+@media (min-width: 1300px) {
+  .user-info {
+    right: 300px;
+  }
+}
 .user-info button {
   margin-right: 5px;
   border: none;
@@ -4148,49 +4180,64 @@ button:focus-visible {
   margin-top: 20px;
 }
 
-/* Estilo base para el contenedor de la barra de búsqueda */
-/* Contenedor de la barra de búsqueda */
 .headerSearchBarClick {
-  position: fixed;
-  top: 15%;
-  right: 0%;
-  background: #524c4c; /* Fondo blanco */
-  border: 5px solid #ffc107; /* Borde gris oscuro */
-  border-radius: 20px; /* Bordes redondeados */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
-  padding: 20px; /* Espaciado interno */
+ position: fixed;
+right: 0px;
+top: 15%;
+ background: black;
+  border: 3px solid #ffc107; /* Borde amarillo */
+  border-radius: 20px; 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  padding: 10px; /* Menor padding para reducir la altura */
   z-index: 1000;
-  width: 600px; /* Ancho del campo de búsqueda */
-  height: auto; /* Altura reducida */
-  max-width: 90%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 80%; /* Ancho relativo para mayor flexibilidad */
+  max-width: 600px; /* Ancho máximo */
+  height: auto; 
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  
 }
 
 .headerSearchBarClick .inputnavBar {
   width: 100%;
-  background: #524c4c;
-  padding: 12px 16px;
-  border: 2px solid #333; 
+  background: black;
+  padding: 8px 12px; 
+  border: 2px solid #ffc107; 
   border-radius: 20px; 
   font-size: 18px; 
   box-sizing: border-box;
   outline: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease; 
-  margin-right: 10px;
-  color: white;
+  margin-bottom: 10px; 
+  color: white; 
 }
 
 .cerrar-searchbar {
+  width: 15%;
+  padding: 6px 10px; 
   background: none;
-  font-size: large;
-  color: white;
-  margin-right: 10px;
+  border: none;
+  border-radius: 20px; 
+  color: #ffc107;
+  cursor: pointer;
+  font-size: 16px; 
+  text-align: center;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
+
+.cerrar-searchbar:hover {
+  background: #ff9900; /* Color diferente en hover */
+  transform: scale(1.05); /* Efecto de aumento en hover */
+}
+
+/* Media query para ajustar la posición en pantallas grandes */
+@media (min-width: 1300px) {
+  .headerSearchBarClick {
+    top: 15%;
+    width: 40%;
+    right: 18%;
+  }
+}
+
 
 .headerSearchBarClick .inputnavBar:focus {
   border-color: #ffc107; 
@@ -4206,7 +4253,6 @@ button:focus-visible {
   border: none;
   border-radius: 0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  padding: 20px;
   z-index: 1000;
   width: 100%;
   height: 100vh;
@@ -4215,6 +4261,7 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  
 }
 
 .headerNavBarClick button,
@@ -4230,31 +4277,32 @@ button:focus-visible {
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
-  text-align: center; /* Centra el texto */
+  text-align: center;
   transition: background 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box;
 }
 
 .headerNavBarClick button:hover,
 .headerNavBarClick span:hover {
   background: #febb00;
-  transform: scale(0.85); 
+  
 }
 
 .headerNavBarClick .filtrosContainer {
   position: fixed;
-  left: 60%;
-}
+  left: 50%;
+  }
 
-.headerNavBarClick .dropdownEquipos {
-  width: 100%; /* Asegura que ocupe el ancho completo del contenedor */
+.white-bar .headerNavBarClick .dropdownEquipos {
+  width: 100%; 
   background-color: black;
   gap: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: "Merri", sans-serif;
   padding: 8px;
   box-sizing: border-box;
+  
 }
-
 
 .white-bar.fixed .headerNavBarClick .dropdownEquipos button,
 .white-bar.fixed .headerNavBarClick .dropdownEquipos span {
@@ -4263,20 +4311,40 @@ button:focus-visible {
   font-size: 14px;
 }
 
+.white-bar .headerNavBarClick .dropdownEquipos button,
+.white-bar .headerNavBarClick .dropdownEquipos span {
+  color: white;
+  padding: 0;
+  font-size: 14px;
+}
 
-@media (max-width: 780px) {
+  .white-bar .headerNavBarClick .dropdownEquipos  {
+    grid-template-columns: repeat(3, 2fr);
+    position: absolute;
+    left: 5px
+  }
+
   .white-bar.fixed .headerNavBarClick .dropdownEquipos  {
-    grid-template-columns: repeat(2, 2fr);
-    
+    grid-template-columns: repeat(3, 2fr);
+    position: absolute;
+    left: 60px
   }
-}
 
-@media (max-width: 580px) {
-  .headerNavBarClick .dropdownEquipos button, .headerNavBarClick .dropdownEquipos span {
-    font-size: 8px;
-    
+  @media (max-width: 510px) {
+    .white-bar .headerNavBarClick .dropdownEquipos,
+    .white-bar.fixed .headerNavBarClick .dropdownEquipos {
+      grid-template-columns: repeat(2, 1fr);
+      font-size: 12px;
+    }
   }
-}
+
+  @media (max-width: 510px) {
+    .white-bar .headerNavBarClick .dropdownEquipos button span,
+    .white-bar.fixed .headerNavBarClick .dropdownEquipos button span {
+      
+      font-size: 12px;
+    }
+  }
 
 .gif {
   width: 300px;
@@ -4287,6 +4355,11 @@ button:focus-visible {
   width: 300px;
   max-width: 80%;
   margin-top: 20px;
+}
+.white-bar .headerNavBarClick .dropdownEmpresa {
+  position: absolute;
+left: -10%;
+
 }
 
 

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FiltrosFamiliasYMarcas from "../components/FiltrosFamiliasYMarcas";
 
 export default function HeaderNavBar({
-  handleMostrarModalGarantia,
+  handleCerrarModalHeadBar,
   onSelectFamilia,
 }) {
   const navigate = useNavigate();
@@ -46,6 +46,7 @@ export default function HeaderNavBar({
               <FiltrosFamiliasYMarcas
                 onSelectFamilia={onSelectFamilia}
                 onClose={() => setIsEquiposDropdownOpen(false)}
+                handleCerrarModalHeadBar={handleCerrarModalHeadBar}
               />
             </div>
           )}

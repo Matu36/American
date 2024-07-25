@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GrClose } from "react-icons/gr";
+import { FaTimes } from "react-icons/fa";
 import { useRepuesto } from "../hooks/useRepuestos";
 
 export default function RepuestoForm({ handleCerrarModalRepuesto }) {
@@ -61,7 +61,7 @@ export default function RepuestoForm({ handleCerrarModalRepuesto }) {
           onClick={handleCerrarModalRepuesto}
           className="button-cerrar"
         >
-          <GrClose />
+          <FaTimes />
         </button>
       </div>
       <div>
@@ -163,6 +163,7 @@ export default function RepuestoForm({ handleCerrarModalRepuesto }) {
           </div>
         </form>
       </div>
+      <br />
     </div>
   );
 }

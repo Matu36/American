@@ -1,13 +1,13 @@
 import React from "react";
-import { GrClose } from "react-icons/gr";
 import about from "../assets/img/about.png";
+import { FaTimes } from "react-icons/fa";
 
 export default function AboutUs({ handleCerrarModalAbout }) {
   return (
     <div className="contact-container">
       <div className="about-button">
         <button onClick={handleCerrarModalAbout} className="button-cerrar">
-          <GrClose />
+          <FaTimes />
         </button>
       </div>
       <img src={about} alt="" className="about-image" />

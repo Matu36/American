@@ -3,12 +3,12 @@ import AboutUs from "../components/AboutUs";
 import Contact from "../components/Contact";
 import MAPS from "../assets/img/MAPS.png";
 import { FaXTwitter } from "react-icons/fa6";
-import { GrClose } from "react-icons/gr";
 import {
   FaInstagram,
   FaFacebook,
   FaWhatsapp,
   FaMapMarkerAlt,
+  faTimer,
 } from "react-icons/fa";
 import Modal from "react-modal";
 import Garantia from "../components/Garantia";
@@ -184,7 +184,7 @@ export default function FooterAlternativo() {
                   onClick={closeModal}
                   className="button-cerrar"
                 >
-                  <GrClose />
+                  <faTimer />
                 </button>
               </div>
             </div>

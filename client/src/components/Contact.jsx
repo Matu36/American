@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GrClose } from "react-icons/gr";
+import { FaTimes } from "react-icons/fa";
 import { useContacto } from "../hooks/useContacto";
 
 export default function Contact({ handleCerrarModalContact }) {
@@ -62,7 +62,7 @@ export default function Contact({ handleCerrarModalContact }) {
           onClick={handleCerrarModalContact}
           className="button-cerrar"
         >
-          <GrClose />
+          <FaTimes />
         </button>
       </div>
       <div>
@@ -164,6 +164,7 @@ export default function Contact({ handleCerrarModalContact }) {
           </div>
         </form>
       </div>
+      <br />
     </div>
   );
 }

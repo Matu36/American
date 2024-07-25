@@ -264,6 +264,7 @@ export default function NavBarAlternativo({
                 handleMostrarModalGarantia={handleMostrarModalGarantia}
                 handleCerrarModalGarantia={handleCerrarModalGarantia}
                 onSelectFamilia={onSelectFamilia}
+                handleCerrarModalHeadBar={handleCerrarModalHeadBar}
               />
               {/* <img
                 className="gif"
@@ -282,12 +283,6 @@ export default function NavBarAlternativo({
 
           {searchBar && (
             <div className="headerSearchBarClick">
-              <button
-                onClick={handleCerrarModalSearchBar}
-                className="cerrar-searchbar"
-              >
-                X
-              </button>
               <input
                 className="inputnavBar"
                 type="text"
@@ -306,7 +301,8 @@ export default function NavBarAlternativo({
                       style={{
                         color: "gray",
                         cursor: "pointer",
-                        marginBottom: "5px",
+                        marginBottom: "10px",
+                        fontSize: "18px",
                       }}
                     >
                       {suggestion}
@@ -314,6 +310,12 @@ export default function NavBarAlternativo({
                   ))}
                 </div>
               )}
+              <button
+                onClick={handleCerrarModalSearchBar}
+                className="cerrar-searchbar"
+              >
+                <FaChevronUp />
+              </button>
             </div>
           )}
 
