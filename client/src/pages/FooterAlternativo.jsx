@@ -8,7 +8,7 @@ import {
   FaFacebook,
   FaWhatsapp,
   FaMapMarkerAlt,
-  faTimer,
+  FaTimes,
 } from "react-icons/fa";
 import Modal from "react-modal";
 import Garantia from "../components/Garantia";
@@ -184,7 +184,7 @@ export default function FooterAlternativo() {
                   onClick={closeModal}
                   className="button-cerrar"
                 >
-                  <faTimer />
+                  <FaTimes />
                 </button>
               </div>
             </div>

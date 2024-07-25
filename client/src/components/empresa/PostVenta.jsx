@@ -83,11 +83,7 @@ export default function PostVenta() {
     >
       <div className="postVentaContainer">
         <img src={postventa} alt="PostVenta" className="large-images" />
-
-        <p className="postVentaText">
-          Contamos con más de 15 años de respaldo en el Servicio de PostVenta.
-        </p>
-        <img src={camioneta} alt="Camioneta" className="large-images" />
+        <br />
         <h2 className="postVentaSubtitle">
           ¿Por qué hacer su servicio de PostVenta con nosotros?
         </h2>
