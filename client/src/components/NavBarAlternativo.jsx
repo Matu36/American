@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import logo from "../assets/img/LOGOAMERICANPRINCIPAL.png";
 import gruagif from "../assets/img/GRUAGIF1.gif";
 import { FiSearch } from "react-icons/fi";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaChevronUp } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 import Login from "./usuario/Login";
@@ -256,18 +256,6 @@ export default function NavBarAlternativo({
               <br />
               <img className="americanTogle" src={AmericanVial} alt="" />
 
-              <img
-                className="gif"
-                style={{ marginTop: "90px" }}
-                src={gruagif}
-                alt=""
-              />
-              <button
-                className="button-cerrar"
-                onClick={handleCerrarModalHeadBar}
-              >
-                X
-              </button>
               <HeaderNavBar
                 handleMostrarModalAbout={handleMostrarModalAbout}
                 handleCerrarModalAbout={handleCerrarModalAbout}
@@ -277,6 +265,18 @@ export default function NavBarAlternativo({
                 handleCerrarModalGarantia={handleCerrarModalGarantia}
                 onSelectFamilia={onSelectFamilia}
               />
+              {/* <img
+                className="gif"
+                style={{ marginTop: "90px" }}
+                src={gruagif}
+                alt=""
+              /> */}
+              <button
+                style={{ background: "none" }}
+                onClick={handleCerrarModalHeadBar}
+              >
+                <FaChevronUp />
+              </button>
             </div>
           )}
 

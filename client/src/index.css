@@ -3719,25 +3719,29 @@ button:focus-visible {
 .filtrosContainer {
   position: absolute; 
   left: 0;
-  width: 100vh; 
+  max-width: 100%;
+  width: 100vh;
+  background-color: #000;
 }
 
 .dropdownEquipos {
-  position: absolute; 
-  top: calc(50% + 0px); /* Ajustar según la altura de headerNavBar */
-  left: 23%;
+  position: fixed; 
+  top: 100%;
+  left: 50%;
   transform: translateX(-50%);
   background-color: black;
   color: white;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajustar columnas según el tamaño */
+  grid-template-columns: repeat(5, 2fr);
   gap: 10px;
   z-index: 1000;
-  width: 100vw;
+  width: 100vw; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: "Merri", sans-serif;
   padding: 8px;
   box-sizing: border-box;
+  margin-left: auto; 
+  margin-right: auto; 
 }
 
 
@@ -3755,33 +3759,11 @@ button:focus-visible {
   width: 100%;
 }
 
-.dropdownEquipos button:hover {
-  background-color: #ffc107;
-}
-
-@media (max-width: 1200px) {
+@media (min-width: 1280px) {
   .dropdownEquipos {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-}
+  width: 1280px;
+  }}
 
-@media (max-width: 992px) {
-  .dropdownEquipos {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .dropdownEquipos {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  }
-}
-
-@media (max-width: 576px) {
-  .dropdownEquipos {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  }
-}
 
 
 .postVentaContainer {
@@ -4221,31 +4203,31 @@ button:focus-visible {
   position: fixed;
   top: 0;
   right: 0;
-  background: #333;
+  background: black;
   border: none;
   border-radius: 0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   padding: 20px;
   z-index: 1000;
-  width: 100%; 
-  height: 100%; 
-  display: flex;
+  width: 100%;
+  height: 100vh;
+  display: inline-block;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow-y: auto; 
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .headerNavBarClick button,
 .headerNavBarClick span {
-  width: 450px; 
+  width: 100%; 
   max-width: 100%; 
   padding: 15px; 
   margin-bottom: 15px; 
   background: #444;
   color: #fff;
   border: none;
+  background: none;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
@@ -4255,24 +4237,59 @@ button:focus-visible {
 
 .headerNavBarClick button:hover,
 .headerNavBarClick span:hover {
-  background: #555;
-  transform: scale(1.05); /* Efecto de aumento en el hover */
+  background: #febb00;
+  transform: scale(0.85); 
+}
+
+.headerNavBarClick .filtrosContainer {
+  position: fixed;
+  left: 60%;
+}
+
+.headerNavBarClick .dropdownEquipos {
+  width: 100%; /* Asegura que ocupe el ancho completo del contenedor */
+  background-color: black;
+  gap: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: "Merri", sans-serif;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+
+.headerNavBarClick .dropdownEquipos button,
+.headerNavBarClick .dropdownEquipos span {
+  color: white;
+  padding: 0;
+  font-size: 14px;
+}
+
+
+@media (max-width: 780px) {
+  .white-bar.fixed .headerNavBarClick .dropdownEquipos  {
+    grid-template-columns: repeat(3, 2fr);
+    
+  }
+}
+
+@media (max-width: 580px) {
+  .headerNavBarClick .dropdownEquipos button, .headerNavBarClick .dropdownEquipos span {
+    font-size: 8px;
+    
+  }
 }
 
 .gif {
   width: 300px;
   max-width: 60%;
-  
-  
 }
 
 .americanTogle {
-  position: absolute;
-  top: 0px;
   width: 300px;
   max-width: 80%;
   margin-top: 20px;
 }
+
 
 .financiarText {
   font-size: 1.2rem;
