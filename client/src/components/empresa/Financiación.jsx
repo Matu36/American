@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import FinanciacionImg from "../../assets/img/FINANCIACION/FINANCIACION.jpeg";
+import FinanciacionImg from "../../assets/img/FINANCIACION/FINANCIACION.png";
 import PagoCuotas from "../../assets/img/FINANCIACION/cuotas.jpeg";
 import Tarjeta from "../../assets/img/FINANCIACION/Tarjeta_de_Credito.jpg";
 import Layout from "../../pages/Layout";
@@ -87,30 +87,49 @@ export default function Financiación() {
       onSelectFamilia={handleFamiliaClick}
     >
       <div className="postVentaContainer">
-        <h1 className="postVentTitle">FINANCIACIÓN</h1>
         <img
           src={FinanciacionImg}
           alt="Financiación"
           className="large-images"
         />
-
-        <p className="postVentText">
-          Contamos con la más amplia gama de financiación para usted y su
+        <br />
+        <h3>
+          {" "}
+          Contamos con la más amplia gama de financiación para usted y su{" "}
+        </h3>
+        <h3>
           empresa. Adquiera su equipamiento con confianza y seguridad, a su
-          medida.
-        </p>
+        </h3>
+        <h3>medida.</h3>
+
         <img src={PagoCuotas} alt="Pago Cuotas" className="postVentImage" />
         <br />
-        <br />
-        <p className="financiarText">
+
+        <h4>
+          {" "}
           En <strong>American Vial</strong>, entendemos la importancia de contar
+        </h4>
+        <h4>
+          {" "}
           con el equipo adecuado para llevar tu negocio al siguiente nivel. Es
+        </h4>
+        <h4>
+          {" "}
           por eso que ofrecemos opciones de financiamiento flexibles diseñadas
-          para adaptarse a tus necesidades.
-        </p>
-        <p className="financiarText">
+        </h4>
+        <h4>para adaptarse a tus necesidades.</h4>
+        <br />
+        <h2
+          style={{
+            textDecoration: "underline",
+            textDecorationColor: "#ffc107",
+            textUnderlineOffset: "4px",
+          }}
+        >
           <strong>¿Por qué financiar con nosotros?</strong>
-        </p>
+        </h2>
+
+        <br />
         <ul className="financiarList">
           <li>Planes de pago personalizados para tu conveniencia.</li>
           <li>Intereses competitivos que se ajustan a tu presupuesto.</li>
@@ -120,18 +139,19 @@ export default function Financiación() {
           </li>
           <li>Proceso de aplicación simple y rápido.</li>
         </ul>
-        <p className="financiarText">
-          No dejes que el costo inicial te impida obtener el equipo que
-          necesitas. Nuestra misión es apoyarte para que puedas crecer y
-          alcanzar tus objetivos comerciales.
-        </p>
-        <p className="financiarText">
-          <strong>¡Contacta con nosotros hoy mismo!</strong> Estamos aquí para
-          ayudarte a explorar las opciones de financiamiento que mejor se
-          adapten a tu situación. Juntos, podemos encontrar la solución perfecta
-          para tus necesidades empresariales.
-        </p>
-
+        <div className="postVentaFooter">
+          <p className="financiarText" style={{ color: "black" }}>
+            No dejes que el costo inicial te impida obtener el equipo que
+            necesitas. Nuestra misión es apoyarte para que puedas crecer y
+            alcanzar tus objetivos comerciales.
+          </p>
+          <p className="financiarText" style={{ color: "black" }}>
+            <strong>¡Contacta con nosotros hoy mismo!</strong> Estamos aquí para
+            ayudarte a explorar las opciones de financiamiento que mejor se
+            adapten a tu situación. Juntos, podemos encontrar la solución
+            perfecta para tus necesidades empresariales.
+          </p>
+        </div>
         {selectedMarca && (
           <div ref={cardsContainerRef} className="cards-container">
             {productos && productos.length > 0

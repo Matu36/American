@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Layout from "../../pages/Layout";
-import repuestosimage from "../../assets/img/REPUESTOS/repuestos.jpg";
-import tinglado from "../../assets/img/REPUESTOS/tinglado.jpg";
+import repuestosimage from "../../assets/img/REPUESTOS/REPUESTOS.png";
 import foto1 from "../../assets/img/REPUESTOS/foto1.jpg";
 import foto2 from "../../assets/img/REPUESTOS/foto2.jpg";
 import foto3 from "../../assets/img/REPUESTOS/foto3.jpg";
@@ -78,14 +77,13 @@ export default function AmericanRepuestos() {
       <div className="postVentaContainer">
         <div className="large-images">
           <img src={repuestosimage} alt="Repuestos" className="large-image" />
-          <h1 className="postVentaTitle">REPUESTOS</h1>
-          {/* <h3 className="postVentaText">Respuestas para su equipo</h3> */}
-          <img src={tinglado} alt="Tinglado" className="large-image" />
         </div>
-        <h3 className="postVentaSubtitle">
+        <br />
+        <h3>
           Equipamiento Integral e Infraestructura para dar respuestas
           satisfactorias.
         </h3>
+        <br />
         <div className="grid-images">
           <img src={foto1} alt="Foto 1" className="grid-image" />
           <img src={foto2} alt="Foto 2" className="grid-image" />
