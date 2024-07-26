@@ -22,7 +22,7 @@ export default function ContactoProducto({
     direccion: "",
     pagoContado: true,
     cuotas: 1,
-    anticipo: "",
+    anticipo: 0,
     moneda: "USD",
   });
 
@@ -74,7 +74,9 @@ export default function ContactoProducto({
           style={{ marginTop: "-20px" }}
         >
           <div className="form-group">
-            <label htmlFor="nombre">Nombre:</label>
+            <label htmlFor="nombre">
+              Nombre: <span className="obligatorio">*</span>
+            </label>
             <input
               type="text"
               id="nombre"
@@ -85,7 +87,9 @@ export default function ContactoProducto({
             />
           </div>
           <div className="form-group">
-            <label htmlFor="apellido">Apellido:</label>
+            <label htmlFor="apellido">
+              Apellido: <span className="obligatorio">*</span>
+            </label>
             <input
               type="text"
               id="apellido"
@@ -96,17 +100,22 @@ export default function ContactoProducto({
             />
           </div>
           <div className="form-group">
-            <label htmlFor="razonSocial">Razón Social:</label>
+            <label htmlFor="razonSocial">
+              Razón Social: <span className="obligatorio">*</span>
+            </label>
             <input
               type="text"
               id="razonSocial"
               name="razonSocial"
               value={formData.razonSocial}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">
+              Email: <span className="obligatorio">*</span>
+            </label>
             <input
               type="email"
               id="email"
@@ -117,7 +126,9 @@ export default function ContactoProducto({
             />
           </div>
           <div className="form-group">
-            <label htmlFor="telefonoCelular">Teléfono:</label>
+            <label htmlFor="telefonoCelular">
+              Teléfono:<span className="obligatorio">*</span>
+            </label>
             <input
               type="tel"
               id="telefonoCelular"
@@ -135,12 +146,12 @@ export default function ContactoProducto({
               name="direccion"
               value={formData.direccion}
               onChange={handleChange}
-              required
             />
           </div>
           <div className="form-group">
             <label htmlFor="pagoContado">Contado:</label>
             <select
+              style={{ height: "45px" }}
               id="pagoContado"
               name="pagoContado"
               value={formData.pagoContado}
@@ -153,6 +164,7 @@ export default function ContactoProducto({
           <div className="form-group">
             <label htmlFor="cuotas">Cuotas:</label>
             <select
+              style={{ height: "45px" }}
               id="cuotas"
               name="cuotas"
               value={formData.cuotas}
@@ -173,12 +185,12 @@ export default function ContactoProducto({
               name="anticipo"
               value={formData.anticipo}
               onChange={handleChange}
-              required
             />
           </div>
           <div className="form-group">
             <label htmlFor="moneda">Moneda:</label>
             <select
+              style={{ height: "45px" }}
               id="moneda"
               name="moneda"
               value={formData.moneda}

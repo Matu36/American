@@ -11,6 +11,7 @@ export default function FormMensaje() {
   const idUsuario = auth?.id;
   const { mutate: crearMensaje } = useMensajes().mensajesMutation;
   const { data, isLoading } = useUsuario().usuariosMensajesQuery;
+  const [key, setKey] = useState(0);
 
   const [formData, setFormData] = useState({
     idUsuario: idUsuario,
@@ -53,6 +54,7 @@ export default function FormMensaje() {
           idDestino: "",
           Mensaje: "",
         });
+        setKey((prevKey) => prevKey + 1);
       },
       onError: (error) => {
         if (error.response) {
@@ -93,6 +95,7 @@ export default function FormMensaje() {
           idDestino: "",
           Mensaje: "",
         });
+        setKey((prevKey) => prevKey + 1);
       },
     });
   };
@@ -103,6 +106,7 @@ export default function FormMensaje() {
       <div className="form-group">
         <label htmlFor="idDestino">Destinatario</label>
         <Select
+          key={key}
           id="idDestino"
           name="idDestino"
           options={userOptions}

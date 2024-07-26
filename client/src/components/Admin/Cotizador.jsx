@@ -221,7 +221,9 @@ const Cotizador = () => {
         />
       </div>
       <div className="form-group">
-        <label className="form-label">Cliente</label>
+        <label className="form-label">
+          Cliente <span className="obligatorio">*</span>
+        </label>
         <Select
           name="idCliente"
           value={
@@ -272,7 +274,9 @@ const Cotizador = () => {
         )}
       </div>
       <div className="form-group">
-        <label className="form-label">Familia</label>
+        <label className="form-label">
+          Categoría <span className="obligatorio">*</span>
+        </label>
         <Select
           options={familias}
           value={selectedFamilia}
@@ -283,7 +287,9 @@ const Cotizador = () => {
         />
       </div>
       <div className="form-group">
-        <label className="form-label">Marca</label>
+        <label className="form-label">
+          Marca <span className="obligatorio">*</span>
+        </label>
         <Select
           options={marcas}
           value={selectedMarca}
@@ -295,7 +301,9 @@ const Cotizador = () => {
         />
       </div>
       <div className="form-group">
-        <label className="form-label">Modelo</label>
+        <label className="form-label">
+          Modelo <span className="obligatorio">*</span>
+        </label>
         <Select
           options={modelos}
           value={selectedModelo}
@@ -307,7 +315,9 @@ const Cotizador = () => {
         />
       </div>
       <div className="form-group">
-        <label className="form-label">Moneda:</label>
+        <label className="form-label">
+          Moneda:<span className="obligatorio">*</span>
+        </label>
         <select
           name="moneda"
           value={formData.moneda}
@@ -323,7 +333,9 @@ const Cotizador = () => {
         </select>
       </div>
       <div className="form-group">
-        <label className="form-label">Precio de venta:</label>
+        <label className="form-label">
+          Precio de venta: <span className="obligatorio">*</span>
+        </label>
         <input
           type="number"
           name="precio"
@@ -334,7 +346,9 @@ const Cotizador = () => {
         />
       </div>
       <div className="form-group">
-        <label className="form-label">IVA (10.5%):</label>
+        <label className="form-label">
+          IVA (10.5%): <span className="obligatorio">*</span>
+        </label>
         <input
           type="number"
           name="IVA"
@@ -415,7 +429,9 @@ const Cotizador = () => {
       )}
 
       <div className="form-group">
-        <label className="form-label">Precio Final:</label>
+        <label className="form-label">
+          Precio Final: <span className="obligatorio">*</span>
+        </label>
         <input
           type="number"
           name="PrecioFinal"

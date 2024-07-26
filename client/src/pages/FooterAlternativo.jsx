@@ -102,7 +102,7 @@ export default function FooterAlternativo() {
         </div>
         <br />
         <br />
-        <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
+        <div style={{ display: "flex", justifyContent: "center", gap: "40px" }}>
           <a
             href="https://twitter.com"
             target="_blank"
@@ -189,10 +189,7 @@ export default function FooterAlternativo() {
               </div>
             </div>
             <h4>Ubicación</h4>
-            <img
-              src={MAPS}
-              style={{ height: "250px", width: "400px", marginBottom: "1rem" }}
-            />
+            <img src={MAPS} style={{ maxWidth: "70%", width: "100%" }} />
             <p style={{ fontWeight: "bold", marginTop: "0.5rem" }}>
               Panamericana Km 28.250 – Paris 256 esq. Colectora Este,
             </p>

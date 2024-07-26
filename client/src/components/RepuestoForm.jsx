@@ -82,7 +82,9 @@ export default function RepuestoForm({ handleCerrarModalRepuesto }) {
       <div className="contact-content">
         <form className="contact-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="nombre">Nombre:</label>
+            <label htmlFor="nombre">
+              Nombre:<span className="obligatorio">*</span>
+            </label>
             <input
               type="text"
               id="nombre"
@@ -93,7 +95,9 @@ export default function RepuestoForm({ handleCerrarModalRepuesto }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="apellidos">Apellidos:</label>
+            <label htmlFor="apellidos">
+              Apellidos:<span className="obligatorio">*</span>
+            </label>
             <input
               type="text"
               id="apellidos"
@@ -104,7 +108,9 @@ export default function RepuestoForm({ handleCerrarModalRepuesto }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">
+              Email:<span className="obligatorio">*</span>
+            </label>
             <input
               type="email"
               id="email"
@@ -115,7 +121,9 @@ export default function RepuestoForm({ handleCerrarModalRepuesto }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="telefono">Teléfono:</label>
+            <label htmlFor="telefono">
+              Teléfono:<span className="obligatorio">*</span>
+            </label>
             <input
               type="number"
               id="telefono"
@@ -126,7 +134,9 @@ export default function RepuestoForm({ handleCerrarModalRepuesto }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="direccion">Dirección:</label>
+            <label htmlFor="direccion">
+              Dirección:<span className="obligatorio">*</span>
+            </label>
             <input
               type="text"
               id="direccion"
@@ -136,17 +146,18 @@ export default function RepuestoForm({ handleCerrarModalRepuesto }) {
               required
             />
           </div>
-
-          <div className="form-group">
-            <label htmlFor="consulta">Repuesto:</label>
-            <input
-              id="consulta"
-              name="consulta"
+          <div className="form-group" style={{ width: "97%" }}>
+            <label htmlFor="repuesto">
+              Repuesto:<span className="obligatorio">*</span>
+            </label>
+            <textarea
+              id="repuesto"
+              name="repuesto"
               rows="4"
               value={repuesto}
               onChange={(e) => setRepuesto(e.target.value)}
               required
-            ></input>
+            ></textarea>
           </div>
 
           <div

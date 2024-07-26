@@ -83,7 +83,9 @@ export default function Contact({ handleCerrarModalContact }) {
       <div className="contact-content" style={{ marginTop: "-0.5rem" }}>
         <form className="contact-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="nombre">Nombre:</label>
+            <label htmlFor="nombre">
+              Nombre: <span className="obligatorio">*</span>
+            </label>
             <input
               type="text"
               id="nombre"
@@ -94,7 +96,9 @@ export default function Contact({ handleCerrarModalContact }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="apellidos">Apellidos:</label>
+            <label htmlFor="apellidos">
+              Apellidos:<span className="obligatorio">*</span>
+            </label>
             <input
               type="text"
               id="apellidos"
@@ -105,7 +109,9 @@ export default function Contact({ handleCerrarModalContact }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">
+              Email:<span className="obligatorio">*</span>
+            </label>
             <input
               type="email"
               id="email"
@@ -116,7 +122,9 @@ export default function Contact({ handleCerrarModalContact }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="telefono">Teléfono:</label>
+            <label htmlFor="telefono">
+              Teléfono:<span className="obligatorio">*</span>
+            </label>
             <input
               type="number"
               id="telefono"
@@ -127,7 +135,9 @@ export default function Contact({ handleCerrarModalContact }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="direccion">Dirección:</label>
+            <label htmlFor="direccion">
+              Dirección:<span className="obligatorio">*</span>
+            </label>
             <input
               type="text"
               id="direccion"
@@ -138,8 +148,10 @@ export default function Contact({ handleCerrarModalContact }) {
             />
           </div>
           <div className="form-group"></div>
-          <div className="form-group" style={{ width: "100%" }}>
-            <label htmlFor="consulta">Consulta:</label>
+          <div className="form-group" style={{ width: "97%" }}>
+            <label htmlFor="consulta">
+              Consulta:<span className="obligatorio">*</span>
+            </label>
             <textarea
               id="consulta"
               name="consulta"

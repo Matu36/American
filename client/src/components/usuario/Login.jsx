@@ -117,12 +117,21 @@ export default function Login({ handleCerrarModalLogin }) {
 
           <form className="login-form" onSubmit={loginUser}>
             <div className="form-group">
-              <label htmlFor="email">Correo Electrónico</label>
-              <input type="email" name="email" onChange={changed} />
+              <label htmlFor="email">
+                Correo Electrónico <span className="obligatorio">*</span>
+              </label>
+              <input type="email" name="email" onChange={changed} required />
             </div>
             <div className="form-group">
-              <label htmlFor="contraseña">Contraseña</label>
-              <input type="password" name="password" onChange={changed} />
+              <label htmlFor="contraseña">
+                Contraseña <span className="obligatorio">*</span>
+              </label>
+              <input
+                type="password"
+                name="password"
+                onChange={changed}
+                required
+              />
             </div>
 
             {saved === "error" && (
