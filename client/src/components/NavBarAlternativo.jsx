@@ -196,7 +196,7 @@ export default function NavBarAlternativo({
   };
 
   return (
-    <div>
+    <>
       {login && (
         <div>
           <Login
@@ -415,6 +415,6 @@ export default function NavBarAlternativo({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

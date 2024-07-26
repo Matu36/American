@@ -92,7 +92,7 @@ button:focus-visible {
 .grid-container {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .marca {
@@ -125,6 +125,12 @@ button:focus-visible {
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
+}
+
+@media (max-width: 1200px) and (min-width: 1000px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 1000px) and (min-width: 501px) {
@@ -1381,6 +1387,7 @@ button:focus-visible {
 .navbar-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .black-bar {
@@ -1414,6 +1421,7 @@ button:focus-visible {
   align-items: center;
   z-index: 1000;
   width: 100%;
+ 
 }
 .search-bar {
   display: flex;
@@ -1973,12 +1981,12 @@ button:focus-visible {
   top: 0;
   right: 0;
 }
-
+/* 
 @media (min-width: 1300px) {
   .user-info {
     right: 300px;
   }
-}
+} */
 .user-info button {
   margin-right: 5px;
   border: none;
@@ -2636,16 +2644,22 @@ button:focus-visible {
 }
 
 
-@media (max-width: 1300px) {
-  .DetalleCard {
-    max-width: 600px;
-  }
-}
-
 .CarrouselImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+@media (max-width: 1600px) {
+  .CarrouselImg {
+    height: 450px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .DetalleCard {
+    max-width: 600px;
+  }
 }
 
 @media (max-width: 1100px) {
@@ -2657,12 +2671,10 @@ button:focus-visible {
 @media (max-width: 1100px) {
   .CarrouselImg {
     width: 100vw; 
-    height: auto; 
+    height: 500px; 
     object-fit: cover; 
   }
 }
-
-
 
 .DetalleCard h2 {
   font-size: 24px;
@@ -2706,15 +2718,21 @@ button:focus-visible {
 .detalle-info {
   background-color: #f4f4f4;
   padding: 20px;
-  height: 360px;
   max-width: 50%;
   width: 100%;
+  height: 450px;
 }
 
 @media (max-width: 1100px) {
   .detalle-info {
     width: 100%;
     max-width: 100%;
+  }
+}
+
+@media (min-width: 1600px) {
+  .detalle-info {
+    height: 700px;
   }
 }
 
@@ -4031,13 +4049,13 @@ button:focus-visible {
 .AmericanContactoContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Espacio entre las columnas */
+  gap: 20px; 
 }
 
 .AmericanContacto {
   flex: 1;
   min-width: 300px;
-  max-width: 600px; /* Ajusta según el diseño */
+  max-width: 800px; 
 }
 
 .AmericanContacto h3, .AmericanContacto h5 {
@@ -4212,15 +4230,13 @@ button:focus-visible {
 .headerSearchBarClick {
  position: fixed;
 right: 0px;
-top: 15%;
- background: black;
-  border: 3px solid #ffc107; /* Borde amarillo */
-  border-radius: 20px; 
+top: 13%;
+background-color: rgba(0, 0, 0, 0.8);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  padding: 10px; /* Menor padding para reducir la altura */
+  padding: 10px; 
   z-index: 1000;
-  width: 80%; /* Ancho relativo para mayor flexibilidad */
-  max-width: 600px; /* Ancho máximo */
+  width: 100%; 
+  max-width: 100%;
   height: auto; 
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
@@ -4229,14 +4245,13 @@ top: 15%;
   width: 100%;
   background: black;
   padding: 8px 12px; 
-  border: 2px solid #ffc107; 
-  border-radius: 20px; 
   font-size: 18px; 
   box-sizing: border-box;
   outline: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease; 
   margin-bottom: 10px; 
+  margin-top: 20px;
   color: white; 
 }
 
@@ -4258,21 +4273,9 @@ top: 15%;
   transform: scale(1.05); 
 }
 
-/* Media query para ajustar la posición en pantallas grandes */
-@media (min-width: 1300px) {
-  .headerSearchBarClick {
-    top: 15%;
-    width: 40%;
-    right: 18%;
-  }
-}
-
-
-.headerSearchBarClick .inputnavBar:focus {
+/* .headerSearchBarClick .inputnavBar:focus {
   border-color: #ffc107; 
-}
-
-
+} */
 
 .headerNavBarClick {
   position: fixed;
