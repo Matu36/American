@@ -238,14 +238,16 @@ export default function Detalle() {
                 <FaCheck className="check-icon" /> {detalle}
               </div>
             ))}
-            <div>
-              <button
-                className="submit-button"
-                onClick={handleFichaTecnicaClick}
-              >
-                FICHA TÉCNICA
-              </button>
-            </div>
+            {fichaPDF && (
+              <div>
+                <button
+                  className="submit-button"
+                  onClick={handleFichaTecnicaClick}
+                >
+                  FICHA TÉCNICA
+                </button>
+              </div>
+            )}
           </div>
           {contactoProducto && (
             <div className="modal">
