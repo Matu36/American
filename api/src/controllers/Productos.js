@@ -181,6 +181,7 @@ const getProductoById = async (req, res) => {
       imagen5: producto.imagen5,
       imagen6: producto.imagen6,
       precio: producto.precio,
+      fichaPDF: producto.fichaPDF,
       codigo: producto.codigo,
       division: producto.division,
       potencia: producto.potencia,

@@ -101,6 +101,7 @@ export default function Detalle() {
     capacidadDeCarga,
     capacidadDeBalde,
     Detalles,
+    fichaPDF,
   } = producto;
 
   const images = [
@@ -122,6 +123,10 @@ export default function Detalle() {
   };
 
   const detallesArray = Detalles.split("\n");
+
+  const handleFichaTecnicaClick = () => {
+    window.open(fichaPDF, "_blank");
+  };
 
   return (
     <Layout
@@ -233,6 +238,14 @@ export default function Detalle() {
                 <FaCheck className="check-icon" /> {detalle}
               </div>
             ))}
+            <div>
+              <button
+                className="submit-button"
+                onClick={handleFichaTecnicaClick}
+              >
+                FICHA TÉCNICA
+              </button>
+            </div>
           </div>
           {contactoProducto && (
             <div className="modal">

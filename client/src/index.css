@@ -2656,9 +2656,9 @@ button:focus-visible {
 
 @media (max-width: 1100px) {
   .CarrouselImg {
-    width: 100vw; /* Ocupa todo el ancho de la ventana */
-    height: auto; /* Ajusta la altura proporcionalmente */
-    object-fit: cover; /* Ajusta la imagen para cubrir el área del contenedor */
+    width: 100vw; 
+    height: auto; 
+    object-fit: cover; 
   }
 }
 
@@ -4434,7 +4434,6 @@ left: -10%;
     padding: 10px 0;
   }
 }
-
 
 
 
