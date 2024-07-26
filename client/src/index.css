@@ -2620,6 +2620,12 @@ button:focus-visible {
   
 }
 
+@media (max-width: 1100px) {
+  .DetalleCardContainer {
+    flex-direction: column;
+  }
+}
+
 .DetalleCard {
   background-color: #f0f0f0;
   flex: 1; 
@@ -2630,21 +2636,9 @@ button:focus-visible {
 }
 
 
-@media (max-width: 1200px) {
-  .DetalleCard {
-    max-width: 800px;
-  }
-}
-
-@media (max-width: 992px) {
+@media (max-width: 1300px) {
   .DetalleCard {
     max-width: 600px;
-  }
-}
-
-@media (max-width: 768px) {
-  .DetalleCard {
-    max-width: 400px;
   }
 }
 
@@ -2654,11 +2648,21 @@ button:focus-visible {
   object-fit: cover;
 }
 
-@media (max-width: 517px) {
-  .CarrouselImg {
-    max-width: 400px;
+@media (max-width: 1100px) {
+  .DetalleCard {
+    max-width: 100%;
   }
 }
+
+@media (max-width: 1100px) {
+  .CarrouselImg {
+    width: 100vw; /* Ocupa todo el ancho de la ventana */
+    height: auto; /* Ajusta la altura proporcionalmente */
+    object-fit: cover; /* Ajusta la imagen para cubrir el área del contenedor */
+  }
+}
+
+
 
 .DetalleCard h2 {
   font-size: 24px;
@@ -2693,14 +2697,27 @@ button:focus-visible {
   background-color: #333;
 }
 
+.detalles-container {
+  background-color: #f4f4f4;
+  padding: 20px;
+  justify-content: center;
+}
+
 .detalle-info {
   background-color: #f4f4f4;
   padding: 20px;
-  
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 360px;
   max-width: 50%;
   width: 100%;
 }
+
+@media (max-width: 1100px) {
+  .detalle-info {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
 .detalle-info p {
   display: flex;
   justify-content: space-around;
@@ -2726,8 +2743,6 @@ button:focus-visible {
 }
 
 .detalles-titulo {
-  text-decoration: underline;
-  text-decoration-color: rgba(255, 204, 0, 0.7);
   margin-bottom: 8px;
   display: inline-block;
   font-size: x-large;
@@ -2735,12 +2750,14 @@ button:focus-visible {
 
 .detalles-list {
   padding-left: 0;
-  margin-top: 8px;
+  margin-top: 15px;
+  
 }
 
 .detalle-item {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
   margin: 8px 0;
 }
 

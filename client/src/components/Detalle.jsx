@@ -223,18 +223,17 @@ export default function Detalle() {
             <p>
               <strong>Capacidad de Balde:</strong> {capacidadDeBalde}
             </p>
-            <div>
-              <strong className="detalles-titulo">Detalles</strong>
-              <div className="detalles-list">
-                {detallesArray.map((detalle, index) => (
-                  <div key={index} className="detalle-item">
-                    <FaCheck className="check-icon" /> {detalle}
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
-
+        </div>
+        <div className="detalles-container">
+          <strong className="detalles-titulo">Detalles</strong>
+          <div className="detalles-list">
+            {detallesArray.map((detalle, index) => (
+              <div key={index} className="detalle-item">
+                <FaCheck className="check-icon" /> {detalle}
+              </div>
+            ))}
+          </div>
           {contactoProducto && (
             <div className="modal">
               <ContactoProducto
