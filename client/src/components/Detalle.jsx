@@ -128,90 +128,85 @@ export default function Detalle() {
       onSearchByMarca={handleSearchByMarca}
       onSelectFamilia={handleFamiliaClick}
     >
-      <div className="blue-bar">CONSTRUYENDO EL FUTURO</div>
-
-      <div
-        ref={carouselRef}
-        id="carouselContainer"
-        className="DetalleCardContainer"
-      >
-        <div className="DetalleCard">
-          <span className="detalleMarca">
-            {marca} {modelo}
-          </span>
-          <Carousel
-            additionalTransfrom={0}
-            arrows={false}
-            autoPlaySpeed={3000}
-            centerMode={false}
-            className="custom-carousel"
-            containerClass="custom-container"
-            dotListClass="custom-dot-list"
-            draggable
-            focusOnSelect={false}
-            infinite
-            itemClass="custom-item"
-            keyBoardControl
-            minimumTouchDrag={80}
-            pauseOnHover
-            renderArrowsWhenDisabled={false}
-            renderButtonGroupOutside={false}
-            renderDotsOutside={false}
-            responsive={{
-              desktop: {
-                breakpoint: {
-                  max: 3000,
-                  min: 1024,
+      <div className="postVentaContainer">
+        <div
+          ref={carouselRef}
+          id="carouselContainer"
+          className="DetalleCardContainer"
+        >
+          <div className="DetalleCard">
+            <Carousel
+              additionalTransfrom={0}
+              arrows={false}
+              autoPlaySpeed={3000}
+              centerMode={false}
+              className="custom-carousel"
+              containerClass="custom-container"
+              dotListClass="custom-dot-list"
+              draggable
+              focusOnSelect={false}
+              infinite
+              itemClass="custom-item"
+              keyBoardControl
+              minimumTouchDrag={80}
+              pauseOnHover
+              renderArrowsWhenDisabled={false}
+              renderButtonGroupOutside={false}
+              renderDotsOutside={false}
+              responsive={{
+                desktop: {
+                  breakpoint: {
+                    max: 3000,
+                    min: 1024,
+                  },
+                  items: 1,
                 },
-                items: 1,
-              },
-              mobile: {
-                breakpoint: {
-                  max: 464,
-                  min: 0,
+                mobile: {
+                  breakpoint: {
+                    max: 464,
+                    min: 0,
+                  },
+                  items: 1,
                 },
-                items: 1,
-              },
-              tablet: {
-                breakpoint: {
-                  max: 1024,
-                  min: 464,
+                tablet: {
+                  breakpoint: {
+                    max: 1024,
+                    min: 464,
+                  },
+                  items: 1,
                 },
-                items: 1,
-              },
-            }}
-            rewind={false}
-            rewindWithAnimation={false}
-            rtl={false}
-            shouldResetAutoplay
-            showDots
-            sliderClass="custom-slider"
-            slidesToSlide={1}
-            swipeable
-            autoPlay={true}
-          >
-            {images.map((src, index) => (
-              <img
-                key={index}
-                src={src}
-                className="CarrouselImg"
-                alt={`Imagen ${index + 1}`}
-              />
-            ))}
-          </Carousel>
-
-          <hr className="hrPersonalizado" />
+              }}
+              rewind={false}
+              rewindWithAnimation={false}
+              rtl={false}
+              shouldResetAutoplay
+              showDots
+              sliderClass="custom-slider"
+              slidesToSlide={1}
+              swipeable
+              autoPlay={true}
+            >
+              {images.map((src, index) => (
+                <img
+                  key={index}
+                  src={src}
+                  className="CarrouselImg"
+                  alt={`Imagen ${index + 1}`}
+                />
+              ))}
+            </Carousel>
+          </div>
 
           <div className="detalle-info">
-            <p>
-              <strong>Categoría:</strong> {familia}
-            </p>
-            <p>
-              <strong>Marca:</strong> {marca}
-            </p>
-            <p>
-              <strong>Modelo:</strong> {modelo}
-            </p>
+            <h2>
+              <strong>{familia}</strong>
+            </h2>
+            <h1>
+              <strong>
+                {marca} {modelo}
+              </strong>
+            </h1>
+            <br />
             <p>
               <strong>Código:</strong> {codigo}
             </p>
@@ -239,17 +234,6 @@ export default function Detalle() {
               </div>
             </div>
           </div>
-          <div
-            className="form-actions"
-            style={{ display: "flex", justifyContent: "center" }}
-          >
-            <button
-              onClick={handleMostrarContactoProducto}
-              className="form-submit-custom"
-            >
-              Dejá tu consulta por este producto
-            </button>
-          </div>
 
           {contactoProducto && (
             <div className="modal">
@@ -262,8 +246,18 @@ export default function Detalle() {
               />
             </div>
           )}
-
-          <br />
+        </div>
+        <br />
+        <div
+          className="form-actions"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <button
+            onClick={handleMostrarContactoProducto}
+            className="form-submit-custom"
+          >
+            Dejá tu consulta por este producto
+          </button>
         </div>
       </div>
       {busquedaActiva && (

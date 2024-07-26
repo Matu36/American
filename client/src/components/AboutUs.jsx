@@ -12,15 +12,16 @@ export default function AboutUs({ handleCerrarModalAbout }) {
       </div>
       <img src={about} alt="" className="about-image" />
 
-      <div className="contact-content">
-        <h4 style={{ fontFamily: "merri" }}>Sobre Nosotros</h4>
-        <span>
+      <div className="about-content-margin">
+        <h4 style={{ fontWeight: "bold" }}>Sobre Nosotros</h4>
+        <span style={{ fontWeight: "bolder" }}>
           Con mas 10 años de trayectoria, American vial es una empresa dedicada
           a prestar servicios de alquiler y venta de maquinaria para la
           construcción. En la actualidad American Vial es un referente
           indiscutido en el segmento de maquinas viales de origen Asia & Brasil.
         </span>
       </div>
+      <br />
     </div>
   );
 }
