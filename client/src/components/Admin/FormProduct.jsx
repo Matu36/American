@@ -60,6 +60,25 @@ export default function FormProduct() {
     }
   };
 
+  const uploadPDF = async (e) => {
+    const file = e.target.files[0];
+
+    setLoading(true);
+
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "Images");
+
+    const res = await fetch(Clouddinary, {
+      method: "POST",
+      body: data,
+    });
+
+    const pdfData = await res.json();
+    setLoading(false);
+    setProducto({ ...producto, fichaPDF: pdfData.secure_url });
+  };
+
   //CLOUDDINARY//
   const [selectedFamilia, setSelectedFamilia] = useState(null);
   const [selectedDivision, setSelectedDivision] = useState(null);
@@ -166,6 +185,7 @@ export default function FormProduct() {
     capacidadDeCarga: "",
     capacidadDeBalde: "",
     detalles: "",
+    fichaPDF: "",
   });
 
   const saveProduct = async (e) => {
@@ -212,6 +232,7 @@ export default function FormProduct() {
         codigo: "",
         division: "",
         potencia: "",
+        fichaPDF: "",
         motor: "",
         capacidadDeCarga: "",
         capacidadDeBalde: "",
@@ -397,7 +418,16 @@ export default function FormProduct() {
             onChange={(e) => uploadImage(e, 6)}
           />
         </div>
-
+        <div className="form-group">
+          <label htmlFor="fichaPDF">Ficha PDF</label>
+          <input
+            id="fichaPDF"
+            name="fichaPDF"
+            type="file"
+            accept="application/pdf"
+            onChange={uploadPDF}
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="cantidadTotal">Cantidad Total</label>
           <div>

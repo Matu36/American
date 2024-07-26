@@ -63,11 +63,31 @@ export default function ProductosEdit() {
     }
   };
 
+  const uploadPDF = async (e) => {
+    const file = e.target.files[0];
+
+    setLoading(true);
+
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "Images");
+
+    const res = await fetch(Clouddinary, {
+      method: "POST",
+      body: data,
+    });
+
+    const pdfData = await res.json();
+    setLoading(false);
+    setProducto({ ...producto, fichaPDF: pdfData.secure_url });
+  };
+
   //CLOUDDINARY//
 
   const [producto, setProducto] = useState({
     id: id,
     familia: "",
+    division: "",
     marca: "",
     modelo: "",
     precio: "",
@@ -85,12 +105,14 @@ export default function ProductosEdit() {
     capacidadDeCarga: "",
     capacidadDeBalde: "",
     detalles: "",
+    fichaPDF: "",
   });
 
   useEffect(() => {
     if (productoDetalle) {
       setProducto({
         id: productoDetalle.id || id,
+        division: productoDetalle.division || "",
         familia: productoDetalle.familia || "",
         marca: productoDetalle.marca || "",
         modelo: productoDetalle.modelo || "",
@@ -104,6 +126,7 @@ export default function ProductosEdit() {
         imagen6: productoDetalle.imagen6 || "",
         cantidadTotal: productoDetalle.cantidadTotal || "",
         codigo: productoDetalle.codigo || "",
+        fichPDF: productoDetalle.fichPDF || "",
         potencia: productoDetalle.potencia || "",
         motor: productoDetalle.motor || "",
         capacidadDeCarga: productoDetalle.capacidadDeCarga || "",
@@ -120,6 +143,7 @@ export default function ProductosEdit() {
         setProducto({
           familia: "",
           marca: "",
+          division: "",
           modelo: "",
           precio: "",
           imagen: "",
@@ -131,6 +155,7 @@ export default function ProductosEdit() {
           imagen6: "",
           cantidadTotal: "",
           codigo: "",
+          fichaPDF: "",
           potencia: "",
           motor: "",
           capacidadDeCarga: "",
@@ -145,6 +170,21 @@ export default function ProductosEdit() {
     <div className="form-container1">
       <h2 className="tituloCompo">Modificar Producto</h2> <br />
       <form onSubmit={saveProduct}>
+        <div className="form-group">
+          <label htmlFor="division">División</label>
+          <input
+            type="text"
+            id="division"
+            name="division"
+            value={producto.division}
+            autoComplete="off"
+            placeholder="División"
+            onChange={(e) =>
+              setProducto({ ...producto, division: e.target.value })
+            }
+          />
+        </div>
+
         <div className="form-group">
           <label htmlFor="familia">Categoría</label>
           <input
@@ -285,7 +325,16 @@ export default function ProductosEdit() {
             onChange={(e) => uploadImage(e, 6)}
           />
         </div>
-
+        <div className="form-group">
+          <label htmlFor="fichaPDF">Ficha PDF</label>
+          <input
+            id="fichaPDF"
+            name="fichaPDF"
+            type="file"
+            accept="application/pdf"
+            onChange={uploadPDF}
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="cantidadTotal">Cantidad Total</label>
           <div>
