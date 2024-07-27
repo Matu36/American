@@ -21,7 +21,7 @@ export default function Detalle() {
   const { data, isLoading } = useProducto(id).productoQueryById;
   const { data: productos, isLoading: loading } = useProducto(
     null,
-    selectedMarca
+    selectedMarca !== "" ? selectedMarca : null
   ).productoQueryByFamilia;
 
   useEffect(() => {
@@ -67,6 +67,14 @@ export default function Detalle() {
       carouselRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => setKey((prevKey) => prevKey + 1);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   if (isLoading) {
     return (

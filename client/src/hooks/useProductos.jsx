@@ -54,7 +54,8 @@ export const useProducto = (id, familia) => {
   const productoQueryByFamilia = useQuery({
     queryKey: ["productofamilia", { familia }],
     queryFn: () => productoByFamilia(familia),
-    enabled: familia !== undefined && familia !== null,
+    enabled:
+      familia !== undefined && familia !== null && typeof familia === "string",
   });
 
   const productosParaCotizarQuery = useQuery({

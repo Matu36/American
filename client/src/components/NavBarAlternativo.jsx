@@ -372,6 +372,7 @@ export default function NavBarAlternativo({
             )}
           </div>
           <button
+            className="fiveguys"
             style={{
               background: "none",
             }}
@@ -387,10 +388,13 @@ export default function NavBarAlternativo({
                 <span className="user-info">
                   {role === "vendedor" || role === "administrador" ? (
                     <Link to="/admin">
-                      <button style={{ color: "gray" }}>Admin</button>{" "}
+                      <button className="admin" style={{ color: "gray" }}>
+                        Admin
+                      </button>{" "}
                     </Link>
                   ) : null}
                   <button
+                    className="nombreapellidoadmin"
                     onClick={handleMostrarModalEdit}
                     style={{ color: "gray", marginRight: "5px" }}
                   >

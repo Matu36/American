@@ -189,8 +189,8 @@ export default function FooterAlternativo() {
               </div>
             </div>
             <h4>Ubicación</h4>
-            <img src={MAPS} style={{ maxWidth: "70%", width: "100%" }} />
-            <p style={{ fontWeight: "bold", marginTop: "0.5rem" }}>
+            <img src={MAPS} style={{ maxWidth: "50%", width: "70%" }} />
+            <p style={{ fontWeight: "bold", marginTop: "2.5rem" }}>
               Panamericana Km 28.250 – Paris 256 esq. Colectora Este,
             </p>
             <p style={{ fontWeight: "bold" }}>
@@ -228,4 +228,25 @@ export default function FooterAlternativo() {
       </div>
     </div>
   );
+}
+
+// COLLAPSE //
+
+{
+  /* <div>
+<a
+  aria-controls="collapseContact"
+  aria-expanded="false"
+  className="nav-link dropdown-toggle"
+  data-bs-toggle="collapse"
+  href="#collapseContact"
+  role="button"
+>
+  <FaUsers className="sidebarIcons text-muted" size="1.50em" />{" "}
+  Contacto
+</a>
+<div className="collapse" id="collapseContact">
+  <Contact />
+</div>
+</div> */
 }
