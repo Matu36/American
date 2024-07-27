@@ -4114,7 +4114,7 @@ button:focus-visible {
 .datosAmericanContacto {
   flex: 1;
   min-width: 300px;
-  max-width: 600px;
+  max-width: 100%;
   padding: 20px;
   background-color: #f9f9f9; 
   border: 4px double #272726;
@@ -4122,6 +4122,12 @@ button:focus-visible {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
   position: relative; 
   margin-left: 20px;
+}
+
+@media (max-width: 800px) {
+  .datosAmericanContacto {
+    margin-left: 0; 
+  }
 }
 
 .datosAmericanContacto::before {
