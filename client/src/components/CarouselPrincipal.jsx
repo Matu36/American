@@ -1,12 +1,10 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-// import imagen4 from "../assets/img/CAROUSEL/AUTOELEVADOR.jpg";
 import imagen2 from "../assets/img/CAROUSEL/EXCAVADORA.jpg";
 import imagen3 from "../assets/img/CAROUSEL/PALA-CARGADORA.jpg";
 import imagen4 from "../assets/img/VARIOS/FOTO1.jpg";
 import imagen5 from "../assets/img/VARIOS/FOTO2.jpg";
-// import imagen5 from "../assets/img/CAROUSEL/RETROEXCAVADORA.png";
 import imagen6 from "../assets/img/VARIOS/americanvialfc.jpg";
 
 export default function CarouselPrincipal() {

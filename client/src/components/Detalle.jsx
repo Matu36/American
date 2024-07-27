@@ -228,16 +228,6 @@ export default function Detalle() {
             <p>
               <strong>Capacidad de Balde:</strong> {capacidadDeBalde}
             </p>
-          </div>
-        </div>
-        <div className="detalles-container">
-          <strong className="detalles-titulo">Detalles</strong>
-          <div className="detalles-list">
-            {detallesArray.map((detalle, index) => (
-              <div key={index} className="detalle-item">
-                <FaCheck className="check-icon" /> {detalle}
-              </div>
-            ))}
             {fichaPDF && (
               <div>
                 <button
@@ -249,6 +239,29 @@ export default function Detalle() {
               </div>
             )}
           </div>
+        </div>
+
+        <div className="detalles-container">
+          <strong className="detalles-titulo">Detalles</strong>
+          <div className="detalles-list">
+            {detallesArray.map((detalle, index) => (
+              <div key={index} className="detalle-item">
+                <FaCheck className="check-icon" /> {detalle}
+              </div>
+            ))}
+            <div
+              className="form-actions"
+              style={{ display: "flex", justifyContent: "center" }}
+            >
+              <button
+                onClick={handleMostrarContactoProducto}
+                className="form-submit-custom"
+              >
+                Dejá tu consulta por este producto
+              </button>
+            </div>
+          </div>
+
           {contactoProducto && (
             <div className="modal">
               <ContactoProducto
@@ -261,19 +274,8 @@ export default function Detalle() {
             </div>
           )}
         </div>
-        <br />
-        <div
-          className="form-actions"
-          style={{ display: "flex", justifyContent: "center" }}
-        >
-          <button
-            onClick={handleMostrarContactoProducto}
-            className="form-submit-custom"
-          >
-            Dejá tu consulta por este producto
-          </button>
-        </div>
       </div>
+
       {busquedaActiva && (
         <div ref={cardsContainerRef} className="cards-container" id="card">
           {productos?.length > 0 ? (

@@ -16,7 +16,7 @@ import Contact from "./Contact";
 import Garantia from "./Garantia";
 import AboutUs from "./AboutUs";
 import { FaBars } from "react-icons/fa";
-import AmericanVial from "../assets/img/logoAmerican.png";
+import AmericanVial from "../assets/img/LOGOAMERICANPRINCIPAL.png";
 
 export default function NavBarAlternativo({
   onSearchByMarca,

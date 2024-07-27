@@ -126,12 +126,12 @@ export default function ProductosEdit() {
         imagen6: productoDetalle.imagen6 || "",
         cantidadTotal: productoDetalle.cantidadTotal || "",
         codigo: productoDetalle.codigo || "",
-        fichPDF: productoDetalle.fichPDF || "",
+        fichaPDF: productoDetalle.fichaPDF || "",
         potencia: productoDetalle.potencia || "",
         motor: productoDetalle.motor || "",
         capacidadDeCarga: productoDetalle.capacidadDeCarga || "",
         capacidadDeBalde: productoDetalle.capacidadDeBalde || "",
-        detalles: productoDetalle.detalles || "",
+        detalles: productoDetalle.Detalles || "",
       });
     }
   }, [productoDetalle, id]);
