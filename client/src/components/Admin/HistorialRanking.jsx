@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useRanking } from "../../hooks/useCotizaciones";
+import { FaTimes } from "react-icons/fa";
 import Spinner from "../../UI/Spinner";
 
 export default function HistorialRanking() {
   const { data, isLoading } = useRanking().rankingQuery;
   const [showRanking, setShowRanking] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowRanking(false);
-    }, 8000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   if (isLoading)
     return (
@@ -24,6 +17,12 @@ export default function HistorialRanking() {
 
   return (
     <div className="ranking-container">
+      <button
+        className="close-button-ranking"
+        onClick={() => setShowRanking(false)}
+      >
+        <FaTimes />
+      </button>
       <div className="ranking-item">
         <h2>Vendedor con más cotizaciones</h2>
         <p>

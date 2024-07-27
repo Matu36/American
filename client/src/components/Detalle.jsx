@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+import AMERICAN from "../assets/img/AMERICANSINFONDO.png";
 import Layout from "../pages/Layout";
 import { useProducto } from "../hooks/useProductos";
 import ContactoProducto from "./ContactoProducto";
@@ -7,7 +8,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Card from "./Card";
 import Spinner from "../UI/Spinner";
-import { FaCheck, FaWhatsapp } from "react-icons/fa";
+import { FaCircle, FaWhatsapp } from "react-icons/fa";
 
 export default function Detalle() {
   const [producto, setProducto] = useState(null);
@@ -142,134 +143,142 @@ export default function Detalle() {
       onSelectFamilia={handleFamiliaClick}
     >
       <div className="postVentaContainer">
-        <div
-          ref={carouselRef}
-          id="carouselContainer"
-          className="DetalleCardContainer"
-        >
-          <div className="DetalleCard">
-            <Carousel
-              additionalTransfrom={0}
-              arrows={false}
-              autoPlaySpeed={3000}
-              centerMode={false}
-              className="custom-carousel"
-              containerClass="custom-container"
-              dotListClass="custom-dot-list"
-              draggable
-              focusOnSelect={false}
-              infinite
-              itemClass="custom-item"
-              keyBoardControl
-              minimumTouchDrag={80}
-              pauseOnHover
-              renderArrowsWhenDisabled={false}
-              renderButtonGroupOutside={false}
-              renderDotsOutside={false}
-              responsive={{
-                desktop: {
-                  breakpoint: {
-                    max: 3000,
-                    min: 1024,
+        <div className="detallebackground">
+          <div
+            ref={carouselRef}
+            id="carouselContainer"
+            className="DetalleCardContainer"
+          >
+            <div className="DetalleCard">
+              <Carousel
+                additionalTransfrom={0}
+                arrows={false}
+                autoPlaySpeed={3000}
+                centerMode={false}
+                className="custom-carousel"
+                containerClass="custom-container"
+                dotListClass="custom-dot-list"
+                draggable
+                focusOnSelect={false}
+                infinite
+                itemClass="custom-item"
+                keyBoardControl
+                minimumTouchDrag={80}
+                pauseOnHover
+                renderArrowsWhenDisabled={false}
+                renderButtonGroupOutside={false}
+                renderDotsOutside={false}
+                responsive={{
+                  desktop: {
+                    breakpoint: {
+                      max: 3000,
+                      min: 1024,
+                    },
+                    items: 1,
                   },
-                  items: 1,
-                },
-                mobile: {
-                  breakpoint: {
-                    max: 464,
-                    min: 0,
+                  mobile: {
+                    breakpoint: {
+                      max: 464,
+                      min: 0,
+                    },
+                    items: 1,
                   },
-                  items: 1,
-                },
-                tablet: {
-                  breakpoint: {
-                    max: 1024,
-                    min: 464,
+                  tablet: {
+                    breakpoint: {
+                      max: 1024,
+                      min: 464,
+                    },
+                    items: 1,
                   },
-                  items: 1,
-                },
-              }}
-              rewind={false}
-              rewindWithAnimation={false}
-              rtl={false}
-              shouldResetAutoplay
-              showDots
-              sliderClass="custom-slider"
-              slidesToSlide={1}
-              swipeable
-              autoPlay={true}
-            >
-              {images.map((src, index) => (
-                <img
-                  key={index}
-                  src={src}
-                  className="CarrouselImg"
-                  alt={`Imagen ${index + 1}`}
-                />
-              ))}
-            </Carousel>
-          </div>
-
-          <div className="detalle-info">
-            <h2>
-              <strong>{familia}</strong>
-            </h2>
-            <h1>
-              <strong>
-                {marca} {modelo}
-              </strong>
-            </h1>
-            <br />
-            <p>
-              <strong>Código:</strong> {codigo}
-            </p>
-            <p>
-              <strong>Potencia:</strong> {potencia}
-            </p>
-
-            <p>
-              <strong>Motor:</strong> {motor}
-            </p>
-            <p>
-              <strong>Capacidad de Carga:</strong> {capacidadDeCarga}
-            </p>
-            <p>
-              <strong>Capacidad de Balde:</strong> {capacidadDeBalde}
-            </p>
-            {fichaPDF && (
-              <div>
-                <button
-                  className="submit-button"
-                  onClick={handleFichaTecnicaClick}
-                >
-                  FICHA TÉCNICA
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div className="detalles-container">
-          <strong className="detalles-titulo">Detalles</strong>
-          <div className="detalles-list">
-            {detallesArray.map((detalle, index) => (
-              <div key={index} className="detalle-item">
-                <FaCheck className="check-icon" /> {detalle}
-              </div>
-            ))}
-            <div
-              className="form-actions"
-              style={{ display: "flex", justifyContent: "center" }}
-            >
-              <button
-                onClick={handleMostrarContactoProducto}
-                className="form-submit-custom"
+                }}
+                rewind={false}
+                rewindWithAnimation={false}
+                rtl={false}
+                shouldResetAutoplay
+                showDots
+                sliderClass="custom-slider"
+                slidesToSlide={1}
+                swipeable
+                autoPlay={true}
               >
-                Dejá tu consulta por este producto
-              </button>
+                {images.map((src, index) => (
+                  <img
+                    key={index}
+                    src={src}
+                    className="CarrouselImg"
+                    alt={`Imagen ${index + 1}`}
+                  />
+                ))}
+              </Carousel>
+            </div>
+
+            <div className="detalle-info">
+              <h2>
+                <strong>{familia}</strong>
+              </h2>
+              <h1>
+                <strong>
+                  {marca} {modelo}
+                </strong>
+              </h1>
+              <br />
+              <p>
+                <strong>Código:</strong> {codigo}
+              </p>
+              <p>
+                <strong>Potencia:</strong> {potencia}
+              </p>
+
+              <p>
+                <strong>Motor:</strong> {motor}
+              </p>
+              <p>
+                <strong>Capacidad de Carga:</strong> {capacidadDeCarga}
+              </p>
+              <p>
+                <strong>Capacidad de Balde:</strong> {capacidadDeBalde}
+              </p>
+              {fichaPDF && (
+                <div className="fichatenica">
+                  <button
+                    className="submit-button"
+                    onClick={handleFichaTecnicaClick}
+                  >
+                    FICHA TÉCNICA
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 
+          <div className="detalles-container">
+            <div className="detalles-image-american">
+              <img src={AMERICAN} alt="" />
+              <h1 style={{ fontFamily: "merri", marginTop: "15px" }}>
+                EL PODER DE UNA MARCA
+              </h1>
+            </div>
+            <div className="detalles-list">
+              <strong className="detalles-titulo">DETALLES</strong>
+              {detallesArray.map((detalle, index) => (
+                <div key={index} className="detalle-item">
+                  <FaCircle className="check-icon" /> {detalle}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div
+            className="form-actions"
+            style={{ display: "flex", marginTop: "2rem" }}
+          >
+            <button
+              onClick={handleMostrarContactoProducto}
+              className="form-submit-custom"
+            >
+              Dejá tu consulta por este producto
+            </button>
+          </div>
+          <br />
           {contactoProducto && (
             <div className="modal">
               <ContactoProducto

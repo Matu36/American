@@ -1440,7 +1440,7 @@ button:focus-visible {
   
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1240px) {
   .inputnav {
     display: none;
   }
@@ -1594,7 +1594,7 @@ button:focus-visible {
   }
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1240px) {
   .white-bar .search-button-modal-open {
     position: absolute;
     right: 150px;
@@ -1603,7 +1603,7 @@ button:focus-visible {
 }
 
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1240px) {
   .white-bar .search-button {
     visibility: hidden;
     right: 80px; 
@@ -2644,6 +2644,10 @@ button:focus-visible {
   padding-bottom: 2rem;
 }
 
+.detallebackground {
+  background-color: #f0f0f0;
+}
+
 .DetalleCardContainer {
   max-width: 100%;
   display: flex;
@@ -2660,7 +2664,7 @@ button:focus-visible {
 }
 
 .DetalleCard {
-  background-color: #f0f0f0;
+  
   flex: 1; 
   max-width: 50%;
   font-family: "merri";
@@ -2675,24 +2679,10 @@ button:focus-visible {
   object-fit: cover;
 }
 
-@media (max-width: 1600px) {
-  .CarrouselImg {
-    height: 450px;
-  }
-}
-
-@media (max-width: 1300px) {
-  .DetalleCard {
-    max-width: 600px;
-  }
-}
-
-
 
 @media (max-width: 1100px) {
   .CarrouselImg {
     width: 100vw; 
-    height: 500px; 
     object-fit: cover; 
   }
 }
@@ -2709,11 +2699,9 @@ button:focus-visible {
   margin-bottom: 8px;
 }
 .detalle-info {
-  background-color: #f4f4f4;
   padding: 20px;
   max-width: 50%;
   width: 100%;
-  height: 450px;
   flex: 1;
 }
 
@@ -2724,20 +2712,13 @@ button:focus-visible {
   }
 }
 
-@media (min-width: 1600px) {
-  .detalle-info {
-    height: 700px;
-  }
-}
-
 .detalle-info p {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 8px 0;
   font-size: 16px;
   border-bottom: 1px solid #ccc;
-  padding-bottom: 8px;
+  padding-bottom: 15  px;
 }
 
 .detalle-info p:last-child {
@@ -2757,15 +2738,24 @@ button:focus-visible {
 
 .detalles-titulo {
   margin-bottom: 8px;
+  font-family: "merri";
   display: inline-block;
-  font-size: x-large;
+  font-size: 34px;
+  text-align: center;
+  width: 100%; 
+  margin-bottom: 20px;
+  
 }
 
 .detalles-list {
   padding-left: 0;
-  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   
 }
+
+
 
 .detalle-item {
   display: flex;
@@ -2776,8 +2766,43 @@ button:focus-visible {
 
 .check-icon {
   margin-right: 8px;
-  color: green;
+  font-size:small;
+  color: #ffcc00;
+  min-width: 20px
 }
+
+
+@media (max-width: 1100px) {
+  .detalles-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 10px;
+  }
+
+  .detalle-item {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    height: auto; 
+  }
+
+  .check-icon {
+    min-width: 20px;
+    align-self: flex-start;
+  }
+  
+  .detalles-titulo {
+    grid-column: span 2;
+    text-align: center; 
+    display: block; 
+    margin-bottom: 20px; 
+  }
+}
+
+
+  
+
 
 .container {
   position: relative;
@@ -2801,11 +2826,26 @@ button:focus-visible {
 }
 
 .detalles-container {
-  background-color: #f4f4f4;
   padding: 20px;
-  justify-content: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
 }
 
+.detalles-image-american img {
+width: 350px;
+}
+
+@media (max-width: 1100px) {
+  .detalles-image-american {
+    display: none;
+  }
+}
+
+.fichatenica{
+  margin-top: 3rem;
+}
 
 
 .form-submit-custom {
@@ -3390,15 +3430,16 @@ button:focus-visible {
   position: fixed;
   top: 10px;
   right: 10px;
-  background-color: #ffeb3b; /* Amarillo */
-  border: 2px solid #f44336; /* Rojo */
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff; 
+  border: 2px solid #ffcc00; 
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
   padding: 20px;
   z-index: 1000;
-  max-width: 300px;
-  animation: fadeInOut 3s ease-in-out;
+  max-width: 320px;
+  font-family: 'Arial', sans-serif;
 }
+
 
 @keyframes fadeInOut {
   0% {
@@ -3410,10 +3451,7 @@ button:focus-visible {
     opacity: 1;
     transform: translateY(0);
   }
-  100% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
+ 
 }
 
 .ranking-item {
@@ -3423,14 +3461,28 @@ button:focus-visible {
 .ranking-item h2 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
-  color: #d32f2f;
+  color: #333; 
 }
 
 .ranking-item p {
   margin: 0;
   font-size: 1em;
+  color: #666; 
+}
+
+.close-button-ranking {
+ 
+  background: transparent;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: #333; 
+}
+
+.close-button-ranking:hover {
   color: #000;
 }
+
 
 .custom-carousel .custom-container {
   width: 100vw; 
