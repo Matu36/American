@@ -252,12 +252,6 @@ export default function Detalle() {
           </div>
 
           <div className="detalles-container">
-            <div className="detalles-image-american">
-              <img src={AMERICAN} alt="" />
-              <h1 style={{ fontFamily: "merri", marginTop: "15px" }}>
-                EL PODER DE UNA MARCA
-              </h1>
-            </div>
             <div className="detalles-list">
               <strong className="detalles-titulo">DETALLES</strong>
               {detallesArray.map((detalle, index) => (
@@ -266,6 +260,12 @@ export default function Detalle() {
                 </div>
               ))}
             </div>
+            {/* <div className="detalles-image-american">
+              <img src={AMERICAN} alt="" />
+              <h1 style={{ fontFamily: "merri", marginTop: "15px" }}>
+                EL PODER DE UNA MARCA
+              </h1>
+            </div> */}
           </div>
           <div
             className="form-actions"

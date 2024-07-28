@@ -2748,11 +2748,17 @@ button:focus-visible {
 }
 
 .detalles-list {
-  padding-left: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  padding-left: 0;
   
+  list-style: none;
+}
+
+.detalles-list li {
+  flex: 1 1 100%; /* Cada elemento ocupa todo el ancho en pantallas pequeñas */
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 
@@ -2828,7 +2834,8 @@ button:focus-visible {
 .detalles-container {
   padding: 20px;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  flex-direction: column;
   align-items: center;
   
 }
@@ -2844,7 +2851,7 @@ width: 350px;
 }
 
 .fichatenica{
-  margin-top: 3rem;
+  margin-top: 1.5rem;
 }
 
 
