@@ -14,6 +14,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      empresa: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       familia: {
         type: DataTypes.STRING,
         allowNull: false,

@@ -46,8 +46,9 @@ const createCotizacion = async (req, res) => {
     let id = await generateNewId();
 
     // Formatear idUsuario y idCotizacion
-    const formattedIdUsuario = String(idUsuario).padStart(3, "0");
-    const formattedIdCotizacion = String(id).padStart(5, "0");
+    const formattedIdUsuario = String(idUsuario).slice(0, 5);
+
+    const formattedIdCotizacion = String(id);
     const numeroCotizacion = `${formattedIdUsuario} - ${formattedIdCotizacion}`;
 
     let nuevaCotizacion = await Cotizaciones.create({
@@ -699,7 +700,7 @@ const filtrarCotizacionesPorFecha = async (req, res) => {
           attributes: ["marca", "modelo"],
         },
       ],
-      order: [["numeroCotizacion", "ASC"]],
+      order: [["fechaDeCreacion", "ASC"]],
     });
 
     if (!cotizaciones || cotizaciones.length === 0) {

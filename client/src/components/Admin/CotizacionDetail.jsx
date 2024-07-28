@@ -2,7 +2,7 @@ import React from "react";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
 import { useParams } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
-import Logo from "../../assets/img/logoAmerican.png";
+import Logo from "../../assets/img/LOGOAMERICANPRINCIPAL.png";
 import Empresa from "../../assets/img/EmpresaPDF.jpg";
 
 import {

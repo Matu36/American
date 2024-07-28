@@ -86,6 +86,7 @@ export default function ProductosEdit() {
 
   const [producto, setProducto] = useState({
     id: id,
+    empresa: "",
     familia: "",
     division: "",
     marca: "",
@@ -112,6 +113,7 @@ export default function ProductosEdit() {
     if (productoDetalle) {
       setProducto({
         id: productoDetalle.id || id,
+        empresa: productoDetalle.empresa || "",
         division: productoDetalle.division || "",
         familia: productoDetalle.familia || "",
         marca: productoDetalle.marca || "",
@@ -142,6 +144,7 @@ export default function ProductosEdit() {
       onSuccess: () => {
         setProducto({
           familia: "",
+          empresa: "",
           marca: "",
           division: "",
           modelo: "",
@@ -170,6 +173,20 @@ export default function ProductosEdit() {
     <div className="form-container1">
       <h2 className="tituloCompo">Modificar Producto</h2> <br />
       <form onSubmit={saveProduct}>
+        <div className="form-group">
+          <label htmlFor="empresa">Empresa</label>
+          <input
+            type="text"
+            id="empresa"
+            name="empresa"
+            value={producto.empresa}
+            autoComplete="off"
+            placeholder="Empresa"
+            onChange={(e) =>
+              setProducto({ ...producto, empresa: e.target.value })
+            }
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="division">División</label>
           <input

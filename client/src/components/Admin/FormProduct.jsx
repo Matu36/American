@@ -86,6 +86,17 @@ export default function FormProduct() {
   const { data: productos } = useProducto().productosParaCotizarQuery;
   const { data: marcas } = useProducto().productosMarcasQuery;
   const { data: divisiones } = useProducto().productosDivisionesQuery;
+  const [selectedEmpresa, setSelectedEmpresa] = useState(null);
+
+  const opcionesEmpresa = [
+    { value: "AGRO", label: "AGRO" },
+    { value: "VIAL", label: "VIAL" },
+  ];
+
+  const handleChangeEmpresa = (selectedOption) => {
+    setSelectedEmpresa(selectedOption);
+    setProducto({ ...producto, empresa: selectedOption.value });
+  };
 
   const opcionesFamilias =
     productos?.map((producto) => ({
@@ -167,6 +178,7 @@ export default function FormProduct() {
 
   const [producto, setProducto] = useState({
     familia: "",
+    empresa: "",
     marca: "",
     modelo: "",
     division: "",
@@ -221,6 +233,7 @@ export default function FormProduct() {
 
       setProducto({
         marca: "",
+        empresa: "",
         familia: "",
         modelo: "",
         imagen: "",
@@ -256,14 +269,27 @@ export default function FormProduct() {
     }
   };
 
-  //FIN EDITAR COSTOS
-
   return (
     <div className="form-container1">
       <h2 className="tituloCompo">Cargar Producto</h2> <br />
       <form onSubmit={saveProduct}>
         <div className="form-group">
           <div className="form-group">
+            <div className="form-group">
+              <label htmlFor="empresa">
+                Empresa <span className="obligatorio">*</span>
+              </label>
+
+              <Select
+                id="empresa"
+                name="empresa"
+                options={opcionesEmpresa}
+                value={selectedEmpresa}
+                onChange={handleChangeEmpresa}
+                required
+                placeholder="Selecciona una Empresa"
+              />
+            </div>
             <label htmlFor="division">
               División <span className="obligatorio">*</span>
             </label>
@@ -311,7 +337,9 @@ export default function FormProduct() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="modelo">Modelo</label>
+          <label htmlFor="modelo">
+            Modelo<span className="obligatorio">*</span>
+          </label>
           <div>
             <input
               type="text"

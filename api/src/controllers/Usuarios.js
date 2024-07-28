@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const sendEmailWithTemplate = require("../mailer/sendEmailWithTemplate");
 const jwt = require("../services/jwt.js");
 const { Op } = require("sequelize");
+const crypto = require("crypto");
 
 const registro = async (req, res) => {
   try {
@@ -23,9 +24,13 @@ const registro = async (req, res) => {
     // Genera un hash para la contraseña
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
+    // Genera un id de 10 caracteres
+    const userId = crypto.randomBytes(15).toString("hex").substring(0, 20);
+
     const [instance, created] = await Usuarios.findOrCreate({
       where: { email: req.body.email.toLowerCase() },
       defaults: {
+        id: userId,
         password: hashedPassword, // Guarda el hash en lugar de la contraseña en texto plano
         nombre: req.body.nombre || null,
         apellido: req.body.apellido || null,
@@ -344,7 +349,13 @@ const getUsuariosConRolFalse = async (req, res) => {
         .json({ error: "No se encontraron usuarios con rol false" });
     }
 
-    return res.status(200).json(usuarios);
+    // Recorrer los usuarios y modificar el id para que solo tenga los primeros 5 caracteres
+    const usuariosConIdCortado = usuarios.map((usuario) => ({
+      ...usuario.toJSON(),
+      id: usuario.id.substring(0, 5),
+    }));
+
+    return res.status(200).json(usuariosConIdCortado);
   } catch (error) {
     console.error("Error al obtener usuarios con rol false:", error);
     return res

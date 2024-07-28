@@ -3008,10 +3008,16 @@ width: 350px;
 }
 
 .appadmin {
-  margin: auto;
+  margin:auto;
   width: 80%;
   max-width: 100%;
 }
+/* 
+@media (max-width: 600px) {
+  .appadmin {
+    margin: auto;
+  }
+} */
 
 .cellConsulta {
   white-space: normal;

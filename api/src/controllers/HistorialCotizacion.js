@@ -9,34 +9,15 @@ const getHistorialDetallePorUsuario = async (req, res) => {
       return res.status(400).json({ error: "Se requiere el valor combinado" });
     }
 
-    const idUsuario = combinedValue.slice(0, 1);
-    const numeroCotizacion = combinedValue.slice(1);
+    // Separar el idUsuario y el numeroCotizacion desde combinedValue
+    const [idUsuario, numeroCotizacion] = combinedValue.split("-");
 
-    const formattedNumeroCotizacion1 = `00${idUsuario} - 0000${numeroCotizacion}`;
-    const formattedNumeroCotizacion2 = `00${idUsuario} - 000${numeroCotizacion}`;
-    const formattedNumeroCotizacion3 = `00${idUsuario} - 00${numeroCotizacion}`;
-    const formattedNumeroCotizacion4 = `00${idUsuario} - 0${numeroCotizacion}`;
-    const formattedNumeroCotizacion5 = `00${idUsuario} - ${numeroCotizacion}`;
-    const formattedNumeroCotizacion6 = `0${idUsuario} - 0000${numeroCotizacion}`;
-    const formattedNumeroCotizacion7 = `0${idUsuario} - 000${numeroCotizacion}`;
-    const formattedNumeroCotizacion8 = `0${idUsuario} - 00${numeroCotizacion}`;
-    const formattedNumeroCotizacion9 = `0${idUsuario} - 0${numeroCotizacion}`;
-    const formattedNumeroCotizacion10 = `0${idUsuario} - ${numeroCotizacion}`;
+    // Quitar espacios y juntar nuevamente el idUsuario y numeroCotizacion
+    const formattedNumeroCotizacion = `${idUsuario} - ${numeroCotizacion}`;
 
     const detalle = await HistorialCotizacion.findAll({
       where: {
-        [Op.or]: [
-          { numeroCotizacion: formattedNumeroCotizacion1 },
-          { numeroCotizacion: formattedNumeroCotizacion2 },
-          { numeroCotizacion: formattedNumeroCotizacion3 },
-          { numeroCotizacion: formattedNumeroCotizacion4 },
-          { numeroCotizacion: formattedNumeroCotizacion5 },
-          { numeroCotizacion: formattedNumeroCotizacion6 },
-          { numeroCotizacion: formattedNumeroCotizacion7 },
-          { numeroCotizacion: formattedNumeroCotizacion8 },
-          { numeroCotizacion: formattedNumeroCotizacion9 },
-          { numeroCotizacion: formattedNumeroCotizacion10 },
-        ],
+        numeroCotizacion: formattedNumeroCotizacion,
       },
     });
 

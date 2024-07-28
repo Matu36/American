@@ -170,6 +170,7 @@ const getProductoById = async (req, res) => {
     // Devolver el producto encontrado
     return res.send({
       id: producto.id,
+      empresa: producto.empresa,
       familia: producto.familia,
       marca: producto.marca,
       modelo: producto.modelo,
@@ -232,6 +233,7 @@ const createProducto = async (req, res) => {
       !req.body?.familia ||
       !req.body?.marca ||
       !req.body?.modelo ||
+      !req.body?.empresa ||
       !req.body?.precio
     )
       throw "No body params";

@@ -62,7 +62,7 @@ export default function Historial() {
       return;
     }
 
-    const combinedValue = `${selectedVendedor.value}${numeroCotizacion}`;
+    const combinedValue = `${selectedVendedor.value}-${numeroCotizacion}`;
     VendedorHistorial({ combinedValue: combinedValue });
   };
 
