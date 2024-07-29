@@ -17,11 +17,36 @@ export default function AmericanContacto() {
   const [busquedaActiva, setBusquedaActiva] = useState(false);
   const [selectedMarca, setSelectedMarca] = useState("");
   const cardsContainerRef = useRef(null);
+  const [producto, setProducto] = useState(null);
 
   const { data: productos, isLoading } = useProducto(
     null,
     selectedMarca
   ).productoQueryByFamilia;
+
+  useEffect(() => {
+    if (productos) {
+      setProducto(productos);
+    }
+  }, [productos]);
+
+  useEffect(() => {
+    if (busquedaActiva && cardsContainerRef.current) {
+      const firstCard = cardsContainerRef.current.querySelector(".card");
+      if (firstCard) {
+        firstCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }, [busquedaActiva, producto]);
+
+  useEffect(() => {
+    if (busquedaActiva && cardsContainerRef.current) {
+      cardsContainerRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [busquedaActiva]);
 
   const handleFamiliaClick = (familia) => {
     const familiaNormalized =
@@ -31,20 +56,18 @@ export default function AmericanContacto() {
   };
 
   const handleSearchByMarca = (familia) => {
-    const marcaNormalized =
-      familia.charAt(0).toUpperCase() + familia.slice(1).toLowerCase();
+    const palabras = familia.split(" ");
+
+    const palabrasNormalizadas = palabras.map(
+      (palabra) =>
+        palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase()
+    );
+
+    const marcaNormalized = palabrasNormalizadas.join(" ");
+
     setSelectedMarca(marcaNormalized);
     setBusquedaActiva(true);
   };
-
-  useEffect(() => {
-    if (busquedaActiva && cardsContainerRef.current) {
-      const firstCard = cardsContainerRef.current.querySelector(".card");
-      if (firstCard) {
-        firstCard.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [busquedaActiva, selectedMarca]);
 
   if (isLoading) {
     return (
@@ -294,6 +317,7 @@ export default function AmericanContacto() {
             </div>
           </div>
         </div>
+        <br />
         {busquedaActiva && (
           <div ref={cardsContainerRef} className="cards-container">
             {productos.length > 0 ? (

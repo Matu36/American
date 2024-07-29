@@ -2,9 +2,13 @@ const { Productos } = require("../db.js");
 
 const getProductos = async (req, res) => {
   try {
-    let productos = await Productos.findAll();
+    let productos = await Productos.findAll({
+      where: {
+        empresa: "VIAL",
+      },
+    });
 
-    return !productos
+    return !productos || productos.length === 0
       ? res.status(404).send("No hay Productos")
       : res.send(
           productos.map(
@@ -31,7 +35,7 @@ const getProductos = async (req, res) => {
         );
   } catch (error) {
     console.log(error);
-    return res.status(404).send("Error 404");
+    return res.status(500).send("Error del servidor");
   }
 };
 
@@ -90,6 +94,9 @@ const getProductosPorCategoria = async (req, res) => {
   try {
     let familias = await Productos.findAll({
       attributes: ["familia"],
+      where: {
+        empresa: "VIAL",
+      },
       group: ["familia"],
     });
 
@@ -116,6 +123,9 @@ const getProductosPorDivision = async (req, res) => {
   try {
     let divisiones = await Productos.findAll({
       attributes: ["division"],
+      where: {
+        empresa: "VIAL",
+      },
       group: ["division"],
     });
 
@@ -139,6 +149,9 @@ const getProductosPorMarca = async (req, res) => {
   try {
     let marcas = await Productos.findAll({
       attributes: ["marca"],
+      where: {
+        empresa: "VIAL",
+      },
       group: ["marca"],
     });
 

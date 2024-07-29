@@ -55,8 +55,15 @@ export default function PostVenta() {
   }, [busquedaActiva]);
 
   const handleSearchByMarca = (familia) => {
-    const marcaNormalized =
-      familia.charAt(0).toUpperCase() + familia.slice(1).toLowerCase();
+    const palabras = familia.split(" ");
+
+    const palabrasNormalizadas = palabras.map(
+      (palabra) =>
+        palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase()
+    );
+
+    const marcaNormalized = palabrasNormalizadas.join(" ");
+
     setSelectedMarca(marcaNormalized);
     setBusquedaActiva(true);
   };

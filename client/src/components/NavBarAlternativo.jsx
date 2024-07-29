@@ -388,22 +388,18 @@ export default function NavBarAlternativo({
                 <span className="user-info">
                   {role === "vendedor" || role === "administrador" ? (
                     <Link to="/admin">
-                      <button className="admin" style={{ color: "gray" }}>
-                        Admin
-                      </button>{" "}
+                      <button className="admin">Admin</button>{" "}
                     </Link>
                   ) : null}
                   <button
                     className="nombreapellidoadmin"
                     onClick={handleMostrarModalEdit}
-                    style={{ color: "gray", marginRight: "5px" }}
+                    style={{ marginRight: "5px" }}
                   >
                     {auth ? auth.nombre : auth.email}
                   </button>
 
-                  <button style={{ color: "gray" }} onClick={handleLogout}>
-                    Cerrar sesión
-                  </button>
+                  <button onClick={handleLogout}>Cerrar sesión</button>
                 </span>
               </div>
             ) : (

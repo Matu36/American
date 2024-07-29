@@ -252,20 +252,14 @@ export default function Detalle() {
           </div>
 
           <div className="detalles-container">
+            <strong className="detalles-titulo">DETALLES</strong>
             <div className="detalles-list">
-              <strong className="detalles-titulo">DETALLES</strong>
               {detallesArray.map((detalle, index) => (
                 <div key={index} className="detalle-item">
                   <FaCircle className="check-icon" /> {detalle}
                 </div>
               ))}
             </div>
-            {/* <div className="detalles-image-american">
-              <img src={AMERICAN} alt="" />
-              <h1 style={{ fontFamily: "merri", marginTop: "15px" }}>
-                EL PODER DE UNA MARCA
-              </h1>
-            </div> */}
           </div>
           <div
             className="form-actions"

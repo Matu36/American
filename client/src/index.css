@@ -2736,79 +2736,57 @@ button:focus-visible {
   flex-grow: 1;
 }
 
+.detalles-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .detalles-titulo {
-  margin-bottom: 8px;
+  margin-bottom: 20px;
   font-family: "merri";
-  display: inline-block;
   font-size: 34px;
   text-align: center;
-  width: 100%; 
-  margin-bottom: 20px;
-  
+  width: 100%;
 }
 
 .detalles-list {
-  display: flex;
-  flex-wrap: wrap;
-  padding-left: 0;
-  
-  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+  width: 100%;
 }
-
-.detalles-list li {
-  flex: 1 1 100%; /* Cada elemento ocupa todo el ancho en pantallas pequeñas */
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-
 
 .detalle-item {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin: 8px 0;
+  align-items: center;
 }
 
 .check-icon {
   margin-right: 8px;
-  font-size:small;
+  font-size: small;
   color: #ffcc00;
-  min-width: 20px
+  min-width: 20px;
 }
 
-
-@media (max-width: 1100px) {
+@media (min-width: 600px) {
   .detalles-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 20px;
-    row-gap: 10px;
-  }
-
-  .detalle-item {
-    display: flex;
-    align-items: flex-start;
-    width: 100%;
-    height: auto; 
-  }
-
-  .check-icon {
-    min-width: 20px;
-    align-self: flex-start;
-  }
-  
-  .detalles-titulo {
-    grid-column: span 2;
-    text-align: center; 
-    display: block; 
-    margin-bottom: 20px; 
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
+@media (min-width: 900px) {
+  .detalles-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
-  
-
+@media (min-width: 1200px) {
+  .detalles-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 
 .container {
   position: relative;
@@ -2831,14 +2809,6 @@ button:focus-visible {
   background-color: #333;
 }
 
-.detalles-container {
-  padding: 20px;
-  display: flex;
-  /* justify-content: space-around; */
-  flex-direction: column;
-  align-items: center;
-  
-}
 
 .detalles-image-american img {
 width: 350px;
@@ -3105,6 +3075,19 @@ width: 350px;
   display: inline-block;
   width: 150px;
 }
+
+.user-menu-container button {
+  color: gray; 
+  background-color: transparent; 
+  border: none; 
+  padding: 10px 20px; 
+  transition: color 0.3s ease; 
+}
+
+.user-menu-container button:hover {
+  color: #b0b0b0; 
+}
+
 
 .form-container {
   width: 80%;
