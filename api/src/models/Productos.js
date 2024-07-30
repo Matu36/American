@@ -70,6 +70,10 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      precioUSD: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
       costo: {
         type: DataTypes.INTEGER,
         allowNull: true,

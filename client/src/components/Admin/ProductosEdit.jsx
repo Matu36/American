@@ -92,6 +92,7 @@ export default function ProductosEdit() {
     marca: "",
     modelo: "",
     precio: "",
+    precioUSD: "",
     imagen: "",
     imagen1: "",
     imagen2: "",
@@ -119,6 +120,7 @@ export default function ProductosEdit() {
         marca: productoDetalle.marca || "",
         modelo: productoDetalle.modelo || "",
         precio: productoDetalle.precio || "",
+        precioUSD: productoDetalle.precioUSD || "",
         imagen: productoDetalle.imagen || "",
         imagen1: productoDetalle.imagen1 || "",
         imagen2: productoDetalle.imagen2 || "",
@@ -149,6 +151,7 @@ export default function ProductosEdit() {
           division: "",
           modelo: "",
           precio: "",
+          precioUSD: "",
           imagen: "",
           imagen1: "",
           imagen2: "",
@@ -266,6 +269,24 @@ export default function ProductosEdit() {
               placeholder="Precio"
               onChange={(e) =>
                 setProducto({ ...producto, precio: e.target.value })
+              }
+              required
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="precio">Precio USD</label>
+          <div>
+            <input
+              type="number"
+              id="precioUSD"
+              name="precioUSD"
+              value={producto.precioUSD}
+              autoComplete="off"
+              placeholder="Precio USD"
+              onChange={(e) =>
+                setProducto({ ...producto, precioUSD: e.target.value })
               }
               required
             />

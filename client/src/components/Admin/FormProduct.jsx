@@ -183,6 +183,7 @@ export default function FormProduct() {
     modelo: "",
     division: "",
     precio: 0,
+    precioUSD: 0,
     imagen: "",
     imagen1: "",
     imagen2: "",
@@ -242,6 +243,7 @@ export default function FormProduct() {
         imagen3: "",
         cantidadTotal: "",
         precio: "",
+        precioUSD: "",
         codigo: "",
         division: "",
         potencia: "",
@@ -370,6 +372,25 @@ export default function FormProduct() {
               placeholder="Precio"
               onChange={(e) =>
                 setProducto({ ...producto, precio: e.target.value })
+              }
+              required
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="precio">
+            Precio USD <span className="obligatorio">*</span>
+          </label>
+          <div>
+            <input
+              type="number"
+              id="precioUSD"
+              name="precioUSD"
+              value={producto.precioUSD}
+              autoComplete="off"
+              placeholder="Precio USD"
+              onChange={(e) =>
+                setProducto({ ...producto, precioUSD: e.target.value })
               }
               required
             />

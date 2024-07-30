@@ -1,13 +1,18 @@
 import React from "react";
 import { useGarantia } from "../../hooks/useGarantia";
 import { useParams } from "react-router-dom";
+import Spinner from "../../UI/Spinner";
 
 export default function GarantiaDetail() {
   const { id } = useParams();
   const { data: garantiaData, isLoading } = useGarantia(id).garantiaQueryById;
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   }
 
   const {

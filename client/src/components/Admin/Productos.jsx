@@ -5,9 +5,27 @@ import Spinner from "../../UI/Spinner";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { useUsuario } from "../../hooks/useUsuarios";
 
 export default function Productos() {
   const { data, isLoading } = useProducto().productosQuery;
+  const { auth, setAuth } = useAuth();
+
+  const idUsuario = auth?.id;
+
+  const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
+
+  const handleCheckRol = () => {
+    checkRol({ idUsuario });
+  };
+  useEffect(() => {
+    if (idUsuario) {
+      handleCheckRol();
+    }
+  }, [idUsuario]);
+
+  // const { mutate: deleteProducto } = useProducto().productosDeleteMutation;
 
   const [search, setSearch] = useState("");
   const [productos, setProductos] = useState(data);
@@ -44,6 +62,27 @@ export default function Productos() {
     }
   };
 
+  // const handleDeleteProduct = (id) => {
+  //   Swal.fire({
+  //     title: "¿Estás seguro de que deseas eliminar este producto?",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#ffc107",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Sí, eliminar",
+  //     cancelButtonText: "Cancelar",
+  //     background: "#ffffff",
+  //     iconColor: "#ffc107",
+  //     customClass: {
+  //       title: "text-dark",
+  //     },
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       deleteProducto({ id: id });
+  //     }
+  //   });
+  // };
+
   //-------------------------------- FIN SEARCHBAR --------------------------- //
 
   const columns = [
@@ -63,11 +102,26 @@ export default function Productos() {
         >
           <Dropdown.Item
             as={Link}
-            to={`/admin/productos/modificar/${row.id}`}
-            className="dropdown-item dropdown-item-modificar"
+            to={`/admin/productos/detalle/${row.id}`}
+            className="dropdown-item dropdown-item-ver"
           >
-            Modificar
+            Ver Producto
           </Dropdown.Item>
+          {rolData?.data.rol === "administrador" && (
+            <Dropdown.Item
+              as={Link}
+              to={`/admin/productos/modificar/${row.id}`}
+              className="dropdown-item dropdown-item-modificar"
+            >
+              Modificar
+            </Dropdown.Item>
+          )}
+          {/* <Dropdown.Item
+            onClick={() => handleDeleteProduct(row.id)}
+            className="dropdown-item dropdown-item-eliminar"
+          >
+            Eliminar
+          </Dropdown.Item> */}
         </DropdownButton>
       ),
     },

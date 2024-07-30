@@ -3362,6 +3362,17 @@ width: 350px;
   color: #212529;
 }
 
+.acciones-dropdown .dropdown-item-eliminar {
+  color: #ff0707;
+  background-color: transparent;
+  border: none;
+}
+
+.acciones-dropdown .dropdown-item-eliminar:hover {
+  background-color: #f47676;
+  color: #212529;
+}
+
 /* Estilos para botón Concretar Venta */
 .acciones-dropdown .dropdown-item-concretar {
   color: #28a745;

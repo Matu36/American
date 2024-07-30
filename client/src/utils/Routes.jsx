@@ -50,6 +50,7 @@ import Distribuidores from "../components/empresa/Distribuidores";
 import AmericanRepuestos from "../components/empresa/AmericanRepuestos";
 import AmericanContacto from "../components/empresa/AmericanContacto";
 import AmericanGarantia from "../components/empresa/AmericanGarantia";
+import ProductosDetalle from "../components/Admin/ProductosDetalle";
 
 const AppRouter = () => {
   return (
@@ -133,6 +134,7 @@ const AdminLayout = () => {
           <Route path="/contacto/ver/:id" element={<ContactoDetail />} />
           <Route path="/Productos/cargar" element={<FormProduct />} />
           <Route path="/productos/modificar/:id" element={<ProductosEdit />} />
+          <Route path="/productos/detalle/:id" element={<ProductosDetalle />} />
           <Route path="/Cotizaciones/ver" element={<Cotizaciones />} />
           <Route path="/Cotizaciones/ver/:id" element={<CotizacionDetail />} />
           <Route

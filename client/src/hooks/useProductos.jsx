@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ProductosAPI } from "../components/api/ProductosApi";
 import Swal from "sweetalert2";
 
@@ -39,7 +39,12 @@ const editProducto = async (data) => {
   return await ProductosAPI.put(`edit`, data);
 };
 
+const deleteProducto = async (data) => {
+  return await ProductosAPI.delete(`delete`, { data });
+};
+
 export const useProducto = (id, familia) => {
+  const queryClient = useQueryClient();
   const productosQuery = useQuery({
     queryKey: ["productos"],
     queryFn: () => getProductos(),
@@ -74,6 +79,73 @@ export const useProducto = (id, familia) => {
   const productosDivisionesQuery = useQuery({
     queryKey: ["productosdivisiones"],
     queryFn: () => getProductosDivisiones(),
+  });
+
+  const productosDeleteMutation = useMutation({
+    mutationKey: ["delete-producto"],
+    mutationFn: (data) => deleteProducto(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries("productos");
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "El producto ha sido eliminado",
+        showConfirmButton: false,
+        timer: 2000,
+        background: "#ffffff",
+        iconColor: "#ffc107",
+        customClass: {
+          title: "text-dark",
+        },
+      });
+    },
+    onError: (error) => {
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "No se pudo eliminar el producto. Intente más tarde",
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+          default:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "Hubo un error",
+              showConfirmButton: false,
+              timer: 2000,
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+            });
+            break;
+        }
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Hubo un error al procesar la solicitud",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "#ffffff",
+          iconColor: "#ffc107",
+          customClass: {
+            title: "text-dark",
+          },
+        });
+      }
+    },
   });
 
   const productosEditMutation = useMutation({
@@ -151,5 +223,6 @@ export const useProducto = (id, familia) => {
     productosMarcasQuery,
     productosDivisionesQuery,
     productoQueryByFamilia,
+    productosDeleteMutation,
   };
 };
