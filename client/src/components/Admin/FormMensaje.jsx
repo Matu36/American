@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import Select from "react-select";
 import { useUsuario } from "../../hooks/useUsuarios";
 import Swal from "sweetalert2";
+import BackButton from "../../UI/BackButton";
 
 export default function FormMensaje() {
   const { auth } = useAuth();
@@ -102,6 +103,7 @@ export default function FormMensaje() {
 
   return (
     <form onSubmit={handleSubmit} className="form-container1">
+      <BackButton />
       <h2 className="tituloCompo">Crear Mensaje</h2> <br />
       <div className="form-group">
         <label htmlFor="idDestino">Destinatario</label>

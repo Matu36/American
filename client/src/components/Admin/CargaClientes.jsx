@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useClientes } from "../../hooks/useClientes";
+import BackButton from "../../UI/BackButton";
 
 export default function CargaClientes() {
   const { auth } = useAuth();
@@ -48,6 +49,7 @@ export default function CargaClientes() {
 
   return (
     <div className="form-container1">
+      <BackButton />
       <h2 className="tituloCompo">Cargar Clientes</h2> <br />
       <br />
       <form onSubmit={handleSubmit}>

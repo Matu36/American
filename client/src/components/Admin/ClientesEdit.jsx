@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useClientes } from "../../hooks/useClientes";
 import useAuth from "../../hooks/useAuth";
+import BackButton from "../../UI/BackButton";
 
 export default function ClientesEdit() {
   const { auth } = useAuth();
@@ -67,6 +68,7 @@ export default function ClientesEdit() {
 
   return (
     <div className="form-container1">
+      <BackButton />
       <h2 className="tituloCompo">Modificar datos del Cliente</h2>
       <br />
       <br />

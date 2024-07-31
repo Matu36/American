@@ -7,6 +7,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "../../UI/Spinner";
 import VentasExcel from "./Excel/VentasExcel";
+import BackButton from "../../UI/BackButton";
 
 export default function Ventas() {
   const { auth } = useAuth();
@@ -122,6 +123,7 @@ export default function Ventas() {
 
   return (
     <div className="form-container">
+      <BackButton />
       <div>
         <div className="form-group" style={{ maxWidth: "60%" }}>
           <h2 className="tituloCompo">Ventas</h2> <br />

@@ -14,6 +14,7 @@ import {
   Image,
 } from "@react-pdf/renderer";
 import { styles } from "../../assets/Styles/PDFestilosDetalle";
+import BackButton from "../../UI/BackButton";
 
 export default function CotizacionDetail() {
   const { id } = useParams();
@@ -159,6 +160,7 @@ export default function CotizacionDetail() {
 
   return (
     <div className="form-container1">
+      <BackButton />
       <h2>Detalle de Cotización</h2>
       <br />
 

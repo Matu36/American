@@ -7,6 +7,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "../../UI/Spinner";
 import ClientesExcel from "./Excel/ClientesExcel";
+import BackButton from "../../UI/BackButton";
 
 export default function Clientes() {
   const { auth } = useAuth();
@@ -123,6 +124,7 @@ export default function Clientes() {
   //---------------------------------FIN SPINNER ------------------------------------//
   return (
     <div className="form-container">
+      <BackButton />
       <div>
         <div className="form-group" style={{ maxWidth: "40%" }}>
           <h2 className="tituloCompo">Clientes</h2> <br />

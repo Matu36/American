@@ -6,6 +6,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import DataTable from "react-data-table-component";
 import Spinner from "../../UI/Spinner";
+import BackButton from "../../UI/BackButton";
 
 export default function MensajesRecibidos() {
   const { auth } = useAuth();
@@ -124,6 +125,7 @@ export default function MensajesRecibidos() {
 
   return (
     <div className="form-container">
+      <BackButton />
       <div>
         <div className="form-group" style={{ maxWidth: "60%" }}>
           <h2 className="tituloCompo">Mensajes Recibidos</h2> <br />

@@ -2,6 +2,7 @@ import React from "react";
 import { useGarantia } from "../../hooks/useGarantia";
 import { useParams } from "react-router-dom";
 import Spinner from "../../UI/Spinner";
+import BackButton from "../../UI/BackButton";
 
 export default function GarantiaDetail() {
   const { id } = useParams();
@@ -33,6 +34,7 @@ export default function GarantiaDetail() {
 
   return (
     <div className="form-container1">
+      <BackButton />
       <h3>Detalle de la Garantía</h3>
       <br />
       <div style={{ marginBottom: "10px" }}>

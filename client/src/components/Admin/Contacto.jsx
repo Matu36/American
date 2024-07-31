@@ -10,6 +10,7 @@ import Select from "react-select";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import ContactoExcel from "./Excel/ContactoExcel";
+import BackButton from "../../UI/BackButton";
 
 export default function Contacto() {
   const { data, isLoading } = useContacto().contactoQuery;
@@ -162,6 +163,7 @@ export default function Contacto() {
 
   return (
     <div className="form-container">
+      <BackButton />
       <div>
         <div>
           <>

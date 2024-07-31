@@ -6,6 +6,7 @@ import Select from "react-select";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
 import { useParams } from "react-router-dom";
 import { useUsuario } from "../../hooks/useUsuarios";
+import BackButton from "../../UI/BackButton";
 
 export default function CotizacionEdit() {
   const { auth } = useAuth();
@@ -261,6 +262,7 @@ export default function CotizacionEdit() {
 
   return (
     <form onSubmit={handleSubmit} className="form-container">
+      <BackButton />
       <div>
         {" "}
         <h2 className="tituloCompo">Cotizador</h2> <br />

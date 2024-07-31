@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { useProducto } from "../../hooks/useProductos";
 import Select from "react-select";
+import BackButton from "../../UI/BackButton";
 
 const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
 
@@ -273,6 +274,7 @@ export default function FormProduct() {
 
   return (
     <div className="form-container1">
+      <BackButton />
       <h2 className="tituloCompo">Cargar Producto</h2> <br />
       <form onSubmit={saveProduct}>
         <div className="form-group">

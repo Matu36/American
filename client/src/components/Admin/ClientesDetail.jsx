@@ -2,6 +2,7 @@ import React from "react";
 import { useClientes } from "../../hooks/useClientes";
 import { useParams } from "react-router-dom";
 import Spinner from "../../UI/Spinner";
+import BackButton from "../../UI/BackButton";
 
 export default function ClientesDetail() {
   const { id } = useParams();
@@ -34,6 +35,7 @@ export default function ClientesDetail() {
 
   return (
     <div className="form-container1">
+      <BackButton />
       <h2>Detalle del Cliente</h2>
       <br />
       <div style={{ marginBottom: "10px" }}>

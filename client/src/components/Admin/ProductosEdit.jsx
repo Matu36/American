@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useProducto } from "../../hooks/useProductos";
 import { useParams } from "react-router-dom";
+import BackButton from "../../UI/BackButton";
 
 const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
 
@@ -174,6 +175,7 @@ export default function ProductosEdit() {
 
   return (
     <div className="form-container1">
+      <BackButton />
       <h2 className="tituloCompo">Modificar Producto</h2> <br />
       <form onSubmit={saveProduct}>
         <div className="form-group">

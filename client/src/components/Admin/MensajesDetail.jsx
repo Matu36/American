@@ -2,6 +2,7 @@ import React from "react";
 import { useMensajes } from "../../hooks/useMensajes";
 import { useParams } from "react-router-dom";
 import Spinner from "../../UI/Spinner";
+import BackButton from "../../UI/BackButton";
 
 export default function MensajesDetail() {
   const { id } = useParams();
@@ -22,6 +23,7 @@ export default function MensajesDetail() {
 
   return (
     <div className="form-container1">
+      <BackButton />
       <h2>Detalles del Mensaje</h2>
       <br />
       <div>

@@ -10,6 +10,7 @@ import Select from "react-select";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import RepuestosExcel from "./Excel/RepuestosExcel";
+import BackButton from "../../UI/BackButton";
 
 export default function Repuestos() {
   const { data, isLoading } = useRepuesto().repuestoQuery;
@@ -162,6 +163,7 @@ export default function Repuestos() {
 
   return (
     <div className="form-container">
+      <BackButton />
       <div>
         <div>
           <>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useContacto } from "../../hooks/useContacto";
 import { useParams } from "react-router-dom";
+import BackButton from "../../UI/BackButton";
 
 export default function ContactoDetail() {
   const { id } = useParams();
@@ -12,6 +13,7 @@ export default function ContactoDetail() {
   }
   return (
     <div className="form-container1">
+      <BackButton />
       <h2>Detalle del Contacto</h2>
 
       <div style={{ marginBottom: "10px" }}>

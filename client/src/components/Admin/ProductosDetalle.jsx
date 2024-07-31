@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useProducto } from "../../hooks/useProductos";
 import Spinner from "../../UI/Spinner";
+import BackButton from "../../UI/BackButton";
 
 export default function ProductosDetalle() {
   const { id } = useParams();
@@ -42,6 +43,7 @@ export default function ProductosDetalle() {
 
   return (
     <div className="form-container1">
+      <BackButton />
       <h3 style={itemStyle}>Detalle del Producto</h3>
       <div>
         {Object.keys(productoData)

@@ -8,6 +8,7 @@ import HistorialRanking from "./HistorialRanking";
 import HistorialFechaExcel from "./Excel/HistorialFechaExcel";
 import HistorialProductoExcel from "./Excel/HistorialProductoExcel";
 import HistorialVendedorExcel from "./Excel/HistorialVendedorExcel";
+import BackButton from "../../UI/BackButton";
 
 export default function Historial() {
   const { data: vendedoresData, isLoading: isLoadingVendedores } =
@@ -114,6 +115,7 @@ export default function Historial() {
 
   return (
     <div className="form-container1">
+      <BackButton />
       <HistorialRanking />
       <h2>Historial</h2>
       {isLoadingVendedores ? (

@@ -2,6 +2,7 @@ import React from "react";
 import { useRepuesto } from "../../hooks/useRepuestos";
 import { useParams } from "react-router-dom";
 import Spinner from "../../UI/Spinner";
+import BackButton from "../../UI/BackButton";
 
 export default function RepuestosDetail() {
   const { id } = useParams();
@@ -18,6 +19,7 @@ export default function RepuestosDetail() {
   }
   return (
     <div className="form-container1">
+      <BackButton />
       <h2>Detalle del Repuesto</h2>
 
       <div style={{ marginBottom: "10px" }}>

@@ -10,6 +10,7 @@ import Select from "react-select";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import ContactoProductoExcel from "./Excel/ContactoProductoExcel";
+import BackButton from "../../UI/BackButton";
 
 export default function ContactoProducto() {
   const { data, isLoading } = useContactoProducto().contactoProductoQuery;
@@ -156,6 +157,7 @@ export default function ContactoProducto() {
 
   return (
     <div className="form-container">
+      <BackButton />
       <div>
         <>
           <div className="form-group" style={{ maxWidth: "60%" }}>

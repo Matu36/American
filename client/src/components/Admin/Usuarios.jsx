@@ -6,6 +6,7 @@ import Spinner from "../../UI/Spinner";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link } from "react-router-dom";
+import BackButton from "../../UI/BackButton";
 
 export default function Usuarios() {
   const [search, setSearch] = useState("");
@@ -103,6 +104,7 @@ export default function Usuarios() {
 
   return (
     <div className="form-container">
+      <BackButton />
       <>
         <div>
           <div className="form-group" style={{ maxWidth: "40%" }}>

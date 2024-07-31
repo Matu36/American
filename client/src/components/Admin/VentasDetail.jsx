@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useVentas } from "../../hooks/useCotizaciones";
 import Spinner from "../../UI/Spinner";
+import BackButton from "../../UI/BackButton";
 
 export default function VentasDetail() {
   const { id } = useParams();
@@ -21,6 +22,7 @@ export default function VentasDetail() {
 
   return (
     <div className="form-container1">
+      <BackButton />
       <h2>Detalle de la Venta</h2>
       <br />
       <div className="detail-section">

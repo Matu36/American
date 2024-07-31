@@ -5,6 +5,7 @@ import { useProducto } from "../../hooks/useProductos";
 import Select from "react-select";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
 import { useUsuario } from "../../hooks/useUsuarios";
+import BackButton from "../../UI/BackButton";
 
 const Cotizador = () => {
   const { auth } = useAuth();
@@ -204,6 +205,7 @@ const Cotizador = () => {
 
   return (
     <form onSubmit={handleSubmit} className="form-container">
+      <BackButton />
       <div>
         {" "}
         <h2 className="tituloCompo">Cotizador</h2> <br />

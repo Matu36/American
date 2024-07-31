@@ -2,6 +2,7 @@ import React from "react";
 import { useContactoProducto } from "../../hooks/useContactoProducto";
 import { useParams } from "react-router-dom";
 import Spinner from "../../UI/Spinner";
+import BackButton from "../../UI/BackButton";
 
 export default function DescuentoDetail() {
   const { id } = useParams();
@@ -17,6 +18,7 @@ export default function DescuentoDetail() {
   }
   return (
     <div className="form-container1">
+      <BackButton />
       <h3>Detalle del Contacto por Producto</h3>
       <div className="detalle-descuento">
         <br />

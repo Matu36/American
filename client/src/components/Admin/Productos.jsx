@@ -7,6 +7,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useUsuario } from "../../hooks/useUsuarios";
+import BackButton from "../../UI/BackButton";
 
 export default function Productos() {
   const { data, isLoading } = useProducto().productosQuery;
@@ -146,6 +147,7 @@ export default function Productos() {
   return (
     <>
       <div className="form-container">
+        <BackButton />
         <div>
           <div className="form-group" style={{ maxWidth: "60%" }}>
             <h2 className="tituloCompo"> Productos</h2> <br />

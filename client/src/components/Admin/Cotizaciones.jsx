@@ -7,6 +7,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "../../UI/Spinner";
 import CotizacionesExcel from "./Excel/CotizacionesExcel";
+import BackButton from "../../UI/BackButton";
 
 export default function Cotizaciones() {
   const { auth } = useAuth();
@@ -148,6 +149,7 @@ export default function Cotizaciones() {
   //---------------------------------FIN SPINNER ------------------------------------//
   return (
     <div className="form-container">
+      <BackButton />
       <div>
         <div className="form-group" style={{ maxWidth: "40%" }}>
           <h2 className="tituloCompo">Cotizaciones</h2> <br />

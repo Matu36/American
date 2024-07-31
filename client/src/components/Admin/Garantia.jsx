@@ -10,6 +10,7 @@ import Select from "react-select";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import GarantiaExcel from "./Excel/GarantiaExcel";
+import BackButton from "../../UI/BackButton";
 
 export default function Garantia() {
   const [search, setSearch] = useState("");
@@ -146,6 +147,7 @@ export default function Garantia() {
 
   return (
     <div className="form-container">
+      <BackButton />
       <div>
         <>
           <div className="form-group" style={{ maxWidth: "60%" }}>
