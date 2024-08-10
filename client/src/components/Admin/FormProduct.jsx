@@ -99,11 +99,15 @@ export default function FormProduct() {
     setProducto({ ...producto, empresa: selectedOption.value });
   };
 
-  const opcionesFamilias =
-    productos?.map((producto) => ({
-      value: producto.familia,
-      label: producto.familia,
-    })) || [];
+  const getUniqueFamilias = (productos) => {
+    const familiasSet = new Set(productos.map((producto) => producto.familia));
+    return Array.from(familiasSet).map((familia) => ({
+      value: familia,
+      label: familia,
+    }));
+  };
+
+  const opcionesFamilias = getUniqueFamilias(productos);
 
   const opcionesConNuevaFamilia = [
     ...opcionesFamilias,
@@ -115,6 +119,8 @@ export default function FormProduct() {
       const nuevaFamilia = prompt("Ingrese la nueva Categoría:");
       if (nuevaFamilia) {
         const newFamiliaOption = { value: nuevaFamilia, label: nuevaFamilia };
+
+        // Actualiza las opciones y selecciona la nueva familia
         setSelectedFamilia(newFamiliaOption);
         setProducto({ ...producto, familia: nuevaFamilia });
       }

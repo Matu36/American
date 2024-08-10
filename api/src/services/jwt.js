@@ -1,9 +1,10 @@
 const jwt = require("jwt-simple");
 const moment = require("moment");
+const { JWTSECRET } = process.env;
 
 //clave secreta//
 
-const secret = "CLAVE_SECRETA_VENICE";
+const secret = JWTSECRET;
 
 const createToken = (user) => {
   const payload = {
@@ -15,13 +16,22 @@ const createToken = (user) => {
     email: user.email,
     rol: user.rol,
     iat: moment().unix(),
-    exp: moment().add(30, "days").unix(),
+    exp: moment().add(30, "minutes").unix(),
   };
 
   return jwt.encode(payload, secret);
 };
 
+const decodeToken = (token) => {
+  try {
+    return jwt.decode(token, secret);
+  } catch (error) {
+    throw new Error("Token inválido o expirado");
+  }
+};
+
 module.exports = {
   secret,
   createToken,
+  decodeToken,
 };
