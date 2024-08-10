@@ -78,19 +78,20 @@ const AdminLayout = () => {
   const [loading, setLoading] = useState(true);
 
   const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
 
   const navigate = useNavigate();
 
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 
   const handleCheckRol = () => {
-    checkRol({ idUsuario });
+    checkRol({ token });
   };
   useEffect(() => {
-    if (idUsuario) {
+    if (token) {
       handleCheckRol();
     }
-  }, [idUsuario]);
+  }, [token]);
 
   useEffect(() => {
     if (rolData) {

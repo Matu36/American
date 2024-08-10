@@ -4,6 +4,7 @@ const sendEmailWithTemplate = require("../mailer/sendEmailWithTemplate");
 const jwt = require("../services/jwt.js");
 const { Op } = require("sequelize");
 const crypto = require("crypto");
+const { JWTSECRET } = process.env;
 
 const registro = async (req, res) => {
   try {
@@ -25,7 +26,7 @@ const registro = async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     // Genera un id de 10 caracteres
-    const userId = crypto.randomBytes(15).toString("hex").substring(0, 20);
+    const userId = crypto.randomBytes(30).toString("hex").substring(0, 60);
 
     const [instance, created] = await Usuarios.findOrCreate({
       where: { email: req.body.email.toLowerCase() },
@@ -267,7 +268,21 @@ const resetPassword = async (req, res) => {
 
 const verificarRol = async (req, res) => {
   try {
-    const idUsuario = req.body.idUsuario;
+    // Obtener el token desde el encabezado Authorization
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    // Decodificar el token
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    // Obtener el ID del usuario desde el token
+    const idUsuario = decodedToken.id;
 
     const usuario = await Usuarios.findByPk(idUsuario);
 
@@ -289,8 +304,7 @@ const verificarRol = async (req, res) => {
       throw "El usuario no tiene un rol válido (ni administrador ni vendedor)";
     }
   } catch (error) {
-    console.error(error);
-    return res.status(400).send(error);
+    return res.status(400).send({ error: error.message || error });
   }
 };
 
