@@ -37,10 +37,13 @@ const registro = async (req, res) => {
         apellido: req.body.apellido || null,
         direccion: req.body.direccion || null,
         telefono: req.body.telefono || null,
+        codigo: null,
       },
     });
 
     if (created) {
+      const formattedCodigo = String(instance.codigo).padStart(3, "0");
+      await instance.update({ codigo: formattedCodigo });
       console.log("Usuario Creado");
       sendEmailWithTemplate(instance.email, "newUser");
     }

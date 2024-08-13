@@ -192,6 +192,10 @@ export default function Historial() {
                 }}
               >
                 <span>
+                  <strong>Número de Cotización:</strong>{" "}
+                  {detalle.codigoCotizacion}
+                </span>
+                <span>
                   <strong>Precio de Venta:</strong> {detalle.moneda}{" "}
                   {detalle.precio}
                 </span>
@@ -294,7 +298,7 @@ export default function Historial() {
               >
                 <span>
                   <strong>Número de Cotización:</strong>{" "}
-                  {detalle.numeroCotizacion}
+                  {detalle.codigoCotizacion}
                 </span>
                 <span>
                   <strong>Precio de Venta:</strong> {detalle.moneda}{" "}
@@ -416,7 +420,7 @@ export default function Historial() {
               >
                 <span>
                   <strong>Número de Cotización:</strong>{" "}
-                  {cotizacion.numeroCotizacion}
+                  {cotizacion.codigoCotizacion}
                 </span>
                 <span>
                   <strong>Precio de Venta:</strong> {cotizacion.moneda}{" "}

@@ -12,7 +12,8 @@ import BackButton from "../../UI/BackButton";
 export default function Cotizaciones() {
   const { auth } = useAuth();
   const [search, setSearch] = useState("");
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
 
   const [clicked, setClicked] = useState({ isClicked: false });
 
@@ -69,7 +70,7 @@ export default function Cotizaciones() {
   const columns = [
     {
       name: "Nro Cotización",
-      selector: (row) => row.numeroCotizacion,
+      selector: (row) => row.codigoCotizacion,
       sortable: true,
     },
     {

@@ -11,7 +11,8 @@ import SideBarResponsiva from "./SideBarResponsiva";
 export default function NavBarAdmin() {
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
   const { data } = useMensajes(idUsuario).MensajesCountQuery;
   const [sidebar, setSideBar] = useState(false);
   const [isHovered, setIsHovered] = useState(false);

@@ -10,7 +10,8 @@ import BackButton from "../../UI/BackButton";
 const Cotizador = () => {
   const { auth } = useAuth();
   const { mutate: cotizacionCreate } = useCotizaciones().cotizacionMutation;
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
 
   // CHEQUEAMOS EL ROL PARA EL INTERES //
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;

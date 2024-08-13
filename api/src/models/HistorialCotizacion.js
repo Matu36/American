@@ -82,6 +82,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      codigoCotizacion: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       familia: {
         type: DataTypes.STRING,
         allowNull: true,

@@ -5,12 +5,25 @@ const { Productos } = require("../db.js");
 const { HistorialCotizacion } = require("../db.js");
 const { conn } = require("../db.js");
 const { Op } = require("sequelize");
+const { JWTSECRET } = process.env;
+const jwt = require("../services/jwt.js");
 
 // FUNCION PARA CREAR UNA COTIZACION //
 const createCotizacion = async (req, res) => {
   try {
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
     const {
-      idUsuario,
       idCliente,
       idProducto,
       IVA,
@@ -37,6 +50,17 @@ const createCotizacion = async (req, res) => {
       throw "Faltan parámetros en el cuerpo de la solicitud";
     }
 
+    // Obtener el código del usuario
+    const usuario = await Usuarios.findOne({
+      where: { id: idUsuario },
+      attributes: ["nombre", "apellido", "codigo"],
+    });
+
+    if (!usuario) {
+      throw "Usuario no encontrado";
+    }
+
+    // Generar el nuevo ID para la cotización
     const generateNewId = async () => {
       const maxId = await Cotizaciones.max("id");
       const newId = maxId ? maxId + 1 : 1;
@@ -45,18 +69,25 @@ const createCotizacion = async (req, res) => {
 
     let id = await generateNewId();
 
-    // Formatear idUsuario y idCotizacion
+    // Formatear idUsuario y idCotizacion para numeroCotizacion
     const formattedIdUsuario = String(idUsuario).slice(0, 5);
-
     const formattedIdCotizacion = String(id);
-    const numeroCotizacion = `${formattedIdUsuario} - ${formattedIdCotizacion}`;
 
+    // Crear numeroCotizacion y codigoCotizacion
+    const numeroCotizacion = `${formattedIdUsuario} - ${formattedIdCotizacion}`;
+    const codigoCotizacion = `${usuario.codigo} - ${String(id).padStart(
+      3,
+      "0"
+    )}`;
+
+    // Crear la nueva cotización
     let nuevaCotizacion = await Cotizaciones.create({
       id,
       idUsuario,
       idCliente,
       idProducto,
       numeroCotizacion,
+      codigoCotizacion,
       precio,
       anticipo,
       saldoAFinanciar,
@@ -79,12 +110,6 @@ const createCotizacion = async (req, res) => {
       attributes: ["nombre", "apellido", "mail"],
     });
 
-    const usuario = await Usuarios.findOne({
-      where: { id: idUsuario },
-      attributes: ["nombre", "apellido"],
-    });
-
-    // Obtener datos del producto
     const producto = await Productos.findOne({
       where: { id: idProducto },
       attributes: ["familia", "marca", "modelo"],
@@ -107,6 +132,7 @@ const createCotizacion = async (req, res) => {
       cuotaValor: nuevaCotizacion.cuotaValor,
       saldoConInteres: nuevaCotizacion.saldoConInteres,
       PrecioFinal: nuevaCotizacion.PrecioFinal,
+      codigoCotizacion: nuevaCotizacion.codigoCotizacion,
       fechaDeCreacion: nuevaCotizacion.fechaDeCreacion,
       fechaModi: nuevaCotizacion.fechaModi,
       nombreCliente: cliente.nombre,
@@ -118,6 +144,7 @@ const createCotizacion = async (req, res) => {
       estado: nuevaCotizacion.estado,
       apellidoVendedor: usuario.apellido,
       nombreVendedor: usuario.nombre,
+      codigo: usuario.codigo,
     });
 
     return res.status(201).send(nuevaCotizacion);
@@ -131,10 +158,18 @@ const createCotizacion = async (req, res) => {
 
 const getCotizaciones = async (req, res) => {
   try {
-    const idUsuario = req.params.idUsuario;
-    if (!idUsuario) {
-      throw "Se requiere el ID de usuario";
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
     }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
 
     const usuario = await Usuarios.findByPk(idUsuario);
     if (!usuario) {
@@ -159,9 +194,13 @@ const getCotizaciones = async (req, res) => {
         "cuotas",
         "cuotaValor",
         "saldoAFinanciar",
+        "codigoCotizacion",
       ],
       include: [
-        { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
+        {
+          model: Usuarios,
+          attributes: ["nombre", "apellido", "email"],
+        },
         { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
         { model: Productos, attributes: ["familia", "marca", "modelo"] },
       ],
@@ -303,6 +342,7 @@ const putCotizaciones = async (req, res) => {
       modelo: producto.modelo,
       apellidoVendedor: usuario.apellido,
       nombreVendedor: usuario.nombre,
+      codigoCotizacion: cotizacion.codigoCotizacion,
     });
 
     return res.send(cotizacion);
@@ -362,6 +402,7 @@ const updateCotizacionEstado = async (req, res) => {
       moneda: cotizacion.moneda,
       interes: cotizacion.interes,
       saldo: cotizacion.saldo,
+      codigoCotizacion: cotizacion.codigoCotizacion,
       saldoConInteres: cotizacion.saldoConInteres,
       PrecioFinal: cotizacion.PrecioFinal,
       estado: cotizacion.estado,
@@ -410,7 +451,18 @@ const sumarPreciosFinales = async (req, res) => {
 
 const sumarPreciosFinalesPorMonedaYEstado = async (req, res) => {
   try {
-    const idUsuario = req.body.idUsuario;
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
     const usuario = await Usuarios.findByPk(idUsuario);
     const esRolTrue = usuario.rol === true;
 
@@ -445,7 +497,18 @@ const sumarPreciosFinalesPorMonedaYEstado = async (req, res) => {
 
 const getCotizacionesEstadoDos = async (req, res) => {
   try {
-    const { idUsuario } = req.params;
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
 
     if (!idUsuario) {
       throw "Se requiere el ID de usuario";
@@ -469,6 +532,7 @@ const getCotizacionesEstadoDos = async (req, res) => {
           "fechaDeCreacion",
           "moneda",
           "numeroCotizacion",
+          "codigoCotizacion",
           "saldoAFinanciar",
           "cuotas",
           "cuotaValor",
@@ -494,6 +558,7 @@ const getCotizacionesEstadoDos = async (req, res) => {
           "cuotas",
           "cuotaValor",
           "anticipo",
+          "codigoCotizacion",
         ],
         include: [
           { model: Usuarios, attributes: ["nombre", "apellido"] },
@@ -544,7 +609,18 @@ const getVentaById = async (req, res) => {
 
 const getUltimasCotizaciones = async (req, res) => {
   try {
-    const { idUsuario } = req.params;
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
 
     if (!idUsuario) {
       return res.status(400).json({ error: "Se requiere el ID de usuario" });
@@ -593,7 +669,18 @@ const getUltimasCotizaciones = async (req, res) => {
 
 const getCotizacionesSum = async (req, res) => {
   try {
-    const { idUsuario } = req.params;
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
 
     if (!idUsuario) {
       return res.status(400).json({ error: "Se requiere el ID de usuario" });

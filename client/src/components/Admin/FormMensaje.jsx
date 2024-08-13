@@ -9,7 +9,8 @@ import BackButton from "../../UI/BackButton";
 
 export default function FormMensaje() {
   const { auth } = useAuth();
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
   const { mutate: crearMensaje } = useMensajes().mensajesMutation;
   const { data, isLoading } = useUsuario().usuariosMensajesQuery;
   const [key, setKey] = useState(0);

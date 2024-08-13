@@ -40,6 +40,12 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         defaultValue: null,
       },
+      codigo: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        unique: true,
+        allowNull: false,
+      },
       rol: {
         // null: basic user ; false: admin user ; true: super admin user
         type: DataTypes.BOOLEAN,

@@ -9,7 +9,7 @@ const VentasExcel = ({ data }) => {
       Categoria: item.Producto.familia,
       Marca: item.Producto.marca,
       Modelo: item.Producto.modelo,
-      NroCotización: item.numeroCotizacion,
+      NroCotización: item.codigoCotizacion,
 
       Moneda: item.moneda,
       "Precio de Venta": item.precio,

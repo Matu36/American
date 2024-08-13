@@ -19,7 +19,8 @@ import { MdPerson, MdMail } from "react-icons/md";
 const SideBarAdmin = () => {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const { auth } = useAuth();
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 
   const handleCheckRol = () => {

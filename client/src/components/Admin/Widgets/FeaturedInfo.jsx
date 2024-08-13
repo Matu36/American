@@ -4,7 +4,8 @@ import useAuth from "../../../hooks/useAuth";
 
 export default function FeaturedInfo() {
   const { auth } = useAuth();
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
 
   const { data, isLoading } = useInfoHomeAdmin(idUsuario).infoAdminQuery;
 

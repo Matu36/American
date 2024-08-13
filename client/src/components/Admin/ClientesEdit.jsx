@@ -6,7 +6,8 @@ import BackButton from "../../UI/BackButton";
 
 export default function ClientesEdit() {
   const { auth } = useAuth();
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
 
   const { id } = useParams();
 

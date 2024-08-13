@@ -19,7 +19,8 @@ import { MdPerson, MdMail } from "react-icons/md";
 
 const SideBarResponsiva = ({ handleCerrarModalSideBar }) => {
   const { auth } = useAuth();
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 
   const handleCheckRol = () => {

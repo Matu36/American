@@ -16,7 +16,7 @@ const HistorialVendedorExcel = ({ data }) => {
       }
 
       return {
-        "Número de Cotización": item.numeroCotizacion,
+        "Número de Cotización": item.codigoCotizacion,
         Moneda: item.moneda,
         Anticipo: item.anticipo,
         IVA: item.IVA,

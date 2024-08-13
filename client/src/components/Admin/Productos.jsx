@@ -13,7 +13,8 @@ export default function Productos() {
   const { data, isLoading } = useProducto().productosQuery;
   const { auth, setAuth } = useAuth();
 
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
 
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 

@@ -61,7 +61,6 @@ export default function Login({ handleCerrarModalLogin }) {
           apellido: data.loggedUser.apellido,
           direccion: data.loggedUser.direccion,
           email: data.loggedUser.email,
-          id: data.loggedUser.id,
           nombre: data.loggedUser.nombre,
           telefono: data.loggedUser.telefono,
         };

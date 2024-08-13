@@ -1,10 +1,24 @@
 const { Clientes } = require("../db.js");
 const { Usuarios } = require("../db.js");
+const { JWTSECRET } = process.env;
+const jwt = require("../services/jwt.js");
 
 const createCliente = async (req, res) => {
   try {
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
     if (
-      !req.body?.idUsuario ||
+      !idUsuario ||
       !req.body?.CUIT ||
       !req.body?.domicilio ||
       !req.body?.nombre ||
@@ -22,7 +36,7 @@ const createCliente = async (req, res) => {
 
     let id = await generateNewId();
 
-    let nuevoCliente = await Clientes.create({ id, ...req.body });
+    let nuevoCliente = await Clientes.create({ id, ...req.body, idUsuario });
 
     return res.status(201).send(nuevoCliente);
   } catch (error) {
@@ -35,12 +49,18 @@ const createCliente = async (req, res) => {
 
 const getClientesPorIdDeUsuario = async (req, res) => {
   try {
-    // Verifica si se proporciona el ID de usuario desde los parámetros de la ruta
-    if (!req.params.idUsuario) {
-      throw "Se requiere el ID de usuario";
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
     }
 
-    const idUsuario = req.params.idUsuario;
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
 
     // Busca el usuario en la base de datos
     const usuario = await Usuarios.findByPk(idUsuario);
@@ -187,7 +207,18 @@ const updateCliente = async (req, res) => {
 
 const getClientesParaCotizar = async (req, res) => {
   try {
-    const idUsuario = req.params.idUsuario;
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
 
     const usuario = await Usuarios.findByPk(idUsuario, { attributes: ["rol"] });
 

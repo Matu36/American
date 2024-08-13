@@ -11,7 +11,8 @@ import BackButton from "../../UI/BackButton";
 export default function CotizacionEdit() {
   const { auth } = useAuth();
   const { id } = useParams();
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
 
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 

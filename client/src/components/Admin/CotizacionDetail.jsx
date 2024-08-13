@@ -32,14 +32,11 @@ export default function CotizacionDetail() {
     numeroCotizacion,
     precio,
     anticipo,
-    saldoAFinanciar,
+    codigoCotizacion,
     IVA,
     moneda,
     cuotas,
     cuotaValor,
-    // interes,
-    // saldo,
-    // saldoConInteres,
     PrecioFinal,
     fechaDeCreacion,
     Usuario,
@@ -56,7 +53,7 @@ export default function CotizacionDetail() {
           <Image src={Logo} style={styles.logo} />
         </View>
         <View style={styles.section}>
-          <Text style={styles.header}>Cotización {numeroCotizacion}</Text>
+          <Text style={styles.header}>Cotización {codigoCotizacion}</Text>
           <Text style={styles.subHeader}>Información de Cotización</Text>
 
           <Text style={styles.text}>
@@ -167,7 +164,7 @@ export default function CotizacionDetail() {
       <div>
         <p>
           <strong>Número de Cotización:</strong>{" "}
-          {numeroCotizacion ? numeroCotizacion : null}
+          {codigoCotizacion ? codigoCotizacion : null}
         </p>
         <p>
           <strong>Fecha de la Cotización:</strong>{" "}
@@ -235,7 +232,7 @@ export default function CotizacionDetail() {
 
       <PDFDownloadLink
         document={<MyDocument cotizacionDetalle={cotizacionDetalle} />}
-        fileName={`cotizacion_${numeroCotizacion}.pdf`}
+        fileName={`cotizacion_${codigoCotizacion}.pdf`}
       >
         {({ loading }) => (
           <button className="form-submit">

@@ -12,7 +12,8 @@ import BackButton from "../../UI/BackButton";
 export default function Ventas() {
   const { auth } = useAuth();
   const [search, setSearch] = useState("");
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
 
   const { ventasQueryById, isLoading } = useVentas(idUsuario);
   const [ventas, setVentas] = useState(ventasQueryById.data);
@@ -60,7 +61,7 @@ export default function Ventas() {
     },
     {
       name: "Nro de Cotización",
-      selector: (row) => row.numeroCotizacion,
+      selector: (row) => row.codigoCotizacion,
       sortable: true,
     },
     {

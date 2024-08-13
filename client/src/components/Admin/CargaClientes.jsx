@@ -6,7 +6,8 @@ import BackButton from "../../UI/BackButton";
 export default function CargaClientes() {
   const { auth } = useAuth();
   const { mutate: clienteCreate } = useClientes().clientesMutation;
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
 
   // Estado local para manejar los datos del formulario
   const [formData, setFormData] = useState({

@@ -12,7 +12,8 @@ import BackButton from "../../UI/BackButton";
 export default function Clientes() {
   const { auth } = useAuth();
   const [search, setSearch] = useState("");
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
 
   const { clientesQueryById, isLoading } = useClientes(idUsuario);
   const [clientes, setClientes] = useState(clientesQueryById.data);

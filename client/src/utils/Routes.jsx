@@ -2,7 +2,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
   useNavigate,
 } from "react-router-dom";
 import App from "../App";
@@ -51,11 +50,18 @@ import AmericanRepuestos from "../components/empresa/AmericanRepuestos";
 import AmericanContacto from "../components/empresa/AmericanContacto";
 import AmericanGarantia from "../components/empresa/AmericanGarantia";
 import ProductosDetalle from "../components/Admin/ProductosDetalle";
+import useAxiosInterceptor from "../hooks/useAxiosInterceptor";
 
 const AppRouter = () => {
+  const InterceptorSetup = () => {
+    useAxiosInterceptor();
+    return null;
+  };
+
   return (
     <Router>
       <AuthProvider>
+        <InterceptorSetup />
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/postventa" element={<PostVenta />} />
@@ -77,7 +83,6 @@ const AdminLayout = () => {
   const { auth, setAuth } = useAuth();
   const [loading, setLoading] = useState(true);
 
-  const idUsuario = auth?.id;
   const token = localStorage.getItem("token");
 
   const navigate = useNavigate();

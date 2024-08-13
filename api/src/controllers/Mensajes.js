@@ -1,10 +1,24 @@
 const { Mensajes, Usuarios } = require("../db.js");
 const { Op } = require("sequelize");
 const { conn } = require("../db.js");
+const { JWTSECRET } = process.env;
+const jwt = require("../services/jwt.js");
 
 const createMessage = async (req, res) => {
   try {
-    const { idUsuario, idDestino, Mensaje } = req.body;
+    const { idDestino, Mensaje } = req.body;
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
 
     if (!idUsuario || !idDestino || !Mensaje) {
       throw "Faltan parámetros en el cuerpo de la solicitud";
@@ -27,7 +41,18 @@ const createMessage = async (req, res) => {
 
 const getMessagesByUserAndDestination = async (req, res) => {
   try {
-    const { idUsuario } = req.body;
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
 
     if (!idUsuario) {
       throw "Se requiere el ID de usuario";
@@ -52,7 +77,18 @@ const getMessagesByUserAndDestination = async (req, res) => {
 
 const countMessagesByDestination = async (req, res) => {
   try {
-    const { idUsuario } = req.params;
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
 
     if (!idUsuario) {
       throw "Se requiere el ID de usuario";
@@ -103,7 +139,18 @@ const updateMessageState = async (req, res) => {
 
 const getMensajesByUsuario = async (req, res) => {
   try {
-    const { idUsuario } = req.params;
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
 
     if (!idUsuario) {
       return res.status(400).json({ error: "Se requiere el ID de usuario" });
@@ -135,7 +182,18 @@ const getMensajesByUsuario = async (req, res) => {
 
 const getMensajesByDestino = async (req, res) => {
   try {
-    const { idUsuario } = req.params;
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
 
     if (!idUsuario) {
       return res.status(400).json({ error: "Se requiere el ID de usuario" });

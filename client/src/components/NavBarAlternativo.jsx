@@ -73,7 +73,8 @@ export default function NavBarAlternativo({
     setContact(false);
   };
 
-  const idUsuario = auth?.id;
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
 
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 
