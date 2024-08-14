@@ -102,6 +102,19 @@ const {
   getHistorialDetallePorUsuario,
 } = require("../controllers/HistorialCotizacion");
 
+const {
+  createOfertaNovedad,
+  updateOfertaNovedad,
+  getOfertasNovedadesAsc,
+  deleteOfertaNovedad,
+} = require("../controllers/OfertasNovedades");
+
+const {
+  deleteFavorito,
+  getFavoritosAsc,
+  createFavorito,
+} = require("../controllers/Favoritos.js");
+
 const check = require("../middlewares/auth");
 
 //VAMOS A USAR ESTO CUANDO NECESITEMOS TENER LOS DATOS DE DE SESION DEL USUARIO O CUANDO NECESITEMOS SEGURIDAD.
@@ -220,4 +233,12 @@ router.get("/repuestos/get", check.auth, getRepuestos);
 router.get("/repuestos/detalle/:id", check.auth, getRepuestoById);
 router.put("/repuestos/derivado", check.auth, updateRepuestoUsuario);
 router.put("/garantias/derivado", check.auth, updateGarantiaUsuario);
+router.get("/ofertasNovedades/get", getOfertasNovedadesAsc);
+router.post("/ofertasNovedades/create", createOfertaNovedad);
+router.put("/ofertasNovedades/edit", updateOfertaNovedad);
+router.delete("/ofertasNovedades/delete", deleteOfertaNovedad);
+router.get("/favoritos/get/:idUsuario", getFavoritosAsc);
+router.post("/favoritos/create", createFavorito);
+router.delete("/favoritos/delete", deleteFavorito);
+
 module.exports = router;
