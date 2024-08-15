@@ -56,7 +56,7 @@ const updateOfertaNovedad = async (req, res) => {
 const getOfertasNovedadesAsc = async (req, res) => {
   try {
     const ofertasNovedades = await OfertasNovedades.findAll({
-      order: [["id", "ASC"]],
+      order: [["id", "DESC"]],
     });
     return res.status(200).json(ofertasNovedades);
   } catch (error) {

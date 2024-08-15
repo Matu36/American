@@ -13,6 +13,7 @@ import {
   FaPhone,
   FaAngleDown,
   FaCogs,
+  FaTag,
 } from "react-icons/fa";
 import { MdPerson, MdMail } from "react-icons/md";
 
@@ -127,6 +128,12 @@ const SideBarAdmin = () => {
     {
       label: "ContactoProducto",
       icon: FaPercentage,
+      subCategories: [],
+      roles: ["administrador"],
+    },
+    {
+      label: "OfertasNovedades",
+      icon: FaTag,
       subCategories: [],
       roles: ["administrador"],
     },
