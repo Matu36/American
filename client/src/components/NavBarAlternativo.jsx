@@ -397,7 +397,7 @@ export default function NavBarAlternativo({
             />
           </button>
           <div>
-            {token?.length > 0 ? (
+            {idUsuario?.length > 0 ? (
               <div className="user-menu-container">
                 <span className="user-info">
                   {role === "vendedor" || role === "administrador" ? (

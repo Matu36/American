@@ -233,7 +233,7 @@ router.get("/repuestos/get", check.auth, getRepuestos);
 router.get("/repuestos/detalle/:id", check.auth, getRepuestoById);
 router.put("/repuestos/derivado", check.auth, updateRepuestoUsuario);
 router.put("/garantias/derivado", check.auth, updateGarantiaUsuario);
-router.get("/ofertasNovedades/get", check.auth, getOfertasNovedadesAsc);
+router.get("/ofertasNovedades/get", getOfertasNovedadesAsc);
 router.post("/ofertasNovedades/create", check.auth, createOfertaNovedad);
 router.put("/ofertasNovedades/edit", check.auth, updateOfertaNovedad);
 router.delete("/ofertasNovedades/delete", check.auth, deleteOfertaNovedad);
