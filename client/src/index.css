@@ -1419,6 +1419,7 @@ button:focus-visible {
   align-items: flex-end;
   transition: border-bottom 0.5s ease;
   width: 70%;
+ padding-right: 15px;
 
 }
 
@@ -1564,6 +1565,18 @@ button:focus-visible {
   background: none;
   cursor: pointer;
   margin-top: 5.5rem;
+}
+
+.faHome-button {
+  position: absolute;
+  right: 0;
+  font-size: 1.5rem;
+  background: none;
+  cursor: pointer;
+  margin-top: 4.5rem;
+  color:white;
+  
+  
 }
 
 .search-button-modal-open {
