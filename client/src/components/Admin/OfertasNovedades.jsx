@@ -112,7 +112,7 @@ export default function OfertasNovedades() {
               />
             )}
           </div>
-          <button type="submit" className="submit-button" disabled={loading}>
+          <button type="submit" className="form-submit" disabled={loading}>
             Crear
           </button>
         </form>
