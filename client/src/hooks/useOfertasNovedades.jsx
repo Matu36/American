@@ -16,7 +16,7 @@ const editOfertaNovedades = async (data) => {
 };
 
 const deleteOfertasNovedad = async (data) => {
-  return await OfertasNovedadesAPI.delete(`delete`, data);
+  return await OfertasNovedadesAPI.delete(`delete`, { data });
 };
 
 export const useOfertasNovedades = () => {
@@ -97,7 +97,7 @@ export const useOfertasNovedades = () => {
     mutationKey: ["edit-ofertaNovedad"],
     mutationFn: (data) => editOfertaNovedades(data),
     onSuccess: () => {
-      ofertaNovedadQuery.refetch();
+      queryClient.invalidateQueries("ofertasNovedades");
       Swal.fire({
         position: "center",
         icon: "info",
@@ -165,7 +165,7 @@ export const useOfertasNovedades = () => {
     mutationKey: ["delete-ofertaNovedad"],
     mutationFn: (data) => deleteOfertasNovedad(data),
     onSuccess: () => {
-      ofertaNovedadQuery.refetch();
+      queryClient.invalidateQueries("ofertasNovedades");
       Swal.fire({
         position: "center",
         icon: "info",

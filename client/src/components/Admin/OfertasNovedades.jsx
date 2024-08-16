@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useOfertasNovedades } from "../../hooks/useOfertasNovedades";
 import BackButton from "../../UI/BackButton";
+import Spinner from "../../UI/Spinner";
 
 const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
 
@@ -11,6 +12,8 @@ export default function OfertasNovedades() {
   });
 
   const { mutate: crearOferta } = useOfertasNovedades().ofertaNovedadMutation;
+  const { mutate: eliminarOferta } =
+    useOfertasNovedades().ofertaNovedadDeleteMutation;
 
   const { data } = useOfertasNovedades().ofertaNovedadQuery;
 
@@ -50,6 +53,10 @@ export default function OfertasNovedades() {
     }));
   };
 
+  const EliminarOferta = (id) => {
+    eliminarOferta({ id: id });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -69,57 +76,63 @@ export default function OfertasNovedades() {
   return (
     <div className="form-container2">
       <BackButton />
+      <br />
       <div>
-        <h2>Crear Nueva Oferta/Novedad</h2>
+        <h2>Crear nueva Oferta / Novedad</h2>
       </div>
       <br />
-
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="novedades">Novedades:</label>
-          <textarea
-            type="text"
-            id="novedades"
-            name="novedades"
-            value={oferta.novedades}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="foto">Foto:</label>
-          <input
-            type="file"
-            id="foto"
-            onChange={uploadImage}
-            disabled={loading}
-          />
-          {loading && <p>Cargando imagen...</p>}
-          {oferta.foto && (
-            <img
-              src={oferta.foto}
-              alt="Imagen cargada"
-              style={{ width: "200px", marginTop: "10px" }}
+      <div className="containerNovedades">
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="novedades">Novedades:</label>
+            <textarea
+              type="text"
+              id="novedades"
+              name="novedades"
+              value={oferta.novedades}
+              onChange={handleChange}
+              required
             />
-          )}
-        </div>
-        <button type="submit" className="form-submit" disabled={loading}>
-          Crear Oferta/Novedad
-        </button>
-      </form>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="foto">Foto:</label>
+            <input
+              type="file"
+              id="foto"
+              onChange={uploadImage}
+              disabled={loading}
+            />
+            {loading && <Spinner />}
+            {oferta.foto && (
+              <img
+                src={oferta.foto}
+                alt="Imagen cargada"
+                style={{ width: "200px", marginTop: "10px" }}
+              />
+            )}
+          </div>
+          <button type="submit" className="submit-button" disabled={loading}>
+            Crear
+          </button>
+        </form>
+      </div>
       <div className="ofertas-list">
-        <h3>Ofertas y Novedades</h3>
         {data && data.length > 0 ? (
-          data.map((item, index) => (
-            <div key={index} className="oferta-item">
-              <p>{item.novedades}</p>
-              {item.foto && (
-                <img
-                  src={item.foto}
-                  alt={`Oferta ${index + 1}`}
-                  style={{ width: "150px", marginTop: "10px" }}
-                />
-              )}
+          data.map((item) => (
+            <div key={item.id} className="oferta-item">
+              <button
+                className="delete-button"
+                onClick={() => EliminarOferta(item.id)}
+              >
+                ×
+              </button>
+              <img src={item.foto} alt={`Oferta ${item.id}`} />
+              <br />
+              <p>
+                {" "}
+                <strong>{item.novedades}</strong>
+              </p>
             </div>
           ))
         ) : (
