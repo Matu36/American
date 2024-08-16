@@ -100,7 +100,7 @@ export default function FormProduct() {
   };
 
   const getUniqueFamilias = (productos) => {
-    const familiasSet = new Set(productos.map((producto) => producto.familia));
+    const familiasSet = new Set(productos?.map((producto) => producto.familia));
     return Array.from(familiasSet).map((familia) => ({
       value: familia,
       label: familia,

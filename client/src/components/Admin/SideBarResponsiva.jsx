@@ -14,6 +14,7 @@ import {
   FaAngleDown,
   FaCogs,
   FaArrowLeft,
+  FaTag,
 } from "react-icons/fa";
 import { MdPerson, MdMail } from "react-icons/md";
 
@@ -127,6 +128,12 @@ const SideBarResponsiva = ({ handleCerrarModalSideBar }) => {
     {
       label: "ContactoProducto",
       icon: FaPercentage,
+      subCategories: [],
+      roles: ["administrador"],
+    },
+    {
+      label: "OfertasNovedades",
+      icon: FaTag,
       subCategories: [],
       roles: ["administrador"],
     },
