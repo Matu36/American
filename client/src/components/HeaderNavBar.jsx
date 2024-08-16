@@ -69,6 +69,7 @@ export default function HeaderNavBar({
               <button onClick={() => navigate("/americanrepuestos")}>
                 Repuestos
               </button>
+              <button onClick={() => navigate("/novedades")}>Novedades</button>
               <button onClick={() => navigate("/americanContacto")}>
                 Contacto
               </button>

@@ -78,7 +78,7 @@ export default function OfertasNovedades() {
       <BackButton />
       <br />
       <div>
-        <h2>Crear nueva Oferta / Novedad</h2>
+        <h2>Crear Novedad</h2>
       </div>
       <br />
       <div className="containerNovedades">

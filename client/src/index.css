@@ -1424,7 +1424,10 @@ button:focus-visible {
 }
 
 .fauser {
-  margin-top: 4rem;
+  position: absolute;
+  right: 0;
+  top: 50;
+ margin-top: 15px;
 }
 
 .inputnav {
@@ -1465,6 +1468,10 @@ button:focus-visible {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.white-bar.fixed .faHome-button{
+  margin-top: 1.8rem;
+}
+
 
 .white-bar.fixed .americanimg {
   max-width: 100px;
@@ -1473,13 +1480,16 @@ button:focus-visible {
 
 
 .white-bar.fixed .fauser {
-  margin-top:  30px; 
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 50px;
 }
 
 @media screen and (max-width: 1240px) {
   .white-bar.fixed .burguer-icon-front  {
    position: absolute;
-   right: 85px;
+   right: 75px;
    top:-16px
   }
 }
@@ -1487,7 +1497,7 @@ button:focus-visible {
 @media screen and (max-width: 1240px) {
   .white-bar .burguer-icon-front  {
    position: absolute;
-   right: 85px;
+   right: 75px;
    top:27px
   }
 }
@@ -1570,10 +1580,10 @@ button:focus-visible {
 .faHome-button {
   position: absolute;
   right: 0;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   background: none;
   cursor: pointer;
-  margin-top: 4.5rem;
+  margin-top: 4rem;
   color:white;
   
   

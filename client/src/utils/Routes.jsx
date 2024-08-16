@@ -52,6 +52,7 @@ import AmericanGarantia from "../components/empresa/AmericanGarantia";
 import ProductosDetalle from "../components/Admin/ProductosDetalle";
 import useAxiosInterceptor from "../hooks/useAxiosInterceptor";
 import OfertasNovedades from "../components/Admin/OfertasNovedades";
+import Muro from "../components/miUsuario/Muro";
 
 const AppRouter = () => {
   const InterceptorSetup = () => {
@@ -71,6 +72,7 @@ const AppRouter = () => {
           <Route path="/americanContacto" element={<AmericanContacto />} />
           <Route path="/americanGarantia" element={<AmericanGarantia />} />
           <Route path="/distribuidores" element={<Distribuidores />} />
+          <Route path="/novedades" element={<Muro />} />
           <Route path="/productos/:id" element={<Detalle />} />
           <Route path="/Error" element={<ErroPage />} />
           <Route path="/admin/*" element={<AdminLayout />} />

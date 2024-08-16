@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import logo from "../assets/img/LOGOAMERICANPRINCIPAL.png";
 import gruagif from "../assets/img/GRUAGIF1.gif";
 import { FiSearch } from "react-icons/fi";
-import { FaUser, FaChevronUp, FaHome } from "react-icons/fa";
+import { FaUser, FaChevronUp, FaBell } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 import Login from "./usuario/Login";
@@ -372,11 +372,14 @@ export default function NavBarAlternativo({
               </div>
             )}
           </div>
-
-          <button className="faHome-button">
-            <FaHome />
-          </button>
-
+          {/* {idUsuario && (
+            <button
+              className="faHome-button"
+              onClick={() => navigate("/miUsuario")}
+            >
+              <FaBell />
+            </button>
+          )} */}
           <button
             className="fiveguys"
             style={{
