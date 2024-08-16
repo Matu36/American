@@ -1426,7 +1426,7 @@ button:focus-visible {
 .fauser {
   position: absolute;
   right: 0;
-  top: 50;
+  top: 45;
  margin-top: 15px;
 }
 
@@ -1483,7 +1483,7 @@ button:focus-visible {
   position: absolute;
   right: 0;
   top: 0;
-  margin-top: 50px;
+  margin-top: 45px;
 }
 
 @media screen and (max-width: 1240px) {

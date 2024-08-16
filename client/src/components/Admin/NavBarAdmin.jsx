@@ -17,6 +17,11 @@ export default function NavBarAdmin() {
   const [sidebar, setSideBar] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
+  if (!idUsuario) {
+    navigate("/");
+    return null;
+  }
+
   const handleMostrarModalSideBar = () => {
     setIsHovered(true);
     setSideBar(true);
@@ -54,6 +59,7 @@ export default function NavBarAdmin() {
           </div>
         </button>
       </div>
+
       <div className="user__info">
         {auth.nombre} {auth.apellido}
         <button

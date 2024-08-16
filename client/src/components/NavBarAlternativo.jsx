@@ -163,7 +163,7 @@ export default function NavBarAlternativo({
     }
   };
   const handleUserButtonClick = () => {
-    if (Object.keys(auth).length === 0) {
+    if (!token) {
       handleMostrarModalLogin();
     } else {
       setShowUserMenu(!showUserMenu);
@@ -392,7 +392,7 @@ export default function NavBarAlternativo({
             />
           </button>
           <div>
-            {Object.keys(auth).length > 0 ? (
+            {token?.length > 0 ? (
               <div className="user-menu-container">
                 <span className="user-info">
                   {role === "vendedor" || role === "administrador" ? (
