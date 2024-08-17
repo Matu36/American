@@ -758,10 +758,12 @@ button:focus-visible {
   
   .contact-form {
     display: block;
+    margin-left: 0;
   }
 
   .contact-form .form-group {
     width: 100%;
+    
     margin-bottom: 15px;
   }
 
