@@ -169,7 +169,7 @@ export default function Login({ handleCerrarModalLogin }) {
           </div>
 
           <button
-            style={{ fontSize: "larger", fontFamily: "merri" }}
+            style={{ fontSize: "larger", fontFamily: "merri", color: "black" }}
             onClick={handleMostrarModalRegistro}
           >
             Registráte
