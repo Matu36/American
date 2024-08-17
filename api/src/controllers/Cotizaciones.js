@@ -279,6 +279,20 @@ const getCantidadCotizacionesPorUsuario = async (req, res) => {
 
 const putCotizaciones = async (req, res) => {
   try {
+    // Obtener el token del encabezado
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    // Decodificar el token para obtener el idUsuario
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+    const idUsuario = decodedToken.id;
+
     const { id, ...updatedFields } = req.body;
 
     if (!id) {
@@ -291,6 +305,11 @@ const putCotizaciones = async (req, res) => {
 
     if (!cotizacion) {
       return res.status(404).send("No se encontró la cotización.");
+    }
+
+    // Asegúrate de que el idUsuario esté presente en updatedFields si es necesario
+    if (updatedFields.idUsuario) {
+      updatedFields.idUsuario = idUsuario;
     }
 
     updatedFields.fechaModi = new Date();

@@ -75,12 +75,6 @@ export default function NavBarAlternativo({
   const token = localStorage.getItem("token");
   const idUsuario = token;
 
-  useEffect(() => {
-    if (!idUsuario) {
-      localStorage.removeItem("user");
-    }
-  }, [idUsuario]);
-
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 
   const handleCheckRol = () => {
@@ -168,7 +162,7 @@ export default function NavBarAlternativo({
     }
   };
   const handleUserButtonClick = () => {
-    if (!token) {
+    if (!role) {
       handleMostrarModalLogin();
     } else {
       setShowUserMenu(!showUserMenu);
@@ -199,6 +193,7 @@ export default function NavBarAlternativo({
       setShowLogOutMessage(false);
       navigate("/");
     }, 3000);
+    window.location.reload();
   };
 
   return (
@@ -397,7 +392,7 @@ export default function NavBarAlternativo({
             />
           </button>
           <div>
-            {idUsuario?.length > 0 ? (
+            {role ? (
               <div className="user-menu-container">
                 <span className="user-info">
                   {role === "vendedor" || role === "administrador" ? (
@@ -405,15 +400,18 @@ export default function NavBarAlternativo({
                       <button className="admin">Admin</button>{" "}
                     </Link>
                   ) : null}
-                  <button
-                    className="nombreapellidoadmin"
-                    onClick={handleMostrarModalEdit}
-                    style={{ marginRight: "5px" }}
-                  >
-                    {auth ? auth.nombre : auth.email}
-                  </button>
-
-                  <button onClick={handleLogout}>Cerrar sesión</button>
+                  {role ? (
+                    <button
+                      className="nombreapellidoadmin"
+                      onClick={handleMostrarModalEdit}
+                      style={{ marginRight: "5px" }}
+                    >
+                      {auth ? auth.nombre : auth.email}
+                    </button>
+                  ) : null}
+                  {role ? (
+                    <button onClick={handleLogout}>Cerrar sesión</button>
+                  ) : null}
                 </span>
               </div>
             ) : (

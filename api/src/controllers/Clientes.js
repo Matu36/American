@@ -2,6 +2,8 @@ const { Clientes } = require("../db.js");
 const { Usuarios } = require("../db.js");
 const { JWTSECRET } = process.env;
 const jwt = require("../services/jwt.js");
+const { Op } = require("sequelize");
+const { conn } = require("../db.js");
 
 const createCliente = async (req, res) => {
   try {
@@ -69,10 +71,14 @@ const getClientesPorIdDeUsuario = async (req, res) => {
       throw "Usuario no encontrado";
     }
 
+    // Fecha límite: 3 meses atrás desde hoy
+    const tresMesesAtras = new Date();
+    tresMesesAtras.setMonth(tresMesesAtras.getMonth() - 3);
+
     let clientes;
 
-    // Si el usuario tiene el rol para ver todos los clientes
     if (usuario.rol === true) {
+      // Administrador: Ver todos los clientes
       clientes = await Clientes.findAll({
         attributes: [
           "id",
@@ -89,13 +95,36 @@ const getClientesPorIdDeUsuario = async (req, res) => {
             attributes: [],
           },
         ],
-
         order: [["fechaDeCreacion", "DESC"]],
       });
     } else {
-      // Si el usuario solo puede ver sus propios clientes
+      // Vendedor: Ver clientes exclusivos y aquellos sin cotizaciones recientes
       clientes = await Clientes.findAll({
-        where: { idUsuario },
+        where: {
+          [Op.or]: [
+            // Clientes a los que el vendedor ha realizado una cotización en los últimos 3 meses
+            {
+              id: {
+                [Op.in]: conn.literal(
+                  `(SELECT "idCliente" FROM "Cotizaciones"
+                    WHERE "idUsuario" = '${idUsuario}' 
+                    AND "fechaDeCreacion" > '${tresMesesAtras.toISOString()}')`
+                ),
+              },
+            },
+            // Clientes que no han tenido ninguna cotización en los últimos 3 meses
+            {
+              id: {
+                [Op.in]: conn.literal(
+                  `(SELECT "idCliente" FROM "Cotizaciones"
+                    WHERE "fechaDeCreacion" <= '${tresMesesAtras.toISOString()}'
+                    GROUP BY "idCliente"
+                    HAVING COUNT("idCliente") = 0)`
+                ),
+              },
+            },
+          ],
+        },
         attributes: [
           "id",
           "nombre",
@@ -111,6 +140,7 @@ const getClientesPorIdDeUsuario = async (req, res) => {
             attributes: [],
           },
         ],
+        order: [["fechaDeCreacion", "DESC"]],
       });
     }
 
@@ -226,16 +256,42 @@ const getClientesParaCotizar = async (req, res) => {
       throw "Usuario no encontrado";
     }
 
+    // Fecha límite: 3 meses atrás desde hoy
+    const tresMesesAtras = new Date();
+    tresMesesAtras.setMonth(tresMesesAtras.getMonth() - 3);
+
     let clientes;
 
     if (usuario.rol === true) {
+      // Administrador: Ver todos los clientes
       clientes = await Clientes.findAll({
         attributes: ["id", "nombre", "apellido", "mail", "CUIT"],
       });
     } else {
+      // Vendedor: Ver clientes exclusivos y aquellos sin cotizaciones recientes
       clientes = await Clientes.findAll({
         where: {
-          idUsuario: idUsuario,
+          [Op.or]: [
+            // Clientes a los que el usuario ha realizado una cotización en los últimos 3 meses
+            {
+              id: {
+                [Op.in]: conn.literal(
+                  `(SELECT "idCliente" FROM "Cotizaciones"
+                    WHERE "idUsuario" = '${idUsuario}' 
+                    AND "fechaDeCreacion" > '${tresMesesAtras.toISOString()}')`
+                ),
+              },
+            },
+            // Clientes que no tienen cotizaciones recientes (más de 3 meses) y no están asociados a otros usuarios
+            {
+              id: {
+                [Op.notIn]: conn.literal(
+                  `(SELECT "idCliente" FROM "Cotizaciones"
+                    WHERE "fechaDeCreacion" > '${tresMesesAtras.toISOString()}')`
+                ),
+              },
+            },
+          ],
         },
         attributes: ["id", "nombre", "apellido", "mail", "CUIT"],
       });

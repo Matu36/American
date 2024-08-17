@@ -84,6 +84,8 @@ export default function CotizacionEdit() {
         interes: cotizacionDetalle.interes,
       });
 
+      console.log(formData);
+
       // Set selected client
       const selectedCliente = clientes?.find(
         (cliente) => cliente.id === cotizacionDetalle.idCliente
