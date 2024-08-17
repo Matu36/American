@@ -107,8 +107,10 @@ const getClientesPorIdDeUsuario = async (req, res) => {
               id: {
                 [Op.in]: conn.literal(
                   `(SELECT "idCliente" FROM "Cotizaciones"
-                    WHERE "idUsuario" = '${idUsuario}' 
-                    AND "fechaDeCreacion" > '${tresMesesAtras.toISOString()}')`
+                    WHERE "idUsuario" = '${idUsuario}'
+                    AND "fechaDeCreacion" > '${tresMesesAtras.toISOString()}'
+                    AND ("fechaVenta" IS NULL OR "fechaVenta" > '${tresMesesAtras.toISOString()}')
+                    AND ("fechaModi" IS NULL OR "fechaModi" > '${tresMesesAtras.toISOString()}'))`
                 ),
               },
             },
@@ -118,6 +120,8 @@ const getClientesPorIdDeUsuario = async (req, res) => {
                 [Op.in]: conn.literal(
                   `(SELECT "idCliente" FROM "Cotizaciones"
                     WHERE "fechaDeCreacion" <= '${tresMesesAtras.toISOString()}'
+                    AND ("fechaVenta" IS NULL OR "fechaVenta" <= '${tresMesesAtras.toISOString()}')
+                    AND ("fechaModi" IS NULL OR "fechaModi" <= '${tresMesesAtras.toISOString()}')
                     GROUP BY "idCliente"
                     HAVING COUNT("idCliente") = 0)`
                 ),
