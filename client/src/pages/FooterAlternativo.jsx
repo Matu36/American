@@ -188,8 +188,23 @@ export default function FooterAlternativo() {
                 </button>
               </div>
             </div>
-            <h4>Ubicación</h4>
-            <img src={MAPS} style={{ maxWidth: "50%", width: "70%" }} />
+            <h4
+              style={{
+                fontWeight: "bold",
+                textDecoration: "underline",
+                textDecorationColor: "#febb00",
+              }}
+            >
+              UBICACIÓN
+            </h4>
+            <br />
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Panamericana+Km+28.250,+Paris+256,+Don+Torcuato,+Buenos+Aires,+Argentina"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={MAPS} className="MAPS" alt="Ubicación en Google Maps" />
+            </a>
             <p style={{ fontWeight: "bold", marginTop: "2.5rem" }}>
               Panamericana Km 28.250 – Paris 256 esq. Colectora Este,
             </p>

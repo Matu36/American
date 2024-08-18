@@ -167,7 +167,7 @@ export default function Login({ handleCerrarModalLogin }) {
               style={{
                 color: "black",
                 fontFamily: "merri",
-                fontSize: "1.3rem",
+                fontSize: "1rem",
               }}
             >
               ¿Aún no pertenecés a American Vial?
@@ -176,7 +176,7 @@ export default function Login({ handleCerrarModalLogin }) {
 
           <button
             className="submit-button"
-            // style={{ fontSize: "larger", fontFamily: "merri" }}
+            style={{ color: "black" }}
             onClick={handleMostrarModalRegistro}
           >
             Registráte

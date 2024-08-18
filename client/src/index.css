@@ -80,9 +80,9 @@ button:focus-visible {
 }
 
 .navbar {
-  background-color: #febb00;
-  padding-left: 10px;
-  padding-right: 10px;
+  background-color: black;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 
@@ -98,7 +98,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: black
+  background-color: #febb00;
 }
 
 .marca:not(:last-child) {
@@ -168,7 +168,8 @@ button:focus-visible {
   flex-wrap: wrap;
   align-items: flex-start;
   padding: 0;
-  background-color: #febb00
+  
+  background-color: black
 }
 
 .card {
@@ -179,7 +180,8 @@ button:focus-visible {
   background-color: #f5f5f5;
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
-  border: 5px solid black;
+  border: 5px solid #febb00;
+  
 }
 
 @media (max-width: 650px) {
@@ -343,7 +345,7 @@ button:focus-visible {
 .eleganzaContainer {
   display: flex;
   justify-content: center;
-  background-color: #febb00
+  background-color: black;
 }
 
 .eleganzaImgContainer {
@@ -584,6 +586,7 @@ button:focus-visible {
 
 .about-image {
   width: 70%;
+  border-radius: 15px;
 }
 
 .about-content {
@@ -702,6 +705,10 @@ button:focus-visible {
   width: 100%;
   margin-top: 1rem;
   font-family: "Merriweather", serif;
+  font-size: 18px;
+  color: grey;
+ padding-left: 0.5rem;
+ padding-right: 0.5rem;
 }
 
 .contact-form {
@@ -802,6 +809,19 @@ button:focus-visible {
   color: #fff;
   margin-top: 1rem;
  
+}
+
+.MAPS {
+  max-width: 50%;
+  width: 70%;
+  border-radius: 10px;
+}
+
+@media (max-width: 650px) {
+  .MAPS {
+    max-width: 100%; 
+    width: 100%; 
+  }
 }
 
 
@@ -1470,6 +1490,10 @@ button:focus-visible {
   justify-content: space-between;
   padding: 10px 20px;
   background-color: rgba(0, 0, 0, 0.8);
+  border-bottom: 3px solid #febb00;
+
+  /* Shadow effect */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
 }
 
 .white-bar.fixed .faHome-button{
@@ -1494,7 +1518,7 @@ button:focus-visible {
   .white-bar.fixed .burguer-icon-front  {
    position: absolute;
    right: 40px;
-   top:-1px
+   top:-3px
   }
 }
 
@@ -1524,14 +1548,14 @@ button:focus-visible {
 
 @media screen and (max-width: 1100px) {
   .americanimg {
-    margin-top: 2rem;
+    margin-top: 3.5rem;
   }
 }
 
 @media screen and (max-width: 750px) {
   .americanimg img {
     position: absolute;
-    top: 35px;
+    top: 48px;
     left: 0;
     width: 500px;
     height: auto;
@@ -1540,7 +1564,7 @@ button:focus-visible {
   @media screen and (max-width: 660px) {
     .americanimg img {
       position: absolute;
-      top: 55px;
+      top: 65px;
       
      width: 400px;
       
@@ -1551,7 +1575,7 @@ button:focus-visible {
   @media screen and (max-width: 550px) {
     .americanimg img {
       position: absolute;
-      top: 45px;
+      top: 85px;
       
      width: 300px;
       
@@ -1563,7 +1587,7 @@ button:focus-visible {
 @media screen and (max-width: 750px) {
  .white-bar.fixed .americanimg img {
     position: absolute;
-    top: 25px;
+    top: 22px;
    width: 400px;
     height: auto;
   }
@@ -1571,7 +1595,7 @@ button:focus-visible {
   @media screen and (max-width: 600px) {
     .white-bar.fixed .americanimg img {
        position: absolute;
-       top: 25px;
+       top: 38px;
        width: 300px;
        height: auto;
      }
@@ -1579,7 +1603,7 @@ button:focus-visible {
 @media screen and (max-width: 450px) {
   .white-bar.fixed .americanimg img {
      position: absolute;
-     top: 35px;
+     top: 45px;
      width: 250px;
      height: auto;
    }
@@ -1625,8 +1649,9 @@ button:focus-visible {
 
 .white-bar.fixed .search-button-modal-open  {
   position: absolute;
-  top: -20px;
+  top: -22px;
   right: 0px;
+  
   visibility: visible;
   color: white;
 
@@ -3573,6 +3598,8 @@ width: 350px;
 .custom-carousel .custom-container {
   width: 100vw; 
   overflow: hidden; 
+  
+  
 }
 
 .custom-carousel .custom-slider {
@@ -3589,7 +3616,7 @@ width: 350px;
 }
 
 .custom-carousel .custom-slide img {
-  width: 100vw;
+  width: 95vw;
   height: 40vw;
 
   
@@ -3597,8 +3624,12 @@ width: 350px;
 
 @media (max-width: 1000px) {
   .custom-carousel .custom-slide img {
-    height: 80vw;
+    height: 60vw;
   }
+}
+
+.custom-slide {
+  background-color: black;
 }
 
 .custom-carousel .custom-slider-transition {
@@ -4138,19 +4169,6 @@ width: 350px;
   margin-bottom: 20px;
 }
 
-.large-imagess {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-@media (max-width: 700px) {
-  .large-images {
-    height: 300px;
-  }
-}
 
 .large-image {
   width: 100%;
