@@ -80,9 +80,9 @@ button:focus-visible {
 }
 
 .navbar {
-  background-color: black;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  background-color: #febb00;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 
@@ -93,12 +93,12 @@ button:focus-visible {
 }
 
 .marca {
-  margin-top: 2rem;
-  padding: 15px 0.5rem;
+  margin-top: 1rem;
+  padding: 0.5rem 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #febb00
+  background-color: black
 }
 
 .marca:not(:last-child) {
@@ -168,7 +168,7 @@ button:focus-visible {
   flex-wrap: wrap;
   align-items: flex-start;
   padding: 0;
-  background-color: #febb00;
+  background-color: #febb00
 }
 
 .card {
@@ -343,7 +343,7 @@ button:focus-visible {
 .eleganzaContainer {
   display: flex;
   justify-content: center;
-  background-color: black
+  background-color: #febb00
 }
 
 .eleganzaImgContainer {
@@ -1493,7 +1493,7 @@ button:focus-visible {
 @media screen and (max-width: 1240px) {
   .white-bar.fixed .burguer-icon-front  {
    position: absolute;
-   right: 50px;
+   right: 40px;
    top:-1px
   }
 }
@@ -1501,7 +1501,7 @@ button:focus-visible {
 @media screen and (max-width: 1240px) {
   .white-bar .burguer-icon-front  {
    position: absolute;
-   right: 60px;
+   right: 35px;
    top:40px
   }
 }
@@ -1626,7 +1626,7 @@ button:focus-visible {
 .white-bar.fixed .search-button-modal-open  {
   position: absolute;
   top: -20px;
-  right: 10px;
+  right: 0px;
   visibility: visible;
   color: white;
 
@@ -1651,7 +1651,7 @@ button:focus-visible {
 @media screen and (max-width: 1240px) {
   .white-bar .search-button-modal-open {
     position: absolute;
-    right: 10px;
+    right: 0px;
     top:20px;
     visibility: visible;
     color: white;
