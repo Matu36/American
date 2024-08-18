@@ -2,6 +2,7 @@ const transporter = require("../mailer/mailer");
 const newUser = require("./templates/newUser");
 const newPassword = require("./templates/newPassword");
 const contacto = require("../mailer/templates/contacto");
+const UsuarioCotizacionUnMes = require("../mailer/templates/UsuarioCotizacionUnMes");
 const { NODEMAILER_USER } = process.env;
 
 const sendEmailWithTemplate = (to, template, props) => {
@@ -33,6 +34,15 @@ const sendEmailWithTemplate = (to, template, props) => {
         to,
         subject: "Gracias por Contactarnos!",
         html: contacto({ email: to }),
+      };
+      break;
+
+    case "UsuarioCotizacionUnMes":
+      emailOptions = {
+        from: NODEMAILER_USER,
+        to,
+        subject: "Recordatorio: Cotización pendiente en AMERICAN VIAL",
+        html: UsuarioCotizacionUnMes({ email: to }),
       };
       break;
 

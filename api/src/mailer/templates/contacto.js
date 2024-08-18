@@ -75,7 +75,6 @@ const contacto = (props) => {
   <p>Estamos comprometidos en ofrecer productos de alta calidad que cumplen con los estándares más exigentes del mercado. Nuestro objetivo es asegurar que encuentres la maquinaria adecuada para cada uno de tus proyectos, facilitando así tu trabajo y garantizando resultados excelentes.</p>
   <p>Para más detalles sobre nuestros productos y servicios, te invitamos a visitar nuestro sitio web y explorar todas las opciones disponibles. También puedes seguirnos en nuestras redes sociales para estar al tanto de nuestras promociones especiales y las últimas novedades del sector.</p>
   <p>¡Esperamos poder asistirte pronto!</p>
-  <p>Nos vemos en AMERICAN VIAL,</p>
   <p><b>Equipo AMERICAN VIAL</b></p>
   <p><b>P.D.</b> No te pierdas nuestras novedades y promociones especiales. Síguenos en nuestras redes sociales para estar al tanto de todo lo que tenemos para ofrecerte!</p>
 </body>
