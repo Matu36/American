@@ -88,7 +88,7 @@ export default function PostVenta() {
       onSelectFamilia={handleFamiliaClick}
     >
       <div className="postVentaContainer">
-        <img src={postventa} alt="PostVenta" className="large-imagess" />
+        <img src={postventa} alt="PostVenta" className="large-images" />
 
         <h2 className="postVentaSubtitle">
           ¿Por qué hacer su servicio de PostVenta con nosotros?
