@@ -197,7 +197,7 @@ export default function FooterAlternativo() {
             >
               UBICACIÓN
             </h4>
-            <br />
+
             <a
               href="https://www.google.com/maps/search/?api=1&query=Panamericana+Km+28.250,+Paris+256,+Don+Torcuato,+Buenos+Aires,+Argentina"
               target="_blank"
@@ -205,10 +205,12 @@ export default function FooterAlternativo() {
             >
               <img src={MAPS} className="MAPS" alt="Ubicación en Google Maps" />
             </a>
-            <p style={{ fontWeight: "bold", marginTop: "2.5rem" }}>
+            <p
+              style={{ fontWeight: "bold", marginTop: "0.5rem", color: "grey" }}
+            >
               Panamericana Km 28.250 – Paris 256 esq. Colectora Este,
             </p>
-            <p style={{ fontWeight: "bold" }}>
+            <p style={{ fontWeight: "bold", color: "grey" }}>
               (1611) Don Torcuato – Prov. de Buenos Aires – ARGENTINA
             </p>
             <br />

@@ -1431,6 +1431,7 @@ button:focus-visible {
   align-items: center;
   z-index: 1000;
   width: 100%;
+  
  
 }
 .search-bar {
@@ -1491,8 +1492,6 @@ button:focus-visible {
   padding: 10px 20px;
   background-color: rgba(0, 0, 0, 0.8);
   border-bottom: 3px solid #febb00;
-
-  /* Shadow effect */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
 }
 
@@ -4022,6 +4021,7 @@ width: 350px;
   box-sizing: border-box;
   margin-left: auto; 
   margin-right: auto; 
+  max-height: 400px;
   overflow-y: auto;
   
 }
@@ -4040,8 +4040,6 @@ width: 350px;
   margin: 0;
   width: 100%;
 }
-
-
 
 .postVentaContainer {
   padding: 40px;
@@ -4172,7 +4170,6 @@ width: 350px;
 
 .large-image {
   width: 100%;
-  
   margin-bottom: 10px;
 }
 
@@ -4190,6 +4187,7 @@ width: 350px;
 @media (min-width: 768px) {
   .grid-images {
     grid-template-columns: repeat(2, 1fr);
+   
   }
 }
 
@@ -4651,7 +4649,7 @@ left: -10%;
   .postVentImage {
     width: 700px;
     padding: 10px 0;
-    height: 300px;
+    height: 250px;
   }
 }
 

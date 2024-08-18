@@ -88,7 +88,7 @@ export default function AmericanRepuestos() {
 
         <h3>
           Equipamiento Integral e Infraestructura para dar respuestas
-          satisfactorias.
+          satisfactorias
         </h3>
         <br />
         <div className="grid-images">

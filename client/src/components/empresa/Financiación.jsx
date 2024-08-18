@@ -100,31 +100,22 @@ export default function Financiación() {
           className="large-images"
         />
         <br />
-        <h3>
+        <h2 className="postVentaSubtitle">
           {" "}
           Contamos con la más amplia gama de financiación para usted y su{" "}
-        </h3>
-        <h3>
           empresa. Adquiera su equipamiento con confianza y seguridad, a su
-        </h3>
-        <h3>medida.</h3>
-
+          medida.
+        </h2>
         <img src={PagoCuotas} alt="Pago Cuotas" className="postVentImage" />
         <br />
 
-        <h4>
+        <h2 className="postVentaSubtitle">
           {" "}
           En <strong>American Vial</strong>, entendemos la importancia de contar
-        </h4>
-        <h4>
-          {" "}
           con el equipo adecuado para llevar tu negocio al siguiente nivel. Es
-        </h4>
-        <h4>
-          {" "}
           por eso que ofrecemos opciones de financiamiento flexibles diseñadas
-        </h4>
-        <h4>para adaptarse a tus necesidades.</h4>
+          para adaptarse a tus necesidades.
+        </h2>
         <br />
         <h2
           style={{

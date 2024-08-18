@@ -93,7 +93,7 @@ export default function PostVenta() {
         <h2 className="postVentaSubtitle">
           ¿Por qué hacer su servicio de PostVenta con nosotros?
         </h2>
-        <ul className="postVentaList">
+        <ul className="financiarList">
           <li>Porque mantiene la vigencia de su garantía.</li>
           <li>Porque extiende la vida útil de su equipo nuevo.</li>
           <li>

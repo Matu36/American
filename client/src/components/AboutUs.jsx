@@ -19,9 +19,9 @@ export default function AboutUs({ handleCerrarModalAbout }) {
       >
         SOBRE NOSOTROS
       </h4>
-      <br />
+
       <img src={about} alt="" className="about-image" />
-      <br />
+
       <div className="about-content-margin" style={{ textAlign: "justify" }}>
         <span>
           Con mas 10 años de trayectoria, American vial es una empresa dedicada
