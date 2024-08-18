@@ -1879,7 +1879,7 @@ button:focus-visible {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-right: 8px;
+  
 }
 
 .login-form input[type="submit"] {

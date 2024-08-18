@@ -163,13 +163,20 @@ export default function Login({ handleCerrarModalLogin }) {
           )}
 
           <div style={{ marginTop: "1rem" }}>
-            <span style={{ color: "#ffcc00", fontFamily: "merri" }}>
+            <span
+              style={{
+                color: "black",
+                fontFamily: "merri",
+                fontSize: "1.3rem",
+              }}
+            >
               ¿Aún no pertenecés a American Vial?
             </span>
           </div>
 
           <button
-            style={{ fontSize: "larger", fontFamily: "merri", color: "black" }}
+            className="submit-button"
+            // style={{ fontSize: "larger", fontFamily: "merri" }}
             onClick={handleMostrarModalRegistro}
           >
             Registráte

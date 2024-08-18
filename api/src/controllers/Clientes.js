@@ -89,45 +89,23 @@ const getClientesPorIdDeUsuario = async (req, res) => {
           "CUIT",
           "razonSocial",
         ],
-        include: [
-          {
-            model: Usuarios,
-            attributes: [],
-          },
-        ],
         order: [["fechaDeCreacion", "DESC"]],
       });
     } else {
-      // Vendedor: Ver clientes exclusivos y aquellos sin cotizaciones recientes
+      // Vendedor: Ver clientes a los que les haya creado, modificado una cotización o realizado una venta
       clientes = await Clientes.findAll({
         where: {
-          [Op.or]: [
-            // Clientes a los que el vendedor ha realizado una cotización en los últimos 3 meses
-            {
-              id: {
-                [Op.in]: conn.literal(
-                  `(SELECT "idCliente" FROM "Cotizaciones"
-                    WHERE "idUsuario" = '${idUsuario}'
-                    AND "fechaDeCreacion" > '${tresMesesAtras.toISOString()}'
-                    AND ("fechaVenta" IS NULL OR "fechaVenta" > '${tresMesesAtras.toISOString()}')
-                    AND ("fechaModi" IS NULL OR "fechaModi" > '${tresMesesAtras.toISOString()}'))`
-                ),
-              },
-            },
-            // Clientes que no han tenido ninguna cotización en los últimos 3 meses
-            {
-              id: {
-                [Op.in]: conn.literal(
-                  `(SELECT "idCliente" FROM "Cotizaciones"
-                    WHERE "fechaDeCreacion" <= '${tresMesesAtras.toISOString()}'
-                    AND ("fechaVenta" IS NULL OR "fechaVenta" <= '${tresMesesAtras.toISOString()}')
-                    AND ("fechaModi" IS NULL OR "fechaModi" <= '${tresMesesAtras.toISOString()}')
-                    GROUP BY "idCliente"
-                    HAVING COUNT("idCliente") = 0)`
-                ),
-              },
-            },
-          ],
+          id: {
+            [Op.in]: conn.literal(
+              `(SELECT "idCliente" FROM "Cotizaciones"
+                WHERE "idUsuario" = '${idUsuario}'
+                AND (
+                  "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                  "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                  "fechaVenta" > '${tresMesesAtras.toISOString()}'
+                ))`
+            ),
+          },
         },
         attributes: [
           "id",
@@ -137,12 +115,6 @@ const getClientesPorIdDeUsuario = async (req, res) => {
           "fechaDeCreacion",
           "CUIT",
           "razonSocial",
-        ],
-        include: [
-          {
-            model: Usuarios,
-            attributes: [],
-          },
         ],
         order: [["fechaDeCreacion", "DESC"]],
       });
@@ -281,8 +253,12 @@ const getClientesParaCotizar = async (req, res) => {
               id: {
                 [Op.in]: conn.literal(
                   `(SELECT "idCliente" FROM "Cotizaciones"
-                    WHERE "idUsuario" = '${idUsuario}' 
-                    AND "fechaDeCreacion" > '${tresMesesAtras.toISOString()}')`
+                  WHERE "idUsuario" = '${idUsuario}' 
+                  AND (
+                    "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                    "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                    "fechaVenta" > '${tresMesesAtras.toISOString()}'
+                  ))`
                 ),
               },
             },
@@ -291,7 +267,11 @@ const getClientesParaCotizar = async (req, res) => {
               id: {
                 [Op.notIn]: conn.literal(
                   `(SELECT "idCliente" FROM "Cotizaciones"
-                    WHERE "fechaDeCreacion" > '${tresMesesAtras.toISOString()}')`
+                  WHERE (
+                    "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                    "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                    "fechaVenta" > '${tresMesesAtras.toISOString()}'
+                  ))`
                 ),
               },
             },
