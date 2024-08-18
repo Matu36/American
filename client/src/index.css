@@ -80,9 +80,9 @@ button:focus-visible {
 }
 
 .navbar {
-  background-color: #febb00;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  background-color: black;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 
@@ -93,13 +93,12 @@ button:focus-visible {
 }
 
 .marca {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  padding: 15px 1rem;
+  margin-top: 2rem;
+  padding: 15px 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #000;
+  background-color: #febb00
 }
 
 .marca:not(:last-child) {
@@ -109,7 +108,7 @@ button:focus-visible {
 
 .marca button,
 .marca a {
-  margin: 0.5rem;
+  margin: 1.5rem;
   padding: 0;
   border: none;
   background: none;
@@ -122,6 +121,8 @@ button:focus-visible {
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
+    border-radius: 5px;
+    border: solid 1px gray;
 }
 
 @media (max-width: 1400px) and (min-width: 1000px) {
@@ -342,7 +343,7 @@ button:focus-visible {
 .eleganzaContainer {
   display: flex;
   justify-content: center;
-  background-color: #febb00;
+  background-color: black
 }
 
 .eleganzaImgContainer {
