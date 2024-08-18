@@ -78,7 +78,7 @@ export default function Distribuidores() {
     >
       <div className="postVentaContainer">
         <div className="large-images">
-          <img src={Distribuidores1} alt="Repuestos" className="large-image" />
+          <img src={Distribuidores1} alt="Repuestos" className="large-images" />
         </div>
 
         <div className="grid-imagesdist">

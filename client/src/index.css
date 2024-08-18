@@ -1640,8 +1640,8 @@ button:focus-visible {
 
 @media screen and (min-width: 1240px) {
   .white-bar.fixed .search-button-modal-open {
-    right: 10px; 
-    top:-20px;
+    right: 0; 
+    top:-25px;
     color: white;
    
     
@@ -3970,10 +3970,11 @@ width: 350px;
   max-width: 100%;
   width: 100vh;
   background-color: #000;
+  
 }
 
 .dropdownEquipos {
-  position: fixed; 
+  position: absolute; 
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
@@ -3990,6 +3991,8 @@ width: 350px;
   box-sizing: border-box;
   margin-left: auto; 
   margin-right: auto; 
+  overflow-y: auto;
+  
 }
 
 
@@ -4135,9 +4138,23 @@ width: 350px;
   margin-bottom: 20px;
 }
 
+.large-imagess {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 700px) {
+  .large-images {
+    height: 300px;
+  }
+}
+
 .large-image {
   width: 100%;
-  height: auto;
+  
   margin-bottom: 10px;
 }
 
@@ -4207,6 +4224,7 @@ width: 350px;
   font-family: "Merri", sans-serif;
   padding: 8px;
   box-sizing: border-box; 
+  overflow-y: auto;
 }
 
 /* Contact.css */
@@ -4510,6 +4528,7 @@ background-color: rgba(0, 0, 0, 0.8);
   font-family: "Merri", sans-serif;
   padding: 8px;
   box-sizing: border-box;
+  overflow-y: auto;
   
 }
 
@@ -4603,7 +4622,8 @@ left: -10%;
 
 .postVentImage {
   display: block;
-  max-width: 50%;
+  max-width: 70%;
+  width: 700px;
   height: 400px;
   margin: 0 auto;
   padding: 20px 0;
@@ -4611,8 +4631,9 @@ left: -10%;
 
 @media (max-width: 768px) {
   .postVentImage {
-    max-width: 50%;
+    width: 700px;
     padding: 10px 0;
+    height: 300px;
   }
 }
 

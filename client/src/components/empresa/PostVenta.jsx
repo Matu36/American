@@ -88,8 +88,8 @@ export default function PostVenta() {
       onSelectFamilia={handleFamiliaClick}
     >
       <div className="postVentaContainer">
-        <img src={postventa} alt="PostVenta" className="large-images" />
-        <br />
+        <img src={postventa} alt="PostVenta" className="large-imagess" />
+
         <h2 className="postVentaSubtitle">
           ¿Por qué hacer su servicio de PostVenta con nosotros?
         </h2>
@@ -107,7 +107,7 @@ export default function PostVenta() {
             puntos estratégicos de todo el país.
           </li>
         </ul>
-        <img src={garantia} alt="Garantía" style={{ width: "20%" }} />
+        <img src={garantia} alt="Garantía" style={{ width: "25%" }} />
         <div className="postVentaFooter">
           <h3>LLEVAMOS MAS DE 10000 MAQUINAS VENDIDAS</h3>
           <h3>CON MAS DE 25 MILLONES DE HORAS DE USO,</h3>
@@ -124,8 +124,7 @@ export default function PostVenta() {
             )}
           </div>
         )}
-        <br />
-        <br />
+
         <div style={{ display: "flex", justifyContent: "center" }}>
           <button className="submit-button" onClick={handleMostrarModalContact}>
             Contacto

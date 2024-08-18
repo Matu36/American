@@ -83,9 +83,9 @@ export default function AmericanRepuestos() {
     >
       <div className="postVentaContainer">
         <div className="large-images">
-          <img src={repuestosimage} alt="Repuestos" className="large-image" />
+          <img src={repuestosimage} alt="Repuestos" className="large-images" />
         </div>
-        <br />
+
         <h3>
           Equipamiento Integral e Infraestructura para dar respuestas
           satisfactorias.
