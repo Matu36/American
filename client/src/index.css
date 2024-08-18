@@ -931,7 +931,7 @@ button:focus-visible {
   background: none;
   color: white;
   padding: 0px;
-  margin-right: 30px;
+ margin-right: 20px;
 }
 
 /* MENSAJE EL PRODUCTO HA SIDO AÑADIDO AL CARRITO */
@@ -1427,7 +1427,7 @@ button:focus-visible {
   position: absolute;
   right: 0;
   top: 0;
- margin-top: 15px;
+ 
 }
 
 .inputnav {
