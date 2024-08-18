@@ -4777,6 +4777,14 @@ left: -10%;
   }
 }
 
+@media (max-width: 600px) {
+  .NovedadesTitle {
+    text-align: left;
+    margin-left: 30px;
+    margin-right: auto; 
+  }
+}
+
 
 
 

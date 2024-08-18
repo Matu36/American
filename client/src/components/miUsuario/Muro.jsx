@@ -89,7 +89,9 @@ export default function Muro() {
       onSelectFamilia={handleFamiliaClick}
     >
       <BackButton />
-      <br /> <br /> <h3 style={{ fontFamily: "merri" }}>Novedades</h3>
+      <div className="NovedadesTitle">
+        <br /> <br /> <h3 style={{ fontFamily: "merri" }}>Novedades</h3>
+      </div>
       <div className="ofertas-list">
         {data && data.length > 0 ? (
           data.map((item) => (
