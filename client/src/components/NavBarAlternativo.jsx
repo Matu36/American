@@ -336,13 +336,7 @@ export default function NavBarAlternativo({
 
           <div className="search-bar">
             <button className="search-button" onClick={handleSearch}>
-              <FiSearch
-                style={{
-                  color: "grey",
-                  fontSize: "26px",
-                  marginTop: "-1rem",
-                }}
-              />
+              <FiSearch />
             </button>
 
             <input
@@ -358,13 +352,9 @@ export default function NavBarAlternativo({
               <div>
                 {suggestions.map((suggestion, index) => (
                   <div
+                    className="sugerencias"
                     key={index}
                     onClick={() => handleSuggestionClick(suggestion)}
-                    style={{
-                      color: "gray",
-                      cursor: "pointer",
-                      marginBottom: "5px",
-                    }}
                   >
                     {suggestion}
                   </div>

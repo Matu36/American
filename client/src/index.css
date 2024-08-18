@@ -85,9 +85,6 @@ button:focus-visible {
   padding-right: 2rem;
 }
 
-/* .containerApp {
-  background-color: #febb00;
-} */
 
 .grid-container {
   display: grid;
@@ -141,7 +138,7 @@ button:focus-visible {
 
 @media (max-width: 650px) {
   .grid-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -1421,18 +1418,21 @@ button:focus-visible {
   align-items: flex-end;
   transition: border-bottom 0.5s ease;
   width: 70%;
- padding-right: 15px;
+
 
 }
 
 .fauser {
   position: absolute;
   right: 0;
-  top: 45;
+  top: 0;
  margin-top: 15px;
 }
 
 .inputnav {
+  position: absolute;
+  top: 10px;
+ right: 10px;
   padding: 10px;
   font-size: 16px;
   color: #fff;
@@ -1445,6 +1445,7 @@ button:focus-visible {
   margin-bottom: 0.5rem;
   
 }
+
 
 @media (max-width: 1240px) {
   .inputnav {
@@ -1485,40 +1486,25 @@ button:focus-visible {
   position: absolute;
   right: 0;
   top: 0;
-  margin-top: 45px;
+  
 }
 
 @media screen and (max-width: 1240px) {
   .white-bar.fixed .burguer-icon-front  {
    position: absolute;
-   right: 75px;
-   top:-16px
+   right: 50px;
+   top:-1px
   }
 }
 
 @media screen and (max-width: 1240px) {
   .white-bar .burguer-icon-front  {
    position: absolute;
-   right: 75px;
-   top:27px
+   right: 60px;
+   top:40px
   }
 }
 
-@media screen and (max-width: 600px) {
-  .white-bar.fixed .admin  {
-   position: absolute;
-   right: 10px;
-   top:60px
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .white-bar.fixed .nombreapellidoadmin  {
-   position: absolute;
-   right: 10px;
-   top:30px
-  }
-}
 
 
 @media screen and (max-width: 850px) {
@@ -1544,16 +1530,27 @@ button:focus-visible {
 @media screen and (max-width: 750px) {
   .americanimg img {
     position: absolute;
-    top: 15px;
+    top: 35px;
     left: 0;
-    width: 400px;
+    width: 500px;
     height: auto;
+  }
+
+  @media screen and (max-width: 660px) {
+    .americanimg img {
+      position: absolute;
+      top: 55px;
+      
+     width: 400px;
+      
+      height: auto;
+    }
   }
 
   @media screen and (max-width: 550px) {
     .americanimg img {
       position: absolute;
-      top: 35px;
+      top: 45px;
       
      width: 300px;
       
@@ -1562,21 +1559,45 @@ button:focus-visible {
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
  .white-bar.fixed .americanimg img {
     position: absolute;
-    top: 5px;
-   width: 240px;
+    top: 25px;
+   width: 400px;
     height: auto;
   }
+
+  @media screen and (max-width: 600px) {
+    .white-bar.fixed .americanimg img {
+       position: absolute;
+       top: 25px;
+       width: 300px;
+       height: auto;
+     }
+}
+@media screen and (max-width: 450px) {
+  .white-bar.fixed .americanimg img {
+     position: absolute;
+     top: 35px;
+     width: 250px;
+     height: auto;
+   }
+}
 }
 
 
 .search-button {
+  position: absolute;
+  right: 230px;
+  top: 65px;
   border: none;
   background: none;
   cursor: pointer;
-  margin-top: 5.5rem;
+  color: white;
+  font-size: 30px;
+  visibility: hidden;
+  font-weight: bold;
+
 }
 
 .faHome-button {
@@ -1597,14 +1618,17 @@ button:focus-visible {
   cursor: pointer;
   margin-top: 5.5rem;
   visibility: hidden; 
+  color: white;
 }
 
 
 .white-bar.fixed .search-button-modal-open  {
   position: absolute;
-  right: 150px;
-  top:-35px;
+  top: -20px;
+  right: 10px;
   visibility: visible;
+  color: white;
+
  }
 
  .white-bar.fixed .search-button  {
@@ -1615,15 +1639,21 @@ button:focus-visible {
 
 @media screen and (min-width: 1240px) {
   .white-bar.fixed .search-button-modal-open {
-    right: 80px; 
+    right: 10px; 
+    top:-20px;
+    color: white;
+   
+    
   }
 }
 
 @media screen and (max-width: 1240px) {
   .white-bar .search-button-modal-open {
     position: absolute;
-    right: 150px;
+    right: 10px;
+    top:20px;
     visibility: visible;
+    color: white;
   }
 }
 
@@ -1631,11 +1661,26 @@ button:focus-visible {
 @media screen and (max-width: 1240px) {
   .white-bar .search-button {
     visibility: hidden;
-    right: 80px; 
+    right: 10px; 
+    color: white;
   }
 }
 
  .white-bar.fixed .inputnav  {
+  display: none;
+ }
+
+ .sugerencias {
+ color: gray;
+ cursor: pointer;
+ position: absolute;
+ top: 60px;
+ right: 140px;
+ font-size: 20px;
+
+ }
+
+ .white-bar.fixed .sugerencias  {
   display: none;
  }
 
@@ -3545,6 +3590,14 @@ width: 350px;
 .custom-carousel .custom-slide img {
   width: 100vw;
   height: 40vw;
+
+  
+}
+
+@media (max-width: 1000px) {
+  .custom-carousel .custom-slide img {
+    height: 80vw;
+  }
 }
 
 .custom-carousel .custom-slider-transition {
