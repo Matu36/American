@@ -1470,6 +1470,12 @@ button:focus-visible {
   
 }
 
+@media (max-width: 1240px) {
+  .white-bar {
+    height: 100px;
+  }
+}
+
 
 @media (max-width: 1240px) {
   .inputnav {
@@ -1503,8 +1509,9 @@ button:focus-visible {
 
 
 .white-bar.fixed .americanimg {
-  max-width: 100px;
-  margin-top: 10px; 
+ position: absolute;
+ left: 0;
+ top:35px
 }
 
 
@@ -1527,7 +1534,7 @@ button:focus-visible {
   .white-bar .burguer-icon-front  {
    position: absolute;
    right: 35px;
-   top:40px
+   top:0px
   }
 }
 
@@ -1547,17 +1554,19 @@ button:focus-visible {
 }
 
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1240px) {
   .americanimg {
-    margin-top: 3.5rem;
+   position: absolute;
+   left: 0;
+   top:40px
   }
 }
 
 @media screen and (max-width: 750px) {
   .americanimg img {
-    position: absolute;
+    /* position: absolute;
     top: 48px;
-    left: 0;
+    left: 0; */
     width: 500px;
     height: auto;
   }
@@ -1565,7 +1574,7 @@ button:focus-visible {
   @media screen and (max-width: 660px) {
     .americanimg img {
       position: absolute;
-      top: 65px;
+      top: 15px;
       
      width: 400px;
       
@@ -1576,7 +1585,7 @@ button:focus-visible {
   @media screen and (max-width: 550px) {
     .americanimg img {
       position: absolute;
-      top: 85px;
+      top: 35px;
       
      width: 300px;
       
@@ -1678,7 +1687,7 @@ button:focus-visible {
   .white-bar .search-button-modal-open {
     position: absolute;
     right: 0px;
-    top:20px;
+    top:-20px;
     visibility: visible;
     color: white;
   }
