@@ -276,7 +276,7 @@ export default function NavBarAlternativo({
               >
                 <FaChevronUp />
               </button>
-              <img className="gif" src={gruaGif} alt="" />
+              {/* <img className="gif" src={gruaGif} alt="" /> */}
             </div>
           )}
 
