@@ -4006,7 +4006,7 @@ width: 350px;
 .dropdownEquipos {
   position: absolute; 
   top: 100%;
-  left: 50%;
+  left: 110%;
   transform: translateX(-50%);
   background-color: black;
   color: white;
@@ -4098,9 +4098,7 @@ width: 350px;
 .postVentaList li::before {
   content: "•"; /* Puntos antes de cada elemento */
   color: #ffcc00; /* Color amarillo para los puntos */
-  position: absolute;
-  left: 0;
-  top: 0;
+  margin-right: 1rem;
   font-size: 1.5rem;
 }
 
