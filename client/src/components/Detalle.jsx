@@ -305,7 +305,7 @@ export default function Detalle() {
       )}
       <div className="whatsapp">
         <a
-          href="https://wa.me/1159249700?text=Hola,%20¿En%20qué%20te%20podemos%20ayudar?"
+          href="https://wa.me/1159249700"
           target="_blank"
           rel="noopener noreferrer"
         >
