@@ -16,6 +16,7 @@ import Garantia from "./Garantia";
 import AboutUs from "./AboutUs";
 import { FaBars } from "react-icons/fa";
 import AmericanVial from "../assets/img/LOGOAMERICANPRINCIPAL.png";
+import gruaGif from "../assets/img/GRUAGIF1.gif";
 
 export default function NavBarAlternativo({
   onSearchByMarca,
@@ -268,18 +269,19 @@ export default function NavBarAlternativo({
                 onSelectFamilia={onSelectFamilia}
                 handleCerrarModalHeadBar={handleCerrarModalHeadBar}
               />
-              {/* <img
-                className="gif"
-                style={{ marginTop: "90px" }}
-                src={gruagif}
-                alt=""
-              /> */}
+
               <button
                 style={{ background: "none" }}
                 onClick={handleCerrarModalHeadBar}
               >
                 <FaChevronUp />
               </button>
+              <img
+                className="gif"
+                style={{ marginTop: "90px" }}
+                src={gruaGif}
+                alt=""
+              />
             </div>
           )}
 

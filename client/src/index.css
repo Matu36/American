@@ -4592,8 +4592,8 @@ background-color: rgba(0, 0, 0, 0.8);
   }
 
 .gif {
-  width: 300px;
-  max-width: 60%;
+  width: 400px;
+  max-width: 80%;
 }
 
 .americanTogle {
@@ -4751,24 +4751,24 @@ left: -10%;
   top: 10px;
   right: 10px;
   background: none;
-  border: 2px solid #ffcc00; /* Borde amarillo */
-  color: #ffcc00; /* Texto amarillo */
-  font-size: 18px; /* Tamaño de fuente moderado */
-  width: 30px; /* Ancho del botón */
-  height: 30px; /* Altura del botón */
+  border: 2px solid #ffcc00; 
+  color: #ffcc00;
+  font-size: 18px; 
+  width: 30px; 
+  height: 30px; 
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
 .delete-button:hover {
-  color: #fff; /* Texto blanco al pasar el ratón */
-  background-color: #ffcc00; /* Fondo amarillo al pasar el ratón */
-  border-color: #ffcc00; /* Borde amarillo al pasar el ratón */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada al pasar el ratón */
+  color: #fff; 
+  background-color: #ffcc00; 
+  border-color: #ffcc00; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
 }
 
 @media (max-width: 700px) {
