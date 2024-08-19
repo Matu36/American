@@ -125,7 +125,7 @@ export default function FooterAlternativo() {
             <FaFacebook size={40} color="#1877F2" />
           </a>
           <a
-            href="https://wa.me/1159249700"
+            href="https://wa.me/1159249700?text=Hola,%20¿En%20qué%20te%20podemos%20ayudar?"
             target="_blank"
             rel="noopener noreferrer"
           >
