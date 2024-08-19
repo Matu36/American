@@ -99,7 +99,7 @@ export default function Financiación() {
           alt="Financiación"
           className="large-images"
         />
-        <br />
+
         <h2 className="postVentaSubtitle">
           {" "}
           Contamos con la más amplia gama de financiación para usted y su{" "}
