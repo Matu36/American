@@ -3222,7 +3222,7 @@ width: 350px;
 
 .form-container1 {
   width: 50%;
-  margin: 1.4rem auto;
+  margin: 0.4rem auto;
   padding: 20px;
   background-color: #000;
   color: #ffcc00;
@@ -3233,8 +3233,14 @@ width: 350px;
 }
 
 @media (max-width: 600px) {
+  .form-container {
+    width: 95%;
+  }
+}
+
+@media (max-width: 600px) {
   .form-container1 {
-    width: 80%;
+    width: 95%;
   }
 }
 /* Estilos para los campos de entrada y select */
@@ -4719,7 +4725,7 @@ left: -10%;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 40px;
 }
 
 .ofertas-list h3 {
@@ -4795,13 +4801,7 @@ left: -10%;
   }
 }
 
-@media (max-width: 600px) {
-  .NovedadesTitle {
-    text-align: left;
-    margin-left: 30px;
-    margin-right: auto; 
-  }
-}
+.NovedadesTitle {margin-bottom: -20px;}
 
 
 
