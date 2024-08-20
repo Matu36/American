@@ -997,8 +997,8 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
   text-align: center;
-  border-top: 3px solid black;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+  /* border-top: 3px solid black;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4); */
 }
 
 .about-button {
@@ -4454,6 +4454,12 @@ background-color: rgba(0, 0, 0, 0.8);
   max-width: 100%;
   height: auto; 
   transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+@media (max-width: 1240px) {
+  .white-bar .headerSearchBarClick {
+    top: 100px; 
+  }
 }
 
 .white-bar.fixed .headerSearchBarClick {
