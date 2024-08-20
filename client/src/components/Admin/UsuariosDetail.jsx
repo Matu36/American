@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useUsuario } from "../../hooks/useUsuarios";
 import Spinner from "../../UI/Spinner";
+import BackButton from "../../UI/BackButton";
 
 export default function UsuariosDetail() {
   const { id } = useParams();
@@ -21,6 +22,7 @@ export default function UsuariosDetail() {
 
   return (
     <div className="form-container1">
+      <BackButton />
       <h2>Detalle del Usuario</h2>
       <br />
       <div>

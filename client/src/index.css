@@ -2150,6 +2150,7 @@ button:focus-visible {
 
 .containerAdmin {
   display: flex;
+  
 }
 
 @media screen and (max-width: 600px) {
@@ -2166,8 +2167,8 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #febb00;
-  color: black;
+  background-color: black;
+  color: #febb00;
   max-width: 100%;
   height: 140px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -2177,16 +2178,17 @@ button:focus-visible {
 .navbarAdmin__title {
   font-size: 1.25rem;
   font-weight: bold;
+  color: #ffcc00;
 }
 
 @media (max-width: 700px) {
   .navbarAdmin__title {
-    font-size: 0.8rem;
+    font-size: 1.5rem;
   }
 }
 @media (max-width: 500px) {
   .navbarAdmin__title {
-    font-size: 0.6rem;
+    font-size: 1.2rem;
   }
 }
 
@@ -2211,6 +2213,7 @@ button:focus-visible {
   display: flex;
   align-items: center;
   position: relative;
+  color: yellow;
 }
 
 .navbarAdmin__icon {
@@ -2354,7 +2357,7 @@ button:focus-visible {
 .user__info {
   display: flex;
   align-items: center;
-  color: black;
+  color: #ffcc00;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   margin-right: 0.5rem;
   border-radius: 8px;
@@ -2364,10 +2367,10 @@ button:focus-visible {
 
 @media (max-width: 600px) {
   .user__info {
-    font-size: 10px;
+    font-size: 14px;
     padding: 0;
     margin-right: 1.5rem;
-    margin-top: -4rem;
+    margin-top: -5rem;
   }
 }
 
@@ -3204,8 +3207,8 @@ width: 350px;
 
 
 .form-container {
-  width: 80%;
-  margin: 2rem auto;
+  width: 82%;
+  margin: 0.2rem auto;
   padding: 20px;
   background-color: #000;
   color: #ffcc00;
@@ -3219,7 +3222,7 @@ width: 350px;
 
 .form-container1 {
   width: 50%;
-  margin: 2rem auto;
+  margin: 1.4rem auto;
   padding: 20px;
   background-color: #000;
   color: #ffcc00;
@@ -3886,7 +3889,7 @@ width: 350px;
 
 @media (max-width: 500px) {
   .navbarAdmin__icon {
-    font-size: small;
+    font-size: x-large;
   }
 }
 
@@ -4689,8 +4692,8 @@ left: -10%;
   justify-content: center;
   transition: background-color 0.3s ease; 
   position: absolute;
-  right: 70px; 
-  top: 190px; 
+  right: 30px; 
+  top: 155px; 
 }
 
 .back-button:hover {
@@ -4799,6 +4802,8 @@ left: -10%;
     margin-right: auto; 
   }
 }
+
+
 
 
 /* PROBANDO DEPLOY  */

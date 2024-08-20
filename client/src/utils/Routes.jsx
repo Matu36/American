@@ -92,9 +92,32 @@ const AdminLayout = () => {
 
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 
-  const handleCheckRol = () => {
-    checkRol({ token });
+  const handleCheckRol = async () => {
+    try {
+      await checkRol({ token });
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        navigate("/");
+      }
+    }
   };
+
+  useEffect(() => {
+    if (token) {
+      handleCheckRol();
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (rolData) {
+      setLoading(false);
+      const role = rolData?.data.rol;
+      if (!role) {
+        navigate("/error");
+      }
+    }
+  }, [rolData, navigate]);
+
   useEffect(() => {
     if (token) {
       handleCheckRol();

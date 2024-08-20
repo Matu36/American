@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useUsuario } from "../../hooks/useUsuarios";
 import useAuth from "../../hooks/useAuth";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaUsers,
@@ -24,8 +24,16 @@ const SideBarResponsiva = ({ handleCerrarModalSideBar }) => {
   const idUsuario = token;
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 
-  const handleCheckRol = () => {
-    checkRol({ idUsuario });
+  const navigate = useNavigate();
+
+  const handleCheckRol = async () => {
+    try {
+      await checkRol({ idUsuario });
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        navigate("/");
+      }
+    }
   };
 
   useEffect(() => {

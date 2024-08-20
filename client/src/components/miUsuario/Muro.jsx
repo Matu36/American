@@ -90,7 +90,7 @@ export default function Muro() {
     >
       <BackButton />
       <div className="NovedadesTitle">
-        <br /> <br /> <h3 style={{ fontFamily: "merri" }}>Novedades</h3>
+        <br /> <h3 style={{ fontFamily: "merri" }}>Novedades</h3>
       </div>
       <div className="ofertas-list">
         {data && data.length > 0 ? (

@@ -158,7 +158,7 @@ export default function CotizacionDetail() {
   return (
     <div className="form-container1">
       <BackButton />
-      <h2>Detalle de Cotización</h2>
+      <h2>Detalle de la Cotización</h2>
       <br />
 
       <div>

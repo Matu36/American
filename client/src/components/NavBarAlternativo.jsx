@@ -78,8 +78,14 @@ export default function NavBarAlternativo({
 
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 
-  const handleCheckRol = () => {
-    checkRol({ idUsuario });
+  const handleCheckRol = async () => {
+    try {
+      await checkRol({ idUsuario });
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        navigate("/");
+      }
+    }
   };
 
   const navigateToHome = () => {

@@ -60,7 +60,7 @@ export default function EditarUsuario({ handleCerrarModalEdit }) {
               type="email"
               name="email"
               onChange={changed}
-              placeholder={auth.email}
+              value={auth.email}
               disabled
             />
           </div>
@@ -76,7 +76,7 @@ export default function EditarUsuario({ handleCerrarModalEdit }) {
               type="text"
               name="nombre"
               onChange={changed}
-              placeholder={auth.nombre}
+              value={auth.nombre}
             />
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function EditarUsuario({ handleCerrarModalEdit }) {
               type="text"
               name="apellido"
               onChange={changed}
-              placeholder={auth.apellido}
+              value={auth.apellido}
             />
           </div>
           <div className="registroform">
@@ -96,7 +96,7 @@ export default function EditarUsuario({ handleCerrarModalEdit }) {
               type="text"
               name="telefono"
               onChange={changed}
-              placeholder={auth.telefono}
+              value={auth.telefono}
             />
           </div>
           <div className="registroform">
@@ -105,7 +105,7 @@ export default function EditarUsuario({ handleCerrarModalEdit }) {
               type="text"
               name="direccion"
               onChange={changed}
-              placeholder={auth.direccion}
+              value={auth.direccion}
             />
           </div>
         </div>
@@ -119,7 +119,7 @@ export default function EditarUsuario({ handleCerrarModalEdit }) {
       <span>
         {saved == "saved" ? "Usuario modificado Correctamente" : null}
       </span>
-      <span>{saved == "error" ? "Error papu" : null}</span>
+      <span>{saved == "error" ? "Error Interno del Servidor" : null}</span>
     </div>
   );
 }

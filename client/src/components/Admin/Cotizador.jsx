@@ -6,6 +6,7 @@ import Select from "react-select";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
 import { useUsuario } from "../../hooks/useUsuarios";
 import BackButton from "../../UI/BackButton";
+import { useNavigate } from "react-router-dom";
 
 const Cotizador = () => {
   const { auth } = useAuth();
@@ -16,8 +17,16 @@ const Cotizador = () => {
   // CHEQUEAMOS EL ROL PARA EL INTERES //
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 
-  const handleCheckRol = () => {
-    checkRol({ idUsuario });
+  const navigate = useNavigate();
+
+  const handleCheckRol = async () => {
+    try {
+      await checkRol({ idUsuario });
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        navigate("/");
+      }
+    }
   };
 
   useEffect(() => {

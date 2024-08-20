@@ -4,7 +4,7 @@ import { useClientes } from "../../hooks/useClientes";
 import { useProducto } from "../../hooks/useProductos";
 import Select from "react-select";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useUsuario } from "../../hooks/useUsuarios";
 import BackButton from "../../UI/BackButton";
 
@@ -16,8 +16,16 @@ export default function CotizacionEdit() {
 
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 
-  const handleCheckRol = () => {
-    checkRol({ idUsuario });
+  const navigate = useNavigate();
+
+  const handleCheckRol = async () => {
+    try {
+      await checkRol({ idUsuario });
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        navigate("/");
+      }
+    }
   };
 
   useEffect(() => {

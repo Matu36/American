@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaUser, FaBell } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import logo from "../../assets/img/logoAmerican.png";
+import logo from "../../assets/img/LOGOAMERICANPRINCIPAL.png";
 import { useMensajes } from "../../hooks/useMensajes";
 import gruagif from "../../assets/img/GRUAGIF1.gif";
 import { FaBars } from "react-icons/fa";
@@ -40,9 +40,9 @@ export default function NavBarAdmin() {
 
   return (
     <nav className="navbarAdmin">
-      <div className="grua-container">
+      {/* <div className="grua-container">
         <img src={gruagif} alt="" className="grua-img" />
-      </div>
+      </div> */}
 
       <div className="sidebarAdmin__header">
         {sidebar && (
@@ -87,7 +87,7 @@ export default function NavBarAdmin() {
               background: "none",
             }}
           >
-            <FaBars className="burguer-icon" />
+            <FaBars className="burguer-icon" style={{ color: "white" }} />
           </button>
         )}
       </div>

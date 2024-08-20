@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useUsuario } from "../../hooks/useUsuarios";
 import BackButton from "../../UI/BackButton";
+import { useNavigate } from "react-router-dom";
 
 export default function Productos() {
   const { data, isLoading } = useProducto().productosQuery;
@@ -18,8 +19,16 @@ export default function Productos() {
 
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
 
-  const handleCheckRol = () => {
-    checkRol({ idUsuario });
+  const navigate = useNavigate();
+
+  const handleCheckRol = async () => {
+    try {
+      await checkRol({ idUsuario });
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        navigate("/");
+      }
+    }
   };
   useEffect(() => {
     if (idUsuario) {

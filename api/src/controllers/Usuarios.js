@@ -173,9 +173,24 @@ const getLastLoggedInUsers = async (req, res) => {
 };
 
 const putUser = async (req, res) => {
+  const token = req.headers.authorization;
+
+  if (!token) {
+    return res.status(401).send({ error: "Token no proporcionado" });
+  }
+
   try {
-    //ACA BUSCA POR ID, es decir, le permite modificar al usuario una vez logueado o autenticado //
-    const user = await Usuarios.findByPk(req.body.id);
+    // Decodificar el token para obtener el ID del usuario
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    // Obtener el ID del usuario desde el token decodificado
+    const userId = decodedToken.id;
+
+    // Buscar el usuario por ID (obtenido del token)
+    const user = await Usuarios.findByPk(userId);
 
     if (!user) {
       return res.status(404).send("No se encontró el usuario");
@@ -183,8 +198,9 @@ const putUser = async (req, res) => {
 
     // Verificar si se proporciona una modificación en la solicitud
     const { email, password, nombre, apellido, direccion, telefono } = req.body;
+
     if (email || password || nombre || apellido || direccion || telefono) {
-      // Si se proporciona un nuevo email, actualizarlo y volver a cargar el usuario
+      // Si se proporciona un nuevo email, actualizarlo
       if (email) {
         user.email = email.toLowerCase();
       }
@@ -211,20 +227,16 @@ const putUser = async (req, res) => {
 
       // Guardar los cambios en la base de datos
       await user.save();
-      return res.status(200).send({ status: "success" });
+      return res
+        .status(200)
+        .send({ status: "success", user: await user.reload() });
     } else {
       return res
         .status(400)
-
-        .send(
-          "Se debe proporcionar al menos un campo para actualizar (email o password)"
-        );
+        .send("Se debe proporcionar al menos un campo para actualizar.");
     }
-
-    // Devolver el usuario actualizado
-    return res.send(await user.reload());
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).send(error);
   }
 };
@@ -271,20 +283,17 @@ const resetPassword = async (req, res) => {
 
 const verificarRol = async (req, res) => {
   try {
-    // Obtener el token desde el encabezado Authorization
     const token = req.headers.authorization;
 
     if (!token) {
       return res.status(401).send({ error: "Token no proporcionado" });
     }
 
-    // Decodificar el token
     const decodedToken = jwt.decodeToken(
       token.replace("Bearer ", ""),
       JWTSECRET
     );
 
-    // Obtener el ID del usuario desde el token
     const idUsuario = decodedToken.id;
 
     const usuario = await Usuarios.findByPk(idUsuario);
