@@ -673,7 +673,7 @@ const getUltimasCotizaciones = async (req, res) => {
           attributes: ["modelo"],
         },
       ],
-      attributes: ["PrecioFinal"],
+      attributes: ["PrecioFinal", "moneda"],
     });
 
     return res.status(200).json(cotizaciones);

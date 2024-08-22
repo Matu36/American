@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
 import Logo from "../../assets/img/LOGOAMERICANPRINCIPAL.png";
 import Empresa from "../../assets/img/EmpresaPDF.jpg";
+import Spinner from "../../UI/Spinner";
 
 import {
   PDFDownloadLink,
@@ -25,7 +26,11 @@ export default function CotizacionDetail() {
   ).cotizacionDetalleQuery;
 
   if (isLoading) {
-    return <div className="loader">Loading...</div>;
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   }
 
   const {
@@ -158,7 +163,7 @@ export default function CotizacionDetail() {
   return (
     <div className="form-container1">
       <BackButton />
-      <h2>Detalle de la Cotización</h2>
+      <h2>Detalle Cotización</h2>
       <br />
 
       <div>

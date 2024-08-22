@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useUltimasCotizaciones } from "../../../hooks/useCotizaciones";
 import useAuth from "../../../hooks/useAuth";
+import Spinner from "../../../UI/Spinner";
 
 export default function WidgetLg() {
   const { auth } = useAuth();
@@ -11,7 +12,11 @@ export default function WidgetLg() {
     useUltimasCotizaciones(idUsuario).ultimasCotizacionesQuery;
 
   if (isLoading) {
-    return <div className="loader">Loading...</div>;
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   }
 
   return (
@@ -33,7 +38,9 @@ export default function WidgetLg() {
                 {cotizacion.Cliente.nombre} {cotizacion.Cliente.apellido}
               </td>
               <td>{cotizacion.Producto.modelo}</td>
-              <td>$ {cotizacion.PrecioFinal}</td>
+              <td>
+                {cotizacion.moneda} {cotizacion.PrecioFinal}
+              </td>
             </tr>
           ))}
         </tbody>

@@ -16,13 +16,15 @@ export default function HistorialRanking() {
   if (!data || !showRanking) return null;
 
   return (
-    <div className="ranking-container">
+    <div className="contact-container">
       <button
         className="close-button-ranking"
         onClick={() => setShowRanking(false)}
       >
         <FaTimes />
       </button>
+      <h2>Ranking</h2>
+      <br />
       <div className="ranking-item">
         <h2>Vendedor con más cotizaciones</h2>
         <p>
