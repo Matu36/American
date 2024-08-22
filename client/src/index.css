@@ -3326,13 +3326,30 @@ width: 350px;
 
 .cliente-info {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  justify-content: space-between; 
+  flex-wrap: nowrap; 
+  width: 100%;
+  gap: 5px; 
 }
 
 .cliente-detail {
+  flex-grow: 1; 
   margin-top: 1rem;
-  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 980px) {
+  .cliente-info {
+    margin-top: 1rem;
+    flex-direction: column; 
+    align-items: stretch;  
+  }
+
+  .cliente-detail {
+    width: 100%; 
+    margin-top: 0.2rem; 
+    margin-bottom: 0.2rem;
+    
+  }
 }
 .clientes-detail-container {
   max-width: 600px;

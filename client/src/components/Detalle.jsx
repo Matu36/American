@@ -222,9 +222,7 @@ export default function Detalle() {
                 </strong>
               </h1>
               <br />
-              <p>
-                <strong>Código:</strong> {codigo}
-              </p>
+
               <p>
                 <strong>Potencia:</strong> {potencia}
               </p>
@@ -237,6 +235,9 @@ export default function Detalle() {
               </p>
               <p>
                 <strong>Capacidad de Balde:</strong> {capacidadDeBalde}
+              </p>
+              <p>
+                <strong>Código:</strong> {codigo}
               </p>
               {fichaPDF && (
                 <div className="fichatenica">

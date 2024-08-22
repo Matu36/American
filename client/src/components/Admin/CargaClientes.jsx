@@ -2,12 +2,24 @@ import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useClientes } from "../../hooks/useClientes";
 import BackButton from "../../UI/BackButton";
+import InputMask from "react-input-mask";
+import { soloNumeros } from "../../utils/soloNumeros";
 
 export default function CargaClientes() {
   const { auth } = useAuth();
   const { mutate: clienteCreate } = useClientes().clientesMutation;
   const token = localStorage.getItem("token");
   const idUsuario = token;
+
+  const handleMaskedChange = (e) => {
+    const unmaskedValue = e.target.value.replace(/-/g, "").replace(/\s+/g, "");
+    handleChange({
+      target: {
+        name: e.target.name,
+        value: unmaskedValue,
+      },
+    });
+  };
 
   // Estado local para manejar los datos del formulario
   const [formData, setFormData] = useState({
@@ -55,17 +67,26 @@ export default function CargaClientes() {
       <br />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="CUIT">
-            CUIT <span className="obligatorio">*</span>
+          <label htmlFor="domicilio">
+            CUIT<span className="obligatorio">*</span>
           </label>
-          <input
-            type="text"
-            id="CUIT"
-            name="CUIT"
+          <InputMask
+            mask="99 - 99999999 - 9"
+            maskChar=" "
             value={formData.CUIT}
-            onChange={handleChange}
+            onChange={handleMaskedChange}
             required
-          />
+          >
+            {(inputProps) => (
+              <input
+                {...inputProps}
+                type="text"
+                id="CUIT"
+                name="CUIT"
+                required
+              />
+            )}
+          </InputMask>
         </div>
         <div className="form-group">
           <label htmlFor="domicilio">
@@ -139,7 +160,7 @@ export default function CargaClientes() {
             id="telefono"
             name="telefono"
             value={formData.telefono}
-            onChange={handleChange}
+            onChange={(e) => handleChange(soloNumeros(e))}
             required
           />
         </div>
