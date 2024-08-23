@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
-import { Global } from "../../helpers/Global";
-import logo from "../../assets/img/AMERICAN.jpg";
+import logo from "../../assets/img/welcomefondoblanco.png";
 
 export default function Registro({ handleCerrarModalRegistro }) {
   const { form, changed } = useForm({});
@@ -64,6 +63,7 @@ export default function Registro({ handleCerrarModalRegistro }) {
         handleCerrarModalRegistro();
         window.location.reload();
       }, 2000);
+
       return () => clearTimeout(timer);
     }
   }, [showWelcomeMessage]);

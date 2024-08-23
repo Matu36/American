@@ -724,6 +724,7 @@ button:focus-visible {
   font-family: "Merriweather", serif;
   font-size: 18px;
   color: grey;
+  font-weight: bold;
  padding-left: 0.5rem;
  padding-right: 0.5rem;
 }
@@ -1960,21 +1961,60 @@ button:focus-visible {
 }
 
 /* index.css */
-.welcome-message {
-  display: flex;
-  flex-direction: column; 
+.login-container .welcome-message,
+.registro-container .welcome-message {
+ position: absolute;
+ left: 46%;
+ top: 50%;
+  width: 300px;
+  flex-direction: column;
   justify-content: center;
-  align-items: center; 
-  height: 50%; 
-  text-align: center; 
+  align-items: center;
+  height: auto; 
+  text-align: center;
+  padding: 20px;
+  background-color: #ffcc00; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  margin: 20px;
+  transition: all 0.3s ease-in-out;
 }
 
-.welcome-message img {
+.login-container .welcome-message img,
+.registro-container .welcome-message img {
   max-width: 100%; 
-  height: auto; 
-  margin-bottom: 10px; 
-  margin-top: 30px;
+  width: 800px;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
+
+.login-container .welcome-message h2,
+.registro-container .welcome-message h2 {
+  color: #000; 
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+
+@media (max-width: 600px) {
+  .login-container .welcome-message,
+  .registro-container .welcome-message {
+    padding: 15px;
+    margin: 10px;
+    height: auto;
+  }
+
+  .welcome-message h2 {
+    font-size: 20px;
+  }
+
+  .welcome-message p {
+    font-size: 16px;
+  }
+}
+
 
 
 /* ESTILOS PARA EL FORMULARIO DE REGISTRO DE USUARIO */

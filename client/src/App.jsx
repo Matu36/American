@@ -16,11 +16,17 @@ function App() {
   const [suscripcion, setSuscripcion] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setSuscripcion(true);
-    }, 3000);
+    const suscripcionMostrada = sessionStorage.getItem("suscripcionMostrada");
 
-    return () => clearTimeout(timer);
+    if (!suscripcionMostrada) {
+      const timer = setTimeout(() => {
+        setSuscripcion(true);
+
+        sessionStorage.setItem("suscripcionMostrada", "true");
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   const { data: productos, isLoading } = useProducto().productosQuery;

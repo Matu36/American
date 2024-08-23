@@ -3,7 +3,7 @@ import { useForm } from "../../hooks/useForm";
 import Registro from "./Registro";
 import RecoverPass from "./RecoverPass";
 import { useNavigate, useLocation } from "react-router-dom";
-import logo from "../../assets/img/AMERICAN.jpg";
+import logo from "../../assets/img/welcomefondoblanco.png";
 
 export default function Login({ handleCerrarModalLogin }) {
   const { form, changed } = useForm({});
@@ -86,15 +86,13 @@ export default function Login({ handleCerrarModalLogin }) {
   };
 
   useEffect(() => {
-    // Después de 3 segundos, ocultar el mensaje de bienvenida
     if (showWelcomeMessage) {
       const timer = setTimeout(() => {
         setShowWelcomeMessage(false);
         handleCerrarModalLogin();
 
-        // Condición para determinar la ruta actual
         if (location.pathname === "/") {
-          window.location.reload(); // Recargar la página si estamos en '/'
+          window.location.reload();
         } else {
           navigate("/");
           window.location.reload();
@@ -158,7 +156,7 @@ export default function Login({ handleCerrarModalLogin }) {
           {showWelcomeMessage && (
             <div className="welcome-message">
               <img src={logo} alt="" />
-              <p>Bienvenido a American Vial!</p>
+              <h2>Bienvenido a American Vial!</h2>
             </div>
           )}
 
