@@ -53,6 +53,7 @@ import ProductosDetalle from "../components/Admin/ProductosDetalle";
 import useAxiosInterceptor from "../hooks/useAxiosInterceptor";
 import OfertasNovedades from "../components/Admin/OfertasNovedades";
 import Muro from "../components/miUsuario/Muro";
+import Suscripcion from "../components/Admin/Suscripcion";
 
 const AppRouter = () => {
   const InterceptorSetup = () => {
@@ -184,6 +185,7 @@ const AdminLayout = () => {
           <Route path="/Repuestos" element={<Repuestos />} />
           <Route path="/Repuestos/ver/:id" element={<RepuestosDetail />} />
           <Route path="/ContactoProducto" element={<ContactoProducto />} />
+          <Route path="/Suscriptores" element={<Suscripcion />} />
           <Route path="/Mensajes/nuevo" element={<FormMensaje />} />
           <Route path="/Mensajes/enviados" element={<MensajesEnviados />} />
           <Route path="/Mensajes/enviados/:id" element={<MensajesDetail />} />

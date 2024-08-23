@@ -14,6 +14,7 @@ import {
   FaAngleDown,
   FaCogs,
   FaTag,
+  FaEnvelopeOpen,
 } from "react-icons/fa";
 import { MdPerson, MdMail } from "react-icons/md";
 
@@ -140,11 +141,18 @@ const SideBarAdmin = () => {
       roles: ["administrador"],
     },
     {
+      label: "Suscriptores",
+      icon: FaEnvelopeOpen,
+      subCategories: [],
+      roles: ["administrador"],
+    },
+    {
       label: "OfertasNovedades",
       icon: FaTag,
       subCategories: [],
       roles: ["administrador"],
     },
+
     {
       label: "Mensajes",
       icon: MdMail,

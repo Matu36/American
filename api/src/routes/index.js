@@ -103,6 +103,11 @@ const {
 } = require("../controllers/HistorialCotizacion");
 
 const {
+  getAllSuscripciones,
+  createSuscripcion,
+} = require("../controllers/Suscripcion");
+
+const {
   createOfertaNovedad,
   updateOfertaNovedad,
   getOfertasNovedadesAsc,
@@ -240,5 +245,7 @@ router.delete("/ofertasNovedades/delete", check.auth, deleteOfertaNovedad);
 router.get("/favoritos/get/:idUsuario", getFavoritosAsc);
 router.post("/favoritos/create", createFavorito);
 router.delete("/favoritos/delete", deleteFavorito);
+router.get("/suscripcion/getAll", getAllSuscripciones);
+router.post("/suscripcion/create", createSuscripcion);
 
 module.exports = router;

@@ -6,11 +6,22 @@ import Layout from "./pages/Layout";
 import { useProducto } from "./hooks/useProductos";
 import CarouselPrincipal from "./components/CarouselPrincipal";
 import { FaWhatsapp } from "react-icons/fa";
+import Suscripcion from "./components/Suscripcion";
 
 function App() {
   const [selectedFamilia, setSelectedFamilia] = useState(null);
   const cardsContainerRef = useRef(null);
   const { auth, setAuth } = useAuth();
+
+  const [suscripcion, setSuscripcion] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSuscripcion(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const { data: productos, isLoading } = useProducto().productosQuery;
 
@@ -51,7 +62,7 @@ function App() {
     >
       <div className="containerApp">
         <CarouselPrincipal />
-
+        {suscripcion && <Suscripcion onClose={() => setSuscripcion(false)} />}
         <div className="eleganzaContainer">
           <div className="navBarDiv">
             <NavBar onSelectFamilia={handleFamiliaClick} />
