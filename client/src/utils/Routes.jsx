@@ -76,6 +76,7 @@ const AppRouter = () => {
           <Route path="/novedades" element={<Muro />} />
           <Route path="/productos/:id" element={<Detalle />} />
           <Route path="/Error" element={<ErroPage />} />
+          <Route path="*" element={<ErroPage />} />
           <Route path="/admin/*" element={<AdminLayout />} />
         </Routes>
       </AuthProvider>
@@ -108,18 +109,30 @@ const AdminLayout = () => {
     }
   }, [token]);
 
+  if (!token) {
+    navigate("/error");
+    return;
+  }
+
   useEffect(() => {
     if (rolData) {
       const role = rolData?.data?.rol;
       if (role === "comun") {
-        navigate("/acceso-denegado");
-      } else if (!role) {
         navigate("/error");
+        console.log(role);
       } else {
         setLoading(false);
       }
     }
   }, [rolData, navigate]);
+
+  if (loading) {
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <>

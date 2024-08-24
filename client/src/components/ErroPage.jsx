@@ -1,5 +1,10 @@
 import React from "react";
+import error from "../assets/img/error404.jpg";
 
 export default function ErroPage() {
-  return <div>Te equivocaste!</div>;
+  return (
+    <div className="fullscreen-image">
+      <img src={error} alt="Error Image" />
+    </div>
+  );
 }
