@@ -1,5 +1,5 @@
 import React from "react";
-import error from "../assets/img/error404.jpg";
+import error from "../assets/img/error404.png";
 
 export default function ErroPage() {
   return (
