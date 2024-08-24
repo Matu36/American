@@ -4954,22 +4954,36 @@ left: -10%;
 }
 
 .fullscreen-image {
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%; 
-  height: 100%; 
-  background-size: cover; 
-  background-repeat: no-repeat; 
-  background-position: center; 
-  z-index: -1; 
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -1;
 }
 
 .fullscreen-image img {
   width: 100%;
   height: 100%;
-
 }
+
+.ordenador {
+  display: none; 
+}
+
+
+@media (min-width: 700px) {
+  .responsivo {
+    display: none; 
+  }
+  .ordenador {
+    display: block; 
+  }
+}
+
 
 
 
