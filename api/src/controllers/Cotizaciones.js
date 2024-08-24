@@ -177,8 +177,18 @@ const getCotizaciones = async (req, res) => {
     }
 
     let whereCondition = { estado: 1 };
-    if (!usuario.rol) {
-      whereCondition.idUsuario = idUsuario;
+    if (usuario.rol === false && !usuario.baneado) {
+      // Si es vendedor
+      whereCondition.idUsuario = idUsuario; // Solo sus cotizaciones
+    } else if (
+      usuario.rol === true ||
+      (usuario.rol === false && usuario.baneado === true)
+    ) {
+      // Si es administrador o gerente (ambos roles ven todas las cotizaciones)
+    } else {
+      return res
+        .status(403)
+        .send({ error: "No tienes permisos para acceder a esta información" });
     }
 
     const cotizaciones = await Cotizaciones.findAll({
@@ -541,7 +551,10 @@ const getCotizacionesEstadoDos = async (req, res) => {
 
     // Obtener las cotizaciones con estado 2 según el rol del usuario
     let cotizaciones;
-    if (usuario.rol === true) {
+    if (
+      usuario.rol === true ||
+      (usuario.rol === false && usuario.baneado === true)
+    ) {
       cotizaciones = await Cotizaciones.findAll({
         where: { estado: 2 },
         attributes: [
@@ -654,8 +667,16 @@ const getUltimasCotizaciones = async (req, res) => {
 
     // Definir las condiciones de búsqueda
     let whereCondition = {};
-    if (!usuario.rol) {
-      whereCondition = { idUsuario };
+    if (usuario.rol === false && !usuario.baneado) {
+      whereCondition.idUsuario = idUsuario;
+    } else if (
+      usuario.rol === true ||
+      (usuario.rol === false && usuario.baneado === true)
+    ) {
+    } else {
+      return res
+        .status(403)
+        .send({ error: "No tienes permisos para acceder a esta información" });
     }
 
     // Obtener las últimas 5 cotizaciones
@@ -714,7 +735,10 @@ const getCotizacionesSum = async (req, res) => {
     let cotizacionesCotizaciones;
     let cotizacionesVentas;
 
-    if (usuario.rol === true) {
+    if (
+      usuario.rol === true ||
+      (usuario.rol === false && usuario.baneado === true)
+    ) {
       cotizacionesCotizaciones = await Cotizaciones.findAll({
         where: { estado: 1 },
       });

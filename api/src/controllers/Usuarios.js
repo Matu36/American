@@ -299,22 +299,20 @@ const verificarRol = async (req, res) => {
     const usuario = await Usuarios.findByPk(idUsuario);
 
     if (!usuario) {
-      throw "Usuario no encontrado";
+      throw new Error("Usuario no encontrado");
     }
 
-    let rolDescripcion = null;
+    let rolDescripcion = "comun";
 
     if (usuario.rol === true) {
       rolDescripcion = "administrador";
+    } else if (usuario.rol === false && usuario.baneado === true) {
+      rolDescripcion = "gerente";
     } else if (usuario.rol === false) {
       rolDescripcion = "vendedor";
     }
 
-    if (rolDescripcion) {
-      return res.status(200).json({ rol: rolDescripcion });
-    } else {
-      throw "El usuario no tiene un rol válido (ni administrador ni vendedor)";
-    }
+    return res.status(200).json({ rol: rolDescripcion });
   } catch (error) {
     return res.status(400).send({ error: error.message || error });
   }

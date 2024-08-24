@@ -87,7 +87,6 @@ export default function NavBarAlternativo({
       }
     }
   };
-
   const navigateToHome = () => {
     navigate("/");
   };
@@ -202,6 +201,8 @@ export default function NavBarAlternativo({
     }, 3000);
     window.location.reload();
   };
+
+  console.log(role);
 
   return (
     <>
@@ -388,7 +389,9 @@ export default function NavBarAlternativo({
             {role ? (
               <div className="user-menu-container">
                 <span className="user-info">
-                  {role === "vendedor" || role === "administrador" ? (
+                  {role === "vendedor" ||
+                  role === "administrador" ||
+                  role === "gerente" ? (
                     <Link to="/admin">
                       <button className="admin">Admin</button>{" "}
                     </Link>

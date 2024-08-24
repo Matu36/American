@@ -36,10 +36,7 @@ export default function Login({ handleCerrarModalLogin }) {
   const loginUser = async (e) => {
     e.preventDefault();
 
-    //Datos del formulario
     let userToLogin = form;
-
-    //Peticion al backend
 
     try {
       // Petición al backend

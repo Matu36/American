@@ -61,15 +61,15 @@ const SideBarAdmin = () => {
         {
           label: "Cargar clientes",
           path: "/admin/clientes/cargar",
-          roles: ["administrador", "vendedor"],
+          roles: ["administrador", "vendedor", "gerente"],
         },
         {
           label: "Ver clientes",
           path: "/admin/clientes/ver",
-          roles: ["administrador", "vendedor"],
+          roles: ["administrador", "vendedor", "gerente"],
         },
       ],
-      roles: ["administrador", "vendedor"],
+      roles: ["administrador", "vendedor", "gerente"],
     },
     {
       label: "Productos",
@@ -78,15 +78,15 @@ const SideBarAdmin = () => {
         {
           label: "Cargar productos",
           path: "/admin/productos/cargar",
-          roles: ["administrador"],
+          roles: ["administrador", "gerente"],
         },
         {
           label: "Ver productos",
           path: "/admin/productos/ver",
-          roles: ["administrador", "vendedor"],
+          roles: ["administrador", "vendedor", "gerente"],
         },
       ],
-      roles: ["administrador", "vendedor"],
+      roles: ["administrador", "vendedor", "gerente"],
     },
     {
       label: "Cotizaciones",
@@ -95,26 +95,26 @@ const SideBarAdmin = () => {
         {
           label: "Crear Cotizacion",
           path: "/admin/cotizaciones/crear",
-          roles: ["administrador", "vendedor"],
+          roles: ["administrador", "vendedor", "gerente"],
         },
         {
           label: "Ver Cotizaciones",
           path: "/admin/cotizaciones/ver",
-          roles: ["administrador", "vendedor"],
+          roles: ["administrador", "vendedor", "gerente"],
         },
         {
           label: "Historial Cotizaciones",
           path: "/admin/cotizaciones/historial",
-          roles: ["administrador"],
+          roles: ["administrador", "gerente"],
         },
       ],
-      roles: ["administrador", "vendedor"],
+      roles: ["administrador", "vendedor", "gerente"],
     },
     {
       label: "Ventas",
       icon: FaShoppingCart,
       subCategories: [],
-      roles: ["administrador", "vendedor"],
+      roles: ["administrador", "vendedor", "gerente"],
     },
     {
       label: "Garantia",
@@ -160,20 +160,20 @@ const SideBarAdmin = () => {
         {
           label: "Nuevo Correo",
           path: "/admin/mensajes/nuevo",
-          roles: ["administrador", "vendedor"],
+          roles: ["administrador", "vendedor", "gerente"],
         },
         {
           label: "Ver mensajes",
           path: "/admin/mensajes/ver",
-          roles: ["administrador", "vendedor"],
+          roles: ["administrador", "vendedor", "gerente"],
         },
         {
           label: "Ver enviados",
           path: "/admin/mensajes/enviados",
-          roles: ["administrador", "vendedor"],
+          roles: ["administrador", "vendedor", "gerente"],
         },
       ],
-      roles: ["administrador", "vendedor"],
+      roles: ["administrador", "vendedor", "gerente"],
     },
   ];
 

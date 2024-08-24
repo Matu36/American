@@ -61,7 +61,6 @@ export default function Registro({ handleCerrarModalRegistro }) {
       const timer = setTimeout(() => {
         setShowWelcomeMessage(false);
         handleCerrarModalRegistro();
-        window.location.reload();
       }, 2000);
 
       return () => clearTimeout(timer);
