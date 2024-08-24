@@ -42,8 +42,7 @@ export const useSuscriptores = () => {
             Swal.fire({
               position: "center",
               icon: "warning",
-              title:
-                "Hay errores en el formulario; por favor, intente nuevamente",
+              title: "El Email ingresado se encuentra suscripto",
               background: "#ffffff",
               iconColor: "#ffc107",
               customClass: {
