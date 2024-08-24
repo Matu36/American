@@ -97,9 +97,8 @@ const AdminLayout = () => {
     try {
       await checkRol({ token });
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        navigate("/");
-      }
+      console.error("Error al verificar rol:", error);
+      navigate("/");
     }
   };
 
@@ -111,37 +110,16 @@ const AdminLayout = () => {
 
   useEffect(() => {
     if (rolData) {
-      setLoading(false);
-      const role = rolData?.data.rol;
-      if (!role) {
+      const role = rolData?.data?.rol;
+      if (role === "comun") {
+        navigate("/acceso-denegado");
+      } else if (!role) {
         navigate("/error");
+      } else {
+        setLoading(false);
       }
     }
   }, [rolData, navigate]);
-
-  useEffect(() => {
-    if (token) {
-      handleCheckRol();
-    }
-  }, [token]);
-
-  useEffect(() => {
-    if (rolData) {
-      setLoading(false);
-      const role = rolData?.data.rol;
-      if (!role) {
-        navigate("/error");
-      }
-    }
-  }, [rolData, navigate]);
-
-  if (loading) {
-    return (
-      <div>
-        <Spinner />
-      </div>
-    );
-  }
 
   return (
     <>
