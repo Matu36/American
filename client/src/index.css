@@ -4975,7 +4975,7 @@ left: -10%;
 }
 
 
-@media (min-width: 700px) {
+@media (min-width: 500px) {
   .responsivo {
     display: none; 
   }
