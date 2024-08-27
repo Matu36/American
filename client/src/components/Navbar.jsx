@@ -29,6 +29,12 @@ import TERMINADORAASFALTO from "../assets/img/FAMILIAS/TERMINADORAASFALTO.jpg";
 import TOPADORA from "../assets/img/FAMILIAS/TOPADORA.jpg";
 import TROMPOHORMIGONERO from "../assets/img/FAMILIAS/TROMPOHORMIGONERO.jpg";
 import TUNELERAHORIZONTAL from "../assets/img/FAMILIAS/TUNELERAHORIZONTAL.jpg";
+import GRUAIMAGE from "../assets/img/CAROUSEL/gruashome.png";
+import CAMIONIMAGE from "../assets/img/CAROUSEL/camionminerohome.png";
+import AUTOELEVADOR from "../assets/img/CAROUSEL/AUTOELEVADOR.jpg";
+import EXCAVADORAHOME from "../assets/img/CAROUSEL/EXCAVADORA.jpg";
+import BOMBAHORMIGONHOME from "../assets/img/CAROUSEL/bombahormigon.png";
+import RODILLOHOME from "../assets/img/CAROUSEL/rodillo.png";
 
 export default function NavBar({ onSelectFamilia }) {
   const handleFamiliaClick = (familia) => {
@@ -37,7 +43,100 @@ export default function NavBar({ onSelectFamilia }) {
 
   return (
     <div className="navbar">
-      <div className="grid-container">
+      <div className="tituloHome">
+        <h1>EL PODER DE UNA MARCA </h1> <h2> LA GARANTÍA DEL LÍDER</h2>
+      </div>
+      <div className="containerFamiliaHome">
+        <div className="letrasHome">
+          <h1>GRÚAS</h1>
+        </div>
+
+        <div className="imageHome">
+          <img src={GRUAIMAGE} alt="" />
+          <a
+            aria-controls="collapseGruas"
+            aria-expanded="false"
+            className="nav-link dropdown-toggle"
+            data-bs-toggle="collapse"
+            href="#collapseGruas"
+            role="button"
+          ></a>
+        </div>
+      </div>
+
+      <div className="categoriasContainer collapse" id="collapseGruas">
+        <div>
+          <button className="marca" onClick={() => handleFamiliaClick("Gruas")}>
+            <img src={GRUASRT} alt="GRUASRT" />
+          </button>
+        </div>
+        <div>
+          <button className="marca" onClick={() => handleFamiliaClick("Gruas")}>
+            <img src={GRUASSOBRECAMION} alt="GRUASSOBRECAMION" />
+          </button>
+        </div>
+        <div>
+          <button className="marca" onClick={() => handleFamiliaClick("Gruas")}>
+            <img src={GRUASTODOTORRENO} alt="GRUASTODOTORRENO" />
+          </button>
+        </div>
+      </div>
+      <div className="containerFamiliaHome">
+        <div className="letrasHome">
+          <h1>CAMIONES</h1>
+        </div>
+        <div className="imageHome">
+          {" "}
+          <img src={CAMIONIMAGE} alt="" />
+          <a
+            aria-controls="collapseCamion"
+            aria-expanded="false"
+            className="nav-link dropdown-toggle"
+            data-bs-toggle="collapse"
+            href="#collapseCamion"
+            role="button"
+          ></a>
+        </div>
+      </div>
+      <div className="categoriasContainer collapse" id="collapseCamion">
+        <div>
+          <button
+            className="marca"
+            onClick={() => handleFamiliaClick("CAMIONARTICULADO")}
+          >
+            <img src={CAMIONARTICULADO} alt="CAMIONARTICULADO" />
+          </button>
+        </div>
+        <div>
+          <button
+            className="marca"
+            onClick={() => handleFamiliaClick("CAMIONMINERO")}
+          >
+            <img src={CAMIONMINERO} alt="CAMIONMINERO" />
+          </button>
+        </div>
+      </div>
+
+      <div className="containerFamiliaHome">
+        <div className="letrasHome">
+          <h1>AUTO</h1>
+          <h1>ELEVADORES</h1>
+        </div>
+
+        <div className="imageHome">
+          <img src={AUTOELEVADOR} alt="" />
+          <a
+            aria-controls="collapseAutoelevadores"
+            aria-expanded="false"
+            className="nav-link dropdown-toggle"
+            data-bs-toggle="collapse"
+            href="#collapseAutoelevadores"
+            role="button"
+          ></a>
+        </div>
+      </div>
+
+      <div className="categoriasContainer collapse" id="collapseAutoelevadores">
         <button
           className="marca"
           onClick={() => handleFamiliaClick("AUTOELEVADOR2-4")}
@@ -56,6 +155,63 @@ export default function NavBar({ onSelectFamilia }) {
         >
           <img src={AUTOELEVADOR10} alt="AUTOELEVADOR10" />
         </button>
+      </div>
+
+      <div className="containerFamiliaHome">
+        <div className="letrasHome">
+          <h1>EXCAVADORAS</h1>
+        </div>
+
+        <div className="imageHome">
+          <img src={EXCAVADORAHOME} alt="" />
+          <a
+            aria-controls="collapseExcavadoras"
+            aria-expanded="false"
+            className="nav-link dropdown-toggle"
+            data-bs-toggle="collapse"
+            href="#collapseExcavadoras"
+            role="button"
+          ></a>
+        </div>
+      </div>
+
+      <div className="categoriasContainer collapse" id="collapseExcavadoras">
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("EXCAVADORA")}
+        >
+          <img src={EXCAVADORA} alt="EXCAVADORA" />
+        </button>
+
+        <button
+          className="marca"
+          onClick={() => handleFamiliaClick("EXCAVADORAMINERA")}
+        >
+          <img src={EXCAVADORAMINERA} alt="EXCAVADORAMINERA" />
+        </button>
+      </div>
+
+      <div className="containerFamiliaHome">
+        <div className="letrasHome">
+          <h1>BOMBAS</h1>
+          <h1>DE</h1>
+          <h1>HORMIGON</h1>
+        </div>
+
+        <div className="imageHome">
+          <img src={BOMBAHORMIGONHOME} alt="" />
+          <a
+            aria-controls="collapseBombas"
+            aria-expanded="false"
+            className="nav-link dropdown-toggle"
+            data-bs-toggle="collapse"
+            href="#collapseBombas"
+            role="button"
+          ></a>
+        </div>
+      </div>
+
+      <div className="categoriasContainer collapse" id="collapseBombas">
         <button
           className="marca"
           onClick={() => handleFamiliaClick("BOMBAHORMIGON")}
@@ -68,45 +224,56 @@ export default function NavBar({ onSelectFamilia }) {
         >
           <img src={BOMBAHORMIGONSOBRECAMION} alt="BOMBAHORMIGONSOBRECAMION" />
         </button>
+      </div>
+
+      <div className="containerFamiliaHome">
+        <div className="letrasHome">
+          <h1>RODILLOS</h1>
+        </div>
+
+        <div className="imageHome">
+          <img src={RODILLOHOME} alt="" />
+          <a
+            aria-controls="collapseRodillos"
+            aria-expanded="false"
+            className="nav-link dropdown-toggle"
+            data-bs-toggle="collapse"
+            href="#collapseRodillos"
+            role="button"
+          ></a>
+        </div>
+      </div>
+
+      <div className="categoriasContainer collapse" id="collapseRodillos">
         <button
           className="marca"
-          onClick={() => handleFamiliaClick("CAMIONARTICULADO")}
+          onClick={() => handleFamiliaClick("RODILLOCOMPACTADOR")}
         >
-          <img src={CAMIONARTICULADO} alt="CAMIONARTICULADO" />
+          <img src={RODILLOCOMPACTADOR} alt="RODILLOCOMPACTADOR" />
         </button>
         <button
           className="marca"
-          onClick={() => handleFamiliaClick("CAMIONMINERO")}
+          onClick={() => handleFamiliaClick("RODILLODOBLELISO")}
         >
-          <img src={CAMIONMINERO} alt="CAMIONMINERO" />
+          <img src={RODILLODOBLELISO} alt="RODILLODOBLELISO" />
         </button>
         <button
           className="marca"
-          onClick={() => handleFamiliaClick("EXCAVADORA")}
+          onClick={() => handleFamiliaClick("RODILLONEUMATICO")}
         >
-          <img src={EXCAVADORA} alt="EXCAVADORA" />
+          <img src={RODILLONEUMATICO} alt="RODILLONEUMATICO" />
         </button>
-        <button
-          className="marca"
-          onClick={() => handleFamiliaClick("EXCAVADORAMINERA")}
-        >
-          <img src={EXCAVADORAMINERA} alt="EXCAVADORAMINERA" />
-        </button>
+      </div>
+
+      {/* A PARTIR DE ACA HACER LAS IMAGENES GRANDES DE CADA BOTON Y ABAJO DE TODO LAS NOVEDADES  */}
+      <div className="grid-container">
         <button
           className="marca"
           onClick={() => handleFamiliaClick("FRESADORA")}
         >
           <img src={FRESADORA} alt="FRESADORA" />
         </button>
-        <button className="marca" onClick={() => handleFamiliaClick("Gruas")}>
-          <img src={GRUASRT} alt="GRUASRT" />
-        </button>
-        <button className="marca" onClick={() => handleFamiliaClick("Gruas")}>
-          <img src={GRUASSOBRECAMION} alt="GRUASSOBRECAMION" />
-        </button>
-        <button className="marca" onClick={() => handleFamiliaClick("Gruas")}>
-          <img src={GRUASTODOTORRENO} alt="GRUASTODOTORRENO" />
-        </button>
+
         <button
           className="marca"
           onClick={() => handleFamiliaClick("MANIPULADORESMAGNI")}
@@ -161,24 +328,7 @@ export default function NavBar({ onSelectFamilia }) {
         >
           <img src={RETROEXCAVADORA} alt="RETROEXCAVADORA" />
         </button>
-        <button
-          className="marca"
-          onClick={() => handleFamiliaClick("RODILLOCOMPACTADOR")}
-        >
-          <img src={RODILLOCOMPACTADOR} alt="RODILLOCOMPACTADOR" />
-        </button>
-        <button
-          className="marca"
-          onClick={() => handleFamiliaClick("RODILLODOBLELISO")}
-        >
-          <img src={RODILLODOBLELISO} alt="RODILLODOBLELISO" />
-        </button>
-        <button
-          className="marca"
-          onClick={() => handleFamiliaClick("RODILLONEUMATICO")}
-        >
-          <img src={RODILLONEUMATICO} alt="RODILLONEUMATICO" />
-        </button>
+
         <button
           className="marca"
           onClick={() => handleFamiliaClick("TERMINADORAASFALTO")}
