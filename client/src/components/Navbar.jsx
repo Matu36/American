@@ -285,8 +285,10 @@ export default function NavBar({ onSelectFamilia }) {
         onClick={() => handleFamiliaClick("TOPADORA")}
       >
         <img src={TOPADORAHOME} alt="TOPADORA" />
+
         <div className="letrasHomefOTOSOLA">
           <h1>TOPADORAS</h1>
+          <a className="nav-link dropdown-toggle" role="button"></a>
         </div>
       </button>
 
@@ -296,6 +298,7 @@ export default function NavBar({ onSelectFamilia }) {
       >
         <div className="letrasHomefOTOSOLA">
           <h1>FRESADORAS</h1>
+          <a className="nav-link dropdown-toggle" role="button"></a>
         </div>
         <img src={FRESADORAHOME} alt="FRESADORA" />
       </button>
@@ -307,6 +310,7 @@ export default function NavBar({ onSelectFamilia }) {
         <img src={MANIPULADORESMAGNI} alt="MANIPULADORESMAGNI" />
         <div className="letrasHomefOTOSOLA">
           <h1>MANIPULADORES MAGNI</h1>
+          <a className="nav-link dropdown-toggle" role="button"></a>
         </div>
       </button>
 
@@ -316,6 +320,7 @@ export default function NavBar({ onSelectFamilia }) {
       >
         <div className="letrasHomefOTOSOLA">
           <h1>MINI CARGADORAS</h1>
+          <a className="nav-link dropdown-toggle" role="button"></a>
         </div>
         <img src={MINICARGADORA} alt="MINICARGADORA" />
       </button>
@@ -328,6 +333,7 @@ export default function NavBar({ onSelectFamilia }) {
         <div className="letrasHomefOTOSOLA">
           <h1>MOTO</h1>
           <h1>NIVELADORAS</h1>
+          <a className="nav-link dropdown-toggle" role="button"></a>
         </div>
       </button>
 

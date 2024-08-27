@@ -81,6 +81,7 @@ button:focus-visible {
 
 .navbar {
   padding: 2rem;
+  padding-top: 1rem;
   background-color: #000; 
   color: #febb00; 
   font-family: 'Merri', sans-serif; 
@@ -2942,10 +2943,12 @@ button:focus-visible {
 
 .container {
   position: relative;
+  
 }
 
 .container .carousel .slide {
   margin-right: 10px;
+ 
 }
 
 .container .carousel .slide img {
@@ -3675,7 +3678,6 @@ width: 350px;
 .custom-carousel .custom-container {
   width: 100vw; 
   overflow: hidden; 
-  
   
 }
 
@@ -4981,7 +4983,7 @@ left: -10%;
   margin: 1rem;
   margin-top: 0;
   color: grey;
-  font-size: 3vw;
+  font-size: 3.5vw;
   margin-bottom: 2rem;
   
 }
@@ -5010,26 +5012,22 @@ left: -10%;
 .containerFamiliaHome::before {
   content: ""; 
   position: absolute; 
-  top: 90%; 
+  top: 97%; 
   bottom: 0; 
   left: 0; 
   width: 5px; 
   background-color: #e6b800; 
 }
 
-
 .containerFamiliaHome::after {
   content: "";
   position: absolute; 
-  top: 90%; 
+  top: 97%; 
   bottom: 0; 
   right: 0; 
   width: 5px; 
   background-color: #e6b800; 
 }
-
-
-
 
 .letrasHome {
   font-size: 1.2vw; 
@@ -5102,11 +5100,13 @@ left: -10%;
 }
 
 
+
 /* MOBILE PARA EL HOME  */
 
 @media (max-width: 700px) {
   .tituloHome {
-    margin-top: 1rem;
+    margin-top: 0rem;
+    font-size: 1.8vw;
   }
 }
 
