@@ -100,20 +100,25 @@ button:focus-visible {
 
 .grid-container {
   display: grid;
+  margin-left: auto;
+  margin-right: auto;
   gap: 1rem;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(4, 1fr); 
+  margin-top: 4rem;
 }
 
 .marca {
   display: flex;
   flex-direction: column;
   align-items: center;
+  
   background-color: #febb00;
- 
   padding: 0.5rem;
   border-radius: 5px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: solid 1px gray;
+  margin-bottom: 1rem;
+  width: 100%;
 }
 
 .marca img {
@@ -129,7 +134,7 @@ button:focus-visible {
 
 @media (max-width: 1400px) and (min-width: 1000px) {
   .grid-container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -159,7 +164,6 @@ button:focus-visible {
   flex-wrap: wrap;
   align-items: flex-start;
   padding: 0;
-  
   background-color: black
 }
 
@@ -4975,33 +4979,54 @@ left: -10%;
 }
 
 .tituloHome h2 {
-  margin: 2rem;
+  margin: 1rem;
   color: grey;
   font-size: 3vw;
+  margin-bottom: 2rem;
   
 }
 
 
 .containerFamiliaHome {
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center; 
   justify-content: center; 
   max-width: 100%;
   width: 90%;
-  background-color: #f0f0f0; 
+  background-color: black; 
   padding: 3rem; 
   position: relative;
-  border-bottom: 10px double #d1d1d1; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  border-bottom: 10px double #e6b800; 
+  border-left: 5px solid #e6b800; 
+  border-right: 5px solid #e6b800; 
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.2), 
+    inset 0 0 10px #e6b800; 
   margin-left: auto;
   margin-right: auto;
+  border-radius: 5px; 
 }
 
 
+
 .letrasHome {
-  font-size: 1.2vw; /* Ajusta el tamaño de la fuente basado en el ancho de la ventana */
+  font-size: 1.2vw; 
+  align-items: center;
+  margin: auto;
+  padding-right: 3rem;
+  color: #d1d1d1; 
+  font-family: "Merri", serif;
+  text-shadow: 
+    1px 1px 2px rgba(0, 0, 0, 0.8),  
+    -1px -1px 2px rgba(255, 255, 255, 0.3), 
+    2px 2px 4px rgba(192, 192, 192, 0.5); 
+  background-color: transparent; 
+}
+
+.letrasHomefOTOSOLA {
+  font-size: 1vw; 
   align-items: center;
   margin: auto;
   padding-right: 3rem;
@@ -5034,7 +5059,7 @@ left: -10%;
   align-items: center; 
   width: 100%; 
   padding: 1rem;
-  
+  gap: 1rem;
 }
 
 .categoriasContainer div {
@@ -5054,6 +5079,120 @@ left: -10%;
 .nav-link  {
   color: #e6b800;
   font-size: 3rem;
+}
+
+
+/* MOBILE PARA EL HOME  */
+
+@media (max-width: 700px) {
+  .tituloHome {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .containerFamiliaHome {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    
+    
+  }
+}
+
+@media (max-width: 700px) {
+  .imageHome {
+    margin: auto;
+    width: 80%; 
+    
+  }
+}
+
+@media (max-width: 700px) {
+  .letrasHome {
+    padding: 0
+  }
+}
+
+@media (max-width: 700px) {
+  .nav-link {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .imageHome img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 600px) {
+  .categoriasContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .categoriasContainer div {
+    width: 100%; 
+    display: flex;
+    justify-content: center; 
+    margin: 1rem 0; 
+  }
+}
+
+.CARDHOMEIMAGENSOLA {
+  background-color: #000;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 2rem; 
+  margin: auto;
+  padding: 2rem; 
+  max-width: 100%; 
+  width: 90%; 
+  box-sizing: border-box; 
+  position: relative;
+}
+
+.CARDHOMEIMAGENSOLA::after {
+  content: ""; 
+  position: absolute; 
+  bottom: 0; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  width: 70%; 
+  height: 5px; 
+  background-color: #e6b800; 
+}
+
+
+.CARDHOMEIMAGENSOLA img {
+  width: 100%;
+  height: auto;
+  max-width: 100%; 
+  border-radius: 5px; 
+}
+
+@media (min-width: 600px) {
+  .CARDHOMEIMAGENSOLA {
+    flex-direction: row; 
+    gap: 3rem; 
+  }
+
+  .CARDHOMEIMAGENSOLA img {
+    width: 70%; 
+  }
+}
+
+
+.descripcionesHome {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4rem;
+
 }
 
 

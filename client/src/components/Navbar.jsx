@@ -7,16 +7,16 @@ import BOMBAHORMIGON from "../assets/img/FAMILIAS/BOMBAHORMIGON.jpg";
 import BOMBAHORMIGONSOBRECAMION from "../assets/img/FAMILIAS/BOMBAHORMIGONSOBRECAMION.jpg";
 import CAMIONARTICULADO from "../assets/img/FAMILIAS/CAMIONARTICULADO.jpg";
 import CAMIONMINERO from "../assets/img/FAMILIAS/CAMIONMINERO.jpg";
-import EXCAVADORA from "../assets/img/FAMILIAS/EXCAVADORA.jpg";
+import EXCAVADORA from "../assets/img/CAROUSEL/excavadorahome.png";
 import EXCAVADORAMINERA from "../assets/img/FAMILIAS/EXCAVADORAMINERA.jpg";
-import FRESADORA from "../assets/img/FAMILIAS/FRESADORA.jpg";
+import FRESADORAHOME from "../assets/img/CAROUSEL/FRESADORAHOME.png";
 import GRUASRT from "../assets/img/FAMILIAS/GRUASRT.jpg";
 import GRUASSOBRECAMION from "../assets/img/FAMILIAS/GRUASSOBRECAMION.jpg";
 import GRUASTODOTORRENO from "../assets/img/FAMILIAS/GRUASTODOTERRENO.jpg";
-import MANIPULADORESMAGNI from "../assets/img/FAMILIAS/MANIPULADORESMAGNI.jpg";
-import MINICARGADORA from "../assets/img/FAMILIAS/MINICARGADORA.jpg";
+import MANIPULADORESMAGNI from "../assets/img/CAROUSEL/manipulador.png";
+import MINICARGADORA from "../assets/img/CAROUSEL/minicargadora.png";
 import MINIRODILLO from "../assets/img/FAMILIAS/MINIRODILLO.jpg";
-import MOTONIVELADORA from "../assets/img/FAMILIAS/MOTONIVELADORA.jpg";
+import MOTONIVELADORA from "../assets/img/CAROUSEL/motoniveladora.png";
 import PALACARGADORA from "../assets/img/FAMILIAS/PALACARGADORA.jpg";
 import PILOTERA from "../assets/img/FAMILIAS/PILOTERA.jpg";
 import PLATAFORMASARTICULADAS from "../assets/img/FAMILIAS/PLATAFORMASARTICULADAS.jpg";
@@ -31,10 +31,11 @@ import TROMPOHORMIGONERO from "../assets/img/FAMILIAS/TROMPOHORMIGONERO.jpg";
 import TUNELERAHORIZONTAL from "../assets/img/FAMILIAS/TUNELERAHORIZONTAL.jpg";
 import GRUAIMAGE from "../assets/img/CAROUSEL/gruashome.png";
 import CAMIONIMAGE from "../assets/img/CAROUSEL/camionminerohome.png";
-import AUTOELEVADOR from "../assets/img/CAROUSEL/AUTOELEVADOR.jpg";
-import EXCAVADORAHOME from "../assets/img/CAROUSEL/EXCAVADORA.jpg";
+import AUTOELEVADOR from "../assets/img/CAROUSEL/autoelevador.png";
+import EXCAVADORAHOME from "../assets/img/CAROUSEL/excavadorahome.png";
 import BOMBAHORMIGONHOME from "../assets/img/CAROUSEL/bombahormigon.png";
 import RODILLOHOME from "../assets/img/CAROUSEL/rodillo.png";
+import TOPADORAHOME from "../assets/img/CAROUSEL/topadora.png";
 
 export default function NavBar({ onSelectFamilia }) {
   const handleFamiliaClick = (familia) => {
@@ -263,41 +264,81 @@ export default function NavBar({ onSelectFamilia }) {
         >
           <img src={RODILLONEUMATICO} alt="RODILLONEUMATICO" />
         </button>
-      </div>
-
-      {/* A PARTIR DE ACA HACER LAS IMAGENES GRANDES DE CADA BOTON Y ABAJO DE TODO LAS NOVEDADES  */}
-      <div className="grid-container">
-        <button
-          className="marca"
-          onClick={() => handleFamiliaClick("FRESADORA")}
-        >
-          <img src={FRESADORA} alt="FRESADORA" />
-        </button>
-
-        <button
-          className="marca"
-          onClick={() => handleFamiliaClick("MANIPULADORESMAGNI")}
-        >
-          <img src={MANIPULADORESMAGNI} alt="MANIPULADORESMAGNI" />
-        </button>
-        <button
-          className="marca"
-          onClick={() => handleFamiliaClick("MINICARGADORA")}
-        >
-          <img src={MINICARGADORA} alt="MINICARGADORA" />
-        </button>
         <button
           className="marca"
           onClick={() => handleFamiliaClick("MINIRODILLO")}
         >
           <img src={MINIRODILLO} alt="MINIRODILLO" />
         </button>
-        <button
-          className="marca"
-          onClick={() => handleFamiliaClick("MOTONIVELADORA")}
-        >
-          <img src={MOTONIVELADORA} alt="MOTONIVELADORA" />
-        </button>
+      </div>
+
+      {/* A PARTIR DE ACA HACER LAS IMAGENES GRANDES DE CADA BOTON Y ABAJO DE TODO LAS NOVEDADES  */}
+      <div className="descripcionesHome">
+        <h3>American VIAL comercializa maquinarias viales</h3>
+        <h3>para la construcción y el campo y todo tipo de empresa.</h3>
+        <h3>Cuenta con un stock permanente en su planta de Don Torcuato.</h3>
+      </div>
+
+      <button
+        className="CARDHOMEIMAGENSOLA"
+        onClick={() => handleFamiliaClick("TOPADORA")}
+      >
+        <img src={TOPADORAHOME} alt="TOPADORA" />
+        <div className="letrasHomefOTOSOLA">
+          <h1>TOPADORAS</h1>
+        </div>
+      </button>
+
+      <button
+        className="CARDHOMEIMAGENSOLA"
+        onClick={() => handleFamiliaClick("FRESADORA")}
+      >
+        <div className="letrasHomefOTOSOLA">
+          <h1>FRESADORAS</h1>
+        </div>
+        <img src={FRESADORAHOME} alt="FRESADORA" />
+      </button>
+
+      <button
+        className="CARDHOMEIMAGENSOLA"
+        onClick={() => handleFamiliaClick("MANIPULADORESMAGNI")}
+      >
+        <img src={MANIPULADORESMAGNI} alt="MANIPULADORESMAGNI" />
+        <div className="letrasHomefOTOSOLA">
+          <h1>MANIPULADORES MAGNI</h1>
+        </div>
+      </button>
+
+      <button
+        className="CARDHOMEIMAGENSOLA"
+        onClick={() => handleFamiliaClick("MINICARGADORA")}
+      >
+        <div className="letrasHomefOTOSOLA">
+          <h1>MINI CARGADORAS</h1>
+        </div>
+        <img src={MINICARGADORA} alt="MINICARGADORA" />
+      </button>
+
+      <button
+        className="CARDHOMEIMAGENSOLA"
+        onClick={() => handleFamiliaClick("MOTONIVELADORA")}
+      >
+        <img src={MOTONIVELADORA} alt="MOTONIVELADORA" />
+        <div className="letrasHomefOTOSOLA">
+          <h1>MOTO</h1>
+          <h1>NIVELADORAS</h1>
+        </div>
+      </button>
+
+      <div className="descripcionesHome">
+        <h3>Consolida su liderazgo en ventas</h3>
+        <h3>con una atención de Post-Venta desde principio a fin,</h3>
+        <h3>
+          contando con recursos y repuestos para darle tranquilidad a su compra.
+        </h3>
+      </div>
+
+      <div className="grid-container">
         <button
           className="marca"
           onClick={() => handleFamiliaClick("PALACARGADORA")}
@@ -335,12 +376,7 @@ export default function NavBar({ onSelectFamilia }) {
         >
           <img src={TERMINADORAASFALTO} alt="TERMINADORAASFALTO" />
         </button>
-        <button
-          className="marca"
-          onClick={() => handleFamiliaClick("TOPADORA")}
-        >
-          <img src={TOPADORA} alt="TOPADORA" />
-        </button>
+
         <button
           className="marca"
           onClick={() => handleFamiliaClick("TROMPOHORMIGONERO")}
