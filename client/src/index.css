@@ -4966,13 +4966,12 @@ left: -10%;
 /* HOME */
 
 .tituloHome {
-  margin-top: 3rem;
+  margin-top: 2rem;
   display: block;
   justify-content: center;
   align-items: center;
   margin-left: auto;
   margin-right: auto;
- 
   color: #e6b800;
   font-size: 1.5vw;
   
@@ -4980,6 +4979,7 @@ left: -10%;
 
 .tituloHome h2 {
   margin: 1rem;
+  margin-top: 0;
   color: grey;
   font-size: 3vw;
   margin-bottom: 2rem;
@@ -4996,18 +4996,38 @@ left: -10%;
   max-width: 100%;
   width: 90%;
   background-color: black; 
-  padding: 3rem; 
+  padding: 1rem; 
   position: relative;
   border-bottom: 10px double #e6b800; 
-  border-left: 5px solid #e6b800; 
-  border-right: 5px solid #e6b800; 
-  box-shadow: 
-    0 4px 8px rgba(0, 0, 0, 0.2), 
-    inset 0 0 10px #e6b800; 
+  border-left: none; 
+  border-right: none; 
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px; 
 }
+
+
+.containerFamiliaHome::before {
+  content: ""; 
+  position: absolute; 
+  top: 90%; 
+  bottom: 0; 
+  left: 0; 
+  width: 5px; 
+  background-color: #e6b800; 
+}
+
+
+.containerFamiliaHome::after {
+  content: "";
+  position: absolute; 
+  top: 90%; 
+  bottom: 0; 
+  right: 0; 
+  width: 5px; 
+  background-color: #e6b800; 
+}
+
 
 
 
@@ -5122,8 +5142,8 @@ left: -10%;
 
 @media (max-width: 700px) {
   .imageHome img {
-    width: 150px;
-    height: 150px;
+    width: 220px;
+    height: 220px;
   }
 }
 
