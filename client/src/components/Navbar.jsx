@@ -8,6 +8,7 @@ import BOMBAHORMIGONSOBRECAMION from "../assets/img/FAMILIAS/BOMBAHORMIGONSOBREC
 import CAMIONARTICULADO from "../assets/img/FAMILIAS/CAMIONARTICULADO.jpg";
 import CAMIONMINERO from "../assets/img/FAMILIAS/CAMIONMINERO.jpg";
 import EXCAVADORA from "../assets/img/CAROUSEL/excavadorahome.png";
+import EXCAVADORACARD from "../assets/img/FAMILIAS/EXCAVADORA.jpg";
 import EXCAVADORAMINERA from "../assets/img/FAMILIAS/EXCAVADORAMINERA.jpg";
 import FRESADORAHOME from "../assets/img/CAROUSEL/FRESADORAHOME.png";
 import GRUASRT from "../assets/img/FAMILIAS/GRUASRT.jpg";
@@ -181,7 +182,7 @@ export default function NavBar({ onSelectFamilia }) {
           className="marca"
           onClick={() => handleFamiliaClick("EXCAVADORA")}
         >
-          <img src={EXCAVADORA} alt="EXCAVADORA" />
+          <img src={EXCAVADORACARD} alt="EXCAVADORA" />
         </button>
 
         <button
