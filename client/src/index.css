@@ -3795,6 +3795,27 @@ width: 350px;
   }
 }
 
+@media (max-width: 600px) {
+ 
+
+  .grupoContacto h3 {
+    margin-bottom: 20px; 
+    font-size: 8vw; 
+  }
+
+  .grupoContacto a {
+    font-size: 5vw; 
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .grupoContacto a svg {
+    width: 10vw; 
+    height: 10vw; 
+    margin-bottom: 5px; 
+  }
+}
+
 
 .logout {
   position: fixed;
