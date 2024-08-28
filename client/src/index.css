@@ -951,6 +951,10 @@ button:focus-visible {
  margin-right: 20px;
 }
 
+.shoppingButton:hover {
+  color: #e6b800; /* Color amarillo en hover */
+}
+
 /* MENSAJE EL PRODUCTO HA SIDO AÑADIDO AL CARRITO */
 
 .alert-container {
@@ -994,7 +998,7 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .about-button {
@@ -1446,8 +1450,9 @@ button:focus-visible {
   position: absolute;
   right: 0;
   top: 0;
- 
 }
+
+
 
 .inputnav {
   position: absolute;
@@ -3741,6 +3746,7 @@ width: 350px;
  margin-top:20px ;
   text-decoration: none;
   color: #333;
+  font-weight:600;
 }
 
 .grupoContacto a:hover {
@@ -5005,8 +5011,8 @@ left: -10%;
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px; 
+  
 }
-
 
 .containerFamiliaHome::before {
   content: ""; 
@@ -5016,6 +5022,7 @@ left: -10%;
   left: 0; 
   width: 5px; 
   background-color: #e6b800; 
+  
 }
 
 .containerFamiliaHome::after {
