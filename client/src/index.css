@@ -82,11 +82,10 @@ button:focus-visible {
 .navbar {
   padding: 2rem;
   padding-top: 2rem;
-  background-color: #000; 
-  color: #febb00; 
-  font-family: 'Merri', sans-serif; 
+  background-color: #000;
+  color: #febb00;
+  font-family: "Merri", sans-serif;
 }
-
 
 .category {
   margin-bottom: 2rem;
@@ -104,7 +103,7 @@ button:focus-visible {
   margin-left: auto;
   margin-right: auto;
   gap: 1rem;
-  grid-template-columns: repeat(4, 1fr); 
+  grid-template-columns: repeat(4, 1fr);
   margin-top: 4rem;
 }
 
@@ -112,11 +111,13 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   background-color: #febb00;
   padding: 0.5rem;
   border-radius: 5px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   border: solid 1px gray;
   margin-bottom: 1rem;
   width: 100%;
@@ -153,7 +154,7 @@ button:focus-visible {
 
 @media (max-width: 400px) {
   .grid-container {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
 }
 
@@ -165,7 +166,7 @@ button:focus-visible {
   flex-wrap: wrap;
   align-items: flex-start;
   padding: 0;
-  background-color: black
+  background-color: black;
 }
 
 .card {
@@ -177,7 +178,6 @@ button:focus-visible {
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
   border: 5px solid #febb00;
-  
 }
 
 @media (max-width: 650px) {
@@ -627,8 +627,6 @@ button:focus-visible {
   }
 }
 
-
-
 .modal {
   position: fixed;
   top: 0;
@@ -643,19 +641,19 @@ button:focus-visible {
 }
 
 .contact-container {
-  width: 100%; 
-  max-width: 700px; 
-  margin: 20px auto; 
+  width: 100%;
+  max-width: 700px;
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #f4f4f4;
-  padding: 15px; 
+  padding: 15px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: relative;
   height: auto;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   overflow: hidden;
 }
 
@@ -663,13 +661,13 @@ button:focus-visible {
 .contact-container::after {
   content: "";
   position: absolute;
-  top: 4px;  
+  top: 4px;
   left: 4px;
   right: 4px;
   bottom: 4px;
   border-radius: 8px;
   pointer-events: none;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 .contact-container::before {
@@ -678,12 +676,11 @@ button:focus-visible {
 
 .contact-container::after {
   border: 4px solid #ffcc00;
-  top: 8px; 
+  top: 8px;
   left: 8px;
   right: 8px;
   bottom: 8px;
 }
-
 
 @media screen and (max-width: 850px) {
   .contact-container {
@@ -704,8 +701,8 @@ button:focus-visible {
   font-size: 18px;
   color: grey;
   font-weight: bold;
- padding-left: 0.5rem;
- padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .contact-form {
@@ -757,7 +754,6 @@ button:focus-visible {
     margin: -8px;
   }
 
-  
   .contact-form {
     display: block;
     margin-left: 0;
@@ -765,7 +761,7 @@ button:focus-visible {
 
   .contact-form .form-group {
     width: 100%;
-    
+
     margin-bottom: 15px;
   }
 
@@ -777,11 +773,11 @@ button:focus-visible {
   }
 
   .contact-container::before {
-  display: none;
+    display: none;
   }
 
   .contact-container::after {
-   display: none;
+    display: none;
   }
 }
 
@@ -789,7 +785,7 @@ button:focus-visible {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin-top: 15px; 
+  margin-top: 15px;
 }
 
 .submit-button,
@@ -805,7 +801,6 @@ button:focus-visible {
   background-color: #ffcc00;
   color: #fff;
   margin-top: 1rem;
- 
 }
 
 .MAPS {
@@ -816,11 +811,10 @@ button:focus-visible {
 
 @media (max-width: 650px) {
   .MAPS {
-    max-width: 100%; 
-    width: 100%; 
+    max-width: 100%;
+    width: 100%;
   }
 }
-
 
 /* CARRITO */
 
@@ -948,7 +942,7 @@ button:focus-visible {
   background: none;
   color: white;
   padding: 0px;
- margin-right: 20px;
+  margin-right: 20px;
 }
 
 .shoppingButton:hover {
@@ -1429,12 +1423,10 @@ button:focus-visible {
   text-align: center;
   display: flex;
   height: 150px;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   z-index: 1000;
   width: 100%;
-  
- 
 }
 .search-bar {
   display: flex;
@@ -1442,8 +1434,6 @@ button:focus-visible {
   align-items: flex-end;
   transition: border-bottom 0.5s ease;
   width: 70%;
-
-
 }
 
 .fauser {
@@ -1452,12 +1442,10 @@ button:focus-visible {
   top: 0;
 }
 
-
-
 .inputnav {
   position: absolute;
   top: 10px;
- right: 10px;
+  right: 10px;
   padding: 10px;
   font-size: 16px;
   color: #fff;
@@ -1468,7 +1456,6 @@ button:focus-visible {
   border-radius: 20px;
   margin-top: 5rem;
   margin-bottom: 0.5rem;
-  
 }
 
 @media (max-width: 1240px) {
@@ -1476,7 +1463,6 @@ button:focus-visible {
     height: 110px;
   }
 }
-
 
 @media (max-width: 1240px) {
   .inputnav {
@@ -1487,7 +1473,6 @@ button:focus-visible {
 .inputnav::placeholder {
   color: #ccc;
 }
-
 
 .white-bar.fixed {
   position: fixed;
@@ -1504,62 +1489,53 @@ button:focus-visible {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
 }
 
-.white-bar.fixed .faHome-button{
+.white-bar.fixed .faHome-button {
   margin-top: 1.8rem;
 }
 
-
 .white-bar.fixed .americanimg {
- position: absolute;
- left: 0;
- top:35px
+  display: flex;
+  justify-content: center;
+  margin: auto;
 }
-
 
 .white-bar.fixed .fauser {
   position: absolute;
   right: 0;
   top: 0;
-  
 }
 
 @media screen and (max-width: 1240px) {
-  .white-bar.fixed .burguer-icon-front  {
-   position: absolute;
-   right: 40px;
-   top:-3px
+  .white-bar.fixed .burguer-icon-front {
+    position: absolute;
+    right: 40px;
+    top: -3px;
   }
 }
 
 @media screen and (max-width: 1240px) {
-  .white-bar .burguer-icon-front  {
-   position: absolute;
-   right: 35px;
-   top:0px
+  .white-bar .burguer-icon-front {
+    position: absolute;
+    right: 35px;
+    top: 0px;
   }
 }
-
-
 
 @media screen and (max-width: 850px) {
   .white-bar img {
     max-width: 500px;
-   
   }
 }
-
-
 
 .americanimg {
   margin-top: -2rem;
 }
 
-
 @media screen and (max-width: 1240px) {
   .americanimg {
-   position: absolute;
-   left: 0;
-   top:40px
+    display: flex;
+    justify-content: center;
+    margin: auto;
   }
 }
 
@@ -1574,11 +1550,8 @@ button:focus-visible {
 
   @media screen and (max-width: 660px) {
     .americanimg img {
-      position: absolute;
-      top: 15px;
-      
-     width: 400px;
-      
+      width: 400px;
+
       height: auto;
     }
   }
@@ -1587,40 +1560,39 @@ button:focus-visible {
     .americanimg img {
       position: absolute;
       top: 35px;
-      
-     width: 300px;
-      
+
+      width: 300px;
+
       height: auto;
     }
   }
 }
 
 @media screen and (max-width: 750px) {
- .white-bar.fixed .americanimg img {
+  .white-bar.fixed .americanimg img {
     position: absolute;
     top: 22px;
-   width: 400px;
+    width: 400px;
     height: auto;
   }
 
   @media screen and (max-width: 600px) {
     .white-bar.fixed .americanimg img {
-       position: absolute;
-       top: 38px;
-       width: 300px;
-       height: auto;
-     }
+      position: absolute;
+      top: 38px;
+      width: 300px;
+      height: auto;
+    }
+  }
+  @media screen and (max-width: 450px) {
+    .white-bar.fixed .americanimg img {
+      position: absolute;
+      top: 45px;
+      width: 250px;
+      height: auto;
+    }
+  }
 }
-@media screen and (max-width: 450px) {
-  .white-bar.fixed .americanimg img {
-     position: absolute;
-     top: 45px;
-     width: 250px;
-     height: auto;
-   }
-}
-}
-
 
 .search-button {
   position: absolute;
@@ -1633,7 +1605,6 @@ button:focus-visible {
   font-size: 30px;
   visibility: hidden;
   font-weight: bold;
-
 }
 
 .faHome-button {
@@ -1643,9 +1614,7 @@ button:focus-visible {
   background: none;
   cursor: pointer;
   margin-top: 4rem;
-  color:white;
-  
-  
+  color: white;
 }
 
 .search-button-modal-open {
@@ -1653,34 +1622,28 @@ button:focus-visible {
   background: none;
   cursor: pointer;
   margin-top: 5.5rem;
-  visibility: hidden; 
+  visibility: hidden;
   color: white;
 }
 
-
-.white-bar.fixed .search-button-modal-open  {
+.white-bar.fixed .search-button-modal-open {
   position: absolute;
   top: -22px;
   right: 0px;
-  
+
   visibility: visible;
   color: white;
+}
 
- }
-
- .white-bar.fixed .search-button  {
+.white-bar.fixed .search-button {
   display: none;
- }
-
-
+}
 
 @media screen and (min-width: 1240px) {
   .white-bar.fixed .search-button-modal-open {
-    right: 0; 
-    top:-25px;
+    right: 0;
+    top: -25px;
     color: white;
-   
-    
   }
 }
 
@@ -1688,51 +1651,47 @@ button:focus-visible {
   .white-bar .search-button-modal-open {
     position: absolute;
     right: 0px;
-    top:-20px;
+    top: -20px;
     visibility: visible;
     color: white;
   }
 }
 
-
 @media screen and (max-width: 1240px) {
   .white-bar .search-button {
     visibility: hidden;
-    right: 10px; 
+    right: 10px;
     color: white;
   }
 }
 
- .white-bar.fixed .inputnav  {
+.white-bar.fixed .inputnav {
   display: none;
- }
+}
 
- .sugerencias {
- color: gray;
- cursor: pointer;
- position: absolute;
- top: 60px;
- right: 140px;
- font-size: 20px;
+.sugerencias {
+  color: gray;
+  cursor: pointer;
+  position: absolute;
+  top: 60px;
+  right: 140px;
+  font-size: 20px;
+}
 
- }
-
- .white-bar.fixed .sugerencias  {
+.white-bar.fixed .sugerencias {
   display: none;
- }
+}
 
 .burguer-icon-front {
-  display: none; 
-  background: none; 
+  display: none;
+  background: none;
   background-color: none;
-  border: none; 
+  border: none;
   cursor: pointer;
-  margin-right: 25px; 
+  margin-right: 25px;
   color: white;
   font-size: 26px;
 }
-
-
 
 @media screen and (max-width: 1240px) {
   .burguer-icon-front {
@@ -1740,7 +1699,6 @@ button:focus-visible {
     margin-top: 4.5rem;
   }
 }
-
 
 .filtrosTodos {
   display: flex;
@@ -1915,7 +1873,6 @@ button:focus-visible {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  
 }
 
 .login-form input[type="submit"] {
@@ -1946,40 +1903,39 @@ button:focus-visible {
 /* index.css */
 .login-container .welcome-message,
 .registro-container .welcome-message {
- position: absolute;
- left: 46%;
- top: 50%;
+  position: absolute;
+  left: 46%;
+  top: 50%;
   width: 300px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: auto; 
+  height: auto;
   text-align: center;
   padding: 20px;
-  background-color: #ffcc00; 
-  border-radius: 10px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  background-color: #ffcc00;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   margin: 20px;
   transition: all 0.3s ease-in-out;
 }
 
 .login-container .welcome-message img,
 .registro-container .welcome-message img {
-  max-width: 100%; 
+  max-width: 100%;
   width: 800px;
   height: auto;
   margin-bottom: 20px;
-  border-radius: 10px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .login-container .welcome-message h2,
 .registro-container .welcome-message h2 {
-  color: #000; 
+  color: #000;
   font-size: 24px;
   margin-bottom: 10px;
 }
-
 
 @media (max-width: 600px) {
   .login-container .welcome-message,
@@ -1997,8 +1953,6 @@ button:focus-visible {
     font-size: 16px;
   }
 }
-
-
 
 /* ESTILOS PARA EL FORMULARIO DE REGISTRO DE USUARIO */
 
@@ -2190,7 +2144,6 @@ button:focus-visible {
 
 .containerAdmin {
   display: flex;
-  
 }
 
 @media screen and (max-width: 600px) {
@@ -2808,10 +2761,9 @@ button:focus-visible {
 .DetalleCardContainer {
   max-width: 100%;
   display: flex;
-  align-items: flex-start; 
+  align-items: flex-start;
   flex-direction: row;
   justify-content: space-between;
-  
 }
 
 @media (max-width: 1100px) {
@@ -2821,14 +2773,12 @@ button:focus-visible {
 }
 
 .DetalleCard {
-  
-  flex: 1; 
+  flex: 1;
   max-width: 50%;
   font-family: "merri";
   display: flex;
   flex-direction: column;
 }
-
 
 .CarrouselImg {
   width: 100%;
@@ -2836,11 +2786,10 @@ button:focus-visible {
   object-fit: cover;
 }
 
-
 @media (max-width: 1100px) {
   .CarrouselImg {
-    width: 100vw; 
-    object-fit: cover; 
+    width: 100vw;
+    object-fit: cover;
   }
 }
 
@@ -2863,7 +2812,8 @@ button:focus-visible {
 }
 
 @media (max-width: 1100px) {
-  .DetalleCard, .detalle-info {
+  .DetalleCard,
+  .detalle-info {
     max-width: 100%;
     width: 100%;
   }
@@ -2875,7 +2825,7 @@ button:focus-visible {
   align-items: center;
   font-size: 16px;
   border-bottom: 1px solid #ccc;
-  padding-bottom: 15  px;
+  padding-bottom: 15 px;
 }
 
 .detalle-info p:last-child {
@@ -2886,7 +2836,6 @@ button:focus-visible {
   font-weight: bold;
   margin-right: 8px;
   flex-basis: 160px;
-
 }
 
 .detalle-info span {
@@ -2947,12 +2896,10 @@ button:focus-visible {
 
 .container {
   position: relative;
-  
 }
 
 .container .carousel .slide {
   margin-right: 10px;
- 
 }
 
 .container .carousel .slide img {
@@ -2968,9 +2915,8 @@ button:focus-visible {
   background-color: #333;
 }
 
-
 .detalles-image-american img {
-width: 350px;
+  width: 350px;
 }
 
 @media (max-width: 1100px) {
@@ -2979,10 +2925,9 @@ width: 350px;
   }
 }
 
-.fichatenica{
+.fichatenica {
   margin-top: 1.5rem;
 }
-
 
 .form-submit-custom {
   background-color: #000;
@@ -3005,7 +2950,6 @@ width: 350px;
 }
 
 .blue-bar {
-  
   width: 100%;
   height: 60px;
   background-color: #999999;
@@ -3144,7 +3088,7 @@ width: 350px;
 }
 
 .appadmin {
-  margin:auto;
+  margin: auto;
   width: 80%;
   max-width: 100%;
 }
@@ -3236,17 +3180,16 @@ width: 350px;
 }
 
 .user-menu-container button {
-  color: gray; 
-  background-color: transparent; 
-  border: none; 
-  padding: 10px 20px; 
-  transition: color 0.3s ease; 
+  color: gray;
+  background-color: transparent;
+  border: none;
+  padding: 10px 20px;
+  transition: color 0.3s ease;
 }
 
 .user-menu-container button:hover {
-  color: #b0b0b0; 
+  color: #b0b0b0;
 }
-
 
 .form-container {
   width: 82%;
@@ -3351,29 +3294,28 @@ width: 350px;
 
 .cliente-info {
   display: flex;
-  justify-content: space-between; 
-  flex-wrap: nowrap; 
+  justify-content: space-between;
+  flex-wrap: nowrap;
   width: 100%;
-  gap: 5px; 
+  gap: 5px;
 }
 
 .cliente-detail {
-  flex-grow: 1; 
+  flex-grow: 1;
   margin-top: 1rem;
 }
 
 @media (max-width: 980px) {
   .cliente-info {
     margin-top: 1rem;
-    flex-direction: column; 
-    align-items: stretch;  
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .cliente-detail {
-    width: 100%; 
-    margin-top: 0.2rem; 
+    width: 100%;
+    margin-top: 0.2rem;
     margin-bottom: 0.2rem;
-    
   }
 }
 .clientes-detail-container {
@@ -3625,16 +3567,15 @@ width: 350px;
   position: fixed;
   top: 10px;
   right: 10px;
-  background-color: #ffffff; 
-  border: 2px solid #ffcc00; 
+  background-color: #ffffff;
+  border: 2px solid #ffcc00;
   border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   padding: 20px;
   z-index: 1000;
   max-width: 320px;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
-
 
 @keyframes fadeInOut {
   0% {
@@ -3646,7 +3587,6 @@ width: 350px;
     opacity: 1;
     transform: translateY(0);
   }
- 
 }
 
 .ranking-item {
@@ -3656,33 +3596,30 @@ width: 350px;
 .ranking-item h2 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
-  color: #333; 
+  color: #333;
 }
 
 .ranking-item p {
   margin: 0;
   font-size: 1em;
-  color: #666; 
+  color: #666;
 }
 
 .close-button-ranking {
- 
   background: transparent;
   border: none;
   font-size: 1.2em;
   cursor: pointer;
-  color: #333; 
+  color: #333;
 }
 
 .close-button-ranking:hover {
   color: #000;
 }
 
-
 .custom-carousel .custom-container {
-  width: 100vw; 
-  overflow: hidden; 
-  
+  width: 100vw;
+  overflow: hidden;
 }
 
 .custom-carousel .custom-slider {
@@ -3701,8 +3638,6 @@ width: 350px;
 .custom-carousel .custom-slide img {
   width: 95vw;
   height: 40vw;
-
-  
 }
 
 @media (max-width: 1000px) {
@@ -3724,18 +3659,18 @@ width: 350px;
   justify-content: space-around;
   background-color: #f0f0f0;
   padding: 20px;
-  margin: 0; 
+  margin: 0;
 }
 
 .grupoContacto {
   text-align: center;
   padding: 10px;
-  margin: 0; 
+  margin: 0;
 }
 
 .grupoContacto h3 {
   font-size: 1.5rem;
-  
+
   color: #ffc107;
   font-weight: bold;
   font-family: "merri";
@@ -3743,10 +3678,10 @@ width: 350px;
 
 .grupoContacto a {
   display: block;
- margin-top:20px ;
+  margin-top: 20px;
   text-decoration: none;
   color: #333;
-  font-weight:600;
+  font-weight: 600;
 }
 
 .grupoContacto a:hover {
@@ -3756,7 +3691,6 @@ width: 350px;
 .grupoContacto a svg {
   margin-right: 10px;
 }
-
 
 @media (max-width: 701px) {
   .datosContacto {
@@ -3770,12 +3704,11 @@ width: 350px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
   }
 
   .grupoContacto h3 {
-    margin-bottom: 20px; 
-    font-size: 5vw; 
+    margin-bottom: 20px;
+    font-size: 5vw;
   }
 
   .grupoContacto a {
@@ -3783,39 +3716,36 @@ width: 350px;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    font-size: 3vw; 
+    font-size: 3vw;
     width: 100%;
     margin-top: 15px;
   }
 
   .grupoContacto a svg {
-    width: 8vw; 
-    height: 8vw; 
-    margin-bottom: 5px; 
+    width: 8vw;
+    height: 8vw;
+    margin-bottom: 5px;
   }
 }
 
 @media (max-width: 600px) {
- 
-
   .grupoContacto h3 {
-    margin-bottom: 20px; 
-    font-size: 8vw; 
+    margin-bottom: 20px;
+    font-size: 8vw;
   }
 
   .grupoContacto a {
-    font-size: 5vw; 
+    font-size: 5vw;
     width: 100%;
     margin-top: 15px;
   }
 
   .grupoContacto a svg {
-    width: 10vw; 
-    height: 10vw; 
-    margin-bottom: 5px; 
+    width: 10vw;
+    height: 10vw;
+    margin-bottom: 5px;
   }
 }
-
 
 .logout {
   position: fixed;
@@ -3837,7 +3767,7 @@ width: 350px;
   background-color: rgba(255, 255, 0, 1);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .whatsapp {
@@ -3860,11 +3790,11 @@ width: 350px;
 }
 
 .whatsapp a:hover {
-  background-color: #128c7e; 
+  background-color: #128c7e;
 }
 
 .whatsapp a:focus {
-  outline: none; 
+  outline: none;
 }
 
 .carouselmarcaimage {
@@ -4019,20 +3949,18 @@ width: 350px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
+.headerNavBar button {
+  margin-right: 20px;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-  .headerNavBar button {
-    margin-right: 20px;
-    background: none;
-    color: white;
-    border: none; 
-    cursor: pointer; 
-    transition: background-color 0.3s;
-  }
-  
-  .headerNavBar button:hover {
-    background-color: #ffc107; 
-  } 
-
+.headerNavBar button:hover {
+  background-color: #ffc107;
+}
 
 .headerNavBar {
   position: absolute;
@@ -4041,12 +3969,15 @@ width: 350px;
   transform: translateX(-50%);
   color: white;
   font-family: "Merri", sans-serif;
-  transition: top 0.3s ease, left 0.3s ease, transform 0.3s ease;
+  transition:
+    top 0.3s ease,
+    left 0.3s ease,
+    transform 0.3s ease;
 }
 
 .white-bar.fixed .headerNavBar {
-  top: 50px; 
-  left: 60%; 
+  top: 50px;
+  left: 60%;
   transform: translateX(-20%);
 }
 
@@ -4061,7 +3992,6 @@ width: 350px;
     display: none;
   }
 }
-
 
 .empresaButtonWrapper {
   position: relative;
@@ -4101,16 +4031,15 @@ width: 350px;
 }
 
 .filtrosContainer {
-  position: absolute; 
+  position: absolute;
   left: 0;
   max-width: 100%;
   width: 100vh;
   background-color: #000;
-  
 }
 
 .dropdownEquipos {
-  position: absolute; 
+  position: absolute;
   top: 100%;
   left: 110%;
   transform: translateX(-50%);
@@ -4120,18 +4049,16 @@ width: 350px;
   grid-template-columns: repeat(5, 2fr);
   gap: 10px;
   z-index: 1000;
-  width: 100vw; 
+  width: 100vw;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: "Merri", sans-serif;
   padding: 8px;
   box-sizing: border-box;
-  margin-left: auto; 
-  margin-right: auto; 
+  margin-left: auto;
+  margin-right: auto;
   max-height: 400px;
   overflow-y: auto;
-  
 }
-
 
 .dropdownEquipos button {
   background: none;
@@ -4153,21 +4080,20 @@ width: 350px;
   color: black;
   font-family: "Merri", sans-serif;
   text-align: center;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
-  border-radius: 10px; 
-  border: 3px solid #ddd; 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 3px solid #ddd;
   max-width: 100%;
   margin: 0 auto;
   margin-top: 1rem;
 }
-
 
 .postVentaTitle {
   font-size: 2.5rem;
   margin: 20px 0;
   color: #333;
   text-transform: uppercase;
-  letter-spacing: 1px; 
+  letter-spacing: 1px;
 }
 
 .postVentaText {
@@ -4256,7 +4182,6 @@ width: 350px;
   }
 }
 
-
 .american-repuestos {
   display: flex;
   flex-direction: column;
@@ -4270,7 +4195,6 @@ width: 350px;
   align-items: center;
   margin-bottom: 20px;
 }
-
 
 .large-image {
   width: 100%;
@@ -4291,7 +4215,6 @@ width: 350px;
 @media (min-width: 768px) {
   .grid-images {
     grid-template-columns: repeat(2, 1fr);
-   
   }
 }
 
@@ -4324,26 +4247,25 @@ width: 350px;
   }
 }
 
-
 .obligatorio {
   color: red;
 }
 
 .white-bar.fixed .dropdownEquipos {
   position: absolute;
-  top: 150%; 
-  left:0;
+  top: 150%;
+  left: 0;
   transform: translateX(-60%);
   color: white;
   display: grid;
   grid-template-columns: repeat(5, 2fr);
   gap: 10px;
   z-index: 1000;
-  width: 100vw; 
+  width: 100vw;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: "Merri", sans-serif;
   padding: 8px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   overflow-y: auto;
 }
 
@@ -4352,16 +4274,17 @@ width: 350px;
 .AmericanContactoContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; 
+  gap: 20px;
 }
 
 .AmericanContacto {
   flex: 1;
   min-width: 300px;
-  max-width: 800px; 
+  max-width: 800px;
 }
 
-.AmericanContacto h3, .AmericanContacto h5 {
+.AmericanContacto h3,
+.AmericanContacto h5 {
   margin: 0;
 }
 
@@ -4383,7 +4306,8 @@ width: 350px;
   margin-bottom: 5px;
 }
 
-.form-group input, .form-group textarea {
+.form-group input,
+.form-group textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #ced4da;
@@ -4395,32 +4319,31 @@ width: 350px;
   min-width: 300px;
   max-width: 100%;
   padding: 20px;
-  background-color: #f9f9f9; 
+  background-color: #f9f9f9;
   border: 4px double #272726;
-  border-radius: 8px; 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
-  position: relative; 
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
   margin-left: 20px;
 }
 
 @media (max-width: 800px) {
   .datosAmericanContacto {
-    margin-left: 0; 
+    margin-left: 0;
   }
 }
 
 .datosAmericanContacto::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: -6px; 
-  left: -6px; 
-  right: -6px; 
-  bottom: -6px; 
-  border: 2px solid #000; 
-  border-radius: 10px; 
-  z-index: -1; 
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  z-index: -1;
 }
-
 
 .grupoAmericanContacto {
   display: flex;
@@ -4433,15 +4356,14 @@ width: 350px;
 .grupoContactoAmerican {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   margin: 10px;
 }
 
 .grupoContactoAmerican h3 {
   margin-bottom: 15px;
   font-size: 2rem;
-  color: #ffcc00; 
-  
+  color: #ffcc00;
 }
 
 .grupoContactoAmerican a {
@@ -4451,7 +4373,9 @@ width: 350px;
   text-decoration: none; /* Sin subrayado */
   margin: 10px 0;
   font-size: 1rem;
-  transition: color 0.3s ease, background-color 0.3s ease;
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease;
 }
 
 .grupoContactoAmerican a:hover {
@@ -4538,60 +4462,63 @@ width: 350px;
 }
 
 .white-bar .headerSearchBarClick {
- position: fixed;
-right: 0px;
-top: 150px;
-background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  right: 0px;
+  top: 150px;
+  background-color: rgba(0, 0, 0, 0.8);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  padding: 10px; 
+  padding: 10px;
   z-index: 1000;
-  width: 100%; 
+  width: 100%;
   max-width: 100%;
-  height: auto; 
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  height: auto;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
 }
 
 @media (max-width: 1240px) {
   .white-bar .headerSearchBarClick {
-    top: 100px; 
+    top: 100px;
   }
 }
 
 .white-bar.fixed .headerSearchBarClick {
-  top:100px
+  top: 100px;
 }
-
 
 .headerSearchBarClick .inputnavBar {
   width: 100%;
   background: black;
-  padding: 8px 12px; 
-  font-size: 18px; 
+  padding: 8px 12px;
+  font-size: 18px;
   box-sizing: border-box;
   outline: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease; 
-  margin-bottom: 10px; 
+  transition: border-color 0.3s ease;
+  margin-bottom: 10px;
   margin-top: 20px;
-  color: white; 
+  color: white;
 }
 
 .cerrar-searchbar {
   width: 15%;
-  padding: 6px 10px; 
+  padding: 6px 10px;
   background: none;
   border: none;
-  border-radius: 20px; 
+  border-radius: 20px;
   color: #ffc107;
   cursor: pointer;
-  font-size: 16px; 
+  font-size: 16px;
   text-align: center;
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
 }
 
 .cerrar-searchbar:hover {
-  background: #e7f520; 
-  transform: scale(1.05); 
+  background: #e7f520;
+  transform: scale(1.05);
 }
 
 /* .headerSearchBarClick .inputnavBar:focus {
@@ -4613,16 +4540,17 @@ background-color: rgba(0, 0, 0, 0.8);
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
 }
 
 .headerNavBarClick button,
 .headerNavBarClick span {
-  width: 100%; 
-  max-width: 100%; 
-  padding: 15px; 
-  margin-bottom: 15px; 
+  width: 100%;
+  max-width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
   background: #444;
   color: #fff;
   border: none;
@@ -4631,23 +4559,24 @@ background-color: rgba(0, 0, 0, 0.8);
   cursor: pointer;
   font-size: 16px;
   text-align: center;
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
   box-sizing: border-box;
 }
 
 .headerNavBarClick button:hover,
 .headerNavBarClick span:hover {
   background: #febb00;
-  
 }
 
 .headerNavBarClick .filtrosContainer {
   position: fixed;
   left: 50%;
-  }
+}
 
 .white-bar .headerNavBarClick .dropdownEquipos {
-  width: 100%; 
+  width: 100%;
   background-color: black;
   gap: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -4655,9 +4584,7 @@ background-color: rgba(0, 0, 0, 0.8);
   padding: 8px;
   box-sizing: border-box;
   overflow-y: auto;
-  
 }
-
 
 .white-bar.fixed .headerNavBarClick .dropdownEquipos button,
 .white-bar.fixed .headerNavBarClick .dropdownEquipos span {
@@ -4673,33 +4600,32 @@ background-color: rgba(0, 0, 0, 0.8);
   font-size: 14px;
 }
 
-  .white-bar .headerNavBarClick .dropdownEquipos  {
-    grid-template-columns: repeat(3, 2fr);
-    position: absolute;
-    left: 5px
-  }
+.white-bar .headerNavBarClick .dropdownEquipos {
+  grid-template-columns: repeat(3, 2fr);
+  position: absolute;
+  left: 5px;
+}
 
-  .white-bar.fixed .headerNavBarClick .dropdownEquipos  {
-    grid-template-columns: repeat(3, 2fr);
-    position: absolute;
-    left: 40px
-  }
+.white-bar.fixed .headerNavBarClick .dropdownEquipos {
+  grid-template-columns: repeat(3, 2fr);
+  position: absolute;
+  left: 40px;
+}
 
-  @media (max-width: 510px) {
-    .white-bar .headerNavBarClick .dropdownEquipos,
-    .white-bar.fixed .headerNavBarClick .dropdownEquipos {
-      grid-template-columns: repeat(2, 1fr);
-      font-size: 12px;
-    }
+@media (max-width: 510px) {
+  .white-bar .headerNavBarClick .dropdownEquipos,
+  .white-bar.fixed .headerNavBarClick .dropdownEquipos {
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 12px;
   }
+}
 
-  @media (max-width: 510px) {
-    .white-bar .headerNavBarClick .dropdownEquipos button span,
-    .white-bar.fixed .headerNavBarClick .dropdownEquipos button span {
-      
-      font-size: 12px;
-    }
+@media (max-width: 510px) {
+  .white-bar .headerNavBarClick .dropdownEquipos button span,
+  .white-bar.fixed .headerNavBarClick .dropdownEquipos button span {
+    font-size: 12px;
   }
+}
 
 .gif {
   width: 400px;
@@ -4713,15 +4639,12 @@ background-color: rgba(0, 0, 0, 0.8);
 }
 .white-bar .headerNavBarClick .dropdownEmpresa {
   position: absolute;
-left: -10%;
-
+  left: -10%;
 }
-
 
 .financiarText {
   font-size: 1.2rem;
   margin-bottom: 20px;
-  
 }
 
 .financiarList {
@@ -4734,22 +4657,22 @@ left: -10%;
 
 .financiarList li {
   margin-bottom: 10px;
-  color: black; 
+  color: black;
   position: relative;
   padding-left: 1.5em;
 }
 
 .financiarList li::before {
-  content: "\2022"; 
-  color: #febb00; 
+  content: "\2022";
+  color: #febb00;
   margin-right: 1rem;
-  font-size: 2rem; 
+  font-size: 2rem;
 }
 
 .postVentImage {
   display: block;
   max-width: 70%;
-   width: 700px;
+  width: 700px;
   height: 400px;
   margin: 0 auto;
   padding: 20px 0;
@@ -4772,20 +4695,19 @@ left: -10%;
   overflow: hidden;
 }
 
-
 .back-button {
-  background-color: #ffc107; 
-  color: white; 
+  background-color: #ffc107;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
   position: absolute;
-  right: 30px; 
-  top: 155px; 
+  right: 30px;
+  top: 155px;
 }
 
 .back-button:hover {
@@ -4801,10 +4723,10 @@ left: -10%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.form-container2 input, .form-container2 textarea {
+.form-container2 input,
+.form-container2 textarea {
   width: 100%;
 }
-
 
 .ofertas-list {
   display: grid;
@@ -4830,7 +4752,9 @@ left: -10%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
   position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   overflow: hidden;
 }
 
@@ -4848,11 +4772,11 @@ left: -10%;
 }
 
 .oferta-item img {
-  max-width: 100%; 
-  max-height: 200px; 
+  max-width: 100%;
+  max-height: 200px;
   width: 100%;
   height: auto;
-  object-fit: contain; 
+  object-fit: contain;
   border-radius: 8px;
 }
 
@@ -4861,24 +4785,24 @@ left: -10%;
   top: 10px;
   right: 10px;
   background: none;
-  border: 2px solid #ffcc00; 
+  border: 2px solid #ffcc00;
   color: #ffcc00;
-  font-size: 18px; 
-  width: 30px; 
-  height: 30px; 
+  font-size: 18px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .delete-button:hover {
-  color: #fff; 
-  background-color: #ffcc00; 
-  border-color: #ffcc00; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+  color: #fff;
+  background-color: #ffcc00;
+  border-color: #ffcc00;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 700px) {
@@ -4887,7 +4811,9 @@ left: -10%;
   }
 }
 
-.NovedadesTitle {margin-bottom: -20px;}
+.NovedadesTitle {
+  margin-bottom: -20px;
+}
 
 .suscripcion-container {
   position: fixed;
@@ -4898,7 +4824,7 @@ left: -10%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
 }
 
@@ -4977,19 +4903,17 @@ left: -10%;
 }
 
 .ordenador {
-  display: none; 
+  display: none;
 }
-
 
 @media (min-width: 500px) {
   .responsivo {
-    display: none; 
+    display: none;
   }
   .ordenador {
-    display: block; 
+    display: block;
   }
 }
-
 
 /* HOME */
 
@@ -5002,7 +4926,6 @@ left: -10%;
   margin-right: auto;
   color: #e6b800;
   font-size: 1.5vw;
-  
 }
 
 .tituloHome h2 {
@@ -5011,127 +4934,121 @@ left: -10%;
   color: grey;
   font-size: 3.5vw;
   margin-bottom: 2rem;
-  
 }
-
 
 .containerFamiliaHome {
   margin-top: 2rem;
   margin-bottom: 1rem;
   display: flex;
-  align-items: center; 
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
   max-width: 100%;
   width: 90%;
-  background-color: black; 
-  padding: 1rem; 
+  background-color: black;
+  padding: 1rem;
   position: relative;
-  border-bottom: 10px double #e6b800; 
-  border-left: none; 
-  border-right: none; 
+  border-bottom: 10px double #e6b800;
+  border-left: none;
+  border-right: none;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 5px; 
-  
+  border-radius: 5px;
 }
 
 .containerFamiliaHome::before {
-  content: ""; 
-  position: absolute; 
-  top: 97%; 
-  bottom: 0; 
-  left: 0; 
-  width: 5px; 
-  background-color: #e6b800; 
-  
+  content: "";
+  position: absolute;
+  top: 97%;
+  bottom: 0;
+  left: 0;
+  width: 5px;
+  background-color: #e6b800;
 }
 
 .containerFamiliaHome::after {
   content: "";
-  position: absolute; 
-  top: 97%; 
-  bottom: 0; 
-  right: 0; 
-  width: 5px; 
-  background-color: #e6b800; 
+  position: absolute;
+  top: 97%;
+  bottom: 0;
+  right: 0;
+  width: 5px;
+  background-color: #e6b800;
 }
 
 .letrasHome {
-  font-size: 1.2vw; 
+  font-size: 1.2vw;
   align-items: center;
   margin: auto;
   padding-right: 3rem;
-  color: #d1d1d1; 
+  color: #d1d1d1;
   font-family: "Merri", serif;
-  text-shadow: 
-    1px 1px 2px rgba(0, 0, 0, 0.8),  
-    -1px -1px 2px rgba(255, 255, 255, 0.3), 
-    2px 2px 4px rgba(192, 192, 192, 0.5); 
-  background-color: transparent; 
+  text-shadow:
+    1px 1px 2px rgba(0, 0, 0, 0.8),
+    -1px -1px 2px rgba(255, 255, 255, 0.3),
+    2px 2px 4px rgba(192, 192, 192, 0.5);
+  background-color: transparent;
 }
 
 .letrasHomefOTOSOLA {
-  font-size: 1vw; 
+  font-size: 1vw;
   align-items: center;
   margin: auto;
   padding-right: 3rem;
-  color: #d1d1d1; 
+  color: #d1d1d1;
   font-family: "Merri", serif;
-  text-shadow: 
-    1px 1px 2px rgba(0, 0, 0, 0.8),  
-    -1px -1px 2px rgba(255, 255, 255, 0.3), 
-    2px 2px 4px rgba(192, 192, 192, 0.5); 
-  background-color: transparent; 
+  text-shadow:
+    1px 1px 2px rgba(0, 0, 0, 0.8),
+    -1px -1px 2px rgba(255, 255, 255, 0.3),
+    2px 2px 4px rgba(192, 192, 192, 0.5);
+  background-color: transparent;
 }
 
 .letrasHomefOTOSOLASACAR {
-  font-size: 1vw; 
+  font-size: 1vw;
   align-items: center;
   margin: auto;
   padding-right: 3rem;
-  color: #d1d1d1; 
+  color: #d1d1d1;
   font-family: "Merri", serif;
-  text-shadow: 
-    1px 1px 2px rgba(0, 0, 0, 0.8),  
-    -1px -1px 2px rgba(255, 255, 255, 0.3), 
-    2px 2px 4px rgba(192, 192, 192, 0.5); 
-  background-color: transparent; 
+  text-shadow:
+    1px 1px 2px rgba(0, 0, 0, 0.8),
+    -1px -1px 2px rgba(255, 255, 255, 0.3),
+    2px 2px 4px rgba(192, 192, 192, 0.5);
+  background-color: transparent;
 }
 
 .letrasHomefOTOSOLAdebajo {
-  font-size: 1vw; 
+  font-size: 1vw;
   align-items: center;
   margin: auto;
   padding-right: 3rem;
-  color: #d1d1d1; 
+  color: #d1d1d1;
   font-family: "Merri", serif;
-  text-shadow: 
-    1px 1px 2px rgba(0, 0, 0, 0.8),  
-    -1px -1px 2px rgba(255, 255, 255, 0.3), 
-    2px 2px 4px rgba(192, 192, 192, 0.5); 
-  background-color: transparent; 
-
+  text-shadow:
+    1px 1px 2px rgba(0, 0, 0, 0.8),
+    -1px -1px 2px rgba(255, 255, 255, 0.3),
+    2px 2px 4px rgba(192, 192, 192, 0.5);
+  background-color: transparent;
 }
 
 @media (min-width: 600px) {
   .letrasHomefOTOSOLAdebajo {
-   display: none;
+    display: none;
   }
 }
 
 @media (max-width: 600px) {
   .letrasHomefOTOSOLASACAR {
-   display: none;
+    display: none;
   }
 }
-
 
 .imageHome {
   margin-left: auto;
   max-width: 100%;
-  width: 65%; 
-  border: 5px solid rgba(0, 0, 0, 0.2); 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+  width: 65%;
+  border: 5px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   position: relative;
 }
 
@@ -5142,32 +5059,28 @@ left: -10%;
 .categoriasContainer {
   display: flex;
   justify-content: space-around;
-  align-items: center; 
-  width: 100%; 
+  align-items: center;
+  width: 100%;
   padding: 1rem;
   gap: 1rem;
 }
 
 .categoriasContainer div {
   flex: 1;
-  text-align: center; 
+  text-align: center;
   display: flex;
   justify-content: space-around;
   margin-bottom: 3rem;
 }
 
-
 .containerFamiliaHomeReverso {
   margin-top: 2rem;
-
 }
 
-.nav-link  {
+.nav-link {
   color: #e6b800;
   font-size: 3rem;
 }
-
-
 
 /* MOBILE PARA EL HOME  */
 
@@ -5183,22 +5096,19 @@ left: -10%;
     display: block;
     margin-top: 0;
     margin-bottom: 0.5rem;
-    
-    
   }
 }
 
 @media (max-width: 700px) {
   .imageHome {
     margin: auto;
-    width: 80%; 
-    
+    width: 80%;
   }
 }
 
 @media (max-width: 700px) {
   .letrasHome {
-    padding: 0
+    padding: 0;
   }
 }
 
@@ -5223,83 +5133,61 @@ left: -10%;
   }
 
   .categoriasContainer div {
-    width: 100%; 
+    width: 100%;
     display: flex;
-    justify-content: center; 
-    margin: 1rem 0; 
+    justify-content: center;
+    margin: 1rem 0;
   }
 }
 
 .CARDHOMEIMAGENSOLA {
   background-color: #000;
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 2rem; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
   margin: auto;
-  padding: 2rem; 
-  max-width: 100%; 
-  width: 90%; 
-  box-sizing: border-box; 
+  padding: 2rem;
+  max-width: 100%;
+  width: 90%;
+  box-sizing: border-box;
   position: relative;
 }
 
 .CARDHOMEIMAGENSOLA::after {
-  content: ""; 
-  position: absolute; 
-  bottom: 0; 
-  left: 50%; 
-  transform: translateX(-50%); 
-  width: 70%; 
-  height: 5px; 
-  background-color: #e6b800; 
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 5px;
+  background-color: #e6b800;
 }
-
 
 .CARDHOMEIMAGENSOLA img {
   width: 100%;
   height: auto;
-  max-width: 100%; 
-  border-radius: 5px; 
+  max-width: 100%;
+  border-radius: 5px;
 }
 
 @media (min-width: 600px) {
   .CARDHOMEIMAGENSOLA {
-    flex-direction: row; 
-    gap: 3rem; 
+    flex-direction: row;
+    gap: 3rem;
   }
 
   .CARDHOMEIMAGENSOLA img {
-    width: 70%; 
+    width: 70%;
   }
 }
-
 
 .descripcionesHome {
   margin-left: auto;
   margin-right: auto;
   margin-top: 4rem;
-
 }
 
-
-
-
-
 /* PROBANDO DEPLOY  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

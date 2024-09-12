@@ -202,8 +202,6 @@ export default function NavBarAlternativo({
     window.location.reload();
   };
 
-  console.log(role);
-
   return (
     <>
       {login && (
@@ -374,7 +372,7 @@ export default function NavBarAlternativo({
               <FaBell />
             </button>
           )} */}
-          <button
+          {/* <button
             className="fiveguys"
             style={{
               background: "none",
@@ -384,7 +382,7 @@ export default function NavBarAlternativo({
               className="burguer-icon-front"
               onClick={handleMostrarModalheadBar}
             />
-          </button>
+          </button> */}
           <div>
             {role ? (
               <div className="user-menu-container">
