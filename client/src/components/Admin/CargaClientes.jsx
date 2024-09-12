@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useClientes } from "../../hooks/useClientes";
 import BackButton from "../../UI/BackButton";
@@ -21,6 +21,33 @@ export default function CargaClientes() {
     });
   };
 
+  const fetchProvincias = async () => {
+    try {
+      const response = await fetch(
+        "https://apis.datos.gob.ar/georef/api/provincias?campos=id,nombre"
+      );
+      const data = await response.json();
+      return data.provincias;
+    } catch (error) {
+      console.error("Error fetching provincias:", error);
+    }
+  };
+
+  const fetchMunicipios = async (provinciaId) => {
+    try {
+      const response = await fetch(
+        `https://apis.datos.gob.ar/georef/api/municipios?provincia=${provinciaId}&campos=id,nombre&max=100`
+      );
+      const data = await response.json();
+      return data.municipios;
+    } catch (error) {
+      console.error("Error fetching municipios:", error);
+    }
+  };
+
+  const [provincias, setProvincias] = useState([]);
+  const [municipios, setMunicipios] = useState([]);
+
   // Estado local para manejar los datos del formulario
   const [formData, setFormData] = useState({
     idUsuario: idUsuario,
@@ -31,15 +58,47 @@ export default function CargaClientes() {
     mail: "",
     telefono: "",
     razonSocial: "",
+    provincia: "",
+    ciudad: "",
   });
 
-  // Manejar cambios en los campos del formulario
-  const handleChange = (e) => {
+  useEffect(() => {
+    const loadProvincias = async () => {
+      const provinciasData = await fetchProvincias();
+      setProvincias(provinciasData || []);
+    };
+
+    loadProvincias();
+  }, []);
+
+  const handleChange = async (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    if (name === "provincia") {
+      const provinciaId = provincias.find((p) => p.nombre === value)?.id;
+      if (provinciaId) {
+        const municipiosData = await fetchMunicipios(provinciaId);
+        setMunicipios(municipiosData || []);
+        // Solo actualiza el valor del campo `provincia` y resetea `ciudad`
+        setFormData({
+          ...formData,
+          provincia: value,
+          ciudad: "",
+        });
+      } else {
+        setMunicipios([]);
+        setFormData({
+          ...formData,
+          provincia: value,
+          ciudad: "",
+        });
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -57,6 +116,8 @@ export default function CargaClientes() {
       mail: "",
       telefono: "",
       razonSocial: "",
+      provincia: "",
+      ciudad: "",
     });
   };
 
@@ -67,7 +128,7 @@ export default function CargaClientes() {
       <br />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="domicilio">
+          <label htmlFor="CUIT">
             CUIT<span className="obligatorio">*</span>
           </label>
           <InputMask
@@ -102,7 +163,7 @@ export default function CargaClientes() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="nombre">Razón Social</label>
+          <label htmlFor="razonSocial">Razón Social</label>
           <input
             type="text"
             id="razonSocial"
@@ -163,6 +224,44 @@ export default function CargaClientes() {
             onChange={(e) => handleChange(soloNumeros(e))}
             required
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="provincia">
+            Provincia<span className="obligatorio">*</span>
+          </label>
+          <select
+            id="provincia"
+            name="provincia"
+            value={formData.provincia}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Selecciona una provincia</option>
+            {provincias.map((provincia) => (
+              <option key={provincia.id} value={provincia.nombre}>
+                {provincia.nombre}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="ciudad">
+            Ciudad<span className="obligatorio">*</span>
+          </label>
+          <select
+            id="ciudad"
+            name="ciudad"
+            value={formData.ciudad}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Selecciona una ciudad</option>
+            {municipios.map((municipio) => (
+              <option key={municipio.id} value={municipio.nombre}>
+                {municipio.nombre}
+              </option>
+            ))}
+          </select>
         </div>
         <button type="submit" className="form-submit">
           Guardar Cliente
