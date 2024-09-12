@@ -2355,6 +2355,7 @@ button:focus-visible {
   border-radius: 8px;
   padding: 10px 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 75px;
 }
 
 @media (max-width: 600px) {
@@ -2362,7 +2363,7 @@ button:focus-visible {
     font-size: 14px;
     padding: 0;
     margin-right: 1.5rem;
-    margin-top: -5rem;
+    margin-top: 5rem;
   }
 }
 
