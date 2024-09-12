@@ -208,6 +208,44 @@ export default function CargaClientes() {
           />
         </div>
         <div className="form-group">
+          <label htmlFor="provincia">
+            Provincia<span className="obligatorio">*</span>
+          </label>
+          <select
+            id="provincia"
+            name="provincia"
+            value={formData.provincia}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Selecciona una provincia</option>
+            {provincias.map((provincia) => (
+              <option key={provincia.id} value={provincia.nombre}>
+                {provincia.nombre}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="ciudad">
+            Ciudad<span className="obligatorio">*</span>
+          </label>
+          <select
+            id="ciudad"
+            name="ciudad"
+            value={formData.ciudad}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Selecciona una ciudad</option>
+            {municipios.map((municipio) => (
+              <option key={municipio.id} value={municipio.nombre}>
+                {municipio.nombre}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
           <label htmlFor="mail">
             Email Principal<span className="obligatorio">*</span>
           </label>
@@ -275,44 +313,7 @@ export default function CargaClientes() {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="provincia">
-            Provincia<span className="obligatorio">*</span>
-          </label>
-          <select
-            id="provincia"
-            name="provincia"
-            value={formData.provincia}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Selecciona una provincia</option>
-            {provincias.map((provincia) => (
-              <option key={provincia.id} value={provincia.nombre}>
-                {provincia.nombre}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="ciudad">
-            Ciudad<span className="obligatorio">*</span>
-          </label>
-          <select
-            id="ciudad"
-            name="ciudad"
-            value={formData.ciudad}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Selecciona una ciudad</option>
-            {municipios.map((municipio) => (
-              <option key={municipio.id} value={municipio.nombre}>
-                {municipio.nombre}
-              </option>
-            ))}
-          </select>
-        </div>
+
         <button type="submit" className="form-submit">
           Guardar Cliente
         </button>
