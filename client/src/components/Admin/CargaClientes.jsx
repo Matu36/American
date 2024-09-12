@@ -56,7 +56,11 @@ export default function CargaClientes() {
     nombre: "",
     apellido: "",
     mail: "",
+    mailAlternativo1: "",
+    mailAlternativo2: "",
     telefono: "",
+    telefonoSecundario: "",
+    telefonoSecundario1: "",
     razonSocial: "",
     provincia: "",
     ciudad: "",
@@ -115,6 +119,10 @@ export default function CargaClientes() {
       apellido: "",
       mail: "",
       telefono: "",
+      mailAlternativo1: "",
+      mailAlternativo2: "",
+      telefonoAlternativo: "",
+      telefonoAlternativo1: "",
       razonSocial: "",
       provincia: "",
       ciudad: "",
@@ -201,7 +209,7 @@ export default function CargaClientes() {
         </div>
         <div className="form-group">
           <label htmlFor="mail">
-            Email<span className="obligatorio">*</span>
+            Email Principal<span className="obligatorio">*</span>
           </label>
           <input
             type="email"
@@ -213,6 +221,26 @@ export default function CargaClientes() {
           />
         </div>
         <div className="form-group">
+          <label htmlFor="mailalternativo">Email Alternativo</label>
+          <input
+            type="email"
+            id="mailalternativo"
+            name="mailalternativo"
+            value={formData.mailAlternativo1}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="mailalternativo1">Email Alternativo 1</label>
+          <input
+            type="email"
+            id="mailalternativo1"
+            name="mailalternativo1"
+            value={formData.mailAlternativo2}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
           <label htmlFor="telefono">
             Teléfono<span className="obligatorio">*</span>
           </label>
@@ -221,6 +249,28 @@ export default function CargaClientes() {
             id="telefono"
             name="telefono"
             value={formData.telefono}
+            onChange={(e) => handleChange(soloNumeros(e))}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="telefonoAlternativo">Teléfono Alternativo</label>
+          <input
+            type="number"
+            id="telefonoAlternativo"
+            name="telefonoAlternativo"
+            value={formData.telefonoAlternativo}
+            onChange={(e) => handleChange(soloNumeros(e))}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="telefonoAlternativo1">Teléfono Alternativo 1</label>
+          <input
+            type="number"
+            id="telefonoAlternativo1"
+            name="telefonoAlternativo1"
+            value={formData.telefonoAlternativo1}
             onChange={(e) => handleChange(soloNumeros(e))}
             required
           />
