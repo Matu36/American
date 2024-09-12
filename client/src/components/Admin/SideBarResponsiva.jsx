@@ -116,64 +116,64 @@ const SideBarResponsiva = ({ handleCerrarModalSideBar }) => {
       subCategories: [],
       roles: ["administrador", "vendedor", "gerente"],
     },
-    {
-      label: "Garantia",
-      icon: FaShieldAlt,
-      subCategories: [],
-      roles: ["administrador"],
-    },
-    {
-      label: "Repuestos",
-      icon: FaCogs,
-      subCategories: [],
-      roles: ["administrador"],
-    },
-    {
-      label: "Contacto",
-      icon: FaPhone,
-      subCategories: [],
-      roles: ["administrador"],
-    },
-    {
-      label: "ContactoProducto",
-      icon: FaPercentage,
-      subCategories: [],
-      roles: ["administrador"],
-    },
-    {
-      label: "Suscriptores",
-      icon: FaEnvelopeOpen,
-      subCategories: [],
-      roles: ["administrador"],
-    },
-    {
-      label: "OfertasNovedades",
-      icon: FaTag,
-      subCategories: [],
-      roles: ["administrador"],
-    },
-    {
-      label: "Mensajes",
-      icon: MdMail,
-      subCategories: [
-        {
-          label: "Nuevo Correo",
-          path: "/admin/mensajes/nuevo",
-          roles: ["administrador", "vendedor", "gerente"],
-        },
-        {
-          label: "Ver mensajes",
-          path: "/admin/mensajes/ver",
-          roles: ["administrador", "vendedor", "gerente"],
-        },
-        {
-          label: "Ver enviados",
-          path: "/admin/mensajes/enviados",
-          roles: ["administrador", "vendedor", "gerente"],
-        },
-      ],
-      roles: ["administrador", "vendedor", "gerente"],
-    },
+    // {
+    //   label: "Garantia",
+    //   icon: FaShieldAlt,
+    //   subCategories: [],
+    //   roles: ["administrador"],
+    // },
+    // {
+    //   label: "Repuestos",
+    //   icon: FaCogs,
+    //   subCategories: [],
+    //   roles: ["administrador"],
+    // },
+    // {
+    //   label: "Contacto",
+    //   icon: FaPhone,
+    //   subCategories: [],
+    //   roles: ["administrador"],
+    // },
+    // {
+    //   label: "ContactoProducto",
+    //   icon: FaPercentage,
+    //   subCategories: [],
+    //   roles: ["administrador"],
+    // },
+    // {
+    //   label: "Suscriptores",
+    //   icon: FaEnvelopeOpen,
+    //   subCategories: [],
+    //   roles: ["administrador"],
+    // },
+    // {
+    //   label: "OfertasNovedades",
+    //   icon: FaTag,
+    //   subCategories: [],
+    //   roles: ["administrador"],
+    // },
+    // {
+    //   label: "Mensajes",
+    //   icon: MdMail,
+    //   subCategories: [
+    //     {
+    //       label: "Nuevo Correo",
+    //       path: "/admin/mensajes/nuevo",
+    //       roles: ["administrador", "vendedor", "gerente"],
+    //     },
+    //     {
+    //       label: "Ver mensajes",
+    //       path: "/admin/mensajes/ver",
+    //       roles: ["administrador", "vendedor", "gerente"],
+    //     },
+    //     {
+    //       label: "Ver enviados",
+    //       path: "/admin/mensajes/enviados",
+    //       roles: ["administrador", "vendedor", "gerente"],
+    //     },
+    //   ],
+    //   roles: ["administrador", "vendedor", "gerente"],
+    // },
   ];
 
   const filteredCategories = categories.filter((category) =>

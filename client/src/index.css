@@ -1826,13 +1826,12 @@ button:focus-visible {
 
 .login-container {
   background-color: #fff;
-  padding: 20px;
-  padding-top: 5px;
+  padding: 40px;
   border-radius: 16px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   border: 2px solid #ccc;
   max-width: 500px;
-  width: 80%;
+  width: 90%;
   margin: auto;
   position: fixed;
   top: 50%;

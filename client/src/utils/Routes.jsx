@@ -13,7 +13,7 @@ import Productos from "../components/Admin/Productos";
 import Usuarios from "../components/Admin/Usuarios";
 import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
-import Detalle from "../components/Detalle";
+// import Detalle from "../components/Detalle";
 import Cotizador from "../components/Admin/Cotizador";
 import Contacto from "../components/Admin/Contacto";
 import Garantia from "../components/Admin/Garantia";
@@ -43,16 +43,16 @@ import { useUsuario } from "../hooks/useUsuarios";
 import Spinner from "../UI/Spinner";
 import Repuestos from "../components/Admin/Repuestos";
 import RepuestosDetail from "../components/Admin/RepuestosDetail";
-import PostVenta from "../components/empresa/PostVenta";
-import Financiación from "../components/empresa/Financiación";
-import Distribuidores from "../components/empresa/Distribuidores";
-import AmericanRepuestos from "../components/empresa/AmericanRepuestos";
-import AmericanContacto from "../components/empresa/AmericanContacto";
-import AmericanGarantia from "../components/empresa/AmericanGarantia";
+// import PostVenta from "../components/empresa/PostVenta";
+// import Financiación from "../components/empresa/Financiación";
+// import Distribuidores from "../components/empresa/Distribuidores";
+// import AmericanRepuestos from "../components/empresa/AmericanRepuestos";
+// import AmericanContacto from "../components/empresa/AmericanContacto";
+// import AmericanGarantia from "../components/empresa/AmericanGarantia";
 import ProductosDetalle from "../components/Admin/ProductosDetalle";
 import useAxiosInterceptor from "../hooks/useAxiosInterceptor";
 import OfertasNovedades from "../components/Admin/OfertasNovedades";
-import Muro from "../components/miUsuario/Muro";
+// import Muro from "../components/miUsuario/Muro";
 import Suscripcion from "../components/Admin/Suscripcion";
 
 const AppRouter = () => {
@@ -67,14 +67,14 @@ const AppRouter = () => {
         <InterceptorSetup />
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/postventa" element={<PostVenta />} />
+          {/* <Route path="/postventa" element={<PostVenta />} />
           <Route path="/financiacion" element={<Financiación />} />
           <Route path="/americanrepuestos" element={<AmericanRepuestos />} />
           <Route path="/americanContacto" element={<AmericanContacto />} />
           <Route path="/americanGarantia" element={<AmericanGarantia />} />
           <Route path="/distribuidores" element={<Distribuidores />} />
           <Route path="/novedades" element={<Muro />} />
-          <Route path="/productos/:id" element={<Detalle />} />
+          <Route path="/productos/:id" element={<Detalle />} /> */}
           <Route path="/Error" element={<ErroPage />} />
           <Route path="*" element={<ErroPage />} />
           <Route path="/admin/*" element={<AdminLayout />} />
@@ -87,6 +87,7 @@ const AppRouter = () => {
 const AdminLayout = () => {
   const { auth, setAuth } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [rolDatas, setRolDatas] = useState(null);
 
   const token = localStorage.getItem("token");
 
@@ -98,7 +99,6 @@ const AdminLayout = () => {
     try {
       await checkRol({ token });
     } catch (error) {
-      console.error("Error al verificar rol:", error);
       navigate("/");
     }
   };
@@ -119,7 +119,6 @@ const AdminLayout = () => {
       const role = rolData?.data?.rol;
       if (role === "comun") {
         navigate("/error");
-        console.log(role);
       } else {
         setLoading(false);
       }
@@ -145,17 +144,17 @@ const AdminLayout = () => {
         <Routes>
           <Route index element={<AppAdmin />} />
           <Route path="/Usuarios" element={<Usuarios />} />
-          <Route path="/OfertasNovedades" element={<OfertasNovedades />} />
+          {/* <Route path="/OfertasNovedades" element={<OfertasNovedades />} /> */}
           <Route path="/Usuarios/:id" element={<UsuariosDetail />} />
           <Route path="/Clientes/ver" element={<Clientes />} />
           <Route path="/Clientes/ver/:id" element={<ClientesDetail />} />
           <Route path="/Clientes/modificar/:id" element={<ClientesEdit />} />
           <Route path="/Clientes/cargar" element={<CargaClientes />} />
           <Route path="/Productos/ver" element={<Productos />} />
-          <Route
+          {/* <Route
             path="/ContacoProducto/ver/:id"
             element={<ContactoProductoDetail />}
-          />
+          /> */}
           <Route path="/contacto/ver/:id" element={<ContactoDetail />} />
           <Route path="/Productos/cargar" element={<FormProduct />} />
           <Route path="/productos/modificar/:id" element={<ProductosEdit />} />
@@ -169,7 +168,7 @@ const AdminLayout = () => {
           <Route path="/Cotizaciones/historial" element={<Historial />} />
           <Route path="/Cotizaciones/crear" element={<Cotizador />} />
           <Route path="/ventas" element={<Ventas />} />
-          <Route path="/Garantia" element={<Garantia />} />
+          {/* <Route path="/Garantia" element={<Garantia />} />
           <Route path="/garantias/garantia/:id" element={<GarantiaDetail />} />
           <Route path="/ventas/:id" element={<VentasDetail />} />
           <Route path="/Contacto" element={<Contacto />} />
@@ -181,7 +180,7 @@ const AdminLayout = () => {
           <Route path="/Mensajes/enviados" element={<MensajesEnviados />} />
           <Route path="/Mensajes/enviados/:id" element={<MensajesDetail />} />
           <Route path="/Mensajes/ver" element={<MensajesRecibidos />} />
-          <Route path="/Mensajes/ver/:id" element={<MensajesDetail />} />
+          <Route path="/Mensajes/ver/:id" element={<MensajesDetail />} /> */}
         </Routes>
       </div>
     </>

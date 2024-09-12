@@ -17,6 +17,12 @@ export default function NavBarAdmin() {
   const [sidebar, setSideBar] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
+  const handleLogout = () => {
+    localStorage.clear();
+    setAuth({});
+    navigate("/");
+  };
+
   if (!idUsuario) {
     navigate("/");
     return null;
@@ -91,6 +97,19 @@ export default function NavBarAdmin() {
           </button>
         )}
       </div>
+      <button
+        style={{
+          background: "none",
+          backgroundColor: "none",
+          color: "gray",
+          position: "absolute",
+          top: 0,
+          right: 0,
+        }}
+        onClick={handleLogout}
+      >
+        Cerrar sesión
+      </button>
     </nav>
   );
 }
