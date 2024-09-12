@@ -163,25 +163,44 @@ const getClientePorId = async (req, res) => {
 
 const updateCliente = async (req, res) => {
   try {
-    if (!req.body?.id) {
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    // Decodifica el token para obtener el idUsuario
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+    const idUsuario = decodedToken.id;
+
+    if (!idUsuario) {
+      return res.status(401).send({ error: "Token inválido" });
+    }
+
+    // Verifica si el cuerpo de la solicitud contiene el id del cliente
+    const {
+      id,
+      CUIT,
+      domicilio,
+      nombre,
+      apellido,
+      mail,
+      telefono,
+      mailAlternativo,
+      mailAlternativo1,
+      telefonoAlternativo,
+      telefonoAlternativo1,
+    } = req.body;
+
+    if (!id) {
       throw "Se requiere el ID del cliente";
     }
 
-    const id = req.body.id;
-
     // Verifica que al menos uno de los campos para actualizar esté presente en el cuerpo de la solicitud
-    const { idUsuario, CUIT, domicilio, nombre, apellido, mail, telefono } =
-      req.body;
-
-    if (
-      !idUsuario &&
-      !CUIT &&
-      !domicilio &&
-      !nombre &&
-      !apellido &&
-      !mail &&
-      !telefono
-    ) {
+    if (!CUIT && !domicilio && !nombre && !apellido && !mail && !telefono) {
       throw "No hay parámetros para actualizar";
     }
 
@@ -192,15 +211,26 @@ const updateCliente = async (req, res) => {
       return res.status(404).send("Cliente no encontrado");
     }
 
+    // Verifica que el idUsuario coincida con el del cliente (opcional, para mayor seguridad)
+    if (cliente.idUsuario !== idUsuario) {
+      return res
+        .status(403)
+        .send("No tienes permiso para modificar este cliente");
+    }
+
     // Actualiza los campos del cliente
     await cliente.update({
-      idUsuario: idUsuario ?? cliente.idUsuario,
       CUIT: CUIT ?? cliente.CUIT,
       domicilio: domicilio ?? cliente.domicilio,
       nombre: nombre ?? cliente.nombre,
       apellido: apellido ?? cliente.apellido,
       mail: mail ?? cliente.mail,
+      mailAlternativo: mailAlternativo ?? cliente.mailAlternativo,
+      mailAlternativo1: mailAlternativo1 ?? cliente.mailAlternativo1,
       telefono: telefono ?? cliente.telefono,
+      telefonoAlternativo: telefonoAlternativo ?? cliente.telefonoAlternativo,
+      telefonoAlternativo1:
+        telefonoAlternativo1 ?? cliente.telefonoAlternativo1,
       fechaModi: new Date(),
     });
 

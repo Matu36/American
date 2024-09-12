@@ -31,6 +31,10 @@ export default function ClientesDetail() {
     fechaModi,
     Usuario,
     razonSocial,
+    mailAlternativo,
+    mailAlternativo1,
+    telefonoAlternativo,
+    telefonoAlternativo1,
   } = clienteDetalle;
 
   return (
@@ -57,7 +61,19 @@ export default function ClientesDetail() {
         <strong>Email:</strong> {mail}
       </div>
       <div style={{ marginBottom: "10px" }}>
+        <strong>Email Alternativo:</strong> {mailAlternativo}
+      </div>
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Email Alternativo:</strong> {mailAlternativo1}
+      </div>
+      <div style={{ marginBottom: "10px" }}>
         <strong>Teléfono:</strong> {telefono}
+      </div>
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Teléfono Alternativo:</strong> {telefonoAlternativo}
+      </div>
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Teléfono Alternativo:</strong> {telefonoAlternativo1}
       </div>
       <div style={{ marginBottom: "10px" }}>
         <strong>Creado:</strong> {fechaDeCreacion}

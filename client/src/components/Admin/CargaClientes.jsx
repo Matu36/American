@@ -4,6 +4,7 @@ import { useClientes } from "../../hooks/useClientes";
 import BackButton from "../../UI/BackButton";
 import InputMask from "react-input-mask";
 import { soloNumeros } from "../../utils/soloNumeros";
+import Select from "react-select";
 
 export default function CargaClientes() {
   const { auth } = useAuth();
@@ -56,11 +57,11 @@ export default function CargaClientes() {
     nombre: "",
     apellido: "",
     mail: "",
+    mailAlternativo: "",
     mailAlternativo1: "",
-    mailAlternativo2: "",
     telefono: "",
-    telefonoSecundario: "",
-    telefonoSecundario1: "",
+    telefonoAlternativo: "",
+    telefonoAlternativo1: "",
     razonSocial: "",
     provincia: "",
     ciudad: "",
@@ -119,8 +120,8 @@ export default function CargaClientes() {
       apellido: "",
       mail: "",
       telefono: "",
+      mailAlternativo: "",
       mailAlternativo1: "",
-      mailAlternativo2: "",
       telefonoAlternativo: "",
       telefonoAlternativo1: "",
       razonSocial: "",
@@ -211,40 +212,56 @@ export default function CargaClientes() {
           <label htmlFor="provincia">
             Provincia<span className="obligatorio">*</span>
           </label>
-          <select
+          <Select
             id="provincia"
             name="provincia"
-            value={formData.provincia}
-            onChange={handleChange}
+            options={provincias.map((provincia) => ({
+              value: provincia.nombre,
+              label: provincia.nombre,
+            }))}
+            value={
+              formData.provincia
+                ? { value: formData.provincia, label: formData.provincia }
+                : null
+            }
+            onChange={(selectedOption) =>
+              handleChange({
+                target: { name: "provincia", value: selectedOption.value },
+              })
+            }
+            placeholder="Selecciona una provincia"
+            isClearable
             required
-          >
-            <option value="">Selecciona una provincia</option>
-            {provincias.map((provincia) => (
-              <option key={provincia.id} value={provincia.nombre}>
-                {provincia.nombre}
-              </option>
-            ))}
-          </select>
+          />
         </div>
+
         <div className="form-group">
           <label htmlFor="ciudad">
             Ciudad<span className="obligatorio">*</span>
           </label>
-          <select
+          <Select
             id="ciudad"
             name="ciudad"
-            value={formData.ciudad}
-            onChange={handleChange}
+            options={municipios.map((municipio) => ({
+              value: municipio.nombre,
+              label: municipio.nombre,
+            }))}
+            value={
+              formData.ciudad
+                ? { value: formData.ciudad, label: formData.ciudad }
+                : null
+            }
+            onChange={(selectedOption) =>
+              handleChange({
+                target: { name: "ciudad", value: selectedOption.value },
+              })
+            }
+            placeholder="Selecciona una ciudad"
+            isClearable
             required
-          >
-            <option value="">Selecciona una ciudad</option>
-            {municipios.map((municipio) => (
-              <option key={municipio.id} value={municipio.nombre}>
-                {municipio.nombre}
-              </option>
-            ))}
-          </select>
+          />
         </div>
+
         <div className="form-group">
           <label htmlFor="mail">
             Email Principal<span className="obligatorio">*</span>
@@ -259,25 +276,26 @@ export default function CargaClientes() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="mailalternativo">Email Alternativo</label>
+          <label htmlFor="mailAlternativo">Email Alternativo</label>
           <input
             type="email"
-            id="mailalternativo"
-            name="mailalternativo"
-            value={formData.mailAlternativo1}
+            id="mailAlternativo"
+            name="mailAlternativo"
+            value={formData.mailAlternativo}
             onChange={handleChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="mailalternativo1">Email Alternativo 1</label>
+          <label htmlFor="mailAlternativo1">Email Alternativo 1</label>
           <input
             type="email"
-            id="mailalternativo1"
-            name="mailalternativo1"
-            value={formData.mailAlternativo2}
+            id="mailAlternativo1"
+            name="mailAlternativo1"
+            value={formData.mailAlternativo1}
             onChange={handleChange}
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="telefono">
             Teléfono<span className="obligatorio">*</span>

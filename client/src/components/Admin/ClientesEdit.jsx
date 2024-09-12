@@ -20,6 +20,10 @@ export default function ClientesEdit() {
     apellido: "",
     mail: "",
     telefono: "",
+    telefonoAlternativo: "",
+    telefonoAlternativo1: "",
+    mailAlternativo: "",
+    mailAlternativo1: "",
   });
 
   const {
@@ -38,6 +42,10 @@ export default function ClientesEdit() {
         apellido: clienteDetalle.apellido || "",
         mail: clienteDetalle.mail || "",
         telefono: clienteDetalle.telefono || "",
+        telefonoAlternativo: clienteDetalle.telefonoAlternativo || "",
+        telefonoAlternativo1: clienteDetalle.telefonoAlternativo1 || "",
+        mailAlternativo: clienteDetalle.mailAlternativo || "",
+        mailAlternativo1: clienteDetalle.mailAlternativo1 || "",
       });
     }
   }, [clienteDetalle, id, idUsuario]);
@@ -56,15 +64,6 @@ export default function ClientesEdit() {
     const data = { ...formData, idUsuario };
 
     await ediCliente(data);
-
-    setFormData({
-      CUIT: "",
-      domicilio: "",
-      nombre: "",
-      apellido: "",
-      mail: "",
-      telefono: "",
-    });
   };
 
   return (
@@ -119,7 +118,7 @@ export default function ClientesEdit() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="mail">Email</label>
+          <label htmlFor="mail">Email Principal</label>
           <input
             type="email"
             id="mail"
@@ -130,12 +129,56 @@ export default function ClientesEdit() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="telefono">Teléfono</label>
+          <label htmlFor="mailAlternativo">Email Alternativo</label>
+          <input
+            type="email"
+            id="mailAlternativo"
+            name="mailAlternativo"
+            value={formData.mailAlternativo}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="mailAlternativo1">Email Alternativo</label>
+          <input
+            type="email"
+            id="mailAlternativo1"
+            name="mailAlternativo1"
+            value={formData.mailAlternativo1}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="telefono">Teléfono Principal</label>
           <input
             type="number"
             id="telefono"
             name="telefono"
             value={formData.telefono}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="telefonoAlternativo">Teléfono Alternativo</label>
+          <input
+            type="number"
+            id="telefonoAlternativo"
+            name="telefonoAlternativo"
+            value={formData.telefonoAlternativo}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="telefonoAlternativo1">Teléfono Alternativo</label>
+          <input
+            type="number"
+            id="telefonoAlternativo1"
+            name="telefonoAlternativo1"
+            value={formData.telefonoAlternativo1}
             onChange={handleChange}
             required
           />
