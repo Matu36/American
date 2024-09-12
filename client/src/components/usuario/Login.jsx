@@ -86,7 +86,7 @@ export default function Login({ handleCerrarModalLogin }) {
     if (showWelcomeMessage) {
       const timer = setTimeout(() => {
         setShowWelcomeMessage(false);
-        handleCerrarModalLogin();
+        // handleCerrarModalLogin();
 
         if (location.pathname === "/") {
           window.location.reload();
@@ -137,7 +137,7 @@ export default function Login({ handleCerrarModalLogin }) {
 
             <input type="submit" value="Ingresar" className="form-submit" />
           </form>
-          <button onClick={handleMostrarModalRecover}>
+          {/* <button onClick={handleMostrarModalRecover}>
             <span style={{ color: "black" }}>¿Olvidaste tu contraeña?</span>
           </button>
           {recover && (
@@ -148,7 +148,7 @@ export default function Login({ handleCerrarModalLogin }) {
                 />
               </div>
             </div>
-          )}
+          )} */}
 
           {showWelcomeMessage && (
             <div className="welcome-message">
@@ -158,7 +158,7 @@ export default function Login({ handleCerrarModalLogin }) {
           )}
 
           <div style={{ marginTop: "1rem" }}>
-            <span
+            {/* <span
               style={{
                 color: "black",
                 fontFamily: "merri",
@@ -166,7 +166,7 @@ export default function Login({ handleCerrarModalLogin }) {
               }}
             >
               ¿Aún no pertenecés a American Vial?
-            </span>
+            </span> */}
           </div>
 
           <button
