@@ -47,15 +47,7 @@ export default function FormProduct() {
       case 3:
         setProducto({ ...producto, imagen3: uploadedImages[0] });
         break;
-      case 4:
-        setProducto({ ...producto, imagen4: uploadedImages[0] });
-        break;
-      case 5:
-        setProducto({ ...producto, imagen5: uploadedImages[0] });
-        break;
-      case 6:
-        setProducto({ ...producto, imagen6: uploadedImages[0] });
-        break;
+
       default:
         break;
     }
@@ -88,11 +80,6 @@ export default function FormProduct() {
   const { data: marcas } = useProducto().productosMarcasQuery;
   const { data: divisiones } = useProducto().productosDivisionesQuery;
   const [selectedEmpresa, setSelectedEmpresa] = useState(null);
-
-  const opcionesEmpresa = [
-    { value: "AGRO", label: "AGRO" },
-    { value: "VIAL", label: "VIAL" },
-  ];
 
   const handleChangeEmpresa = (selectedOption) => {
     setSelectedEmpresa(selectedOption);
@@ -185,26 +172,23 @@ export default function FormProduct() {
 
   const [producto, setProducto] = useState({
     familia: "",
-    empresa: "",
     marca: "",
     modelo: "",
     division: "",
-    precio: 0,
     precioUSD: 0,
     imagen: "",
     imagen1: "",
     imagen2: "",
     imagen3: "",
-    imagen4: "",
-    imagen5: "",
-    imagen6: "",
     cantidadTotal: 0,
     codigo: "",
-    potencia: "",
     motor: "",
-    capacidadDeCarga: "",
-    capacidadDeBalde: "",
-    detalles: "",
+    caracteristicasGenerales: "",
+    motoresdeTraslacionyZapatas: "",
+    sistemaHidraulico: "",
+    capacidades: "",
+    Cabina: "",
+    dimensionesGenerales: "",
     fichaPDF: "",
   });
 
@@ -240,25 +224,25 @@ export default function FormProduct() {
       });
 
       setProducto({
-        marca: "",
-        empresa: "",
         familia: "",
+        marca: "",
         modelo: "",
+        division: "",
+        precioUSD: 0,
         imagen: "",
         imagen1: "",
         imagen2: "",
         imagen3: "",
-        cantidadTotal: "",
-        precio: "",
-        precioUSD: "",
+        cantidadTotal: 0,
         codigo: "",
-        division: "",
-        potencia: "",
-        fichaPDF: "",
         motor: "",
-        capacidadDeCarga: "",
-        capacidadDeBalde: "",
-        detalles: "",
+        caracteristicasGenerales: "",
+        motoresdeTraslacionyZapatas: "",
+        sistemaHidraulico: "",
+        capacidades: "",
+        Cabina: "",
+        dimensionesGenerales: "",
+        fichaPDF: "",
       });
     } catch (error) {
       console.error("Error al crear el producto:", error);
@@ -285,21 +269,6 @@ export default function FormProduct() {
       <form onSubmit={saveProduct}>
         <div className="form-group">
           <div className="form-group">
-            <div className="form-group">
-              <label htmlFor="empresa">
-                Empresa <span className="obligatorio">*</span>
-              </label>
-
-              <Select
-                id="empresa"
-                name="empresa"
-                options={opcionesEmpresa}
-                value={selectedEmpresa}
-                onChange={handleChangeEmpresa}
-                required
-                placeholder="Selecciona una Empresa"
-              />
-            </div>
             <label htmlFor="division">
               División <span className="obligatorio">*</span>
             </label>
@@ -315,7 +284,7 @@ export default function FormProduct() {
             />
           </div>
           <label htmlFor="familia">
-            Categoría <span className="obligatorio">*</span>
+            Familia <span className="obligatorio">*</span>
           </label>
           <Select
             id="familia"
@@ -366,25 +335,6 @@ export default function FormProduct() {
           </div>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="precio">
-            Precio <span className="obligatorio">*</span>
-          </label>
-          <div>
-            <input
-              type="number"
-              id="precio"
-              name="precio"
-              value={producto.precio}
-              autoComplete="off"
-              placeholder="Precio"
-              onChange={(e) =>
-                setProducto({ ...producto, precio: e.target.value })
-              }
-              required
-            />
-          </div>
-        </div>
         <div className="form-group">
           <label htmlFor="precio">
             Precio USD <span className="obligatorio">*</span>
@@ -446,36 +396,6 @@ export default function FormProduct() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="imagen">Imagen 4</label>
-          <input
-            type="file"
-            id="imagen4"
-            name="file"
-            accept="image/png, image/jpeg, image/jpg"
-            onChange={(e) => uploadImage(e, 4)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="imagen">Imagen 5</label>
-          <input
-            type="file"
-            id="imagen5"
-            name="file"
-            accept="image/png, image/jpeg, image/jpg"
-            onChange={(e) => uploadImage(e, 5)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="imagen">Imagen 6</label>
-          <input
-            type="file"
-            id="imagen6"
-            name="file"
-            accept="image/png, image/jpeg, image/jpg"
-            onChange={(e) => uploadImage(e, 6)}
-          />
-        </div>
-        <div className="form-group">
           <label htmlFor="fichaPDF">Ficha PDF</label>
           <input
             id="fichaPDF"
@@ -518,20 +438,64 @@ export default function FormProduct() {
             />
           </div>
         </div>
-
         <div className="form-group">
-          <label htmlFor="potencia">Potencia</label>
+          <label htmlFor="caracteristicasGenerales">
+            Características Generales
+          </label>
           <div>
-            <input
-              type="text"
-              id="potencia"
-              name="potencia"
-              value={producto.potencia || ""}
+            <textarea
+              id="caracteristicasGenerales"
+              name="caracteristicasGenerales"
+              value={producto.caracteristicasGenerales || ""}
               autoComplete="off"
-              placeholder="Potencia"
+              placeholder="Caracteristicas Generales"
               onChange={(e) =>
-                setProducto({ ...producto, potencia: e.target.value })
+                setProducto({
+                  ...producto,
+                  caracteristicasGenerales: e.target.value,
+                })
               }
+              style={{ width: "100%", height: "150px", padding: "8px" }}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="motoresDeTraslacionYZapatas">
+            Motores de Traslación y Zapatas
+          </label>
+          <div>
+            <textarea
+              id="motoresDeTraslacionYZapatas"
+              name="motoresDeTraslacionYZapatas"
+              value={producto.motoresdeTraslacionyZapatas || ""}
+              autoComplete="off"
+              placeholder="Motores de Traslación y Zapatas"
+              onChange={(e) =>
+                setProducto({
+                  ...producto,
+                  motoresdeTraslacionyZapatas: e.target.value,
+                })
+              }
+              style={{ width: "100%", height: "150px", padding: "8px" }}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="sistemaHidraulico">Sistema Hidráulico</label>
+          <div>
+            <textarea
+              id="sistemaHidraulico"
+              name="sistemaHidraulico"
+              value={producto.sistemaHidraulico || ""}
+              autoComplete="off"
+              placeholder="Sistema Hidráulico"
+              onChange={(e) =>
+                setProducto({
+                  ...producto,
+                  sistemaHidraulico: e.target.value,
+                })
+              }
+              style={{ width: "100%", height: "150px", padding: "8px" }}
             />
           </div>
         </div>
@@ -539,65 +503,74 @@ export default function FormProduct() {
         <div className="form-group">
           <label htmlFor="motor">Motor</label>
           <div>
-            <input
-              type="text"
+            <textarea
               id="motor"
               name="motor"
               value={producto.motor || ""}
               autoComplete="off"
               placeholder="Motor"
               onChange={(e) =>
-                setProducto({ ...producto, motor: e.target.value })
+                setProducto({
+                  ...producto,
+                  motor: e.target.value,
+                })
               }
+              style={{ width: "100%", height: "150px", padding: "8px" }}
             />
           </div>
         </div>
-
         <div className="form-group">
-          <label htmlFor="capacidadDeCarga">Capacidad de Carga</label>
-          <div>
-            <input
-              type="text"
-              id="capacidadDeCarga"
-              name="capacidadDeCarga"
-              value={producto.capacidadDeCarga || ""}
-              autoComplete="off"
-              placeholder="Capacidad de Carga"
-              onChange={(e) =>
-                setProducto({ ...producto, capacidadDeCarga: e.target.value })
-              }
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="capacidadDeBalde">Capacidad de Balde</label>
-          <div>
-            <input
-              type="text"
-              id="capacidadDeBalde"
-              name="capacidadDeBalde"
-              value={producto.capacidadDeBalde || ""}
-              autoComplete="off"
-              placeholder="Capacidad de Balde"
-              onChange={(e) =>
-                setProducto({ ...producto, capacidadDeBalde: e.target.value })
-              }
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="detalles">Detalles</label>
+          <label htmlFor="capacidades">Capacidades</label>
           <div>
             <textarea
-              id="detalles"
-              name="detalles"
-              value={producto.detalles || ""}
+              id="capacidades"
+              name="capacidades"
+              value={producto.capacidades || ""}
               autoComplete="off"
-              placeholder="Detalles"
+              placeholder="Capacidades"
               onChange={(e) =>
-                setProducto({ ...producto, detalles: e.target.value })
+                setProducto({
+                  ...producto,
+                  capacidades: e.target.value,
+                })
+              }
+              style={{ width: "100%", height: "150px", padding: "8px" }}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="cabina">Cabina</label>
+          <div>
+            <textarea
+              id="Cabina"
+              name="Cabina"
+              value={producto.Cabina || ""}
+              autoComplete="off"
+              placeholder="Cabina"
+              onChange={(e) =>
+                setProducto({
+                  ...producto,
+                  Cabina: e.target.value,
+                })
+              }
+              style={{ width: "100%", height: "150px", padding: "8px" }}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="dimensionesGenerales">Dimensiones Generales</label>
+          <div>
+            <textarea
+              id="dimensionesGenerales"
+              name="dimensionesGenerales"
+              value={producto.dimensionesGenerales || ""}
+              autoComplete="off"
+              placeholder="Dimensiones Generales"
+              onChange={(e) =>
+                setProducto({
+                  ...producto,
+                  dimensionesGenerales: e.target.value,
+                })
               }
               style={{ width: "100%", height: "150px", padding: "8px" }}
             />

@@ -50,15 +50,7 @@ export default function ProductosEdit() {
       case 3:
         setProducto({ ...producto, imagen3: uploadedImages[0] });
         break;
-      case 4:
-        setProducto({ ...producto, imagen4: uploadedImages[0] });
-        break;
-      case 5:
-        setProducto({ ...producto, imagen5: uploadedImages[0] });
-        break;
-      case 6:
-        setProducto({ ...producto, imagen6: uploadedImages[0] });
-        break;
+
       default:
         break;
     }
@@ -87,27 +79,24 @@ export default function ProductosEdit() {
 
   const [producto, setProducto] = useState({
     id: id,
-    empresa: "",
     familia: "",
-    division: "",
     marca: "",
     modelo: "",
-    precio: "",
-    precioUSD: "",
+    division: "",
+    precioUSD: 0,
     imagen: "",
     imagen1: "",
     imagen2: "",
     imagen3: "",
-    imagen4: "",
-    imagen5: "",
-    imagen6: "",
-    cantidadTotal: "",
+    cantidadTotal: 0,
     codigo: "",
-    potencia: "",
     motor: "",
-    capacidadDeCarga: "",
-    capacidadDeBalde: "",
-    detalles: "",
+    caracteristicasGenerales: "",
+    motoresdeTraslacionyZapatas: "",
+    sistemaHidraulico: "",
+    capacidades: "",
+    Cabina: "",
+    dimensionesGenerales: "",
     fichaPDF: "",
   });
 
@@ -115,62 +104,34 @@ export default function ProductosEdit() {
     if (productoDetalle) {
       setProducto({
         id: productoDetalle.id || id,
-        empresa: productoDetalle.empresa || "",
-        division: productoDetalle.division || "",
         familia: productoDetalle.familia || "",
         marca: productoDetalle.marca || "",
         modelo: productoDetalle.modelo || "",
-        precio: productoDetalle.precio || "",
-        precioUSD: productoDetalle.precioUSD || "",
+        division: productoDetalle.division || "",
+        precioUSD: productoDetalle.precioUSD || 0,
         imagen: productoDetalle.imagen || "",
         imagen1: productoDetalle.imagen1 || "",
         imagen2: productoDetalle.imagen2 || "",
         imagen3: productoDetalle.imagen3 || "",
-        imagen4: productoDetalle.imagen4 || "",
-        imagen5: productoDetalle.imagen5 || "",
-        imagen6: productoDetalle.imagen6 || "",
-        cantidadTotal: productoDetalle.cantidadTotal || "",
+        cantidadTotal: productoDetalle.cantidadTotal || 0,
         codigo: productoDetalle.codigo || "",
-        fichaPDF: productoDetalle.fichaPDF || "",
-        potencia: productoDetalle.potencia || "",
         motor: productoDetalle.motor || "",
-        capacidadDeCarga: productoDetalle.capacidadDeCarga || "",
-        capacidadDeBalde: productoDetalle.capacidadDeBalde || "",
-        detalles: productoDetalle.Detalles || "",
+        caracteristicasGenerales:
+          productoDetalle.caracteristicasGenerales || "",
+        motoresdeTraslacionyZapatas:
+          productoDetalle.motoresdeTraslacionyZapatas || "",
+        sistemaHidraulico: productoDetalle.sistemaHidraulico || "",
+        capacidades: productoDetalle.capacidades || "",
+        Cabina: productoDetalle.Cabina || "",
+        dimensionesGenerales: productoDetalle.dimensionesGenerales || "",
+        fichaPDF: productoDetalle.fichaPDF || "",
       });
     }
   }, [productoDetalle, id]);
 
   const saveProduct = async (e) => {
     e.preventDefault();
-    productoEdit(producto, {
-      onSuccess: () => {
-        setProducto({
-          familia: "",
-          empresa: "",
-          marca: "",
-          division: "",
-          modelo: "",
-          precio: "",
-          precioUSD: "",
-          imagen: "",
-          imagen1: "",
-          imagen2: "",
-          imagen3: "",
-          imagen4: "",
-          imagen5: "",
-          imagen6: "",
-          cantidadTotal: "",
-          codigo: "",
-          fichaPDF: "",
-          potencia: "",
-          motor: "",
-          capacidadDeCarga: "",
-          capacidadDeBalde: "",
-          detalles: "",
-        });
-      },
-    });
+    productoEdit(producto);
   };
 
   return (
@@ -178,20 +139,6 @@ export default function ProductosEdit() {
       <BackButton />
       <h2 className="tituloCompo">Modificar Producto</h2> <br />
       <form onSubmit={saveProduct}>
-        <div className="form-group">
-          <label htmlFor="empresa">Empresa</label>
-          <input
-            type="text"
-            id="empresa"
-            name="empresa"
-            value={producto.empresa}
-            autoComplete="off"
-            placeholder="Empresa"
-            onChange={(e) =>
-              setProducto({ ...producto, empresa: e.target.value })
-            }
-          />
-        </div>
         <div className="form-group">
           <label htmlFor="division">División</label>
           <input
@@ -260,25 +207,9 @@ export default function ProductosEdit() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="precio">Precio</label>
-          <div>
-            <input
-              type="number"
-              id="precio"
-              name="precio"
-              value={producto.precio}
-              autoComplete="off"
-              placeholder="Precio"
-              onChange={(e) =>
-                setProducto({ ...producto, precio: e.target.value })
-              }
-              required
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="precio">Precio USD</label>
+          <label htmlFor="precio">
+            Precio USD <span className="obligatorio">*</span>
+          </label>
           <div>
             <input
               type="number"
@@ -336,36 +267,6 @@ export default function ProductosEdit() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="imagen">Imagen 4</label>
-          <input
-            type="file"
-            id="imagen4"
-            name="file"
-            accept="image/png, image/jpeg, image/jpg"
-            onChange={(e) => uploadImage(e, 4)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="imagen">Imagen 5</label>
-          <input
-            type="file"
-            id="imagen5"
-            name="file"
-            accept="image/png, image/jpeg, image/jpg"
-            onChange={(e) => uploadImage(e, 5)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="imagen">Imagen 6</label>
-          <input
-            type="file"
-            id="imagen6"
-            name="file"
-            accept="image/png, image/jpeg, image/jpg"
-            onChange={(e) => uploadImage(e, 6)}
-          />
-        </div>
-        <div className="form-group">
           <label htmlFor="fichaPDF">Ficha PDF</label>
           <input
             id="fichaPDF"
@@ -408,20 +309,64 @@ export default function ProductosEdit() {
             />
           </div>
         </div>
-
         <div className="form-group">
-          <label htmlFor="potencia">Potencia</label>
+          <label htmlFor="caracteristicasGenerales">
+            Características Generales
+          </label>
           <div>
-            <input
-              type="text"
-              id="potencia"
-              name="potencia"
-              value={producto.potencia || ""}
+            <textarea
+              id="caracteristicasGenerales"
+              name="caracteristicasGenerales"
+              value={producto.caracteristicasGenerales || ""}
               autoComplete="off"
-              placeholder="Potencia"
+              placeholder="Caracteristicas Generales"
               onChange={(e) =>
-                setProducto({ ...producto, potencia: e.target.value })
+                setProducto({
+                  ...producto,
+                  caracteristicasGenerales: e.target.value,
+                })
               }
+              style={{ width: "100%", height: "150px", padding: "8px" }}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="motoresDeTraslacionYZapatas">
+            Motores de Traslación y Zapatas
+          </label>
+          <div>
+            <textarea
+              id="motoresDeTraslacionYZapatas"
+              name="motoresDeTraslacionYZapatas"
+              value={producto.motoresdeTraslacionyZapatas || ""}
+              autoComplete="off"
+              placeholder="Motores de Traslación y Zapatas"
+              onChange={(e) =>
+                setProducto({
+                  ...producto,
+                  motoresdeTraslacionyZapatas: e.target.value,
+                })
+              }
+              style={{ width: "100%", height: "150px", padding: "8px" }}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="sistemaHidraulico">Sistema Hidráulico</label>
+          <div>
+            <textarea
+              id="sistemaHidraulico"
+              name="sistemaHidraulico"
+              value={producto.sistemaHidraulico || ""}
+              autoComplete="off"
+              placeholder="Sistema Hidráulico"
+              onChange={(e) =>
+                setProducto({
+                  ...producto,
+                  sistemaHidraulico: e.target.value,
+                })
+              }
+              style={{ width: "100%", height: "150px", padding: "8px" }}
             />
           </div>
         </div>
@@ -429,65 +374,74 @@ export default function ProductosEdit() {
         <div className="form-group">
           <label htmlFor="motor">Motor</label>
           <div>
-            <input
-              type="text"
+            <textarea
               id="motor"
               name="motor"
               value={producto.motor || ""}
               autoComplete="off"
               placeholder="Motor"
               onChange={(e) =>
-                setProducto({ ...producto, motor: e.target.value })
+                setProducto({
+                  ...producto,
+                  motor: e.target.value,
+                })
               }
+              style={{ width: "100%", height: "150px", padding: "8px" }}
             />
           </div>
         </div>
-
         <div className="form-group">
-          <label htmlFor="capacidadDeCarga">Capacidad de Carga</label>
-          <div>
-            <input
-              type="text"
-              id="capacidadDeCarga"
-              name="capacidadDeCarga"
-              value={producto.capacidadDeCarga || ""}
-              autoComplete="off"
-              placeholder="Capacidad de Carga"
-              onChange={(e) =>
-                setProducto({ ...producto, capacidadDeCarga: e.target.value })
-              }
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="capacidadDeBalde">Capacidad de Balde</label>
-          <div>
-            <input
-              type="text"
-              id="capacidadDeBalde"
-              name="capacidadDeBalde"
-              value={producto.capacidadDeBalde || ""}
-              autoComplete="off"
-              placeholder="Capacidad de Balde"
-              onChange={(e) =>
-                setProducto({ ...producto, capacidadDeBalde: e.target.value })
-              }
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="detalles">Detalles</label>
+          <label htmlFor="capacidades">Capacidades</label>
           <div>
             <textarea
-              id="detalles"
-              name="detalles"
-              value={producto.detalles || ""}
+              id="capacidades"
+              name="capacidades"
+              value={producto.capacidades || ""}
               autoComplete="off"
-              placeholder="Detalles"
+              placeholder="Capacidades"
               onChange={(e) =>
-                setProducto({ ...producto, detalles: e.target.value })
+                setProducto({
+                  ...producto,
+                  capacidades: e.target.value,
+                })
+              }
+              style={{ width: "100%", height: "150px", padding: "8px" }}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="cabina">Cabina</label>
+          <div>
+            <textarea
+              id="Cabina"
+              name="Cabina"
+              value={producto.Cabina || ""}
+              autoComplete="off"
+              placeholder="Cabina"
+              onChange={(e) =>
+                setProducto({
+                  ...producto,
+                  Cabina: e.target.value,
+                })
+              }
+              style={{ width: "100%", height: "150px", padding: "8px" }}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="dimensionesGenerales">Dimensiones Generales</label>
+          <div>
+            <textarea
+              id="dimensionesGenerales"
+              name="dimensionesGenerales"
+              value={producto.dimensionesGenerales || ""}
+              autoComplete="off"
+              placeholder="Dimensiones Generales"
+              onChange={(e) =>
+                setProducto({
+                  ...producto,
+                  dimensionesGenerales: e.target.value,
+                })
               }
               style={{ width: "100%", height: "150px", padding: "8px" }}
             />

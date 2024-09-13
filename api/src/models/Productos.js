@@ -12,11 +12,7 @@ module.exports = (sequelize) => {
       },
       division: {
         type: DataTypes.STRING,
-        allowNull: false,
-      },
-      empresa: {
-        type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       familia: {
         type: DataTypes.STRING,
@@ -46,18 +42,6 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      imagen4: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-      },
-      imagen5: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-      },
-      imagen6: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-      },
       fichaPDF: {
         type: DataTypes.TEXT,
         allowNull: true,
@@ -65,10 +49,6 @@ module.exports = (sequelize) => {
       cantidadTotal: {
         type: DataTypes.INTEGER,
         allowNull: true,
-      },
-      precio: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
       },
       precioUSD: {
         type: DataTypes.INTEGER,
@@ -82,23 +62,31 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      potencia: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
       motor: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
       },
-      capacidadDeCarga: {
-        type: DataTypes.STRING,
+      caracteristicasGenerales: {
+        type: DataTypes.TEXT,
         allowNull: true,
       },
-      capacidadDeBalde: {
-        type: DataTypes.STRING,
+      motoresdeTraslacionyZapatas: {
+        type: DataTypes.TEXT,
         allowNull: true,
       },
-      detalles: {
+      sistemaHidraulico: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      capacidades: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      Cabina: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      dimensionesGenerales: {
         type: DataTypes.TEXT,
         allowNull: true,
       },

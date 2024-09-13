@@ -2,11 +2,7 @@ const { Productos } = require("../db.js");
 
 const getProductos = async (req, res) => {
   try {
-    let productos = await Productos.findAll({
-      where: {
-        empresa: "VIAL",
-      },
-    });
+    let productos = await Productos.findAll({});
 
     return !productos || productos.length === 0
       ? res.status(404).send("No hay Productos")
@@ -17,19 +13,21 @@ const getProductos = async (req, res) => {
               familia,
               marca,
               modelo,
-              precio,
+              precioUSD,
               imagen,
               imagen1,
               division,
+              codigo,
             }) => ({
               id,
               familia,
               marca,
               modelo,
-              precio,
+              precioUSD,
               imagen,
               imagen1,
               division,
+              codigo,
             })
           )
         );
@@ -39,64 +37,13 @@ const getProductos = async (req, res) => {
   }
 };
 
-// FILTRO POR CATEGORIAS PARA EL FRONT //
-
-const getProductosPorFamilia = async (req, res) => {
-  try {
-    const { familia } = req.params;
-
-    let productos;
-
-    if (familia) {
-      productos = await Productos.findAll({
-        where: {
-          familia: familia,
-        },
-      });
-    } else {
-      productos = await Productos.findAll();
-    }
-
-    return !productos || productos.length === 0
-      ? res.status(404).send("No hay Productos")
-      : res.send(
-          productos.map(
-            ({
-              id,
-              familia,
-              marca,
-              modelo,
-              precio,
-              imagen,
-              imagen1,
-              division,
-            }) => ({
-              id,
-              familia,
-              marca,
-              modelo,
-              precio,
-              imagen,
-              imagen1,
-              division,
-            })
-          )
-        );
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send("Error 500");
-  }
-};
-
 // FUNCION PARA TRAER SOLO LAS CATEGORIAS PARA EL INPUT QUE VA MOSTRANDO LAS CATEGORIAS //
 
 const getProductosPorCategoria = async (req, res) => {
   try {
     let familias = await Productos.findAll({
       attributes: ["familia"],
-      where: {
-        empresa: "VIAL",
-      },
+
       group: ["familia"],
     });
 
@@ -123,9 +70,7 @@ const getProductosPorDivision = async (req, res) => {
   try {
     let divisiones = await Productos.findAll({
       attributes: ["division"],
-      where: {
-        empresa: "VIAL",
-      },
+
       group: ["division"],
     });
 
@@ -149,9 +94,7 @@ const getProductosPorMarca = async (req, res) => {
   try {
     let marcas = await Productos.findAll({
       attributes: ["marca"],
-      where: {
-        empresa: "VIAL",
-      },
+
       group: ["marca"],
     });
 
@@ -180,10 +123,10 @@ const getProductoById = async (req, res) => {
       return res.status(404).send("Producto no encontrado");
     }
 
-    // Devolver el producto encontrado
+    // Devolver solo los campos especificados en el modelo
     return res.send({
       id: producto.id,
-      empresa: producto.empresa,
+      division: producto.division,
       familia: producto.familia,
       marca: producto.marca,
       modelo: producto.modelo,
@@ -191,20 +134,18 @@ const getProductoById = async (req, res) => {
       imagen1: producto.imagen1,
       imagen2: producto.imagen2,
       imagen3: producto.imagen3,
-      imagen4: producto.imagen4,
-      imagen5: producto.imagen5,
-      imagen6: producto.imagen6,
-      precio: producto.precio,
-      precioUSD: producto.precioUSD,
       fichaPDF: producto.fichaPDF,
-      codigo: producto.codigo,
-      division: producto.division,
-      potencia: producto.potencia,
       cantidadTotal: producto.cantidadTotal,
+      precioUSD: producto.precioUSD,
+      costo: producto.costo,
+      codigo: producto.codigo,
       motor: producto.motor,
-      capacidadDeCarga: producto.capacidadDeCarga,
-      capacidadDeBalde: producto.capacidadDeBalde,
-      Detalles: producto.detalles,
+      caracteristicasGenerales: producto.caracteristicasGenerales,
+      motoresdeTraslacionyZapatas: producto.motoresdeTraslacionyZapatas,
+      sistemaHidraulico: producto.sistemaHidraulico,
+      capacidades: producto.capacidades,
+      Cabina: producto.Cabina,
+      dimensionesGenerales: producto.dimensionesGenerales,
     });
   } catch (error) {
     console.log(error);
@@ -247,8 +188,7 @@ const createProducto = async (req, res) => {
       !req.body?.familia ||
       !req.body?.marca ||
       !req.body?.modelo ||
-      !req.body?.empresa ||
-      !req.body?.precio
+      !req.body?.precioUSD
     )
       throw "No body params";
 
@@ -309,5 +249,4 @@ module.exports = {
   getProductosPorCategoria,
   getProductosPorDivision,
   getProductosPorMarca,
-  getProductosPorFamilia,
 };

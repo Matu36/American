@@ -73,34 +73,15 @@ export default function Productos() {
     }
   };
 
-  // const handleDeleteProduct = (id) => {
-  //   Swal.fire({
-  //     title: "¿Estás seguro de que deseas eliminar este producto?",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#ffc107",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Sí, eliminar",
-  //     cancelButtonText: "Cancelar",
-  //     background: "#ffffff",
-  //     iconColor: "#ffc107",
-  //     customClass: {
-  //       title: "text-dark",
-  //     },
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       deleteProducto({ id: id });
-  //     }
-  //   });
-  // };
-
   //-------------------------------- FIN SEARCHBAR --------------------------- //
 
   const columns = [
     { name: "Categorìa", selector: (row) => row.familia, sortable: true },
+
     { name: "Marca", selector: (row) => row.marca, sortable: true },
     { name: "Modelo", selector: (row) => row.modelo, sortable: true },
-    { name: "Precio", selector: (row) => row.precio, sortable: true },
+    { name: "Código", selector: (row) => row.codigo, sortable: true },
+    { name: "Precio USD", selector: (row) => row.precioUSD, sortable: true },
 
     {
       name: "Acciones",
@@ -127,12 +108,6 @@ export default function Productos() {
               Modificar
             </Dropdown.Item>
           )}
-          {/* <Dropdown.Item
-            onClick={() => handleDeleteProduct(row.id)}
-            className="dropdown-item dropdown-item-eliminar"
-          >
-            Eliminar
-          </Dropdown.Item> */}
         </DropdownButton>
       ),
     },
