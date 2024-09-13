@@ -60,29 +60,56 @@ export default function ClientesDetail() {
       <div style={{ marginBottom: "10px" }}>
         <strong>Email:</strong> {mail}
       </div>
-      <div style={{ marginBottom: "10px" }}>
-        <strong>Email Alternativo:</strong> {mailAlternativo}
-      </div>
-      <div style={{ marginBottom: "10px" }}>
-        <strong>Email Alternativo:</strong> {mailAlternativo1}
-      </div>
+      {mailAlternativo && (
+        <div style={{ marginBottom: "10px" }}>
+          <strong>Email Alternativo:</strong> {mailAlternativo}
+        </div>
+      )}
+
+      {mailAlternativo1 && (
+        <div style={{ marginBottom: "10px" }}>
+          <strong>Email Alternativo 1:</strong> {mailAlternativo1}
+        </div>
+      )}
+
       <div style={{ marginBottom: "10px" }}>
         <strong>Teléfono:</strong> {telefono}
       </div>
+      {telefonoAlternativo && (
+        <div style={{ marginBottom: "10px" }}>
+          <strong>Teléfono Alternativo:</strong> {telefonoAlternativo}
+        </div>
+      )}
+
+      {telefonoAlternativo1 && (
+        <div style={{ marginBottom: "10px" }}>
+          <strong>Teléfono Alternativo 1:</strong> {telefonoAlternativo1}
+        </div>
+      )}
+
       <div style={{ marginBottom: "10px" }}>
-        <strong>Teléfono Alternativo:</strong> {telefonoAlternativo}
+        <strong>Creado:</strong>{" "}
+        {new Date(fechaDeCreacion).toLocaleDateString("es-ES", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        })}
       </div>
-      <div style={{ marginBottom: "10px" }}>
-        <strong>Teléfono Alternativo:</strong> {telefonoAlternativo1}
-      </div>
-      <div style={{ marginBottom: "10px" }}>
-        <strong>Creado:</strong> {fechaDeCreacion}
-      </div>
-      <div style={{ marginBottom: "10px" }}>
-        <strong>Modificado:</strong> {fechaModi}
-      </div>
+
       <div style={{ marginBottom: "10px" }}>
         <strong>Cargado por:</strong> {Usuario.nombre} {Usuario.apellido}
+      </div>
+      <div style={{ marginBottom: "10px" }}>
+        <div style={{ marginBottom: "10px" }}>
+          <strong>Modificado:</strong>{" "}
+          {fechaModi
+            ? new Date(fechaModi).toLocaleDateString("es-ES", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })
+            : "Sin modificaciones"}
+        </div>
       </div>
     </div>
   );

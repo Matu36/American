@@ -61,9 +61,22 @@ export default function ClientesEdit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = { ...formData, idUsuario };
+    let clienteData = { ...formData };
 
-    await ediCliente(data);
+    Object.keys(clienteData).forEach((key) => {
+      if (clienteData[key] === "") {
+        delete clienteData[key];
+      }
+    });
+
+    const data = { ...clienteData, idUsuario };
+
+    try {
+      await ediCliente(data);
+      console.log("Cliente creado exitosamente");
+    } catch (error) {
+      console.error("Error al crear cliente:", error);
+    }
   };
 
   return (
@@ -136,7 +149,6 @@ export default function ClientesEdit() {
             name="mailAlternativo"
             value={formData.mailAlternativo}
             onChange={handleChange}
-            required
           />
         </div>
         <div className="form-group">
@@ -147,7 +159,6 @@ export default function ClientesEdit() {
             name="mailAlternativo1"
             value={formData.mailAlternativo1}
             onChange={handleChange}
-            required
           />
         </div>
         <div className="form-group">
@@ -169,7 +180,6 @@ export default function ClientesEdit() {
             name="telefonoAlternativo"
             value={formData.telefonoAlternativo}
             onChange={handleChange}
-            required
           />
         </div>
         <div className="form-group">
@@ -180,7 +190,6 @@ export default function ClientesEdit() {
             name="telefonoAlternativo1"
             value={formData.telefonoAlternativo1}
             onChange={handleChange}
-            required
           />
         </div>
         <button type="submit" className="form-submit">

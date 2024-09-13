@@ -109,9 +109,22 @@ export default function CargaClientes() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = { ...formData, idUsuario };
+    let clienteData = { ...formData };
 
-    await clienteCreate(data);
+    Object.keys(clienteData).forEach((key) => {
+      if (clienteData[key] === "") {
+        delete clienteData[key];
+      }
+    });
+
+    const data = { ...clienteData, idUsuario };
+
+    try {
+      await clienteCreate(data);
+      console.log("Cliente creado exitosamente");
+    } catch (error) {
+      console.error("Error al crear cliente:", error);
+    }
 
     setFormData({
       CUIT: "",
@@ -317,7 +330,6 @@ export default function CargaClientes() {
             name="telefonoAlternativo"
             value={formData.telefonoAlternativo}
             onChange={(e) => handleChange(soloNumeros(e))}
-            required
           />
         </div>
         <div className="form-group">
@@ -328,7 +340,6 @@ export default function CargaClientes() {
             name="telefonoAlternativo1"
             value={formData.telefonoAlternativo1}
             onChange={(e) => handleChange(soloNumeros(e))}
-            required
           />
         </div>
 
