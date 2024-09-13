@@ -140,7 +140,7 @@ const Cotizador = () => {
     if (formData.cuotas > 1) {
       setFormData((prevData) => ({
         ...prevData,
-        interes: formData.cuotas * 3,
+        interes: formData.cuotas * 3.5,
       }));
     } else {
       setFormData((prevData) => ({
@@ -154,8 +154,9 @@ const Cotizador = () => {
     let precio = parseFloat(formData.precio) || 0;
     let anticipo = parseFloat(formData.anticipo) || 0;
     let IVA = parseFloat(formData.IVA) || 0;
+
     let interes = parseFloat(formData.interes) || 0;
-    let saldoAFinanciar = (precio - anticipo) * (1 + IVA / 100);
+    let saldoAFinanciar = precio - anticipo;
     let cuotaValor = null;
     if (formData.cuotas > 0) {
       cuotaValor = (saldoAFinanciar * (1 + interes / 100)) / formData.cuotas;
@@ -163,7 +164,7 @@ const Cotizador = () => {
     let PrecioFinal =
       formData.cuotas === 1
         ? precio * (1 + IVA / 100)
-        : saldoAFinanciar * (1 + interes / 100) + anticipo;
+        : (saldoAFinanciar * (1 + interes / 100) + anticipo) * 1.105;
 
     setFormData((prevData) => ({
       ...prevData,
