@@ -13,6 +13,11 @@ const Cotizador = () => {
   const { mutate: cotizacionCreate } = useCotizaciones().cotizacionMutation;
   const token = localStorage.getItem("token");
   const idUsuario = token;
+  const [showForm, setShowForm] = useState(false);
+
+  const toggleFormVisibility = () => {
+    setShowForm((prev) => !prev);
+  };
 
   // CHEQUEAMOS EL ROL PARA EL INTERES //
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
@@ -105,11 +110,13 @@ const Cotizador = () => {
     anticipo: 0,
     saldoAFinanciar: 0,
     IVA: 10.5,
-    moneda: "",
+    moneda: "USD",
     PrecioFinal: "",
     cuotas: 1,
     cuotaValor: null,
     interes: 0,
+    notasEmail: "",
+    notasUsuario: "",
   });
 
   useEffect(() => {
@@ -191,10 +198,12 @@ const Cotizador = () => {
       anticipo: 0,
       saldoAFinanciar: 0,
       IVA: 10.5,
-      moneda: "",
+      moneda: "USD",
       PrecioFinal: "",
       cuotas: 0,
       cuotaValor: null,
+      notasEmail: "",
+      notasUsuario: "",
     });
     setSelectedCliente(null);
     setSelectedFamilia(null);
@@ -215,251 +224,272 @@ const Cotizador = () => {
     : [];
 
   return (
-    <form onSubmit={handleSubmit} className="form-container">
-      <BackButton />
-      <div>
-        {" "}
-        <h2 className="tituloCompo">Cotizador</h2> <br />
-      </div>
-      <div></div>
-      <div className="form-group">
-        <label className="form-label">Vendedor</label>
-        <input
-          type="number"
-          name="idUsuario"
-          placeholder={`${auth?.nombre} ${auth?.apellido}`}
-          onChange={handleChange}
-          readOnly
-          className="form-input"
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          Cliente <span className="obligatorio">*</span>
-        </label>
-        <Select
-          name="idCliente"
-          value={
-            clienteOptions.find(
-              (option) => option.value === formData.idCliente
-            ) || null
-          }
-          onChange={handleClienteChange}
-          options={clienteOptions}
-          isLoading={isLoading}
-          isClearable
-          className="form-input"
-          required
-        />
-        {selectedCliente && (
-          <div className="cliente-info">
-            <div className="form-group cliente-detail">
-              <label className="form-label small">Nombre:</label>
-              <input
-                type="text"
-                name="nombreCliente"
-                value={selectedCliente.nombre}
-                disabled
-                className="form-input small"
-              />
-            </div>
-            <div className="form-group cliente-detail">
-              <label className="form-label small">Apellido:</label>
-              <input
-                type="text"
-                name="apellidoCliente"
-                value={selectedCliente.apellido}
-                disabled
-                className="form-input small"
-              />
-            </div>
-            <div className="form-group cliente-detail">
-              <label className="form-label small">CUIT:</label>
-              <input
-                type="text"
-                name="cuitCliente"
-                value={selectedCliente.CUIT}
-                disabled
-                className="form-input small"
-              />
-            </div>
-          </div>
-        )}
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          Categoría <span className="obligatorio">*</span>
-        </label>
-        <Select
-          options={familias}
-          value={selectedFamilia}
-          onChange={setSelectedFamilia}
-          placeholder="Seleccionar familia"
-          className="form-input"
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          Marca <span className="obligatorio">*</span>
-        </label>
-        <Select
-          options={marcas}
-          value={selectedMarca}
-          onChange={setSelectedMarca}
-          placeholder="Seleccionar marca"
-          isDisabled={!selectedFamilia}
-          className="form-input"
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          Modelo <span className="obligatorio">*</span>
-        </label>
-        <Select
-          options={modelos}
-          value={selectedModelo}
-          onChange={setSelectedModelo}
-          placeholder="Seleccionar modelo"
-          isDisabled={!selectedMarca}
-          className="form-input"
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          Moneda:<span className="obligatorio">*</span>
-        </label>
-        <select
-          name="moneda"
-          value={formData.moneda}
-          onChange={handleChange}
-          className="form-input"
-          required
-        >
-          <option value="" disabled>
-            Seleccionar
-          </option>
-          <option value="$">$</option>
-          <option value="USD">USD</option>
-        </select>
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          Precio de venta: <span className="obligatorio">*</span>
-        </label>
-        <input
-          type="number"
-          name="precio"
-          value={formData.precio}
-          onChange={handleChange}
-          required
-          className="form-input"
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          IVA (10.5%): <span className="obligatorio">*</span>
-        </label>
-        <input
-          type="number"
-          name="IVA"
-          value={formData.IVA}
-          onChange={handleChange}
-          className="form-input"
-          disabled={role === "vendedor"}
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label">Cuotas</label>
-        <select
-          name="cuotas"
-          value={formData.cuotas}
-          onChange={handleChange}
-          className="form-input"
-        >
-          <option value={1}>Contado</option>
-          {Array.from({ length: 11 }, (_, i) => i + 2).map((num) => (
-            <option key={num} value={num}>
-              {num}
-            </option>
-          ))}
-        </select>
-      </div>
-      {formData.cuotas > 1 && (
-        <>
-          <div className="form-group">
-            <label className="form-label">Anticipo:</label>
-            <input
-              type="number"
-              name="anticipo"
-              value={formData.anticipo}
-              onChange={handleChange}
-              className="form-input"
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="form-label">Valor de Cuota:</label>
-            <input
-              type="number"
-              name="cuotaValor"
-              value={formData.cuotaValor}
-              onChange={handleChange}
-              className="form-input"
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="form-label">Saldo a Financiar:</label>
-            <input
-              type="number"
-              name="saldoAFinanciar"
-              value={formData.saldoAFinanciar}
-              onChange={handleChange}
-              required
-              className="form-input"
-            />
-          </div>
-        </>
-      )}
-      {role === "vendedor" ? (
-        <div className="form-group">
-          {/* Interés no visible para vendedores */}
+    <>
+      <form onSubmit={handleSubmit} className="form-container">
+        <BackButton />
+        <div>
+          {" "}
+          <h2 className="tituloCompo">Cotizador</h2> <br />
         </div>
-      ) : (
+        <div></div>
         <div className="form-group">
-          <label className="form-label">Interés:</label>
+          <label className="form-label">Vendedor</label>
           <input
             type="number"
-            name="interes"
-            value={formData.interes}
+            name="idUsuario"
+            placeholder={`${auth?.nombre} ${auth?.apellido}`}
             onChange={handleChange}
+            readOnly
             className="form-input"
           />
         </div>
-      )}
+        <div className="form-group">
+          <label className="form-label">
+            Cliente <span className="obligatorio">*</span>
+          </label>
+          <Select
+            name="idCliente"
+            value={
+              clienteOptions.find(
+                (option) => option.value === formData.idCliente
+              ) || null
+            }
+            onChange={handleClienteChange}
+            options={clienteOptions}
+            isLoading={isLoading}
+            isClearable
+            className="form-input"
+            required
+          />
+          {selectedCliente && (
+            <div className="cliente-info">
+              <div className="form-group cliente-detail">
+                <label className="form-label small">Nombre:</label>
+                <input
+                  type="text"
+                  name="nombreCliente"
+                  value={selectedCliente.nombre}
+                  disabled
+                  className="form-input small"
+                />
+              </div>
+              <div className="form-group cliente-detail">
+                <label className="form-label small">Apellido:</label>
+                <input
+                  type="text"
+                  name="apellidoCliente"
+                  value={selectedCliente.apellido}
+                  disabled
+                  className="form-input small"
+                />
+              </div>
+              <div className="form-group cliente-detail">
+                <label className="form-label small">CUIT:</label>
+                <input
+                  type="text"
+                  name="cuitCliente"
+                  value={selectedCliente.CUIT}
+                  disabled
+                  className="form-input small"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="form-group">
+          <label className="form-label">
+            Categoría <span className="obligatorio">*</span>
+          </label>
+          <Select
+            options={familias}
+            value={selectedFamilia}
+            onChange={setSelectedFamilia}
+            placeholder="Seleccionar familia"
+            className="form-input"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">
+            Marca <span className="obligatorio">*</span>
+          </label>
+          <Select
+            options={marcas}
+            value={selectedMarca}
+            onChange={setSelectedMarca}
+            placeholder="Seleccionar marca"
+            isDisabled={!selectedFamilia}
+            className="form-input"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">
+            Modelo <span className="obligatorio">*</span>
+          </label>
+          <Select
+            options={modelos}
+            value={selectedModelo}
+            onChange={setSelectedModelo}
+            placeholder="Seleccionar modelo"
+            isDisabled={!selectedMarca}
+            className="form-input"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">
+            Moneda:<span className="obligatorio">*</span>
+          </label>
+          <input
+            disabled
+            name="moneda"
+            value={formData.moneda}
+            onChange={handleChange}
+            className="form-input"
+            placeholder="USD"
+            required
+          />
+        </div>
 
-      <div className="form-group">
-        <label className="form-label">
-          Precio Final: <span className="obligatorio">*</span>
-        </label>
-        <input
-          type="number"
-          name="PrecioFinal"
-          value={formData.PrecioFinal}
-          disabled
-          className="form-input"
-        />
-      </div>
-      <div></div>
-      <div>
-        <button type="submit" className="form-submit">
-          Guardar Cotización
-        </button>
-      </div>
-    </form>
+        <div className="form-group">
+          <label className="form-label">
+            Precio de venta: <span className="obligatorio">*</span>
+          </label>
+          <input
+            type="number"
+            name="precio"
+            value={formData.precio}
+            onChange={handleChange}
+            required
+            className="form-input"
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">
+            IVA (10.5%): <span className="obligatorio">*</span>
+          </label>
+          <input
+            type="number"
+            name="IVA"
+            value={formData.IVA}
+            onChange={handleChange}
+            className="form-input"
+            disabled={role === "vendedor"}
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Cuotas</label>
+          <select
+            name="cuotas"
+            value={formData.cuotas}
+            onChange={handleChange}
+            className="form-input"
+          >
+            <option value={1}>Contado</option>
+            {Array.from({ length: 11 }, (_, i) => i + 2).map((num) => (
+              <option key={num} value={num}>
+                {num}
+              </option>
+            ))}
+          </select>
+        </div>
+        {formData.cuotas > 1 && (
+          <>
+            <div className="form-group">
+              <label className="form-label">Anticipo:</label>
+              <input
+                type="number"
+                name="anticipo"
+                value={formData.anticipo}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Valor de Cuota:</label>
+              <input
+                type="number"
+                name="cuotaValor"
+                value={formData.cuotaValor}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Saldo a Financiar:</label>
+              <input
+                type="number"
+                name="saldoAFinanciar"
+                value={formData.saldoAFinanciar}
+                onChange={handleChange}
+                required
+                className="form-input"
+              />
+            </div>
+          </>
+        )}
+        {role === "vendedor" ? (
+          <div className="form-group">
+            {/* Interés no visible para vendedores */}
+          </div>
+        ) : (
+          <div className="form-group">
+            <label className="form-label">Interés:</label>
+            <input
+              type="number"
+              name="interes"
+              value={formData.interes}
+              onChange={handleChange}
+              className="form-input"
+            />
+          </div>
+        )}
+
+        <div className="form-group">
+          <label className="form-label">
+            Precio Final: <span className="obligatorio">*</span>
+          </label>
+          <input
+            type="number"
+            name="PrecioFinal"
+            value={formData.PrecioFinal}
+            disabled
+            className="form-input"
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Notas para el Cliente</label>
+          <textarea
+            type="text"
+            name="notasEmail"
+            value={formData.notasEmail}
+            onChange={handleChange}
+            className="form-input"
+            style={{ width: "100%", height: "150px", padding: "8px" }}
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Notas De la Cotización</label>
+          <textarea
+            type="text"
+            name="notasUsuario"
+            value={formData.notasUsuario}
+            onChange={handleChange}
+            className="form-input"
+            style={{ width: "100%", height: "150px", padding: "8px" }}
+          />
+        </div>
+        <div>
+          <button type="submit" className="form-submit">
+            Guardar Cotización
+          </button>
+        </div>
+      </form>
+    </>
   );
 };
 

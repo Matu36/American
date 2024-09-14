@@ -24,6 +24,10 @@ module.exports = (sequelize) => {
           notEmpty: true,
         },
       },
+      distribuidor: {
+        type: DataTypes.INTEGER,
+        defaultValue: null,
+      },
       nombre: {
         type: DataTypes.STRING,
         defaultValue: null,

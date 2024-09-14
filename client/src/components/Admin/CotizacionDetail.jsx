@@ -34,7 +34,6 @@ export default function CotizacionDetail() {
   }
 
   const {
-    numeroCotizacion,
     precio,
     anticipo,
     codigoCotizacion,

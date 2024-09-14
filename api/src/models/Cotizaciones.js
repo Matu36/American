@@ -33,8 +33,16 @@ module.exports = (sequelize) => {
         type: DataTypes.DECIMAL,
         allowNull: false,
       },
+      precio2: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
 
       anticipo: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
+      anticipo2: {
         type: DataTypes.DECIMAL,
         allowNull: true,
       },
@@ -42,7 +50,15 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
+      cuotas2: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
       cuotaValor: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
+      cuotaValor2: {
         type: DataTypes.DECIMAL,
         allowNull: true,
       },
@@ -51,15 +67,31 @@ module.exports = (sequelize) => {
         type: DataTypes.DECIMAL,
         allowNull: true,
       },
+      saldoAFinanciar2: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
       IVA: {
         type: DataTypes.DECIMAL,
         allowNull: false,
+      },
+      IVA2: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
       },
       moneda: {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      moneda2: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       interes: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
+      interes2: {
         type: DataTypes.DECIMAL,
         allowNull: true,
       },
@@ -68,9 +100,17 @@ module.exports = (sequelize) => {
         type: DataTypes.DECIMAL,
         allowNull: true,
       },
+      saldoConInteres2: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
       PrecioFinal: {
         type: DataTypes.DECIMAL,
         allowNull: false,
+      },
+      PrecioFinal2: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
       },
       estado: {
         type: DataTypes.INTEGER,
@@ -88,6 +128,14 @@ module.exports = (sequelize) => {
       },
       fechaVenta: {
         type: DataTypes.DATE,
+        allowNull: true,
+      },
+      notasEmail: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      notasUsuario: {
+        type: DataTypes.TEXT,
         allowNull: true,
       },
     },

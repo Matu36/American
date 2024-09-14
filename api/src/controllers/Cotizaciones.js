@@ -37,6 +37,8 @@ const createCotizacion = async (req, res) => {
       saldoConInteres,
       cuotas,
       cuotaValor,
+      notasEmail,
+      notasUsuario,
     } = req.body;
 
     if (
@@ -100,6 +102,8 @@ const createCotizacion = async (req, res) => {
       saldoConInteres,
       PrecioFinal,
       estado: 1,
+      notasEmail,
+      notasUsuario,
       fechaDeCreacion: new Date(),
       fechaModi: new Date(),
       fechaVenta: null,
