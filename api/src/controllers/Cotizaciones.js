@@ -1,6 +1,7 @@
 const { Cotizaciones } = require("../db.js");
 const { Usuarios } = require("../db.js");
 const { Clientes } = require("../db.js");
+const { CotizacionIndividual } = require("../db.js");
 const { Productos } = require("../db.js");
 const { HistorialCotizacion } = require("../db.js");
 const { conn } = require("../db.js");
@@ -39,16 +40,19 @@ const createCotizacion = async (req, res) => {
       cuotaValor,
       notasEmail,
       notasUsuario,
+      plazoEntrega,
+      formaPago,
+      mantenimientoOferta,
+      lugarEntrega,
+      garantia,
+      entregaTecnica,
+      origenFabricacion,
+      patentamiento,
+      cantidadProducto,
+      cotizacionesIndividuales, // Aquí se incluye el array de cotizaciones individuales
     } = req.body;
 
-    if (
-      !idUsuario ||
-      !idCliente ||
-      !idProducto ||
-      !IVA ||
-      !moneda ||
-      !PrecioFinal
-    ) {
+    if (!idUsuario || !idCliente || !idProducto) {
       throw "Faltan parámetros en el cuerpo de la solicitud";
     }
 
@@ -82,7 +86,7 @@ const createCotizacion = async (req, res) => {
       "0"
     )}`;
 
-    // Crear la nueva cotización
+    // Crear la nueva cotización en la tabla Cotizaciones
     let nuevaCotizacion = await Cotizaciones.create({
       id,
       idUsuario,
@@ -104,10 +108,32 @@ const createCotizacion = async (req, res) => {
       estado: 1,
       notasEmail,
       notasUsuario,
+      plazoEntrega,
+      formaPago,
+      mantenimientoOferta,
+      lugarEntrega,
+      garantia,
+      cantidadProducto,
+      entregaTecnica,
+      origenFabricacion,
+      patentamiento,
       fechaDeCreacion: new Date(),
       fechaModi: new Date(),
       fechaVenta: null,
     });
+
+    // Crear los detalles en CotizacionIndividual utilizando el mismo idCotizacion
+    if (cotizacionesIndividuales && cotizacionesIndividuales.length > 0) {
+      const cotizacionesIndividualesConId = cotizacionesIndividuales.map(
+        (cotizacion) => ({
+          idCotizacion: nuevaCotizacion.id,
+          ...cotizacion, // Agregamos los detalles de cada cotización individual
+        })
+      );
+
+      // Insertamos todas las cotizaciones individuales en batch
+      await CotizacionIndividual.bulkCreate(cotizacionesIndividualesConId);
+    }
 
     const cliente = await Clientes.findOne({
       where: { id: idCliente },
@@ -122,34 +148,6 @@ const createCotizacion = async (req, res) => {
     if (!cliente || !producto) {
       throw "No se pudieron obtener los datos del cliente o del producto";
     }
-
-    // Crear una nueva entrada en HistorialCotizacion
-    await HistorialCotizacion.create({
-      numeroCotizacion: nuevaCotizacion.numeroCotizacion,
-      precio: nuevaCotizacion.precio,
-      anticipo: nuevaCotizacion.anticipo,
-      saldoAFinanciar: nuevaCotizacion.saldoAFinanciar,
-      IVA: nuevaCotizacion.IVA,
-      moneda: nuevaCotizacion.moneda,
-      interes: nuevaCotizacion.interes,
-      cuotas: nuevaCotizacion.cuotas,
-      cuotaValor: nuevaCotizacion.cuotaValor,
-      saldoConInteres: nuevaCotizacion.saldoConInteres,
-      PrecioFinal: nuevaCotizacion.PrecioFinal,
-      codigoCotizacion: nuevaCotizacion.codigoCotizacion,
-      fechaDeCreacion: nuevaCotizacion.fechaDeCreacion,
-      fechaModi: nuevaCotizacion.fechaModi,
-      nombreCliente: cliente.nombre,
-      apellidoCliente: cliente.apellido,
-      mailCliente: cliente.mail,
-      familia: producto.familia,
-      marca: producto.marca,
-      modelo: producto.modelo,
-      estado: nuevaCotizacion.estado,
-      apellidoVendedor: usuario.apellido,
-      nombreVendedor: usuario.nombre,
-      codigo: usuario.codigo,
-    });
 
     return res.status(201).send(nuevaCotizacion);
   } catch (error) {
@@ -200,14 +198,7 @@ const getCotizaciones = async (req, res) => {
       attributes: [
         "id",
         "numeroCotizacion",
-        "precio",
-        "PrecioFinal",
         "fechaDeCreacion",
-        "moneda",
-        "anticipo",
-        "cuotas",
-        "cuotaValor",
-        "saldoAFinanciar",
         "codigoCotizacion",
       ],
       include: [
@@ -236,7 +227,7 @@ const getCotizacionDetalle = async (req, res) => {
     // Verificar si se proporciona el ID de cotización desde los parámetros de la ruta
     const idCotizacion = req.params.idCotizacion;
     if (!idCotizacion) {
-      throw "Se requiere el ID de cotización";
+      return res.status(400).send({ error: "Se requiere el ID de cotización" });
     }
 
     // Buscar la cotización en la base de datos
@@ -244,23 +235,118 @@ const getCotizacionDetalle = async (req, res) => {
       include: [
         {
           model: Usuarios,
-          attributes: ["nombre", "apellido", "email", "telefono"],
+          attributes: ["nombre", "apellido", "email"],
         },
-        { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
-        { model: Productos, attributes: ["familia", "marca", "modelo"] },
+        {
+          model: Clientes,
+          attributes: ["razonSocial", "CUIT"],
+        },
+        {
+          model: Productos,
+          attributes: [
+            "division",
+            "familia",
+            "marca",
+            "modelo",
+            "motor",
+            "caracteristicasGenerales",
+            "motoresdeTraslacionyZapatas",
+            "sistemaHidraulico",
+            "capacidades",
+            "Cabina",
+            "dimensionesGenerales",
+          ],
+        },
+        {
+          model: CotizacionIndividual,
+          attributes: [
+            "precio",
+            "anticipo",
+            "saldoAFinanciar",
+            "IVA",
+            "moneda",
+            "interes",
+            "cuotas",
+            "cuotaValor",
+            "saldoConInteres",
+            "PrecioFinal",
+            "cantidadProducto",
+            "estado",
+          ],
+        },
       ],
     });
 
     // Verificar si se encontró la cotización
     if (!cotizacion) {
-      throw "Cotización no encontrada";
+      return res.status(404).send({ error: "Cotización no encontrada" });
     }
 
+    // Estructurar los datos para la respuesta
+    const respuesta = {
+      idUsuario: cotizacion.idUsuario,
+      idCliente: cotizacion.idCliente,
+      idProducto: cotizacion.idProducto,
+      IVA: cotizacion.IVA,
+      moneda: cotizacion.moneda,
+      PrecioFinal: cotizacion.PrecioFinal,
+      precio: cotizacion.precio,
+      anticipo: cotizacion.anticipo,
+      saldoAFinanciar: cotizacion.saldoAFinanciar,
+      interes: cotizacion.interes,
+      saldo: cotizacion.saldo,
+      saldoConInteres: cotizacion.saldoConInteres,
+      cuotas: cotizacion.cuotas,
+      cuotaValor: cotizacion.cuotaValor,
+      notasEmail: cotizacion.notasEmail,
+      notasUsuario: cotizacion.notasUsuario,
+      numeroCotizacion: cotizacion.numeroCotizacion,
+      codigoCotizacion: cotizacion.codigoCotizacion,
+      plazoEntrega: cotizacion.plazoEntrega,
+      formaPago: cotizacion.formaPago,
+      mantenimientoOferta: cotizacion.mantenimientoOferta,
+      lugarEntrega: cotizacion.lugarEntrega,
+      garantia: cotizacion.garantia,
+      entregaTecnica: cotizacion.entregaTecnica,
+      origenFabricacion: cotizacion.origenFabricacion,
+      patentamiento: cotizacion.patentamiento,
+      estado: cotizacion.estado,
+      fechaDeCreacion: cotizacion.fechaDeCreacion,
+      fechaModi: cotizacion.fechaModi,
+      fechaVenta: cotizacion.fechaVenta,
+      cotizacionesIndividuales: cotizacion.CotizacionIndividuals || [], // Usa el nombre correcto del campo
+      cliente: {
+        razonSocial: cotizacion.Cliente.razonSocial,
+        CUIT: cotizacion.Cliente.CUIT,
+      },
+      usuario: {
+        nombre: cotizacion.Usuario.nombre,
+        apellido: cotizacion.Usuario.apellido,
+        email: cotizacion.Usuario.email,
+      },
+      producto: {
+        division: cotizacion.Producto.division,
+        familia: cotizacion.Producto.familia,
+        marca: cotizacion.Producto.marca,
+        modelo: cotizacion.Producto.modelo,
+        motor: cotizacion.Producto.motor,
+        caracteristicasGenerales: cotizacion.Producto.caracteristicasGenerales,
+        motoresdeTraslacionyZapatas:
+          cotizacion.Producto.motoresdeTraslacionyZapatas,
+        sistemaHidraulico: cotizacion.Producto.sistemaHidraulico,
+        capacidades: cotizacion.Producto.capacidades,
+        cabina: cotizacion.Producto.cabina,
+        dimensionesGenerales: cotizacion.Producto.dimensionesGenerales,
+      },
+    };
+
     // Devolver la cotización completa
-    return res.status(200).json(cotizacion);
+    return res.status(200).json(respuesta);
   } catch (error) {
     console.error("Error al obtener detalle de cotización:", error);
-    return res.status(400).send(error);
+    return res.status(400).send({
+      error: error.message || "Error al obtener detalle de cotización",
+    });
   }
 };
 

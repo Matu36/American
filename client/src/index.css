@@ -3236,6 +3236,20 @@ margin-top: -10px;
   overflow-x: auto;
 }
 
+.cotizacion-section {
+  width: 100%;
+  margin: 0.2rem auto;
+  padding: 20px;
+  background-color: #000;
+  color: #ffcc00;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: grid;
+  
+  gap: 20px;
+  overflow-x: auto;
+}
+
 .form-container1 {
   width: 50%;
   margin: 0.4rem auto;
@@ -5219,6 +5233,35 @@ margin-top: -10px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 4rem;
+}
+
+.cotizacionDetailSimilPdf {
+  width: 100%; 
+  border: solid 1px #dcdcdc; 
+  border-radius: 5px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  padding: 16px; 
+  box-sizing: border-box; 
+  margin: 20px;
+}
+
+.imagenesPDF {
+  display: flex;
+  
+}
+
+.imagenesPDF .sino {
+  width: 30%;
+  margin-right: 50px;
+}
+
+.imagenesPDF .american {
+  width: 45%;
+  height: 80%;
+}
+
+.bordeSINOMACH {
+  border: 1px solid black;
 }
 
 /* PROBANDO DEPLOY  */

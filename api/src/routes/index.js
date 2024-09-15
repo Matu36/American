@@ -53,6 +53,10 @@ const {
 } = require("../controllers/Clientes");
 
 const {
+  eliminarCotizacionIndividual,
+} = require("../controllers/CotizacionIndividual");
+
+const {
   getContactos,
   createContacto,
   countActiveContactos,
@@ -155,7 +159,7 @@ router.get("/contacto/detalle/:id", check.auth, getContactoById);
 router.post("/productos/create", check.auth, createProducto);
 router.put("/productos/edit", check.auth, putProductos);
 router.delete("/productos/delete", check.auth, deleteProducto);
-router.post("/cotizaciones/create", check.auth, createCotizacion);
+router.post("/cotizaciones/create", createCotizacion);
 router.get("/cotizaciones/get/:idUsuario", check.auth, getCotizaciones);
 router.get(
   "/cotizaciones/getCotizacionesSum/:idUsuario",
@@ -164,7 +168,7 @@ router.get(
 );
 router.get(
   "/cotizaciones/getDetalle/:idCotizacion",
-  check.auth,
+
   getCotizacionDetalle
 );
 router.get(
@@ -178,6 +182,7 @@ router.get(
   getCantidadCotizacionesPorUsuario
 );
 router.get("/Cotizaciones/ranking", check.auth, getranking);
+router.delete("/Cotizaciones/delete", eliminarCotizacionIndividual);
 router.put("/cotizaciones/edit", check.auth, putCotizaciones);
 router.post("/clientes/create", check.auth, createCliente);
 router.get("/clientes/get/:idUsuario", getClientesPorIdDeUsuario);

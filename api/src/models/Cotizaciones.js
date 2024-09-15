@@ -29,89 +29,39 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      precio: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
-      },
-      precio2: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-
-      anticipo: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-      anticipo2: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-      cuotas: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      cuotas2: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      cuotaValor: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-      cuotaValor2: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-
-      saldoAFinanciar: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-      saldoAFinanciar2: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-      IVA: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
-      },
-      IVA2: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-      moneda: {
+      plazoEntrega: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      moneda2: {
+      formaPago: {
         type: DataTypes.STRING,
-        allowNull: true,
-      },
-      interes: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-      interes2: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-
-      saldoConInteres: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-      saldoConInteres2: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-      PrecioFinal: {
-        type: DataTypes.DECIMAL,
         allowNull: false,
       },
-      PrecioFinal2: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
+      mantenimientoOferta: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
+      lugarEntrega: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      garantia: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      entregaTecnica: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      origenFabricacion: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      patentamiento: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+
       estado: {
         type: DataTypes.INTEGER,
         allowNull: false,

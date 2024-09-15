@@ -51,7 +51,7 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       precioUSD: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       costo: {

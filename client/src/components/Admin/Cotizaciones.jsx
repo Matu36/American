@@ -72,31 +72,32 @@ export default function Cotizaciones() {
       name: "Nro Cotización",
       selector: (row) => row.codigoCotizacion,
       sortable: true,
+      width: "160px",
     },
     {
       name: "Producto",
       selector: (row) => row.Producto.modelo,
       sortable: true,
+      width: "160px",
     },
-    {
-      name: "Precio Final",
-      selector: (row) => row.PrecioFinal,
-      sortable: true,
-    },
+
     {
       name: "Fecha de Cotización",
       selector: (row) => new Date(row.fechaDeCreacion).toLocaleDateString(),
       sortable: true,
+      width: "160px",
     },
     {
       name: "Vendedor",
       selector: (row) => `${row.Usuario.nombre} ${row.Usuario.apellido}`,
       sortable: true,
+      width: "160px",
     },
     {
       name: "Cliente",
       selector: (row) => `${row.Cliente.nombre} ${row.Cliente.apellido}`,
       sortable: true,
+      width: "160px",
     },
 
     {
