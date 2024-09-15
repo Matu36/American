@@ -65,6 +65,8 @@ export default function CargaClientes() {
     razonSocial: "",
     provincia: "",
     ciudad: "",
+    contactoAlternativo: "",
+    contactoAlternativo1: "",
   });
 
   useEffect(() => {
@@ -140,6 +142,8 @@ export default function CargaClientes() {
       razonSocial: "",
       provincia: "",
       ciudad: "",
+      contactoAlternativo: "",
+      contactoAlternativo1: "",
     });
   };
 
@@ -171,19 +175,7 @@ export default function CargaClientes() {
             )}
           </InputMask>
         </div>
-        <div className="form-group">
-          <label htmlFor="domicilio">
-            Domicilio<span className="obligatorio">*</span>
-          </label>
-          <input
-            type="text"
-            id="domicilio"
-            name="domicilio"
-            value={formData.domicilio}
-            onChange={handleChange}
-            required
-          />
-        </div>
+
         <div className="form-group">
           <label htmlFor="razonSocial">Razón Social</label>
           <input
@@ -274,10 +266,22 @@ export default function CargaClientes() {
             required
           />
         </div>
-
+        <div className="form-group">
+          <label htmlFor="domicilio">
+            Domicilio<span className="obligatorio">*</span>
+          </label>
+          <input
+            type="text"
+            id="domicilio"
+            name="domicilio"
+            value={formData.domicilio}
+            onChange={handleChange}
+            required
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="mail">
-            Email Principal<span className="obligatorio">*</span>
+            Email<span className="obligatorio">*</span>
           </label>
           <input
             type="email"
@@ -287,9 +291,32 @@ export default function CargaClientes() {
             onChange={handleChange}
             required
           />
+          <div className="form-group">
+            <label htmlFor="telefono">
+              Teléfono<span className="obligatorio">*</span>
+            </label>
+            <input
+              type="number"
+              id="telefono"
+              name="telefono"
+              value={formData.telefono}
+              onChange={(e) => handleChange(soloNumeros(e))}
+              required
+            />
+          </div>
         </div>
         <div className="form-group">
-          <label htmlFor="mailAlternativo">Email Alternativo</label>
+          <label htmlFor="contactoAlternativo">Contacto Alternativo</label>
+          <input
+            type="contactoAlternativo"
+            id="contactoAlternativo"
+            name="contactoAlternativo"
+            value={formData.contactoAlternativo}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="mailAlternativo">Email</label>
           <input
             type="email"
             id="mailAlternativo"
@@ -299,7 +326,27 @@ export default function CargaClientes() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="mailAlternativo1">Email Alternativo 1</label>
+          <label htmlFor="telefonoAlternativo">Teléfono</label>
+          <input
+            type="number"
+            id="telefonoAlternativo"
+            name="telefonoAlternativo"
+            value={formData.telefonoAlternativo}
+            onChange={(e) => handleChange(soloNumeros(e))}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="contactoAlternativo1">Contacto Alternativo</label>
+          <input
+            type="contactoAlternativo1"
+            id="contactoAlternativo1"
+            name="contactoAlternativo1"
+            value={formData.contactoAlternativo1}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="mailAlternativo1">Email</label>
           <input
             type="email"
             id="mailAlternativo1"
@@ -310,30 +357,7 @@ export default function CargaClientes() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="telefono">
-            Teléfono<span className="obligatorio">*</span>
-          </label>
-          <input
-            type="number"
-            id="telefono"
-            name="telefono"
-            value={formData.telefono}
-            onChange={(e) => handleChange(soloNumeros(e))}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="telefonoAlternativo">Teléfono Alternativo</label>
-          <input
-            type="number"
-            id="telefonoAlternativo"
-            name="telefonoAlternativo"
-            value={formData.telefonoAlternativo}
-            onChange={(e) => handleChange(soloNumeros(e))}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="telefonoAlternativo1">Teléfono Alternativo 1</label>
+          <label htmlFor="telefonoAlternativo1">Teléfono</label>
           <input
             type="number"
             id="telefonoAlternativo1"

@@ -30,6 +30,22 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      provincia: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      ciudad: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      contactoAlternativo: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      contactoAlternativo1: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       razonSocial: {
         type: DataTypes.STRING,
         allowNull: false,

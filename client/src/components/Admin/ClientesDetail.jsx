@@ -35,6 +35,10 @@ export default function ClientesDetail() {
     mailAlternativo1,
     telefonoAlternativo,
     telefonoAlternativo1,
+    contactoAlternativo,
+    contactoAlternativo1,
+    provincia,
+    ciudad,
   } = clienteDetalle;
 
   return (
@@ -60,32 +64,48 @@ export default function ClientesDetail() {
       <div style={{ marginBottom: "10px" }}>
         <strong>Email:</strong> {mail}
       </div>
-      {mailAlternativo && (
-        <div style={{ marginBottom: "10px" }}>
-          <strong>Email Alternativo:</strong> {mailAlternativo}
-        </div>
-      )}
-
-      {mailAlternativo1 && (
-        <div style={{ marginBottom: "10px" }}>
-          <strong>Email Alternativo 1:</strong> {mailAlternativo1}
-        </div>
-      )}
-
       <div style={{ marginBottom: "10px" }}>
         <strong>Teléfono:</strong> {telefono}
       </div>
+      {contactoAlternativo && (
+        <div style={{ marginBottom: "10px" }}>
+          <strong>Contacto Alternativo:</strong> {contactoAlternativo}
+        </div>
+      )}
+      {mailAlternativo && (
+        <div style={{ marginBottom: "10px" }}>
+          <strong>Email:</strong> {mailAlternativo}
+        </div>
+      )}
       {telefonoAlternativo && (
         <div style={{ marginBottom: "10px" }}>
           <strong>Teléfono Alternativo:</strong> {telefonoAlternativo}
         </div>
       )}
 
-      {telefonoAlternativo1 && (
+      {contactoAlternativo1 && (
         <div style={{ marginBottom: "10px" }}>
-          <strong>Teléfono Alternativo 1:</strong> {telefonoAlternativo1}
+          <strong>Contacto Alternativo:</strong> {contactoAlternativo1}
         </div>
       )}
+
+      {mailAlternativo1 && (
+        <div style={{ marginBottom: "10px" }}>
+          <strong>Email:</strong> {mailAlternativo1}
+        </div>
+      )}
+
+      {telefonoAlternativo1 && (
+        <div style={{ marginBottom: "10px" }}>
+          <strong>Teléfono:</strong> {telefonoAlternativo1}
+        </div>
+      )}
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Provincia:</strong> {provincia}
+      </div>
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Ciudad:</strong> {ciudad}
+      </div>
 
       <div style={{ marginBottom: "10px" }}>
         <strong>Creado:</strong>{" "}

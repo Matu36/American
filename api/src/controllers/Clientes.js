@@ -185,10 +185,13 @@ const updateCliente = async (req, res) => {
       id,
       CUIT,
       domicilio,
+      razonSocial,
       nombre,
       apellido,
       mail,
       telefono,
+      contactoAlternativo,
+      contactoAlternativo1,
       mailAlternativo,
       mailAlternativo1,
       telefonoAlternativo,
@@ -223,6 +226,7 @@ const updateCliente = async (req, res) => {
       CUIT: CUIT ?? cliente.CUIT,
       domicilio: domicilio ?? cliente.domicilio,
       nombre: nombre ?? cliente.nombre,
+      razonSocial: razonSocial ?? cliente.razonSocial,
       apellido: apellido ?? cliente.apellido,
       mail: mail ?? cliente.mail,
       mailAlternativo: mailAlternativo ?? cliente.mailAlternativo,
@@ -231,6 +235,9 @@ const updateCliente = async (req, res) => {
       telefonoAlternativo: telefonoAlternativo ?? cliente.telefonoAlternativo,
       telefonoAlternativo1:
         telefonoAlternativo1 ?? cliente.telefonoAlternativo1,
+      contactoAlternativo: contactoAlternativo ?? cliente.contactoAlternativo,
+      contactoAlternativo1:
+        contactoAlternativo1 ?? cliente.contactoAlternativo1,
       fechaModi: new Date(),
     });
 
