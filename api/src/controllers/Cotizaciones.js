@@ -255,6 +255,9 @@ const getCotizacionDetalle = async (req, res) => {
             "capacidades",
             "Cabina",
             "dimensionesGenerales",
+            "imagen",
+            "imagen1",
+            "imagen2",
           ],
         },
         {
@@ -335,8 +338,11 @@ const getCotizacionDetalle = async (req, res) => {
           cotizacion.Producto.motoresdeTraslacionyZapatas,
         sistemaHidraulico: cotizacion.Producto.sistemaHidraulico,
         capacidades: cotizacion.Producto.capacidades,
-        cabina: cotizacion.Producto.cabina,
+        Cabina: cotizacion.Producto.Cabina,
         dimensionesGenerales: cotizacion.Producto.dimensionesGenerales,
+        imagen: cotizacion.Producto.imagen,
+        imagen1: cotizacion.Producto.imagen1,
+        imagen2: cotizacion.Producto.imagen2,
       },
     };
 

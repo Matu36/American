@@ -324,42 +324,110 @@ export default function CotizacionDetail() {
 
           <div className="condicionesgenerales">
             <h4>Condiciones Generales de Venta</h4>
+            <ul>
+              <li>Plazo de Entrega: {plazoEntrega}</li>
+              <li>Forma de Pago: {formaPago}</li>
+              <li>Manteniemiento de Oferta: {mantenimientoOferta}</li>
+              <li>Lugar de Entrega: {lugarEntrega}</li>
+              <li> Garantía: {garantia}</li>
+              <li>Entrega Técnica: {entregaTecnica}</li>
+              <li>Origen de Fabricación: {origenFabricacion}</li>
+              <li>Patentamiento: {patentamiento}</li>
+            </ul>
           </div>
-          {/* <p>
+          <p>
             <strong>Anticipo:</strong> {cotizacion.moneda}{" "}
             {parseFloat(cotizacion.anticipo).toFixed(2)}
           </p>
           <p>
             <strong>Financiación: </strong>
-            {cotizacion.cuotas} Cuotas de {cotizacion.moneda}{" "}
+            {cotizacion.cuotas} Pagos de {cotizacion.moneda}{" "}
             {parseFloat(cotizacion.cuotaValor).toFixed(2)}
           </p>
           <p>
-            <strong>IVA:</strong> {cotizacion.moneda}{" "}
-            {parseFloat(cotizacion.IVA).toFixed(2)}
+            <strong>IVA:</strong> {parseFloat(cotizacion.IVA).toFixed(2)}%
           </p>
           <p>
             <strong>Precio Final:</strong> {cotizacion.moneda}{" "}
             {parseFloat(cotizacion.PrecioFinal).toFixed(2)}
-          </p> */}
+          </p>
         </div>
       ))}
       <div>
-        <h3>Producto</h3>
+        <h3>Características Técnicas Generales:</h3>
+
+        <div>
+          <h4>Especificaciones Principales:</h4>
+          <ul>
+            {producto.caracteristicasGenerales
+              .split("\n")
+              .map((caracteristica, index) => (
+                <li key={index}>{caracteristica}</li>
+              ))}
+          </ul>
+
+          <h4>Motores de Traslación y Zapatas:</h4>
+          <ul>
+            {producto.motoresdeTraslacionyZapatas
+              .split("\n")
+              .map((motor, index) => (
+                <li key={index}>{motor}</li>
+              ))}
+          </ul>
+
+          <h4>Sistema Hidráulico:</h4>
+          <ul>
+            {producto.sistemaHidraulico.split("\n").map((sistema, index) => (
+              <li key={index}>{sistema}</li>
+            ))}
+          </ul>
+
+          <h4>Motor:</h4>
+          <ul>
+            {producto.motor.split("\n").map((motor, index) => (
+              <li key={index}>{motor}</li>
+            ))}
+          </ul>
+
+          <h4>Capacidades:</h4>
+          <ul>
+            {producto.capacidades.split("\n").map((capacidad, index) => (
+              <li key={index}>{capacidad}</li>
+            ))}
+          </ul>
+
+          <h4>Cabina:</h4>
+          <ul>
+            {producto.Cabina.split("\n").map((cabina, index) => (
+              <li key={index}>{cabina}</li>
+            ))}
+          </ul>
+
+          <h4>Dimensiones Generales:</h4>
+          <ul>
+            {producto.dimensionesGenerales
+              .split("\n")
+              .map((dimension, index) => (
+                <li key={index}>{dimension}</li>
+              ))}
+          </ul>
+        </div>
+      </div>
+      <div className="parrafoSINOMACH">
         <p>
-          <strong>Familia:</strong> {producto.familia}
-        </p>
-        <p>
-          <strong>Marca:</strong> {producto.marca}
-        </p>
-        <p>
-          <strong>Modelo:</strong> {producto.modelo}
+          En los últimos diez años SINOMACH ha desarrollado un programa de
+          fabricación en cooperación con compañías de prestigio mundial como
+          Caterpillar (USA), Krupp (Alemania), Liebherr (Alemania), etc.,
+          obteniendo como resultado una transferencia y aporte de tecnología y
+          calidad aplicada para el diseño, fabricación y servicio de todos los
+          equipos.
         </p>
       </div>
       <div>
-        <h3>Detalle Financiero</h3>
+        {" "}
+        <img src={producto.imagen} alt="" />
       </div>
-      <div>
+      {/* <div>
         <h3>Asesor Comercial</h3>
         <p>
           <strong>Nombre:</strong> {usuario.nombre} {usuario.apellido}
@@ -370,6 +438,12 @@ export default function CotizacionDetail() {
         <p>
           <strong>Email:</strong> {usuario.email}
         </p>
+      </div> */}
+      Dto. Comercial. Lucas Pedro Pulice 1123404859
+      <div className="footerDetail">
+        <hr />
+        Panamericana Km 28.250 Paris 256 esq. Colectora Este 1611 - Don Torcuato
+        - Bs. As. Argentina. Tel./Fax : (5411) 4748-5900 www.americanvial.com
       </div>
       {/* <PDFDownloadLink
         document={<MyDocument cotizacionDetalle={cotizacionDetalle} />}
