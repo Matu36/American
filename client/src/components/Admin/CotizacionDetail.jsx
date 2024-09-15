@@ -65,117 +65,6 @@ export default function CotizacionDetail() {
     plazoEntrega,
   } = cotizacionDetalle;
 
-  // const cuotasNumber = Number(cuotas);
-
-  // const MyDocument = ({ cotizacionDetalle }) => (
-  //   <Document>
-  //     <Page size="A4" style={styles.page}>
-  //       <View style={styles.logoContainer}>
-  //         <Image src={Logo} style={styles.logo} />
-  //       </View>
-  //       <View style={styles.section}>
-  //         <Text style={styles.header}>Cotización {codigoCotizacion}</Text>
-  //         <Text style={styles.subHeader}>Información de Cotización</Text>
-
-  //         <Text style={styles.text}>
-  //           <Text style={styles.label}>Fecha de Cotización: </Text>
-  //           {new Date(fechaDeCreacion).toLocaleString()}
-  //         </Text>
-  //         <Text style={styles.subHeader}>Producto</Text>
-  //         <Text style={styles.text}>
-  //           <Text style={styles.label}>Categoría: </Text>
-  //           {Producto.familia}
-  //         </Text>
-  //         <Text style={styles.text}>
-  //           <Text style={styles.label}>Marca: </Text>
-  //           {Producto.marca}
-  //         </Text>
-  //         <Text style={styles.text}>
-  //           <Text style={styles.label}>Modelo: </Text>
-  //           {Producto.modelo}
-  //         </Text>
-  //         <Text style={styles.subHeader}>Detalle de la Cotización</Text>
-  //         <Text style={styles.text}>
-  //           <Text style={styles.label}>Precio de Venta: </Text>
-  //           {moneda} {parseFloat(precio).toFixed(2)}
-  //         </Text>
-  //         <Text style={styles.text}>
-  //           <Text style={styles.label}>Anticipo: </Text>
-  //           {moneda} {parseFloat(anticipo).toFixed(2)}
-  //         </Text>
-  //         <Text style={styles.text}>
-  //           <Text style={styles.label}>Financiación: </Text>
-  //           {(cuotasNumber === 1 || cuotasNumber === 0) && (
-  //             <Text style={styles.text}>
-  //               {moneda} {parseFloat(PrecioFinal).toFixed(2)}
-  //             </Text>
-  //           )}
-
-  //           {cuotasNumber > 1 && (
-  //             <Text style={styles.text}>
-  //               {cuotas} Cuotas de {moneda} {parseFloat(cuotaValor).toFixed(2)}
-  //             </Text>
-  //           )}
-  //         </Text>
-  //         <Text style={styles.text}>
-  //           <Text style={styles.label}>IVA: </Text>
-  //           {parseFloat(IVA).toFixed(2)}
-  //         </Text>
-  //         <Text style={styles.text}>
-  //           <Text style={styles.label}>Precio Final: </Text>
-  //           {moneda} {parseFloat(PrecioFinal).toFixed(2)}
-  //         </Text>
-
-  //         <Text style={styles.subHeader}>Cliente</Text>
-  //         <Text style={styles.text}>
-  //           <Text style={styles.label}>Nombre: </Text>
-  //           {Cliente.nombre} {Cliente.apellido}
-  //         </Text>
-  //         <Text style={styles.text}>
-  //           <Text style={styles.label}>Email: </Text>
-  //           {Cliente.mail}
-  //         </Text>
-
-  //         <Text style={styles.subHeader}>Asesor Comercial </Text>
-
-  //         <Text style={styles.text}>
-  //           <Text style={styles.subHeader}>
-  //             {Usuario.nombre} {Usuario.apellido}{" "}
-  //           </Text>
-  //         </Text>
-
-  //         <Text style={styles.text}>
-  //           <Text style={styles.label}>Teléfono: </Text>
-  //           {Usuario.telefono}
-  //         </Text>
-  //         <Text style={styles.text}>
-  //           <Text style={styles.label}>Email: </Text>
-  //           {Usuario.email}
-  //         </Text>
-  //       </View>
-  //       <View style={styles.contactContainer}>
-  //         <Image src={Empresa} style={styles.empresaImage} />
-  //         <View style={styles.contactTextContainer}>
-  //           <Text style={styles.contactHeader}>Contacto</Text>
-  //           <Text style={[styles.contactText, styles.boldText]}>Ventas</Text>
-  //           <Text style={styles.contactText}>4748-5900</Text>
-  //           <Text style={styles.contactText}>11 5924-9700</Text>
-  //           <Text style={[styles.contactText, styles.boldText]}>
-  //             Servicio Post Venta
-  //           </Text>
-  //           <Text style={styles.contactText}>4748-5900</Text>
-  //           <Text style={styles.contactText}>11 3928-4834</Text>
-  //           <Text style={styles.contactText}>servicios@americanvial.com</Text>
-  //           <Text style={[styles.contactText, styles.boldText]}>Repuestos</Text>
-  //           <Text style={styles.contactText}>4748-5900</Text>
-  //           <Text style={styles.contactText}>11 5146-9600</Text>
-  //           <Text style={styles.contactText}>repuestos@americanvial.com</Text>
-  //         </View>
-  //       </View>
-  //     </Page>
-  //   </Document>
-  // );
-
   const numerosEnLetras = (num) => {
     const unidades = [
       "cero",
@@ -276,6 +165,188 @@ export default function CotizacionDetail() {
       : `${numerosEnLetras(mil)} mil ${numerosEnLetras(resto)}`;
   };
 
+  const MyDocument = () => (
+    <Document>
+      <Page size="A4" style={styles.page}>
+        {/* Logos */}
+        <View style={styles.logoContainer}>
+          <Image src={SINOMACH} />
+          <Image src={americanvial} />
+        </View>
+
+        {/* Título y fecha */}
+        <Text style={styles.subHeader}>
+          SINOMACH CONSTRUCTION MACHINERY GROUP I/E CO., LTD.
+        </Text>
+        <Text>Distribuidor en Argentina -</Text>
+        <Text>{fechaFormateada}</Text>
+        <Text style={styles.hr} />
+
+        {/* Información del cliente */}
+        <View>
+          <Text>Razon Social: {cliente.razonSocial}</Text>
+          <Text>Cuit: {cliente.CUIT}</Text>
+          <Text>COTIZACION AVG: {cotizacionDetalle.codigoCotizacion}</Text>
+        </View>
+
+        {/* Texto principal */}
+        <View>
+          <Text>De nuestra mayor consideración,</Text>
+          <Text>
+            SINOMACH, como el más importante fabricante de equipos para
+            construcción de China y mediante nuestro representante en Argentina,
+            nos dirigimos a ustedes para ofrecerles el suministro y cotización
+            por:
+          </Text>
+        </View>
+
+        {/* Detalles de la cotización */}
+        {cotizacionesIndividuales.map((cotizacion, index) => (
+          <View key={index} style={styles.cotizacionItem}>
+            <Text>
+              {cotizacion.cantidadProducto} {producto.familia} SINOMACH modelo{" "}
+              {producto.modelo}
+            </Text>
+            <Text>
+              Precio Unitario del equipo: {cotizacion.moneda}{" "}
+              {cotizacion.precio} + IVA ({cotizacion.IVA}%)
+            </Text>
+            {cotizacion.anticipo && (
+              <Text>
+                Anticipo: {cotizacion.moneda} {cotizacion.anticipo}
+              </Text>
+            )}
+
+            {cotizacion.cuotas && cotizacion.cuotaValor && (
+              <Text>
+                Financiación: {cotizacion.cuotas} Pagos de {cotizacion.moneda}{" "}
+                {cotizacion.cuotaValor}
+              </Text>
+            )}
+
+            <Text>
+              Precio Final: {cotizacion.moneda} {cotizacion.PrecioFinal}
+            </Text>
+          </View>
+        ))}
+
+        {/* Condiciones generales de venta */}
+        <View style={styles.condicionesgenerales}>
+          <Text>Condiciones Generales de Venta</Text>
+          <Text>Plazo de Entrega: {plazoEntrega}</Text>
+          <Text>Forma de Pago: {formaPago}</Text>
+          <Text>Mantenimiento de Oferta: {mantenimientoOferta}</Text>
+          <Text>Lugar de Entrega: {lugarEntrega}</Text>
+          <Text>Garantía: {garantia}</Text>
+          <Text>Entrega Técnica: {entregaTecnica}</Text>
+          <Text>Origen de Fabricación: {origenFabricacion}</Text>
+          <Text>Patentamiento: {patentamiento}</Text>
+        </View>
+
+        {cotizacionesIndividuales.map((cotizacion, index) => (
+          <View key={index}>
+            <Text>
+              <strong>Anticipo:</strong> {cotizacion.moneda}{" "}
+              {parseFloat(cotizacion.anticipo).toFixed(2)}
+            </Text>
+            <Text>
+              <strong>Financiación:</strong> {cotizacion.cuotas} Pagos de{" "}
+              {cotizacion.moneda} {parseFloat(cotizacion.cuotaValor).toFixed(2)}
+            </Text>
+            <Text>
+              <strong>IVA:</strong> {parseFloat(cotizacion.IVA).toFixed(2)}%
+            </Text>
+            <Text>
+              <strong>Precio Final:</strong> {cotizacion.moneda}{" "}
+              {parseFloat(cotizacion.PrecioFinal).toFixed(2)}
+            </Text>
+          </View>
+        ))}
+
+        <View>
+          <Text>Características Técnicas Generales:</Text>
+
+          <View>
+            <Text>Especificaciones Principales:</Text>
+            <View>
+              {producto.caracteristicasGenerales
+                .split("\n")
+                .map((caracteristica, index) => (
+                  <Text key={index}>{caracteristica}</Text>
+                ))}
+            </View>
+
+            <Text>Motores de Traslación y Zapatas:</Text>
+            <View>
+              {producto.motoresdeTraslacionyZapatas
+                .split("\n")
+                .map((motor, index) => (
+                  <Text key={index}>{motor}</Text>
+                ))}
+            </View>
+
+            <Text>Sistema Hidráulico:</Text>
+            <View>
+              {producto.sistemaHidraulico.split("\n").map((sistema, index) => (
+                <Text key={index}>{sistema}</Text>
+              ))}
+            </View>
+
+            <Text>Motor:</Text>
+            <View>
+              {producto.motor.split("\n").map((motor, index) => (
+                <Text key={index}>{motor}</Text>
+              ))}
+            </View>
+
+            <Text>Capacidades:</Text>
+            <View>
+              {producto.capacidades.split("\n").map((capacidad, index) => (
+                <Text key={index}>{capacidad}</Text>
+              ))}
+            </View>
+
+            <Text>Cabina:</Text>
+            <View>
+              {producto.Cabina.split("\n").map((cabina, index) => (
+                <Text key={index}>{cabina}</Text>
+              ))}
+            </View>
+
+            <Text>Dimensiones Generales:</Text>
+            <View>
+              {producto.dimensionesGenerales
+                .split("\n")
+                .map((dimension, index) => (
+                  <Text key={index}>{dimension}</Text>
+                ))}
+            </View>
+          </View>
+        </View>
+
+        <Image src={producto.imagen} />
+
+        {/* Asesor comercial */}
+        <View>
+          <Text>Asesor Comercial</Text>
+          <Text>
+            Nombre: {usuario.nombre} {usuario.apellido}
+          </Text>
+          <Text>Email: {usuario.email}</Text>
+        </View>
+
+        {/* Pie de página */}
+        <View style={styles.footerDetail}>
+          <Text>
+            Panamericana Km 28.250 Paris 256 esq. Colectora Este 1611 - Don
+            Torcuato - Bs. As. Argentina
+          </Text>
+          <Text>Tel./Fax: (5411) 4748-5900 www.americanvial.com</Text>
+        </View>
+      </Page>
+    </Document>
+  );
+
   return (
     <div className="cotizacionDetailSimilPdf">
       <BackButton />
@@ -335,15 +406,20 @@ export default function CotizacionDetail() {
               <li>Patentamiento: {patentamiento}</li>
             </ul>
           </div>
-          <p>
-            <strong>Anticipo:</strong> {cotizacion.moneda}{" "}
-            {parseFloat(cotizacion.anticipo).toFixed(2)}
-          </p>
-          <p>
-            <strong>Financiación: </strong>
-            {cotizacion.cuotas} Pagos de {cotizacion.moneda}{" "}
-            {parseFloat(cotizacion.cuotaValor).toFixed(2)}
-          </p>
+          {cotizacion.anticipo && (
+            <p>
+              <strong>Anticipo:</strong> {cotizacion.moneda}{" "}
+              {parseFloat(cotizacion.anticipo).toFixed(2)}
+            </p>
+          )}
+
+          {cotizacion.cuotas && cotizacion.cuotaValor && (
+            <p>
+              <strong>Financiación:</strong> {cotizacion.cuotas} Pagos de{" "}
+              {cotizacion.moneda} {parseFloat(cotizacion.cuotaValor).toFixed(2)}
+            </p>
+          )}
+
           <p>
             <strong>IVA:</strong> {parseFloat(cotizacion.IVA).toFixed(2)}%
           </p>
@@ -427,25 +503,23 @@ export default function CotizacionDetail() {
         {" "}
         <img src={producto.imagen} alt="" />
       </div>
-      {/* <div>
+      <div>
         <h3>Asesor Comercial</h3>
         <p>
           <strong>Nombre:</strong> {usuario.nombre} {usuario.apellido}
         </p>
-        <p>
-          <strong>Teléfono:</strong> {usuario.telefono}
-        </p>
+
         <p>
           <strong>Email:</strong> {usuario.email}
         </p>
-      </div> */}
+      </div>
       Dto. Comercial. Lucas Pedro Pulice 1123404859
       <div className="footerDetail">
         <hr />
         Panamericana Km 28.250 Paris 256 esq. Colectora Este 1611 - Don Torcuato
         - Bs. As. Argentina. Tel./Fax : (5411) 4748-5900 www.americanvial.com
       </div>
-      {/* <PDFDownloadLink
+      <PDFDownloadLink
         document={<MyDocument cotizacionDetalle={cotizacionDetalle} />}
         fileName={`cotizacion_${codigoCotizacion}.pdf`}
       >
@@ -460,7 +534,7 @@ export default function CotizacionDetail() {
             )}
           </button>
         )}
-      </PDFDownloadLink> */}
+      </PDFDownloadLink>
     </div>
   );
 }
