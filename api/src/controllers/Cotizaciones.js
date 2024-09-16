@@ -49,7 +49,7 @@ const createCotizacion = async (req, res) => {
       origenFabricacion,
       patentamiento,
       cantidadProducto,
-      cotizacionesIndividuales, // Aquí se incluye el array de cotizaciones individuales
+      cotizacionesIndividuales,
     } = req.body;
 
     if (!idUsuario || !idCliente || !idProducto) {
@@ -127,7 +127,7 @@ const createCotizacion = async (req, res) => {
       const cotizacionesIndividualesConId = cotizacionesIndividuales.map(
         (cotizacion) => ({
           idCotizacion: nuevaCotizacion.id,
-          ...cotizacion, // Agregamos los detalles de cada cotización individual
+          ...cotizacion,
         })
       );
 
@@ -144,6 +144,37 @@ const createCotizacion = async (req, res) => {
       where: { id: idProducto },
       attributes: ["familia", "marca", "modelo"],
     });
+
+    for (const cotizacion of cotizacionesIndividuales) {
+      await HistorialCotizacion.create({
+        numeroCotizacion: nuevaCotizacion.numeroCotizacion,
+        precio: cotizacion.precio || null,
+        anticipo: cotizacion.anticipo || null,
+        saldoAFinanciar: cotizacion.saldoAFinanciar || null,
+        IVA: cotizacion.IVA || null,
+        moneda: cotizacion.moneda || null,
+        interes: cotizacion.interes || null,
+        saldo: cotizacion.saldo || null,
+        cuotas: cotizacion.cuotas || null,
+        cuotaValor: cotizacion.cuotaValor || null,
+        saldoConInteres: cotizacion.saldoConInteres || null,
+        PrecioFinal: cotizacion.PrecioFinal || null,
+        codigoCotizacion: nuevaCotizacion.codigoCotizacion,
+        fechaDeCreacion: nuevaCotizacion.fechaDeCreacion,
+        fechaModi: nuevaCotizacion.fechaModi,
+        nombreCliente: cliente.nombre || "",
+        apellidoCliente: cliente.apellido || "",
+        mailCliente: cliente.mail || "",
+        familia: producto.familia || "",
+        marca: producto.marca || "",
+        modelo: producto.modelo || "",
+        estado: nuevaCotizacion.estado,
+        apellidoVendedor: usuario.apellido || "",
+        nombreVendedor: usuario.nombre || "",
+        codigo: usuario.codigo || "",
+        notasUsuario: notasUsuario || "",
+      });
+    }
 
     if (!cliente || !producto) {
       throw "No se pudieron obtener los datos del cliente o del producto";
@@ -403,14 +434,29 @@ const putCotizaciones = async (req, res) => {
     );
     const idUsuario = decodedToken.id;
 
+    // Obtener los datos del cuerpo de la solicitud
     const { id, cotizacionesIndividuales, ...updatedFields } = req.body;
 
+    // Verificar que se proporciona un ID
     if (!id) {
       return res
         .status(400)
         .send(
           "Se requiere un ID válido para actualizar o crear la cotización."
         );
+    }
+
+    // Verificar y convertir idCliente e idProducto
+    const idCliente = parseInt(req.body.idCliente, 10);
+    const idProducto = parseInt(req.body.idProducto, 10);
+
+    const usuario = await Usuarios.findOne({
+      where: { id: idUsuario },
+      attributes: ["nombre", "apellido", "codigo"],
+    });
+
+    if (!usuario) {
+      throw "Usuario no encontrado";
     }
 
     let cotizacion = await Cotizaciones.findOne({ where: { id } });
@@ -426,13 +472,66 @@ const putCotizaciones = async (req, res) => {
       if (cotizacionesIndividuales && cotizacionesIndividuales.length > 0) {
         const cotizacionesIndividualesConId = cotizacionesIndividuales.map(
           (cotizacionIndividual) => ({
-            idCotizacion: cotizacion.id, // Asegúrate de usar el id recién creado
+            idCotizacion: cotizacion.id,
             ...cotizacionIndividual,
           })
         );
 
         // Insertar las cotizaciones individuales en batch
         await CotizacionIndividual.bulkCreate(cotizacionesIndividualesConId);
+
+        console.log("ID Cliente:", idCliente);
+        console.log("ID Producto:", idProducto);
+
+        const cliente = await Clientes.findOne({
+          where: { id: idCliente },
+          attributes: ["nombre", "apellido", "mail"],
+        });
+
+        if (!cliente) {
+          throw "Cliente no encontrado";
+        }
+
+        const producto = await Productos.findOne({
+          where: { id: idProducto },
+          attributes: ["familia", "marca", "modelo"],
+        });
+
+        if (!producto) {
+          throw "Producto no encontrado";
+        }
+
+        // Crear el historial para cada cotización individual
+        for (const cotizacionIndividual of cotizacionesIndividuales) {
+          await HistorialCotizacion.create({
+            numeroCotizacion: cotizacion.numeroCotizacion,
+            precio: cotizacionIndividual.precio || null,
+            anticipo: cotizacionIndividual.anticipo || null,
+            saldoAFinanciar: cotizacionIndividual.saldoAFinanciar || null,
+            IVA: cotizacionIndividual.IVA || null,
+            moneda: cotizacionIndividual.moneda || null,
+            interes: cotizacionIndividual.interes || null,
+            saldo: cotizacionIndividual.saldo || null,
+            cuotas: cotizacionIndividual.cuotas || null,
+            cuotaValor: cotizacionIndividual.cuotaValor || null,
+            saldoConInteres: cotizacionIndividual.saldoConInteres || null,
+            PrecioFinal: cotizacionIndividual.PrecioFinal || null,
+            codigoCotizacion: cotizacion.codigoCotizacion,
+            fechaDeCreacion: cotizacion.fechaDeCreacion,
+            fechaModi: cotizacion.fechaModi,
+            nombreCliente: cliente.nombre || "",
+            apellidoCliente: cliente.apellido || "",
+            mailCliente: cliente.mail || "",
+            familia: producto.familia || "",
+            marca: producto.marca || "",
+            modelo: producto.modelo || "",
+            estado: cotizacion.estado,
+            apellidoVendedor: usuario.apellido || "",
+            nombreVendedor: usuario.nombre || "",
+            codigo: usuario.codigo || "",
+            notasUsuario: updatedFields.notasUsuario || "",
+          });
+        }
       }
 
       return res.status(201).send(cotizacion);

@@ -19,11 +19,11 @@ module.exports = (sequelize) => {
       },
       anticipo: {
         type: DataTypes.DECIMAL,
-        allowNull: false,
+        allowNull: true,
       },
       saldoAFinanciar: {
         type: DataTypes.DECIMAL,
-        allowNull: false,
+        allowNull: true,
       },
       IVA: {
         type: DataTypes.DECIMAL,
@@ -100,6 +100,10 @@ module.exports = (sequelize) => {
       },
       estado: {
         type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      notasUsuario: {
+        type: DataTypes.TEXT,
         allowNull: true,
       },
     },

@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
 import BackButton from "../../UI/BackButton";
 import Select from "react-select";
+import { focusManager } from "@tanstack/react-query";
 
 export default function CotizacionEdit() {
   const { auth } = useAuth();

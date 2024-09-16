@@ -40,11 +40,11 @@ module.exports = (sequelize) => {
       },
       contactoAlternativo: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       contactoAlternativo1: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       razonSocial: {
         type: DataTypes.STRING,

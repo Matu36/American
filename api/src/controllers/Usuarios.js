@@ -362,9 +362,6 @@ const getUsuariosConRolFalse = async (req, res) => {
   try {
     const usuarios = await Usuarios.findAll({
       attributes: ["id", "nombre", "apellido"],
-      where: {
-        rol: false,
-      },
     });
 
     if (!usuarios || usuarios.length === 0) {

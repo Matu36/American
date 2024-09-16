@@ -80,7 +80,7 @@ export default function Productos() {
 
   const columns = [
     {
-      name: "Categoría",
+      name: "Familia",
       selector: (row) => row.familia,
       sortable: true,
       width: "200px",
