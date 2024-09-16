@@ -434,8 +434,16 @@ const putCotizaciones = async (req, res) => {
     );
     const idUsuario = decodedToken.id;
 
-    const { id, cotizacionesIndividuales, ...updatedFields } = req.body;
+    // Obtener los datos del cuerpo de la solicitud
+    const {
+      id,
+      idCliente,
+      idProducto,
+      cotizacionesIndividuales,
+      ...updatedFields
+    } = req.body;
 
+    // Verificar que se proporciona un ID
     if (!id) {
       return res
         .status(400)
@@ -454,6 +462,9 @@ const putCotizaciones = async (req, res) => {
     }
 
     let cotizacion = await Cotizaciones.findOne({ where: { id } });
+
+    let cliente;
+    let producto;
 
     if (!cotizacion) {
       // Si no se encuentra la cotización, crear una nueva
@@ -474,15 +485,23 @@ const putCotizaciones = async (req, res) => {
         // Insertar las cotizaciones individuales en batch
         await CotizacionIndividual.bulkCreate(cotizacionesIndividualesConId);
 
-        const cliente = await Clientes.findOne({
+        cliente = await Clientes.findOne({
           where: { id: idCliente },
           attributes: ["nombre", "apellido", "mail"],
         });
 
-        const producto = await Productos.findOne({
+        if (!cliente) {
+          throw "Cliente no encontrado";
+        }
+
+        producto = await Productos.findOne({
           where: { id: idProducto },
           attributes: ["familia", "marca", "modelo"],
         });
+
+        if (!producto) {
+          throw "Producto no encontrado";
+        }
 
         // Crear el historial para cada cotización individual
         for (const cotizacionIndividual of cotizacionesIndividuales) {
@@ -502,12 +521,12 @@ const putCotizaciones = async (req, res) => {
             codigoCotizacion: cotizacion.codigoCotizacion,
             fechaDeCreacion: cotizacion.fechaDeCreacion,
             fechaModi: cotizacion.fechaModi,
-            nombreCliente: cliente.nombre,
-            apellidoCliente: cliente.apellido,
-            mailCliente: cliente.email,
-            familia: producto.familia,
-            marca: producto.marca,
-            modelo: producto.modelo,
+            nombreCliente: cliente.nombre || "",
+            apellidoCliente: cliente.apellido || "",
+            mailCliente: cliente.mail || "",
+            familia: producto.familia || "",
+            marca: producto.marca || "",
+            modelo: producto.modelo || "",
             estado: cotizacion.estado,
             apellidoVendedor: usuario.apellido || "",
             nombreVendedor: usuario.nombre || "",
@@ -529,23 +548,76 @@ const putCotizaciones = async (req, res) => {
 
     await cotizacion.update(updatedFields);
 
-    // Actualizar las cotizaciones individuales asociadas
-    if (cotizacionesIndividuales && cotizacionesIndividuales.length > 0) {
+    // Recuperar las cotizaciones individuales actuales
+    const cotizacionesActuales = await CotizacionIndividual.findAll({
+      where: { idCotizacion: id },
+    });
+
+    // Convertir a un mapa por id para comparación
+    const cotizacionesActualesMap = new Map(
+      cotizacionesActuales.map((item) => [item.id, item])
+    );
+
+    // Identificar cambios
+    const cotizacionesIndividualesConId = cotizacionesIndividuales.map(
+      (cotizacionIndividual) => ({
+        idCotizacion: cotizacion.id, // Usa el id existente
+        ...cotizacionIndividual,
+      })
+    );
+
+    const cotizacionesAActualizar = cotizacionesIndividualesConId.filter(
+      (nueva) => {
+        const actual = cotizacionesActualesMap.get(nueva.id);
+        if (!actual) return true; // Si es nueva, siempre se debe guardar
+        return !(
+          actual.precio === nueva.precio &&
+          actual.anticipo === nueva.anticipo &&
+          actual.saldoAFinanciar === nueva.saldoAFinanciar &&
+          actual.IVA === nueva.IVA &&
+          actual.moneda === nueva.moneda &&
+          actual.interes === nueva.interes &&
+          actual.saldo === nueva.saldo &&
+          actual.cuotas === nueva.cuotas &&
+          actual.cuotaValor === nueva.cuotaValor &&
+          actual.saldoConInteres === nueva.saldoConInteres &&
+          actual.PrecioFinal === nueva.PrecioFinal
+        );
+      }
+    );
+
+    if (cotizacionesAActualizar.length > 0) {
       // Eliminar las cotizaciones individuales existentes
       await CotizacionIndividual.destroy({ where: { idCotizacion: id } });
 
       // Crear nuevas cotizaciones individuales
-      const cotizacionesIndividualesConId = cotizacionesIndividuales.map(
-        (cotizacionIndividual) => ({
-          idCotizacion: cotizacion.id, // Usa el id existente
-          ...cotizacionIndividual,
-        })
-      );
+      await CotizacionIndividual.bulkCreate(cotizacionesAActualizar);
 
-      await CotizacionIndividual.bulkCreate(cotizacionesIndividualesConId);
+      // Si no se ha definido previamente, obtener cliente y producto
+      if (!cliente) {
+        cliente = await Clientes.findOne({
+          where: { id: idCliente },
+          attributes: ["nombre", "apellido", "mail"],
+        });
 
-      // Crear el historial para cada cotización individual
-      for (const cotizacionIndividual of cotizacionesIndividuales) {
+        if (!cliente) {
+          throw "Cliente no encontrado";
+        }
+      }
+
+      if (!producto) {
+        producto = await Productos.findOne({
+          where: { id: idProducto },
+          attributes: ["familia", "marca", "modelo"],
+        });
+
+        if (!producto) {
+          throw "Producto no encontrado";
+        }
+      }
+
+      // Crear el historial para las cotizaciones individuales modificadas
+      for (const cotizacionIndividual of cotizacionesAActualizar) {
         await HistorialCotizacion.create({
           numeroCotizacion: cotizacion.numeroCotizacion,
           precio: cotizacionIndividual.precio || null,
@@ -562,12 +634,12 @@ const putCotizaciones = async (req, res) => {
           codigoCotizacion: cotizacion.codigoCotizacion,
           fechaDeCreacion: cotizacion.fechaDeCreacion,
           fechaModi: cotizacion.fechaModi,
-          nombreCliente: "", // Obtener el nombre del cliente según sea necesario
-          apellidoCliente: "", // Obtener el apellido del cliente según sea necesario
-          mailCliente: "", // Obtener el mail del cliente según sea necesario
-          familia: "", // Obtener la familia del producto según sea necesario
-          marca: "", // Obtener la marca del producto según sea necesario
-          modelo: "", // Obtener el modelo del producto según sea necesario
+          nombreCliente: cliente ? cliente.nombre : "",
+          apellidoCliente: cliente ? cliente.apellido : "",
+          mailCliente: cliente ? cliente.mail : "",
+          familia: producto ? producto.familia : "",
+          marca: producto ? producto.marca : "",
+          modelo: producto ? producto.modelo : "",
           estado: cotizacion.estado,
           apellidoVendedor: usuario.apellido || "",
           nombreVendedor: usuario.nombre || "",
