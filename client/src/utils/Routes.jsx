@@ -13,6 +13,7 @@ import Productos from "../components/Admin/Productos";
 import Usuarios from "../components/Admin/Usuarios";
 import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 // import Detalle from "../components/Detalle";
 import Cotizador from "../components/Admin/Cotizador";
 import Contacto from "../components/Admin/Contacto";
@@ -85,34 +86,46 @@ const AppRouter = () => {
 };
 
 const AdminLayout = () => {
-  const { auth, setAuth } = useAuth();
   const [loading, setLoading] = useState(true);
-  const [rolDatas, setRolDatas] = useState(null);
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
+  const {
+    mutate: checkRol,
+    data: rolData,
+    isError: rolError,
+  } = useUsuario().CheckRolMutation;
+
+  // Función para verificar si el token ha expirado
+  const checkTokenExpiration = (token) => {
+    try {
+      const decodedToken = jwtDecode(token);
+      const currentTime = Date.now() / 1000;
+      return decodedToken.exp < currentTime;
+    } catch (error) {
+      return true;
+    }
+  };
 
   const token = localStorage.getItem("token");
 
-  const navigate = useNavigate();
-
-  const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
-
+  // Función para verificar el rol del usuario
   const handleCheckRol = async () => {
     try {
-      await checkRol({ token });
+      if (token) {
+        await checkRol({ token });
+      }
     } catch (error) {
-      navigate("/");
+      setError(true);
     }
   };
 
   useEffect(() => {
-    if (token) {
+    if (token && !checkTokenExpiration(token)) {
       handleCheckRol();
+    } else {
+      navigate("/error");
     }
   }, [token]);
-
-  if (!token) {
-    navigate("/error");
-    return;
-  }
 
   useEffect(() => {
     if (rolData) {
@@ -123,8 +136,12 @@ const AdminLayout = () => {
         setLoading(false);
       }
     }
-  }, [rolData, navigate]);
+    if (rolError || error) {
+      navigate("/error");
+    }
+  }, [rolData, rolError, error, navigate]);
 
+  // Mientras está verificando, puedes mostrar un loader
   if (loading) {
     return (
       <div>
@@ -132,7 +149,6 @@ const AdminLayout = () => {
       </div>
     );
   }
-
   return (
     <>
       <NavBarAdmin />

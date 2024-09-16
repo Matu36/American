@@ -103,7 +103,7 @@ export default function Usuarios() {
   //---------------------------------FIN SPINNER ------------------------------------//
 
   return (
-    <div className="form-container">
+    <div className="postVentaContainer">
       <BackButton />
       <>
         <div>

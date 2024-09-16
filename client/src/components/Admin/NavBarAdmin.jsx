@@ -7,6 +7,7 @@ import { useMensajes } from "../../hooks/useMensajes";
 import gruagif from "../../assets/img/GRUAGIF1.gif";
 import { FaBars } from "react-icons/fa";
 import SideBarResponsiva from "./SideBarResponsiva";
+import EditarUsuario from "../usuario/EditarUsuario";
 
 export default function NavBarAdmin() {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ export default function NavBarAdmin() {
   const { data } = useMensajes(idUsuario).MensajesCountQuery;
   const [sidebar, setSideBar] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [edit, setEdit] = useState(false);
 
   const handleLogout = () => {
     localStorage.clear();
@@ -23,10 +26,13 @@ export default function NavBarAdmin() {
     navigate("/");
   };
 
-  if (!idUsuario) {
-    navigate("/");
-    return null;
-  }
+  const handleMostrarModalEdit = () => {
+    setEdit(true);
+  };
+
+  const handleCerrarModalEdit = () => {
+    setEdit(false);
+  };
 
   const handleMostrarModalSideBar = () => {
     setIsHovered(true);
@@ -43,6 +49,30 @@ export default function NavBarAdmin() {
   const handleButtonClick = () => {
     navigate("/");
   };
+
+  const updateAuthFromLocalStorage = () => {
+    const nombre = localStorage.getItem("nombre");
+    const apellido = localStorage.getItem("apellido");
+
+    if (nombre && apellido) {
+      setAuth({
+        nombre: nombre,
+        apellido: apellido,
+      });
+      setLoading(false); // Deja de mostrar el mensaje de carga cuando se actualice el estado
+    }
+  };
+
+  useEffect(() => {
+    // Actualiza auth cuando el componente se monte
+    updateAuthFromLocalStorage();
+
+    // Configura un intervalo para verificar cambios en localStorage
+    const intervalId = setInterval(updateAuthFromLocalStorage, 1000); // Cada segundo
+
+    // Limpia el intervalo cuando el componente se desmonte
+    return () => clearInterval(intervalId);
+  }, [setAuth]);
 
   return (
     <nav className="navbarAdmin">
@@ -66,19 +96,8 @@ export default function NavBarAdmin() {
         </button>
       </div>
 
-      <div className="user__info">
+      <div onClick={handleMostrarModalEdit} className="user__info">
         {auth.nombre} {auth.apellido}
-        <button
-          className="navbarAdmin__icon-button"
-          onClick={() => {
-            alert(`Tiene ${data?.count} mensajes sin leer.`);
-          }}
-        >
-          <FaBell className="navbarAdmin__icon" />
-          {data?.count > 0 && (
-            <span className="navbarAdmin__badge">{data?.count}</span>
-          )}
-        </button>
         {!sidebar && (
           <button
             onClick={handleMostrarModalSideBar}
@@ -110,6 +129,15 @@ export default function NavBarAdmin() {
       >
         Cerrar sesión
       </button>
+
+      {edit && (
+        <div>
+          <EditarUsuario
+            handleMostrarModalEdit={handleMostrarModalEdit}
+            handleCerrarModalEdit={handleCerrarModalEdit}
+          />
+        </div>
+      )}
     </nav>
   );
 }

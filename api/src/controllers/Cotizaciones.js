@@ -239,7 +239,7 @@ const getCotizacionDetalle = async (req, res) => {
         },
         {
           model: Clientes,
-          attributes: ["razonSocial", "CUIT"],
+          attributes: ["razonSocial", "CUIT", "apellido", "mail"],
         },
         {
           model: Productos,
@@ -263,6 +263,7 @@ const getCotizacionDetalle = async (req, res) => {
         {
           model: CotizacionIndividual,
           attributes: [
+            "id",
             "precio",
             "anticipo",
             "saldoAFinanciar",
@@ -287,6 +288,7 @@ const getCotizacionDetalle = async (req, res) => {
 
     // Estructurar los datos para la respuesta
     const respuesta = {
+      idCotizacion: cotizacion.id,
       idUsuario: cotizacion.idUsuario,
       idCliente: cotizacion.idCliente,
       idProducto: cotizacion.idProducto,
@@ -317,10 +319,12 @@ const getCotizacionDetalle = async (req, res) => {
       fechaDeCreacion: cotizacion.fechaDeCreacion,
       fechaModi: cotizacion.fechaModi,
       fechaVenta: cotizacion.fechaVenta,
-      cotizacionesIndividuales: cotizacion.CotizacionIndividuals || [], // Usa el nombre correcto del campo
+      cotizacionesIndividuales: cotizacion.CotizacionIndividuals || [],
       cliente: {
         razonSocial: cotizacion.Cliente.razonSocial,
         CUIT: cotizacion.Cliente.CUIT,
+        email: cotizacion.Cliente.mail,
+        apellido: cotizacion.Cliente.apellido,
       },
       usuario: {
         nombre: cotizacion.Usuario.nombre,
@@ -399,21 +403,42 @@ const putCotizaciones = async (req, res) => {
     );
     const idUsuario = decodedToken.id;
 
-    const { id, ...updatedFields } = req.body;
+    const { id, cotizacionesIndividuales, ...updatedFields } = req.body;
 
     if (!id) {
       return res
         .status(400)
-        .send("Se requiere un ID válido para actualizar la cotización.");
+        .send(
+          "Se requiere un ID válido para actualizar o crear la cotización."
+        );
     }
 
     let cotizacion = await Cotizaciones.findOne({ where: { id } });
 
     if (!cotizacion) {
-      return res.status(404).send("No se encontró la cotización.");
+      // Si no se encuentra la cotización, crear una nueva
+      updatedFields.idUsuario = idUsuario;
+      updatedFields.fechaModi = new Date();
+
+      // Crear la nueva cotización
+      cotizacion = await Cotizaciones.create(updatedFields);
+
+      if (cotizacionesIndividuales && cotizacionesIndividuales.length > 0) {
+        const cotizacionesIndividualesConId = cotizacionesIndividuales.map(
+          (cotizacionIndividual) => ({
+            idCotizacion: cotizacion.id, // Asegúrate de usar el id recién creado
+            ...cotizacionIndividual,
+          })
+        );
+
+        // Insertar las cotizaciones individuales en batch
+        await CotizacionIndividual.bulkCreate(cotizacionesIndividualesConId);
+      }
+
+      return res.status(201).send(cotizacion);
     }
 
-    // Asegúrate de que el idUsuario esté presente en updatedFields si es necesario
+    // Si se encuentra la cotización, actualizarla
     if (updatedFields.idUsuario) {
       updatedFields.idUsuario = idUsuario;
     }
@@ -422,53 +447,21 @@ const putCotizaciones = async (req, res) => {
 
     await cotizacion.update(updatedFields);
 
-    // Obtener datos del cliente
-    const cliente = await Clientes.findOne({
-      where: { id: cotizacion.idCliente },
-      attributes: ["nombre", "apellido", "mail"],
-    });
+    // Actualizar las cotizaciones individuales asociadas
+    if (cotizacionesIndividuales && cotizacionesIndividuales.length > 0) {
+      // Eliminar las cotizaciones individuales existentes
+      await CotizacionIndividual.destroy({ where: { idCotizacion: id } });
 
-    const usuario = await Usuarios.findOne({
-      where: { id: cotizacion.idUsuario },
-      attributes: ["nombre", "apellido"],
-    });
+      // Crear nuevas cotizaciones individuales
+      const cotizacionesIndividualesConId = cotizacionesIndividuales.map(
+        (cotizacionIndividual) => ({
+          idCotizacion: cotizacion.id, // Usa el id existente
+          ...cotizacionIndividual,
+        })
+      );
 
-    // Obtener datos del producto
-    const producto = await Productos.findOne({
-      where: { id: cotizacion.idProducto },
-      attributes: ["familia", "marca", "modelo"],
-    });
-
-    if (!cliente || !producto) {
-      throw "No se pudieron obtener los datos del cliente o del producto";
+      await CotizacionIndividual.bulkCreate(cotizacionesIndividualesConId);
     }
-
-    // Crear una nueva entrada en HistorialCotizacion
-    await HistorialCotizacion.create({
-      numeroCotizacion: cotizacion.numeroCotizacion,
-      precio: cotizacion.precio,
-      anticipo: cotizacion.anticipo,
-      saldoAFinanciar: cotizacion.saldoAFinanciar,
-      IVA: cotizacion.IVA,
-      moneda: cotizacion.moneda,
-      interes: cotizacion.interes,
-      cuotas: cotizacion.cuotas,
-      cuotaValor: cotizacion.cuotaValor,
-      saldoConInteres: cotizacion.saldoConInteres,
-      PrecioFinal: cotizacion.PrecioFinal,
-      estado: cotizacion.estado,
-      fechaDeCreacion: cotizacion.fechaDeCreacion,
-      fechaModi: updatedFields.fechaModi,
-      nombreCliente: cliente.nombre,
-      apellidoCliente: cliente.apellido,
-      mailCliente: cliente.mail,
-      familia: producto.familia,
-      marca: producto.marca,
-      modelo: producto.modelo,
-      apellidoVendedor: usuario.apellido,
-      nombreVendedor: usuario.nombre,
-      codigoCotizacion: cotizacion.codigoCotizacion,
-    });
 
     return res.send(cotizacion);
   } catch (error) {

@@ -384,7 +384,7 @@ export default function NavBarAlternativo({
             />
           </button> */}
           <div>
-            {role ? (
+            {/* {role ? (
               <div className="user-menu-container">
                 <span className="user-info">
                   {role === "vendedor" ||
@@ -415,9 +415,9 @@ export default function NavBarAlternativo({
                   onClick={handleUserButtonClick}
                 >
                   {/* <FaUser /> */}
-                </button>
+            {/* </button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
