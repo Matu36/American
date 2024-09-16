@@ -4146,6 +4146,7 @@ margin-top: -10px;
   max-width: 100%;
   margin: 0 auto;
   margin-top: 1rem;
+  font-weight: bold;
 }
 
 .postVentaContainer1 {
@@ -5368,5 +5369,11 @@ margin-top: -10px;
   box-shadow: 0 0 5px #ff4d4d; /* Sombra al hacer foco */
 }
 
+
+.info-cliente-edit {
+  color: #000;
+  display: flex;
+  justify-content: space-around;
+}
 
 /* PROBANDO DEPLOY  */

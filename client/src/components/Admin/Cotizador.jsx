@@ -342,7 +342,7 @@ const Cotizador = () => {
       <form onSubmit={handleSubmit}>
         <BackButton />
         <div>
-          <h2 className="tituloCompo">Cotizador</h2> <br />
+          <h2 className="tituloCompo">Crear Cotización</h2> <br />
         </div>
         <div></div>
         <div className="form-group">
@@ -761,11 +761,15 @@ const Cotizador = () => {
         ))}
 
         <div>
-          <button type="button" onClick={addCotizacionIndividual}>
+          <button
+            type="button"
+            className="form-submit"
+            onClick={addCotizacionIndividual}
+          >
             Añadir Cotización
           </button>
         </div>
-
+        <br />
         <div className="form-group">
           <label className="form-label">Notas para el Cliente</label>
           <textarea

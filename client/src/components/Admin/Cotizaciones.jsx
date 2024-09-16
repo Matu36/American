@@ -150,7 +150,7 @@ export default function Cotizaciones() {
 
   //---------------------------------FIN SPINNER ------------------------------------//
   return (
-    <div className="form-container">
+    <div className="postVentaContainer">
       <BackButton />
       <div>
         <div className="form-group" style={{ maxWidth: "40%" }}>
@@ -163,11 +163,16 @@ export default function Cotizaciones() {
             value={search}
             autoComplete="off"
             disabled={!cotizacionesQueryById.data}
-            style={{ height: "2rem" }}
+            style={{
+              height: "2.5rem",
+              borderRadius: "10px",
+              border: "2px solid grey",
+            }}
           />
         </div>
         {!showSpinner ? (
           <DataTable
+            className="datatable-container"
             columns={columns}
             data={cotizaciones}
             pagination

@@ -285,47 +285,55 @@ export default function CotizacionEdit() {
   };
 
   return (
-    <div className="cotizadorform">
+    <div className="postVentaContainer">
       <form onSubmit={handleSubmit}>
         <BackButton />
-        <div className="form-container3">
-          <div>
-            <h2 className="tituloCompo">Cotizador</h2> <br />
+
+        <div>
+          <h2 className="tituloCompo">Editar Cotización</h2> <br />
+        </div>
+        <div></div>
+        <div className="form-group">
+          <label className="form-label">Vendedor</label>
+          <input
+            type="number"
+            name="idUsuario"
+            placeholder={`${auth?.nombre || ""} ${auth?.apellido || ""}`}
+            onChange={handleChange}
+            readOnly
+            className="form-input"
+            value={formData.idUsuario}
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Cliente</label>
+          <div className="cliente-info">
+            <div className="form-group cliente-detail">
+              <Select
+                name="idCliente"
+                value={{
+                  label: formData.cliente || "",
+                  value: formData.idCliente || "",
+                }}
+                isDisabled={true}
+                onChange={(option) =>
+                  setFormData({ ...formData, cliente: option?.value || "" })
+                }
+                options={[]}
+                className="form-select"
+              />
+            </div>
           </div>
-          <div></div>
-          <div className="form-group">
-            <label className="form-label">Vendedor</label>
-            <input
-              type="number"
-              name="idUsuario"
-              placeholder={`${auth?.nombre || ""} ${auth?.apellido || ""}`}
-              onChange={handleChange}
-              readOnly
-              className="form-input"
-              value={formData.idUsuario}
-            />
-          </div>
-          <div className="form-group">
-            <label className="form-label">Cliente</label>
-            <Select
-              name="idCliente"
-              value={{
-                label: formData.cliente || "",
-                value: formData.idCliente || "",
-              }}
-              isDisabled={true}
-              onChange={(option) =>
-                setFormData({ ...formData, cliente: option?.value || "" })
-              }
-              options={[]}
-              className="form-select"
-            />
+          <div className="info-cliente-edit">
             <span>
+              {" "}
               CUIT: {formData.CUIT} {""}
-              RAZÓN SOCIAL: {formData.razonSocial}
             </span>
+            <span> RAZÓN SOCIAL: {formData.razonSocial}</span>
           </div>
-          <div></div>
+        </div>
+        <div></div>
+        <div className="postVentaContainer2">
           <div className="form-group">
             <label className="form-label">Familia</label>
             <input
@@ -359,24 +367,7 @@ export default function CotizacionEdit() {
               disabled
             />
           </div>
-          <div className="form-group">
-            <label className="form-label">Notas Email</label>
-            <textarea
-              name="notasEmail"
-              value={formData.notasEmail}
-              onChange={handleChange}
-              className="form-textarea"
-            />
-          </div>
-          <div className="form-group">
-            <label className="form-label">Notas Usuario</label>
-            <textarea
-              name="notasUsuario"
-              value={formData.notasUsuario}
-              onChange={handleChange}
-              className="form-textarea"
-            />
-          </div>
+
           <div className="form-group">
             <label className="form-label">Plazo de Entrega</label>
             <input
@@ -457,8 +448,14 @@ export default function CotizacionEdit() {
               className="form-input"
             />
           </div>
-          {formData.cotizacionesIndividuales.map((cotizacion, index) => (
-            <div key={index} className="form-group">
+        </div>
+        {formData.cotizacionesIndividuales.map((cotizacion, index) => (
+          <div key={index} className="postVentaContainer2">
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              {" "}
+              <h2 className="tituloCompo">Cotización</h2> <br />
+            </div>
+            <div className="form-group">
               <label className="form-label">Cantidad</label>
               <input
                 type="number"
@@ -472,6 +469,8 @@ export default function CotizacionEdit() {
                 }
                 className="form-input"
               />
+            </div>
+            <div className="form-group">
               <label className="form-label">Moneda</label>
               <input
                 type="text"
@@ -485,6 +484,8 @@ export default function CotizacionEdit() {
                 }
                 className="form-input"
               />
+            </div>
+            <div className="form-group">
               <label className="form-label">Precio de Venta</label>
               <input
                 type="text"
@@ -498,6 +499,8 @@ export default function CotizacionEdit() {
                 }
                 className="form-input"
               />
+            </div>
+            <div className="form-group">
               <label className="form-label">IVA</label>
               <input
                 type="number"
@@ -507,85 +510,86 @@ export default function CotizacionEdit() {
                 }
                 className="form-input"
               />
-              <div className="form-group">
-                <label className="form-label">Cuotas</label>
-                <select
-                  name={`cotizacionesIndividuales[${index}].cuotas`}
-                  value={cotizacion.cuotas}
-                  onChange={(e) =>
-                    handleCotizacionIndividualChange(
-                      index,
-                      "cuotas",
-                      e.target.value
-                    )
-                  }
-                  className="form-input"
-                >
-                  <option value={1}>Contado</option>
-                  {Array.from({ length: 11 }, (_, i) => i + 2).map((num) => (
-                    <option key={num} value={num}>
-                      {num}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            </div>
+            <div className="form-group">
+              <label className="form-label">Cuotas</label>
+              <select
+                name={`cotizacionesIndividuales[${index}].cuotas`}
+                value={cotizacion.cuotas}
+                onChange={(e) =>
+                  handleCotizacionIndividualChange(
+                    index,
+                    "cuotas",
+                    e.target.value
+                  )
+                }
+                className="form-input"
+              >
+                <option value={1}>Contado</option>
+                {Array.from({ length: 11 }, (_, i) => i + 2).map((num) => (
+                  <option key={num} value={num}>
+                    {num}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-              {cotizacion.cuotas > 1 && (
-                <>
-                  <div className="form-group">
-                    <label className="form-label">Anticipo:</label>
-                    <input
-                      type="number"
-                      name={`cotizacionesIndividuales[${index}].anticipo`}
-                      value={cotizacion.anticipo}
-                      onChange={(e) =>
-                        handleCotizacionIndividualChange(
-                          index,
-                          "anticipo",
-                          e.target.value
-                        )
-                      }
-                      className="form-input"
-                    />
-                  </div>
+            {cotizacion.cuotas > 1 && (
+              <>
+                <div className="form-group">
+                  <label className="form-label">Anticipo:</label>
+                  <input
+                    type="number"
+                    name={`cotizacionesIndividuales[${index}].anticipo`}
+                    value={cotizacion.anticipo}
+                    onChange={(e) =>
+                      handleCotizacionIndividualChange(
+                        index,
+                        "anticipo",
+                        e.target.value
+                      )
+                    }
+                    className="form-input"
+                  />
+                </div>
 
-                  <div className="form-group">
-                    <label className="form-label">Valor de Cuota:</label>
-                    <input
-                      type="number"
-                      name={`cotizacionesIndividuales[${index}].cuotaValor`}
-                      value={cotizacion.cuotaValor}
-                      onChange={(e) =>
-                        handleCotizacionIndividualChange(
-                          index,
-                          "cuotaValor",
-                          e.target.value
-                        )
-                      }
-                      className="form-input"
-                    />
-                  </div>
+                <div className="form-group">
+                  <label className="form-label">Valor de Cuota:</label>
+                  <input
+                    type="number"
+                    name={`cotizacionesIndividuales[${index}].cuotaValor`}
+                    value={cotizacion.cuotaValor}
+                    onChange={(e) =>
+                      handleCotizacionIndividualChange(
+                        index,
+                        "cuotaValor",
+                        e.target.value
+                      )
+                    }
+                    className="form-input"
+                  />
+                </div>
 
-                  <div className="form-group">
-                    <label className="form-label">Saldo a Financiar:</label>
-                    <input
-                      type="number"
-                      name={`cotizacionesIndividuales[${index}].saldoAFinanciar`}
-                      value={cotizacion.saldoAFinanciar}
-                      onChange={(e) =>
-                        handleCotizacionIndividualChange(
-                          index,
-                          "saldoAFinanciar",
-                          e.target.value
-                        )
-                      }
-                      required
-                      className="form-input"
-                    />
-                  </div>
-                </>
-              )}
-
+                <div className="form-group">
+                  <label className="form-label">Saldo a Financiar:</label>
+                  <input
+                    type="number"
+                    name={`cotizacionesIndividuales[${index}].saldoAFinanciar`}
+                    value={cotizacion.saldoAFinanciar}
+                    onChange={(e) =>
+                      handleCotizacionIndividualChange(
+                        index,
+                        "saldoAFinanciar",
+                        e.target.value
+                      )
+                    }
+                    required
+                    className="form-input"
+                  />
+                </div>
+              </>
+            )}
+            {/* <div className="form-group">
               <label className="form-label">Saldo con Interés</label>
               <input
                 type="text"
@@ -593,6 +597,8 @@ export default function CotizacionEdit() {
                 readOnly
                 className="form-input"
               />
+            </div> */}
+            <div className="form-group">
               <label className="form-label">Interés</label>
               <input
                 type="number"
@@ -606,7 +612,8 @@ export default function CotizacionEdit() {
                 }
                 className="form-input"
               />
-
+            </div>
+            <div className="form-group">
               <label className="form-label">Precio Final</label>
               <input
                 type="text"
@@ -614,28 +621,50 @@ export default function CotizacionEdit() {
                 readOnly
                 className="form-input"
               />
-
-              <br />
-              <br />
-              <div>
-                <button
-                  type="button"
-                  onClick={() => removeCotizacionIndividual(index)}
-                >
-                  Eliminar
-                </button>
-              </div>
             </div>
-          ))}
-          <div>
-            <button type="button" onClick={addCotizacionIndividual}>
-              Añadir Cotización
-            </button>
-            <button type="submit" className="form-submit">
-              Guardar cambios
-            </button>
+
+            <div>
+              <button
+                type="button"
+                className="buttonEliminar"
+                onClick={() => removeCotizacionIndividual(index)}
+              >
+                Eliminar Cotización
+              </button>
+            </div>
           </div>
+        ))}
+        <div>
+          <button
+            type="button"
+            className="form-submit"
+            onClick={addCotizacionIndividual}
+          >
+            Añadir Cotización
+          </button>
         </div>
+        <br />
+        <div className="form-group">
+          <label className="form-label">Notas Email</label>
+          <textarea
+            name="notasEmail"
+            value={formData.notasEmail}
+            onChange={handleChange}
+            className="form-textarea"
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Notas Usuario</label>
+          <textarea
+            name="notasUsuario"
+            value={formData.notasUsuario}
+            onChange={handleChange}
+            className="form-textarea"
+          />
+        </div>
+        <button type="submit" className="form-submit">
+          Guardar cambios
+        </button>
       </form>
     </div>
   );
