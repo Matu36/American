@@ -12,6 +12,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function Productos() {
   const { data, isLoading } = useProducto().productosQuery;
+
+  console.log(data);
+
   const { auth, setAuth } = useAuth();
 
   const token = localStorage.getItem("token");
@@ -76,7 +79,12 @@ export default function Productos() {
   //-------------------------------- FIN SEARCHBAR --------------------------- //
 
   const columns = [
-    { name: "Categorìa", selector: (row) => row.familia, sortable: true },
+    {
+      name: "Categoría",
+      selector: (row) => row.familia,
+      sortable: true,
+      width: "200px",
+    },
 
     { name: "Marca", selector: (row) => row.marca, sortable: true },
     { name: "Modelo", selector: (row) => row.modelo, sortable: true },
@@ -131,7 +139,7 @@ export default function Productos() {
 
   return (
     <>
-      <div className="form-container">
+      <div className="postVentaContainer">
         <BackButton />
         <div>
           <div className="form-group" style={{ maxWidth: "60%" }}>
@@ -148,6 +156,7 @@ export default function Productos() {
           </div>
           {!showSpinner ? (
             <DataTable
+              className="datatable-container"
               columns={columns}
               data={productos}
               pagination

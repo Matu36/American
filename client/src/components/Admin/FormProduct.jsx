@@ -263,9 +263,15 @@ export default function FormProduct() {
   };
 
   return (
-    <div className="form-container1">
+    <div className="postVentaContainer1">
       <BackButton />
-      <h2 className="tituloCompo">Cargar Producto</h2> <br />
+      <h2
+        className="tituloCompo"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        Cargar Producto
+      </h2>{" "}
+      <br />
       <form onSubmit={saveProduct}>
         <div className="form-group">
           <div className="form-group">

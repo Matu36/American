@@ -135,9 +135,15 @@ export default function ProductosEdit() {
   };
 
   return (
-    <div className="form-container1">
+    <div className="postVentaContainer1">
       <BackButton />
-      <h2 className="tituloCompo">Modificar Producto</h2> <br />
+      <h2
+        className="tituloCompo"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        Editar Producto
+      </h2>{" "}
+      <br />
       <form onSubmit={saveProduct}>
         <div className="form-group">
           <label htmlFor="division">División</label>

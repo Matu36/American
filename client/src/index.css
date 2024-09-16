@@ -61,7 +61,12 @@ h1 {
   font-family: "merri";
   display: flex;
   color: #febb00;
+  text-decoration: underline; 
+  text-decoration-color: #febb00; 
+  display: flex;
+  justify-content: center;
 }
+
 
 button {
   border-radius: 8px;
@@ -3210,7 +3215,7 @@ top:25px;
 }
 
 .cotizadorform {
-  width: 82%;
+  width: 100%;
   margin: auto;
   padding-bottom: 20px;
 }
@@ -4161,6 +4166,34 @@ margin-top: -10px;
 }
 
 .postVentaContainer1 .form-group {
+  width: 100%;
+  margin: auto;
+  padding: 1rem;
+  
+}
+
+.postVentaContainer2 {
+  padding: 40px;
+  background-color: white;
+  
+  margin: auto;
+  font-family: "Merri", sans-serif;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 3px solid #ddd;
+  max-width: 100%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  width: 90%;
+  color: black;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  overflow-x: auto;
+}
+
+.postVentaContainer2 .form-group {
   width: 100%;
   margin: auto;
   padding: 1rem;
@@ -5309,6 +5342,30 @@ margin-top: -10px;
 
 .datatable-container .rdt_TableRow:nth-child(odd) {
   background-color: #ffffcc; /* Amarillo claro */
+}
+
+
+.buttonEliminar {
+  background-color: #ff4d4d; 
+  color: white; 
+  margin-top: 45px;
+  border: none; 
+  padding: 10px 10px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-weight: bold; 
+  transition: background-color 0.3s ease; 
+  display: flex;
+  margin-left: auto;
+}
+
+.buttonEliminar:hover {
+  background-color: #e60000; 
+}
+
+.buttonEliminar:focus {
+  outline: none; /* Sin contorno de enfoque */
+  box-shadow: 0 0 5px #ff4d4d; /* Sombra al hacer foco */
 }
 
 

@@ -40,18 +40,24 @@ export default function ProductosDetalle() {
   const itemStyle = {
     marginBottom: "10px",
     textTransform: "capitalize",
+    display: "flex",
+    justifyContent: "center",
   };
 
   return (
-    <div className="form-container1">
+    <div className="postVentaContainer1">
       <BackButton />
-      <h3 style={itemStyle}>Detalle del Producto</h3>
+      <h3 style={itemStyle} className="tituloCompo">
+        Detalle del Producto
+      </h3>
+      <br />
       <div>
         {Object.keys(productoData)
           .filter((key) => !excludedFields.includes(key))
           .map((key) => (
-            <div key={key} style={itemStyle}>
+            <div key={key}>
               <strong>{formatFieldName(key)}:</strong> {productoData[key]}
+              <hr />
             </div>
           ))}
       </div>
