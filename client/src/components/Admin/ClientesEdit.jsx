@@ -148,9 +148,14 @@ export default function ClientesEdit() {
   };
 
   return (
-    <div className="form-container1">
+    <div className="postVentaContainer1">
       <BackButton />
-      <h2 className="tituloCompo">Modificar datos del Cliente</h2>
+      <h2
+        className="tituloCompo"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        Editar Cliente
+      </h2>
       <br />
       <br />
       <form onSubmit={handleSubmit}>

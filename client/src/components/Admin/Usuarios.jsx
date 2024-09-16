@@ -62,7 +62,7 @@ export default function Usuarios() {
     },
     {
       name: "Creado",
-      selector: (row) => new Date(row.createdAt).toLocaleString(),
+      selector: (row) => new Date(row.createdAt).toLocaleDateString(),
       sortable: true,
     },
     {
@@ -117,7 +117,11 @@ export default function Usuarios() {
               value={search}
               autoComplete="off"
               disabled={!data}
-              style={{ height: "2rem" }}
+              style={{
+                height: "2.5rem",
+                borderRadius: "10px",
+                border: "2px solid grey",
+              }}
             />
           </div>
           <div className="datatable-container">

@@ -42,71 +42,88 @@ export default function ClientesDetail() {
   } = clienteDetalle;
 
   return (
-    <div className="form-container1">
+    <div className="postVentaContainer1">
       <BackButton />
-      <h2>Detalle del Cliente</h2>
+      <h2
+        className="tituloCompo"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        Detalle del Cliente
+      </h2>
       <br />
       <div style={{ marginBottom: "10px" }}>
         <strong>CUIT:</strong> {CUIT}
       </div>
+      <hr />
       <div style={{ marginBottom: "10px" }}>
         <strong>Razón Social:</strong> {razonSocial}
       </div>
+      <hr />
       <div style={{ marginBottom: "10px" }}>
         <strong>Domicilio:</strong> {domicilio}
       </div>
+      <hr />
       <div style={{ marginBottom: "10px" }}>
         <strong>Nombre:</strong> {nombre}
       </div>
+      <hr />
       <div style={{ marginBottom: "10px" }}>
         <strong>Apellido:</strong> {apellido}
       </div>
+      <hr />
       <div style={{ marginBottom: "10px" }}>
         <strong>Email:</strong> {mail}
       </div>
+      <hr />
       <div style={{ marginBottom: "10px" }}>
         <strong>Teléfono:</strong> {telefono}
       </div>
+      <hr />
       {contactoAlternativo && (
         <div style={{ marginBottom: "10px" }}>
           <strong>Contacto Alternativo:</strong> {contactoAlternativo}
         </div>
       )}
+      <hr />
       {mailAlternativo && (
         <div style={{ marginBottom: "10px" }}>
           <strong>Email:</strong> {mailAlternativo}
         </div>
       )}
+      <hr />
       {telefonoAlternativo && (
         <div style={{ marginBottom: "10px" }}>
           <strong>Teléfono Alternativo:</strong> {telefonoAlternativo}
         </div>
       )}
-
+      <hr />
       {contactoAlternativo1 && (
         <div style={{ marginBottom: "10px" }}>
           <strong>Contacto Alternativo:</strong> {contactoAlternativo1}
         </div>
       )}
+      <hr />
 
       {mailAlternativo1 && (
         <div style={{ marginBottom: "10px" }}>
           <strong>Email:</strong> {mailAlternativo1}
         </div>
       )}
-
+      <hr />
       {telefonoAlternativo1 && (
         <div style={{ marginBottom: "10px" }}>
           <strong>Teléfono:</strong> {telefonoAlternativo1}
         </div>
       )}
+      <hr />
       <div style={{ marginBottom: "10px" }}>
         <strong>Provincia:</strong> {provincia}
       </div>
+      <hr />
       <div style={{ marginBottom: "10px" }}>
         <strong>Ciudad:</strong> {ciudad}
       </div>
-
+      <hr />
       <div style={{ marginBottom: "10px" }}>
         <strong>Creado:</strong>{" "}
         {new Date(fechaDeCreacion).toLocaleDateString("es-ES", {
@@ -115,10 +132,11 @@ export default function ClientesDetail() {
           year: "numeric",
         })}
       </div>
-
+      <hr />
       <div style={{ marginBottom: "10px" }}>
         <strong>Cargado por:</strong> {Usuario.nombre} {Usuario.apellido}
       </div>
+      <hr />
       <div style={{ marginBottom: "10px" }}>
         <div style={{ marginBottom: "10px" }}>
           <strong>Modificado:</strong>{" "}
@@ -130,6 +148,7 @@ export default function ClientesDetail() {
               })
             : "Sin modificaciones"}
         </div>
+        <hr />
       </div>
     </div>
   );

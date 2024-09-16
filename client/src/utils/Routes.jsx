@@ -123,7 +123,7 @@ const AdminLayout = () => {
     if (token && !checkTokenExpiration(token)) {
       handleCheckRol();
     } else {
-      navigate("/error");
+      navigate("/");
     }
   }, [token]);
 
@@ -131,13 +131,13 @@ const AdminLayout = () => {
     if (rolData) {
       const role = rolData?.data?.rol;
       if (role === "comun") {
-        navigate("/error");
+        navigate("/");
       } else {
         setLoading(false);
       }
     }
     if (rolError || error) {
-      navigate("/error");
+      navigate("/");
     }
   }, [rolData, rolError, error, navigate]);
 

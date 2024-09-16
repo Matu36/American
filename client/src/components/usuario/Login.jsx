@@ -67,6 +67,7 @@ export default function Login({ handleCerrarModalLogin }) {
         localStorage.setItem("user", JSON.stringify(loggedUser));
         setSaved("login");
         navigate("/admin");
+        window.location.reload();
         // setShowWelcomeMessage(true);
       } else {
         setErrorMessage(

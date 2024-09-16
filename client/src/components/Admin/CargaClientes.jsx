@@ -148,9 +148,15 @@ export default function CargaClientes() {
   };
 
   return (
-    <div className="form-container1">
+    <div className="postVentaContainer1">
       <BackButton />
-      <h2 className="tituloCompo">Cargar Clientes</h2> <br />
+      <h2
+        className="tituloCompo"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        Cargar Clientes
+      </h2>{" "}
+      <br />
       <br />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -291,20 +297,21 @@ export default function CargaClientes() {
             onChange={handleChange}
             required
           />
-          <div className="form-group">
-            <label htmlFor="telefono">
-              Teléfono<span className="obligatorio">*</span>
-            </label>
-            <input
-              type="number"
-              id="telefono"
-              name="telefono"
-              value={formData.telefono}
-              onChange={(e) => handleChange(soloNumeros(e))}
-              required
-            />
-          </div>
         </div>
+        <div className="form-group">
+          <label htmlFor="telefono">
+            Teléfono<span className="obligatorio">*</span>
+          </label>
+          <input
+            type="number"
+            id="telefono"
+            name="telefono"
+            value={formData.telefono}
+            onChange={(e) => handleChange(soloNumeros(e))}
+            required
+          />
+        </div>
+
         <div className="form-group">
           <label htmlFor="contactoAlternativo">Contacto Alternativo</label>
           <input

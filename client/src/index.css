@@ -60,6 +60,7 @@ h1 {
 .tituloCompo {
   font-family: "merri";
   display: flex;
+  color: #febb00;
 }
 
 button {
@@ -2290,11 +2291,14 @@ button:focus-visible {
   }
 }
 
+
 @media (min-width: 600px) {
   .burguer {
     display: none;
   }
 }
+
+
 
 .sidebarAdmin__header {
   display: flex;
@@ -2313,7 +2317,7 @@ button:focus-visible {
 
 @media (max-width: 600px) {
   .sidebarAdmin__image {
-    max-width: 140%;
+    max-width: 100%;
     margin-top: 1.5rem;
     margin-left: -1rem;
   }
@@ -2361,13 +2365,10 @@ button:focus-visible {
   
 }
 
-@media (max-width: 600px) {
-  .user__info {
-    font-size: 14px;
-    padding: 0;
-    margin-right: 1.5rem;
-    margin-top: 5rem;
-  }
+.user__info .burguer .burguer-icon {
+  position: absolute;
+top:25px;
+  right: -120px;
 }
 
 @media (max-width: 500px) {
@@ -3342,7 +3343,8 @@ margin-top: -10px;
 }
 
 .datatable-container {
-  border: 1px solid black;
+  border: 2px solid grey;
+  margin-top: 2rem;
 }
 
 .cliente-info {
@@ -4141,6 +4143,33 @@ margin-top: -10px;
   margin-top: 1rem;
 }
 
+.postVentaContainer1 {
+  padding: 40px;
+  background-color: white;
+  
+  margin: auto;
+  font-family: "Merri", sans-serif;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 3px solid #ddd;
+  max-width: 100%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  width: 50%;
+  color: black;
+}
+
+.postVentaContainer1 .form-group {
+  width: 100%;
+  margin: auto;
+  padding: 1rem;
+  
+}
+
+.form-group input{
+  border: solid 2px gray;
+}
 
 
 .postVentaTitle {
@@ -5273,5 +5302,14 @@ margin-top: -10px;
 .bordeSINOMACH {
   border: 1px solid black;
 }
+
+.datatable-container .rdt_TableRow:nth-child(even) {
+  background-color: #ffcccc; /* Rojo claro */
+}
+
+.datatable-container .rdt_TableRow:nth-child(odd) {
+  background-color: #ffffcc; /* Amarillo claro */
+}
+
 
 /* PROBANDO DEPLOY  */

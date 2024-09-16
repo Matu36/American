@@ -124,7 +124,7 @@ export default function Clientes() {
 
   //---------------------------------FIN SPINNER ------------------------------------//
   return (
-    <div className="form-container">
+    <div className="postVentaContainer">
       <BackButton />
       <div>
         <div className="form-group" style={{ maxWidth: "40%" }}>
@@ -137,10 +137,16 @@ export default function Clientes() {
             value={search}
             autoComplete="off"
             disabled={!clientesQueryById.data}
+            style={{
+              height: "2.5rem",
+              borderRadius: "10px",
+              border: "2px solid grey",
+            }}
           />
         </div>
         {!showSpinner ? (
           <DataTable
+            className="datatable-container"
             columns={columns}
             data={clientes}
             pagination
