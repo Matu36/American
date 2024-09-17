@@ -4,7 +4,6 @@ import useAuth from "../../hooks/useAuth";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
 import BackButton from "../../UI/BackButton";
 import Select from "react-select";
-import { focusManager } from "@tanstack/react-query";
 
 export default function CotizacionEdit() {
   const { auth } = useAuth();
@@ -54,6 +53,8 @@ export default function CotizacionEdit() {
     ],
   });
 
+  console.log(formData);
+
   useEffect(() => {
     if (!isLoadingCotizacion && cotizacionDetalle) {
       // Verificar si existe cotizacionDetalle y si tiene cotizacionesIndividuales
@@ -82,7 +83,7 @@ export default function CotizacionEdit() {
         origenFabricacion: cotizacionDetalle.origenFabricacion || "",
         patentamiento: cotizacionDetalle.patentamiento || "",
         cotizacionesIndividuales: cotizaciones.map((cotizacionIndividual) => ({
-          id: cotizacionIndividual.id || "",
+          id: cotizacionIndividual.id,
           precio: cotizacionIndividual.precio || "",
           anticipo: cotizacionIndividual.anticipo || 0,
           saldoAFinanciar: cotizacionIndividual.saldoAFinanciar || 0,
@@ -175,7 +176,7 @@ export default function CotizacionEdit() {
       cotizacionesIndividuales: [
         ...formData.cotizacionesIndividuales,
         {
-          id: formData.id,
+          id: null,
           precio: "",
           anticipo: 0,
           saldoAFinanciar: 0,

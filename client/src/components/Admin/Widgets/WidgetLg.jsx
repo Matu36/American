@@ -28,7 +28,8 @@ export default function WidgetLg() {
           <tr>
             <th>Cliente</th>
             <th>Modelo</th>
-            <th>Precio</th>
+            <th>Moneda</th>
+            <th>Precio Final</th>
           </tr>
         </thead>
         <tbody>
@@ -38,9 +39,8 @@ export default function WidgetLg() {
                 {cotizacion.Cliente.nombre} {cotizacion.Cliente.apellido}
               </td>
               <td>{cotizacion.Producto.modelo}</td>
-              <td>
-                {cotizacion.moneda} {cotizacion.PrecioFinal}
-              </td>
+              <td>U$D</td>
+              <td>{cotizacion.CotizacionIndividuals[0]?.PrecioFinal}</td>
             </tr>
           ))}
         </tbody>

@@ -452,15 +452,17 @@ const putCotizaciones = async (req, res) => {
         );
     }
 
+    // Verificar la existencia del usuario
     const usuario = await Usuarios.findOne({
       where: { id: idUsuario },
       attributes: ["nombre", "apellido", "codigo"],
     });
 
     if (!usuario) {
-      throw "Usuario no encontrado";
+      throw new Error("Usuario no encontrado");
     }
 
+    // Buscar la cotización por ID
     let cotizacion = await Cotizaciones.findOne({ where: { id } });
 
     let cliente;
@@ -474,6 +476,7 @@ const putCotizaciones = async (req, res) => {
       // Crear la nueva cotización
       cotizacion = await Cotizaciones.create(updatedFields);
 
+      // Verificar e insertar cotizaciones individuales
       if (cotizacionesIndividuales && cotizacionesIndividuales.length > 0) {
         const cotizacionesIndividualesConId = cotizacionesIndividuales.map(
           (cotizacionIndividual) => ({
@@ -491,7 +494,7 @@ const putCotizaciones = async (req, res) => {
         });
 
         if (!cliente) {
-          throw "Cliente no encontrado";
+          throw new Error("Cliente no encontrado");
         }
 
         producto = await Productos.findOne({
@@ -500,7 +503,7 @@ const putCotizaciones = async (req, res) => {
         });
 
         if (!producto) {
-          throw "Producto no encontrado";
+          throw new Error("Producto no encontrado");
         }
 
         // Crear el historial para cada cotización individual
@@ -561,11 +564,25 @@ const putCotizaciones = async (req, res) => {
     // Identificar cambios
     const cotizacionesIndividualesConId = cotizacionesIndividuales.map(
       (cotizacionIndividual) => ({
-        idCotizacion: cotizacion.id, // Usa el id existente
+        idCotizacion: cotizacion.id,
         ...cotizacionIndividual,
       })
     );
 
+    // Filtrar las cotizaciones individuales que deben ser eliminadas
+    const cotizacionesAEliminar = cotizacionesActuales.filter(
+      (actual) =>
+        !cotizacionesIndividualesConId.some((nueva) => nueva.id === actual.id)
+    );
+
+    if (cotizacionesAEliminar.length > 0) {
+      // Eliminar las cotizaciones individuales que no están en la lista de actualización
+      await CotizacionIndividual.destroy({
+        where: { id: cotizacionesAEliminar.map((c) => c.id) },
+      });
+    }
+
+    // Filtrar las cotizaciones individuales que deben ser actualizadas o agregadas
     const cotizacionesAActualizar = cotizacionesIndividualesConId.filter(
       (nueva) => {
         const actual = cotizacionesActualesMap.get(nueva.id);
@@ -587,11 +604,22 @@ const putCotizaciones = async (req, res) => {
     );
 
     if (cotizacionesAActualizar.length > 0) {
-      // Eliminar las cotizaciones individuales existentes
-      await CotizacionIndividual.destroy({ where: { idCotizacion: id } });
-
-      // Crear nuevas cotizaciones individuales
-      await CotizacionIndividual.bulkCreate(cotizacionesAActualizar);
+      // Crear o actualizar cotizaciones individuales
+      await CotizacionIndividual.bulkCreate(cotizacionesAActualizar, {
+        updateOnDuplicate: [
+          "precio",
+          "anticipo",
+          "saldoAFinanciar",
+          "IVA",
+          "moneda",
+          "interes",
+          "saldo",
+          "cuotas",
+          "cuotaValor",
+          "saldoConInteres",
+          "PrecioFinal",
+        ],
+      });
 
       // Si no se ha definido previamente, obtener cliente y producto
       if (!cliente) {
@@ -601,7 +629,7 @@ const putCotizaciones = async (req, res) => {
         });
 
         if (!cliente) {
-          throw "Cliente no encontrado";
+          throw new Error("Cliente no encontrado");
         }
       }
 
@@ -612,7 +640,7 @@ const putCotizaciones = async (req, res) => {
         });
 
         if (!producto) {
-          throw "Producto no encontrado";
+          throw new Error("Producto no encontrado");
         }
       }
 
@@ -634,12 +662,12 @@ const putCotizaciones = async (req, res) => {
           codigoCotizacion: cotizacion.codigoCotizacion,
           fechaDeCreacion: cotizacion.fechaDeCreacion,
           fechaModi: cotizacion.fechaModi,
-          nombreCliente: cliente ? cliente.nombre : "",
-          apellidoCliente: cliente ? cliente.apellido : "",
-          mailCliente: cliente ? cliente.mail : "",
-          familia: producto ? producto.familia : "",
-          marca: producto ? producto.marca : "",
-          modelo: producto ? producto.modelo : "",
+          nombreCliente: cliente.nombre || "",
+          apellidoCliente: cliente.apellido || "",
+          mailCliente: cliente.mail || "",
+          familia: producto.familia || "",
+          marca: producto.marca || "",
+          modelo: producto.modelo || "",
           estado: cotizacion.estado,
           apellidoVendedor: usuario.apellido || "",
           nombreVendedor: usuario.nombre || "",
@@ -649,10 +677,10 @@ const putCotizaciones = async (req, res) => {
       }
     }
 
-    return res.send(cotizacion);
+    return res.status(200).send(cotizacion);
   } catch (error) {
-    console.log(error);
-    return res.status(500).send("Error interno del servidor.");
+    console.error("Error en putCotizaciones:", error.message);
+    return res.status(500).send({ error: error.message });
   }
 };
 
@@ -733,9 +761,12 @@ const updateCotizacionEstado = async (req, res) => {
 
 const sumarPreciosFinales = async (req, res) => {
   try {
-    const sumaPreciosFinalesUSD = await Cotizaciones.sum("PrecioFinal", {
-      where: { moneda: "USD" },
-    });
+    const sumaPreciosFinalesUSD = await cotizacionesIndividuales.sum(
+      "PrecioFinal",
+      {
+        where: { moneda: "USD" },
+      }
+    );
 
     const sumaPreciosFinalesARS = await Cotizaciones.sum("PrecioFinal", {
       where: { moneda: "$" },
@@ -968,8 +999,11 @@ const getUltimasCotizaciones = async (req, res) => {
           model: Productos,
           attributes: ["modelo"],
         },
+        {
+          model: CotizacionIndividual,
+          attributes: ["PrecioFinal"],
+        },
       ],
-      attributes: ["PrecioFinal", "moneda"],
     });
 
     return res.status(200).json(cotizaciones);
@@ -1014,18 +1048,45 @@ const getCotizacionesSum = async (req, res) => {
       usuario.rol === true ||
       (usuario.rol === false && usuario.baneado === true)
     ) {
+      // Obtener todas las cotizaciones
       cotizacionesCotizaciones = await Cotizaciones.findAll({
         where: { estado: 1 },
+        include: [
+          {
+            model: CotizacionIndividual,
+            attributes: ["PrecioFinal", "moneda"],
+          },
+        ],
       });
+
       cotizacionesVentas = await Cotizaciones.findAll({
         where: { estado: 2 },
+        include: [
+          {
+            model: CotizacionIndividual,
+            attributes: ["PrecioFinal", "moneda"],
+          },
+        ],
       });
     } else {
       cotizacionesCotizaciones = await Cotizaciones.findAll({
         where: { idUsuario, estado: 1 },
+        include: [
+          {
+            model: CotizacionIndividual,
+            attributes: ["PrecioFinal", "moneda"],
+          },
+        ],
       });
+
       cotizacionesVentas = await Cotizaciones.findAll({
         where: { idUsuario, estado: 2 },
+        include: [
+          {
+            model: CotizacionIndividual,
+            attributes: ["PrecioFinal", "moneda"],
+          },
+        ],
       });
     }
 
@@ -1042,26 +1103,32 @@ const getCotizacionesSum = async (req, res) => {
       },
     };
 
+    // Calcular total para cotizaciones
     cotizacionesCotizaciones.forEach((cotizacion) => {
-      const { PrecioFinal, moneda } = cotizacion;
-      const precioFinal = parseFloat(PrecioFinal);
+      cotizacion.CotizacionIndividuals.forEach((indiv) => {
+        const { PrecioFinal, moneda } = indiv;
+        const precioFinal = parseFloat(PrecioFinal);
 
-      if (moneda === "$") {
-        result.COTIZACIONES.totalPesos += precioFinal;
-      } else if (moneda === "USD") {
-        result.COTIZACIONES.totalUSD += precioFinal;
-      }
+        if (moneda === "$") {
+          result.COTIZACIONES.totalPesos += precioFinal;
+        } else if (moneda === "USD") {
+          result.COTIZACIONES.totalUSD += precioFinal;
+        }
+      });
     });
 
+    // Calcular total para ventas
     cotizacionesVentas.forEach((cotizacion) => {
-      const { PrecioFinal, moneda } = cotizacion;
-      const precioFinal = parseFloat(PrecioFinal);
+      cotizacion.CotizacionIndividuals.forEach((indiv) => {
+        const { PrecioFinal, moneda } = indiv;
+        const precioFinal = parseFloat(PrecioFinal);
 
-      if (moneda === "$") {
-        result.VENTAS.totalPesos += precioFinal;
-      } else if (moneda === "USD") {
-        result.VENTAS.totalUSD += precioFinal;
-      }
+        if (moneda === "$") {
+          result.VENTAS.totalPesos += precioFinal;
+        } else if (moneda === "USD") {
+          result.VENTAS.totalUSD += precioFinal;
+        }
+      });
     });
 
     return res.status(200).json(result);
