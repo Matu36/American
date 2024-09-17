@@ -373,9 +373,6 @@ const getUsuariosConRolFalse = async (req, res) => {
     );
     const idUsuario = decodedToken.id;
 
-    console.log("Token:", token);
-    console.log("ID de usuario decodificado:", idUsuario);
-
     if (!idUsuario) {
       return res.status(400).json({ error: "Se requiere el ID de usuario" });
     }
@@ -384,8 +381,6 @@ const getUsuariosConRolFalse = async (req, res) => {
     const usuarioAutenticado = await Usuarios.findByPk(idUsuario, {
       attributes: ["rol"],
     });
-
-    console.log("Usuario autenticado:", usuarioAutenticado);
 
     if (!usuarioAutenticado) {
       return res.status(404).json({ error: "Usuario no encontrado" });
@@ -396,7 +391,6 @@ const getUsuariosConRolFalse = async (req, res) => {
     let usuarios;
 
     if (rol === true) {
-      // El usuario es admin, trae todos los usuarios
       usuarios = await Usuarios.findAll({
         attributes: ["id", "nombre", "apellido"],
       });
@@ -408,13 +402,16 @@ const getUsuariosConRolFalse = async (req, res) => {
       });
     }
 
-    console.log("Usuarios encontrados:", usuarios);
-
     if (!usuarios || usuarios.length === 0) {
       return res.status(404).json({ error: "No se encontraron usuarios" });
     }
 
-    return res.status(200).json(usuarios);
+    const usuariosConIdCortado = usuarios.map((usuario) => ({
+      ...usuario.toJSON(),
+      id: usuario.id.substring(0, 5),
+    }));
+
+    return res.status(200).json(usuariosConIdCortado);
   } catch (error) {
     console.error(
       "Error al obtener usuarios con rol false:",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { useUsuario } from "../../hooks/useUsuarios";
 import { useHistorial } from "../../hooks/useHistorial";
@@ -9,10 +9,33 @@ import HistorialFechaExcel from "./Excel/HistorialFechaExcel";
 import HistorialProductoExcel from "./Excel/HistorialProductoExcel";
 import HistorialVendedorExcel from "./Excel/HistorialVendedorExcel";
 import BackButton from "../../UI/BackButton";
+import { useNavigate } from "react-router-dom";
 
 export default function Historial() {
   const token = localStorage.getItem("token");
   const idUsuario = token;
+
+  const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
+
+  const navigate = useNavigate();
+
+  const handleCheckRol = async () => {
+    try {
+      await checkRol({ idUsuario });
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        navigate("/");
+      }
+    }
+  };
+
+  const role = rolData?.data.rol;
+
+  useEffect(() => {
+    if (idUsuario) {
+      handleCheckRol();
+    }
+  }, [idUsuario]);
 
   const { data: vendedoresData, isLoading: isLoadingVendedores } =
     useUsuario(idUsuario).vendedoresQuery;
@@ -91,7 +114,6 @@ export default function Historial() {
   const handleNumeroCotizacionChange = (e) => {
     setNumeroCotizacion(e.target.value);
   };
-  console.log(vendedoresData);
 
   const options = vendedoresData?.map((vendedor) => ({
     value: vendedor.id,
@@ -121,7 +143,7 @@ export default function Historial() {
   return (
     <div className="postVentaContainer1">
       <BackButton />
-      <HistorialRanking />
+      {role === "administrador" && <HistorialRanking />}
       <h2>Historial</h2>
       {isLoadingVendedores ? (
         <p>Cargando...</p>
