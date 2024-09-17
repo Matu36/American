@@ -281,7 +281,7 @@ export default function Historial() {
                 </span>
                 <span>
                   <strong>Notas de la Cotización:</strong>{" "}
-                  {detalle.notasUsuario} {detalle.notasUsuario}
+                  {detalle.notasUsuario}
                 </span>
               </div>
               <br />
@@ -415,7 +415,7 @@ export default function Historial() {
                 </span>
                 <span style={{ display: "block", marginBottom: "8px" }}>
                   <strong>Notas de la Cotización:</strong>{" "}
-                  {detalle?.notasUsuario} {detalle?.notasUsuario}
+                  {detalle?.notasUsuario}
                 </span>
               </div>
 
@@ -575,7 +575,7 @@ export default function Historial() {
                   </span>
                   <span style={{ display: "block", marginBottom: "8px" }}>
                     <strong>Notas de la Cotización:</strong>{" "}
-                    {cotizacion?.notasUsuario} {cotizacion?.notasUsuario}
+                    {cotizacion?.notasUsuario}
                   </span>
                 </div>
               </div>

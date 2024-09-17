@@ -1267,17 +1267,15 @@ const getCotizacionesPorModelo = async (req, res) => {
       return res.status(400).json({ error: "El modelo es requerido" });
     }
 
-    // Filtrar cotizaciones por modelo y, si el rol es falso, por el usuario
-    let filtroUsuario = {};
-
-    if (usuario.rol === false) {
-      filtroUsuario = { idUsuario: idUsuario };
-    }
+    // Determinar si el rol permite ver todas las cotizaciones o solo las del usuario
+    const whereClause = usuario.rol ? {} : { idUsuario };
 
     const cotizaciones = await Cotizaciones.findAll({
+      where: whereClause, // Aplica el filtro de rol
       include: [
         {
           model: Productos,
+          as: "Producto",
           attributes: ["familia", "marca", "modelo"],
           where: {
             modelo: {
@@ -1288,9 +1286,6 @@ const getCotizacionesPorModelo = async (req, res) => {
         {
           model: Usuarios,
           attributes: ["nombre", "apellido"],
-          where: {
-            id: idUsuario,
-          },
         },
         {
           model: Clientes,
