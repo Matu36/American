@@ -288,9 +288,8 @@ export default function CotizacionEdit() {
 
   return (
     <div className="postVentaContainer">
+      <BackButton />
       <form onSubmit={handleSubmit}>
-        <BackButton />
-
         <div>
           <h2 className="tituloCompo">Editar Cotización</h2> <br />
         </div>
