@@ -218,11 +218,25 @@ export default function Historial() {
                   {detalle.PrecioFinal}
                 </span>
                 <span>
-                  <strong>Fecha de Creación:</strong> {detalle.fechaDeCreacion}
+                  <strong>Fecha de Creación:</strong>{" "}
+                  {new Date(detalle.fechaDeCreacion).toLocaleDateString(
+                    "es-ES",
+                    {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    }
+                  )}
                 </span>
                 <span>
-                  <strong>Fecha de Modificación:</strong> {detalle.fechaModi}
+                  <strong>Fecha de Modificación:</strong>{" "}
+                  {new Date(detalle.fechaModi).toLocaleDateString("es-ES", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  })}
                 </span>
+
                 <span>
                   <strong>Producto:</strong> {detalle.familia} {detalle.marca}{" "}
                   {detalle.modelo}
@@ -296,47 +310,59 @@ export default function Historial() {
                   color: detalle.estado === 2 ? "lightgreen" : "inherit",
                 }}
               >
+                {detalle.CotizacionIndividuals?.map((individual, index) => (
+                  <div key={index}>
+                    <span>
+                      <strong>Producto #{index + 1}:</strong>{" "}
+                      {detalle.Producto?.marca} {detalle.Producto?.modelo}
+                    </span>
+                    <span>
+                      <strong>Precio de Venta:</strong> {individual.moneda}{" "}
+                      {individual.precio}
+                    </span>
+                    <span>
+                      <strong>Anticipo:</strong> {individual.moneda}{" "}
+                      {individual.anticipo}
+                    </span>
+                    <span>
+                      <strong>Saldo a Financiar:</strong> {individual.moneda}{" "}
+                      {individual.saldoAFinanciar}
+                    </span>
+                    <span>
+                      <strong>Financiación:</strong> {individual.cuotas} Pagos
+                      de {individual.moneda} {individual.cuotaValor}
+                    </span>
+                    <span>
+                      <strong>IVA:</strong> {individual.IVA}
+                    </span>
+                    <span>
+                      <strong>Precio Final:</strong> {individual.moneda}{" "}
+                      {individual.PrecioFinal}
+                    </span>
+                  </div>
+                ))}
                 <span>
-                  <strong>Número de Cotización:</strong>{" "}
-                  {detalle.codigoCotizacion}
+                  <strong>Fecha de Modificación:</strong>{" "}
+                  {new Date(detalle.fechaModi).toLocaleDateString()}
                 </span>
                 <span>
-                  <strong>Precio de Venta:</strong> {detalle.moneda}{" "}
-                  {detalle.precio}
+                  <strong>Producto:</strong> {detalle.Producto?.marca}{" "}
+                  {detalle.Producto?.modelo}
                 </span>
                 <span>
-                  <strong>Anticipo:</strong> {detalle.moneda} {detalle.anticipo}
+                  <strong>Cliente:</strong> {detalle.Cliente?.nombre}{" "}
+                  {detalle.Cliente?.apellido}
                 </span>
                 <span>
-                  <strong>Saldo a Financiar:</strong> {detalle.moneda}{" "}
-                  {detalle.saldoAFinanciar}
+                  <strong>Usuario:</strong> {detalle.Usuario?.nombre}{" "}
+                  {detalle.Usuario?.apellido}
                 </span>
                 <span>
-                  <strong>Financiación:</strong> {detalle.cuotas} Cuotas de{" "}
-                  {detalle.moneda} {detalle.cuotaValor}
-                </span>
-                <span>
-                  <strong>IVA:</strong> {detalle.IVA}
-                </span>
-                <span>
-                  <strong>Precio Final:</strong> {detalle.moneda}{" "}
-                  {detalle.PrecioFinal}
-                </span>
-                <span>
-                  <strong>Fecha de Creación:</strong> {detalle.fechaDeCreacion}
-                </span>
-                <span>
-                  <strong>Fecha de Modificación:</strong> {detalle.fechaModi}
-                </span>
-                <span>
-                  <strong>Producto:</strong> {detalle.Producto.familia}{" "}
-                  {detalle.Producto.marca} {detalle.Producto.modelo}
-                </span>
-                <span>
-                  <strong>Cliente:</strong> {detalle.Cliente.nombre}{" "}
-                  {detalle.Cliente.apellido}
+                  <strong>Notas de la Cotización:</strong>{" "}
+                  {detalle?.notasUsuario} {detalle?.notasUsuario}
                 </span>
               </div>
+
               <br />
             </div>
           ))
@@ -418,52 +444,67 @@ export default function Historial() {
                   color: cotizacion.estado === 2 ? "lightgreen" : "inherit",
                 }}
               >
-                <span>
-                  <strong>Número de Cotización:</strong>{" "}
-                  {cotizacion.codigoCotizacion}
-                </span>
-                <span>
-                  <strong>Precio de Venta:</strong> {cotizacion.moneda}{" "}
-                  {cotizacion.precio}
-                </span>
-                <span>
-                  <strong>Anticipo:</strong> {cotizacion.moneda}{" "}
-                  {cotizacion.anticipo}
-                </span>
-                <span>
-                  <strong>Saldo a Financiar:</strong> {cotizacion.moneda}{" "}
-                  {cotizacion.saldoAFinanciar}
-                </span>
-                <span>
-                  <strong>Financiación:</strong> {cotizacion.cuotas} Cuotas de{" "}
-                  {cotizacion.moneda} {cotizacion.cuotaValor}
-                </span>
-                <span>
-                  <strong>IVA:</strong> {cotizacion.IVA}
-                </span>
-                <span>
-                  <strong>Precio Final:</strong> {cotizacion.moneda}{" "}
-                  {cotizacion.PrecioFinal}
-                </span>
-                <span>
-                  <strong>Fecha de Creación:</strong>{" "}
-                  {cotizacion.fechaDeCreacion}
-                </span>
-                <span>
-                  <strong>Fecha de Modificación:</strong> {cotizacion.fechaModi}
-                </span>
-                <span>
-                  <strong>Producto:</strong> {cotizacion.Producto?.marca}{" "}
-                  {cotizacion.Producto?.modelo}
-                </span>
-                <span>
-                  <strong>Cliente:</strong> {cotizacion.Cliente?.nombre}{" "}
-                  {cotizacion.Cliente?.apellido}
-                </span>
-                <span>
-                  <strong>Usuario:</strong> {cotizacion.Usuario?.nombre}{" "}
-                  {cotizacion.Usuario?.apellido}
-                </span>
+                <div>
+                  <span>
+                    <strong>Número de Cotización:</strong>{" "}
+                    {cotizacion.codigoCotizacion}
+                  </span>
+
+                  {cotizacion.CotizacionIndividuals?.map(
+                    (individual, index) => (
+                      <div key={index}>
+                        <span>
+                          <strong>Producto #{index + 1}:</strong>{" "}
+                          {cotizacion.Producto?.marca}{" "}
+                          {cotizacion.Producto?.modelo}
+                        </span>
+                        <span>
+                          <strong>Precio de Venta:</strong> {individual.moneda}{" "}
+                          {individual.precio}
+                        </span>
+                        <span>
+                          <strong>Anticipo:</strong> {individual.moneda}{" "}
+                          {individual.anticipo}
+                        </span>
+                        <span>
+                          <strong>Saldo a Financiar:</strong>{" "}
+                          {individual.moneda} {individual.saldoAFinanciar}
+                        </span>
+                        <span>
+                          <strong>Financiación:</strong> {individual.cuotas}{" "}
+                          Pagos de {individual.moneda} {individual.cuotaValor}
+                        </span>
+                        <span>
+                          <strong>IVA:</strong> {individual.IVA}
+                        </span>
+                        <span>
+                          <strong>Precio Final:</strong> {individual.moneda}{" "}
+                          {individual.PrecioFinal}
+                        </span>
+                      </div>
+                    )
+                  )}
+                  <span>
+                    <strong>Fecha de Modificación:</strong>{" "}
+                    {new Date(cotizacion.fechaModi).toLocaleDateString()}
+                  </span>
+                  <span>
+                    <strong>Producto:</strong> {cotizacion.Producto?.marca}{" "}
+                    {cotizacion.Producto?.modelo}
+                  </span>
+                  <span>
+                    <strong>Cliente:</strong> {cotizacion.Cliente?.nombre}{" "}
+                    {cotizacion.Cliente?.apellido}
+                  </span>
+                  <span>
+                    <strong>Usuario:</strong> {cotizacion.Usuario?.nombre}{" "}
+                    {cotizacion.Usuario?.apellido}
+                  </span>
+                  <span>
+                    <strong>Notas de la Cotización:</strong>{" "}
+                    {cotizacion?.notasUsuario} {cotizacion?.notasUsuario}
+                  </span>
+                </div>
               </div>
               <br />
             </div>
