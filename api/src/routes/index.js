@@ -142,7 +142,11 @@ router.get("/usuarios/lastFive", check.auth, getLastLoggedInUsers);
 router.get("/usuarios/chart", check.auth, getUsuariosChart);
 router.get("/usuarios/detail/:idUsuario", check.auth, obtenerDetalleUsuario);
 router.get("/usuarios/all", check.auth, getAllUsers);
-router.get("/usuarios/vendedores", check.auth, getUsuariosConRolFalse);
+router.get(
+  "/usuarios/vendedores/:idUsuario",
+  check.auth,
+  getUsuariosConRolFalse
+);
 router.put("/usuarios/recoverpass", resetPassword);
 router.get("/productos/getAll", getProductos);
 router.get("/productos/getParaCotizar", check.auth, getProductosParaCotizar);

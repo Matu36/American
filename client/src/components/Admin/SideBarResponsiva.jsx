@@ -105,7 +105,7 @@ const SideBarResponsiva = ({ handleCerrarModalSideBar }) => {
         {
           label: "Historial Cotizaciones",
           path: "/admin/cotizaciones/historial",
-          roles: ["administrador", "gerente"],
+          roles: ["administrador", "gerente", "vendedor"],
         },
       ],
       roles: ["administrador", "vendedor", "gerente"],

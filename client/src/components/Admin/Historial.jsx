@@ -11,8 +11,12 @@ import HistorialVendedorExcel from "./Excel/HistorialVendedorExcel";
 import BackButton from "../../UI/BackButton";
 
 export default function Historial() {
+  const token = localStorage.getItem("token");
+  const idUsuario = token;
+
   const { data: vendedoresData, isLoading: isLoadingVendedores } =
-    useUsuario().vendedoresQuery;
+    useUsuario(idUsuario).vendedoresQuery;
+
   const { data: productos } = useProducto().productosParaCotizarQuery;
   const [selectedProducto, setSelectedProducto] = useState(null);
 
@@ -87,6 +91,7 @@ export default function Historial() {
   const handleNumeroCotizacionChange = (e) => {
     setNumeroCotizacion(e.target.value);
   };
+  console.log(vendedoresData);
 
   const options = vendedoresData?.map((vendedor) => ({
     value: vendedor.id,
@@ -114,7 +119,7 @@ export default function Historial() {
   }));
 
   return (
-    <div className="form-container1">
+    <div className="postVentaContainer1">
       <BackButton />
       <HistorialRanking />
       <h2>Historial</h2>
@@ -244,6 +249,10 @@ export default function Historial() {
                 <span>
                   <strong>Cliente:</strong> {detalle.nombreCliente}{" "}
                   {detalle.apellidoCliente}
+                </span>
+                <span>
+                  <strong>Notas de la Cotización:</strong>{" "}
+                  {detalle.notasUsuario} {detalle.notasUsuario}
                 </span>
               </div>
               <br />

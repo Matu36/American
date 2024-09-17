@@ -360,25 +360,66 @@ const obtenerDetalleUsuario = async (req, res) => {
 
 const getUsuariosConRolFalse = async (req, res) => {
   try {
-    const usuarios = await Usuarios.findAll({
-      attributes: ["id", "nombre", "apellido"],
-    });
+    const token = req.headers.authorization;
 
-    if (!usuarios || usuarios.length === 0) {
-      return res
-        .status(404)
-        .json({ error: "No se encontraron usuarios con rol false" });
+    if (!token) {
+      return res.status(401).json({ error: "Token no proporcionado" });
     }
 
-    // Recorrer los usuarios y modificar el id para que solo tenga los primeros 5 caracteres
-    const usuariosConIdCortado = usuarios.map((usuario) => ({
-      ...usuario.toJSON(),
-      id: usuario.id.substring(0, 5),
-    }));
+    // Decodificar el token
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+    const idUsuario = decodedToken.id;
 
-    return res.status(200).json(usuariosConIdCortado);
+    console.log("Token:", token);
+    console.log("ID de usuario decodificado:", idUsuario);
+
+    if (!idUsuario) {
+      return res.status(400).json({ error: "Se requiere el ID de usuario" });
+    }
+
+    // Buscar el usuario para obtener su rol
+    const usuarioAutenticado = await Usuarios.findByPk(idUsuario, {
+      attributes: ["rol"],
+    });
+
+    console.log("Usuario autenticado:", usuarioAutenticado);
+
+    if (!usuarioAutenticado) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    const rol = usuarioAutenticado.rol;
+
+    let usuarios;
+
+    if (rol === true) {
+      // El usuario es admin, trae todos los usuarios
+      usuarios = await Usuarios.findAll({
+        attributes: ["id", "nombre", "apellido"],
+      });
+    } else {
+      // El usuario no es admin, trae solo su propio usuario
+      usuarios = await Usuarios.findAll({
+        where: { id: idUsuario },
+        attributes: ["id", "nombre", "apellido"],
+      });
+    }
+
+    console.log("Usuarios encontrados:", usuarios);
+
+    if (!usuarios || usuarios.length === 0) {
+      return res.status(404).json({ error: "No se encontraron usuarios" });
+    }
+
+    return res.status(200).json(usuarios);
   } catch (error) {
-    console.error("Error al obtener usuarios con rol false:", error);
+    console.error(
+      "Error al obtener usuarios con rol false:",
+      error.message || error
+    );
     return res
       .status(500)
       .json({ error: "Error al obtener usuarios con rol false" });
