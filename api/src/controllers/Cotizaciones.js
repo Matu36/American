@@ -1141,22 +1141,51 @@ const getCotizacionesSum = async (req, res) => {
 // FUNCION QUE FILTRA POR FECHAS //
 
 const filtrarCotizacionesPorFecha = async (req, res) => {
-  const { fechaDesde, fechaHasta } = req.body;
-
-  if (!fechaDesde || !fechaHasta) {
-    return res.status(400).json({ message: "Las fechas son requeridas" });
-  }
-
-  const startDate = new Date(fechaDesde);
-  const endDate = new Date(fechaHasta);
-  endDate.setDate(endDate.getDate() + 1);
-
   try {
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).json({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+    const idUsuario = decodedToken.id;
+
+    if (!idUsuario) {
+      return res.status(400).json({ error: "Se requiere el ID de usuario" });
+    }
+
+    const usuario = await Usuarios.findByPk(idUsuario);
+
+    if (!usuario) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    const { fechaDesde, fechaHasta } = req.body;
+
+    if (!fechaDesde || !fechaHasta) {
+      return res.status(400).json({ message: "Las fechas son requeridas" });
+    }
+
+    const startDate = new Date(fechaDesde);
+    const endDate = new Date(fechaHasta);
+    endDate.setDate(endDate.getDate() + 1);
+
+    let filtroUsuario = {};
+
+    if (usuario.rol === false) {
+      filtroUsuario = { idUsuario: idUsuario };
+    }
+
     const cotizaciones = await Cotizaciones.findAll({
       where: {
         fechaDeCreacion: {
           [Op.between]: [startDate, endDate],
         },
+        ...filtroUsuario,
       },
       include: [
         {
@@ -1207,10 +1236,42 @@ const filtrarCotizacionesPorFecha = async (req, res) => {
 
 const getCotizacionesPorModelo = async (req, res) => {
   try {
+    // Obtener y verificar el token de autorización
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).json({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+    const idUsuario = decodedToken.id;
+
+    if (!idUsuario) {
+      return res.status(400).json({ error: "Se requiere el ID de usuario" });
+    }
+
+    // Buscar el usuario para obtener su rol
+    const usuario = await Usuarios.findByPk(idUsuario);
+
+    if (!usuario) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    // Obtener el modelo del cuerpo de la solicitud
     const { modelo } = req.body;
 
     if (!modelo) {
       return res.status(400).json({ error: "El modelo es requerido" });
+    }
+
+    // Filtrar cotizaciones por modelo y, si el rol es falso, por el usuario
+    let filtroUsuario = {};
+
+    if (usuario.rol === false) {
+      filtroUsuario = { idUsuario: idUsuario };
     }
 
     const cotizaciones = await Cotizaciones.findAll({
@@ -1227,6 +1288,9 @@ const getCotizacionesPorModelo = async (req, res) => {
         {
           model: Usuarios,
           attributes: ["nombre", "apellido"],
+          where: {
+            id: idUsuario,
+          },
         },
         {
           model: Clientes,
@@ -1259,6 +1323,7 @@ const getCotizacionesPorModelo = async (req, res) => {
       });
     }
 
+    // Retornar las cotizaciones encontradas
     return res.status(200).json(cotizaciones);
   } catch (error) {
     console.error("Error al obtener las cotizaciones por modelo:", error);

@@ -17,7 +17,17 @@ const postCotizacion = async (data) => {
 };
 
 const postCotisPorFecha = async (data) => {
-  return await CotizacionesAPI.post(`fecha`, data);
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    throw new Error("Token no proporcionado");
+  }
+
+  return await CotizacionesAPI.post("/fecha/", data, {
+    headers: {
+      Authorization: `${token}`,
+    },
+  });
 };
 
 const postCotizacionState2 = async (data) => {

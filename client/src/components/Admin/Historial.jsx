@@ -144,7 +144,8 @@ export default function Historial() {
     <div className="postVentaContainer1">
       <BackButton />
       {role === "administrador" && <HistorialRanking />}
-      <h2>Historial</h2>
+      <h2 className="tituloCompo">Historial</h2>
+      <br />
       {isLoadingVendedores ? (
         <p>Cargando...</p>
       ) : (
@@ -202,10 +203,12 @@ export default function Historial() {
                       detalle.estado === 2
                         ? "0 0 10px green, 0 0 20px green, 0 0 30px green"
                         : "none",
+                    textDecoration: "underline",
+                    textDecorationColor: "#e6b800",
                   }}
                 >
                   {detalle.estado === 1
-                    ? "Detalles de la Cotización:"
+                    ? "Detalle de la Cotización:"
                     : "Cotización Concretada"}
                 </strong>
               </p>
@@ -213,8 +216,12 @@ export default function Historial() {
               <div
                 style={{
                   display: "flex",
-                  flexWrap: "wrap",
-                  gap: "10px",
+                  flexDirection: "column",
+                  gap: "20px",
+                  padding: "20px",
+                  backgroundColor: "#f9f9f9",
+                  borderRadius: "10px",
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
                   color: detalle.estado === 2 ? "lightgreen" : "inherit",
                 }}
               >
@@ -324,11 +331,13 @@ export default function Historial() {
                       detalle.estado === 2
                         ? "0 0 10px green, 0 0 20px green, 0 0 30px green"
                         : "none",
+                    textDecoration: "underline",
+                    textDecorationColor: "#e6b800",
                   }}
                 >
                   {" "}
                   {detalle.estado === 1
-                    ? "Detalles de la Cotización:"
+                    ? "Detalle de la Cotización:"
                     : "Cotización Concretada"}
                 </strong>
               </p>
@@ -336,59 +345,75 @@ export default function Historial() {
               <div
                 style={{
                   display: "flex",
-                  flexWrap: "wrap",
-                  gap: "10px",
+                  flexDirection: "column",
+                  gap: "20px",
+                  padding: "20px",
+                  backgroundColor: "#f9f9f9",
+                  borderRadius: "10px",
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
                   color: detalle.estado === 2 ? "lightgreen" : "inherit",
                 }}
               >
                 {detalle.CotizacionIndividuals?.map((individual, index) => (
-                  <div key={index}>
-                    <span>
-                      <strong>Producto #{index + 1}:</strong>{" "}
+                  <div
+                    key={index}
+                    style={{
+                      marginBottom: "15px",
+                      padding: "15px",
+                      borderBottom: "1px solid #ddd",
+                    }}
+                  >
+                    <span style={{ display: "block", marginBottom: "8px" }}>
+                      <strong>Número de Cotización:</strong>{" "}
+                      {detalle.codigoCotizacion}
+                    </span>
+                    <span style={{ display: "block", marginBottom: "8px" }}>
+                      <strong>Producto{index + 1}:</strong>{" "}
                       {detalle.Producto?.marca} {detalle.Producto?.modelo}
                     </span>
-                    <span>
+                    <span style={{ display: "block", marginBottom: "8px" }}>
                       <strong>Precio de Venta:</strong> {individual.moneda}{" "}
                       {individual.precio}
                     </span>
-                    <span>
+                    <span style={{ display: "block", marginBottom: "8px" }}>
                       <strong>Anticipo:</strong> {individual.moneda}{" "}
                       {individual.anticipo}
                     </span>
-                    <span>
+                    <span style={{ display: "block", marginBottom: "8px" }}>
                       <strong>Saldo a Financiar:</strong> {individual.moneda}{" "}
                       {individual.saldoAFinanciar}
                     </span>
-                    <span>
+                    <span style={{ display: "block", marginBottom: "8px" }}>
                       <strong>Financiación:</strong> {individual.cuotas} Pagos
                       de {individual.moneda} {individual.cuotaValor}
                     </span>
-                    <span>
+                    <span style={{ display: "block", marginBottom: "8px" }}>
                       <strong>IVA:</strong> {individual.IVA}
                     </span>
-                    <span>
+                    <span style={{ display: "block", marginBottom: "8px" }}>
                       <strong>Precio Final:</strong> {individual.moneda}{" "}
                       {individual.PrecioFinal}
                     </span>
                   </div>
                 ))}
-                <span>
+                <span style={{ display: "block", marginBottom: "8px" }}>
+                  <strong>Fecha de Creación:</strong>{" "}
+                  {new Date(detalle.fechaDeCreacion).toLocaleDateString()}
+                </span>
+                <span style={{ display: "block", marginBottom: "8px" }}>
                   <strong>Fecha de Modificación:</strong>{" "}
                   {new Date(detalle.fechaModi).toLocaleDateString()}
                 </span>
-                <span>
-                  <strong>Producto:</strong> {detalle.Producto?.marca}{" "}
-                  {detalle.Producto?.modelo}
-                </span>
-                <span>
+
+                <span style={{ display: "block", marginBottom: "8px" }}>
                   <strong>Cliente:</strong> {detalle.Cliente?.nombre}{" "}
                   {detalle.Cliente?.apellido}
                 </span>
-                <span>
+                <span style={{ display: "block", marginBottom: "8px" }}>
                   <strong>Usuario:</strong> {detalle.Usuario?.nombre}{" "}
                   {detalle.Usuario?.apellido}
                 </span>
-                <span>
+                <span style={{ display: "block", marginBottom: "8px" }}>
                   <strong>Notas de la Cotización:</strong>{" "}
                   {detalle?.notasUsuario} {detalle?.notasUsuario}
                 </span>
@@ -458,6 +483,8 @@ export default function Historial() {
                       cotizacion.estado === 2
                         ? "0 0 10px green, 0 0 20px green, 0 0 30px green"
                         : "none",
+                    textDecoration: "underline",
+                    textDecorationColor: "#e6b800",
                   }}
                 >
                   {" "}
@@ -470,68 +497,83 @@ export default function Historial() {
               <div
                 style={{
                   display: "flex",
-                  flexWrap: "wrap",
-                  gap: "10px",
+                  flexDirection: "column",
+                  gap: "20px",
+                  padding: "20px",
+                  backgroundColor: "#f9f9f9",
+                  borderRadius: "10px",
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
                   color: cotizacion.estado === 2 ? "lightgreen" : "inherit",
                 }}
               >
                 <div>
-                  <span>
+                  <span style={{ display: "block", marginBottom: "8px" }}>
                     <strong>Número de Cotización:</strong>{" "}
                     {cotizacion.codigoCotizacion}
                   </span>
 
                   {cotizacion.CotizacionIndividuals?.map(
                     (individual, index) => (
-                      <div key={index}>
-                        <span>
-                          <strong>Producto #{index + 1}:</strong>{" "}
+                      <div
+                        key={index}
+                        style={{
+                          marginBottom: "15px",
+                          padding: "15px",
+                          borderBottom: "1px solid #ddd",
+                        }}
+                      >
+                        <span style={{ display: "block", marginBottom: "8px" }}>
+                          <strong>Producto{index + 1}:</strong>{" "}
                           {cotizacion.Producto?.marca}{" "}
                           {cotizacion.Producto?.modelo}
                         </span>
-                        <span>
+                        <span style={{ display: "block", marginBottom: "8px" }}>
                           <strong>Precio de Venta:</strong> {individual.moneda}{" "}
                           {individual.precio}
                         </span>
-                        <span>
+                        <span style={{ display: "block", marginBottom: "8px" }}>
                           <strong>Anticipo:</strong> {individual.moneda}{" "}
                           {individual.anticipo}
                         </span>
-                        <span>
+                        <span style={{ display: "block", marginBottom: "8px" }}>
                           <strong>Saldo a Financiar:</strong>{" "}
                           {individual.moneda} {individual.saldoAFinanciar}
                         </span>
-                        <span>
+                        <span style={{ display: "block", marginBottom: "8px" }}>
                           <strong>Financiación:</strong> {individual.cuotas}{" "}
                           Pagos de {individual.moneda} {individual.cuotaValor}
                         </span>
-                        <span>
+                        <span style={{ display: "block", marginBottom: "8px" }}>
                           <strong>IVA:</strong> {individual.IVA}
                         </span>
-                        <span>
+                        <span style={{ display: "block", marginBottom: "8px" }}>
                           <strong>Precio Final:</strong> {individual.moneda}{" "}
                           {individual.PrecioFinal}
                         </span>
                       </div>
                     )
                   )}
-                  <span>
+                  <span style={{ display: "block", marginBottom: "8px" }}>
+                    <strong>Fecha de Creación:</strong>{" "}
+                    {new Date(cotizacion.fechaDeCreacion).toLocaleDateString()}
+                  </span>
+                  <span style={{ display: "block", marginBottom: "8px" }}>
                     <strong>Fecha de Modificación:</strong>{" "}
                     {new Date(cotizacion.fechaModi).toLocaleDateString()}
                   </span>
-                  <span>
+                  <span style={{ display: "block", marginBottom: "8px" }}>
                     <strong>Producto:</strong> {cotizacion.Producto?.marca}{" "}
                     {cotizacion.Producto?.modelo}
                   </span>
-                  <span>
+                  <span style={{ display: "block", marginBottom: "8px" }}>
                     <strong>Cliente:</strong> {cotizacion.Cliente?.nombre}{" "}
                     {cotizacion.Cliente?.apellido}
                   </span>
-                  <span>
+                  <span style={{ display: "block", marginBottom: "8px" }}>
                     <strong>Usuario:</strong> {cotizacion.Usuario?.nombre}{" "}
                     {cotizacion.Usuario?.apellido}
                   </span>
-                  <span>
+                  <span style={{ display: "block", marginBottom: "8px" }}>
                     <strong>Notas de la Cotización:</strong>{" "}
                     {cotizacion?.notasUsuario} {cotizacion?.notasUsuario}
                   </span>
