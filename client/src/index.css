@@ -1503,6 +1503,7 @@ button:focus-visible {
   display: flex;
   justify-content: center;
   margin: auto;
+
 }
 
 .white-bar.fixed .fauser {
@@ -5322,20 +5323,29 @@ margin-top: -10px;
 .imagenesPDF {
   display: flex;
   
+  
 }
 
 .imagenesPDF .sino {
   width: 30%;
   margin-right: 50px;
+  margin-top: -15px;
 }
 
 .imagenesPDF .american {
   width: 45%;
   height: 80%;
+  margin-top: 10px;
 }
 
 .bordeSINOMACH {
   border: 1px solid black;
+  margin-top: 20PX;
+  text-align: center;
+  font-size: 22px;
+  line-height: 40px;
+  height: 40px;
+  margin-bottom: 20px;
 }
 
 .datatable-container .rdt_TableRow:nth-child(even) {
@@ -5377,8 +5387,67 @@ margin-top: -10px;
   justify-content: space-around;
 }
 
-.SINOMACH   {
+.SINOMACH {
+  position: relative;
+}
+
+.distribuidor {
+  position: relative; 
+  top: -10px; 
+  display: inline-block; 
+  font-size: 14px;
+}
+
+.hrdontorcuato {
+  position: relative; 
+  top: -25px; 
  
 }
 
-/* PROBANDO DEPLOY  */
+.dontorcuato {
+  position: relative; 
+  top: -40px; 
+  display: inline-block; 
+  font-size: 16px;
+}
+
+.AVG {
+  display: flex;
+  justify-content: space-around;
+}
+
+.razonSOCIAL {
+  margin-top: -20px;
+
+}
+
+.LEYENDASINOMACH {
+  margin-top: 20px;
+  display: flex;
+}
+
+.consideracion {
+  font-size: 18px;
+}
+
+.precioUnitario {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.masIva {
+  margin-top: -15px;
+}
+
+.condicionesgenerales h4 {
+  text-decoration: underline;
+}
+
+.caractcoti {
+  margin-left: 40px;
+}
+
+.caractcotizar p {
+  margin-bottom: 5px; 
+  line-height: 1.2;  
+}

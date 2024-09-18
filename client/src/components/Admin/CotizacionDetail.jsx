@@ -356,79 +356,109 @@ export default function CotizacionDetail() {
       </div>
       <div className="SINOMACH">
         <h3>SINOMACH CONSTRUCTION MACHINERY GROUP I/E CO., LTD.</h3>
-        <span>Distribuidor en Argentina -</span>
+        <span className="distribuidor">Distribuidor en Argentina -</span>
+        <hr className="hrdontorcuato" />
+        <span className="dontorcuato">Don Torcuato, {fechaFormateada}</span>
       </div>
-      <hr />
-      Don Torcuato, {fechaFormateada}
-      <div>
+      <div className="razonSOCIAL">
         <h5>Razon Social: {cliente.razonSocial}</h5>
         <h5>Cuit: {cliente.CUIT}</h5>
-        <p>
-          <strong>COTIZACION AVG:</strong>{" "}
-          {codigoCotizacion ? codigoCotizacion : null}
-        </p>
       </div>
-      <div>De nuestra mayor consideración,</div>
-      <div>
-        <h5>
-          SINOMACH, como el más importante fabricante de equipos para
-          construcción de China y mediante nuestro representante en Argentina,
-          nos dirigimos a ustedes para ofrecerles el suministro y cotización
-          por:
-        </h5>
+      <div className="AVG">
+        <div></div>
+        <p>COTIZACION AVG: {codigoCotizacion ? codigoCotizacion : null}</p>
+      </div>
+      <span className="consideracion">De nuestra mayor consideración,</span>
+      <div className="LEYENDASINOMACH">
+        <span className="consideracion">
+          <strong>SINOMACH, </strong>como el más importante fabricante de
+          equipos para construcción de China y mediante nuestro representante en
+          Argentina, nos dirigimos a ustedes para ofrecerles el suministro y
+          cotización por:
+        </span>
       </div>
       {cotizacionesIndividuales.map((cotizacion, index) => (
         <div key={index} className="cotizacion-item">
           <div className="bordeSINOMACH">
             <p>
               {numerosEnLetras(cotizacion.cantidadProducto)} (
-              {cotizacion.cantidadProducto}) {producto.familia} SINOMACH modelo{" "}
-              {producto.modelo}
+              {cotizacion.cantidadProducto}) {producto.familia}{" "}
+              <strong>
+                <em>SINOMACH</em>
+              </strong>{" "}
+              modelo {producto.modelo}
             </p>
           </div>
-          <h3>
-            Precio Unitario del equipo:………….…… {cotizacion.moneda}{" "}
+          <h5 className="precioUnitario">
+            Precio Unitario del equipo:………….…… U$D {""}
             {cotizacion.precio} + IVA.- ({cotizacion.IVA}%)
-          </h3>
+          </h5>
           <p>
             Son dólares estadounidenses, {numerosEnLetras(cotizacion.precio)},
             más IVA.- Ejemplo hoy BNA $ 977 ( $ 180.012.250 + IVA 10.5% )
           </p>
-
+          <hr className="masIva" />
           <div className="condicionesgenerales">
             <h4>Condiciones Generales de Venta</h4>
-            <ul>
-              <li>Plazo de Entrega: {plazoEntrega}</li>
-              <li>Forma de Pago: {formaPago}</li>
-              <li>Manteniemiento de Oferta: {mantenimientoOferta}</li>
-              <li>Lugar de Entrega: {lugarEntrega}</li>
-              <li> Garantía: {garantia}</li>
-              <li>Entrega Técnica: {entregaTecnica}</li>
-              <li>Origen de Fabricación: {origenFabricacion}</li>
-              <li>Patentamiento: {patentamiento}</li>
-            </ul>
+            <br />
+            <div className="caractcoti">
+              <ul>
+                <li>
+                  {" "}
+                  <strong>Plazo de Entrega:</strong> {plazoEntrega}
+                </li>
+                <li>
+                  <strong>Forma de Pago:</strong> {formaPago}
+                </li>
+                <li>
+                  <strong>Manteniemiento de Oferta: </strong>
+                  {mantenimientoOferta}
+                </li>
+                <li>
+                  <strong>Lugar de Entrega: </strong>
+                  {lugarEntrega}
+                </li>
+                <li>
+                  <strong> Garantía: </strong>
+                  {garantia}
+                </li>
+                <li>
+                  <strong>Entrega Técnica:</strong> {entregaTecnica}
+                </li>
+                <li>
+                  <strong>Origen de Fabricación:</strong> {origenFabricacion}
+                </li>
+                <li>
+                  <strong>Patentamiento:</strong> {patentamiento}
+                </li>
+              </ul>
+            </div>
           </div>
-          {cotizacion.anticipo && (
-            <p>
-              <strong>Anticipo:</strong> {cotizacion.moneda}{" "}
-              {parseFloat(cotizacion.anticipo).toFixed(2)}
-            </p>
-          )}
 
-          {cotizacion.cuotas && cotizacion.cuotaValor && (
-            <p>
-              <strong>Financiación:</strong> {cotizacion.cuotas} Pagos de{" "}
-              {cotizacion.moneda} {parseFloat(cotizacion.cuotaValor).toFixed(2)}
-            </p>
-          )}
+          <div className="caractcotizar">
+            {cotizacion.anticipo > 0 && (
+              <p>
+                <strong>Anticipo:</strong> {cotizacion.moneda}{" "}
+                {parseFloat(cotizacion.anticipo).toFixed(2)}
+              </p>
+            )}
 
-          <p>
-            <strong>IVA:</strong> {parseFloat(cotizacion.IVA).toFixed(2)}%
-          </p>
-          <p>
-            <strong>Precio Final:</strong> {cotizacion.moneda}{" "}
-            {parseFloat(cotizacion.PrecioFinal).toFixed(2)}
-          </p>
+            {cotizacion.cuotas && cotizacion.cuotaValor && (
+              <p>
+                <strong>Financiación:</strong> {cotizacion.cuotas} Pagos de{" "}
+                {cotizacion.moneda}{" "}
+                {parseFloat(cotizacion.cuotaValor).toFixed(2)}
+              </p>
+            )}
+
+            <p>
+              <strong>IVA:</strong> {parseFloat(cotizacion.IVA).toFixed(2)}%
+            </p>
+            <p>
+              <strong>Precio Final:</strong> {cotizacion.moneda}{" "}
+              {parseFloat(cotizacion.PrecioFinal).toFixed(2)}
+            </p>
+          </div>
         </div>
       ))}
       <div>
