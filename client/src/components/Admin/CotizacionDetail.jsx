@@ -354,8 +354,10 @@ export default function CotizacionDetail() {
         <img className="sino" src={SINOMACH} alt="" />
         <img className="american" src={americanvial} alt="" />
       </div>
-      <h3>SINOMACH CONSTRUCTION MACHINERY GROUP I/E CO., LTD.</h3>
-      <h5>Distribuidor en Argentina -</h5>
+      <div className="SINOMACH">
+        <h3>SINOMACH CONSTRUCTION MACHINERY GROUP I/E CO., LTD.</h3>
+        <span>Distribuidor en Argentina -</span>
+      </div>
       <hr />
       Don Torcuato, {fechaFormateada}
       <div>

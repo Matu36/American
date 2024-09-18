@@ -1048,42 +1048,43 @@ const getCotizacionesSum = async (req, res) => {
       usuario.rol === true ||
       (usuario.rol === false && usuario.baneado === true)
     ) {
-      // Obtener todas las cotizaciones
+      // Obtener todas las cotizaciones (estado 1) y ventas (estado 2)
       cotizacionesCotizaciones = await Cotizaciones.findAll({
-        where: { estado: 1 },
         include: [
           {
             model: CotizacionIndividual,
+            where: { estado: 1 }, // Filtro por estado 1 en CotizacionIndividual
             attributes: ["PrecioFinal", "moneda"],
           },
         ],
       });
 
       cotizacionesVentas = await Cotizaciones.findAll({
-        where: { estado: 2 },
         include: [
           {
             model: CotizacionIndividual,
+            where: { estado: 2 }, // Filtro por estado 2 en CotizacionIndividual
             attributes: ["PrecioFinal", "moneda"],
           },
         ],
       });
     } else {
+      // Obtener cotizaciones y ventas para el usuario con estado filtrado
       cotizacionesCotizaciones = await Cotizaciones.findAll({
-        where: { idUsuario, estado: 1 },
         include: [
           {
             model: CotizacionIndividual,
+            where: { idUsuario, estado: 1 }, // Filtro por idUsuario y estado 1
             attributes: ["PrecioFinal", "moneda"],
           },
         ],
       });
 
       cotizacionesVentas = await Cotizaciones.findAll({
-        where: { idUsuario, estado: 2 },
         include: [
           {
             model: CotizacionIndividual,
+            where: { idUsuario, estado: 2 }, // Filtro por idUsuario y estado 2
             attributes: ["PrecioFinal", "moneda"],
           },
         ],

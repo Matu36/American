@@ -33,8 +33,16 @@ export default function WidgetLg() {
           </tr>
         </thead>
         <tbody>
-          {data?.flatMap((cotizacion) =>
-            cotizacion.CotizacionIndividuals.map((individual, index) => (
+          {data
+            ?.flatMap((cotizacion) =>
+              cotizacion.CotizacionIndividuals.map((individual, index) => ({
+                cotizacion,
+                individual,
+                index,
+              }))
+            )
+            .slice(0, 5)
+            .map(({ cotizacion, individual, index }) => (
               <tr key={`${cotizacion.id}-${index}`}>
                 <td>
                   {cotizacion.Cliente.nombre} {cotizacion.Cliente.apellido}
@@ -43,8 +51,7 @@ export default function WidgetLg() {
                 <td>U$D</td>
                 <td>{individual.PrecioFinal}</td>
               </tr>
-            ))
-          )}
+            ))}
         </tbody>
       </table>
     </div>

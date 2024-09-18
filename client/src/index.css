@@ -5316,6 +5316,7 @@ margin-top: -10px;
   padding: 16px; 
   box-sizing: border-box; 
   margin: 20px;
+  text-align: left;
 }
 
 .imagenesPDF {
@@ -5374,6 +5375,10 @@ margin-top: -10px;
   color: #000;
   display: flex;
   justify-content: space-around;
+}
+
+.SINOMACH   {
+ 
 }
 
 /* PROBANDO DEPLOY  */
