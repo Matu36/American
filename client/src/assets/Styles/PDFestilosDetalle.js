@@ -84,7 +84,7 @@ export const styles = StyleSheet.create({
     border: "0.3px solid black",
     padding: 5,
     textAlign: "center",
-    width: "100%",
+    width: "98%",
     fontSize: "14px",
   },
   precioUnitario: {
@@ -116,20 +116,26 @@ export const styles = StyleSheet.create({
   caractcotizar: {
     marginTop: 10,
   },
+  caracgeneralescontainer: { marginTop: 5 },
   caracgenerales: {
     fontWeight: "bold",
     fontSize: "14px",
-    marginTop: 20,
+
     textDecoration: "underline",
     textAlign: "center",
   },
   especificaciones: {
-    marginLeft: 20,
+    marginLeft: 40,
     marginVertical: 5,
+    paddingBottom: 0,
   },
 
   cursiva: {
     fontStyle: "italic",
+  },
+  listItem: {
+    marginBottom: 5,
+    fontSize: "11px",
   },
 
   especificacionesPrincipales: {
@@ -137,10 +143,16 @@ export const styles = StyleSheet.create({
     textAlign: "left",
     textDecoration: "underline",
     marginTop: 10,
+    marginBottom: 10,
   },
   footerDetail: {
+    position: "absolute",
+    bottom: 20,
+    left: 0,
+    width: "100%",
     textAlign: "center",
-    fontSize: 10,
-    marginTop: 30,
+    fontSize: 8,
+    paddingLeft: 60,
+    color: "gray",
   },
 });

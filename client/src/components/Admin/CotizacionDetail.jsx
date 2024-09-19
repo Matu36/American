@@ -263,83 +263,161 @@ export default function CotizacionDetail() {
         </View> */}
 
         {/* Características técnicas generales */}
-        <View>
-          <Text style={styles.caracgenerales}>
-            Características Técnicas Generales:
-          </Text>
-          <Text style={styles.especificacionesPrincipales}>
-            Especificaciones Principales:
-          </Text>
-          <View style={styles.especificaciones}>
-            {producto.caracteristicasGenerales
-              .split("\n")
-              .map((caracteristica, index) => (
-                <Text key={index}>{caracteristica}</Text>
-              ))}
-          </View>
-          <Text style={styles.caracgenerales}>
-            Motores de Traslación y Zapatas:
-          </Text>
-          <View style={styles.especificaciones}>
-            {producto.motoresdeTraslacionyZapatas
-              .split("\n")
-              .map((motor, index) => (
-                <Text key={index}>{motor}</Text>
-              ))}
-          </View>
-          <Text style={styles.caracgenerales}>Sistema Hidráulico:</Text>
-          <View style={styles.especificaciones}>
-            {producto.sistemaHidraulico.split("\n").map((sistema, index) => (
-              <Text key={index}>{sistema}</Text>
+
+        <Text style={styles.caracgenerales}>
+          Características Técnicas Generales:
+        </Text>
+        <Text style={styles.especificacionesPrincipales}>
+          Especificaciones Principales:
+        </Text>
+        <View style={styles.especificaciones}>
+          {producto.caracteristicasGenerales
+            .split("\n")
+            .map((caracteristica, index) => (
+              <Text key={index} style={styles.listItem}>
+                • {caracteristica}
+              </Text>
             ))}
-          </View>
-          <Text style={styles.caracgenerales}>Motor:</Text>
-          <View style={styles.especificaciones}>
-            {producto.motor.split("\n").map((motor, index) => (
-              <Text key={index}>{motor}</Text>
-            ))}
-          </View>
-          <Text style={styles.caracgenerales}>Capacidades:</Text>
-          <View style={styles.especificaciones}>
-            {producto.capacidades.split("\n").map((capacidad, index) => (
-              <Text key={index}>{capacidad}</Text>
-            ))}
-          </View>
-          <Text style={styles.caracgenerales}>Cabina:</Text>
-          <View style={styles.especificaciones}>
-            {producto.Cabina.split("\n").map((cabina, index) => (
-              <Text key={index}>{cabina}</Text>
-            ))}
-          </View>
-          <Text style={styles.caracgenerales}>Dimensiones Generales:</Text>
-          <View style={styles.especificaciones}>
-            {producto.dimensionesGenerales
-              .split("\n")
-              .map((dimension, index) => (
-                <Text key={index}>{dimension}</Text>
-              ))}
-          </View>
         </View>
+        <View style={styles.footerDetail}>
+          <Text style={styles.hr} />
+          <Text>
+            Panamericana Km 28.250 Paris 256 esq. Colectora Este 1611 - Don
+            Torcuato - Bs. As. Argentina
+          </Text>
+          <Text>Tel./Fax: (5411) 4748-5900 </Text>{" "}
+          <Text>www.americanvial.com</Text>
+        </View>
+      </Page>
+      <Page size="A4" style={styles.page}>
+        {/* Logos */}
+        <View style={styles.imagenesPDF}>
+          <Image style={styles.sino} src={SINOMACH} />
+          <Image style={styles.american} src={americanvial} />
+        </View>
+
+        {/* Título y fecha */}
+        <View style={styles.SINOMACH}>
+          <Text style={styles.SINOMACHtitle}>
+            SINOMACH CONSTRUCTION MACHINERY GROUP I/E CO., LTD.
+          </Text>
+          <Text style={styles.distribuidor}>Distribuidor en Argentina -</Text>
+          <Text style={styles.hr} />
+        </View>
+        <Text style={styles.especificacionesPrincipales}>
+          Motores de Traslación y Zapatas:
+        </Text>
+        <View style={styles.especificaciones}>
+          {producto.motoresdeTraslacionyZapatas
+            .split("\n")
+            .map((motor, index) => (
+              <Text key={index} style={styles.listItem}>
+                • {motor}
+              </Text>
+            ))}
+        </View>
+        <Text style={styles.especificacionesPrincipales}>
+          Sistema Hidráulico:
+        </Text>
+        <View style={styles.especificaciones}>
+          {producto.sistemaHidraulico.split("\n").map((sistema, index) => (
+            <Text key={index} style={styles.listItem}>
+              • {sistema}
+            </Text>
+          ))}
+        </View>
+        <Text style={styles.especificacionesPrincipales}>Motor:</Text>
+        <View style={styles.especificaciones}>
+          {producto.motor.split("\n").map((motor, index) => (
+            <Text key={index} style={styles.listItem}>
+              • {motor}
+            </Text>
+          ))}
+        </View>
+        <Text style={styles.especificacionesPrincipales}>Capacidades:</Text>
+        <View style={styles.especificaciones}>
+          {producto.capacidades.split("\n").map((capacidad, index) => (
+            <Text key={index} style={styles.listItem}>
+              • {capacidad}
+            </Text>
+          ))}
+        </View>
+        <Text style={styles.especificacionesPrincipales}>Cabina:</Text>
+        <View style={styles.especificaciones}>
+          {producto.Cabina.split("\n").map((cabina, index) => (
+            <Text key={index} style={styles.listItem}>
+              • {cabina}
+            </Text>
+          ))}
+        </View>
+        <View style={styles.footerDetail}>
+          <Text style={styles.hr} />
+          <Text>
+            Panamericana Km 28.250 Paris 256 esq. Colectora Este 1611 - Don
+            Torcuato - Bs. As. Argentina
+          </Text>
+          <Text>Tel./Fax: (5411) 4748-5900 </Text>{" "}
+          <Text>www.americanvial.com</Text>
+        </View>
+      </Page>
+      <Page size="A4" style={styles.page}>
+        {/* Logos */}
+        <View style={styles.imagenesPDF}>
+          <Image style={styles.sino} src={SINOMACH} />
+          <Image style={styles.american} src={americanvial} />
+        </View>
+
+        {/* Título y fecha */}
+        <View style={styles.SINOMACH}>
+          <Text style={styles.SINOMACHtitle}>
+            SINOMACH CONSTRUCTION MACHINERY GROUP I/E CO., LTD.
+          </Text>
+          <Text style={styles.distribuidor}>Distribuidor en Argentina -</Text>
+          <Text style={styles.hr} />
+        </View>
+
+        <Text style={styles.especificacionesPrincipales}>
+          Dimensiones Generales:
+        </Text>
+        <View style={styles.especificaciones}>
+          {producto.dimensionesGenerales.split("\n").map((dimension, index) => (
+            <Text key={index} style={styles.listItem}>
+              • {dimension}
+            </Text>
+          ))}
+        </View>
+
+        <Text style={styles.consideracion}>
+          En los últimos diez años SINOMACH ha desarrollado un programa de
+          fabricación en cooperación con compañías de prestigio mundial como
+          Caterpillar (USA), Krupp (Alemania), Liebherr (Alemania), etc.,
+          obteniendo como resultado una transferencia y aporte de tecnología y
+          calidad aplicada para el diseño, fabricación y servicio de todos los
+          equipos.
+        </Text>
 
         {/* Imagen del producto */}
         <Image src={producto.imagen} />
 
         {/* Asesor comercial */}
-        <View>
+        {/* <View>
           <Text>Asesor Comercial</Text>
           <Text>
             Nombre: {usuario.nombre} {usuario.apellido}
           </Text>
           <Text>Email: {usuario.email}</Text>
-        </View>
+        </View> */}
 
         {/* Pie de página */}
+
         <View style={styles.footerDetail}>
+          <Text style={styles.hr} />
           <Text>
             Panamericana Km 28.250 Paris 256 esq. Colectora Este 1611 - Don
             Torcuato - Bs. As. Argentina
           </Text>
-          <Text>Tel./Fax: (5411) 4748-5900 www.americanvial.com</Text>
+          <Text>Tel./Fax: (5411) 4748-5900 </Text>{" "}
+          <Text>www.americanvial.com</Text>
         </View>
       </Page>
     </Document>
