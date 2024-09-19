@@ -379,6 +379,10 @@ export default function CotizacionDetail() {
       </div>
       {cotizacionesIndividuales.map((cotizacion, index) => (
         <div key={index} className="cotizacion-item">
+          <br />
+          <span style={{ textDecoration: "underline" }}>
+            <strong>Opción {index + 1}:</strong>
+          </span>
           <div className="bordeSINOMACH">
             <p>
               {numerosEnLetras(cotizacion.cantidadProducto)} (
@@ -462,81 +466,107 @@ export default function CotizacionDetail() {
         </div>
       ))}
       <div>
-        <h3>Características Técnicas Generales:</h3>
-
+        <div className="caracgenerales">
+          <h5 style={{ fontWeight: "bold" }}>
+            Características Técnicas Generales:
+          </h5>
+        </div>
         <div>
-          <h4>Especificaciones Principales:</h4>
-          <ul>
-            {producto.caracteristicasGenerales
-              .split("\n")
-              .map((caracteristica, index) => (
-                <li key={index}>{caracteristica}</li>
+          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
+            Especificaciones Principales:
+          </h5>
+          <div className="especificaciones">
+            <ul>
+              {producto.caracteristicasGenerales
+                .split("\n")
+                .map((caracteristica, index) => (
+                  <li key={index}>{caracteristica}</li>
+                ))}
+            </ul>
+          </div>
+          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
+            Motores de Traslación y Zapatas:
+          </h5>
+          <div className="especificaciones">
+            <ul>
+              {producto.motoresdeTraslacionyZapatas
+                .split("\n")
+                .map((motor, index) => (
+                  <li key={index}>{motor}</li>
+                ))}
+            </ul>
+          </div>
+          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
+            Sistema Hidráulico:
+          </h5>
+          <div className="especificaciones">
+            <ul>
+              {producto.sistemaHidraulico.split("\n").map((sistema, index) => (
+                <li key={index}>{sistema}</li>
               ))}
-          </ul>
-
-          <h4>Motores de Traslación y Zapatas:</h4>
-          <ul>
-            {producto.motoresdeTraslacionyZapatas
-              .split("\n")
-              .map((motor, index) => (
+            </ul>
+          </div>
+          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
+            Motor:
+          </h5>
+          <div className="especificaciones">
+            <ul>
+              {producto.motor.split("\n").map((motor, index) => (
                 <li key={index}>{motor}</li>
               ))}
-          </ul>
-
-          <h4>Sistema Hidráulico:</h4>
-          <ul>
-            {producto.sistemaHidraulico.split("\n").map((sistema, index) => (
-              <li key={index}>{sistema}</li>
-            ))}
-          </ul>
-
-          <h4>Motor:</h4>
-          <ul>
-            {producto.motor.split("\n").map((motor, index) => (
-              <li key={index}>{motor}</li>
-            ))}
-          </ul>
-
-          <h4>Capacidades:</h4>
-          <ul>
-            {producto.capacidades.split("\n").map((capacidad, index) => (
-              <li key={index}>{capacidad}</li>
-            ))}
-          </ul>
-
-          <h4>Cabina:</h4>
-          <ul>
-            {producto.Cabina.split("\n").map((cabina, index) => (
-              <li key={index}>{cabina}</li>
-            ))}
-          </ul>
-
-          <h4>Dimensiones Generales:</h4>
-          <ul>
-            {producto.dimensionesGenerales
-              .split("\n")
-              .map((dimension, index) => (
-                <li key={index}>{dimension}</li>
+            </ul>
+          </div>
+          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
+            Capacidades:
+          </h5>
+          <div className="especificaciones">
+            <ul>
+              {producto.capacidades.split("\n").map((capacidad, index) => (
+                <li key={index}>{capacidad}</li>
               ))}
-          </ul>
+            </ul>
+          </div>
+          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
+            Cabina:
+          </h5>
+          <div className="especificaciones">
+            <ul>
+              {producto.Cabina.split("\n").map((cabina, index) => (
+                <li key={index}>{cabina}</li>
+              ))}
+            </ul>
+          </div>
+          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
+            Dimensiones Generales:
+          </h5>
+          <div className="especificaciones">
+            <ul>
+              {producto.dimensionesGenerales
+                .split("\n")
+                .map((dimension, index) => (
+                  <li key={index}>{dimension}</li>
+                ))}
+            </ul>
+          </div>
         </div>
       </div>
       <div className="parrafoSINOMACH">
         <p>
-          En los últimos diez años SINOMACH ha desarrollado un programa de
-          fabricación en cooperación con compañías de prestigio mundial como
-          Caterpillar (USA), Krupp (Alemania), Liebherr (Alemania), etc.,
-          obteniendo como resultado una transferencia y aporte de tecnología y
-          calidad aplicada para el diseño, fabricación y servicio de todos los
-          equipos.
+          En los últimos diez años <strong>SINOMACH</strong> ha desarrollado un
+          programa de fabricación en cooperación con compañías de prestigio
+          mundial como Caterpillar (USA), Krupp (Alemania), Liebherr (Alemania),
+          etc., obteniendo como resultado una transferencia y aporte de
+          tecnología y calidad aplicada para el diseño, fabricación y servicio
+          de todos los equipos.
         </p>
       </div>
-      <div>
+      <div className="imagenDetail">
         {" "}
         <img src={producto.imagen} alt="" />
       </div>
-      <div>
-        <h3>Asesor Comercial</h3>
+
+      {/* <div className="asesorComercial">
+        <h4 style={{ textDecoration: "underline" }}>Asesor Comercial</h4>
         <p>
           <strong>Nombre:</strong> {usuario.nombre} {usuario.apellido}
         </p>
@@ -544,29 +574,39 @@ export default function CotizacionDetail() {
         <p>
           <strong>Email:</strong> {usuario.email}
         </p>
+      </div> */}
+      <div className="deptoComercial">
+        <span>Dto. Comercial.</span> <span> Lucas Pedro Pulice </span>{" "}
+        <span>1123404859</span>
       </div>
-      Dto. Comercial. Lucas Pedro Pulice 1123404859
       <div className="footerDetail">
         <hr />
-        Panamericana Km 28.250 Paris 256 esq. Colectora Este 1611 - Don Torcuato
-        - Bs. As. Argentina. Tel./Fax : (5411) 4748-5900 www.americanvial.com
+        <span>
+          {" "}
+          Panamericana Km 28.250 Paris 256 esq. Colectora Este 1611 - Don
+          Torcuato - Bs. As. Argentina.{" "}
+        </span>{" "}
+        <span>Tel./Fax : (5411) 4748-5900 </span>{" "}
+        <span>www.americanvial.com</span>
       </div>
-      <PDFDownloadLink
-        document={<MyDocument cotizacionDetalle={cotizacionDetalle} />}
-        fileName={`cotizacion_${codigoCotizacion}.pdf`}
-      >
-        {({ loading }) => (
-          <button className="form-submit">
-            {loading ? (
-              "Generando PDF..."
-            ) : (
-              <>
-                <FaFilePdf /> Descargar PDF
-              </>
-            )}
-          </button>
-        )}
-      </PDFDownloadLink>
+      <div className="buttonpdf">
+        <PDFDownloadLink
+          document={<MyDocument cotizacionDetalle={cotizacionDetalle} />}
+          fileName={`cotizacion_${codigoCotizacion}.pdf`}
+        >
+          {({ loading }) => (
+            <button className="form-submit">
+              {loading ? (
+                "Generando PDF..."
+              ) : (
+                <>
+                  <FaFilePdf /> Descargar PDF
+                </>
+              )}
+            </button>
+          )}
+        </PDFDownloadLink>
+      </div>
     </div>
   );
 }

@@ -5451,3 +5451,77 @@ margin-top: -10px;
   margin-bottom: 5px; 
   line-height: 1.2;  
 }
+
+.caracgenerales {
+  text-decoration: underline;
+ margin-top: 20px;
+ position: relative;
+ justify-content: center;
+ text-align: center;
+ margin-bottom: 30px;
+}
+
+.especificaciones {
+  text-align: left; 
+  margin: 0 auto; 
+  width: fit-content; 
+  margin-top: 1rem;
+}
+
+.especificaciones ul {
+  padding-left: 0;
+  
+}
+
+.especificaciones li {
+  padding-left: 10px; 
+  margin-bottom: 5px; 
+}
+
+.parrafoSINOMACH {
+  font-size: 18px;
+  text-align: justify;
+}
+
+.deptoComercial {
+  text-align: right; 
+  margin-right: 20px; 
+}
+
+.deptoComercial span {
+  display: block; 
+}
+
+.asesorComercial {
+  line-height: 1;
+}
+
+.imagenDetail {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin: 20px 0; 
+}
+
+.imagenDetail img {
+  width: 80%; 
+  max-width: 600px; 
+  height: auto; 
+}
+
+.footerDetail {
+  text-align: center; 
+  font-size: 14px; 
+ 
+}
+
+.footerDetail span {
+  display: block; 
+ 
+}
+
+.buttonpdf {
+  display: flex;
+  justify-content: center;
+}
+
