@@ -5309,6 +5309,48 @@ margin-top: -10px;
   margin-top: 4rem;
 }
 
+
+
+.datatable-container .rdt_TableRow:nth-child(even) {
+  background-color: #ffcccc; /* Rojo claro */
+}
+
+.datatable-container .rdt_TableRow:nth-child(odd) {
+  background-color: #ffffcc; /* Amarillo claro */
+}
+
+
+.buttonEliminar {
+  background-color: #ff4d4d; 
+  color: white; 
+  margin-top: 45px;
+  border: none; 
+  padding: 10px 10px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-weight: bold; 
+  transition: background-color 0.3s ease; 
+  display: flex;
+  margin-left: auto;
+}
+
+.buttonEliminar:hover {
+  background-color: #e60000; 
+}
+
+.buttonEliminar:focus {
+  outline: none; 
+  box-shadow: 0 0 5px #ff4d4d; 
+}
+
+
+.info-cliente-edit {
+  color: #000;
+  display: flex;
+  justify-content: space-around;
+}
+
+
 .cotizacionDetailSimilPdf {
   width: 100%; 
   border: solid 1px #dcdcdc; 
@@ -5348,44 +5390,6 @@ margin-top: -10px;
   margin-bottom: 20px;
 }
 
-.datatable-container .rdt_TableRow:nth-child(even) {
-  background-color: #ffcccc; /* Rojo claro */
-}
-
-.datatable-container .rdt_TableRow:nth-child(odd) {
-  background-color: #ffffcc; /* Amarillo claro */
-}
-
-
-.buttonEliminar {
-  background-color: #ff4d4d; 
-  color: white; 
-  margin-top: 45px;
-  border: none; 
-  padding: 10px 10px; 
-  border-radius: 5px; 
-  cursor: pointer; 
-  font-weight: bold; 
-  transition: background-color 0.3s ease; 
-  display: flex;
-  margin-left: auto;
-}
-
-.buttonEliminar:hover {
-  background-color: #e60000; 
-}
-
-.buttonEliminar:focus {
-  outline: none; /* Sin contorno de enfoque */
-  box-shadow: 0 0 5px #ff4d4d; /* Sombra al hacer foco */
-}
-
-
-.info-cliente-edit {
-  color: #000;
-  display: flex;
-  justify-content: space-around;
-}
 
 .SINOMACH {
   position: relative;

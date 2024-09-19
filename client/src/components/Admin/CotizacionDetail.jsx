@@ -30,8 +30,6 @@ export default function CotizacionDetail() {
     id
   ).cotizacionDetalleQuery;
 
-  console.log(cotizacionDetalle);
-
   if (isLoading) {
     return (
       <div>
@@ -169,69 +167,90 @@ export default function CotizacionDetail() {
     <Document>
       <Page size="A4" style={styles.page}>
         {/* Logos */}
-        <View style={styles.logoContainer}>
-          <Image src={SINOMACH} />
-          <Image src={americanvial} />
+        <View style={styles.imagenesPDF}>
+          <Image style={styles.sino} src={SINOMACH} />
+          <Image style={styles.american} src={americanvial} />
         </View>
 
         {/* Título y fecha */}
-        <Text style={styles.subHeader}>
-          SINOMACH CONSTRUCTION MACHINERY GROUP I/E CO., LTD.
-        </Text>
-        <Text>Distribuidor en Argentina -</Text>
-        <Text>{fechaFormateada}</Text>
-        <Text style={styles.hr} />
+        <View style={styles.SINOMACH}>
+          <Text style={styles.SINOMACHtitle}>
+            SINOMACH CONSTRUCTION MACHINERY GROUP I/E CO., LTD.
+          </Text>
+          <Text style={styles.distribuidor}>Distribuidor en Argentina -</Text>
+          <Text style={styles.hr} />
+          <Text style={styles.fechaformateada}>
+            Don Torcuato, {fechaFormateada}
+          </Text>
+        </View>
 
         {/* Información del cliente */}
+        <View style={styles.razonSOCIAL}>
+          <Text style={styles.datosCliente}>
+            Razon Social: {cliente.razonSocial}
+          </Text>
+          <Text style={styles.datosCliente}>Cuit: {cliente.CUIT}</Text>
+        </View>
+
+        {/* Cotización AVG */}
         <View>
-          <Text>Razon Social: {cliente.razonSocial}</Text>
-          <Text>Cuit: {cliente.CUIT}</Text>
-          <Text>COTIZACION AVG: {cotizacionDetalle.codigoCotizacion}</Text>
+          <Text style={styles.avg}>
+            COTIZACION AVG: {codigoCotizacion ? codigoCotizacion : null}
+          </Text>
         </View>
 
         {/* Texto principal */}
-        <View>
-          <Text>De nuestra mayor consideración,</Text>
-          <Text>
-            SINOMACH, como el más importante fabricante de equipos para
-            construcción de China y mediante nuestro representante en Argentina,
-            nos dirigimos a ustedes para ofrecerles el suministro y cotización
-            por:
+        <Text style={styles.consideracion}>
+          De nuestra mayor consideración,
+        </Text>
+        <View style={styles.LEYENDASINOMACH}>
+          <Text style={styles.consideracion}>
+            <Text style={styles.sinomachh}>SINOMACH,</Text> como el más
+            importante fabricante de equipos para construcción de China y
+            mediante nuestro representante en Argentina, nos dirigimos a ustedes
+            para ofrecerles el suministro y cotización por:
           </Text>
         </View>
 
         {/* Detalles de la cotización */}
         {cotizacionesIndividuales.map((cotizacion, index) => (
-          <View key={index} style={styles.cotizacionItem}>
-            <Text>
-              {cotizacion.cantidadProducto} {producto.familia} SINOMACH modelo{" "}
-              {producto.modelo}
-            </Text>
-            <Text>
-              Precio Unitario del equipo: {cotizacion.moneda}{" "}
-              {cotizacion.precio} + IVA ({cotizacion.IVA}%)
-            </Text>
-            {cotizacion.anticipo && (
+          <View key={index}>
+            <Text style={styles.opcion}>Opción {index + 1}:</Text>
+            <View style={styles.cotizacionItem}>
               <Text>
+                {numerosEnLetras(cotizacion.cantidadProducto)} (
+                {cotizacion.cantidadProducto}) {producto.familia}
+                <Text style={styles.cursiva}> SINOMACH </Text>
+                modelo {producto.modelo}
+              </Text>
+            </View>
+            <Text style={styles.precioUnitario}>
+              Precio Unitario del equipo:………….…… U$D {""} {cotizacion.precio} +
+              IVA ({cotizacion.IVA}%)
+            </Text>
+            <Text style={styles.dolares}>
+              (Son dólares estadounidenses, Ciento ochenta y cuatro mil
+              doscientos cincuenta más IVA.-) Ejemplo hoy BNA $ 977 ( $
+              180.012.250 + IVA 10.5% )
+            </Text>
+            <Text style={styles.hr} />
+            <View style={styles.cotizacion}>
+              <Text style={styles.cotizacionText}>
                 Anticipo: {cotizacion.moneda} {cotizacion.anticipo}
               </Text>
-            )}
-
-            {cotizacion.cuotas && cotizacion.cuotaValor && (
-              <Text>
+              <Text style={styles.cotizacionText}>
                 Financiación: {cotizacion.cuotas} Pagos de {cotizacion.moneda}{" "}
                 {cotizacion.cuotaValor}
               </Text>
-            )}
-
-            <Text>
-              Precio Final: {cotizacion.moneda} {cotizacion.PrecioFinal}
-            </Text>
+              <Text style={styles.cotizacionText}>
+                Precio Final: {cotizacion.moneda} {cotizacion.PrecioFinal}
+              </Text>
+            </View>
           </View>
         ))}
 
         {/* Condiciones generales de venta */}
-        <View style={styles.condicionesgenerales}>
+        {/* <View style={styles.condicionesgenerales}>
           <Text>Condiciones Generales de Venta</Text>
           <Text>Plazo de Entrega: {plazoEntrega}</Text>
           <Text>Forma de Pago: {formaPago}</Text>
@@ -241,89 +260,68 @@ export default function CotizacionDetail() {
           <Text>Entrega Técnica: {entregaTecnica}</Text>
           <Text>Origen de Fabricación: {origenFabricacion}</Text>
           <Text>Patentamiento: {patentamiento}</Text>
-        </View>
+        </View> */}
 
-        {cotizacionesIndividuales.map((cotizacion, index) => (
-          <View key={index}>
-            <Text>
-              <strong>Anticipo:</strong> {cotizacion.moneda}{" "}
-              {parseFloat(cotizacion.anticipo).toFixed(2)}
-            </Text>
-            <Text>
-              <strong>Financiación:</strong> {cotizacion.cuotas} Pagos de{" "}
-              {cotizacion.moneda} {parseFloat(cotizacion.cuotaValor).toFixed(2)}
-            </Text>
-            <Text>
-              <strong>IVA:</strong> {parseFloat(cotizacion.IVA).toFixed(2)}%
-            </Text>
-            <Text>
-              <strong>Precio Final:</strong> {cotizacion.moneda}{" "}
-              {parseFloat(cotizacion.PrecioFinal).toFixed(2)}
-            </Text>
-          </View>
-        ))}
-
+        {/* Características técnicas generales */}
         <View>
-          <Text>Características Técnicas Generales:</Text>
-
-          <View>
-            <Text>Especificaciones Principales:</Text>
-            <View>
-              {producto.caracteristicasGenerales
-                .split("\n")
-                .map((caracteristica, index) => (
-                  <Text key={index}>{caracteristica}</Text>
-                ))}
-            </View>
-
-            <Text>Motores de Traslación y Zapatas:</Text>
-            <View>
-              {producto.motoresdeTraslacionyZapatas
-                .split("\n")
-                .map((motor, index) => (
-                  <Text key={index}>{motor}</Text>
-                ))}
-            </View>
-
-            <Text>Sistema Hidráulico:</Text>
-            <View>
-              {producto.sistemaHidraulico.split("\n").map((sistema, index) => (
-                <Text key={index}>{sistema}</Text>
+          <Text style={styles.caracgenerales}>
+            Características Técnicas Generales:
+          </Text>
+          <Text style={styles.especificacionesPrincipales}>
+            Especificaciones Principales:
+          </Text>
+          <View style={styles.especificaciones}>
+            {producto.caracteristicasGenerales
+              .split("\n")
+              .map((caracteristica, index) => (
+                <Text key={index}>{caracteristica}</Text>
               ))}
-            </View>
-
-            <Text>Motor:</Text>
-            <View>
-              {producto.motor.split("\n").map((motor, index) => (
+          </View>
+          <Text style={styles.caracgenerales}>
+            Motores de Traslación y Zapatas:
+          </Text>
+          <View style={styles.especificaciones}>
+            {producto.motoresdeTraslacionyZapatas
+              .split("\n")
+              .map((motor, index) => (
                 <Text key={index}>{motor}</Text>
               ))}
-            </View>
-
-            <Text>Capacidades:</Text>
-            <View>
-              {producto.capacidades.split("\n").map((capacidad, index) => (
-                <Text key={index}>{capacidad}</Text>
+          </View>
+          <Text style={styles.caracgenerales}>Sistema Hidráulico:</Text>
+          <View style={styles.especificaciones}>
+            {producto.sistemaHidraulico.split("\n").map((sistema, index) => (
+              <Text key={index}>{sistema}</Text>
+            ))}
+          </View>
+          <Text style={styles.caracgenerales}>Motor:</Text>
+          <View style={styles.especificaciones}>
+            {producto.motor.split("\n").map((motor, index) => (
+              <Text key={index}>{motor}</Text>
+            ))}
+          </View>
+          <Text style={styles.caracgenerales}>Capacidades:</Text>
+          <View style={styles.especificaciones}>
+            {producto.capacidades.split("\n").map((capacidad, index) => (
+              <Text key={index}>{capacidad}</Text>
+            ))}
+          </View>
+          <Text style={styles.caracgenerales}>Cabina:</Text>
+          <View style={styles.especificaciones}>
+            {producto.Cabina.split("\n").map((cabina, index) => (
+              <Text key={index}>{cabina}</Text>
+            ))}
+          </View>
+          <Text style={styles.caracgenerales}>Dimensiones Generales:</Text>
+          <View style={styles.especificaciones}>
+            {producto.dimensionesGenerales
+              .split("\n")
+              .map((dimension, index) => (
+                <Text key={index}>{dimension}</Text>
               ))}
-            </View>
-
-            <Text>Cabina:</Text>
-            <View>
-              {producto.Cabina.split("\n").map((cabina, index) => (
-                <Text key={index}>{cabina}</Text>
-              ))}
-            </View>
-
-            <Text>Dimensiones Generales:</Text>
-            <View>
-              {producto.dimensionesGenerales
-                .split("\n")
-                .map((dimension, index) => (
-                  <Text key={index}>{dimension}</Text>
-                ))}
-            </View>
           </View>
         </View>
 
+        {/* Imagen del producto */}
         <Image src={producto.imagen} />
 
         {/* Asesor comercial */}
