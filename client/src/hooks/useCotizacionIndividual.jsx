@@ -2,6 +2,11 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CotizacionIndividualAPI } from "../components/api/CotizacionIndividualApi";
 import Swal from "sweetalert2";
 
+const getCountCotizacionEstado3 = async () => {
+  const response = await CotizacionIndividualAPI.get("getEstado3");
+  return response.data;
+};
+
 const postCotizacionState2 = async (data) => {
   return await CotizacionIndividualAPI.put(`estado2`, { id: data.id });
 };
@@ -11,6 +16,11 @@ const postCotizacionState3 = async (data) => {
 };
 
 export const useCotizacionIndividual = () => {
+  const countEstado3 = useQuery({
+    queryKey: ["countEstado3"],
+    queryFn: () => getCountCotizacionEstado3(),
+  });
+
   const cotizacionMutationState2 = useMutation({
     mutationKey: ["cotizacionIndividualState2-mutation"],
     mutationFn: (data) => postCotizacionState2(data),
@@ -124,5 +134,6 @@ export const useCotizacionIndividual = () => {
   return {
     cotizacionMutationState2,
     cotizacionMutationState3,
+    countEstado3,
   };
 };

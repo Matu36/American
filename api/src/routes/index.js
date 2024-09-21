@@ -57,6 +57,7 @@ const {
   eliminarCotizacionIndividual,
   actualizarEstadoCotizacionIndividualEstado3,
   actualizarEstadoCotizacionIndividualEstado2,
+  contarCotizacionesEstado3,
 } = require("../controllers/CotizacionIndividual");
 
 const {
@@ -265,6 +266,7 @@ router.put(
   "/cotizacionIndividual/estado3",
   actualizarEstadoCotizacionIndividualEstado3
 );
+router.get("/cotizacionIndividual/getEstado3", contarCotizacionesEstado3);
 
 router.get("/cotizaciones/getCotizacionEstado3", getCotizacionesEstadoTres);
 

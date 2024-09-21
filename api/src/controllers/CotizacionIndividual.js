@@ -120,8 +120,28 @@ const actualizarEstadoCotizacionIndividualEstado3 = async (req, res) => {
   }
 };
 
+const contarCotizacionesEstado3 = async (req, res) => {
+  try {
+    // Contar todas las cotizaciones con estado 3
+    const count = await CotizacionIndividual.count({
+      where: { estado: 3 },
+    });
+
+    return res.status(200).send({
+      message: "Conteo de cotizaciones con estado 3 exitoso",
+      count,
+    });
+  } catch (error) {
+    console.error("Error al contar las cotizaciones con estado 3:", error);
+    return res.status(500).send({
+      error: error.message || "Error al contar las cotizaciones con estado 3",
+    });
+  }
+};
+
 module.exports = {
   eliminarCotizacionIndividual,
   actualizarEstadoCotizacionIndividualEstado2,
   actualizarEstadoCotizacionIndividualEstado3,
+  contarCotizacionesEstado3,
 };
