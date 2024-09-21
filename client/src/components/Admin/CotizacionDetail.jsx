@@ -543,10 +543,12 @@ export default function CotizacionDetail() {
             <button
               onClick={() => estado3({ id: cotizacion.id })}
               className="btn-concretar-venta"
-              disabled={cotizacion.estado === 3}
+              disabled={cotizacion.estado === 3 || cotizacion.estado === 2}
             >
               {cotizacion.estado === 3
                 ? "Pendiente de Aprobación"
+                : cotizacion.estado === 2
+                ? "Venta Concretada"
                 : "Concretar Venta"}
             </button>
           </div>

@@ -56,32 +56,35 @@ export default function Ventas() {
     {
       name: "Producto",
       selector: (row) =>
-        `${row.Producto.familia} ${row.Producto.marca} ${row.Producto.modelo}`,
+        `${row.Cotizacione.Producto.familia} ${row.Cotizacione.Producto.marca} ${row.Cotizacione.Producto.modelo}`,
       sortable: true,
     },
     {
       name: "Nro de Cotización",
-      selector: (row) => row.codigoCotizacion,
+      selector: (row) => row.Cotizacione.codigoCotizacion,
       sortable: true,
     },
     {
       name: "Precio Final",
       sortable: true,
-      selector: (row) => `${row.moneda} ${row.PrecioFinal}`,
+      selector: (row) => `U$D ${row.PrecioFinal}`,
     },
-    {
-      name: "Fecha de Venta",
-      selector: (row) => new Date(row.fechaDeCreacion).toLocaleDateString(),
-      sortable: true,
-    },
+    // {
+    //   name: "Fecha de Venta",
+    //   selector: (row) =>
+    //     new Date(row.Cotizacione.fechaDeCreacion).toLocaleDateString(),
+    //   sortable: true,
+    // },
     {
       name: "Vendedor",
-      selector: (row) => `${row.Usuario.nombre} ${row.Usuario.apellido}`,
+      selector: (row) =>
+        `${row.Cotizacione.Usuario.nombre} ${row.Cotizacione.Usuario.apellido}`,
       sortable: true,
     },
     {
       name: "Cliente",
-      selector: (row) => `${row.Cliente.nombre} ${row.Cliente.apellido}`,
+      selector: (row) =>
+        `${row.Cotizacione.Cliente.nombre} ${row.Cotizacione.Cliente.apellido}`,
       sortable: true,
     },
 
@@ -140,6 +143,7 @@ export default function Ventas() {
         </div>
         {!showSpinner ? (
           <DataTable
+            className="datatable-container"
             columns={columns}
             data={ventas}
             pagination

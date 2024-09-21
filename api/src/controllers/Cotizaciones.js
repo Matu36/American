@@ -849,61 +849,54 @@ const getCotizacionesEstadoDos = async (req, res) => {
       throw "Se requiere el ID de usuario";
     }
 
-    // Buscar el usuario en la base de datos
     const usuario = await Usuarios.findByPk(idUsuario);
     if (!usuario) {
       throw "Usuario no encontrado";
     }
 
-    // Obtener las cotizaciones con estado 2 según el rol del usuario
     let cotizaciones;
-    if (
-      usuario.rol === true ||
-      (usuario.rol === false && usuario.baneado === true)
-    ) {
-      cotizaciones = await Cotizaciones.findAll({
+    if (usuario.rol === true) {
+      // Usuario con rol true: traer todas las cotizaciones individuales con estado 2
+      cotizaciones = await CotizacionIndividual.findAll({
         where: { estado: 2 },
-        attributes: [
-          "id",
-          "precio",
-          "PrecioFinal",
-          "fechaDeCreacion",
-          "moneda",
-          "numeroCotizacion",
-          "codigoCotizacion",
-          "saldoAFinanciar",
-          "cuotas",
-          "cuotaValor",
-          "anticipo",
-        ],
+        attributes: ["id", "PrecioFinal"],
         include: [
-          { model: Usuarios, attributes: ["nombre", "apellido"] },
-          { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
-          { model: Productos, attributes: ["familia", "marca", "modelo"] },
+          {
+            model: Cotizaciones,
+            attributes: ["codigoCotizacion"],
+            include: [
+              { model: Usuarios, attributes: ["nombre", "apellido"] },
+              { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
+              {
+                model: Productos,
+                attributes: ["familia", "marca", "modelo"],
+              },
+            ],
+            order: [["fechaVenta", "DESC"]],
+          },
         ],
-        order: [["fechaVenta", "DESC"]],
       });
-    } else {
-      cotizaciones = await Cotizaciones.findAll({
-        where: { idUsuario, estado: 2 },
-        attributes: [
-          "id",
-          "PrecioFinal",
-          "fechaDeCreacion",
-          "moneda",
-          "numeroCotizacion",
-          "saldoAFinanciar",
-          "cuotas",
-          "cuotaValor",
-          "anticipo",
-          "codigoCotizacion",
-        ],
+    } else if (usuario.rol === false) {
+      // Usuario con rol false: traer solo sus cotizaciones individuales con estado 2
+      cotizaciones = await CotizacionIndividual.findAll({
+        where: { estado: 2 },
+        attributes: ["id", "PrecioFinal"],
         include: [
-          { model: Usuarios, attributes: ["nombre", "apellido"] },
-          { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
-          { model: Productos, attributes: ["familia", "marca", "modelo"] },
+          {
+            model: Cotizaciones,
+            attributes: ["codigoCotizacion"],
+            where: { idUsuario: usuario.id }, // Filtra las cotizaciones por el idUsuario
+            include: [
+              { model: Usuarios, attributes: ["nombre", "apellido"] },
+              { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
+              {
+                model: Productos,
+                attributes: ["familia", "marca", "modelo"],
+              },
+            ],
+            order: [["fechaVenta", "DESC"]],
+          },
         ],
-        order: [["fechaVenta", "DESC"]],
       });
     }
 
@@ -966,23 +959,29 @@ const getVentaById = async (req, res) => {
     const { id } = req.params;
 
     if (!id) {
-      throw "Se requiere el ID de la cotización";
+      throw "Se requiere el ID de la cotización individual";
     }
 
-    const cotizacion = await Cotizaciones.findByPk(id, {
+    // Buscar la cotización individual por ID
+    const cotizacionIndividual = await CotizacionIndividual.findByPk(id, {
       include: [
-        { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
-        { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
-        { model: Productos, attributes: ["familia", "marca", "modelo"] },
+        {
+          model: Cotizaciones,
+          include: [
+            { model: Usuarios, attributes: ["nombre", "apellido", "email"] },
+            { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
+            { model: Productos, attributes: ["familia", "marca", "modelo"] },
+          ],
+        },
       ],
     });
 
-    if (!cotizacion) {
-      throw "Cotización no encontrada";
+    if (!cotizacionIndividual) {
+      throw "Cotización individual no encontrada";
     }
 
     // Devolver la cotización
-    return res.status(200).json(cotizacion);
+    return res.status(200).json(cotizacionIndividual);
   } catch (error) {
     console.error("Error al obtener la cotización:", error);
     return res.status(400).send(error);
@@ -1090,16 +1089,14 @@ const getCotizacionesSum = async (req, res) => {
     let cotizacionesCotizaciones;
     let cotizacionesVentas;
 
-    if (
-      usuario.rol === true ||
-      (usuario.rol === false && usuario.baneado === true)
-    ) {
+    // Condiciones para obtener cotizaciones y ventas
+    if (usuario.rol === true) {
       // Obtener todas las cotizaciones (estado 1) y ventas (estado 2)
       cotizacionesCotizaciones = await Cotizaciones.findAll({
         include: [
           {
             model: CotizacionIndividual,
-            where: { estado: 1 }, // Filtro por estado 1 en CotizacionIndividual
+            where: { estado: 1 },
             attributes: ["PrecioFinal", "moneda"],
           },
         ],
@@ -1109,28 +1106,30 @@ const getCotizacionesSum = async (req, res) => {
         include: [
           {
             model: CotizacionIndividual,
-            where: { estado: 2 }, // Filtro por estado 2 en CotizacionIndividual
+            where: { estado: 2 },
             attributes: ["PrecioFinal", "moneda"],
           },
         ],
       });
     } else {
-      // Obtener cotizaciones y ventas para el usuario con estado filtrado
+      // Obtener solo las cotizaciones y ventas del usuario con estado filtrado
       cotizacionesCotizaciones = await Cotizaciones.findAll({
+        where: { idUsuario }, // Filtrar por ID de usuario
         include: [
           {
             model: CotizacionIndividual,
-            where: { idUsuario, estado: 1 }, // Filtro por idUsuario y estado 1
+            where: { estado: 1 },
             attributes: ["PrecioFinal", "moneda"],
           },
         ],
       });
 
       cotizacionesVentas = await Cotizaciones.findAll({
+        where: { idUsuario }, // Filtrar por ID de usuario
         include: [
           {
             model: CotizacionIndividual,
-            where: { idUsuario, estado: 2 }, // Filtro por idUsuario y estado 2
+            where: { estado: 2 },
             attributes: ["PrecioFinal", "moneda"],
           },
         ],
@@ -1141,12 +1140,12 @@ const getCotizacionesSum = async (req, res) => {
       COTIZACIONES: {
         totalPesos: 0,
         totalUSD: 0,
-        CANTIDADTOTAL: cotizacionesCotizaciones.length,
+        CANTIDADTOTAL: 0, // Inicializado a 0
       },
       VENTAS: {
         totalPesos: 0,
         totalUSD: 0,
-        CANTIDADTOTAL: cotizacionesVentas.length,
+        CANTIDADTOTAL: 0, // Inicializado a 0
       },
     };
 
@@ -1155,6 +1154,9 @@ const getCotizacionesSum = async (req, res) => {
       cotizacion.CotizacionIndividuals.forEach((indiv) => {
         const { PrecioFinal, moneda } = indiv;
         const precioFinal = parseFloat(PrecioFinal);
+
+        // Contar cada CotizacionIndividual
+        result.COTIZACIONES.CANTIDADTOTAL += 1;
 
         if (moneda === "$") {
           result.COTIZACIONES.totalPesos += precioFinal;
@@ -1169,6 +1171,9 @@ const getCotizacionesSum = async (req, res) => {
       cotizacion.CotizacionIndividuals.forEach((indiv) => {
         const { PrecioFinal, moneda } = indiv;
         const precioFinal = parseFloat(PrecioFinal);
+
+        // Contar cada CotizacionIndividual
+        result.VENTAS.CANTIDADTOTAL += 1;
 
         if (moneda === "$") {
           result.VENTAS.totalPesos += precioFinal;

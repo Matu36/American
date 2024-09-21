@@ -182,6 +182,7 @@ const AdminLayout = () => {
           <Route path="/Cotizaciones/historial" element={<Historial />} />
           <Route path="/Cotizaciones/crear" element={<Cotizador />} />
           <Route path="/ventas/ver" element={<Ventas />} />
+          <Route path="/ventas/:id" element={<VentasDetail />} />
           <Route path="/ventas/aprobar" element={<VentasAprobar />} />
         </Routes>
       </div>

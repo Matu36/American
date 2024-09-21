@@ -123,12 +123,6 @@ export default function Cotizaciones() {
           >
             Modificar
           </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => handleConcretarVenta(row.id)}
-            className="dropdown-item dropdown-item-concretar"
-          >
-            Concretar Venta
-          </Dropdown.Item>
         </DropdownButton>
       ),
     },

@@ -64,6 +64,7 @@ export default function CotizacionEdit() {
       setFormData({
         idUsuario: idUsuario,
         id: cotizacionDetalle.idCotizacion || "",
+        codigoCotizacion: cotizacionDetalle.codigoCotizacion || "",
         idCliente: cotizacionDetalle.idCliente || "",
         idProducto: cotizacionDetalle.idProducto || "",
         notasEmail: cotizacionDetalle.notasEmail || "",
@@ -291,7 +292,9 @@ export default function CotizacionEdit() {
       <BackButton />
       <form onSubmit={handleSubmit}>
         <div>
-          <h2 className="tituloCompo">Editar Cotización</h2> <br />
+          <h2 className="tituloCompo">Modificar Cotización</h2>{" "}
+          <h2> {formData.codigoCotizacion}</h2>
+          <br />
         </div>
         <div></div>
         <div className="form-group">
@@ -590,15 +593,7 @@ export default function CotizacionEdit() {
                 </div>
               </>
             )}
-            {/* <div className="form-group">
-              <label className="form-label">Saldo con Interés</label>
-              <input
-                type="text"
-                value={cotizacion.saldoConInteres}
-                readOnly
-                className="form-input"
-              />
-            </div> */}
+
             <div className="form-group">
               <label className="form-label">Interés</label>
               <input
@@ -625,13 +620,15 @@ export default function CotizacionEdit() {
             </div>
 
             <div>
-              <button
-                type="button"
-                className="buttonEliminar"
-                onClick={() => removeCotizacionIndividual(index)}
-              >
-                Eliminar Cotización
-              </button>
+              {cotizacion.estado !== 2 && cotizacion.estado !== 3 && (
+                <button
+                  type="button"
+                  className="buttonEliminar"
+                  onClick={() => removeCotizacionIndividual(index)}
+                >
+                  Eliminar Cotización
+                </button>
+              )}
             </div>
           </div>
         ))}
