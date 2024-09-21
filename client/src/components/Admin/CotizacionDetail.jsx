@@ -1,15 +1,11 @@
 import React from "react";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
+import { useCotizacionIndividual } from "../../hooks/useCotizacionIndividual";
 import { useParams } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
-import Logo from "../../assets/img/LOGOAMERICANPRINCIPAL.png";
-import Empresa from "../../assets/img/EmpresaPDF.jpg";
 import Spinner from "../../UI/Spinner";
 import americanvial from "../../assets/img/PDF/AMERICAN.png";
-import ENERGY from "../../assets/img/PDF/ENERGY.png";
-import AMERICANDEGRADE from "../../assets/img/PDF/AMERICANDEGRADE.png";
 import SINOMACH from "../../assets/img/PDF/SINOMACH.png";
-import { toWords } from "number-to-words";
 
 import {
   PDFDownloadLink,
@@ -25,10 +21,14 @@ import BackButton from "../../UI/BackButton";
 export default function CotizacionDetail() {
   const { id } = useParams();
 
-  const { data: cotizacionDetalle, isLoading } = useCotizaciones(
-    null,
-    id
-  ).cotizacionDetalleQuery;
+  const { mutate: estado3 } =
+    useCotizacionIndividual().cotizacionMutationState3;
+
+  const {
+    data: cotizacionDetalle,
+    isLoading,
+    refetch: detalle,
+  } = useCotizaciones(null, id).cotizacionDetalleQuery;
 
   if (isLoading) {
     return (
@@ -478,29 +478,28 @@ export default function CotizacionDetail() {
             más IVA.- Ejemplo hoy BNA $ 977 ( $ 180.012.250 + IVA 10.5% )
           </p>
           <hr className="masIva" />
+
+          {/* Condiciones Generales de Venta */}
           <div className="condicionesgenerales">
             <h4>Condiciones Generales de Venta</h4>
             <br />
             <div className="caractcoti">
               <ul>
                 <li>
-                  {" "}
                   <strong>Plazo de Entrega:</strong> {plazoEntrega}
                 </li>
                 <li>
                   <strong>Forma de Pago:</strong> {formaPago}
                 </li>
                 <li>
-                  <strong>Manteniemiento de Oferta: </strong>
+                  <strong>Mantenimiento de Oferta:</strong>{" "}
                   {mantenimientoOferta}
                 </li>
                 <li>
-                  <strong>Lugar de Entrega: </strong>
-                  {lugarEntrega}
+                  <strong>Lugar de Entrega:</strong> {lugarEntrega}
                 </li>
                 <li>
-                  <strong> Garantía: </strong>
-                  {garantia}
+                  <strong>Garantía:</strong> {garantia}
                 </li>
                 <li>
                   <strong>Entrega Técnica:</strong> {entregaTecnica}
@@ -515,6 +514,7 @@ export default function CotizacionDetail() {
             </div>
           </div>
 
+          {/* Detalles Financieros */}
           <div className="caractcotizar">
             {cotizacion.anticipo > 0 && (
               <p>
@@ -539,8 +539,20 @@ export default function CotizacionDetail() {
               {parseFloat(cotizacion.PrecioFinal).toFixed(2)}
             </p>
           </div>
+          <div className="concrectarVenta">
+            <button
+              onClick={() => estado3({ id: cotizacion.id })}
+              className="btn-concretar-venta"
+              disabled={cotizacion.estado === 3}
+            >
+              {cotizacion.estado === 3
+                ? "Pendiente de Aprobación"
+                : "Concretar Venta"}
+            </button>
+          </div>
         </div>
       ))}
+
       <div>
         <div className="caracgenerales">
           <h5 style={{ fontWeight: "bold" }}>

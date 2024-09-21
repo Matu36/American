@@ -5530,3 +5530,132 @@ margin-top: -10px;
   justify-content: center;
 }
 
+.btn-concretar-venta {
+  background-color: #ffcc00; 
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  
+}
+
+.concrectarVenta {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-concretar-venta:hover {
+  background-color: #e6b800; 
+}
+
+.ventasPendientes {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cotizacion-general {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s;
+}
+
+.cotizacion-general:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+h4 {
+  font-size: 1.2rem;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.cotizacion-general h3 {
+  text-decoration: underline;
+}
+.cotizacion-general p {
+ font-weight: bold;
+}
+
+
+/* Distribución de información */
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.cliente-info-pendiente h4 {
+  text-decoration: underline;
+}
+.producto-info-pendiente h4 {
+  text-decoration: underline;
+}
+.usuario-info-pendiente h4 {
+  text-decoration: underline;
+}
+.precios-info-pendiente h4 {
+  text-decoration: underline;
+}
+
+.cliente-info-pendiente,
+.producto-info-pendiente,
+.usuario-info-pendiente {
+  border: 1px solid #e0e0e0;
+  padding: 15px;
+  flex: 1 1 30%;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.cliente-info-pendiente:last-child,
+.producto-info-pendiente:last-child,
+.usuario-info-pendiente:last-child {
+  margin-right: 0; /* Eliminar margen derecho en el último elemento */
+}
+
+.precios-info-pendiente {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 15px;
+  margin-top: 15px;
+  background-color: #f9f9f9;
+}
+
+.precios-info-pendiente h4 {
+  margin-bottom: 10px;
+}
+
+.btn-concretar-venta {
+  margin-top: 20px; /* Espacio entre detalles y botón */
+}
+
+
+
+
+
+
+

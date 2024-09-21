@@ -30,6 +30,11 @@ const postCotisPorFecha = async (data) => {
   });
 };
 
+const getCotizacionParaSerAprobada = async () => {
+  const { data } = await CotizacionesAPI.get(`/getCotizacionEstado3`);
+  return data;
+};
+
 const postCotizacionState2 = async (data) => {
   return await CotizacionesAPI.put(`state`, { id: data.id });
 };
@@ -81,6 +86,11 @@ export const useVentas = (idUsuario, id) => {
 
 export const useCotizaciones = (idUsuario, id) => {
   const queryClient = useQueryClient();
+  const CotizacionesPendientesDeAprobacion = useQuery({
+    queryKey: ["cotispendientesdeaprobacion"],
+    queryFn: getCotizacionParaSerAprobada,
+  });
+
   const cotizacionMutation = useMutation({
     mutationKey: ["cotizacion-mutation"],
     mutationFn: (data) => postCotizacion(data),
@@ -331,6 +341,7 @@ export const useCotizaciones = (idUsuario, id) => {
     cotizacionMutationState2,
     cotizacionEditMutation,
     cotisPorFechaMutation,
+    CotizacionesPendientesDeAprobacion,
   };
 };
 

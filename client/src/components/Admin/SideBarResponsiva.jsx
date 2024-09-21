@@ -105,7 +105,7 @@ const SideBarResponsiva = ({ handleCerrarModalSideBar }) => {
         {
           label: "Historial Cotizaciones",
           path: "/admin/cotizaciones/historial",
-          roles: ["administrador", "gerente", "vendedor"],
+          roles: ["administrador", "gerente"],
         },
       ],
       roles: ["administrador", "vendedor", "gerente"],
@@ -113,7 +113,18 @@ const SideBarResponsiva = ({ handleCerrarModalSideBar }) => {
     {
       label: "Ventas",
       icon: FaShoppingCart,
-      subCategories: [],
+      subCategories: [
+        {
+          label: "Mis Ventas",
+          path: "/admin/ventas/ver",
+          roles: ["administrador", "vendedor"],
+        },
+        {
+          label: "Pendientes de Aprobación",
+          path: "/admin/ventas/aprobar",
+          roles: ["administrador"],
+        },
+      ],
       roles: ["administrador", "vendedor", "gerente"],
     },
     // {

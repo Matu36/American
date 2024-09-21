@@ -113,7 +113,18 @@ const SideBarAdmin = () => {
     {
       label: "Ventas",
       icon: FaShoppingCart,
-      subCategories: [],
+      subCategories: [
+        {
+          label: "Mis Ventas",
+          path: "/admin/ventas/ver",
+          roles: ["administrador", "vendedor"],
+        },
+        {
+          label: "Pendientes de Aprobación",
+          path: "/admin/ventas/aprobar",
+          roles: ["administrador"],
+        },
+      ],
       roles: ["administrador", "vendedor", "gerente"],
     },
     // {

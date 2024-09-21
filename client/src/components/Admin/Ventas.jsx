@@ -123,11 +123,11 @@ export default function Ventas() {
   //---------------------------------FIN SPINNER ------------------------------------//
 
   return (
-    <div className="form-container">
+    <div className="postVentaContainer">
       <BackButton />
       <div>
         <div className="form-group" style={{ maxWidth: "60%" }}>
-          <h2 className="tituloCompo">Ventas</h2> <br />
+          <h2 className="tituloCompo">Mis Ventas</h2> <br />
           <input
             type="text"
             className="form-input"

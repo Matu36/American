@@ -42,6 +42,7 @@ const {
   filtrarCotizacionesPorFecha,
   getCotizacionesPorModelo,
   getranking,
+  getCotizacionesEstadoTres,
 } = require("../controllers/Cotizaciones");
 
 const {
@@ -54,6 +55,8 @@ const {
 
 const {
   eliminarCotizacionIndividual,
+  actualizarEstadoCotizacionIndividualEstado3,
+  actualizarEstadoCotizacionIndividualEstado2,
 } = require("../controllers/CotizacionIndividual");
 
 const {
@@ -254,5 +257,15 @@ router.post("/favoritos/create", createFavorito);
 router.delete("/favoritos/delete", deleteFavorito);
 router.get("/suscripcion/getAll", getAllSuscripciones);
 router.post("/suscripcion/create", createSuscripcion);
+router.put(
+  "/cotizacionIndividual/estado2",
+  actualizarEstadoCotizacionIndividualEstado2
+);
+router.put(
+  "/cotizacionIndividual/estado3",
+  actualizarEstadoCotizacionIndividualEstado3
+);
+
+router.get("/cotizaciones/getCotizacionEstado3", getCotizacionesEstadoTres);
 
 module.exports = router;

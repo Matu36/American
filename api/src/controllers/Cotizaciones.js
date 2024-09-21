@@ -915,6 +915,52 @@ const getCotizacionesEstadoDos = async (req, res) => {
   }
 };
 
+const getCotizacionesEstadoTres = async (req, res) => {
+  try {
+    // Buscar cotizaciones individuales con estado 3
+    const cotizaciones = await CotizacionIndividual.findAll({
+      where: { estado: 3 },
+      attributes: [
+        "precio",
+        "PrecioFinal",
+        "moneda",
+        "interes",
+        "saldoAFinanciar",
+        "cuotas",
+        "cuotaValor",
+        "anticipo",
+        "id",
+      ],
+      include: [
+        {
+          model: Cotizaciones,
+          attributes: [
+            "id",
+            "fechaDeCreacion",
+            "numeroCotizacion",
+            "codigoCotizacion",
+          ],
+          include: [
+            { model: Usuarios, attributes: ["nombre", "apellido"] },
+            { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
+            { model: Productos, attributes: ["familia", "marca", "modelo"] },
+          ],
+        },
+      ],
+      order: [[{ model: Cotizaciones }, "fechaVenta", "DESC"]],
+    });
+
+    // Devolver las cotizaciones individuales con estado 3
+    return res.status(200).json(cotizaciones);
+  } catch (error) {
+    console.error(
+      "Error al obtener cotizaciones individuales con estado 3:",
+      error
+    );
+    return res.status(400).send({ error: error.message });
+  }
+};
+
 const getVentaById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -1473,4 +1519,5 @@ module.exports = {
   filtrarCotizacionesPorFecha,
   getCotizacionesPorModelo,
   getranking,
+  getCotizacionesEstadoTres,
 };
