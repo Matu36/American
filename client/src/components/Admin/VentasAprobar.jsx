@@ -1,6 +1,7 @@
 import React from "react";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
 import { useCotizacionIndividual } from "../../hooks/useCotizacionIndividual";
+import BackButton from "../../UI/BackButton";
 
 export default function VentasAprobar() {
   const { data, isLoading } =
@@ -11,6 +12,8 @@ export default function VentasAprobar() {
 
   return (
     <div className="ventasPendientes">
+      <BackButton />
+      <h2 className="tituloCompo1">Ventas Pendientes</h2> <br />
       {data && data.length > 0 ? (
         data.map((cotizacion) => (
           <div key={cotizacion.codigoCotizacion} className="cotizacion-general">

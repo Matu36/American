@@ -80,42 +80,59 @@ export default function ClientesDetail() {
       </div>
       <hr />
       {contactoAlternativo && (
-        <div style={{ marginBottom: "10px" }}>
-          <strong>Contacto Alternativo:</strong> {contactoAlternativo}
-        </div>
+        <>
+          <div style={{ marginBottom: "10px" }}>
+            <strong>Contacto Alternativo:</strong> {contactoAlternativo}
+          </div>
+          <hr />
+        </>
       )}
-      <hr />
+
       {mailAlternativo && (
-        <div style={{ marginBottom: "10px" }}>
-          <strong>Email:</strong> {mailAlternativo}
-        </div>
+        <>
+          <div style={{ marginBottom: "10px" }}>
+            <strong>Email:</strong> {mailAlternativo}
+          </div>
+          <hr />
+        </>
       )}
-      <hr />
+
       {telefonoAlternativo && (
-        <div style={{ marginBottom: "10px" }}>
-          <strong>Teléfono Alternativo:</strong> {telefonoAlternativo}
-        </div>
+        <>
+          <div style={{ marginBottom: "10px" }}>
+            <strong>Teléfono Alternativo:</strong> {telefonoAlternativo}
+          </div>
+          <hr />
+        </>
       )}
-      <hr />
+
       {contactoAlternativo1 && (
-        <div style={{ marginBottom: "10px" }}>
-          <strong>Contacto Alternativo:</strong> {contactoAlternativo1}
-        </div>
+        <>
+          <div style={{ marginBottom: "10px" }}>
+            <strong>Contacto Alternativo:</strong> {contactoAlternativo1}
+          </div>
+          <hr />
+        </>
       )}
-      <hr />
 
       {mailAlternativo1 && (
-        <div style={{ marginBottom: "10px" }}>
-          <strong>Email:</strong> {mailAlternativo1}
-        </div>
+        <>
+          <div style={{ marginBottom: "10px" }}>
+            <strong>Email:</strong> {mailAlternativo1}
+          </div>
+          <hr />
+        </>
       )}
-      <hr />
+
       {telefonoAlternativo1 && (
-        <div style={{ marginBottom: "10px" }}>
-          <strong>Teléfono:</strong> {telefonoAlternativo1}
-        </div>
+        <>
+          <div style={{ marginBottom: "10px" }}>
+            <strong>Teléfono:</strong> {telefonoAlternativo1}
+          </div>
+          <hr />
+        </>
       )}
-      <hr />
+
       <div style={{ marginBottom: "10px" }}>
         <strong>Provincia:</strong> {provincia}
       </div>

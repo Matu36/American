@@ -368,6 +368,7 @@ const Cotizador = () => {
             onChange={handleClienteChange}
             options={clienteOptions}
             isLoading={isLoading}
+            placeholder="Seleccionar"
             isClearable
             className="form-input"
             required
@@ -415,7 +416,7 @@ const Cotizador = () => {
                 options={familias}
                 value={selectedFamilia}
                 onChange={setSelectedFamilia}
-                placeholder="Seleccionar familia"
+                placeholder="Seleccionar"
                 className="form-input"
                 required
               />
@@ -428,7 +429,7 @@ const Cotizador = () => {
                 options={marcas}
                 value={selectedMarca}
                 onChange={setSelectedMarca}
-                placeholder="Seleccionar marca"
+                placeholder="Seleccionar"
                 isDisabled={!selectedFamilia}
                 className="form-input"
                 required
@@ -442,7 +443,7 @@ const Cotizador = () => {
                 options={modelos}
                 value={selectedModelo}
                 onChange={setSelectedModelo}
-                placeholder="Seleccionar modelo"
+                placeholder="Seleccionar"
                 isDisabled={!selectedMarca}
                 className="form-input"
                 required

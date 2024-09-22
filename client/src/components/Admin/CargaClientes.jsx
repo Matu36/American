@@ -159,224 +159,233 @@ export default function CargaClientes() {
       <br />
       <br />
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="CUIT">
-            CUIT<span className="obligatorio">*</span>
-          </label>
-          <InputMask
-            mask="99 - 99999999 - 9"
-            maskChar=" "
-            value={formData.CUIT}
-            onChange={handleMaskedChange}
-            required
-          >
-            {(inputProps) => (
-              <input
-                {...inputProps}
-                type="text"
-                id="CUIT"
-                name="CUIT"
-                required
-              />
-            )}
-          </InputMask>
-        </div>
+        <div className="formClientes">
+          <div className="form-group">
+            <label htmlFor="CUIT">
+              CUIT<span className="obligatorio">*</span>
+            </label>
+            <InputMask
+              mask="99 - 99999999 - 9"
+              maskChar=" "
+              value={formData.CUIT}
+              onChange={handleMaskedChange}
+              required
+            >
+              {(inputProps) => (
+                <input
+                  {...inputProps}
+                  type="text"
+                  id="CUIT"
+                  name="CUIT"
+                  required
+                />
+              )}
+            </InputMask>
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="razonSocial">Razón Social</label>
-          <input
-            type="text"
-            id="razonSocial"
-            name="razonSocial"
-            value={formData.razonSocial}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="nombre">
-            Nombre<span className="obligatorio">*</span>
-          </label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="apellido">
-            Apellido<span className="obligatorio">*</span>
-          </label>
-          <input
-            type="text"
-            id="apellido"
-            name="apellido"
-            value={formData.apellido}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="provincia">
-            Provincia<span className="obligatorio">*</span>
-          </label>
-          <Select
-            id="provincia"
-            name="provincia"
-            options={provincias.map((provincia) => ({
-              value: provincia.nombre,
-              label: provincia.nombre,
-            }))}
-            value={
-              formData.provincia
-                ? { value: formData.provincia, label: formData.provincia }
-                : null
-            }
-            onChange={(selectedOption) =>
-              handleChange({
-                target: { name: "provincia", value: selectedOption.value },
-              })
-            }
-            placeholder="Selecciona una provincia"
-            isClearable
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label htmlFor="razonSocial">Razón Social</label>
+            <input
+              type="text"
+              id="razonSocial"
+              name="razonSocial"
+              value={formData.razonSocial}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="nombre">
+              Nombre<span className="obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="apellido">
+              Apellido<span className="obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              id="apellido"
+              name="apellido"
+              value={formData.apellido}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="provincia">
+              Provincia<span className="obligatorio">*</span>
+            </label>
+            <Select
+              id="provincia"
+              name="provincia"
+              options={provincias.map((provincia) => ({
+                value: provincia.nombre,
+                label: provincia.nombre,
+              }))}
+              value={
+                formData.provincia
+                  ? { value: formData.provincia, label: formData.provincia }
+                  : null
+              }
+              onChange={(selectedOption) =>
+                handleChange({
+                  target: { name: "provincia", value: selectedOption.value },
+                })
+              }
+              placeholder="Selecciona una provincia"
+              isClearable
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="ciudad">
-            Ciudad<span className="obligatorio">*</span>
-          </label>
-          <Select
-            id="ciudad"
-            name="ciudad"
-            options={municipios.map((municipio) => ({
-              value: municipio.nombre,
-              label: municipio.nombre,
-            }))}
-            value={
-              formData.ciudad
-                ? { value: formData.ciudad, label: formData.ciudad }
-                : null
-            }
-            onChange={(selectedOption) =>
-              handleChange({
-                target: { name: "ciudad", value: selectedOption.value },
-              })
-            }
-            placeholder="Selecciona una ciudad"
-            isClearable
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="domicilio">
-            Domicilio<span className="obligatorio">*</span>
-          </label>
-          <input
-            type="text"
-            id="domicilio"
-            name="domicilio"
-            value={formData.domicilio}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="mail">
-            Email<span className="obligatorio">*</span>
-          </label>
-          <input
-            type="email"
-            id="mail"
-            name="mail"
-            value={formData.mail}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="telefono">
-            Teléfono<span className="obligatorio">*</span>
-          </label>
-          <input
-            type="number"
-            id="telefono"
-            name="telefono"
-            value={formData.telefono}
-            onChange={(e) => handleChange(soloNumeros(e))}
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label htmlFor="ciudad">
+              Ciudad<span className="obligatorio">*</span>
+            </label>
+            <Select
+              id="ciudad"
+              name="ciudad"
+              options={municipios.map((municipio) => ({
+                value: municipio.nombre,
+                label: municipio.nombre,
+              }))}
+              value={
+                formData.ciudad
+                  ? { value: formData.ciudad, label: formData.ciudad }
+                  : null
+              }
+              onChange={(selectedOption) =>
+                handleChange({
+                  target: { name: "ciudad", value: selectedOption.value },
+                })
+              }
+              placeholder="Selecciona una ciudad"
+              isClearable
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="domicilio">
+              Domicilio<span className="obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              id="domicilio"
+              name="domicilio"
+              value={formData.domicilio}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="mail">
+              Email<span className="obligatorio">*</span>
+            </label>
+            <input
+              type="email"
+              id="mail"
+              name="mail"
+              value={formData.mail}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="telefono">
+              Teléfono<span className="obligatorio">*</span>
+            </label>
+            <input
+              type="number"
+              id="telefono"
+              name="telefono"
+              value={formData.telefono}
+              onChange={(e) => handleChange(soloNumeros(e))}
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="contactoAlternativo">Contacto Alternativo</label>
-          <input
-            type="contactoAlternativo"
-            id="contactoAlternativo"
-            name="contactoAlternativo"
-            value={formData.contactoAlternativo}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="mailAlternativo">Email</label>
-          <input
-            type="email"
-            id="mailAlternativo"
-            name="mailAlternativo"
-            value={formData.mailAlternativo}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="telefonoAlternativo">Teléfono</label>
-          <input
-            type="number"
-            id="telefonoAlternativo"
-            name="telefonoAlternativo"
-            value={formData.telefonoAlternativo}
-            onChange={(e) => handleChange(soloNumeros(e))}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="contactoAlternativo1">Contacto Alternativo</label>
-          <input
-            type="contactoAlternativo1"
-            id="contactoAlternativo1"
-            name="contactoAlternativo1"
-            value={formData.contactoAlternativo1}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="mailAlternativo1">Email</label>
-          <input
-            type="email"
-            id="mailAlternativo1"
-            name="mailAlternativo1"
-            value={formData.mailAlternativo1}
-            onChange={handleChange}
-          />
-        </div>
+          <div className="form-group">
+            <label htmlFor="contactoAlternativo">Contacto Alternativo</label>
+            <input
+              type="contactoAlternativo"
+              id="contactoAlternativo"
+              name="contactoAlternativo"
+              placeholder="Nombre y Apellido"
+              value={formData.contactoAlternativo}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="mailAlternativo">Email</label>
+            <input
+              type="email"
+              placeholder="Email Alternativo"
+              id="mailAlternativo"
+              name="mailAlternativo"
+              value={formData.mailAlternativo}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="telefonoAlternativo">Teléfono</label>
+            <input
+              type="number"
+              placeholder="Teléfono Alternativo"
+              id="telefonoAlternativo"
+              name="telefonoAlternativo"
+              value={formData.telefonoAlternativo}
+              onChange={(e) => handleChange(soloNumeros(e))}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="contactoAlternativo1">Contacto Alternativo</label>
+            <input
+              type="contactoAlternativo1"
+              id="contactoAlternativo1"
+              name="contactoAlternativo1"
+              placeholder="Nombre y Apellido"
+              value={formData.contactoAlternativo1}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="mailAlternativo1">Email</label>
+            <input
+              type="email"
+              id="mailAlternativo1"
+              placeholder="Email Alternativo 1"
+              name="mailAlternativo1"
+              value={formData.mailAlternativo1}
+              onChange={handleChange}
+            />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="telefonoAlternativo1">Teléfono</label>
-          <input
-            type="number"
-            id="telefonoAlternativo1"
-            name="telefonoAlternativo1"
-            value={formData.telefonoAlternativo1}
-            onChange={(e) => handleChange(soloNumeros(e))}
-          />
+          <div className="form-group">
+            <label htmlFor="telefonoAlternativo1">Teléfono</label>
+            <input
+              type="number"
+              id="telefonoAlternativo1"
+              placeholder="Teléfono Alternativo 1"
+              name="telefonoAlternativo1"
+              value={formData.telefonoAlternativo1}
+              onChange={(e) => handleChange(soloNumeros(e))}
+            />
+          </div>
         </div>
-
-        <button type="submit" className="form-submit">
-          Guardar Cliente
-        </button>
+        <div>
+          <button type="submit" className="form-submit">
+            Guardar Cliente
+          </button>
+        </div>
       </form>
     </div>
   );

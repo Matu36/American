@@ -67,6 +67,16 @@ h1 {
   justify-content: flex-start;
 }
 
+.tituloCompo1 {
+  font-family: "merri";
+  display: flex;
+  color: #febb00;
+  text-decoration: underline; 
+  text-decoration-color: #febb00; 
+  display: flex;
+  justify-content: center;
+}
+
 
 button {
   border-radius: 8px;
@@ -3183,6 +3193,10 @@ top:25px;
   margin-bottom: 20px;
 }
 
+.detail-section h4 {
+  text-decoration: underline;
+}
+
 .ventas-detail-section h3 {
   margin-bottom: 10px;
   border-bottom: 2px solid #ddd;
@@ -4187,7 +4201,6 @@ margin-top: -10px;
 .postVentaContainer1 {
   padding: 40px;
   background-color: white;
-  
   margin: auto;
   font-family: "Merri", sans-serif;
   text-align: center;
@@ -4201,17 +4214,15 @@ margin-top: -10px;
   color: black;
 }
 
-.postVentaContainer1 .form-group {
-  width: 100%;
-  margin: auto;
-  padding: 1rem;
-  
+.formClientes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
 .postVentaContainer2 {
   padding: 40px;
   background-color: white;
-  
   margin: auto;
   font-family: "Merri", sans-serif;
   text-align: center;
@@ -4224,9 +4235,9 @@ margin-top: -10px;
   width: 90%;
   color: black;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  overflow-x: auto;
+  overflow-x:  auto;
 }
 
 .postVentaContainer2 .form-group {

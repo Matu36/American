@@ -8,6 +8,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "../../UI/Spinner";
 import ClientesExcel from "./Excel/ClientesExcel";
 import BackButton from "../../UI/BackButton";
+import { paginationOptions } from "../../utils/Datatable";
 
 export default function Clientes() {
   const { auth } = useAuth();
@@ -137,11 +138,6 @@ export default function Clientes() {
             value={search}
             autoComplete="off"
             disabled={!clientesQueryById.data}
-            style={{
-              height: "2.5rem",
-              borderRadius: "10px",
-              border: "2px solid grey",
-            }}
           />
         </div>
         {!showSpinner ? (
@@ -152,6 +148,7 @@ export default function Clientes() {
             pagination
             striped
             responsive
+            paginationComponentOptions={paginationOptions}
             noDataComponent={
               <div className="noData">Aún no hay registros ingresados</div>
             }

@@ -9,6 +9,7 @@ import useAuth from "../../hooks/useAuth";
 import { useUsuario } from "../../hooks/useUsuarios";
 import BackButton from "../../UI/BackButton";
 import { useNavigate } from "react-router-dom";
+import { paginationOptions } from "../../utils/Datatable";
 
 export default function Productos() {
   const { data, isLoading } = useProducto().productosQuery;
@@ -161,6 +162,7 @@ export default function Productos() {
               data={productos}
               pagination
               striped
+              paginationComponentOptions={paginationOptions}
               responsive
               noDataComponent={
                 <div className="noData">Aún no hay registros ingresados</div>

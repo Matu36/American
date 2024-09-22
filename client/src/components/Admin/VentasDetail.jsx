@@ -64,15 +64,19 @@ export default function VentasDetail() {
       <br />
       <div className="detail-section">
         <h4>Producto</h4>
+
         <div style={{ marginBottom: "10px" }}>
           <strong>Familia:</strong> {mappedVentaData.producto.familia}
         </div>
+        <hr />
         <div style={{ marginBottom: "10px" }}>
           <strong>Marca:</strong> {mappedVentaData.producto.marca}
         </div>
+        <hr />
         <div style={{ marginBottom: "10px" }}>
           <strong>Modelo:</strong> {mappedVentaData.producto.modelo}
         </div>
+        <hr />
       </div>
       <div className="detail-section">
         <h4>Cliente</h4>
@@ -80,9 +84,11 @@ export default function VentasDetail() {
           <strong>Nombre:</strong>{" "}
           {`${mappedVentaData.cliente.nombre} ${mappedVentaData.cliente.apellido}`}
         </div>
+        <hr />
         <div style={{ marginBottom: "10px" }}>
           <strong>Email:</strong> {mappedVentaData.cliente.mail}
         </div>
+        <hr />
       </div>
       <div className="detail-section">
         <h4>Vendedor</h4>
@@ -90,9 +96,11 @@ export default function VentasDetail() {
           <strong>Nombre:</strong>{" "}
           {`${mappedVentaData.usuario.nombre} ${mappedVentaData.usuario.apellido}`}
         </div>
+        <hr />
         <div style={{ marginBottom: "10px" }}>
           <strong>Email:</strong> {mappedVentaData.usuario.email}
         </div>
+        <hr />
       </div>
       <br />
       <div className="detail-section">
@@ -102,21 +110,26 @@ export default function VentasDetail() {
           <strong>Precio de Venta:</strong> {VentaData.moneda}{" "}
           {VentaData.precio}
         </div>
-        <h5>Financiación:</h5>
+        <hr />
+        <h4>Financiación:</h4>
         <div style={{ marginBottom: "10px" }}>
           <strong>Forma de Pago:</strong> {mappedVentaData.formaPago}
         </div>
+        <hr />
         <div style={{ marginBottom: "10px" }}>
           <strong>Precio Final:</strong> {VentaData.moneda}{" "}
           {VentaData.PrecioFinal}
         </div>
+        <hr />
         <div style={{ marginBottom: "10px" }}>
           {VentaData.cuotas} Pagos de {VentaData.moneda} {VentaData.cuotaValor}
         </div>
+        <hr />
 
         <div style={{ marginBottom: "10px" }}>
           Anticipo: U$D {VentaData.anticipo}
         </div>
+        <hr />
       </div>
       <br />
       <div className="detail-section">

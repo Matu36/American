@@ -8,6 +8,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "../../UI/Spinner";
 import CotizacionesExcel from "./Excel/CotizacionesExcel";
 import BackButton from "../../UI/BackButton";
+import { paginationOptions } from "../../utils/Datatable";
 
 export default function Cotizaciones() {
   const { auth } = useAuth();
@@ -157,16 +158,12 @@ export default function Cotizaciones() {
             value={search}
             autoComplete="off"
             disabled={!cotizacionesQueryById.data}
-            style={{
-              height: "2.5rem",
-              borderRadius: "10px",
-              border: "2px solid grey",
-            }}
           />
         </div>
         {!showSpinner ? (
           <DataTable
             className="datatable-container"
+            paginationComponentOptions={paginationOptions}
             columns={columns}
             data={cotizaciones}
             pagination

@@ -8,6 +8,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "../../UI/Spinner";
 import VentasExcel from "./Excel/VentasExcel";
 import BackButton from "../../UI/BackButton";
+import { paginationOptions } from "../../utils/Datatable";
 
 export default function Ventas() {
   const { auth } = useAuth();
@@ -147,6 +148,7 @@ export default function Ventas() {
             columns={columns}
             data={ventas}
             pagination
+            paginationComponentOptions={paginationOptions}
             striped
             noDataComponent={
               <div className="noData">Aún no hay registros ingresados</div>
