@@ -7,6 +7,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link } from "react-router-dom";
 import BackButton from "../../UI/BackButton";
+import { paginationOptions } from "../../utils/Datatable";
 
 export default function Usuarios() {
   const [search, setSearch] = useState("");
@@ -117,11 +118,6 @@ export default function Usuarios() {
               value={search}
               autoComplete="off"
               disabled={!data}
-              style={{
-                height: "2.5rem",
-                borderRadius: "10px",
-                border: "2px solid grey",
-              }}
             />
           </div>
           <div className="datatable-container">
@@ -132,6 +128,7 @@ export default function Usuarios() {
                 pagination
                 striped
                 responsive
+                paginationComponentOptions={paginationOptions}
                 noDataComponent={
                   <div className="noData">Aún no hay registros ingresados</div>
                 }
