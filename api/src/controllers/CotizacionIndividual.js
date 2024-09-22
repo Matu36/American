@@ -58,7 +58,7 @@ const actualizarEstadoCotizacionIndividualEstado2 = async (req, res) => {
     }
 
     // Actualiza el estado a 3
-    await cotizacionIndividual.update({ estado: 2 });
+    await cotizacionIndividual.update({ estado: 2, fechaVenta: new Date() });
 
     return res.status(200).send({
       message:

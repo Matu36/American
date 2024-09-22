@@ -71,6 +71,19 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: 1,
       },
+      fechaDeCreacion: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
+      fechaModi: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      fechaVenta: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
     },
     {
       tableName: "CotizacionIndividual",

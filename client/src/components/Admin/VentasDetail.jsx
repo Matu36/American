@@ -8,8 +8,6 @@ export default function VentasDetail() {
   const { id } = useParams();
   const { data: VentaData, isLoading } = useVentas(null, id).ventasQueryDetalle;
 
-  console.log(VentaData);
-
   if (isLoading) {
     return (
       <div>
@@ -37,6 +35,7 @@ export default function VentasDetail() {
     patentamiento: VentaData.Cotizacione.patentamiento,
     plazoEntrega: VentaData.Cotizacione.plazoEntrega,
     precio: VentaData.Cotizacione.precio,
+
     // Datos del cliente
     cliente: {
       nombre: VentaData.Cotizacione.Cliente.nombre,
@@ -136,12 +135,12 @@ export default function VentasDetail() {
         <h4>Información de la Venta</h4>
         <div style={{ marginBottom: "10px" }}>
           <strong>Fecha de Cotización:</strong>{" "}
-          {new Date(VentaData.Cotizacione.fechaDeCreacion).toLocaleDateString()}
+          {new Date(VentaData.fechaDeCreacion).toLocaleDateString()}
         </div>
-        {VentaData.Cotizacione.fechaVenta && (
+        {VentaData.fechaVenta && (
           <div style={{ marginBottom: "10px" }}>
             <strong>Fecha de Venta:</strong>{" "}
-            {new Date(VentaData.Cotizacione.fechaVenta).toLocaleDateString()}
+            {new Date(VentaData.fechaVenta).toLocaleDateString()}
           </div>
         )}
       </div>

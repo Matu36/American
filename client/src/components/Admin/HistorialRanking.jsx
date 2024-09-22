@@ -7,6 +7,8 @@ export default function HistorialRanking() {
   const { data, isLoading } = useRanking().rankingQuery;
   const [showRanking, setShowRanking] = useState(true);
 
+  console.log(data);
+
   if (isLoading)
     return (
       <div>
@@ -28,45 +30,45 @@ export default function HistorialRanking() {
       <div className="ranking-item">
         <h2>Vendedor con más cotizaciones</h2>
         <p>
-          {data?.VendedorMasCotizaciones?.nombre}{" "}
-          {data?.VendedorMasCotizaciones?.apellido} con{" "}
-          {data?.VendedorMasCotizaciones?.count} cotizaciones.
+          {data?.topUserCotizaciones?.nombre}{" "}
+          {data?.topUserCotizaciones?.apellido} con{" "}
+          {data?.topUserCotizaciones?.count} cotizaciones.
         </p>
       </div>
       <div className="ranking-item">
         <h2>Vendedor con más ventas</h2>
         <p>
-          {data?.VendedorMasVentas?.nombre} {data?.VendedorMasVentas?.apellido}{" "}
-          con {data?.VendedorMasVentas?.count} ventas.
+          {data?.topUserVentas?.nombre} {data?.topUserVentas?.apellido} con{" "}
+          {data?.topUserVentas?.count} ventas.
         </p>
       </div>
       <div className="ranking-item">
         <h2>Cliente con más cotizaciones</h2>
         <p>
-          {data?.ClienteMasCotizaciones?.nombre}{" "}
-          {data?.ClienteMasCotizaciones?.apellido} con{" "}
-          {data?.ClienteMasCotizaciones?.count} cotizaciones.
+          {data?.topClientCotizaciones?.nombre}{" "}
+          {data?.topClientCotizaciones?.apellido} con{" "}
+          {data?.topClientCotizaciones?.count} cotizaciones.
         </p>
       </div>
       <div className="ranking-item">
         <h2>Cliente con más ventas</h2>
         <p>
-          {data?.ClienteMasVentas?.nombre} {data?.ClienteMasVentas?.apellido}{" "}
-          con {data?.ClienteMasVentas?.count} ventas.
+          {data?.topClientVentas?.nombre} {data?.topClientVentas?.apellido} con{" "}
+          {data?.topClientVentas?.count} ventas.
         </p>
       </div>
       <div className="ranking-item">
         <h2>Producto con más cotizaciones</h2>
         <p>
-          Modelo {data?.ProductoMasCotizaciones?.modelo} con{" "}
-          {data.ProductoMasCotizaciones?.count} cotizaciones.
+          Modelo {data?.topProductCotizaciones?.nombre} con{" "}
+          {data.topProductCotizaciones?.count} cotizaciones.
         </p>
       </div>
       <div className="ranking-item">
         <h2>Producto con más ventas</h2>
         <p>
-          Modelo {data?.ProductoMasVentas?.modelo} con{" "}
-          {data?.ProductoMasVentas?.count} ventas.
+          Modelo {data?.topProductVentas?.nombre} con{" "}
+          {data?.topProductVentas?.count} ventas.
         </p>
       </div>
     </div>

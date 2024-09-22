@@ -480,7 +480,8 @@ const putCotizaciones = async (req, res) => {
       if (cotizacionesIndividuales && cotizacionesIndividuales.length > 0) {
         const cotizacionesIndividualesConId = cotizacionesIndividuales.map(
           (cotizacionIndividual) => ({
-            idCotizacion: cotizacion.id, // Asegúrate de usar el id recién creado
+            idCotizacion: cotizacion.id,
+            fechaDeCreacion: new Date(),
             ...cotizacionIndividual,
           })
         );
@@ -1382,128 +1383,182 @@ const getCotizacionesPorModelo = async (req, res) => {
 
 const getranking = async (req, res) => {
   try {
-    // Usuario con más cotizaciones (estado 1)
-    const mostCotizacionesUser = await Cotizaciones.findOne({
-      where: { estado: 1 },
-      attributes: [
-        "idUsuario",
-        [conn.fn("COUNT", conn.col("Cotizaciones.id")), "countCotizaciones"],
+    // Obtener todas las cotizaciones activas con detalles de usuario, cliente y producto
+    const cotizaciones = await CotizacionIndividual.findAll({
+      where: { estado: [1, 2] }, // Traer tanto cotizaciones (1) como ventas (2)
+      include: [
+        {
+          model: Cotizaciones,
+          include: [
+            {
+              model: Usuarios,
+              attributes: ["id", "nombre", "apellido"],
+            },
+            {
+              model: Clientes,
+              attributes: ["id", "nombre"],
+            },
+            {
+              model: Productos,
+              attributes: ["id", "modelo"],
+            },
+          ],
+        },
       ],
-      include: [{ model: Usuarios, attributes: ["nombre", "apellido"] }],
-      group: ["Cotizaciones.idUsuario", "Usuario.id"],
-      order: [[conn.literal('"countCotizaciones"'), "DESC"]],
-      limit: 1,
+      raw: true,
     });
 
-    // Usuario con más ventas (estado 2)
-    const mostVentasUser = await Cotizaciones.findOne({
-      where: { estado: 2 },
-      attributes: [
-        "idUsuario",
-        [conn.fn("COUNT", conn.col("Cotizaciones.id")), "countVentas"],
-      ],
-      include: [{ model: Usuarios, attributes: ["nombre", "apellido"] }],
-      group: ["Cotizaciones.idUsuario", "Usuario.id"],
-      order: [[conn.literal('"countVentas"'), "DESC"]],
-      limit: 1,
+    // Conteo de cotizaciones y ventas por usuario, cliente y producto
+    const userCount = { cotizaciones: {}, ventas: {} };
+    const clientCount = { cotizaciones: {}, ventas: {} };
+    const productCount = { cotizaciones: {}, ventas: {} };
+
+    cotizaciones.forEach((item) => {
+      const userId = item["Cotizacione.Usuario.id"];
+      const clientId = item["Cotizacione.Cliente.id"];
+      const productId = item["Cotizacione.Producto.id"];
+      const estado = item.estado;
+
+      // Contar por usuario
+      if (userId) {
+        if (estado === 1) {
+          userCount.cotizaciones[userId] =
+            (userCount.cotizaciones[userId] || 0) + 1;
+        } else if (estado === 2) {
+          userCount.ventas[userId] = (userCount.ventas[userId] || 0) + 1;
+        }
+      }
+
+      // Contar por cliente
+      if (clientId) {
+        if (estado === 1) {
+          clientCount.cotizaciones[clientId] =
+            (clientCount.cotizaciones[clientId] || 0) + 1;
+        } else if (estado === 2) {
+          clientCount.ventas[clientId] =
+            (clientCount.ventas[clientId] || 0) + 1;
+        }
+      }
+
+      // Contar por producto
+      if (productId) {
+        if (estado === 1) {
+          productCount.cotizaciones[productId] =
+            (productCount.cotizaciones[productId] || 0) + 1;
+        } else if (estado === 2) {
+          productCount.ventas[productId] =
+            (productCount.ventas[productId] || 0) + 1;
+        }
+      }
     });
 
-    // Producto con más cotizaciones (estado 1)
-    const mostCotizacionesProduct = await Cotizaciones.findOne({
-      where: { estado: 1 },
-      attributes: [
-        "idProducto",
-        [conn.fn("COUNT", conn.col("Cotizaciones.id")), "countCotizaciones"],
-      ],
-      include: [{ model: Productos, attributes: ["modelo"] }],
-      group: ["Cotizaciones.idProducto", "Producto.id"],
-      order: [[conn.literal('"countCotizaciones"'), "DESC"]],
-      limit: 1,
-    });
+    // Función para encontrar el top con validaciones
+    const findTop = (count) => {
+      const keys = Object.keys(count);
+      if (keys.length === 0) return null; // No hay datos
+      return keys.reduce((a, b) => (count[a] > count[b] ? a : b));
+    };
 
-    // Producto con más ventas (estado 2)
-    const mostVentasProduct = await Cotizaciones.findOne({
-      where: { estado: 2 },
-      attributes: [
-        "idProducto",
-        [conn.fn("COUNT", conn.col("Cotizaciones.id")), "countVentas"],
-      ],
-      include: [{ model: Productos, attributes: ["modelo"] }],
-      group: ["Cotizaciones.idProducto", "Producto.id"],
-      order: [[conn.literal('"countVentas"'), "DESC"]],
-      limit: 1,
-    });
+    // Encontrar el top para cotizaciones y ventas
+    const topUserIdCotizaciones = findTop(userCount.cotizaciones);
+    const topUserIdVentas = findTop(userCount.ventas);
+    const topClientIdCotizaciones = findTop(clientCount.cotizaciones);
+    const topClientIdVentas = findTop(clientCount.ventas);
+    const topProductIdCotizaciones = findTop(productCount.cotizaciones);
+    const topProductIdVentas = findTop(productCount.ventas);
 
-    // Cliente con más cotizaciones (estado 1)
-    const mostCotizacionesCliente = await Cotizaciones.findOne({
-      where: { estado: 1 },
-      attributes: [
-        "idCliente",
-        [conn.fn("COUNT", conn.col("Cotizaciones.id")), "countCotizaciones"],
-      ],
-      include: [{ model: Clientes, attributes: ["nombre", "apellido"] }],
-      group: ["Cotizaciones.idCliente", "Cliente.id"],
-      order: [[conn.literal('"countCotizaciones"'), "DESC"]],
-      limit: 1,
-    });
+    // Obtener detalles del usuario top para cotizaciones
+    const topUserDetailsCotizaciones = topUserIdCotizaciones
+      ? await Usuarios.findByPk(topUserIdCotizaciones, {
+          attributes: ["nombre", "apellido"],
+        })
+      : null;
 
-    // Cliente con más ventas (estado 2)
-    const mostVentasCliente = await Cotizaciones.findOne({
-      where: { estado: 2 },
-      attributes: [
-        "idCliente",
-        [conn.fn("COUNT", conn.col("Cotizaciones.id")), "countVentas"],
-      ],
-      include: [{ model: Clientes, attributes: ["nombre", "apellido"] }],
-      group: ["Cotizaciones.idCliente", "Cliente.id"],
-      order: [[conn.literal('"countVentas"'), "DESC"]],
-      limit: 1,
-    });
+    // Obtener detalles del usuario top para ventas
+    const topUserDetailsVentas = topUserIdVentas
+      ? await Usuarios.findByPk(topUserIdVentas, {
+          attributes: ["nombre", "apellido"],
+        })
+      : null;
+
+    // Obtener detalles del cliente top para cotizaciones
+    const topClientDetailsCotizaciones = topClientIdCotizaciones
+      ? await Clientes.findByPk(topClientIdCotizaciones, {
+          attributes: ["nombre", "apellido"],
+        })
+      : null;
+
+    // Obtener detalles del cliente top para ventas
+    const topClientDetailsVentas = topClientIdVentas
+      ? await Clientes.findByPk(topClientIdVentas, {
+          attributes: ["nombre", "apellido"],
+        })
+      : null;
+
+    // Obtener detalles del producto top para cotizaciones
+    const topProductDetailsCotizaciones = topProductIdCotizaciones
+      ? await Productos.findByPk(topProductIdCotizaciones, {
+          attributes: ["modelo"],
+        })
+      : null;
+
+    // Obtener detalles del producto top para ventas
+    const topProductDetailsVentas = topProductIdVentas
+      ? await Productos.findByPk(topProductIdVentas, {
+          attributes: ["modelo"],
+        })
+      : null;
 
     return res.status(200).json({
-      VendedorMasCotizaciones: mostCotizacionesUser
+      topUserCotizaciones: topUserIdCotizaciones
         ? {
-            nombre: mostCotizacionesUser.Usuario.nombre,
-            apellido: mostCotizacionesUser.Usuario.apellido,
-            count: mostCotizacionesUser.dataValues.countCotizaciones,
+            id: topUserIdCotizaciones,
+            nombre: topUserDetailsCotizaciones?.nombre,
+            apellido: topUserDetailsCotizaciones?.apellido,
+            count: userCount.cotizaciones[topUserIdCotizaciones],
           }
         : null,
-      VendedorMasVentas: mostVentasUser
+      topUserVentas: topUserIdVentas
         ? {
-            nombre: mostVentasUser.Usuario.nombre,
-            apellido: mostVentasUser.Usuario.apellido,
-            count: mostVentasUser.dataValues.countVentas,
+            id: topUserIdVentas,
+            nombre: topUserDetailsVentas?.nombre,
+            apellido: topUserDetailsVentas?.apellido,
+            count: userCount.ventas[topUserIdVentas],
           }
         : null,
-      ProductoMasCotizaciones: mostCotizacionesProduct
+      topClientCotizaciones: topClientIdCotizaciones
         ? {
-            modelo: mostCotizacionesProduct.Producto.modelo,
-            count: mostCotizacionesProduct.dataValues.countCotizaciones,
+            id: topClientIdCotizaciones,
+            nombre: topClientDetailsCotizaciones?.nombre,
+            apellido: topClientDetailsCotizaciones?.apellido,
+            count: clientCount.cotizaciones[topClientIdCotizaciones],
           }
         : null,
-      ProductoMasVentas: mostVentasProduct
+      topClientVentas: topClientIdVentas
         ? {
-            modelo: mostVentasProduct.Producto.modelo,
-            count: mostVentasProduct.dataValues.countVentas,
+            id: topClientIdVentas,
+            nombre: topClientDetailsVentas?.nombre,
+            apellido: topClientDetailsVentas?.apellido,
+            count: clientCount.ventas[topClientIdVentas],
           }
         : null,
-      ClienteMasCotizaciones: mostCotizacionesCliente
+      topProductCotizaciones: topProductIdCotizaciones
         ? {
-            nombre: mostCotizacionesCliente.Cliente.nombre,
-            apellido: mostCotizacionesCliente.Cliente.apellido,
-            count: mostCotizacionesCliente.dataValues.countCotizaciones,
+            id: topProductIdCotizaciones,
+            nombre: topProductDetailsCotizaciones?.modelo,
+            count: productCount.cotizaciones[topProductIdCotizaciones],
           }
         : null,
-      ClienteMasVentas: mostVentasCliente
+      topProductVentas: topProductIdVentas
         ? {
-            nombre: mostVentasCliente.Cliente.nombre,
-            apellido: mostVentasCliente.Cliente.apellido,
-            count: mostVentasCliente.dataValues.countVentas,
+            id: topProductIdVentas,
+            nombre: topProductDetailsVentas?.modelo,
+            count: productCount.ventas[topProductIdVentas],
           }
         : null,
     });
   } catch (error) {
-    console.error("Error al obtener el resumen:", error);
+    console.error("Error al obtener el ranking:", error);
     return res.status(500).json({ error: "Error interno del servidor" });
   }
 };
