@@ -170,6 +170,18 @@ export default function FormProduct() {
     }
   };
 
+  const handlePrecioChange = (e) => {
+    const value = e.target.value;
+
+    const cleanValue = value.replace(/[^0-9]/g, "");
+
+    setProducto({ ...producto, precioUSD: cleanValue });
+  };
+
+  const formatPrecio = (precio) => {
+    return precio ? new Intl.NumberFormat().format(precio) : "";
+  };
+
   const [producto, setProducto] = useState({
     familia: "",
     marca: "",
@@ -343,19 +355,17 @@ export default function FormProduct() {
 
         <div className="form-group">
           <label htmlFor="precio">
-            Precio USD <span className="obligatorio">*</span>
+            Precio U$D <span className="obligatorio">*</span>
           </label>
           <div>
             <input
-              type="number"
+              type="text"
               id="precioUSD"
               name="precioUSD"
-              value={producto.precioUSD}
+              value={formatPrecio(producto.precioUSD)}
               autoComplete="off"
               placeholder="Precio USD"
-              onChange={(e) =>
-                setProducto({ ...producto, precioUSD: e.target.value })
-              }
+              onChange={handlePrecioChange}
               required
             />
           </div>

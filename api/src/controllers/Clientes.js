@@ -358,7 +358,15 @@ const getTelefonosPorIdDeUsuario = async (req, res) => {
     if (usuario.rol === true) {
       // Administrador: Ver todos los teléfonos
       telefonos = await Clientes.findAll({
-        attributes: ["telefono", "telefonoAlternativo", "telefonoAlternativo1"],
+        attributes: [
+          "nombre",
+          "apellido",
+          "telefono",
+          "contactoAlternativo",
+          "telefonoAlternativo",
+          "contactoAlternativo1",
+          "telefonoAlternativo1",
+        ],
         order: [["nombre", "ASC"]],
       });
     } else {
