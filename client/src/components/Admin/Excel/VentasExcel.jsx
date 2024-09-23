@@ -3,7 +3,6 @@ import * as XLSX from "xlsx";
 import { SiMicrosoftexcel } from "react-icons/si";
 
 const VentasExcel = ({ data }) => {
-  console.log(data);
   const handleExport = () => {
     const filteredData = data.map((item) => ({
       Categoria: item.Producto.familia,

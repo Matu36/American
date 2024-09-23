@@ -88,6 +88,10 @@ const getClientesPorIdDeUsuario = async (req, res) => {
           "fechaDeCreacion",
           "CUIT",
           "razonSocial",
+          "telefono",
+          "contactoAlternativo",
+          "telefonoAlternativo",
+          "mailAlternativo",
         ],
         order: [["fechaDeCreacion", "DESC"]],
       });

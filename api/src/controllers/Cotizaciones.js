@@ -210,14 +210,15 @@ const getCotizaciones = async (req, res) => {
     }
 
     let whereCondition = { estado: 1 };
+
     if (usuario.rol === false && !usuario.baneado) {
-      // Si es vendedor
-      whereCondition.idUsuario = idUsuario; // Solo sus cotizaciones
+      // Si es vendedor, solo ve sus cotizaciones
+      whereCondition.idUsuario = idUsuario;
     } else if (
       usuario.rol === true ||
       (usuario.rol === false && usuario.baneado === true)
     ) {
-      // Si es administrador o gerente (ambos roles ven todas las cotizaciones)
+      // Si es administrador o gerente (ven todas las cotizaciones)
     } else {
       return res
         .status(403)
@@ -237,10 +238,27 @@ const getCotizaciones = async (req, res) => {
           model: Usuarios,
           attributes: ["nombre", "apellido", "email"],
         },
-        { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
-        { model: Productos, attributes: ["familia", "marca", "modelo"] },
+        {
+          model: Clientes,
+          attributes: ["nombre", "apellido", "mail"],
+        },
+        {
+          model: Productos,
+          attributes: ["familia", "marca", "modelo"],
+        },
+        {
+          model: CotizacionIndividual,
+          attributes: [
+            "precio",
+            "cuotas",
+            "cuotaValor",
+            "saldoAFinanciar",
+            "interes",
+            "PrecioFinal",
+            "fechaDeCreacion",
+          ],
+        },
       ],
-
       order: [["fechaDeCreacion", "DESC"]],
     });
 

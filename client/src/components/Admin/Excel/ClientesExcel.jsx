@@ -11,7 +11,11 @@ const ClientesExcel = ({ data }) => {
       Email: item.mail,
       CUIT: item.CUIT,
       "Razon Social": item.razonSocial,
-      "Fecha de Registro": item.fechaDeCreacion,
+      Telefono: item.telefono,
+      "Contacto Alternativo": item.contactoAlternativo,
+      "Email Alternativo": item.mailAlternativo,
+      "Teléfono Alternativo": item.telefonoAlternativo,
+      "Fecha de Registro": new Date(item.fechaDeCreacion).toLocaleDateString(),
     }));
 
     // Crear una hoja de trabajo a partir de los datos
