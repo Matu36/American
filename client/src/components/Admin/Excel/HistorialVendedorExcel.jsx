@@ -17,6 +17,9 @@ const HistorialVendedorExcel = ({ data }) => {
 
       return {
         "Número de Cotización": item.codigoCotizacion,
+        Producto: `${item.familia} ${item.marca} ${item.modelo}`,
+        Cliente: `${item.nombreCliente} ${item.apellidoCliente}`,
+        Vendedor: `${item.nombreVendedor} ${item.apellidoVendedor}`,
         Moneda: item.moneda,
         Anticipo: item.anticipo,
         IVA: item.IVA,
@@ -29,11 +32,11 @@ const HistorialVendedorExcel = ({ data }) => {
           2
         )}`,
         "Precio Final": item.PrecioFinal,
-        "Fecha de Creación": item.fechaDeCreacion,
-        "Fecha de Modificación": item.fechaModi,
-        Producto: `${item.familia} ${item.marca} ${item.modelo}`,
-        Cliente: `${item.nombreCliente} ${item.apellidoCliente}`,
-        Vendedor: `${item.nombreVendedor} ${item.apellidoVendedor}`,
+
+        "Fecha de Creación": new Date(
+          item.fechaDeCreacion
+        ).toLocaleDateString(),
+        "Fecha de Modificación": new Date(item.fechaModi).toLocaleDateString(),
         Estado: estado,
       };
     });

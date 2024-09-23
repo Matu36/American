@@ -7,8 +7,6 @@ export default function HistorialRanking() {
   const { data, isLoading } = useRanking().rankingQuery;
   const [showRanking, setShowRanking] = useState(true);
 
-  console.log(data);
-
   if (isLoading)
     return (
       <div>

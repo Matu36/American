@@ -4,36 +4,48 @@ import { SiMicrosoftexcel } from "react-icons/si";
 
 const HistorialFechaExcel = ({ data, fechaDesde, fechaHasta }) => {
   const handleExport = () => {
-    // Crear un nuevo array con los elementos específicos
-    const filteredData = data.data.map((item) => {
-      let estado = "";
+    const cotizaciones = Array.isArray(data.data) ? data.data : [];
 
-      // Agregar condición para el estado aquí
-      // Por ejemplo, si el estado es 2, mostrar "Venta concretada"
-      if (item.estado === 2) {
-        estado = "Venta concretada";
-      }
+    const filteredData = cotizaciones
+      .map((item) =>
+        item.CotizacionIndividuals.map((cotizacion) => {
+          let estado = "";
+          if (cotizacion.estado === 2) {
+            estado = "Venta concretada";
+          }
+          if (cotizacion.estado === 1) {
+            estado = "Venta No Concretada";
+          }
 
-      return {
-        "Número de Cotización": item.codigoCotizacion,
-        Moneda: item.moneda,
-        "Precio de Venta": item.precio,
-        "Saldo a Financiar": `${item.moneda} ${parseFloat(
-          item.saldoAFinanciar
-        ).toFixed(2)}`,
-        Cuotas: item.cuotas,
-        Financiación: `${item.moneda} ${parseFloat(item.cuotaValor).toFixed(
-          2
-        )}`,
-        "Precio Final": item.PrecioFinal,
-        "Fecha de Creación": item.fechaDeCreacion,
-        "Fecha de Modificación": item.fechaModi,
-        Producto: `${item.Producto.marca} ${item.Producto.modelo}`,
-        Cliente: `${item.Cliente.nombre} ${item.Cliente.apellido}`,
-        Vendedor: `${item.Usuario.nombre} ${item.Usuario.apellido}`,
-        Estado: estado,
-      };
-    });
+          return {
+            "Número de Cotización": item.codigoCotizacion,
+            Producto: `${item.Producto.marca} ${item.Producto.modelo}`,
+            Cliente: `${item.Cliente.nombre} ${item.Cliente.apellido}`,
+            Vendedor: `${item.Usuario.nombre} ${item.Usuario.apellido}`,
+            Moneda: cotizacion.moneda,
+            "Precio de Venta": cotizacion.precio,
+            "Saldo a Financiar": `${cotizacion.moneda} ${parseFloat(
+              cotizacion.saldoAFinanciar
+            ).toFixed(2)}`,
+            Cuotas: cotizacion.cuotas,
+            Financiación: `${cotizacion.moneda} ${parseFloat(
+              cotizacion.cuotaValor
+            ).toFixed(2)}`,
+            Anticipo: cotizacion.anticipo,
+            IVA: cotizacion.IVA,
+            "Precio Final": cotizacion.PrecioFinal,
+            "Fecha de Creación": new Date(
+              item.fechaDeCreacion
+            ).toLocaleDateString(),
+            "Fecha de Modificación": cotizacion.fechaModi
+              ? new Date(cotizacion.fechaModi).toLocaleDateString()
+              : "N/A",
+
+            Estado: estado,
+          };
+        })
+      )
+      .flat();
 
     // Crear una hoja de trabajo vacía
     const worksheet = XLSX.utils.json_to_sheet([]);

@@ -6,9 +6,7 @@ const CotizacionesExcel = ({ data }) => {
   const handleExport = () => {
     const rows = [];
 
-    // Recorre las cotizaciones generales
     data.forEach((item) => {
-      // Agrega la cotización general como la primera fila
       rows.push({
         NroCotización: item.codigoCotizacion,
         Categoria: item.Producto.familia,

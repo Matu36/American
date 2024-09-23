@@ -878,7 +878,17 @@ const getCotizacionesEstadoDos = async (req, res) => {
       // Usuario con rol true: traer todas las cotizaciones individuales con estado 2
       cotizaciones = await CotizacionIndividual.findAll({
         where: { estado: 2 },
-        attributes: ["id", "PrecioFinal"],
+        attributes: [
+          "id",
+          "precio",
+          "cuotas",
+          "cuotaValor",
+          "saldoAFinanciar",
+          "interes",
+          "PrecioFinal",
+          "fechaDeCreacion",
+          "fechaVenta",
+        ],
         include: [
           {
             model: Cotizaciones,
@@ -899,12 +909,22 @@ const getCotizacionesEstadoDos = async (req, res) => {
       // Usuario con rol false: traer solo sus cotizaciones individuales con estado 2
       cotizaciones = await CotizacionIndividual.findAll({
         where: { estado: 2 },
-        attributes: ["id", "PrecioFinal"],
+        attributes: [
+          "id",
+          "precio",
+          "cuotas",
+          "cuotaValor",
+          "saldoAFinanciar",
+          "interes",
+          "PrecioFinal",
+          "fechaDeCreacion",
+          "fechaVenta",
+        ],
         include: [
           {
             model: Cotizaciones,
             attributes: ["codigoCotizacion"],
-            where: { idUsuario: usuario.id }, // Filtra las cotizaciones por el idUsuario
+            where: { idUsuario: usuario.id },
             include: [
               { model: Usuarios, attributes: ["nombre", "apellido"] },
               { model: Clientes, attributes: ["nombre", "apellido", "mail"] },
