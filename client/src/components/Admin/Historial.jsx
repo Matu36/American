@@ -10,6 +10,7 @@ import HistorialProductoExcel from "./Excel/HistorialProductoExcel";
 import HistorialVendedorExcel from "./Excel/HistorialVendedorExcel";
 import BackButton from "../../UI/BackButton";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../UI/Spinner";
 
 export default function Historial() {
   const token = localStorage.getItem("token");
@@ -149,12 +150,15 @@ export default function Historial() {
       {role === "administrador" && <HistorialRanking />}
       <h2 className="tituloCompo1">Historial</h2>
       <br />
+      <hr />
+      <h4> Filtrar por Vendedor</h4>
+      <hr />
+      <br />
       {isLoadingVendedores ? (
-        <p>Cargando...</p>
+        <Spinner />
       ) : (
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="vendedor">Vendedor:</label>
             <Select
               id="vendedor"
               options={options}
@@ -301,9 +305,12 @@ export default function Historial() {
           <p></p>
         )}
       </div>
+      <hr />
+      <h4> Filtrar por Producto</h4>
+      <hr />
+      <br />
       <form onSubmit={handleProductoSubmit}>
         <div>
-          <label htmlFor="producto">Producto:</label>
           <Select
             id="producto"
             options={productoOptions}
@@ -446,7 +453,10 @@ export default function Historial() {
           <p></p>
         )}
       </div>
+      <hr />
       <h4> Filtrar por Fecha</h4>
+      <hr />
+      <br />
       <form onSubmit={handleSubmitFechas}>
         <div>
           <label htmlFor="fechaDesde">Fecha Desde:</label>
