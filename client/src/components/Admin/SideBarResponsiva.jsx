@@ -11,6 +11,7 @@ import {
   FaShoppingCart,
   FaAngleDown,
   FaArrowLeft,
+  FaEnvelope,
 } from "react-icons/fa";
 import { MdPerson } from "react-icons/md";
 
@@ -121,6 +122,23 @@ const SideBarResponsiva = ({ handleCerrarModalSideBar }) => {
           label: "Pendientes de Aprobación",
           path: "/admin/ventas/aprobar",
           roles: ["administrador"],
+        },
+      ],
+      roles: ["administrador", "vendedor", "gerente"],
+    },
+    {
+      label: "Notificar",
+      icon: FaEnvelope,
+      subCategories: [
+        {
+          label: "Emails",
+          path: "/admin/Notificaciones/Emails",
+          roles: ["administrador", "vendedor", "gerente"],
+        },
+        {
+          label: "WhatsApp",
+          path: "/admin/Notificaciones/WhatsApp",
+          roles: ["administrador", "vendedor", "gerente"],
         },
       ],
       roles: ["administrador", "vendedor", "gerente"],

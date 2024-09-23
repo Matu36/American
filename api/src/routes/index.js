@@ -51,6 +51,7 @@ const {
   updateCliente,
   getClientePorId,
   getClientesParaCotizar,
+  getTelefonosPorIdDeUsuario,
 } = require("../controllers/Clientes");
 
 const {
@@ -194,6 +195,7 @@ router.delete("/Cotizaciones/delete", eliminarCotizacionIndividual);
 router.put("/cotizaciones/edit", check.auth, putCotizaciones);
 router.post("/clientes/create", check.auth, createCliente);
 router.get("/clientes/get/:idUsuario", getClientesPorIdDeUsuario);
+router.get("/clientes/getTelefonos/:idUsuario", getTelefonosPorIdDeUsuario);
 router.get("/clientes/getDetalle/:idCliente", getClientePorId);
 router.get("/clientes/getParaCotizar/:idUsuario", getClientesParaCotizar);
 router.put("/clientes/edit", check.auth, updateCliente);

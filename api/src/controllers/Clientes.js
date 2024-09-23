@@ -327,10 +327,58 @@ const getClientesParaCotizar = async (req, res) => {
   }
 };
 
+const getTelefonosPorIdDeUsuario = async (req, res) => {
+  try {
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
+
+    // Busca el usuario en la base de datos
+    const usuario = await Usuarios.findByPk(idUsuario);
+
+    if (!usuario) {
+      throw "Usuario no encontrado";
+    }
+
+    let telefonos;
+
+    if (usuario.rol === true) {
+      // Administrador: Ver todos los teléfonos
+      telefonos = await Clientes.findAll({
+        attributes: ["telefono", "telefonoAlternativo", "telefonoAlternativo1"],
+        order: [["nombre", "ASC"]],
+      });
+    } else {
+      // Vendedor: Ver teléfonos de clientes asociados a su usuario
+      telefonos = await Clientes.findAll({
+        where: { idUsuario: idUsuario },
+        attributes: ["telefono", "telefonoAlternativo", "telefonoAlternativo1"],
+        order: [["nombre", "ASC"]],
+      });
+    }
+
+    // Devuelve los teléfonos encontrados
+    return res.status(200).json(telefonos);
+  } catch (error) {
+    console.error("Error al obtener teléfonos:", error);
+    return res.status(400).send(error);
+  }
+};
+
 module.exports = {
   createCliente,
   getClientesPorIdDeUsuario,
   updateCliente,
   getClientesParaCotizar,
   getClientePorId,
+  getTelefonosPorIdDeUsuario,
 };

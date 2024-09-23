@@ -59,7 +59,7 @@ export default function VentasDetail() {
   return (
     <div className="postVentaContainer1">
       <BackButton />
-      <h2 className="tituloCompo">Detalle de la Venta</h2>
+      <h2 className="tituloCompo1">Detalle de la Venta</h2>
       <br />
       <div className="detail-section">
         <h4>Producto</h4>

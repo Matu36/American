@@ -56,6 +56,8 @@ import OfertasNovedades from "../components/Admin/OfertasNovedades";
 // import Muro from "../components/miUsuario/Muro";
 import Suscripcion from "../components/Admin/Suscripcion";
 import VentasAprobar from "../components/Admin/VentasAprobar";
+import Wapp from "../components/Admin/Notificaciones/Wapp";
+import MailsMasivos from "../components/Admin/Notificaciones/MailsMasivos";
 
 const AppRouter = () => {
   const InterceptorSetup = () => {
@@ -184,6 +186,8 @@ const AdminLayout = () => {
           <Route path="/ventas/ver" element={<Ventas />} />
           <Route path="/ventas/:id" element={<VentasDetail />} />
           <Route path="/ventas/aprobar" element={<VentasAprobar />} />
+          <Route path="/Notificaciones/WhatsApp" element={<Wapp />} />
+          <Route path="/Notificaciones/Emails" element={<MailsMasivos />} />
         </Routes>
       </div>
     </>
