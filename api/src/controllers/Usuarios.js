@@ -1,6 +1,6 @@
 const { Usuarios } = require("../db.js");
 const bcrypt = require("bcrypt");
-const sendEmailWithTemplate = require("../mailer/sendEmailWithTemplate");
+// const sendEmailWithTemplate = require("../mailer/sendEmailWithTemplate");
 const jwt = require("../services/jwt.js");
 const { Op } = require("sequelize");
 const crypto = require("crypto");
@@ -45,7 +45,7 @@ const registro = async (req, res) => {
       const formattedCodigo = String(instance.codigo).padStart(3, "0");
       await instance.update({ codigo: formattedCodigo });
       console.log("Usuario Creado");
-      sendEmailWithTemplate(instance.email, "newUser");
+      // sendEmailWithTemplate(instance.email, "newUser");
     }
 
     res.send({ status: "success", data: instance });

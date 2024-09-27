@@ -13,6 +13,7 @@ const {
   getUsuariosConRolFalse,
   getUsuariosChart,
 } = require("../controllers/Usuarios");
+const { enviarMailsMasivos } = require("../mailer/mailer.js");
 
 const {
   getProductos,
@@ -52,7 +53,7 @@ const {
   updateCliente,
   getClientePorId,
   getClientesParaCotizar,
-  getTelefonosPorIdDeUsuario,
+  getMailsPorIdDeUsuario,
 } = require("../controllers/Clientes");
 
 const {
@@ -197,7 +198,7 @@ router.put("/cotizaciones/edit", check.auth, putCotizaciones);
 router.put("/cotizaciones/editpdf", updateCotizacionPdf);
 router.post("/clientes/create", check.auth, createCliente);
 router.get("/clientes/get/:idUsuario", getClientesPorIdDeUsuario);
-router.get("/clientes/getTelefonos/:idUsuario", getTelefonosPorIdDeUsuario);
+router.get("/clientes/getEmails/:idUsuario", getMailsPorIdDeUsuario);
 router.get("/clientes/getDetalle/:idCliente", getClientePorId);
 router.get("/clientes/getParaCotizar/:idUsuario", getClientesParaCotizar);
 router.put("/clientes/edit", check.auth, updateCliente);
@@ -206,6 +207,7 @@ router.get("/contacto/getNoLeidosCount", check.auth, countActiveContactos);
 router.put("/contacto/put", check.auth, updateContactoState);
 router.put("/contacto/derivado", check.auth, updateContactoUsuario);
 router.post("/contacto/create", createContacto);
+router.post("/mailsMasivos/create", enviarMailsMasivos);
 router.get("/contactoProducto/get", check.auth, getContactoProducto);
 router.post("/contactoProducto/create", createContactoProducto);
 router.put(

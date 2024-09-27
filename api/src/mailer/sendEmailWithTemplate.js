@@ -10,9 +10,18 @@ const sendEmailWithTemplate = (to, template, props) => {
   let emailOptions;
 
   switch (template) {
+    case "mailsMasivos":
+      emailOptions = {
+        from: NODEMAILER_USER,
+        to,
+        subject: "MAILSMASIVOS",
+        html: mailsMasivos({ email: to, password: props.password }),
+      };
+      break;
+
     case "newUser":
       emailOptions = {
-        from: "matuteprueba@gmail.com",
+        from: NODEMAILER_USER,
         to,
         subject: "Bienvenido a AMERICAN VIAL",
         html: newUser({ email: to }),

@@ -331,7 +331,7 @@ const getClientesParaCotizar = async (req, res) => {
   }
 };
 
-const getTelefonosPorIdDeUsuario = async (req, res) => {
+const getMailsPorIdDeUsuario = async (req, res) => {
   try {
     const token = req.headers.authorization;
 
@@ -353,35 +353,35 @@ const getTelefonosPorIdDeUsuario = async (req, res) => {
       throw "Usuario no encontrado";
     }
 
-    let telefonos;
+    let emails;
 
     if (usuario.rol === true) {
       // Administrador: Ver todos los teléfonos
-      telefonos = await Clientes.findAll({
+      emails = await Clientes.findAll({
         attributes: [
           "nombre",
           "apellido",
-          "telefono",
+          "mail",
           "contactoAlternativo",
-          "telefonoAlternativo",
+          "mailAlternativo",
           "contactoAlternativo1",
-          "telefonoAlternativo1",
+          "mailAlternativo1",
         ],
         order: [["nombre", "ASC"]],
       });
     } else {
-      // Vendedor: Ver teléfonos de clientes asociados a su usuario
-      telefonos = await Clientes.findAll({
+      // Vendedor: Ver emails de clientes asociados a su usuario
+      emails = await Clientes.findAll({
         where: { idUsuario: idUsuario },
-        attributes: ["telefono", "telefonoAlternativo", "telefonoAlternativo1"],
+        attributes: ["mail", "mailAlternativo", "mailAlternativo1"],
         order: [["nombre", "ASC"]],
       });
     }
 
-    // Devuelve los teléfonos encontrados
-    return res.status(200).json(telefonos);
+    // Devuelve los emails encontrados
+    return res.status(200).json(emails);
   } catch (error) {
-    console.error("Error al obtener teléfonos:", error);
+    console.error("Error al obtener emails:", error);
     return res.status(400).send(error);
   }
 };
@@ -392,5 +392,5 @@ module.exports = {
   updateCliente,
   getClientesParaCotizar,
   getClientePorId,
-  getTelefonosPorIdDeUsuario,
+  getMailsPorIdDeUsuario,
 };
