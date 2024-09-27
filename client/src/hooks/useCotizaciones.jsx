@@ -16,6 +16,10 @@ const postCotizacion = async (data) => {
   return await CotizacionesAPI.post(`create`, data);
 };
 
+const postEnvioCotizacionPorEmial = async (data) => {
+  return await CotizacionesAPI.post(`/enviocoti/create`, data);
+};
+
 const postCotisPorFecha = async (data) => {
   const token = localStorage.getItem("token");
 
@@ -281,6 +285,60 @@ export const useCotizaciones = (idUsuario, id) => {
     },
   });
 
+  const cotizacionPorEmailMutation = useMutation({
+    mutationKey: ["cotizacionPorEmail-mutation"],
+    mutationFn: (data) => postEnvioCotizacionPorEmial(data),
+    onSuccess: () => {
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "La cotización se envió por Email corréctamente",
+        showConfirmButton: false,
+        timer: 2000,
+        background: "#ffffff",
+        iconColor: "#ffc107",
+        customClass: {
+          title: "text-dark",
+        },
+      });
+    },
+    onError: (error) => {
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "No se pudo enviar la cotización; intente más tarde",
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+
+          default:
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "Ocurrió un error inesperado, intente más tarde",
+              background: "#ffffff",
+              iconColor: "#dc3545",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+        }
+      }
+    },
+  });
+
   const cotisPorFechaMutation = useMutation({
     mutationKey: ["cotisPorFecha-cotizacion"],
     mutationFn: (data) => postCotisPorFecha(data),
@@ -413,6 +471,7 @@ export const useCotizaciones = (idUsuario, id) => {
     cotisPorFechaMutation,
     CotizacionesPendientesDeAprobacion,
     cotizacionEditPDFMutation,
+    cotizacionPorEmailMutation,
   };
 };
 

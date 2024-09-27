@@ -13,7 +13,10 @@ const {
   getUsuariosConRolFalse,
   getUsuariosChart,
 } = require("../controllers/Usuarios");
-const { enviarMailsMasivos } = require("../mailer/mailer.js");
+const {
+  enviarMailsMasivos,
+  enviarCotizacionPorEmail,
+} = require("../mailer/mailer.js");
 
 const {
   getProductos,
@@ -207,6 +210,7 @@ router.get("/contacto/getNoLeidosCount", check.auth, countActiveContactos);
 router.put("/contacto/put", check.auth, updateContactoState);
 router.put("/contacto/derivado", check.auth, updateContactoUsuario);
 router.post("/contacto/create", createContacto);
+router.post("/cotizaciones/enviocoti/create", enviarCotizacionPorEmail);
 router.post("/mailsMasivos/create", enviarMailsMasivos);
 router.get("/contactoProducto/get", check.auth, getContactoProducto);
 router.post("/contactoProducto/create", createContactoProducto);

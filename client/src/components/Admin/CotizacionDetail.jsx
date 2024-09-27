@@ -26,6 +26,11 @@ export default function CotizacionDetail() {
   const { auth } = useAuth();
   const [loading, setLoading] = useState(false);
   const [isPdfGenerated, setIsPdfGenerated] = useState(false);
+  const [password, setPassword] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { mutate: envioDeCotiPorEmail } =
+    useCotizaciones().cotizacionPorEmailMutation;
 
   const { mutate: UpdatePdfCoti } = useCotizaciones().cotizacionEditPDFMutation;
 
@@ -71,6 +76,22 @@ export default function CotizacionDetail() {
     plazoEntrega,
     CotizacionPDF,
   } = cotizacionDetalle;
+
+  const handleSubmitPorEmail = (e) => {
+    e.preventDefault();
+
+    const emailEmisor = auth.email;
+    const emailReceptor = cotizacionDetalle.cliente.email;
+
+    const requestBody = {
+      emailEmisor,
+      emailReceptor,
+      id,
+      password,
+    };
+    envioDeCotiPorEmail(requestBody);
+    console.log(requestBody);
+  };
 
   const numerosEnLetras = (num) => {
     const unidades = [
@@ -748,10 +769,38 @@ export default function CotizacionDetail() {
           )}
         </PDFDownloadLink>
         <div className="buttonpdf">
-          <button className="form-submit" disabled={!isPdfGenerated}>
+          <button
+            className="form-submit"
+            disabled={!isPdfGenerated}
+            onClick={() => setIsModalOpen(true)}
+          >
             <FaEnvelope /> Enviar Email
           </button>
         </div>
+
+        {isModalOpen && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <h2>Ingresa tu contraseña</h2>
+              <br />
+              <form onSubmit={handleSubmitPorEmail}>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Contraseña"
+                  required
+                />
+                <div className="modal-buttons">
+                  <button type="submit">Enviar</button>
+                  <button type="button" onClick={() => setIsModalOpen(false)}>
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
