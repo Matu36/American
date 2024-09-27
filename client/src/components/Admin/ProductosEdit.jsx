@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useProducto } from "../../hooks/useProductos";
 import { useParams } from "react-router-dom";
 import BackButton from "../../UI/BackButton";
+import CreatableSelect from "react-select/creatable";
 
 const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
 
@@ -161,7 +162,7 @@ export default function ProductosEdit() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="familia">Categoría</label>
+          <label htmlFor="familia">Familia</label>
           <input
             type="text"
             id="familia"

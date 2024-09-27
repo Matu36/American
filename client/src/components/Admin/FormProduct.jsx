@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { useProducto } from "../../hooks/useProductos";
 import Select from "react-select";
 import BackButton from "../../UI/BackButton";
+import CreatableSelect from "react-select/creatable";
 
 const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
 
@@ -98,7 +99,7 @@ export default function FormProduct() {
 
   const opcionesConNuevaFamilia = [
     ...opcionesFamilias,
-    { value: "nueva", label: "Agregar nueva" },
+    // { value: "nueva", label: "Agregar nueva" },
   ];
 
   const handleChangeFamilia = (selectedOption) => {
@@ -125,7 +126,7 @@ export default function FormProduct() {
 
   const opcionesConNuevaDivision = [
     ...opcionesDivisiones,
-    { value: "nueva", label: "Agregar nueva" },
+    // { value: "nueva", label: "Agregar nueva" },
   ];
 
   const handleChangeDivision = (selectedOption) => {
@@ -153,7 +154,7 @@ export default function FormProduct() {
 
   const opcionesConNuevaMarca = [
     ...opcionesMarcas,
-    { value: "nueva", label: "Agregar nueva" },
+    // { value: "nueva", label: "Agregar nueva" },
   ];
 
   const handleChangeMarca = (selectedOption) => {
@@ -290,7 +291,7 @@ export default function FormProduct() {
             <label htmlFor="division">
               División <span className="obligatorio">*</span>
             </label>
-            <Select
+            <CreatableSelect
               id="division"
               name="division"
               type="text"
@@ -299,12 +300,13 @@ export default function FormProduct() {
               onChange={handleChangeDivision}
               placeholder="Selecciona o agrega una nueva división"
               isClearable
+              formatCreateLabel={(inputValue) => `Crear "${inputValue}"`}
             />
           </div>
           <label htmlFor="familia">
             Familia <span className="obligatorio">*</span>
           </label>
-          <Select
+          <CreatableSelect
             id="familia"
             name="familia"
             options={opcionesConNuevaFamilia}
@@ -313,6 +315,7 @@ export default function FormProduct() {
             placeholder="Selecciona o agrega una nueva categoría"
             isClearable
             required
+            formatCreateLabel={(inputValue) => `Crear "${inputValue}"`}
           />
         </div>
 
@@ -321,7 +324,7 @@ export default function FormProduct() {
             Marca <span className="obligatorio">*</span>
           </label>
 
-          <Select
+          <CreatableSelect
             id="marca"
             name="marca"
             type="text"
@@ -330,6 +333,7 @@ export default function FormProduct() {
             onChange={handleChangeMarca}
             placeholder="Selecciona o agrega una nueva marca"
             required
+            formatCreateLabel={(inputValue) => `Crear "${inputValue}"`}
           />
         </div>
 

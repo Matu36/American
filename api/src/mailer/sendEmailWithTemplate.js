@@ -12,7 +12,7 @@ const sendEmailWithTemplate = (to, template, props) => {
   switch (template) {
     case "newUser":
       emailOptions = {
-        from: NODEMAILER_USER,
+        from: "matuteprueba@gmail.com",
         to,
         subject: "Bienvenido a AMERICAN VIAL",
         html: newUser({ email: to }),

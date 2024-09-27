@@ -43,6 +43,7 @@ const {
   getCotizacionesPorModelo,
   getranking,
   getCotizacionesEstadoTres,
+  updateCotizacionPdf,
 } = require("../controllers/Cotizaciones");
 
 const {
@@ -193,6 +194,7 @@ router.get(
 router.get("/Cotizaciones/ranking", check.auth, getranking);
 router.delete("/Cotizaciones/delete", eliminarCotizacionIndividual);
 router.put("/cotizaciones/edit", check.auth, putCotizaciones);
+router.put("/cotizaciones/editpdf", updateCotizacionPdf);
 router.post("/clientes/create", check.auth, createCliente);
 router.get("/clientes/get/:idUsuario", getClientesPorIdDeUsuario);
 router.get("/clientes/getTelefonos/:idUsuario", getTelefonosPorIdDeUsuario);

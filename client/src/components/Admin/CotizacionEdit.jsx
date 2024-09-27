@@ -34,10 +34,13 @@ export default function CotizacionEdit() {
     entregaTecnica: "",
     origenFabricacion: "",
     patentamiento: "",
+    CotizacionPDF: "",
     cotizacionesIndividuales: [
       {
-        id: "",
         precio: "",
+        precioEnPesos: "",
+        cotizacionDolar: 0,
+        anticipoPorcentaje: 0,
         anticipo: 0,
         saldoAFinanciar: 0,
         IVA: 10.5,
@@ -46,14 +49,14 @@ export default function CotizacionEdit() {
         interes: 0,
         cuotas: 1,
         cuotaValor: null,
+        cuotaValorEnPesos: null,
         PrecioFinal: "",
+        PrecioFinalEnPesos: "",
         cantidadProducto: 0,
         estado: 1,
       },
     ],
   });
-
-  console.log(formData);
 
   useEffect(() => {
     if (!isLoadingCotizacion && cotizacionDetalle) {
@@ -83,17 +86,23 @@ export default function CotizacionEdit() {
         entregaTecnica: cotizacionDetalle.entregaTecnica || "",
         origenFabricacion: cotizacionDetalle.origenFabricacion || "",
         patentamiento: cotizacionDetalle.patentamiento || "",
+
         cotizacionesIndividuales: cotizaciones.map((cotizacionIndividual) => ({
           id: cotizacionIndividual.id,
           precio: cotizacionIndividual.precio || "",
+          PrecioFinalEnPesos: cotizacionIndividual.PrecioFinalEnPesos || "",
+          precioEnPesos: cotizacionIndividual.precioEnPesos || "",
           anticipo: cotizacionIndividual.anticipo || 0,
+          anticipoPorcentaje: cotizacionIndividual.anticipoPorcentaje || 0,
           saldoAFinanciar: cotizacionIndividual.saldoAFinanciar || 0,
           IVA: cotizacionIndividual.IVA || 10.5,
+          cotizacionDolar: cotizacionIndividual.cotizacionDolar || "",
           moneda: cotizacionIndividual.moneda || "USD",
           saldoConInteres: cotizacionIndividual.saldoConInteres || 0,
           interes: cotizacionIndividual.interes || 0,
           cuotas: cotizacionIndividual.cuotas || 1,
           cuotaValor: cotizacionIndividual.cuotaValor || null,
+          cuotaValorEnPesos: cotizacionIndividual.cuotaValorEnPesos || null,
           PrecioFinal: cotizacionIndividual.PrecioFinal || "",
           cantidadProducto: cotizacionIndividual.cantidadProducto || 0,
           estado: cotizacionIndividual.estado || 1,
@@ -177,17 +186,21 @@ export default function CotizacionEdit() {
       cotizacionesIndividuales: [
         ...formData.cotizacionesIndividuales,
         {
-          id: null,
           precio: "",
+          precioEnPesos: "",
+          cotizacionDolar: 0,
+          anticipoPorcentaje: 0,
           anticipo: 0,
           saldoAFinanciar: 0,
           IVA: 10.5,
           moneda: "USD",
+          saldoConInteres: 0,
           interes: 0,
           cuotas: 1,
           cuotaValor: null,
-          saldoConInteres: 0,
+          cuotaValorEnPesos: null,
           PrecioFinal: "",
+          PrecioFinalEnPesos: "",
           cantidadProducto: 0,
           estado: 1,
         },
@@ -238,6 +251,10 @@ export default function CotizacionEdit() {
     let anticipo = parseFloat(cotizacion.anticipo) || 0;
     let IVA = parseFloat(cotizacion.IVA) || 0;
     let interes = parseFloat(cotizacion.interes) || 0;
+    let cotizacionDolar = parseFloat(cotizacion.cotizacionDolar) || 1; // Aseguramos que tenga un valor válido
+
+    // Calcular anticipoPorcentaje
+    let anticipoPorcentaje = (anticipo / precio) * 100 || 0;
 
     let saldoAFinanciar = precio - anticipo;
     let saldoConInteres = saldoAFinanciar * (1 + interes / 100);
@@ -250,11 +267,22 @@ export default function CotizacionEdit() {
         ? precio * (1 + IVA / 100)
         : (saldoConInteres + anticipo) * 1.105;
 
+    // Calcular valores en Pesos
+    let precioEnPesos = precio * cotizacionDolar;
+    let cuotaValorEnPesos =
+      cuotaValor !== null ? cuotaValor * cotizacionDolar : null;
+    let PrecioFinalEnPesos = PrecioFinal * cotizacionDolar;
+
     return {
+      anticipoPorcentaje: anticipoPorcentaje.toFixed(2), // Nuevo campo agregado
       saldoAFinanciar: saldoAFinanciar.toFixed(2),
       saldoConInteres: saldoConInteres.toFixed(2),
       cuotaValor: cuotaValor !== null ? cuotaValor.toFixed(2) : null,
       PrecioFinal: PrecioFinal.toFixed(2),
+      precioEnPesos: precioEnPesos.toFixed(2),
+      cuotaValorEnPesos:
+        cuotaValorEnPesos !== null ? cuotaValorEnPesos.toFixed(2) : null,
+      PrecioFinalEnPesos: PrecioFinalEnPesos.toFixed(2),
     };
   };
 
@@ -279,11 +307,12 @@ export default function CotizacionEdit() {
     formData.cotizacionesIndividuales.map((c) => c.IVA).join(),
     formData.cotizacionesIndividuales.map((c) => c.cuotas).join(),
     formData.cotizacionesIndividuales.map((c) => c.interes).join(),
+    formData.cotizacionesIndividuales.map((c) => c.cotizacionDolar).join(),
   ]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
     cotizacionEdit(formData);
   };
 
@@ -459,6 +488,26 @@ export default function CotizacionEdit() {
               {" "}
               <h2 className="tituloCompo">Cotización</h2> <br />
             </div>
+            <div>
+              {" "}
+              <label className="form-label">
+                Cotización Dólar: <span className="obligatorio">*</span>
+              </label>
+              <input
+                type="number"
+                name={`cotizacionesIndividuales[${index}].cotizacionDolar`}
+                value={cotizacion.cotizacionDolar}
+                onChange={(e) =>
+                  handleCotizacionIndividualChange(
+                    index,
+                    "cotizacionDolar",
+                    e.target.value
+                  )
+                }
+                required
+                className="form-input"
+              />
+            </div>
             <div className="form-group">
               <label className="form-label">Cantidad</label>
               <input
@@ -501,6 +550,19 @@ export default function CotizacionEdit() {
                     e.target.value
                   )
                 }
+                className="form-input"
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label" style={{ color: "GrayText" }}>
+                Precio de Venta en Pesos:
+              </label>
+              <input
+                type="number"
+                name={`cotizacionesIndividuales[${index}].precioEnPesos`}
+                value={cotizacion.precioEnPesos}
+                disabled
                 className="form-input"
               />
             </div>
@@ -557,6 +619,24 @@ export default function CotizacionEdit() {
                   />
                 </div>
 
+                <div className="form-group" style={{ color: "GrayText" }}>
+                  <label className="form-label">Anticipo %:</label>
+                  <input
+                    type="number"
+                    name={`cotizacionesIndividuales[${index}].anticipo`}
+                    value={cotizacion.anticipoPorcentaje}
+                    disabled
+                    onChange={(e) =>
+                      handleCotizacionIndividualChange(
+                        index,
+                        "anticipo",
+                        e.target.value
+                      )
+                    }
+                    className="form-input"
+                  />
+                </div>
+
                 <div className="form-group">
                   <label className="form-label">Valor de Cuota:</label>
                   <input
@@ -570,6 +650,17 @@ export default function CotizacionEdit() {
                         e.target.value
                       )
                     }
+                    className="form-input"
+                  />
+                </div>
+
+                <div className="form-group" style={{ color: "gray" }}>
+                  <label className="form-label">Valor de Cuota en Pesos:</label>
+                  <input
+                    type="number"
+                    name={`cotizacionesIndividuales[${index}].cuotaValorEnPesos`}
+                    value={cotizacion.cuotaValorEnPesos}
+                    disabled
                     className="form-input"
                   />
                 </div>
@@ -615,6 +706,16 @@ export default function CotizacionEdit() {
                 type="text"
                 value={cotizacion.PrecioFinal}
                 readOnly
+                className="form-input"
+              />
+            </div>
+            <div className="form-group" style={{ color: "gray" }}>
+              <label className="form-label">Precio Final en Pesos:</label>
+              <input
+                type="number"
+                name={`cotizacionesIndividuales[${index}].PrecioFinalEnPesos`}
+                value={cotizacion.PrecioFinalEnPesos}
+                disabled
                 className="form-input"
               />
             </div>

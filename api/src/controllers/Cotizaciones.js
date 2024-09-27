@@ -187,6 +187,35 @@ const createCotizacion = async (req, res) => {
   }
 };
 
+// GUARDAR URL DEL PDF //
+
+const updateCotizacionPdf = async (req, res) => {
+  try {
+    const { id, CotizacionPDF } = req.body;
+
+    if (!id || !CotizacionPDF) {
+      throw "Faltan parámetros en el cuerpo de la solicitud";
+    }
+
+    // Verificar si la cotización existe
+    const cotizacion = await Cotizaciones.findOne({
+      where: { id: id },
+    });
+
+    if (!cotizacion) {
+      throw "Cotización no encontrada";
+    }
+
+    cotizacion.CotizacionPDF = CotizacionPDF;
+
+    await cotizacion.save();
+
+    return res.status(200).send(cotizacion);
+  } catch (error) {
+    return res.status(400).send({ error: error.toString() });
+  }
+};
+
 //TRAE TODOS LAS COTIZACIONES SI EL USUARIO ES ADMIN, SINO SOLO LAS COTIZACIONES QUE CARGO ESE USUARIO //
 
 const getCotizaciones = async (req, res) => {
@@ -314,6 +343,11 @@ const getCotizacionDetalle = async (req, res) => {
           attributes: [
             "id",
             "precio",
+            "precioEnPesos",
+            "PrecioFinalEnPesos",
+            "cotizacionDolar",
+            "cuotaValorEnPesos",
+            "anticipoPorcentaje",
             "anticipo",
             "saldoAFinanciar",
             "IVA",
@@ -368,6 +402,7 @@ const getCotizacionDetalle = async (req, res) => {
       fechaDeCreacion: cotizacion.fechaDeCreacion,
       fechaModi: cotizacion.fechaModi,
       fechaVenta: cotizacion.fechaVenta,
+      CotizacionPDF: cotizacion.CotizacionPDF,
       cotizacionesIndividuales: cotizacion.CotizacionIndividuals || [],
       cliente: {
         razonSocial: cotizacion.Cliente.razonSocial,
@@ -1618,4 +1653,5 @@ module.exports = {
   getCotizacionesPorModelo,
   getranking,
   getCotizacionesEstadoTres,
+  updateCotizacionPdf,
 };

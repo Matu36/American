@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
 import { useCotizacionIndividual } from "../../hooks/useCotizacionIndividual";
 import { useParams } from "react-router-dom";
-import { FaFilePdf } from "react-icons/fa";
+import { FaFilePdf, FaEnvelope } from "react-icons/fa";
 import Spinner from "../../UI/Spinner";
 import americanvial from "../../assets/img/PDF/AMERICAN.png";
 import SINOMACH from "../../assets/img/PDF/SINOMACH.png";
-
+import useAuth from "../../hooks/useAuth";
 import {
   PDFDownloadLink,
   Document,
@@ -14,12 +14,19 @@ import {
   View,
   Text,
   Image,
+  pdf,
 } from "@react-pdf/renderer";
 import { styles } from "../../assets/Styles/PDFestilosDetalle";
 import BackButton from "../../UI/BackButton";
 
+const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
+
 export default function CotizacionDetail() {
   const { id } = useParams();
+  const { auth } = useAuth();
+  const [loading, setLoading] = useState(false);
+
+  const { mutate: UpdatePdfCoti } = useCotizaciones().cotizacionEditPDFMutation;
 
   const { mutate: estado3 } =
     useCotizacionIndividual().cotizacionMutationState3;
@@ -29,6 +36,8 @@ export default function CotizacionDetail() {
     isLoading,
     refetch: detalle,
   } = useCotizaciones(null, id).cotizacionDetalleQuery;
+
+  console.log(cotizacionDetalle);
 
   if (isLoading) {
     return (
@@ -61,6 +70,7 @@ export default function CotizacionDetail() {
     origenFabricacion,
     patentamiento,
     plazoEntrega,
+    CotizacionPDF,
   } = cotizacionDetalle;
 
   const numerosEnLetras = (num) => {
@@ -161,6 +171,39 @@ export default function CotizacionDetail() {
     return resto === 0
       ? `${numerosEnLetras(mil)} mil`
       : `${numerosEnLetras(mil)} mil ${numerosEnLetras(resto)}`;
+  };
+
+  const generateAndUploadPDF = async () => {
+    setLoading(true);
+    try {
+      const doc = <MyDocument />;
+      const asPdf = pdf(doc);
+      const blob = await asPdf.toBlob();
+
+      // Prepare form data to upload to Cloudinary
+      const data = new FormData();
+      data.append("file", blob);
+      data.append("upload_preset", "Images");
+
+      // Upload the PDF Blob to Cloudinary
+      const res = await fetch(Clouddinary, {
+        method: "POST",
+        body: data,
+      });
+
+      const pdfData = await res.json();
+      setLoading(false);
+
+      const pdfUpdateData = {
+        id: cotizacionDetalle.idCotizacion,
+        CotizacionPDF: pdfData.secure_url,
+      };
+
+      UpdatePdfCoti(pdfUpdateData);
+    } catch (error) {
+      console.error("Error uploading PDF:", error);
+      setLoading(false);
+    }
   };
 
   const MyDocument = () => (
@@ -397,7 +440,7 @@ export default function CotizacionDetail() {
         </Text>
 
         {/* Imagen del producto */}
-        <Image src={producto.imagen} />
+        {/* <Image src={producto?.imagen} /> */}
 
         {/* Asesor comercial */}
         {/* <View>
@@ -680,6 +723,14 @@ export default function CotizacionDetail() {
         <span>www.americanvial.com</span>
       </div>
       <div className="buttonpdf">
+        <button
+          className="form-submit"
+          onClick={generateAndUploadPDF}
+          disabled={loading}
+        >
+          <FaEnvelope /> {loading ? "Generando PDF..." : "Generar PDF"}
+        </button>
+
         <PDFDownloadLink
           document={<MyDocument cotizacionDetalle={cotizacionDetalle} />}
           fileName={`cotizacion_${codigoCotizacion}.pdf`}

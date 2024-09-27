@@ -21,8 +21,19 @@ module.exports = (sequelize) => {
         type: DataTypes.DECIMAL,
         allowNull: false,
       },
-
+      precioEnPesos: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+      },
+      cotizacionDolar: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
       anticipo: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
+      anticipoPorcentaje: {
         type: DataTypes.DECIMAL,
         allowNull: true,
       },
@@ -33,6 +44,10 @@ module.exports = (sequelize) => {
       },
 
       cuotaValor: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
+      cuotaValorEnPesos: {
         type: DataTypes.DECIMAL,
         allowNull: true,
       },
@@ -63,6 +78,10 @@ module.exports = (sequelize) => {
       },
 
       PrecioFinal: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+      },
+      PrecioFinalEnPesos: {
         type: DataTypes.DECIMAL,
         allowNull: false,
       },

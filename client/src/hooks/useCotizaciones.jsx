@@ -43,6 +43,10 @@ const editCotizacion = async (data) => {
   return await CotizacionesAPI.put(`edit`, data);
 };
 
+const editCotizacionPDF = async (data) => {
+  return await CotizacionesAPI.put(`editpdf`, data);
+};
+
 const getCotizacionesById = async (idUsuario) => {
   const { data } = await CotizacionesAPI.get(`/get/${idUsuario}`);
   return data;
@@ -170,6 +174,72 @@ export const useCotizaciones = (idUsuario, id) => {
               position: "center",
               icon: "warning",
               title: "No se pudieron actualizar los datos. Intente más tarde",
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+          default:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "Hubo un error",
+              showConfirmButton: false,
+              timer: 2000,
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+            });
+            break;
+        }
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Hubo un error al procesar la solicitud",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "#ffffff",
+          iconColor: "#ffc107",
+          customClass: {
+            title: "text-dark",
+          },
+        });
+      }
+    },
+  });
+
+  const cotizacionEditPDFMutation = useMutation({
+    mutationKey: ["editPDF-cotizacion"],
+    mutationFn: (data) => editCotizacionPDF(data),
+    onSuccess: () => {
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "El PDF se generó Corréctamente",
+        showConfirmButton: false,
+        timer: 2000,
+        background: "#ffffff",
+        iconColor: "#ffc107",
+        customClass: {
+          title: "text-dark",
+        },
+      });
+    },
+    onError: (error) => {
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "No se pudo generar el PDF. Intente más tarde",
               background: "#ffffff",
               iconColor: "#ffc107",
               customClass: {
@@ -342,6 +412,7 @@ export const useCotizaciones = (idUsuario, id) => {
     cotizacionEditMutation,
     cotisPorFechaMutation,
     CotizacionesPendientesDeAprobacion,
+    cotizacionEditPDFMutation,
   };
 };
 
