@@ -86,7 +86,7 @@ export default function CotizacionDetail() {
     const requestBody = {
       emailEmisor,
       emailReceptor,
-      id,
+      idCotizacion: id,
       password,
     };
     envioDeCotiPorEmail(requestBody);

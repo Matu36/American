@@ -45,7 +45,7 @@ const enviarCotizacionPorEmail = async (req, res) => {
 
     // Obtener la cotización y su relación con CotizacionIndividual
     const cotizacion = await Cotizaciones.findOne({
-      where: { Id: idCotizacion },
+      where: { id: idCotizacion },
       include: [{ model: CotizacionIndividual }],
     });
 
