@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
 import { useCotizacionIndividual } from "../../hooks/useCotizacionIndividual";
 import { useParams } from "react-router-dom";
-import { FaFilePdf, FaEnvelope } from "react-icons/fa";
+import { FaFilePdf, FaEnvelope, FaCog } from "react-icons/fa";
 import Spinner from "../../UI/Spinner";
 import americanvial from "../../assets/img/PDF/AMERICAN.png";
 import SINOMACH from "../../assets/img/PDF/SINOMACH.png";
@@ -25,6 +25,7 @@ export default function CotizacionDetail() {
   const { id } = useParams();
   const { auth } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [isPdfGenerated, setIsPdfGenerated] = useState(false);
 
   const { mutate: UpdatePdfCoti } = useCotizaciones().cotizacionEditPDFMutation;
 
@@ -36,8 +37,6 @@ export default function CotizacionDetail() {
     isLoading,
     refetch: detalle,
   } = useCotizaciones(null, id).cotizacionDetalleQuery;
-
-  console.log(cotizacionDetalle);
 
   if (isLoading) {
     return (
@@ -193,6 +192,7 @@ export default function CotizacionDetail() {
 
       const pdfData = await res.json();
       setLoading(false);
+      setIsPdfGenerated(true);
 
       const pdfUpdateData = {
         id: cotizacionDetalle.idCotizacion,
@@ -728,7 +728,7 @@ export default function CotizacionDetail() {
           onClick={generateAndUploadPDF}
           disabled={loading}
         >
-          <FaEnvelope /> {loading ? "Generando PDF..." : "Generar PDF"}
+          <FaCog /> {loading ? "Generando PDF..." : "Generar PDF"}
         </button>
 
         <PDFDownloadLink
@@ -736,7 +736,7 @@ export default function CotizacionDetail() {
           fileName={`cotizacion_${codigoCotizacion}.pdf`}
         >
           {({ loading }) => (
-            <button className="form-submit">
+            <button className="form-submit" disabled={!isPdfGenerated}>
               {loading ? (
                 "Generando PDF..."
               ) : (
@@ -747,6 +747,11 @@ export default function CotizacionDetail() {
             </button>
           )}
         </PDFDownloadLink>
+        <div className="buttonpdf">
+          <button className="form-submit" disabled={!isPdfGenerated}>
+            <FaEnvelope /> Enviar Email
+          </button>
+        </div>
       </div>
     </div>
   );
