@@ -79,6 +79,7 @@ const enviarCotizacionPorEmail = async (req, res) => {
         },
         {
           model: CotizacionIndividual,
+          where: { estado: 1 },
           attributes: [
             "id",
             "precio",
@@ -186,7 +187,7 @@ const enviarCotizacionPorEmail = async (req, res) => {
     const emailOptions = {
       from: emailEmisor,
       to: emailReceptor,
-      subject: "Cotización Detallada",
+      subject: `Cotización de ${cotizacionDetalle.producto.familia}, ${cotizacionDetalle.producto.marca}, ${cotizacionDetalle.producto.modelo}`,
       html: cotizacionEmail(cotizacionDetalle),
     };
 
@@ -219,7 +220,6 @@ const enviarMailsMasivos = async (req, res) => {
 
     const email = decodedToken.email;
     const hashedPassword = decodedToken.password;
-    console.log("Email:", email, "Hashed Password:", hashedPassword);
 
     if (!emailEmisor || !emailsReceptores || emailsReceptores.length === 0) {
       return res
