@@ -274,6 +274,8 @@ const enviarMailsMasivos = async (req, res) => {
       )
     );
 
+    await MailsMasivos.destroy({ where: {} });
+
     return res.status(201).json({
       message: "Correos enviados exitosamente.",
       resultado,

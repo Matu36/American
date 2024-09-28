@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
     boxSizing: "border-box",
-
+    position: "relative",
     textAlign: "left",
   },
   imagenesPDF: {
@@ -89,7 +89,7 @@ export const styles = StyleSheet.create({
   },
   precioUnitario: {
     fontWeight: "bold",
-    marginTop: 5,
+    marginTop: "15px",
     fontSize: "14px",
   },
   cotizacion: {
@@ -120,7 +120,7 @@ export const styles = StyleSheet.create({
   caracgenerales: {
     fontWeight: "bold",
     fontSize: "14px",
-
+    marginTop: "20px",
     textDecoration: "underline",
     textAlign: "center",
   },
@@ -154,5 +154,15 @@ export const styles = StyleSheet.create({
     fontSize: 8,
     paddingLeft: 60,
     color: "gray",
+  },
+
+  watermark: {
+    position: "absolute",
+    top: "50%",
+    left: "15%",
+    transform: "translate(-50%, -50%)",
+    width: "100%", // Ajusta según lo necesites
+    height: "auto", // Mantener proporciones
+    zIndex: 0, // Asegúrate de que esté detrás de otros elementos
   },
 });

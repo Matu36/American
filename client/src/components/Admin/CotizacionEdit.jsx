@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import { useCotizaciones } from "../../hooks/useCotizaciones";
 import BackButton from "../../UI/BackButton";
 import Select from "react-select";
+import { NumericFormat } from "react-number-format";
 
 export default function CotizacionEdit() {
   const { auth } = useAuth();
@@ -488,24 +489,26 @@ export default function CotizacionEdit() {
               {" "}
               <h2 className="tituloCompo">Cotización</h2> <br />
             </div>
-            <div>
-              {" "}
+            <div className="form-group">
               <label className="form-label">
                 Cotización Dólar: <span className="obligatorio">*</span>
               </label>
-              <input
-                type="number"
+              <NumericFormat
                 name={`cotizacionesIndividuales[${index}].cotizacionDolar`}
                 value={cotizacion.cotizacionDolar}
-                onChange={(e) =>
+                onValueChange={({ value }) =>
                   handleCotizacionIndividualChange(
                     index,
                     "cotizacionDolar",
-                    e.target.value
+                    value
                   )
                 }
                 required
                 className="form-input"
+                thousandSeparator={true}
+                decimalScale={2}
+                fixedDecimalScale={true}
+                allowNegative={false}
               />
             </div>
             <div className="form-group">
@@ -539,18 +542,22 @@ export default function CotizacionEdit() {
               />
             </div>
             <div className="form-group">
-              <label className="form-label">Precio de Venta</label>
-              <input
-                type="text"
+              <label className="form-label">
+                Precio de venta: <span className="obligatorio">*</span>
+              </label>
+              <NumericFormat
+                name={`cotizacionesIndividuales[${index}].precio`}
                 value={cotizacion.precio}
-                onChange={(e) =>
-                  handleCotizacionIndividualChange(
-                    index,
-                    "precio",
-                    e.target.value
-                  )
-                }
+                onValueChange={(values) => {
+                  const { formattedValue, value } = values;
+                  handleCotizacionIndividualChange(index, "precio", value);
+                }}
+                required
                 className="form-input"
+                thousandSeparator={true}
+                decimalScale={2}
+                fixedDecimalScale={true}
+                allowNegative={false}
               />
             </div>
 

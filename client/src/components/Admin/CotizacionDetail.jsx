@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { FaFilePdf, FaEnvelope, FaCog } from "react-icons/fa";
 import Spinner from "../../UI/Spinner";
 import americanvial from "../../assets/img/PDF/AMERICAN.png";
+import americanvialDEGRADE from "../../assets/img/PDF/AMERICANDEGRADE.png";
 import SINOMACH from "../../assets/img/PDF/SINOMACH.png";
 import useAuth from "../../hooks/useAuth";
 import {
@@ -77,7 +78,7 @@ export default function CotizacionDetail() {
     CotizacionPDF,
   } = cotizacionDetalle;
 
-  const handleSubmitPorEmail = (e) => {
+  const handleSubmitPorEmail = async (e) => {
     e.preventDefault();
 
     const emailEmisor = auth.email;
@@ -89,7 +90,13 @@ export default function CotizacionDetail() {
       idCotizacion: id,
       password,
     };
-    envioDeCotiPorEmail(requestBody);
+
+    try {
+      await envioDeCotiPorEmail(requestBody);
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error("Error al enviar la cotización por email:", error);
+    }
   };
 
   const numerosEnLetras = (num) => {
@@ -226,9 +233,12 @@ export default function CotizacionDetail() {
     }
   };
 
+  const cotizacionUnicoElemento = cotizacionesIndividuales[0];
+
   const MyDocument = () => (
     <Document>
       <Page size="A4" style={styles.page}>
+        <Image style={styles.watermark} src={americanvialDEGRADE} />
         {/* Logos */}
         <View style={styles.imagenesPDF}>
           <Image style={styles.sino} src={SINOMACH} />
@@ -275,29 +285,27 @@ export default function CotizacionDetail() {
           </Text>
         </View>
 
-        {/* Detalles de la cotización */}
-        {cotizacionesIndividuales.map((cotizacion, index) => (
-          <View key={index}>
-            <Text style={styles.opcion}>Opción {index + 1}:</Text>
-            <View style={styles.cotizacionItem}>
-              <Text>
-                {numerosEnLetras(cotizacion.cantidadProducto)} (
-                {cotizacion.cantidadProducto}) {producto.familia}
-                <Text style={styles.cursiva}> SINOMACH </Text>
-                modelo {producto.modelo}
-              </Text>
-            </View>
-            <Text style={styles.precioUnitario}>
-              Precio Unitario del equipo:………….…… U$D {""} {cotizacion.precio} +
-              IVA ({cotizacion.IVA}%)
+        <View>
+          <View style={styles.cotizacionItem}>
+            <Text>
+              {numerosEnLetras(cotizacionUnicoElemento.cantidadProducto)} (
+              {cotizacionUnicoElemento.cantidadProducto}) {producto.familia}
+              <Text style={styles.cursiva}> SINOMACH </Text>
+              modelo {producto.modelo}
             </Text>
-            <Text style={styles.dolares}>
-              (Son dólares estadounidenses, Ciento ochenta y cuatro mil
-              doscientos cincuenta más IVA.-) Ejemplo hoy BNA $ 977 ( $
-              180.012.250 + IVA 10.5% )
-            </Text>
-            <Text style={styles.hr} />
-            <View style={styles.cotizacion}>
+          </View>
+          <Text style={styles.precioUnitario}>
+            Precio Unitario del equipo:………….…… U$D {""}{" "}
+            {cotizacionUnicoElemento.precio} + IVA (
+            {cotizacionUnicoElemento.IVA}%)
+          </Text>
+          <Text style={styles.dolares}>
+            (Son dólares estadounidenses, Ciento ochenta y cuatro mil doscientos
+            cincuenta más IVA.-) Ejemplo hoy BNA $ 977 ( $ 180.012.250 + IVA
+            10.5% )
+          </Text>
+          <Text style={styles.hr} />
+          {/* <View style={styles.cotizacion}>
               <Text style={styles.cotizacionText}>
                 Anticipo: {cotizacion.moneda} {cotizacion.anticipo}
               </Text>
@@ -308,22 +316,8 @@ export default function CotizacionDetail() {
               <Text style={styles.cotizacionText}>
                 Precio Final: {cotizacion.moneda} {cotizacion.PrecioFinal}
               </Text>
-            </View>
-          </View>
-        ))}
-
-        {/* Condiciones generales de venta */}
-        {/* <View style={styles.condicionesgenerales}>
-          <Text>Condiciones Generales de Venta</Text>
-          <Text>Plazo de Entrega: {plazoEntrega}</Text>
-          <Text>Forma de Pago: {formaPago}</Text>
-          <Text>Mantenimiento de Oferta: {mantenimientoOferta}</Text>
-          <Text>Lugar de Entrega: {lugarEntrega}</Text>
-          <Text>Garantía: {garantia}</Text>
-          <Text>Entrega Técnica: {entregaTecnica}</Text>
-          <Text>Origen de Fabricación: {origenFabricacion}</Text>
-          <Text>Patentamiento: {patentamiento}</Text>
-        </View> */}
+            </View> */}
+        </View>
 
         {/* Características técnicas generales */}
 
@@ -353,6 +347,7 @@ export default function CotizacionDetail() {
         </View>
       </Page>
       <Page size="A4" style={styles.page}>
+        <Image style={styles.watermark} src={americanvialDEGRADE} />
         {/* Logos */}
         <View style={styles.imagenesPDF}>
           <Image style={styles.sino} src={SINOMACH} />
@@ -424,6 +419,7 @@ export default function CotizacionDetail() {
         </View>
       </Page>
       <Page size="A4" style={styles.page}>
+        <Image style={styles.watermark} src={americanvialDEGRADE} />
         {/* Logos */}
         <View style={styles.imagenesPDF}>
           <Image style={styles.sino} src={SINOMACH} />
@@ -460,7 +456,10 @@ export default function CotizacionDetail() {
         </Text>
 
         {/* Imagen del producto */}
-        {/* <Image src={producto?.imagen} /> */}
+        {producto?.imagen && <Image src={producto.imagen} alt="Imagen" />}
+        {producto?.imagen1 && <Image src={producto.imagen1} alt="Imagen 1" />}
+        {producto?.imagen2 && <Image src={producto.imagen2} alt="Imagen 2" />}
+        {producto?.imagen3 && <Image src={producto.imagen3} alt="Imagen 3" />}
 
         {/* Asesor comercial */}
         {/* <View>
@@ -536,7 +535,8 @@ export default function CotizacionDetail() {
             Precio Unitario del equipo:………….…… U$D {""}
             {cotizacion.precio} + IVA.- ({cotizacion.IVA}%)
           </h5>
-          <p>
+
+          <p style={{ marginTop: "-10px" }}>
             Son dólares estadounidenses, {numerosEnLetras(cotizacion.precio)},
             más IVA.- Ejemplo hoy BNA $ 977 ( $ 180.012.250 + IVA 10.5% )
           </p>

@@ -7,6 +7,7 @@ import { useCotizaciones } from "../../hooks/useCotizaciones";
 import { useUsuario } from "../../hooks/useUsuarios";
 import BackButton from "../../UI/BackButton";
 import { useNavigate } from "react-router-dom";
+import { NumericFormat } from "react-number-format";
 
 const Cotizador = () => {
   const { auth } = useAuth();
@@ -599,24 +600,26 @@ const Cotizador = () => {
               <h2 className="tituloCompo">Cotización</h2> <br />
             </div>
             <div></div>
-            <div>
-              {" "}
+            <div className="form-group">
               <label className="form-label">
                 Cotización Dólar: <span className="obligatorio">*</span>
               </label>
-              <input
-                type="number"
+              <NumericFormat
                 name={`cotizacionesIndividuales[${index}].cotizacionDolar`}
                 value={cotizacion.cotizacionDolar}
-                onChange={(e) =>
+                onValueChange={({ value }) =>
                   handleCotizacionIndividualChange(
                     index,
                     "cotizacionDolar",
-                    e.target.value
+                    value
                   )
                 }
                 required
                 className="form-input"
+                thousandSeparator={true}
+                decimalScale={2}
+                fixedDecimalScale={true}
+                allowNegative={false}
               />
             </div>
             <div className="form-group">
@@ -663,19 +666,19 @@ const Cotizador = () => {
               <label className="form-label">
                 Precio de venta: <span className="obligatorio">*</span>
               </label>
-              <input
-                type="number"
+              <NumericFormat
                 name={`cotizacionesIndividuales[${index}].precio`}
                 value={cotizacion.precio}
-                onChange={(e) =>
-                  handleCotizacionIndividualChange(
-                    index,
-                    "precio",
-                    e.target.value
-                  )
-                }
+                onValueChange={(values) => {
+                  const { formattedValue, value } = values;
+                  handleCotizacionIndividualChange(index, "precio", value);
+                }}
                 required
                 className="form-input"
+                thousandSeparator={true}
+                decimalScale={2}
+                fixedDecimalScale={true}
+                allowNegative={false}
               />
             </div>
             <div className="form-group">
