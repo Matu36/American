@@ -643,6 +643,11 @@ const putCotizaciones = async (req, res) => {
         if (!actual) return true; // Si es nueva, siempre se debe guardar
         return !(
           actual.precio === nueva.precio &&
+          actual.precioEnPesos === nueva.precioEnPesos &&
+          actual.PrecioFinalEnPesos === nueva.PrecioFinalEnPesos &&
+          actual.cuotaValorEnPesos === nueva.cuotaValorEnPesos &&
+          actual.anticipoPorcentaje === nueva.anticipoPorcentaje &&
+          actual.cotizacionDolar === nueva.cotizacionDolar &&
           actual.anticipo === nueva.anticipo &&
           actual.saldoAFinanciar === nueva.saldoAFinanciar &&
           actual.IVA === nueva.IVA &&
@@ -662,6 +667,11 @@ const putCotizaciones = async (req, res) => {
       await CotizacionIndividual.bulkCreate(cotizacionesAActualizar, {
         updateOnDuplicate: [
           "precio",
+          "precioEnPesos",
+          "cotizacionDolar",
+          "anticipoPorcentaje",
+          "cuotaValorEnPesos",
+          "PrecioFinalEnPesos",
           "anticipo",
           "saldoAFinanciar",
           "IVA",
