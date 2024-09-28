@@ -20,8 +20,8 @@ const cotizacionEmail = (cotizacion) => {
 
       return `
         <li style="margin-bottom: 10px; list-style: none; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
-          <strong>Forma de Pago:</strong> ${item.anticipoPorcentaje}% - Anticipo USD: ${item.anticipo} <br />
           <strong>${cuotasOption}:</strong> <br />
+          <strong>${cotizacion.formaPago}</strong> ${item.anticipoPorcentaje}% - Anticipo USD: ${item.anticipo} <br />
           <strong>Saldo en Cuotas:</strong> ${item.cuotas} E-Cheq de $${cuotaValorEnPesos} <br />
           <strong>IVA con E-Cheq a 30 días:</strong> $${saldoConInteres} <br />
         </li>`;
@@ -29,42 +29,54 @@ const cotizacionEmail = (cotizacion) => {
     .join("");
 
   return `
-    <div style="font-family: 'Arial', sans-serif; color: #333; padding: 20px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 8px; width: 80%; margin: auto; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-      <p style="text-align: center; font-weight: bold; background-color: #ffcc00; padding: 10px; font-size: 18px;">${notasEmail}</p>
+   <div style="font-family: 'Arial', sans-serif; color: #333; padding: 20px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 8px; width: 80%; margin: auto; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+    <h4 style="text-align: right; color: #444; font-weight: normal; font-size: 24px;">Cotización N°: ${cotizacion.codigoCotizacion}</h4>
+    <p style="text-align: right; margin: 0; font-weight: bold;">Cliente: ${cotizacion.cliente.razonSocial} (${cotizacion.cliente.CUIT})</p>
+    <p style="text-align: left; font-weight: bold; padding: 10px; font-size: 18px;">${notasEmail}</p>
 
-      <h1 style="text-align: center; color: #444; font-weight: normal; font-size: 24px;">Cotización N°: ${cotizacion.codigoCotizacion}</h1>
-      <p style="text-align: center; margin: 0; font-weight: bold;">Cliente: ${cotizacion.cliente.razonSocial} (${cotizacion.cliente.CUIT})</p>
-      
-      <h2 style="text-align: center; color: #555; font-size: 20px;">Detalles de la Cotización</h2>
-      <p style="text-align: center;">
+    <h2 style="text-align: center; color: #555; font-size: 20px;">Detalles de la Cotización</h2>
+    <p style="text-align: center;">
         <strong>VALOR PAGO DE CONTADO:</strong> U$S 184.250 + IVA 10.5% <br />
         <strong>Cotización Dólar BNA:</strong> Ejemplo Hoy BNA $ 977, Precio en Pesos: $180.012.250 + IVA 10.5%
-      </p>
-      
+    </p>
       <p style="text-align: center; font-weight: bold; color: #f00;">Propuesta de financiación POR TIEMPO LIMITADO sujeto a aprobación:</p>
       <ul style="padding: 0; margin: 0; list-style-type: none; text-align: center;">
         ${cotizacionesIndividuales}
       </ul>
+      
+      <div style="text-align: center; margin: 20px 0; font-weight: bold;">
+        <p>Plazo de Entrega: ${cotizacion.plazoEntrega}</p>
+        <p>Mantenimiento de Oferta: ${cotizacion.mantenimientoOferta}</p>
+        <p>Lugar de Entrega: ${cotizacion.lugarEntrega}</p>
+        <p>Garantía: ${cotizacion.garantia}</p>
+        <p>Entrega Técnica: ${cotizacion.entregaTecnica}</p>
+      </div>
 
-      <p style="text-align: center; margin: 10px 0; font-weight: bold; font-size: 18px;">Descargá la Cotización:</p>
-      <a href="${cotizacion.CotizacionPDF}" download style="text-decoration: none; display: inline-block; margin-bottom: 20px;">
-        <img src="${PDFUrl}" alt="Descargar PDF" style="width: 50px; height: auto; border: none;" />
-      </a>
+   
+<div style="display: flex; justify-content: space-around; gap: 40px; margin-bottom: 20px;">
+  <div style="text-align: center;">
+    <a href="${cotizacion.CotizacionPDF}" download style="text-decoration: none;">
+      <img src="${PDFUrl}" alt="Descargar PDF" style="width: 50px; height: auto; border: none;" />
+    </a>
+    <div style="margin-top: 5px; font-weight: bold; font-size: 16px;">Cotización</div> <!-- Etiqueta para el primer enlace con estilo -->
+  </div>
+  <div style="text-align: center;">
+    <a href="${cotizacion.producto.fichaPDF}" download style="text-decoration: none;">
+      <img src="${PDFUrl}" alt="Descargar Ficha" style="width: 50px; height: auto; border: none;" />
+    </a>
+    <div style="margin-top: 5px; font-weight: bold; font-size: 16px;">Ficha Técnica</div> <!-- Etiqueta para el segundo enlace con estilo -->
+  </div>
+</div>
 
-      <p style="text-align: center; margin: 10px 0; font-weight: bold; font-size: 18px;">Descargá la Ficha del Producto:</p>
-      <a href="${cotizacion.Producto.fichaPDF}" download style="text-decoration: none; display: inline-block; margin-bottom: 20px;">
-        <img src="${PDFUrl}" alt="Descargar Ficha" style="width: 50px; height: auto; border: none;" />
-      </a>
 
-       <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 0 auto;" />
+
+      <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 20px auto;" />
 
       <p style="text-align: center; margin: 10px 0; font-weight: bold;">Paris 256 esq. Colectora Este <br />
         1611 - Don Torcuato - Bs. As.<br />
         Tel./Fax : (+54) 11 4748 5900 / int. 273
       </p>
       <a href="http://www.americanvial.com" style="text-align: center; display: block; margin-bottom: 20px; font-weight: bold;">www.americanvial.com</a>
-
-     
     </div>
   `;
 };

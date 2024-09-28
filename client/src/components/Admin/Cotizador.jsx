@@ -268,7 +268,7 @@ const Cotizador = () => {
     let PrecioFinal =
       cotizacion.cuotas === 1
         ? precio * (1 + IVA / 100)
-        : (saldoConInteres + anticipo) * 1.105;
+        : (saldoConInteres + anticipo) * (1 + IVA / 100);
 
     // Calcular valores en Pesos
     let precioEnPesos = precio * cotizacionDolar;

@@ -75,6 +75,7 @@ const enviarCotizacionPorEmail = async (req, res) => {
             "imagen",
             "imagen1",
             "imagen2",
+            "fichaPDF",
           ],
         },
         {
@@ -108,7 +109,8 @@ const enviarCotizacionPorEmail = async (req, res) => {
       return res.status(404).json({ error: "Cotización no encontrada." });
     }
 
-    // Estructurar los datos de la cotización
+    console.log(cotizacion);
+
     const cotizacionDetalle = {
       idCotizacion: cotizacion.id,
       idUsuario: cotizacion.idUsuario,
@@ -169,6 +171,7 @@ const enviarCotizacionPorEmail = async (req, res) => {
         imagen: cotizacion.Producto.imagen,
         imagen1: cotizacion.Producto.imagen1,
         imagen2: cotizacion.Producto.imagen2,
+        fichaPDF: cotizacion.Producto.fichaPDF,
       },
     };
 
@@ -188,7 +191,13 @@ const enviarCotizacionPorEmail = async (req, res) => {
       from: emailEmisor,
       to: emailReceptor,
       subject: `Cotización de ${cotizacionDetalle.producto.familia}, ${cotizacionDetalle.producto.marca}, ${cotizacionDetalle.producto.modelo}`,
-      html: cotizacionEmail(cotizacionDetalle),
+      html: cotizacionEmail({
+        ...cotizacionDetalle,
+        producto: {
+          ...cotizacionDetalle.producto,
+          fichaPDF: cotizacionDetalle.producto.fichaPDF,
+        },
+      }),
     };
 
     await transporter.sendMail(emailOptions);

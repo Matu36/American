@@ -78,6 +78,13 @@ export default function CotizacionDetail() {
     CotizacionPDF,
   } = cotizacionDetalle;
 
+  const limpiarSeparadores = (valor) => {
+    if (typeof valor === "string") {
+      return valor.replace(/\./g, "");
+    }
+    return valor;
+  };
+
   const handleSubmitPorEmail = async (e) => {
     e.preventDefault();
 
@@ -300,10 +307,16 @@ export default function CotizacionDetail() {
             {cotizacionUnicoElemento.IVA}%)
           </Text>
           <Text style={styles.dolares}>
-            (Son dólares estadounidenses, Ciento ochenta y cuatro mil doscientos
-            cincuenta más IVA.-) Ejemplo hoy BNA $ 977 ( $ 180.012.250 + IVA
-            10.5% )
+            Son dólares estadounidenses,{" "}
+            {numerosEnLetras(
+              Number(limpiarSeparadores(cotizacionUnicoElemento.precio))
+            )}{" "}
+            más IVA .-) Ejemplo hoy BNA ${" "}
+            {cotizacionUnicoElemento.cotizacionDolar} ({" "}
+            {cotizacionUnicoElemento.precioVenta} + IVA{" "}
+            {cotizacionUnicoElemento.IVA}% )
           </Text>
+
           <Text style={styles.hr} />
           {/* <View style={styles.cotizacion}>
               <Text style={styles.cotizacionText}>
@@ -537,8 +550,10 @@ export default function CotizacionDetail() {
           </h5>
 
           <p style={{ marginTop: "-10px" }}>
-            Son dólares estadounidenses, {numerosEnLetras(cotizacion.precio)},
-            más IVA.- Ejemplo hoy BNA $ 977 ( $ 180.012.250 + IVA 10.5% )
+            Son dólares estadounidenses,{" "}
+            {numerosEnLetras(limpiarSeparadores(cotizacion.precio))}, más IVA.-
+            Ejemplo hoy BNA $ {cotizacion.cotizacionDolar} ( ${" "}
+            {cotizacion.precioEnPesos} + IVA {cotizacion.IVA} %)
           </p>
           <hr className="masIva" />
 
