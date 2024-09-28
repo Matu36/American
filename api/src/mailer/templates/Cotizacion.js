@@ -1,4 +1,7 @@
 const cotizacionEmail = (cotizacion) => {
+  const PDFUrl =
+    "https://png.pngtree.com/png-vector/20220606/ourlarge/pngtree-pdf-file-icon-png-png-image_4899509.png"; // URL pública de la imagen
+
   // Obtener detalles de las cotizaciones individuales
   const cotizacionesIndividuales = cotizacion.cotizacionesIndividuales
     .map(
@@ -16,7 +19,7 @@ const cotizacionEmail = (cotizacion) => {
 
   // Generar el template del email
   return `
-    <h1>Cotización Detallada - N°: ${cotizacion.numeroCotizacion}</h1>
+    <h1>Cotización Detallada - N°: ${cotizacion.codigoCotizacion}</h1>
     <p><strong>Cliente:</strong> ${cotizacion.cliente.razonSocial} (${cotizacion.cliente.CUIT})</p>
     <p><strong>Fecha de creación:</strong> ${cotizacion.fechaDeCreacion}</p>
 
@@ -33,6 +36,11 @@ const cotizacionEmail = (cotizacion) => {
 
     <p><strong>IVA:</strong> ${cotizacion.IVA}% <br />
     <strong>Precio Final (con IVA):</strong> ${cotizacion.PrecioFinal} ${cotizacion.moneda}</p>
+
+    <p>Descargá la Cotización:</p>
+    <a href="${cotizacion.CotizacionPDF}" download>
+      <img src="${PDFUrl}" alt="Descargar PDF" style="width: 50px; height: auto;" />
+    </a>
 
     <p>Gracias por confiar en nosotros.</p>
   `;
