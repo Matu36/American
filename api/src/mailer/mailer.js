@@ -9,6 +9,9 @@ const mailsMasivos = require("../mailer/templates/mailsMasivos.js");
 const cotizacionEmail = require("../mailer/templates/Cotizacion.js");
 const { Cotizaciones } = require("../db.js");
 const { CotizacionIndividual } = require("../db.js");
+const { Usuarios } = require("../db.js");
+const { Productos } = require("../db.js");
+const { Clientes } = require("../db.js");
 
 const enviarCotizacionPorEmail = async (req, res) => {
   try {
@@ -43,16 +46,132 @@ const enviarCotizacionPorEmail = async (req, res) => {
       return res.status(401).json({ error: "Credenciales no válidas." });
     }
 
-    // Obtener la cotización y su relación con CotizacionIndividual
+    // Obtener la cotización y su relación con CotizacionIndividual, Clientes, Productos y Usuarios
     const cotizacion = await Cotizaciones.findOne({
       where: { id: idCotizacion },
-      include: [{ model: CotizacionIndividual }],
+      include: [
+        {
+          model: Usuarios,
+          attributes: ["nombre", "apellido", "email"],
+        },
+        {
+          model: Clientes,
+          attributes: ["razonSocial", "CUIT", "apellido", "mail"],
+        },
+        {
+          model: Productos,
+          attributes: [
+            "division",
+            "familia",
+            "marca",
+            "modelo",
+            "motor",
+            "caracteristicasGenerales",
+            "motoresdeTraslacionyZapatas",
+            "sistemaHidraulico",
+            "capacidades",
+            "Cabina",
+            "dimensionesGenerales",
+            "imagen",
+            "imagen1",
+            "imagen2",
+          ],
+        },
+        {
+          model: CotizacionIndividual,
+          attributes: [
+            "id",
+            "precio",
+            "precioEnPesos",
+            "PrecioFinalEnPesos",
+            "cotizacionDolar",
+            "cuotaValorEnPesos",
+            "anticipoPorcentaje",
+            "anticipo",
+            "saldoAFinanciar",
+            "IVA",
+            "moneda",
+            "interes",
+            "cuotas",
+            "cuotaValor",
+            "saldoConInteres",
+            "PrecioFinal",
+            "cantidadProducto",
+            "estado",
+          ],
+        },
+      ],
     });
 
     if (!cotizacion) {
       return res.status(404).json({ error: "Cotización no encontrada." });
     }
 
+    // Estructurar los datos de la cotización
+    const cotizacionDetalle = {
+      idCotizacion: cotizacion.id,
+      idUsuario: cotizacion.idUsuario,
+      idCliente: cotizacion.idCliente,
+      idProducto: cotizacion.idProducto,
+      IVA: cotizacion.IVA,
+      moneda: cotizacion.moneda,
+      PrecioFinal: cotizacion.PrecioFinal,
+      precio: cotizacion.precio,
+      anticipo: cotizacion.anticipo,
+      saldoAFinanciar: cotizacion.saldoAFinanciar,
+      interes: cotizacion.interes,
+      saldoConInteres: cotizacion.saldoConInteres,
+      cuotas: cotizacion.cuotas,
+      cuotaValor: cotizacion.cuotaValor,
+      notasEmail: cotizacion.notasEmail,
+      notasUsuario: cotizacion.notasUsuario,
+      numeroCotizacion: cotizacion.numeroCotizacion,
+      codigoCotizacion: cotizacion.codigoCotizacion,
+      plazoEntrega: cotizacion.plazoEntrega,
+      formaPago: cotizacion.formaPago,
+      mantenimientoOferta: cotizacion.mantenimientoOferta,
+      lugarEntrega: cotizacion.lugarEntrega,
+      garantia: cotizacion.garantia,
+      entregaTecnica: cotizacion.entregaTecnica,
+      origenFabricacion: cotizacion.origenFabricacion,
+      patentamiento: cotizacion.patentamiento,
+      estado: cotizacion.estado,
+      fechaDeCreacion: cotizacion.fechaDeCreacion,
+      fechaModi: cotizacion.fechaModi,
+      fechaVenta: cotizacion.fechaVenta,
+      CotizacionPDF: cotizacion.CotizacionPDF,
+      cotizacionesIndividuales: cotizacion.CotizacionIndividuals || [],
+      cliente: {
+        razonSocial: cotizacion.Cliente.razonSocial,
+        CUIT: cotizacion.Cliente.CUIT,
+        email: cotizacion.Cliente.mail,
+        apellido: cotizacion.Cliente.apellido,
+      },
+      usuario: {
+        nombre: cotizacion.Usuario.nombre,
+        apellido: cotizacion.Usuario.apellido,
+        email: cotizacion.Usuario.email,
+      },
+      producto: {
+        division: cotizacion.Producto.division,
+        familia: cotizacion.Producto.familia,
+        marca: cotizacion.Producto.marca,
+        modelo: cotizacion.Producto.modelo,
+        motor: cotizacion.Producto.motor,
+        caracteristicasGenerales: cotizacion.Producto.caracteristicasGenerales,
+        motoresdeTraslacionyZapatas:
+          cotizacion.Producto.motoresdeTraslacionyZapatas,
+        sistemaHidraulico: cotizacion.Producto.sistemaHidraulico,
+        capacidades: cotizacion.Producto.capacidades,
+        Cabina: cotizacion.Producto.Cabina,
+        dimensionesGenerales: cotizacion.Producto.dimensionesGenerales,
+        imagen: cotizacion.Producto.imagen,
+        imagen1: cotizacion.Producto.imagen1,
+        imagen2: cotizacion.Producto.imagen2,
+      },
+    };
+
+    // Enviar correo electrónico con el detalle de la cotización
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
@@ -68,7 +187,7 @@ const enviarCotizacionPorEmail = async (req, res) => {
       from: emailEmisor,
       to: emailReceptor,
       subject: "Cotización Detallada",
-      html: cotizacionEmail(cotizacion),
+      html: cotizacionEmail(cotizacionDetalle),
     };
 
     await transporter.sendMail(emailOptions);

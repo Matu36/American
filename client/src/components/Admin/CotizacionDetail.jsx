@@ -90,7 +90,6 @@ export default function CotizacionDetail() {
       password,
     };
     envioDeCotiPorEmail(requestBody);
-    console.log(requestBody);
   };
 
   const numerosEnLetras = (num) => {
