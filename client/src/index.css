@@ -5573,6 +5573,8 @@ margin-top: -10px;
 .buttonpdf {
   display: flex;
   justify-content: center;
+  gap: 45px;
+ 
 }
 
 .btn-concretar-venta {

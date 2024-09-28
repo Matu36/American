@@ -743,64 +743,190 @@ export default function CotizacionDetail() {
         <span>Tel./Fax : (5411) 4748-5900 </span>{" "}
         <span>www.americanvial.com</span>
       </div>
-      <div className="buttonpdf">
-        <button
-          className="form-submit"
-          onClick={generateAndUploadPDF}
-          disabled={loading}
-        >
-          <FaCog /> {loading ? "Generando PDF..." : "Generar PDF"}
-        </button>
 
-        <PDFDownloadLink
-          document={<MyDocument cotizacionDetalle={cotizacionDetalle} />}
-          fileName={`cotizacion_${codigoCotizacion}.pdf`}
-        >
-          {({ loading }) => (
-            <button className="form-submit" disabled={!isPdfGenerated}>
-              {loading ? (
-                "Generando PDF..."
-              ) : (
-                <>
-                  <FaFilePdf /> Descargar PDF
-                </>
-              )}
-            </button>
-          )}
-        </PDFDownloadLink>
-        <div className="buttonpdf">
+      <div className="buttonpdf">
+        <div>
+          <button
+            className="form-submit"
+            onClick={generateAndUploadPDF}
+            disabled={loading}
+          >
+            <FaCog /> {loading ? "Generando PDF..." : "Generar PDF"}
+          </button>
+        </div>
+        <div>
+          <PDFDownloadLink
+            document={<MyDocument cotizacionDetalle={cotizacionDetalle} />}
+            fileName={`cotizacion_${codigoCotizacion}.pdf`}
+          >
+            {({ loading }) => (
+              <button
+                className="form-submit"
+                disabled={!isPdfGenerated}
+                style={{
+                  backgroundColor: !isPdfGenerated ? "#ccc" : "#ffcc00",
+                  color: !isPdfGenerated ? "#666" : "#000",
+                  cursor: !isPdfGenerated ? "not-allowed" : "pointer",
+                  opacity: !isPdfGenerated ? 0.6 : 1,
+                  padding: "10px 20px",
+                  border: "none",
+                  borderRadius: "5px",
+                  fontSize: "16px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "background-color 0.3s",
+                }}
+              >
+                {loading ? (
+                  "Generando PDF..."
+                ) : (
+                  <>
+                    <FaFilePdf /> Descargar PDF
+                  </>
+                )}
+              </button>
+            )}
+          </PDFDownloadLink>
+        </div>
+
+        <div>
           <button
             className="form-submit"
             disabled={!isPdfGenerated}
             onClick={() => setIsModalOpen(true)}
+            style={{
+              backgroundColor: !isPdfGenerated ? "#ccc" : "#ffcc00",
+              color: !isPdfGenerated ? "#666" : "#000",
+              cursor: !isPdfGenerated ? "not-allowed" : "pointer",
+              opacity: !isPdfGenerated ? 0.6 : 1,
+              padding: "10px 20px",
+              border: "none",
+              borderRadius: "5px",
+              fontSize: "16px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "background-color 0.3s",
+            }}
           >
             <FaEnvelope /> Enviar Email
           </button>
         </div>
 
-        {isModalOpen && (
-          <div className="modal-overlay">
-            <div className="modal-content">
-              <h2>Ingresa tu contraseña</h2>
-              <br />
-              <form onSubmit={handleSubmitPorEmail}>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Contraseña"
-                  required
-                />
-                <div className="modal-buttons">
-                  <button type="submit">Enviar</button>
-                  <button type="button" onClick={() => setIsModalOpen(false)}>
-                    Cancelar
-                  </button>
-                </div>
-              </form>
+        <div>
+          {isModalOpen && (
+            <div
+              className="modal-overlay"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100vw",
+                height: "100vh",
+                backgroundColor: "rgba(0, 0, 0, 0.6)",
+                zIndex: 999,
+              }}
+            >
+              <div
+                className="modal-content"
+                style={{
+                  backgroundColor: "#fff",
+                  padding: "20px",
+                  borderRadius: "10px",
+                  width: "100%",
+                  maxWidth: "400px",
+                  textAlign: "center",
+                }}
+              >
+                <h2
+                  style={{
+                    color: "#ffc107",
+                    display: "flex",
+                    justifyContent: "center",
+                    fontSize: "24px",
+                  }}
+                >
+                  Ingresá tu contraseña
+                </h2>
+                <br />
+                <form onSubmit={handleSubmitPorEmail}>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Contraseña"
+                    required
+                    style={{
+                      width: "100%",
+                      padding: "10px",
+                      margin: "10px 0",
+                      fontSize: "16px",
+                      borderRadius: "5px",
+                      border: "1px solid #ccc",
+                      textAlign: "center",
+                    }}
+                  />
+                  <div
+                    className="modal-buttons"
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      marginTop: "20px",
+                    }}
+                  >
+                    <button
+                      type="submit"
+                      style={{
+                        backgroundColor: "#ffcc00",
+                        color: "#000",
+                        padding: "10px 20px",
+                        fontSize: "16px",
+                        border: "none",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                        transition: "background-color 0.3s",
+                      }}
+                      onMouseOver={(e) =>
+                        (e.target.style.backgroundColor = "#e6b800")
+                      }
+                      onMouseOut={(e) =>
+                        (e.target.style.backgroundColor = "#ffcc00")
+                      }
+                    >
+                      Enviar
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setIsModalOpen(false)}
+                      style={{
+                        backgroundColor: "#ffcc00",
+                        color: "#000",
+                        padding: "10px 20px",
+                        fontSize: "16px",
+                        border: "none",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                        transition: "background-color 0.3s",
+                      }}
+                      onMouseOver={(e) =>
+                        (e.target.style.backgroundColor = "#e6b800")
+                      }
+                      onMouseOut={(e) =>
+                        (e.target.style.backgroundColor = "#ffcc00")
+                      }
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

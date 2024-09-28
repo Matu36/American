@@ -10,8 +10,8 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(password); // Pasar la contraseña ingresada al manejador de envío
-    setPassword(""); // Limpiar el campo de entrada
+    onSubmit(password);
+    setPassword("");
   };
 
   if (!isOpen) return null;
