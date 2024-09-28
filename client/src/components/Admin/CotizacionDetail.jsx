@@ -714,8 +714,10 @@ export default function CotizacionDetail() {
         </p>
       </div>
       <div className="imagenDetail">
-        {" "}
-        <img src={producto.imagen} alt="" />
+        {producto.imagen && <img src={producto.imagen} alt="" />}
+        {producto.imagen1 && <img src={producto.imagen1} alt="" />}
+        {producto.imagen2 && <img src={producto.imagen2} alt="" />}
+        {producto.imagen3 && <img src={producto.imagen3} alt="" />}
       </div>
 
       {/* <div className="asesorComercial">

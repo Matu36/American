@@ -82,7 +82,7 @@ export const styles = StyleSheet.create({
   cotizacionItem: {
     marginBottom: 15,
     border: "0.3px solid black",
-    padding: 5,
+    padding: "15px",
     textAlign: "center",
     width: "98%",
     fontSize: "14px",
@@ -161,8 +161,8 @@ export const styles = StyleSheet.create({
     top: "50%",
     left: "15%",
     transform: "translate(-50%, -50%)",
-    width: "100%", // Ajusta según lo necesites
-    height: "auto", // Mantener proporciones
-    zIndex: 0, // Asegúrate de que esté detrás de otros elementos
+    width: "100%",
+    height: "auto",
+    zIndex: 0,
   },
 });
