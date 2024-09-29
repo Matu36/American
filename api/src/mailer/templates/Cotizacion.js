@@ -57,7 +57,7 @@ const cotizacionEmail = (cotizacion) => {
         <strong>VALOR PAGO DE CONTADO:</strong> U$S 184.250 + IVA 10.5% <br />
         <strong>Cotización Dólar BNA:</strong> Ejemplo Hoy BNA $ 977, Precio en Pesos: $180.012.250 + IVA 10.5%
     </p>
-      <p style="text-align: center; font-weight: bold; color: #f00;">Propuesta de financiación POR TIEMPO LIMITADO sujeto a aprobación:</p>
+      <p style="text-align: center; font-weight: bold; color: #f00;">Propuesta de financiación POR TIEMPO LIMITADO sujeto a aprobación</p>
       <ul style="padding: 0; margin: 0; list-style-type: none; text-align: center;">
         ${cotizacionesIndividuales}
       </ul>
