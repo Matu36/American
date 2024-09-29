@@ -14,8 +14,6 @@ import { paginationOptions } from "../../utils/Datatable";
 export default function Productos() {
   const { data, isLoading } = useProducto().productosQuery;
 
-  console.log(data);
-
   const { auth, setAuth } = useAuth();
 
   const token = localStorage.getItem("token");

@@ -141,9 +141,6 @@ export default function Historial() {
     label: `${producto.familia} ${producto.marca} ${producto.modelo}`,
   }));
 
-  console.log(ModeloData);
-  console.log(fechasData);
-
   return (
     <div className="postVentaContainer1">
       <BackButton />

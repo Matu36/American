@@ -617,11 +617,28 @@ export default function CotizacionDetail() {
               {parseFloat(cotizacion.PrecioFinal).toFixed(2)}
             </p>
           </div>
-          <div className="concrectarVenta">
+          <div
+            className="concrectarVenta"
+            style={{ margin: "20px 0", textAlign: "center" }}
+          >
             <button
               onClick={() => estado3({ id: cotizacion.id })}
               className="btn-concretar-venta"
               disabled={cotizacion.estado === 3 || cotizacion.estado === 2}
+              style={{
+                ...(cotizacion.estado === 3 || cotizacion.estado === 2
+                  ? {
+                      backgroundColor: "#e0e0e0",
+                      color: "#a9a9a9",
+                      cursor: "not-allowed",
+                    }
+                  : {}),
+                padding: "10px 20px",
+                border: "none",
+                borderRadius: "5px",
+                fontSize: "16px",
+                transition: "background-color 0.3s, color 0.3s",
+              }}
             >
               {cotizacion.estado === 3
                 ? "Pendiente de Aprobación"
