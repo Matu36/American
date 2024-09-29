@@ -6,7 +6,6 @@ const cotizacionEmail = (cotizacion) => {
 
   const notasEmail = cotizacion.notasEmail || "";
 
-  // Obtener detalles de las cotizaciones individuales
   const cotizacionesIndividuales = cotizacion.cotizacionesIndividuales
     .map((item, index) => {
       const cuotasOption =
@@ -14,27 +13,41 @@ const cotizacionEmail = (cotizacion) => {
           ? `Opción ${index + 1}: ${item.anticipoPorcentaje}% y ${
               item.cuotas
             } E-Cheq`
-          : `${item.anticipoPorcentaje}% y ${item.cuotas} E-Cheq`;
+          : `${item.anticipoPorcentaje}% anticipo y ${item.cuotas} E-Cheq`;
       const saldoConInteres = item.saldoConInteres || 0;
       const cuotaValorEnPesos = item.cuotaValorEnPesos || 0;
 
-      return `
-        <li style="margin-bottom: 10px; list-style: none; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
-          <strong>${cuotasOption}:</strong> <br />
-          <strong>${cotizacion.formaPago}</strong> ${item.anticipoPorcentaje}% - Anticipo USD: ${item.anticipo} <br />
-          <strong>Saldo en Cuotas:</strong> ${item.cuotas} E-Cheq de $${cuotaValorEnPesos} <br />
-          <strong>IVA con E-Cheq a 30 días:</strong> $${saldoConInteres} <br />
-        </li>`;
+      return `        
+      <li style="margin-bottom: 30px; list-style: none; padding: 10px 0; text-align: left; position: relative;">
+        <span style="position: absolute; left: -20px; top: 10px; width: 10px; height: 10px; border-radius: 50%; background-color: #000;"></span>
+        <strong style="text-decoration: underline; margin-bottom: 5px; display: block;">${cuotasOption}:</strong> 
+        <strong>${cotizacion.formaPago}</strong> ${
+        item.anticipoPorcentaje
+      }% - Anticipo USD: ${item.anticipo} equivalentes a $ ${
+        item.anticipo * item.cotizacionDolar
+      } <br />
+     <span style="background-color: #ffeaa7; padding: 2px 5px; border-radius: 3px;">
+  <strong>Saldo en</strong> ${item.cuotas} E-Cheq de $${cuotaValorEnPesos}
+</span> <br />
+
+
+
+        <strong>IVA con otro E-Cheq a 30 días de:</strong> $${
+          (item.cuotaValorEnPesos * item.cuotas +
+            item.anticipo * item.cotizacionDolar) *
+          item.IVA
+        } <br />
+      </li>`;
     })
     .join("");
 
   return `
-   <div style="font-family: 'Arial', sans-serif; color: #333; padding: 20px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 8px; width: 80%; margin: auto; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-    <h4 style="text-align: right; color: #444; font-weight: normal; font-size: 24px;">Cotización N°: ${cotizacion.codigoCotizacion}</h4>
-    <p style="text-align: right; margin: 0; font-weight: bold;">Cliente: ${cotizacion.cliente.razonSocial} (${cotizacion.cliente.CUIT})</p>
-    <p style="text-align: left; font-weight: bold; padding: 10px; font-size: 18px;">${notasEmail}</p>
+   <div style="font-family: 'Arial', sans-serif; color: #333; padding: 5px 20px 20px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 8px; width: 80%; margin: auto; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+    <h5 style="text-align: right; color: #444; font-weight: normal; font-size: 16px; opacity: 0.8;">Cotización N°: ${cotizacion.codigoCotizacion}</h5>
+    <p style="text-align: right; margin: 0; font-weight: bold;margin-top: -25px;">Cliente: ${cotizacion.cliente.razonSocial} (${cotizacion.cliente.CUIT})</p>
+    <p style="text-align: left; font-weight: 600; font-size: 16px; margin-top: 35px;">${notasEmail}</p>
 
-    <h2 style="text-align: center; color: #555; font-size: 20px;">Detalles de la Cotización</h2>
+    <h2 style="text-align: center; color: #555; font-size: 20px; text-decoration: underline;margin-top: 35px;">Detalles de la Cotización</h2>
     <p style="text-align: center;">
         <strong>VALOR PAGO DE CONTADO:</strong> U$S 184.250 + IVA 10.5% <br />
         <strong>Cotización Dólar BNA:</strong> Ejemplo Hoy BNA $ 977, Precio en Pesos: $180.012.250 + IVA 10.5%
@@ -43,6 +56,8 @@ const cotizacionEmail = (cotizacion) => {
       <ul style="padding: 0; margin: 0; list-style-type: none; text-align: center;">
         ${cotizacionesIndividuales}
       </ul>
+
+      <p style="font-weight: bold; text-decoration: underline; text-align: center;">ENTREGA INMEDIATA</p>
       
       <div style="text-align: center; margin: 20px 0; font-weight: bold;">
         <p>Plazo de Entrega: ${cotizacion.plazoEntrega}</p>
@@ -52,23 +67,20 @@ const cotizacionEmail = (cotizacion) => {
         <p>Entrega Técnica: ${cotizacion.entregaTecnica}</p>
       </div>
 
-   
-<div style="display: flex; justify-content: space-around; gap: 40px; margin-bottom: 20px;">
-  <div style="text-align: center;">
-    <a href="${cotizacion.CotizacionPDF}" download style="text-decoration: none;">
-      <img src="${PDFUrl}" alt="Descargar PDF" style="width: 50px; height: auto; border: none;" />
-    </a>
-    <div style="margin-top: 5px; font-weight: bold; font-size: 16px;">Cotización</div> <!-- Etiqueta para el primer enlace con estilo -->
-  </div>
-  <div style="text-align: center;">
-    <a href="${cotizacion.producto.fichaPDF}" download style="text-decoration: none;">
-      <img src="${PDFUrl}" alt="Descargar Ficha" style="width: 50px; height: auto; border: none;" />
-    </a>
-    <div style="margin-top: 5px; font-weight: bold; font-size: 16px;">Ficha Técnica</div> <!-- Etiqueta para el segundo enlace con estilo -->
-  </div>
-</div>
-
-
+      <div style="display: flex; justify-content: space-around; gap: 40px; margin-bottom: 20px;">
+        <div style="text-align: center;">
+          <a href="${cotizacion.CotizacionPDF}" download style="text-decoration: none;">
+            <img src="${PDFUrl}" alt="Descargar PDF" style="width: 50px; height: auto; border: none;" />
+          </a>
+          <div style="margin-top: 5px; font-weight: bold; font-size: 16px;">Cotización</div>
+        </div>
+        <div style="text-align: center;">
+          <a href="${cotizacion.producto.fichaPDF}" download style="text-decoration: none;">
+            <img src="${PDFUrl}" alt="Descargar Ficha" style="width: 50px; height: auto; border: none;" />
+          </a>
+          <div style="margin-top: 5px; font-weight: bold; font-size: 16px;">Ficha Técnica</div>
+        </div>
+      </div>
 
       <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 20px auto;" />
 
