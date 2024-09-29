@@ -56,7 +56,7 @@ const enviarCotizacionPorEmail = async (req, res) => {
         },
         {
           model: Clientes,
-          attributes: ["razonSocial", "CUIT", "apellido", "mail"],
+          attributes: ["razonSocial", "CUIT", "apellido", "mail", "nombre"],
         },
         {
           model: Productos,
@@ -109,8 +109,6 @@ const enviarCotizacionPorEmail = async (req, res) => {
       return res.status(404).json({ error: "Cotización no encontrada." });
     }
 
-    console.log(cotizacion);
-
     const cotizacionDetalle = {
       idCotizacion: cotizacion.id,
       idUsuario: cotizacion.idUsuario,
@@ -149,6 +147,7 @@ const enviarCotizacionPorEmail = async (req, res) => {
         CUIT: cotizacion.Cliente.CUIT,
         email: cotizacion.Cliente.mail,
         apellido: cotizacion.Cliente.apellido,
+        nombre: cotizacion.Cliente.nombre,
       },
       usuario: {
         nombre: cotizacion.Usuario.nombre,

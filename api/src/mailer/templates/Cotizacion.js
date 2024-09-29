@@ -44,7 +44,10 @@ const cotizacionEmail = (cotizacion) => {
   return `
    <div style="font-family: 'Arial', sans-serif; color: #333; padding: 5px 20px 20px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 8px; width: 80%; margin: auto; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
     <h5 style="text-align: right; color: #444; font-weight: normal; font-size: 16px; opacity: 0.8;">Cotización N°: ${cotizacion.codigoCotizacion}</h5>
-    <p style="text-align: right; margin: 0; font-weight: bold;margin-top: -25px;">Cliente: ${cotizacion.cliente.razonSocial} (${cotizacion.cliente.CUIT})</p>
+    <p style="text-align: left; margin: 0; font-weight: bold;">Cliente:</p>
+<p style="text-align: left; margin: 0; color: rgba(0, 0, 0, 0.6);">Razón Social: ${cotizacion.cliente.razonSocial} &nbsp; CUIT: (${cotizacion.cliente.CUIT})</p>
+<p style="text-align: left; margin: 0; color: rgba(0, 0, 0, 0.6);">${cotizacion.cliente.nombre} ${cotizacion.cliente.apellido}</p>
+
     <p style="text-align: left; font-weight: 600; font-size: 16px; margin-top: 35px;">${notasEmail}</p>
 
     <h2 style="text-align: center; color: #555; font-size: 20px; text-decoration: underline;margin-top: 35px;">Detalles de la Cotización</h2>

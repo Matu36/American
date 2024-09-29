@@ -196,13 +196,17 @@ router.get(
   getCantidadCotizacionesPorUsuario
 );
 router.get("/Cotizaciones/ranking", check.auth, getranking);
-router.delete("/Cotizaciones/delete", eliminarCotizacionIndividual);
+router.delete("/Cotizaciones/delete", check.auth, eliminarCotizacionIndividual);
 router.put("/cotizaciones/edit", check.auth, putCotizaciones);
 router.put("/cotizaciones/editpdf", updateCotizacionPdf);
 router.post("/clientes/create", check.auth, createCliente);
-router.get("/clientes/get/:idUsuario", getClientesPorIdDeUsuario);
-router.get("/clientes/getEmails/:idUsuario", getMailsPorIdDeUsuario);
-router.get("/clientes/getDetalle/:idCliente", getClientePorId);
+router.get("/clientes/get/:idUsuario", check.auth, getClientesPorIdDeUsuario);
+router.get(
+  "/clientes/getEmails/:idUsuario",
+  check.auth,
+  getMailsPorIdDeUsuario
+);
+router.get("/clientes/getDetalle/:idCliente", check.auth, getClientePorId);
 router.get("/clientes/getParaCotizar/:idUsuario", getClientesParaCotizar);
 router.put("/clientes/edit", check.auth, updateCliente);
 router.get("/contacto/get", check.auth, getContactos);
@@ -210,8 +214,12 @@ router.get("/contacto/getNoLeidosCount", check.auth, countActiveContactos);
 router.put("/contacto/put", check.auth, updateContactoState);
 router.put("/contacto/derivado", check.auth, updateContactoUsuario);
 router.post("/contacto/create", createContacto);
-router.post("/cotizaciones/enviocoti/create", enviarCotizacionPorEmail);
-router.post("/mailsMasivos/create", enviarMailsMasivos);
+router.post(
+  "/cotizaciones/enviocoti/create",
+  check.auth,
+  enviarCotizacionPorEmail
+);
+router.post("/mailsMasivos/create", check.auth, enviarMailsMasivos);
 router.get("/contactoProducto/get", check.auth, getContactoProducto);
 router.post("/contactoProducto/create", createContactoProducto);
 router.put(
@@ -270,14 +278,24 @@ router.get("/suscripcion/getAll", getAllSuscripciones);
 router.post("/suscripcion/create", createSuscripcion);
 router.put(
   "/cotizacionIndividual/estado2",
-  actualizarEstadoCotizacionIndividualEstado2
+  actualizarEstadoCotizacionIndividualEstado2,
+  check.auth
 );
 router.put(
   "/cotizacionIndividual/estado3",
+  check.auth,
   actualizarEstadoCotizacionIndividualEstado3
 );
-router.get("/cotizacionIndividual/getEstado3", contarCotizacionesEstado3);
+router.get(
+  "/cotizacionIndividual/getEstado3",
+  check.auth,
+  contarCotizacionesEstado3
+);
 
-router.get("/cotizaciones/getCotizacionEstado3", getCotizacionesEstadoTres);
+router.get(
+  "/cotizaciones/getCotizacionEstado3",
+  check.auth,
+  getCotizacionesEstadoTres
+);
 
 module.exports = router;
