@@ -10,7 +10,7 @@ const cotizacionEmail = (cotizacion) => {
     .map((item, index) => {
       const cuotasOption =
         item.cuotas > 1
-          ? `Opción ${index + 1}: ${item.anticipoPorcentaje}% y ${
+          ? `Opción ${index + 1}: ${item.anticipoPorcentaje}% anticipo y ${
               item.cuotas
             } E-Cheq`
           : `${item.anticipoPorcentaje}% anticipo y ${item.cuotas} E-Cheq`;
@@ -27,8 +27,10 @@ const cotizacionEmail = (cotizacion) => {
         item.anticipo * item.cotizacionDolar
       } <br />
      <span style="background-color: #ffeaa7; padding: 2px 5px; border-radius: 3px;">
-  <strong>Saldo en</strong> ${item.cuotas} E-Cheq de $${cuotaValorEnPesos}
-</span> <br />
+  <strong>Saldo en</strong> ${
+    item.cuotas
+  } E-Cheq de $${cuotaValorEnPesos} cada 30 dias fijos
+</span>  en pesos. <br />
 
 
 
