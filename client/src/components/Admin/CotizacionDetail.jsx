@@ -19,6 +19,7 @@ import {
 } from "@react-pdf/renderer";
 import { styles } from "../../assets/Styles/PDFestilosDetalle";
 import BackButton from "../../UI/BackButton";
+import Spinner2 from "../../UI/Spinner2";
 
 const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
 
@@ -29,6 +30,7 @@ export default function CotizacionDetail() {
   const [isPdfGenerated, setIsPdfGenerated] = useState(false);
   const [password, setPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loadingEnvio, setLoadingEnvio] = useState(false);
 
   const { mutate: envioDeCotiPorEmail } =
     useCotizaciones().cotizacionPorEmailMutation;
@@ -87,9 +89,10 @@ export default function CotizacionDetail() {
 
   const handleSubmitPorEmail = async (e) => {
     e.preventDefault();
+    setLoadingEnvio(true);
 
-    const emailEmisor = auth.email;
-    const emailReceptor = cotizacionDetalle.cliente.email;
+    const emailEmisor = auth?.email;
+    const emailReceptor = cotizacionDetalle?.cliente?.email;
 
     const requestBody = {
       emailEmisor,
@@ -101,8 +104,11 @@ export default function CotizacionDetail() {
     try {
       await envioDeCotiPorEmail(requestBody);
       setIsModalOpen(false);
+      setPassword("");
     } catch (error) {
       console.error("Error al enviar la cotización por email:", error);
+    } finally {
+      setLoadingEnvio(false);
     }
   };
 
@@ -929,8 +935,9 @@ export default function CotizacionDetail() {
                       onMouseOut={(e) =>
                         (e.target.style.backgroundColor = "#ffcc00")
                       }
+                      disabled={loadingEnvio}
                     >
-                      Enviar
+                      {loadingEnvio ? <Spinner2 /> : "Enviar"}
                     </button>
                     <button
                       type="button"

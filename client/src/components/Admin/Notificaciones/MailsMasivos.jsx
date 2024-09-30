@@ -4,6 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import BackButton from "../../../UI/BackButton";
 import Spinner from "../../../UI/Spinner";
 import { useMails } from "../../../hooks/useMailsMasivos";
+import Spinner2 from "../../../UI/Spinner2";
 
 const Modal = ({ isOpen, onClose, onSubmit }) => {
   const [password, setPassword] = React.useState("");
@@ -49,14 +50,17 @@ export default function MailsMasivos() {
   const token = localStorage.getItem("token");
   const idUsuario = token;
 
-  const { data: clientesEmail, isLoading } =
+  const { data: clientesEmail, isLoading: clientesLoading } =
     useClientes(idUsuario).clientesEmailsQuery;
+
+  // Estado local para el estado de envío
+  const [enviando, setEnviando] = useState(false);
 
   const [selectedEmails, setSelectedEmails] = useState([]);
   const [cuerpoMensaje, setCuerpoMensaje] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (isLoading) return <Spinner />;
+  if (clientesLoading) return <Spinner />;
 
   const handleEmailSelection = (email) => {
     setSelectedEmails((prevEmails) =>
@@ -88,10 +92,17 @@ export default function MailsMasivos() {
       password,
     };
 
+    setEnviando(true);
+
     CrearEmails(emailData, {
       onSuccess: () => {
         setSelectedEmails([]);
         setCuerpoMensaje("");
+
+        setEnviando(false);
+      },
+      onError: () => {
+        setEnviando(false);
       },
     });
     setIsModalOpen(false);
@@ -143,8 +154,8 @@ export default function MailsMasivos() {
           />
         </div>
 
-        <button className="form-submit" type="submit">
-          Enviar Email
+        <button className="form-submit" type="submit" disabled={enviando}>
+          {enviando ? <Spinner2 /> : "Enviar Email"}
         </button>
       </form>
 
