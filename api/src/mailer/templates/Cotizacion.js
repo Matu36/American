@@ -1,6 +1,6 @@
 const cotizacionEmail = (cotizacion) => {
   const PDFUrl =
-    "https://png.pngtree.com/png-vector/20220606/ourlarge/pngtree-pdf-file-icon-png-png-image_4899509.png"; // URL pública de la imagen para el PDF
+    "https://res.cloudinary.com/dmfzplfra/image/upload/v1727730981/PDF_b1hsox.png"; // URL pública de la imagen para el PDF
   const americanVialImage =
     "https://res.cloudinary.com/dmfzplfra/image/upload/v1727536957/Images/american_ftok3h.png"; // URL de la imagen de American Vial
 
@@ -44,7 +44,7 @@ const cotizacionEmail = (cotizacion) => {
     .join("");
 
   return `
-   <div style="font-family: 'Arial', sans-serif; color: #333; padding: 5px 20px 20px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 8px; width: 80%; margin: auto; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+   <div style="font-family: 'Arial', sans-serif; color: #333; padding: 10px 10px 10px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 4px; width: 95%; margin: auto; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
     <h5 style="text-align: right; color: #444; font-weight: normal; font-size: 16px; opacity: 0.8;">Cotización N°: ${cotizacion.codigoCotizacion}</h5>
     <p style="text-align: left; margin: 0; font-weight: bold;">Cliente:</p>
 <p style="text-align: left; margin: 0; color: rgba(0, 0, 0, 0.6);">Razón Social: ${cotizacion.cliente.razonSocial} &nbsp; CUIT: (${cotizacion.cliente.CUIT})</p>
@@ -72,7 +72,7 @@ const cotizacionEmail = (cotizacion) => {
         <p>Entrega Técnica: ${cotizacion.entregaTecnica}</p>
       </div>
 
-      <div style="display: flex; justify-content: space-around; gap: 40px; margin-bottom: 20px;">
+      <div style="display: flex; justify-content: space-around; gap: 40px; margin-bottom: 50px;">
         <div style="text-align: center;">
           <a href="${cotizacion.CotizacionPDF}" download style="text-decoration: none;">
             <img src="${PDFUrl}" alt="Descargar PDF" style="width: 50px; height: auto; border: none;" />
@@ -87,13 +87,21 @@ const cotizacionEmail = (cotizacion) => {
         </div>
       </div>
 
-      <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 20px auto;" />
 
-      <p style="text-align: center; margin: 10px 0; font-weight: bold;">Paris 256 esq. Colectora Este <br />
-        1611 - Don Torcuato - Bs. As.<br />
-        Tel./Fax : (+54) 11 4748 5900 / int. 273
-      </p>
-      <a href="http://www.americanvial.com" style="text-align: center; display: block; margin-bottom: 20px; font-weight: bold;">www.americanvial.com</a>
+     <div style="margin-top: 30px; text-align: center;">
+  <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 20px auto;" />
+  
+  <p style="margin: 10px 0; font-weight: bold;">
+    Paris 256 esq. Colectora Este <br />
+    1611 - Don Torcuato - Bs. As.<br />
+    Tel./Fax : (+54) 11 4748 5900 / int. 273
+  </p>
+  
+  <a href="http://www.americanvial.com" style="display: block; margin-bottom: 20px; font-weight: bold;">
+    www.americanvial.com
+  </a>
+</div>
+
     </div>
   `;
 };

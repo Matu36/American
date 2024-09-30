@@ -1,4 +1,8 @@
-const mailsMasivos = (cuerpoMensaje) => `
+const mailsMasivos = (cuerpoMensaje) => {
+  const americanVialImage =
+    "https://res.cloudinary.com/dmfzplfra/image/upload/v1727536957/Images/american_ftok3h.png"; // URL de la imagen de American Vial
+
+  return `
   <html>
     <head>
       <style>
@@ -31,10 +35,18 @@ const mailsMasivos = (cuerpoMensaje) => `
       <div class="email-container">
         <h1>Mensaje Importante</h1>
         <p>${cuerpoMensaje}</p>
-       
+      
+      <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 20px auto;" />
+      <p style="text-align: center; margin: 10px 0; font-weight: bold;">
+        Paris 256 esq. Colectora Este <br />
+        1611 - Don Torcuato - Bs. As.<br />
+        Tel./Fax : (+54) 11 4748 5900 / int. 273
+      </p>
+      <a href="http://www.americanvial.com" style="text-align: center; display: block; margin-bottom: 20px; font-weight: bold;">www.americanvial.com</a>
       </div>
     </body>
   </html>
-`;
+  `;
+};
 
 module.exports = mailsMasivos;
