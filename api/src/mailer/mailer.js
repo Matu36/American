@@ -15,7 +15,7 @@ const { Clientes } = require("../db.js");
 
 const enviarCotizacionPorEmail = async (req, res) => {
   try {
-    const { emailEmisor, emailReceptor, idCotizacion, password } = req.body;
+    const { emailEmisor, emailsReceptores, idCotizacion, password } = req.body;
 
     const token = req.headers.authorization;
     if (!token) {
@@ -31,7 +31,7 @@ const enviarCotizacionPorEmail = async (req, res) => {
     const email = decodedToken.email;
     const hashedPassword = decodedToken.password;
 
-    if (!emailEmisor || !emailReceptor) {
+    if (!emailEmisor || !emailsReceptores) {
       return res
         .status(400)
         .json({ error: "Emisor y receptor son requeridos." });
@@ -188,7 +188,7 @@ const enviarCotizacionPorEmail = async (req, res) => {
 
     const emailOptions = {
       from: emailEmisor,
-      to: emailReceptor,
+      to: emailsReceptores.join(", "),
       subject: `Cotización de ${cotizacionDetalle.producto.familia}, ${cotizacionDetalle.producto.marca}, ${cotizacionDetalle.producto.modelo}`,
       html: cotizacionEmail({
         ...cotizacionDetalle,

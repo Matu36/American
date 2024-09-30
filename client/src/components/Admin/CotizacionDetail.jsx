@@ -93,10 +93,18 @@ export default function CotizacionDetail() {
 
     const emailEmisor = auth?.email;
     const emailReceptor = cotizacionDetalle?.cliente?.email;
+    const mailAlternativo = cotizacionDetalle?.cliente?.mailAlternativo;
+    const mailAlternativo1 = cotizacionDetalle?.cliente?.mailAlternativo1;
+
+    const emailsReceptores = [
+      emailReceptor,
+      mailAlternativo,
+      mailAlternativo1,
+    ].filter((email) => email);
 
     const requestBody = {
       emailEmisor,
-      emailReceptor,
+      emailsReceptores,
       idCotizacion: id,
       password,
     };
@@ -314,11 +322,8 @@ export default function CotizacionDetail() {
           </Text>
           <Text style={styles.dolares}>
             Son dólares estadounidenses,{" "}
-            {numerosEnLetras(
-              Number(limpiarSeparadores(cotizacionUnicoElemento.precio))
-            )}{" "}
-            más IVA .-) Ejemplo hoy BNA ${" "}
-            {cotizacionUnicoElemento.cotizacionDolar} ({" "}
+            {numerosEnLetras(Number(cotizacionUnicoElemento.precio))} más IVA
+            .-) Ejemplo hoy BNA $ {cotizacionUnicoElemento.cotizacionDolar} ({" "}
             {cotizacionUnicoElemento.precioVenta} + IVA{" "}
             {cotizacionUnicoElemento.IVA}% )
           </Text>
@@ -355,6 +360,20 @@ export default function CotizacionDetail() {
               </Text>
             ))}
         </View>
+
+        <Text style={styles.especificacionesPrincipales}>
+          Motores de Traslación y Zapatas:
+        </Text>
+        <View style={styles.especificaciones}>
+          {producto.motoresdeTraslacionyZapatas
+            .split("\n")
+            .map((motor, index) => (
+              <Text key={index} style={styles.listItem}>
+                • {motor}
+              </Text>
+            ))}
+        </View>
+
         <View style={styles.footerDetail}>
           <Text style={styles.hr} />
           <Text>
@@ -381,18 +400,7 @@ export default function CotizacionDetail() {
           <Text style={styles.distribuidor}>Distribuidor en Argentina -</Text>
           <Text style={styles.hr} />
         </View>
-        <Text style={styles.especificacionesPrincipales}>
-          Motores de Traslación y Zapatas:
-        </Text>
-        <View style={styles.especificaciones}>
-          {producto.motoresdeTraslacionyZapatas
-            .split("\n")
-            .map((motor, index) => (
-              <Text key={index} style={styles.listItem}>
-                • {motor}
-              </Text>
-            ))}
-        </View>
+
         <Text style={styles.especificacionesPrincipales}>
           Sistema Hidráulico:
         </Text>

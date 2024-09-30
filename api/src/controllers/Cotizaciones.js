@@ -317,7 +317,14 @@ const getCotizacionDetalle = async (req, res) => {
         },
         {
           model: Clientes,
-          attributes: ["razonSocial", "CUIT", "apellido", "mail"],
+          attributes: [
+            "razonSocial",
+            "CUIT",
+            "apellido",
+            "mail",
+            "mailAlternativo",
+            "mailAlternativo1",
+          ],
         },
         {
           model: Productos,
@@ -409,6 +416,8 @@ const getCotizacionDetalle = async (req, res) => {
         CUIT: cotizacion.Cliente.CUIT,
         email: cotizacion.Cliente.mail,
         apellido: cotizacion.Cliente.apellido,
+        mailAlternativo: cotizacion.Cliente.mailAlternativo,
+        mailAlternativo1: cotizacion.Cliente.mailAlternativo1,
       },
       usuario: {
         nombre: cotizacion.Usuario.nombre,
