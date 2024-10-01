@@ -205,6 +205,8 @@ export default function FormProduct() {
     fichaPDF: "",
   });
 
+  console.log(producto);
+
   const saveProduct = async (e) => {
     e.preventDefault();
 
