@@ -161,7 +161,9 @@ export default function ClientesEdit() {
       <form onSubmit={handleSubmit}>
         <div className="formClientes">
           <div className="form-group">
-            <label htmlFor="CUIT">CUIT</label>
+            <label htmlFor="CUIT">
+              CUIT <span className="obligatorio">*</span>
+            </label>
             <input
               type="text"
               id="CUIT"
@@ -172,7 +174,7 @@ export default function ClientesEdit() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="razonSocial">Razón Social</label>
+            <label htmlFor="razonSocial"> Razón Social</label>
             <input
               type="text"
               id="razonSocial"
@@ -209,9 +211,7 @@ export default function ClientesEdit() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="provincia">
-              Provincia<span className="obligatorio">*</span>
-            </label>
+            <label htmlFor="provincia">Provincia</label>
             <Select
               id="provincia"
               name="provincia"
@@ -236,9 +236,7 @@ export default function ClientesEdit() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="ciudad">
-              Ciudad<span className="obligatorio">*</span>
-            </label>
+            <label htmlFor="ciudad">Ciudad</label>
             <Select
               id="ciudad"
               name="ciudad"

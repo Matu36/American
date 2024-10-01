@@ -319,6 +319,22 @@ export const useCotizaciones = (idUsuario, id) => {
               timer: 5000,
             });
             break;
+          case 401:
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "Las credenciales no son válidas",
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              showConfirmButton: true,
+              confirmButtonText: "OK",
+              buttonsStyling: false,
+              customClass: {
+                title: "text-dark",
+                confirmButton: "custom-confirm-button",
+              },
+            });
+            break;
 
           default:
             Swal.fire({

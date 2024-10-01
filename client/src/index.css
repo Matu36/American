@@ -4220,6 +4220,12 @@ margin-top: -10px;
   gap: 1rem;
 }
 
+@media (max-width: 700px) {
+  .formClientes {
+    grid-template-columns: 1fr;
+  }
+}
+
 .postVentaContainer2 {
   padding: 40px;
   background-color: white;
@@ -5741,6 +5747,21 @@ p {
   justify-content: space-between;
   margin-top: 10px;
 }
+
+.custom-confirm-button {
+  background-color: black;
+  color: #ffc107;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.custom-confirm-button:hover {
+  background-color: #333;
+}
+
 
 
 

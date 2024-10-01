@@ -25,6 +25,7 @@ export const useMails = () => {
     },
     onError: (error) => {
       if (error.response) {
+        console.error("Error details:", error.response);
         switch (error.response.status) {
           case 400:
             Swal.fire({
@@ -41,6 +42,23 @@ export const useMails = () => {
               timer: 5000,
             });
             break;
+          case 401:
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "Las credenciales no son válidas",
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              showConfirmButton: true,
+              confirmButtonText: "OK",
+              buttonsStyling: false,
+              customClass: {
+                title: "text-dark",
+                confirmButton: "custom-confirm-button",
+              },
+            });
+            break;
+
           default:
             Swal.fire({
               position: "center",
@@ -57,6 +75,7 @@ export const useMails = () => {
             break;
         }
       } else {
+        console.error("Error sin respuesta del servidor:", error);
         Swal.fire({
           position: "center",
           icon: "error",

@@ -1,18 +1,18 @@
 import React from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 
-function Spinner2({ loading }) {
+function Spinner({ loading }) {
   return (
     <div
       style={{
         position: "absolute",
-        left: "55%",
-        top: "100%",
+        left: "50%",
+        top: "70%",
         transform: "translate(-50%, -50%)",
       }}
     >
       <BeatLoader
-        color="black"
+        color="#ffc107"
         cssOverride={{
           position: "relative",
           display: "block",
@@ -34,10 +34,10 @@ function Spinner2({ loading }) {
           marginTop: "10px",
         }}
       >
-        Enviando Email...
+        Enviando Email..
       </span>
     </div>
   );
 }
 
-export default Spinner2;
+export default Spinner;

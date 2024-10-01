@@ -221,9 +221,7 @@ export default function CargaClientes() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="provincia">
-              Provincia<span className="obligatorio">*</span>
-            </label>
+            <label htmlFor="provincia">Provincia</label>
             <Select
               id="provincia"
               name="provincia"
@@ -248,9 +246,7 @@ export default function CargaClientes() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="ciudad">
-              Ciudad<span className="obligatorio">*</span>
-            </label>
+            <label htmlFor="ciudad">Ciudad</label>
             <Select
               id="ciudad"
               name="ciudad"
