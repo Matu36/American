@@ -174,15 +174,13 @@ const enviarCotizacionPorEmail = async (req, res) => {
       },
     };
 
-    // Enviar correo electrónico con el detalle de la cotización
     const transporter = nodemailer.createTransport({
-      service: "Gmail",
+      host: NODEMAILER_HOST,
+      port: NODEMAILER_PORT,
+      secure: true,
       auth: {
         user: email,
         pass: password,
-      },
-      tls: {
-        rejectUnauthorized: false,
       },
     });
 
@@ -245,13 +243,12 @@ const enviarMailsMasivos = async (req, res) => {
     }
 
     const transporter = nodemailer.createTransport({
-      service: "Gmail",
+      host: NODEMAILER_HOST,
+      port: NODEMAILER_PORT,
+      secure: true,
       auth: {
         user: email,
         pass: password,
-      },
-      tls: {
-        rejectUnauthorized: false,
       },
     });
 
