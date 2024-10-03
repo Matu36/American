@@ -60,7 +60,7 @@ module.exports = (sequelize) => {
       },
       fechaModi: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
       },
       nombreCliente: {
         type: DataTypes.STRING,

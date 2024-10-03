@@ -118,7 +118,7 @@ const createCotizacion = async (req, res) => {
       origenFabricacion,
       patentamiento,
       fechaDeCreacion: new Date(),
-      fechaModi: new Date(),
+      fechaModi: null,
       fechaVenta: null,
     });
 
