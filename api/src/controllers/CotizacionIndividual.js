@@ -74,6 +74,8 @@ const actualizarEstadoCotizacionIndividualEstado2 = async (req, res) => {
       return res.status(404).send({ error: "Cotización no encontrada" });
     }
 
+    await cotizacion.update({ fechaVenta: new Date() });
+
     // Obtener cliente, producto y vendedor
     const cliente = await Clientes.findOne({
       where: { id: cotizacion.idCliente },
