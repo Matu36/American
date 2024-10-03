@@ -173,6 +173,7 @@ const createCotizacion = async (req, res) => {
         nombreVendedor: usuario.nombre || "",
         codigo: usuario.codigo || "",
         notasUsuario: notasUsuario || "",
+        fechaDeCreacion: new Date(),
       });
     }
 
@@ -598,6 +599,7 @@ const putCotizaciones = async (req, res) => {
             nombreVendedor: usuario.nombre || "",
             codigo: usuario.codigo || "",
             notasUsuario: updatedFields.notasUsuario || "",
+            fechaDeCreacion: new Date(),
           });
         }
       }
@@ -733,7 +735,6 @@ const putCotizaciones = async (req, res) => {
           saldoConInteres: cotizacionIndividual.saldoConInteres || null,
           PrecioFinal: cotizacionIndividual.PrecioFinal || null,
           codigoCotizacion: cotizacion.codigoCotizacion,
-          fechaDeCreacion: cotizacion.fechaDeCreacion,
           fechaModi: cotizacion.fechaModi,
           nombreCliente: cliente.nombre || "",
           apellidoCliente: cliente.apellido || "",
@@ -746,6 +747,7 @@ const putCotizaciones = async (req, res) => {
           nombreVendedor: usuario.nombre || "",
           codigo: usuario.codigo || "",
           notasUsuario: updatedFields.notasUsuario || "",
+          fechaDeCreacion: new Date(),
         });
       }
     }
@@ -821,6 +823,7 @@ const updateCotizacionEstado = async (req, res) => {
       fechaModi: new Date(),
       apellidoVendedor: usuario.apellido,
       nombreVendedor: usuario.nombre,
+      fechaDeCreacion: new Date(),
     });
 
     return res.status(200).send("La cotización se concretó con éxito.");

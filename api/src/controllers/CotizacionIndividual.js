@@ -128,6 +128,7 @@ const actualizarEstadoCotizacionIndividualEstado2 = async (req, res) => {
       marca: producto.marca || "",
       modelo: producto.modelo || "",
       estado: 2,
+      fechaDeCreacion: new Date(),
       apellidoVendedor: usuario.apellido || "",
       nombreVendedor: usuario.nombre || "",
       codigo: usuario.codigo || "",
@@ -239,6 +240,7 @@ const actualizarEstadoCotizacionIndividualEstado3 = async (req, res) => {
       nombreVendedor: usuario.nombre || "",
       codigo: usuario.codigo || "",
       notasUsuario: cotizacion.notasUsuario || "",
+      fechaDeCreacion: new Date(),
     });
 
     return res.status(200).send({

@@ -285,14 +285,6 @@ export default function Historial() {
                     }
                   )}
                 </span>
-                <span style={{ display: "block", marginBottom: "8px" }}>
-                  <strong>Fecha de Modificación:</strong>{" "}
-                  {new Date(detalle.fechaModi).toLocaleDateString("es-ES", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                  })}
-                </span>
 
                 <span style={{ display: "block", marginBottom: "8px" }}>
                   <strong>Notas de la Cotización:</strong>{" "}
