@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const iniciarCronJob = require("../src/controllers/EmailAutomaticoUnMes.js");
+const programarReporteDiario = require("../src/controllers/EmailReporteDiario.js");
 
 require("./db.js");
 
@@ -30,6 +31,7 @@ server.use((req, res, next) => {
 server.use("/", routes);
 
 iniciarCronJob();
+programarReporteDiario();
 
 // Error catching endware.
 server.use((err, req, res, next) => {
