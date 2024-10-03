@@ -211,7 +211,11 @@ export default function Historial() {
                 >
                   {detalle.estado === 1
                     ? "Detalle de la Cotización:"
-                    : "COTIZACIÓN CONCRETADA"}
+                    : detalle.estado === 2
+                    ? "COTIZACIÓN CONCRETADA"
+                    : detalle.estado === 3
+                    ? "Pendiente de Aprobación"
+                    : "Estado Desconocido"}
                 </strong>
               </p>
 

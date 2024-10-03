@@ -176,6 +176,71 @@ const actualizarEstadoCotizacionIndividualEstado3 = async (req, res) => {
     // Actualiza el estado a 3
     await cotizacionIndividual.update({ estado: 3 });
 
+    const cotizacion = await Cotizaciones.findOne({
+      where: { id: cotizacionIndividual.idCotizacion },
+    });
+
+    if (!cotizacion) {
+      return res.status(404).send({ error: "Cotización no encontrada" });
+    }
+
+    const cliente = await Clientes.findOne({
+      where: { id: cotizacion.idCliente },
+      attributes: ["nombre", "apellido", "mail"],
+    });
+
+    if (!cliente) {
+      return res.status(404).send({ error: "Cliente no encontrado" });
+    }
+
+    const producto = await Productos.findOne({
+      where: { id: cotizacion.idProducto },
+      attributes: ["familia", "marca", "modelo"],
+    });
+
+    if (!producto) {
+      return res.status(404).send({ error: "Producto no encontrado" });
+    }
+
+    const usuario = await Usuarios.findOne({
+      where: { id: cotizacion.idUsuario },
+      attributes: ["nombre", "apellido", "codigo"],
+    });
+
+    if (!usuario) {
+      return res.status(404).send({ error: "Usuario no encontrado" });
+    }
+
+    // Crear un nuevo registro en HistorialCotizacion
+    await HistorialCotizacion.create({
+      numeroCotizacion: cotizacion.numeroCotizacion,
+      precio: cotizacionIndividual.precio || null,
+      anticipo: cotizacionIndividual.anticipo || null,
+      saldoAFinanciar: cotizacionIndividual.saldoAFinanciar || null,
+      IVA: cotizacionIndividual.IVA || null,
+      moneda: cotizacionIndividual.moneda || null,
+      interes: cotizacionIndividual.interes || null,
+      saldo: cotizacionIndividual.saldo || null,
+      cuotas: cotizacionIndividual.cuotas || null,
+      cuotaValor: cotizacionIndividual.cuotaValor || null,
+      saldoConInteres: cotizacionIndividual.saldoConInteres || null,
+      PrecioFinal: cotizacionIndividual.PrecioFinal || null,
+      codigoCotizacion: cotizacion.codigoCotizacion,
+      fechaDeCreacion: cotizacion.fechaDeCreacion,
+      fechaModi: cotizacion.fechaModi,
+      nombreCliente: cliente.nombre || "",
+      apellidoCliente: cliente.apellido || "",
+      mailCliente: cliente.mail || "",
+      familia: producto.familia || "",
+      marca: producto.marca || "",
+      modelo: producto.modelo || "",
+      estado: 3,
+      apellidoVendedor: usuario.apellido || "",
+      nombreVendedor: usuario.nombre || "",
+      codigo: usuario.codigo || "",
+      notasUsuario: cotizacion.notasUsuario || "",
+    });
+
     return res.status(200).send({
       message:
         "Estado de la cotización individual actualizado a 3 correctamente",
