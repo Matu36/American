@@ -102,10 +102,6 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      leido: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
       notasUsuario: {
         type: DataTypes.TEXT,
         allowNull: true,
