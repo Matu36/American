@@ -7,6 +7,7 @@ import { useProducto } from "./hooks/useProductos";
 import CarouselPrincipal from "./components/CarouselPrincipal";
 import { FaWhatsapp } from "react-icons/fa";
 import Suscripcion from "./components/Suscripcion";
+import Login from "./components/usuario/Login";
 
 function App() {
   const [selectedFamilia, setSelectedFamilia] = useState(null);
@@ -66,7 +67,7 @@ function App() {
       onSearchByMarca={handleSearchByMarca}
       onSelectFamilia={handleFamiliaClick}
     >
-      <div className="containerApp">
+      {/* <div className="containerApp">
         <CarouselPrincipal />
         {suscripcion && <Suscripcion onClose={() => setSuscripcion(false)} />}
         <div className="eleganzaContainer">
@@ -92,7 +93,8 @@ function App() {
         >
           <FaWhatsapp size={60} />
         </a>
-      </div>
+      </div> */}
+      <Login />
     </Layout>
   );
 }

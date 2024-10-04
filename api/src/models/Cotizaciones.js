@@ -29,49 +29,39 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      precio: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
-      },
-
-      anticipo: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-      cuotas: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      cuotaValor: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-
-      saldoAFinanciar: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-      IVA: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
-      },
-      moneda: {
+      plazoEntrega: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      interes: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-
-      saldoConInteres: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-      },
-      PrecioFinal: {
-        type: DataTypes.DECIMAL,
+      formaPago: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
+      mantenimientoOferta: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lugarEntrega: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      garantia: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      entregaTecnica: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      origenFabricacion: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      patentamiento: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+
       estado: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -88,6 +78,18 @@ module.exports = (sequelize) => {
       },
       fechaVenta: {
         type: DataTypes.DATE,
+        allowNull: true,
+      },
+      notasEmail: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      notasUsuario: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      CotizacionPDF: {
+        type: DataTypes.TEXT,
         allowNull: true,
       },
     },

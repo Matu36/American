@@ -10,19 +10,9 @@ export default function Registro({ handleCerrarModalRegistro }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const validatePassword = (password) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    return regex.test(password);
-  };
-
   const saveUser = async (e) => {
     e.preventDefault();
-    if (!validatePassword(password)) {
-      setErrorMessage(
-        "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas y números."
-      );
-      return;
-    }
+
     if (password !== confirmPassword) {
       setErrorMessage("Las contraseñas no coinciden.");
       return;

@@ -8,6 +8,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "../../UI/Spinner";
 import VentasExcel from "./Excel/VentasExcel";
 import BackButton from "../../UI/BackButton";
+import { paginationOptions } from "../../utils/Datatable";
 
 export default function Ventas() {
   const { auth } = useAuth();
@@ -56,32 +57,35 @@ export default function Ventas() {
     {
       name: "Producto",
       selector: (row) =>
-        `${row.Producto.familia} ${row.Producto.marca} ${row.Producto.modelo}`,
+        `${row.Cotizacione.Producto.familia} ${row.Cotizacione.Producto.marca} ${row.Cotizacione.Producto.modelo}`,
       sortable: true,
     },
     {
       name: "Nro de Cotización",
-      selector: (row) => row.codigoCotizacion,
+      selector: (row) => row.Cotizacione.codigoCotizacion,
       sortable: true,
     },
     {
       name: "Precio Final",
       sortable: true,
-      selector: (row) => `${row.moneda} ${row.PrecioFinal}`,
+      selector: (row) => `U$D ${row.PrecioFinal}`,
     },
-    {
-      name: "Fecha de Venta",
-      selector: (row) => new Date(row.fechaDeCreacion).toLocaleDateString(),
-      sortable: true,
-    },
+    // {
+    //   name: "Fecha de Venta",
+    //   selector: (row) =>
+    //     new Date(row.Cotizacione.fechaDeCreacion).toLocaleDateString(),
+    //   sortable: true,
+    // },
     {
       name: "Vendedor",
-      selector: (row) => `${row.Usuario.nombre} ${row.Usuario.apellido}`,
+      selector: (row) =>
+        `${row.Cotizacione.Usuario.nombre} ${row.Cotizacione.Usuario.apellido}`,
       sortable: true,
     },
     {
       name: "Cliente",
-      selector: (row) => `${row.Cliente.nombre} ${row.Cliente.apellido}`,
+      selector: (row) =>
+        `${row.Cotizacione.Cliente.nombre} ${row.Cotizacione.Cliente.apellido}`,
       sortable: true,
     },
 
@@ -123,11 +127,11 @@ export default function Ventas() {
   //---------------------------------FIN SPINNER ------------------------------------//
 
   return (
-    <div className="form-container">
+    <div className="postVentaContainer">
       <BackButton />
       <div>
         <div className="form-group" style={{ maxWidth: "60%" }}>
-          <h2 className="tituloCompo">Ventas</h2> <br />
+          <h2 className="tituloCompo">Mis Ventas</h2> <br />
           <input
             type="text"
             className="form-input"
@@ -140,9 +144,11 @@ export default function Ventas() {
         </div>
         {!showSpinner ? (
           <DataTable
+            className="datatable-container"
             columns={columns}
             data={ventas}
             pagination
+            paginationComponentOptions={paginationOptions}
             striped
             noDataComponent={
               <div className="noData">Aún no hay registros ingresados</div>

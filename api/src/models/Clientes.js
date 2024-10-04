@@ -30,6 +30,22 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      provincia: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      ciudad: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      contactoAlternativo: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      contactoAlternativo1: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       razonSocial: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -42,9 +58,31 @@ module.exports = (sequelize) => {
           isEmail: true,
         },
       },
+      mailAlternativo: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+          isEmail: true,
+        },
+      },
+      mailAlternativo1: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+          isEmail: true,
+        },
+      },
       telefono: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      telefonoAlternativo: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      telefonoAlternativo1: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       fechaDeCreacion: {
         type: DataTypes.DATE,

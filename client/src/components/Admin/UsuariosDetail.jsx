@@ -21,34 +21,45 @@ export default function UsuariosDetail() {
     usuariosDetail;
 
   return (
-    <div className="form-container1">
+    <div className="postVentaContainer1">
       <BackButton />
-      <h2>Detalle del Usuario</h2>
+      <h2
+        className="tituloCompo"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        Detalle del Usuario
+      </h2>
       <br />
       <div>
         <strong>Email:</strong> {email}
       </div>
+      <hr />
       <br />
       <div>
         <strong>Nombre:</strong> {nombre}
       </div>
+      <hr />
       <br />
       <div>
         <strong>Apellido:</strong> {apellido}
       </div>
+      <hr />
       <br />
       <div>
         <strong>Dirección:</strong> {direccion}
       </div>
+      <hr />
       <br />
       <div>
         <strong>Teléfono:</strong> {telefono}
       </div>
+      <hr />
       <br />
       <div>
         <strong>Fecha de Registro:</strong>{" "}
-        {new Date(fechaDeRegistro).toLocaleString()}
+        {new Date(fechaDeRegistro).toLocaleDateString()}
       </div>
+      <hr />
     </div>
   );
 }

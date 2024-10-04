@@ -202,8 +202,6 @@ export default function NavBarAlternativo({
     window.location.reload();
   };
 
-  console.log(role);
-
   return (
     <>
       {login && (
@@ -248,7 +246,7 @@ export default function NavBarAlternativo({
           >
             <img src={logo} alt="" />
           </div>
-          <div className="headerNavBar">
+          {/* <div className="headerNavBar">
             <HeaderNavBar
               handleMostrarModalAbout={handleMostrarModalAbout}
               handleCerrarModalAbout={handleCerrarModalAbout}
@@ -259,14 +257,14 @@ export default function NavBarAlternativo({
               onSelectFamilia={onSelectFamilia}
               handleCerrarModalHeadBar={handleCerrarModalHeadBar}
             />
-          </div>
+          </div> */}
 
           {headBar && (
             <div className="headerNavBarClick">
               <br />
               <img className="americanTogle" src={AmericanVial} alt="" />
 
-              <HeaderNavBar
+              {/* <HeaderNavBar
                 handleMostrarModalAbout={handleMostrarModalAbout}
                 handleCerrarModalAbout={handleCerrarModalAbout}
                 handleMostrarModalContact={handleMostrarModalContact}
@@ -282,12 +280,12 @@ export default function NavBarAlternativo({
                 onClick={handleCerrarModalHeadBar}
               >
                 <FaChevronUp />
-              </button>
+              </button> */}
               {/* <img className="gif" src={gruaGif} alt="" /> */}
             </div>
           )}
 
-          {searchBar && (
+          {/* {searchBar && (
             <div className="headerSearchBarClick">
               <input
                 className="inputnavBar"
@@ -336,9 +334,9 @@ export default function NavBarAlternativo({
                 marginTop: "-1rem",
               }}
             />
-          </button>
+          </button> */}
 
-          <div className="search-bar">
+          {/* <div className="search-bar">
             <button className="search-button" onClick={handleSearch}>
               <FiSearch />
             </button>
@@ -365,7 +363,7 @@ export default function NavBarAlternativo({
                 ))}
               </div>
             )}
-          </div>
+          </div> */}
           {/* {idUsuario && (
             <button
               className="faHome-button"
@@ -374,7 +372,7 @@ export default function NavBarAlternativo({
               <FaBell />
             </button>
           )} */}
-          <button
+          {/* <button
             className="fiveguys"
             style={{
               background: "none",
@@ -384,9 +382,9 @@ export default function NavBarAlternativo({
               className="burguer-icon-front"
               onClick={handleMostrarModalheadBar}
             />
-          </button>
+          </button> */}
           <div>
-            {role ? (
+            {/* {role ? (
               <div className="user-menu-container">
                 <span className="user-info">
                   {role === "vendedor" ||
@@ -416,10 +414,10 @@ export default function NavBarAlternativo({
                   className="shoppingButton"
                   onClick={handleUserButtonClick}
                 >
-                  <FaUser />
-                </button>
+                  {/* <FaUser /> */}
+            {/* </button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

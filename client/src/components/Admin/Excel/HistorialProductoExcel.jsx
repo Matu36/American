@@ -4,42 +4,54 @@ import { SiMicrosoftexcel } from "react-icons/si";
 
 const HistorialProductoExcel = ({ data }) => {
   const handleExport = () => {
-    // Crear un nuevo array con los elementos específicos
-    const filteredData = data.data.map((item) => {
-      let estado = "";
-      if (item.estado === 2) {
-        estado = "Venta concretada";
-      }
-      if (item.estado === 1) {
-        estado = "Venta No Concretada";
-      }
+    // Asegurarse de que data sea un array (data.data)
+    const cotizaciones = Array.isArray(data.data) ? data.data : [];
 
-      return {
-        "Número de Cotización": item.codigoCotizacion,
-        Moneda: item.moneda,
-        "Precio de Venta": item.precio,
-        "Saldo a Financiar": `${item.moneda} ${parseFloat(
-          item.saldoAFinanciar
-        ).toFixed(2)}`,
-        Cuotas: item.cuotas,
-        Financiación: `${item.moneda} ${parseFloat(item.cuotaValor).toFixed(
-          2
-        )}`,
-        Anticipo: item.anticipo,
-        IVA: item.IVA,
-        "Precio Final": item.PrecioFinal,
-        "Fecha de Creación": item.fechaDeCreacion,
-        "Fecha de Modificación": item.fechaModi,
-        Producto: `${item.Producto.familia} ${item.Producto.marca} ${item.Producto.modelo}`,
-        Cliente: `${item.Cliente.nombre} ${item.Cliente.apellido}`,
-        Vendedor: `${item.Usuario.nombre} ${item.Usuario.apellido}`,
-        Estado: estado,
-      };
-    });
+    // Crear un nuevo array con los elementos específicos
+    const filteredData = cotizaciones
+      .map((item) =>
+        item.CotizacionIndividuals.map((cotizacion) => {
+          let estado = "";
+          if (cotizacion.estado === 2) {
+            estado = "Venta concretada";
+          }
+          if (cotizacion.estado === 1) {
+            estado = "Venta No Concretada";
+          }
+
+          return {
+            "Número de Cotización": item.codigoCotizacion,
+            Producto: `${item.Producto.familia} ${item.Producto.marca} ${item.Producto.modelo}`,
+            Cliente: `${item.Cliente.nombre} ${item.Cliente.apellido}`,
+            Vendedor: `${item.Usuario.nombre} ${item.Usuario.apellido}`,
+            Moneda: cotizacion.moneda,
+            "Precio de Venta": cotizacion.precio,
+            "Saldo a Financiar": `${cotizacion.moneda} ${parseFloat(
+              cotizacion.saldoAFinanciar
+            ).toFixed(2)}`,
+            Cuotas: cotizacion.cuotas,
+            Financiación: `${cotizacion.moneda} ${parseFloat(
+              cotizacion.cuotaValor
+            ).toFixed(2)}`,
+            Anticipo: cotizacion.anticipo,
+            IVA: cotizacion.IVA,
+            "Precio Final": cotizacion.PrecioFinal,
+            "Fecha de Creación": new Date(
+              item.fechaDeCreacion
+            ).toLocaleDateString(),
+            "Fecha de Modificación": cotizacion.fechaModi
+              ? new Date(cotizacion.fechaModi).toLocaleDateString()
+              : "N/A",
+
+            Estado: estado,
+          };
+        })
+      )
+      .flat(); // Aplanar el array de arrays resultantes
 
     // Obtener el nombre completo del producto
-    const producto = data.data[0]
-      ? `${data.data[0].Producto.familia} ${data.data[0].Producto.marca} ${data.data[0].Producto.modelo}`
+    const producto = cotizaciones[0]
+      ? `${cotizaciones[0].Producto.familia} ${cotizaciones[0].Producto.marca} ${cotizaciones[0].Producto.modelo}`
       : "Producto";
 
     // Crear una hoja de trabajo vacía

@@ -5,7 +5,7 @@ const path = require("path");
 const { DB_URL, DATABASE_URL } = process.env;
 
 const sequelize = new Sequelize(
-  DATABASE_URL,
+  DB_URL,
 
   {
     logging: false,
@@ -53,6 +53,7 @@ const {
   HistorialCotizacion,
   Repuestos,
   Favoritos,
+  CotizacionIndividual,
 } = sequelize.models;
 
 Clientes.belongsTo(Usuarios, {
@@ -84,6 +85,9 @@ Cotizaciones.belongsTo(Productos, {
 Productos.hasMany(Cotizaciones, {
   foreignKey: "idProducto",
 });
+
+Cotizaciones.hasMany(CotizacionIndividual, { foreignKey: "idCotizacion" });
+CotizacionIndividual.belongsTo(Cotizaciones, { foreignKey: "idCotizacion" });
 
 Mensajes.belongsTo(Usuarios, {
   foreignKey: "idUsuario",

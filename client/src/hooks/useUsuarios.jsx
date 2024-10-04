@@ -21,8 +21,8 @@ const getChart = async () => {
   return data;
 };
 
-const getVendedores = async () => {
-  const { data } = await UsuariosAPI.get("/vendedores");
+const getVendedores = async (idUsuario) => {
+  const { data } = await UsuariosAPI.get(`/vendedores/${idUsuario}`);
   return data;
 };
 
@@ -63,8 +63,9 @@ export const useUsuario = (idUsuario) => {
   });
 
   const vendedoresQuery = useQuery({
-    queryKey: ["vendedores"],
-    queryFn: () => getVendedores(),
+    queryKey: ["vendedores", idUsuario],
+    queryFn: () => getVendedores(idUsuario),
+    enabled: idUsuario !== undefined && idUsuario !== null,
   });
 
   const usuariosMensajesQuery = useQuery({

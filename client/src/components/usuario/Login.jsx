@@ -66,7 +66,9 @@ export default function Login({ handleCerrarModalLogin }) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(loggedUser));
         setSaved("login");
-        setShowWelcomeMessage(true);
+        navigate("/admin");
+        window.location.reload();
+        // setShowWelcomeMessage(true);
       } else {
         setErrorMessage(
           data.error ||
@@ -82,32 +84,32 @@ export default function Login({ handleCerrarModalLogin }) {
     }
   };
 
-  useEffect(() => {
-    if (showWelcomeMessage) {
-      const timer = setTimeout(() => {
-        setShowWelcomeMessage(false);
-        handleCerrarModalLogin();
+  // useEffect(() => {
+  //   if (showWelcomeMessage) {
+  //     const timer = setTimeout(() => {
+  //       setShowWelcomeMessage(false);
+  //       // handleCerrarModalLogin();
 
-        if (location.pathname === "/") {
-          window.location.reload();
-        } else {
-          navigate("/");
-          window.location.reload();
-        }
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [showWelcomeMessage, location]);
+  //       if (location.pathname === "/") {
+  //         window.location.reload();
+  //       } else {
+  //         navigate("/");
+  //         window.location.reload();
+  //       }
+  //     }, 2000);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [showWelcomeMessage, location]);
 
   return (
     <div>
       {!registro && (
         <div className="login-container">
-          <div className="button-close-login">
+          {/* <div className="button-close-login">
             <button onClick={handleCerrarModalLogin} style={{ color: "black" }}>
               X
             </button>
-          </div>
+          </div> */}
 
           <form className="login-form" onSubmit={loginUser}>
             <div className="form-group">
@@ -137,7 +139,7 @@ export default function Login({ handleCerrarModalLogin }) {
 
             <input type="submit" value="Ingresar" className="form-submit" />
           </form>
-          <button onClick={handleMostrarModalRecover}>
+          {/* <button onClick={handleMostrarModalRecover}>
             <span style={{ color: "black" }}>¿Olvidaste tu contraeña?</span>
           </button>
           {recover && (
@@ -148,7 +150,7 @@ export default function Login({ handleCerrarModalLogin }) {
                 />
               </div>
             </div>
-          )}
+          )} */}
 
           {showWelcomeMessage && (
             <div className="welcome-message">
@@ -158,7 +160,7 @@ export default function Login({ handleCerrarModalLogin }) {
           )}
 
           <div style={{ marginTop: "1rem" }}>
-            <span
+            {/* <span
               style={{
                 color: "black",
                 fontFamily: "merri",
@@ -166,7 +168,7 @@ export default function Login({ handleCerrarModalLogin }) {
               }}
             >
               ¿Aún no pertenecés a American Vial?
-            </span>
+            </span> */}
           </div>
 
           <button

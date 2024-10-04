@@ -16,8 +16,27 @@ const postCotizacion = async (data) => {
   return await CotizacionesAPI.post(`create`, data);
 };
 
+const postEnvioCotizacionPorEmial = async (data) => {
+  return await CotizacionesAPI.post(`/enviocoti/create`, data);
+};
+
 const postCotisPorFecha = async (data) => {
-  return await CotizacionesAPI.post(`fecha`, data);
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    throw new Error("Token no proporcionado");
+  }
+
+  return await CotizacionesAPI.post("/fecha/", data, {
+    headers: {
+      Authorization: `${token}`,
+    },
+  });
+};
+
+const getCotizacionParaSerAprobada = async () => {
+  const { data } = await CotizacionesAPI.get(`/getCotizacionEstado3`);
+  return data;
 };
 
 const postCotizacionState2 = async (data) => {
@@ -26,6 +45,10 @@ const postCotizacionState2 = async (data) => {
 
 const editCotizacion = async (data) => {
   return await CotizacionesAPI.put(`edit`, data);
+};
+
+const editCotizacionPDF = async (data) => {
+  return await CotizacionesAPI.put(`editpdf`, data);
 };
 
 const getCotizacionesById = async (idUsuario) => {
@@ -71,6 +94,11 @@ export const useVentas = (idUsuario, id) => {
 
 export const useCotizaciones = (idUsuario, id) => {
   const queryClient = useQueryClient();
+  const CotizacionesPendientesDeAprobacion = useQuery({
+    queryKey: ["cotispendientesdeaprobacion"],
+    queryFn: getCotizacionParaSerAprobada,
+  });
+
   const cotizacionMutation = useMutation({
     mutationKey: ["cotizacion-mutation"],
     mutationFn: (data) => postCotizacion(data),
@@ -187,6 +215,142 @@ export const useCotizaciones = (idUsuario, id) => {
             title: "text-dark",
           },
         });
+      }
+    },
+  });
+
+  const cotizacionEditPDFMutation = useMutation({
+    mutationKey: ["editPDF-cotizacion"],
+    mutationFn: (data) => editCotizacionPDF(data),
+    onSuccess: () => {
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "El PDF se generó Corréctamente",
+        showConfirmButton: false,
+        timer: 2000,
+        background: "#ffffff",
+        iconColor: "#ffc107",
+        customClass: {
+          title: "text-dark",
+        },
+      });
+    },
+    onError: (error) => {
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "No se pudo generar el PDF. Intente más tarde",
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+          default:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "Hubo un error",
+              showConfirmButton: false,
+              timer: 2000,
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+            });
+            break;
+        }
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Hubo un error al procesar la solicitud",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "#ffffff",
+          iconColor: "#ffc107",
+          customClass: {
+            title: "text-dark",
+          },
+        });
+      }
+    },
+  });
+
+  const cotizacionPorEmailMutation = useMutation({
+    mutationKey: ["cotizacionPorEmail-mutation"],
+    mutationFn: (data) => postEnvioCotizacionPorEmial(data),
+    onSuccess: () => {
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "La cotización se envió por Email corréctamente",
+        showConfirmButton: false,
+        timer: 2000,
+        background: "#ffffff",
+        iconColor: "#ffc107",
+        customClass: {
+          title: "text-dark",
+        },
+      });
+    },
+    onError: (error) => {
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "No se pudo enviar la cotización; intente más tarde",
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+          case 401:
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "Las credenciales no son válidas",
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              showConfirmButton: true,
+              confirmButtonText: "OK",
+              buttonsStyling: false,
+              customClass: {
+                title: "text-dark",
+                confirmButton: "custom-confirm-button",
+              },
+            });
+            break;
+
+          default:
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "Ocurrió un error inesperado, intente más tarde",
+              background: "#ffffff",
+              iconColor: "#dc3545",
+              customClass: {
+                title: "text-dark",
+              },
+              showConfirmButton: false,
+              timer: 5000,
+            });
+            break;
+        }
       }
     },
   });
@@ -321,6 +485,9 @@ export const useCotizaciones = (idUsuario, id) => {
     cotizacionMutationState2,
     cotizacionEditMutation,
     cotisPorFechaMutation,
+    CotizacionesPendientesDeAprobacion,
+    cotizacionEditPDFMutation,
+    cotizacionPorEmailMutation,
   };
 };
 

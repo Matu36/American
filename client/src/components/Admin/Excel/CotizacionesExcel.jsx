@@ -4,54 +4,57 @@ import { SiMicrosoftexcel } from "react-icons/si";
 
 const CotizacionesExcel = ({ data }) => {
   const handleExport = () => {
-    const filteredData = data.map((item) => ({
-      Categoria: item.Producto.familia,
-      Marca: item.Producto.marca,
-      Modelo: item.Producto.modelo,
-      NroCotización: item.codigoCotizacion,
+    const rows = [];
 
-      Moneda: item.moneda,
-      "Precio de Venta": item.precio,
-      "Saldo a Financiar": `${item.moneda} ${parseFloat(
-        item.saldoAFinanciar
-      ).toFixed(2)}`,
-      Cuotas: item.cuotas,
-      "Valor de las cuotas": `${item.moneda} ${parseFloat(
-        item.cuotaValor
-      ).toFixed(2)}`,
-      Anticipo: item.anticipo,
-      PrecioFinal: item.PrecioFinal,
-      FechaVenta: item.fechaDeCreacion,
-      Vendedor: `${item.Usuario.nombre} ${item.Usuario.apellido}`,
-      Cliente: `${item.Cliente.nombre} ${item.Cliente.apellido}`,
-    }));
+    data.forEach((item) => {
+      rows.push({
+        NroCotización: item.codigoCotizacion,
+        Categoria: item.Producto.familia,
+        Marca: item.Producto.marca,
+        Modelo: item.Producto.modelo,
 
-    // Crear una hoja de trabajo vacía
-    const worksheet = XLSX.utils.json_to_sheet([]);
+        Vendedor: `${item.Usuario.nombre} ${item.Usuario.apellido}`,
+        Cliente: `${item.Cliente.nombre} ${item.Cliente.apellido}`,
+      });
 
-    // Agregar el título y la fecha al principio de la hoja
+      item.CotizacionIndividuals.forEach((cotizacionInd) => {
+        rows.push({
+          Moneda: "U$D",
+          "Precio de Venta": cotizacionInd.precio,
+
+          Cuotas: cotizacionInd.cuotas,
+          "Valor de las cuotas": ` ${parseFloat(
+            cotizacionInd.cuotaValor
+          ).toFixed(2)}`,
+          Interés: cotizacionInd.interes,
+          Anticipo: cotizacionInd.anticipo,
+          "Saldo a Financiar": ` ${parseFloat(
+            cotizacionInd.saldoAFinanciar
+          ).toFixed(2)}`,
+
+          PrecioFinal: cotizacionInd.PrecioFinal,
+          "Fecha de Cotización": new Date(
+            cotizacionInd.fechaDeCreacion
+          ).toLocaleDateString(),
+        });
+      });
+
+      rows.push({});
+    });
+
+    const ws = XLSX.utils.json_to_sheet(rows, { origin: "A3" });
+
     const currentDate = new Date().toLocaleDateString();
     XLSX.utils.sheet_add_aoa(
-      worksheet,
-      [["REPORTE DE LAS COTIZACIONES AL DÍA " + currentDate]],
+      ws,
+      [["REPORTE DE COTIZACIONES AL DÍA " + currentDate]],
       { origin: "A1" }
     );
 
-    // Agregar una fila vacía después del título
-    XLSX.utils.sheet_add_aoa(worksheet, [[]], { origin: -1 });
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Cotizaciones");
 
-    // Agregar los datos de las cotizaciones empezando en la tercera fila
-    XLSX.utils.sheet_add_json(worksheet, filteredData, {
-      origin: -1,
-      skipHeader: false,
-    });
-
-    // Crear un libro de trabajo y agregar la hoja
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Datos");
-
-    // Generar el archivo Excel y descargarlo
-    XLSX.writeFile(workbook, "Cotizaciones.xlsx");
+    XLSX.writeFile(wb, "Cotizaciones.xlsx");
   };
 
   return (

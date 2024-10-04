@@ -8,6 +8,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "../../UI/Spinner";
 import ClientesExcel from "./Excel/ClientesExcel";
 import BackButton from "../../UI/BackButton";
+import { paginationOptions } from "../../utils/Datatable";
 
 export default function Clientes() {
   const { auth } = useAuth();
@@ -124,7 +125,7 @@ export default function Clientes() {
 
   //---------------------------------FIN SPINNER ------------------------------------//
   return (
-    <div className="form-container">
+    <div className="postVentaContainer">
       <BackButton />
       <div>
         <div className="form-group" style={{ maxWidth: "40%" }}>
@@ -141,11 +142,13 @@ export default function Clientes() {
         </div>
         {!showSpinner ? (
           <DataTable
+            className="datatable-container"
             columns={columns}
             data={clientes}
             pagination
             striped
             responsive
+            paginationComponentOptions={paginationOptions}
             noDataComponent={
               <div className="noData">Aún no hay registros ingresados</div>
             }

@@ -15,6 +15,8 @@ export default function ProductosDetalle() {
       </div>
     );
   }
+
+  // Campos que quieres excluir
   const excludedFields = [
     "fichaPDF",
     "imagen",
@@ -28,39 +30,36 @@ export default function ProductosDetalle() {
     "id",
   ];
 
-  // Convert the "Detalles" string into an array of key-value pairs
-  const detallesArray = productoData.Detalles
-    ? productoData.Detalles.split("\n").map((detail) => {
-        const [key, value] = detail.split(": ");
-        return { key, value };
-      })
-    : [];
+  // Función para separar los títulos compuestos y capitalizar la primera letra
+  const formatFieldName = (field) => {
+    return field
+      .replace(/([A-Z])/g, " $1") // Inserta espacio antes de las mayúsculas
+      .replace(/^./, (str) => str.toUpperCase()); // Capitaliza la primera letra
+  };
 
   const itemStyle = {
     marginBottom: "10px",
-    textTransform: "capitalize", // Capitaliza la primera letra de cada palabra
+    textTransform: "capitalize",
+    display: "flex",
+    justifyContent: "center",
   };
 
   return (
-    <div className="form-container1">
+    <div className="postVentaContainer1">
       <BackButton />
-      <h3 style={itemStyle}>Detalle del Producto</h3>
+      <h3 style={itemStyle} className="tituloCompo">
+        Detalle del Producto
+      </h3>
+      <br />
       <div>
         {Object.keys(productoData)
           .filter((key) => !excludedFields.includes(key))
           .map((key) => (
-            <div key={key} style={itemStyle}>
-              <strong>{key}:</strong> {productoData[key]}
+            <div key={key}>
+              <strong>{formatFieldName(key)}:</strong> {productoData[key]}
+              <hr />
             </div>
           ))}
-      </div>
-      <div className="contactoDerivado">
-        <h3 style={{ color: "black" }}>ESPECIFICACIONES</h3>
-        {detallesArray.map(({ key, value }, index) => (
-          <div key={index} style={itemStyle}>
-            <strong>{key}:</strong> {value}
-          </div>
-        ))}
       </div>
     </div>
   );

@@ -88,6 +88,10 @@ const getClientesPorIdDeUsuario = async (req, res) => {
           "fechaDeCreacion",
           "CUIT",
           "razonSocial",
+          "telefono",
+          "contactoAlternativo",
+          "telefonoAlternativo",
+          "mailAlternativo",
         ],
         order: [["fechaDeCreacion", "DESC"]],
       });
@@ -163,25 +167,47 @@ const getClientePorId = async (req, res) => {
 
 const updateCliente = async (req, res) => {
   try {
-    if (!req.body?.id) {
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    // Decodifica el token para obtener el idUsuario
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+    const idUsuario = decodedToken.id;
+
+    if (!idUsuario) {
+      return res.status(401).send({ error: "Token inválido" });
+    }
+
+    // Verifica si el cuerpo de la solicitud contiene el id del cliente
+    const {
+      id,
+      CUIT,
+      domicilio,
+      razonSocial,
+      nombre,
+      apellido,
+      mail,
+      telefono,
+      contactoAlternativo,
+      contactoAlternativo1,
+      mailAlternativo,
+      mailAlternativo1,
+      telefonoAlternativo,
+      telefonoAlternativo1,
+    } = req.body;
+
+    if (!id) {
       throw "Se requiere el ID del cliente";
     }
 
-    const id = req.body.id;
-
     // Verifica que al menos uno de los campos para actualizar esté presente en el cuerpo de la solicitud
-    const { idUsuario, CUIT, domicilio, nombre, apellido, mail, telefono } =
-      req.body;
-
-    if (
-      !idUsuario &&
-      !CUIT &&
-      !domicilio &&
-      !nombre &&
-      !apellido &&
-      !mail &&
-      !telefono
-    ) {
+    if (!CUIT && !domicilio && !nombre && !apellido && !mail && !telefono) {
       throw "No hay parámetros para actualizar";
     }
 
@@ -192,15 +218,30 @@ const updateCliente = async (req, res) => {
       return res.status(404).send("Cliente no encontrado");
     }
 
+    // Verifica que el idUsuario coincida con el del cliente (opcional, para mayor seguridad)
+    if (cliente.idUsuario !== idUsuario) {
+      return res
+        .status(403)
+        .send("No tienes permiso para modificar este cliente");
+    }
+
     // Actualiza los campos del cliente
     await cliente.update({
-      idUsuario: idUsuario ?? cliente.idUsuario,
       CUIT: CUIT ?? cliente.CUIT,
       domicilio: domicilio ?? cliente.domicilio,
       nombre: nombre ?? cliente.nombre,
+      razonSocial: razonSocial ?? cliente.razonSocial,
       apellido: apellido ?? cliente.apellido,
       mail: mail ?? cliente.mail,
+      mailAlternativo: mailAlternativo ?? cliente.mailAlternativo,
+      mailAlternativo1: mailAlternativo1 ?? cliente.mailAlternativo1,
       telefono: telefono ?? cliente.telefono,
+      telefonoAlternativo: telefonoAlternativo ?? cliente.telefonoAlternativo,
+      telefonoAlternativo1:
+        telefonoAlternativo1 ?? cliente.telefonoAlternativo1,
+      contactoAlternativo: contactoAlternativo ?? cliente.contactoAlternativo,
+      contactoAlternativo1:
+        contactoAlternativo1 ?? cliente.contactoAlternativo1,
       fechaModi: new Date(),
     });
 
@@ -290,10 +331,66 @@ const getClientesParaCotizar = async (req, res) => {
   }
 };
 
+const getMailsPorIdDeUsuario = async (req, res) => {
+  try {
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).send({ error: "Token no proporcionado" });
+    }
+
+    const decodedToken = jwt.decodeToken(
+      token.replace("Bearer ", ""),
+      JWTSECRET
+    );
+
+    const idUsuario = decodedToken.id;
+
+    // Busca el usuario en la base de datos
+    const usuario = await Usuarios.findByPk(idUsuario);
+
+    if (!usuario) {
+      throw "Usuario no encontrado";
+    }
+
+    let emails;
+
+    if (usuario.rol === true) {
+      // Administrador: Ver todos los teléfonos
+      emails = await Clientes.findAll({
+        attributes: [
+          "nombre",
+          "apellido",
+          "mail",
+          "contactoAlternativo",
+          "mailAlternativo",
+          "contactoAlternativo1",
+          "mailAlternativo1",
+        ],
+        order: [["nombre", "ASC"]],
+      });
+    } else {
+      // Vendedor: Ver emails de clientes asociados a su usuario
+      emails = await Clientes.findAll({
+        where: { idUsuario: idUsuario },
+        attributes: ["mail", "mailAlternativo", "mailAlternativo1"],
+        order: [["nombre", "ASC"]],
+      });
+    }
+
+    // Devuelve los emails encontrados
+    return res.status(200).json(emails);
+  } catch (error) {
+    console.error("Error al obtener emails:", error);
+    return res.status(400).send(error);
+  }
+};
+
 module.exports = {
   createCliente,
   getClientesPorIdDeUsuario,
   updateCliente,
   getClientesParaCotizar,
   getClientePorId,
+  getMailsPorIdDeUsuario,
 };

@@ -15,96 +15,154 @@ Font.register({
 
 export const styles = StyleSheet.create({
   page: {
-    padding: 10,
-    fontFamily: "Open Sans",
-    backgroundColor: "#ffffff",
-    borderWidth: 4,
-    borderColor: "#000000",
-  },
-  logoContainer: {
-    marginBottom: 20,
-    alignItems: "center",
-    backgroundColor: "#000000",
-    padding: 10,
-  },
-  logo: {
-    width: 150,
-    height: 60,
-  },
-  header: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 10,
-    color: "#000",
-    textAlign: "center",
-  },
-  subHeader: {
-    fontSize: 14,
-    fontWeight: "bold",
-    marginBottom: 8,
-    color: "#000",
-    borderBottomWidth: 1,
-    borderBottomColor: "#ffcc00",
-    paddingBottom: 5,
-  },
-  text: {
-    fontSize: 10,
-    marginBottom: 5,
-    color: "#000",
-  },
-  label: {
-    fontWeight: "bold",
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#000",
+    padding: 30,
+    width: "80%",
+    border: "1px solid #dcdcdc",
     borderRadius: 5,
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+    boxSizing: "border-box",
+    position: "relative",
+    textAlign: "left",
   },
-  hr: {
-    borderBottomWidth: 2,
-    borderBottomColor: "#ffcc00",
-    width: "100%",
-    marginBottom: 10,
-  },
-  pdfdownloadbutton: {
-    display: "inline-block",
-    padding: 10,
-    backgroundColor: "#ffcc00",
-    color: "#000",
-    borderRadius: 5,
-    textDecoration: "none",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  marcaAgua: {
-    textTransform: "uppercase",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%) rotate(45deg)",
-    fontSize: 90,
-    color: "#ffcc00",
-    opacity: 0.2,
-  },
-  contactContainer: {
-    padding: 10,
+  imagenesPDF: {
+    display: "flex",
     flexDirection: "row",
   },
+  sino: {
+    width: "30%",
+    marginRight: 50,
+    marginTop: -15,
+  },
+  american: {
+    width: 220,
+    height: 40,
+  },
+  SINOMACH: {
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  SINOMACHtitle: {
+    fontWeight: "bold",
+    fontSize: "18px",
+  },
+  distribuidor: {
+    fontSize: "8px",
+    textAlign: "left",
+  },
+  hr: {
+    borderBottom: "0.2px solid black",
+  },
 
-  contactHeader: {
+  fechaformateada: {
+    textAlign: "left",
+    fontSize: "10px",
+  },
+  razonSOCIAL: {
+    marginBottom: 15,
+  },
+  datosCliente: {
+    fontSize: "12px",
+    fontWeight: "ultrabold",
+  },
+  avg: { textAlign: "right", fontSize: "10px" },
+  consideracion: {
+    fontSize: 12,
+    marginVertical: 10,
+  },
+
+  opcion: {
     fontSize: 10,
+    marginVertical: 10,
+    textDecoration: "underline",
+  },
+  sinomachh: {
     fontWeight: "bold",
-    marginBottom: 5,
+    color: "#000000",
   },
-  contactText: {
-    fontSize: 8,
-    marginBottom: 3,
+  cotizacionItem: {
+    marginBottom: 15,
+    border: "0.3px solid black",
+    padding: "15px",
+    textAlign: "center",
+    width: "98%",
+    fontSize: "14px",
   },
-  empresaImage: { height: "180px", marginRight: 20 },
+  precioUnitario: {
+    fontWeight: "bold",
+    marginTop: "15px",
+    fontSize: "14px",
+  },
+  cotizacion: {
+    fontWeight: "bold",
+    marginTop: 15,
+    fontSize: "12px",
+    marginBottom: 15,
+  },
 
-  boldText: {
+  cotizacionText: {
     fontWeight: "bold",
+
+    fontSize: "12px",
+  },
+
+  dolares: {
+    fontSize: "9px",
+  },
+  condicionesgenerales: {
+    marginTop: 20,
+    padding: 10,
+    border: "1px solid black",
+  },
+  caractcotizar: {
+    marginTop: 10,
+  },
+  caracgeneralescontainer: { marginTop: 5 },
+  caracgenerales: {
+    fontWeight: "bold",
+    fontSize: "14px",
+    marginTop: "20px",
+    textDecoration: "underline",
+    textAlign: "center",
+  },
+  especificaciones: {
+    marginLeft: 40,
+    marginVertical: 5,
+    paddingBottom: 0,
+  },
+
+  cursiva: {
+    fontStyle: "italic",
+  },
+  listItem: {
+    marginBottom: 5,
+    fontSize: "11px",
+  },
+
+  especificacionesPrincipales: {
+    fontSize: "12px",
+    textAlign: "left",
+    textDecoration: "underline",
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  footerDetail: {
+    position: "absolute",
+    bottom: 20,
+    left: 0,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 8,
+    paddingLeft: 60,
+    color: "gray",
+  },
+
+  watermark: {
+    position: "absolute",
+    top: "50%",
+    left: "15%",
+    transform: "translate(-50%, -50%)",
+    width: "100%",
+    height: "auto",
+    zIndex: 0,
   },
 });

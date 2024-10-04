@@ -69,7 +69,7 @@ export default function FooterAlternativo() {
 
   return (
     <div className="principal-footer">
-      <div style={{ backgroundColor: "white" }}>
+      {/* <div style={{ backgroundColor: "white" }}>
         {" "}
         <CarouselMarcas />
       </div>
@@ -242,7 +242,7 @@ export default function FooterAlternativo() {
 
       <div className="copy">
         Copyright © {currentYear} | American Vial Todos los derechos reservados
-      </div>
+      </div> */}
     </div>
   );
 }

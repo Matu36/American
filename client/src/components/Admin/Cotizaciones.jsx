@@ -8,6 +8,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "../../UI/Spinner";
 import CotizacionesExcel from "./Excel/CotizacionesExcel";
 import BackButton from "../../UI/BackButton";
+import { paginationOptions } from "../../utils/Datatable";
 
 export default function Cotizaciones() {
   const { auth } = useAuth();
@@ -72,31 +73,32 @@ export default function Cotizaciones() {
       name: "Nro Cotización",
       selector: (row) => row.codigoCotizacion,
       sortable: true,
+      width: "160px",
     },
     {
       name: "Producto",
       selector: (row) => row.Producto.modelo,
       sortable: true,
+      width: "160px",
     },
-    {
-      name: "Precio Final",
-      selector: (row) => row.PrecioFinal,
-      sortable: true,
-    },
+
     {
       name: "Fecha de Cotización",
       selector: (row) => new Date(row.fechaDeCreacion).toLocaleDateString(),
       sortable: true,
+      width: "160px",
     },
     {
       name: "Vendedor",
       selector: (row) => `${row.Usuario.nombre} ${row.Usuario.apellido}`,
       sortable: true,
+      width: "160px",
     },
     {
       name: "Cliente",
       selector: (row) => `${row.Cliente.nombre} ${row.Cliente.apellido}`,
       sortable: true,
+      width: "160px",
     },
 
     {
@@ -122,12 +124,6 @@ export default function Cotizaciones() {
           >
             Modificar
           </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => handleConcretarVenta(row.id)}
-            className="dropdown-item dropdown-item-concretar"
-          >
-            Concretar Venta
-          </Dropdown.Item>
         </DropdownButton>
       ),
     },
@@ -149,7 +145,7 @@ export default function Cotizaciones() {
 
   //---------------------------------FIN SPINNER ------------------------------------//
   return (
-    <div className="form-container">
+    <div className="postVentaContainer">
       <BackButton />
       <div>
         <div className="form-group" style={{ maxWidth: "40%" }}>
@@ -162,11 +158,12 @@ export default function Cotizaciones() {
             value={search}
             autoComplete="off"
             disabled={!cotizacionesQueryById.data}
-            style={{ height: "2rem" }}
           />
         </div>
         {!showSpinner ? (
           <DataTable
+            className="datatable-container"
+            paginationComponentOptions={paginationOptions}
             columns={columns}
             data={cotizaciones}
             pagination

@@ -7,6 +7,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link } from "react-router-dom";
 import BackButton from "../../UI/BackButton";
+import { paginationOptions } from "../../utils/Datatable";
 
 export default function Usuarios() {
   const [search, setSearch] = useState("");
@@ -62,7 +63,7 @@ export default function Usuarios() {
     },
     {
       name: "Creado",
-      selector: (row) => new Date(row.createdAt).toLocaleString(),
+      selector: (row) => new Date(row.createdAt).toLocaleDateString(),
       sortable: true,
     },
     {
@@ -103,7 +104,7 @@ export default function Usuarios() {
   //---------------------------------FIN SPINNER ------------------------------------//
 
   return (
-    <div className="form-container">
+    <div className="postVentaContainer">
       <BackButton />
       <>
         <div>
@@ -117,7 +118,6 @@ export default function Usuarios() {
               value={search}
               autoComplete="off"
               disabled={!data}
-              style={{ height: "2rem" }}
             />
           </div>
           <div className="datatable-container">
@@ -128,6 +128,7 @@ export default function Usuarios() {
                 pagination
                 striped
                 responsive
+                paginationComponentOptions={paginationOptions}
                 noDataComponent={
                   <div className="noData">Aún no hay registros ingresados</div>
                 }

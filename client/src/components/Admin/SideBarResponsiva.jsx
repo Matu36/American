@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useUsuario } from "../../hooks/useUsuarios";
 import useAuth from "../../hooks/useAuth";
+import { useCotizacionIndividual } from "../../hooks/useCotizacionIndividual";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   FaHome,
@@ -8,22 +9,20 @@ import {
   FaBox,
   FaFileInvoiceDollar,
   FaShoppingCart,
-  FaShieldAlt,
-  FaPercentage,
-  FaPhone,
   FaAngleDown,
-  FaCogs,
   FaArrowLeft,
-  FaTag,
-  FaEnvelopeOpen,
+  FaEnvelope,
 } from "react-icons/fa";
-import { MdPerson, MdMail } from "react-icons/md";
+import { MdPerson } from "react-icons/md";
 
 const SideBarResponsiva = ({ handleCerrarModalSideBar }) => {
   const { auth } = useAuth();
   const token = localStorage.getItem("token");
   const idUsuario = token;
   const { mutate: checkRol, data: rolData } = useUsuario().CheckRolMutation;
+
+  const { data: countData } = useCotizacionIndividual().countEstado3;
+  const count = countData?.count || 0;
 
   const navigate = useNavigate();
 
@@ -113,62 +112,32 @@ const SideBarResponsiva = ({ handleCerrarModalSideBar }) => {
     {
       label: "Ventas",
       icon: FaShoppingCart,
-      subCategories: [],
+      subCategories: [
+        {
+          label: "Mis Ventas",
+          path: "/admin/ventas/ver",
+          roles: ["administrador", "vendedor"],
+        },
+        {
+          label: "Pendientes de Aprobación",
+          path: "/admin/ventas/aprobar",
+          roles: ["administrador"],
+        },
+      ],
       roles: ["administrador", "vendedor", "gerente"],
     },
     {
-      label: "Garantia",
-      icon: FaShieldAlt,
-      subCategories: [],
-      roles: ["administrador"],
-    },
-    {
-      label: "Repuestos",
-      icon: FaCogs,
-      subCategories: [],
-      roles: ["administrador"],
-    },
-    {
-      label: "Contacto",
-      icon: FaPhone,
-      subCategories: [],
-      roles: ["administrador"],
-    },
-    {
-      label: "ContactoProducto",
-      icon: FaPercentage,
-      subCategories: [],
-      roles: ["administrador"],
-    },
-    {
-      label: "Suscriptores",
-      icon: FaEnvelopeOpen,
-      subCategories: [],
-      roles: ["administrador"],
-    },
-    {
-      label: "OfertasNovedades",
-      icon: FaTag,
-      subCategories: [],
-      roles: ["administrador"],
-    },
-    {
-      label: "Mensajes",
-      icon: MdMail,
+      label: "Notificar",
+      icon: FaEnvelope,
       subCategories: [
         {
-          label: "Nuevo Correo",
-          path: "/admin/mensajes/nuevo",
+          label: "Emails",
+          path: "/admin/Notificaciones/Emails",
           roles: ["administrador", "vendedor", "gerente"],
         },
         {
-          label: "Ver mensajes",
-          path: "/admin/mensajes/ver",
-          roles: ["administrador", "vendedor", "gerente"],
-        },
-        {
-          label: "Ver enviados",
-          path: "/admin/mensajes/enviados",
+          label: "WhatsApp",
+          path: "/admin/Notificaciones/WhatsApp",
           roles: ["administrador", "vendedor", "gerente"],
         },
       ],
@@ -256,6 +225,8 @@ const SideBarResponsiva = ({ handleCerrarModalSideBar }) => {
                           }}
                         >
                           {subCategory.label}
+                          {subCategory.label === "Pendientes de Aprobación" &&
+                            count > 0 && <span className="badge">{count}</span>}
                         </Link>
                       ))}
                   </div>

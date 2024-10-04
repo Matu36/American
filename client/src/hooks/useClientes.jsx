@@ -7,6 +7,11 @@ const getClientesParaCotizar = async (idUsuario) => {
   return data;
 };
 
+const getClientesEmails = async (idUsuario) => {
+  const { data } = await ClientesAPI.get(`/getEmails/${idUsuario}`);
+  return data;
+};
+
 const postCliente = async (data) => {
   return await ClientesAPI.post(`create`, data);
 };
@@ -29,6 +34,12 @@ export const useClientes = (idUsuario, id) => {
   const clienteoQuery = useQuery({
     queryKey: ["clientes", { clienteId: idUsuario }],
     queryFn: () => getClientesParaCotizar(idUsuario),
+    enabled: idUsuario !== undefined && idUsuario !== null,
+  });
+
+  const clientesEmailsQuery = useQuery({
+    queryKey: ["clientesEmails", { clienteId: idUsuario }],
+    queryFn: () => getClientesEmails(idUsuario),
     enabled: idUsuario !== undefined && idUsuario !== null,
   });
 
@@ -182,5 +193,6 @@ export const useClientes = (idUsuario, id) => {
     clientesQueryById,
     clientesQueryDetalle,
     clientesEditMutation,
+    clientesEmailsQuery,
   };
 };

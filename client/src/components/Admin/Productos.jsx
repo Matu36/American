@@ -9,9 +9,11 @@ import useAuth from "../../hooks/useAuth";
 import { useUsuario } from "../../hooks/useUsuarios";
 import BackButton from "../../UI/BackButton";
 import { useNavigate } from "react-router-dom";
+import { paginationOptions } from "../../utils/Datatable";
 
 export default function Productos() {
   const { data, isLoading } = useProducto().productosQuery;
+
   const { auth, setAuth } = useAuth();
 
   const token = localStorage.getItem("token");
@@ -73,34 +75,20 @@ export default function Productos() {
     }
   };
 
-  // const handleDeleteProduct = (id) => {
-  //   Swal.fire({
-  //     title: "¿Estás seguro de que deseas eliminar este producto?",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#ffc107",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Sí, eliminar",
-  //     cancelButtonText: "Cancelar",
-  //     background: "#ffffff",
-  //     iconColor: "#ffc107",
-  //     customClass: {
-  //       title: "text-dark",
-  //     },
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       deleteProducto({ id: id });
-  //     }
-  //   });
-  // };
-
   //-------------------------------- FIN SEARCHBAR --------------------------- //
 
   const columns = [
-    { name: "Categorìa", selector: (row) => row.familia, sortable: true },
+    {
+      name: "Familia",
+      selector: (row) => row.familia,
+      sortable: true,
+      width: "200px",
+    },
+
     { name: "Marca", selector: (row) => row.marca, sortable: true },
     { name: "Modelo", selector: (row) => row.modelo, sortable: true },
-    { name: "Precio", selector: (row) => row.precio, sortable: true },
+    { name: "Código", selector: (row) => row.codigo, sortable: true },
+    { name: "Precio USD", selector: (row) => row.precioUSD, sortable: true },
 
     {
       name: "Acciones",
@@ -127,12 +115,6 @@ export default function Productos() {
               Modificar
             </Dropdown.Item>
           )}
-          {/* <Dropdown.Item
-            onClick={() => handleDeleteProduct(row.id)}
-            className="dropdown-item dropdown-item-eliminar"
-          >
-            Eliminar
-          </Dropdown.Item> */}
         </DropdownButton>
       ),
     },
@@ -156,7 +138,7 @@ export default function Productos() {
 
   return (
     <>
-      <div className="form-container">
+      <div className="postVentaContainer">
         <BackButton />
         <div>
           <div className="form-group" style={{ maxWidth: "60%" }}>
@@ -173,10 +155,12 @@ export default function Productos() {
           </div>
           {!showSpinner ? (
             <DataTable
+              className="datatable-container"
               columns={columns}
               data={productos}
               pagination
               striped
+              paginationComponentOptions={paginationOptions}
               responsive
               noDataComponent={
                 <div className="noData">Aún no hay registros ingresados</div>
