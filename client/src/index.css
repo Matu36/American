@@ -3983,7 +3983,7 @@ margin-top: -10px;
   height: auto;
   transition: transform 0.3s ease;
   transform: translateX(0);
-  position: absolute;
+  position: fixed;
   top: 140px;
   left: 0;
   z-index: 5000;
