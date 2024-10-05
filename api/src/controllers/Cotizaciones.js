@@ -442,6 +442,7 @@ const getCotizacionDetalle = async (req, res) => {
         imagen: cotizacion.Producto.imagen,
         imagen1: cotizacion.Producto.imagen1,
         imagen2: cotizacion.Producto.imagen2,
+        imagen2: cotizacion.Producto.imagen3,
       },
     };
 
