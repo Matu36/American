@@ -3397,6 +3397,8 @@ margin-top: -10px;
 }
 
 
+
+
 .form-input:focus {
   border-color: #999;
   outline: none; 
@@ -3984,7 +3986,7 @@ margin-top: -10px;
   position: absolute;
   top: 140px;
   left: 0;
-  z-index: 1000;
+  z-index: 5000;
 }
 @media (min-width: 600px) {
   .sidebarAdminResponsiva {
@@ -4216,6 +4218,14 @@ margin-top: -10px;
   margin-top: 1rem;
   font-weight: bold;
 }
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+  .postVentaContainer {
+    width: 65%; 
+  }
+}
+
+
 
 @media screen and (max-width: 600px) {
   .postVentaContainer {
@@ -5476,7 +5486,7 @@ margin-top: -10px;
   text-align: center;
   font-size: 22px;
   line-height: 40px;
-  height: 40px;
+  height: auto;
   margin-bottom: 20px;
 }
 
@@ -5799,6 +5809,22 @@ p {
 
 .custom-confirm-button:hover {
   background-color: #333;
+}
+
+@media screen and (max-width: 1000px) {
+  .form-group .form-input{
+    width: 300px !important;
+    font-size: 12px !important;
+    
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .form-group .form-input{
+    width: 300px !important;
+    font-size: 10px !important;
+    
+  }
 }
 
 
