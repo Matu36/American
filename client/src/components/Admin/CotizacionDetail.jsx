@@ -483,10 +483,10 @@ export default function CotizacionDetail() {
         </Text>
 
         {/* Imagen del producto */}
-        {producto?.imagen && <Image src={producto.imagen} alt="Imagen" />}
-        {producto?.imagen1 && <Image src={producto.imagen1} alt="Imagen 1" />}
-        {producto?.imagen2 && <Image src={producto.imagen2} alt="Imagen 2" />}
-        {producto?.imagen3 && <Image src={producto.imagen3} alt="Imagen 3" />}
+        {producto.imagen && <Image src={producto.imagen} alt="Imagen" />}
+        {producto.imagen1 && <Image src={producto.imagen1} alt="Imagen 1" />}
+        {producto.imagen2 && <Image src={producto.imagen2} alt="Imagen 2" />}
+        {producto.imagen3 && <Image src={producto.imagen3} alt="Imagen 3" />}
 
         {/* Asesor comercial */}
         {/* <View>
@@ -511,6 +511,8 @@ export default function CotizacionDetail() {
       </Page>
     </Document>
   );
+
+  console.log(producto);
 
   return (
     <div className="cotizacionDetailSimilPdf">
@@ -760,10 +762,38 @@ export default function CotizacionDetail() {
         </p>
       </div>
       <div className="imagenDetail">
-        {producto.imagen && <img src={producto.imagen} alt="" />}
-        {producto.imagen1 && <img src={producto.imagen1} alt="" />}
-        {producto.imagen2 && <img src={producto.imagen2} alt="" />}
-        {producto.imagen3 && <img src={producto.imagen3} alt="" />}
+        {producto.imagen && (
+          <img
+            src={producto.imagen}
+            alt="Imagen"
+            loading="lazy"
+            onError={(e) => (e.target.style.display = "none")}
+          />
+        )}
+        {producto.imagen1 && (
+          <img
+            src={producto.imagen1}
+            alt="Imagen 1"
+            loading="lazy"
+            onError={(e) => (e.target.style.display = "none")}
+          />
+        )}
+        {producto.imagen2 && (
+          <img
+            src={producto.imagen2}
+            alt="Imagen 2"
+            loading="lazy"
+            onError={(e) => (e.target.style.display = "none")}
+          />
+        )}
+        {producto.imagen3 && (
+          <img
+            src={producto.imagen3}
+            alt="Imagen 3"
+            loading="lazy"
+            onError={(e) => (e.target.style.display = "none")}
+          />
+        )}
       </div>
 
       {/* <div className="asesorComercial">

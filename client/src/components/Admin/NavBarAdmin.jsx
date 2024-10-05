@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { FaUser, FaBell } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/img/LOGOAMERICANPRINCIPAL.png";
 import { useMensajes } from "../../hooks/useMensajes";
-import gruagif from "../../assets/img/GRUAGIF1.gif";
 import { FaBars } from "react-icons/fa";
 import SideBarResponsiva from "./SideBarResponsiva";
 import EditarUsuario from "../usuario/EditarUsuario";
@@ -100,7 +98,10 @@ export default function NavBarAdmin() {
         {auth.nombre} {auth.apellido}
         {!sidebar && (
           <button
-            onClick={handleMostrarModalSideBar}
+            onClick={(event) => {
+              event.stopPropagation();
+              handleMostrarModalSideBar();
+            }}
             onMouseLeave={handleMouseLeave}
             onMouseEnter={handleMostrarModalSideBar}
             className="burguer"

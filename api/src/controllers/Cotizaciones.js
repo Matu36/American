@@ -344,6 +344,7 @@ const getCotizacionDetalle = async (req, res) => {
             "imagen",
             "imagen1",
             "imagen2",
+            "imagen3",
           ],
         },
         {
