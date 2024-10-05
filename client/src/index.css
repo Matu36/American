@@ -662,7 +662,7 @@ button:focus-visible {
   margin: 20px auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center;  
   background-color: #f4f4f4;
   padding: 15px;
   border-radius: 8px;
@@ -698,9 +698,9 @@ button:focus-visible {
   bottom: 8px;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 800px) {
   .contact-container {
-    max-width: 80%;
+    width: 100%;
   }
 }
 
@@ -1482,11 +1482,11 @@ button:focus-visible {
   margin-bottom: 0.5rem;
 }
 
-@media (max-width: 1240px) {
+/* @media (max-width: 1240px) {
   .white-bar {
     height: 110px;
   }
-}
+} */
 
 @media (max-width: 1240px) {
   .inputnav {
@@ -1863,7 +1863,16 @@ button:focus-visible {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2000;
+ 
 }
+
+@media screen and (max-width: 1200px) {
+  .login-container {
+  top: 60%;
+  }
+}
+
+
 
 .button-close-login {
   background: none;
@@ -1977,6 +1986,8 @@ button:focus-visible {
     font-size: 16px;
   }
 }
+
+
 
 /* ESTILOS PARA EL FORMULARIO DE REGISTRO DE USUARIO */
 
@@ -3351,6 +3362,14 @@ margin-top: -10px;
   margin-top: 2rem;
   align-self: flex-end;
 }
+  
+@media screen and (max-width: 600px) {
+  .buttonpdf .form-submit{
+    padding: 5px 10px !important; 
+    font-size: 0.5rem !important  ; 
+    
+  }
+}
 
 .form-submit:hover {
   background-color: #ffd966;
@@ -4198,6 +4217,12 @@ margin-top: -10px;
   font-weight: bold;
 }
 
+@media screen and (max-width: 600px) {
+  .postVentaContainer {
+    width: 95%; 
+  }
+}
+
 .postVentaContainer1 {
   padding: 40px;
   background-color: white;
@@ -4212,6 +4237,12 @@ margin-top: -10px;
   margin-top: 1rem;
   width: 50%;
   color: black;
+}
+
+@media screen and (max-width: 600px) {
+  .postVentaContainer1 {
+    width: 95%; 
+  }
 }
 
 .formClientes {
@@ -4877,11 +4908,19 @@ margin-top: -10px;
   transition: background-color 0.3s ease;
   position: absolute;
   right: 70px;
-  top: 175px;
+  top: 165px;
 }
 
 .back-button:hover {
   background-color: #e6b106; /* Color de fondo al pasar el cursor */
+}
+
+@media screen and (max-width: 600px) {
+  .back-button {
+    right: 30px;
+    top: 165px;
+    font-size: 14px;
+  }
 }
 
 .form-container2 {
