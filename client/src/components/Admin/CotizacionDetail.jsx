@@ -512,7 +512,9 @@ export default function CotizacionDetail() {
     </Document>
   );
 
-  console.log(producto);
+  const cotizacionConEstado1 = cotizacionesIndividuales.some(
+    (cotizacion) => cotizacion.estado === 1
+  );
 
   return (
     <div className="cotizacionDetailSimilPdf">
@@ -666,16 +668,16 @@ export default function CotizacionDetail() {
         </div>
       ))}
 
-      <div>
+      <hr />
+
+      <div className="detalle-cotizacion-generales">
         <div className="caracgenerales">
-          <h5 style={{ fontWeight: "bold" }}>
+          <h4 style={{ fontWeight: "bold" }}>
             Características Técnicas Generales:
-          </h5>
+          </h4>
         </div>
         <div>
-          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
-            Especificaciones Principales:
-          </h5>
+          <h5>Especificaciones Principales:</h5>
           <div className="especificaciones">
             <ul>
               {producto.caracteristicasGenerales
@@ -685,9 +687,7 @@ export default function CotizacionDetail() {
                 ))}
             </ul>
           </div>
-          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
-            Motores de Traslación y Zapatas:
-          </h5>
+          <h5>Motores de Traslación y Zapatas:</h5>
           <div className="especificaciones">
             <ul>
               {producto.motoresdeTraslacionyZapatas
@@ -697,9 +697,7 @@ export default function CotizacionDetail() {
                 ))}
             </ul>
           </div>
-          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
-            Sistema Hidráulico:
-          </h5>
+          <h5>Sistema Hidráulico:</h5>
           <div className="especificaciones">
             <ul>
               {producto.sistemaHidraulico.split("\n").map((sistema, index) => (
@@ -707,9 +705,7 @@ export default function CotizacionDetail() {
               ))}
             </ul>
           </div>
-          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
-            Motor:
-          </h5>
+          <h5>Motor:</h5>
           <div className="especificaciones">
             <ul>
               {producto.motor.split("\n").map((motor, index) => (
@@ -717,9 +713,7 @@ export default function CotizacionDetail() {
               ))}
             </ul>
           </div>
-          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
-            Capacidades:
-          </h5>
+          <h5>Capacidades:</h5>
           <div className="especificaciones">
             <ul>
               {producto.capacidades.split("\n").map((capacidad, index) => (
@@ -727,9 +721,7 @@ export default function CotizacionDetail() {
               ))}
             </ul>
           </div>
-          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
-            Cabina:
-          </h5>
+          <h5>Cabina:</h5>
           <div className="especificaciones">
             <ul>
               {producto.Cabina.split("\n").map((cabina, index) => (
@@ -737,9 +729,7 @@ export default function CotizacionDetail() {
               ))}
             </ul>
           </div>
-          <h5 style={{ textDecoration: "underline", marginLeft: "10rem" }}>
-            Dimensiones Generales:
-          </h5>
+          <h5>Dimensiones Generales:</h5>
           <div className="especificaciones">
             <ul>
               {producto.dimensionesGenerales
@@ -870,13 +860,17 @@ export default function CotizacionDetail() {
         <div>
           <button
             className="form-submit"
-            disabled={!isPdfGenerated}
+            disabled={!isPdfGenerated || !cotizacionConEstado1}
             onClick={() => setIsModalOpen(true)}
             style={{
-              backgroundColor: !isPdfGenerated ? "#ccc" : "#ffcc00",
-              color: !isPdfGenerated ? "#666" : "#000",
-              cursor: !isPdfGenerated ? "not-allowed" : "pointer",
-              opacity: !isPdfGenerated ? 0.6 : 1,
+              backgroundColor:
+                !isPdfGenerated || !cotizacionConEstado1 ? "#ccc" : "#ffcc00",
+              color: !isPdfGenerated || !cotizacionConEstado1 ? "#666" : "#000",
+              cursor:
+                !isPdfGenerated || !cotizacionConEstado1
+                  ? "not-allowed"
+                  : "pointer",
+              opacity: !isPdfGenerated || !cotizacionConEstado1 ? 0.6 : 1,
               padding: "10px 20px",
               border: "none",
               borderRadius: "5px",
