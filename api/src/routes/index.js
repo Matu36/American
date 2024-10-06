@@ -158,7 +158,7 @@ router.get(
   getUsuariosConRolFalse
 );
 router.put("/usuarios/recoverpass", resetPassword);
-router.get("/productos/getAll", getProductos);
+router.get("/productos/getAll", check.auth, getProductos);
 router.get("/productos/getParaCotizar", check.auth, getProductosParaCotizar);
 router.get("/productos/getCategorias", getProductosPorCategoria);
 router.get("/productos/getMarcas", getProductosPorMarca);
@@ -198,7 +198,7 @@ router.get(
 router.get("/Cotizaciones/ranking", check.auth, getranking);
 router.delete("/Cotizaciones/delete", check.auth, eliminarCotizacionIndividual);
 router.put("/cotizaciones/edit", check.auth, putCotizaciones);
-router.put("/cotizaciones/editpdf", updateCotizacionPdf);
+router.put("/cotizaciones/editpdf", check.auth, updateCotizacionPdf);
 router.post("/clientes/create", check.auth, createCliente);
 router.get("/clientes/get/:idUsuario", check.auth, getClientesPorIdDeUsuario);
 router.get(
@@ -207,7 +207,11 @@ router.get(
   getMailsPorIdDeUsuario
 );
 router.get("/clientes/getDetalle/:idCliente", check.auth, getClientePorId);
-router.get("/clientes/getParaCotizar/:idUsuario", getClientesParaCotizar);
+router.get(
+  "/clientes/getParaCotizar/:idUsuario",
+  check.auth,
+  getClientesParaCotizar
+);
 router.put("/clientes/edit", check.auth, updateCliente);
 router.get("/contacto/get", check.auth, getContactos);
 router.get("/contacto/getNoLeidosCount", check.auth, countActiveContactos);
