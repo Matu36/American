@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CotizacionIndividualAPI } from "../components/api/CotizacionIndividualApi";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const getCountCotizacionEstado3 = async () => {
   const response = await CotizacionIndividualAPI.get("getEstado3");
@@ -16,6 +17,8 @@ const postCotizacionState3 = async (data) => {
 };
 
 export const useCotizacionIndividual = () => {
+  const navigate = useNavigate();
+
   const countEstado3 = useQuery({
     queryKey: ["countEstado3"],
     queryFn: () => getCountCotizacionEstado3(),
@@ -57,18 +60,20 @@ export const useCotizacionIndividual = () => {
             });
             break;
 
-          default:
+          case 401:
             Swal.fire({
               position: "center",
-              icon: "info",
-              title: "Ocurrió un error inesperado, intente más tarde",
+              icon: "warning",
+              title: "Tu sesión ha expirado",
+              showConfirmButton: false,
+              timer: 2000,
               background: "#ffffff",
-              iconColor: "#dc3545",
+              iconColor: "#ffc107",
               customClass: {
                 title: "text-dark",
               },
-              showConfirmButton: false,
-              timer: 5000,
+            }).then(() => {
+              navigate("/");
             });
             break;
         }
@@ -112,18 +117,20 @@ export const useCotizacionIndividual = () => {
             });
             break;
 
-          default:
+          case 401:
             Swal.fire({
               position: "center",
-              icon: "info",
-              title: "Ocurrió un error inesperado, intente más tarde",
+              icon: "warning",
+              title: "Tu sesión ha expirado",
+              showConfirmButton: false,
+              timer: 2000,
               background: "#ffffff",
-              iconColor: "#dc3545",
+              iconColor: "#ffc107",
               customClass: {
                 title: "text-dark",
               },
-              showConfirmButton: false,
-              timer: 5000,
+            }).then(() => {
+              navigate("/");
             });
             break;
         }

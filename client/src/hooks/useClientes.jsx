@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ClientesAPI } from "../components/api/ClientesApi";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const getClientesParaCotizar = async (idUsuario) => {
   const { data } = await ClientesAPI.get(`/getParaCotizar/${idUsuario}`);
@@ -31,6 +32,8 @@ const getClientesDetalle = async (id) => {
 };
 
 export const useClientes = (idUsuario, id) => {
+  const navigate = useNavigate();
+
   const clienteoQuery = useQuery({
     queryKey: ["clientes", { clienteId: idUsuario }],
     queryFn: () => getClientesParaCotizar(idUsuario),
@@ -77,11 +80,11 @@ export const useClientes = (idUsuario, id) => {
               timer: 5000,
             });
             break;
-          default:
+          case 401:
             Swal.fire({
               position: "center",
               icon: "warning",
-              title: "Hubo un error",
+              title: "Tu sesión ha expirado",
               showConfirmButton: false,
               timer: 2000,
               background: "#ffffff",
@@ -89,6 +92,8 @@ export const useClientes = (idUsuario, id) => {
               customClass: {
                 title: "text-dark",
               },
+            }).then(() => {
+              navigate("/");
             });
             break;
         }

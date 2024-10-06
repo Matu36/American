@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { useProducto } from "../../hooks/useProductos";
-import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 import BackButton from "../../UI/BackButton";
 import CreatableSelect from "react-select/creatable";
 
 const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
 
 export default function FormProduct() {
+  const navigate = useNavigate();
+
   //CLOUDDINARY//
 
   const [images, setImages] = useState([]);
@@ -220,50 +222,75 @@ export default function FormProduct() {
           },
         }
       );
+
+      // Verificar si el status es 401 (sesión expirada)
+      if (request.status === 401) {
+        Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "Tu sesión ha expirado",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "#ffffff",
+          iconColor: "#ffc107",
+          customClass: {
+            title: "text-dark",
+          },
+        }).then(() => {
+          navigate("/"); // Redirige después de que se cierre el modal
+        });
+        return; // Detener la ejecución si la sesión ha expirado
+      }
+
       const data = await request.json();
-      console.log("Producto creado:", data);
 
-      Swal.fire({
-        position: "center",
-        icon: "info",
-        title: "El Producto ha sido creado corréctamente",
-        showConfirmButton: false,
-        timer: 2000,
-        background: "#ffffff",
-        iconColor: "#ffc107",
-        customClass: {
-          title: "text-dark",
-        },
-      });
+      if (request.ok) {
+        console.log("Producto creado:", data);
 
-      setProducto({
-        familia: "",
-        marca: "",
-        modelo: "",
-        division: "",
-        precioUSD: 0,
-        imagen: "",
-        imagen1: "",
-        imagen2: "",
-        imagen3: "",
-        cantidadTotal: 0,
-        codigo: "",
-        motor: "",
-        caracteristicasGenerales: "",
-        motoresdeTraslacionyZapatas: "",
-        sistemaHidraulico: "",
-        capacidades: "",
-        Cabina: "",
-        dimensionesGenerales: "",
-        fichaPDF: "",
-      });
+        Swal.fire({
+          position: "center",
+          icon: "info",
+          title: "El Producto ha sido creado corréctamente",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "#ffffff",
+          iconColor: "#ffc107",
+          customClass: {
+            title: "text-dark",
+          },
+        });
+
+        setProducto({
+          familia: "",
+          marca: "",
+          modelo: "",
+          division: "",
+          precioUSD: 0,
+          imagen: "",
+          imagen1: "",
+          imagen2: "",
+          imagen3: "",
+          cantidadTotal: 0,
+          codigo: "",
+          motor: "",
+          caracteristicasGenerales: "",
+          motoresdeTraslacionyZapatas: "",
+          sistemaHidraulico: "",
+          capacidades: "",
+          Cabina: "",
+          dimensionesGenerales: "",
+          fichaPDF: "",
+        });
+      } else {
+        throw new Error("Error al crear el producto.");
+      }
     } catch (error) {
       console.error("Error al crear el producto:", error);
 
       Swal.fire({
         position: "center",
-        icon: "info",
-        title: "El producto no pudo crearse. Intente más tarde  ",
+        icon: "error",
+        title: "El producto no pudo crearse. Intente más tarde",
         showConfirmButton: false,
         timer: 2000,
         background: "#ffffff",

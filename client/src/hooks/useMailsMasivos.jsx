@@ -1,12 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
 import { MailsMasivosAPI } from "../components/api/MailsMasivosApi";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const postMails = async (data) => {
   return await MailsMasivosAPI.post(`create`, data);
 };
 
 export const useMails = () => {
+  const navigate = useNavigate();
   const mailsMutation = useMutation({
     mutationFn: postMails,
     onSuccess: () => {
@@ -45,17 +47,17 @@ export const useMails = () => {
           case 401:
             Swal.fire({
               position: "center",
-              icon: "info",
-              title: "Las credenciales no son válidas",
+              icon: "warning",
+              title: "Tu sesión ha expirado",
+              showConfirmButton: false,
+              timer: 2000,
               background: "#ffffff",
               iconColor: "#ffc107",
-              showConfirmButton: true,
-              confirmButtonText: "OK",
-              buttonsStyling: false,
               customClass: {
                 title: "text-dark",
-                confirmButton: "custom-confirm-button",
               },
+            }).then(() => {
+              navigate("/");
             });
             break;
 
