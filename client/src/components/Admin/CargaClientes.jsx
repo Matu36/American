@@ -5,10 +5,12 @@ import BackButton from "../../UI/BackButton";
 import InputMask from "react-input-mask";
 import { soloNumeros } from "../../utils/soloNumeros";
 import Select from "react-select";
+import Spinner from "../../UI/Spinner";
 
 export default function CargaClientes() {
   const { auth } = useAuth();
-  const { mutate: clienteCreate } = useClientes().clientesMutation;
+  const { mutate: clienteCreate, isLoading: cargarCliente } =
+    useClientes().clientesMutation;
   const token = localStorage.getItem("token");
   const idUsuario = token;
 
@@ -378,9 +380,13 @@ export default function CargaClientes() {
           </div>
         </div>
         <div>
-          <button type="submit" className="form-submit">
-            Guardar Cliente
-          </button>
+          {cargarCliente ? (
+            <Spinner loading={cargarCliente} />
+          ) : (
+            <button type="submit" className="form-submit">
+              Guardar Cliente
+            </button>
+          )}
         </div>
       </form>
     </div>
