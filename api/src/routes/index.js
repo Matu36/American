@@ -173,7 +173,7 @@ router.get("/contacto/detalle/:id", check.auth, getContactoById);
 router.post("/productos/create", check.auth, createProducto);
 router.put("/productos/edit", check.auth, putProductos);
 router.delete("/productos/delete", check.auth, deleteProducto);
-router.post("/cotizaciones/create", createCotizacion);
+router.post("/cotizaciones/create", check.auth, createCotizacion);
 router.get("/cotizaciones/get/:idUsuario", check.auth, getCotizaciones);
 router.get(
   "/cotizaciones/getCotizacionesSum/:idUsuario",
