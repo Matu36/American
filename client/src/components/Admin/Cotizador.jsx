@@ -390,209 +390,230 @@ const Cotizador = () => {
             className="form-input"
           />
         </div>
+
         <div className="form-group">
           <label className="form-label">Cliente</label>
-          <Select
-            name="idCliente"
-            value={
-              clienteOptions.find(
-                (option) => option.value === formData.idCliente
-              ) || null
-            }
-            onChange={handleClienteChange}
-            options={clienteOptions}
-            isLoading={isLoading}
-            placeholder="Seleccionar"
-            isClearable
-            className="form-input"
-            required
-          />
-          {selectedCliente && (
-            <div className="cliente-info">
-              <div className="form-group cliente-detail">
-                <label className="form-label small">Nombre:</label>
-                <input
-                  type="text"
-                  name="nombreCliente"
-                  value={selectedCliente.nombre}
-                  disabled
-                  className="form-input small"
-                />
-              </div>
-              <div className="form-group cliente-detail">
-                <label className="form-label small">Apellido:</label>
-                <input
-                  type="text"
-                  name="apellidoCliente"
-                  value={selectedCliente.apellido}
-                  disabled
-                  className="form-input small"
-                />
-              </div>
-              <div className="form-group cliente-detail">
-                <label className="form-label small">CUIT:</label>
-                <input
-                  type="text"
-                  name="cuitCliente"
-                  value={selectedCliente.CUIT}
-                  disabled
-                  className="form-input small"
-                />
-              </div>
-            </div>
-          )}
-          <div className="postVentaContainer2">
-            <div className="form-group">
-              <label className="form-label">
-                Familia <span className="obligatorio">*</span>
-              </label>
-              <Select
-                options={familias}
-                value={selectedFamilia}
-                onChange={setSelectedFamilia}
-                placeholder="Seleccionar"
-                className="form-input"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">
-                Marca <span className="obligatorio">*</span>
-              </label>
-              <Select
-                options={marcas}
-                value={selectedMarca}
-                onChange={setSelectedMarca}
-                placeholder="Seleccionar"
-                isDisabled={!selectedFamilia}
-                className="form-input"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">
-                Modelo <span className="obligatorio">*</span>
-              </label>
-              <Select
-                options={modelos}
-                value={selectedModelo}
-                onChange={setSelectedModelo}
-                placeholder="Seleccionar"
-                isDisabled={!selectedMarca}
-                className="form-input"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">
-                Plazo de Entrega: <span className="obligatorio">*</span>
-              </label>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            <Select
+              name="idCliente"
+              value={
+                clienteOptions.find(
+                  (option) => option.value === formData.idCliente
+                ) || null
+              }
+              onChange={handleClienteChange}
+              options={clienteOptions}
+              isLoading={isLoading}
+              placeholder="Seleccionar"
+              isClearable
+              required
+              className="form-input"
+              styles={{
+                container: (provided) => ({
+                  ...provided,
+                  width: "100%", // Asegura que el Select tenga un ancho del 100%
+                }),
+                control: (provided) => ({
+                  ...provided,
+                  width: "100%", // Asegura que el control del Select tenga un ancho del 100%
+                }),
+              }}
+            />
+          </div>
+        </div>
+        {selectedCliente && (
+          <div className="cliente-info">
+            <div className="form-group cliente-detail">
+              <label className="form-label small">Nombre:</label>
               <input
                 type="text"
-                name="plazoEntrega"
-                value={formData.plazoEntrega}
-                onChange={handleChange}
-                required
-                className="form-input"
+                name="nombreCliente"
+                value={selectedCliente.nombre}
+                disabled
+                className="form-input small"
               />
             </div>
-            <div className="form-group">
-              <label className="form-label">
-                Forma de Pago: <span className="obligatorio">*</span>
-              </label>
+            <div className="form-group cliente-detail">
+              <label className="form-label small">Apellido:</label>
               <input
                 type="text"
-                name="formaPago"
-                value={formData.formaPago}
-                onChange={handleChange}
-                required
-                className="form-input"
+                name="apellidoCliente"
+                value={selectedCliente.apellido}
+                disabled
+                className="form-input small"
               />
             </div>
-            <div className="form-group">
-              <label className="form-label">
-                Mantenimiento de Oferta: <span className="obligatorio">*</span>
-              </label>
+            <div className="form-group cliente-detail">
+              <label className="form-label small">CUIT:</label>
               <input
                 type="text"
-                name="mantenimientoOferta"
-                value={formData.mantenimientoOferta}
-                onChange={handleChange}
-                required
-                className="form-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">
-                Lugar de Entrega: <span className="obligatorio">*</span>
-              </label>
-              <input
-                type="text"
-                name="lugarEntrega"
-                value={formData.lugarEntrega}
-                onChange={handleChange}
-                required
-                className="form-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">
-                Garantía: <span className="obligatorio">*</span>
-              </label>
-              <input
-                type="text"
-                name="garantia"
-                value={formData.garantia}
-                onChange={handleChange}
-                required
-                className="form-input"
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">
-                Entrega Técnica: <span className="obligatorio">*</span>
-              </label>
-              <input
-                type="text"
-                name="entregaTecnica"
-                value={formData.entregaTecnica}
-                onChange={handleChange}
-                required
-                className="form-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">
-                Origen de Fabricación: <span className="obligatorio">*</span>
-              </label>
-              <input
-                type="text"
-                name="origenFabricacion"
-                value={formData.origenFabricacion}
-                onChange={handleChange}
-                required
-                className="form-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">
-                Patentamiento: <span className="obligatorio">*</span>
-              </label>
-              <input
-                type="text"
-                name="patentamiento"
-                value={formData.patentamiento}
-                onChange={handleChange}
-                required
-                className="form-input"
+                name="cuitCliente"
+                value={selectedCliente.CUIT}
+                disabled
+                className="form-input small"
               />
             </div>
           </div>
+        )}
+        <div className="postVentaContainer2">
+          <div className="form-group">
+            <label className="form-label">
+              Familia <span className="obligatorio">*</span>
+            </label>
+            <Select
+              options={familias}
+              value={selectedFamilia}
+              onChange={setSelectedFamilia}
+              placeholder="Seleccionar"
+              className="form-input"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              Marca <span className="obligatorio">*</span>
+            </label>
+            <Select
+              options={marcas}
+              value={selectedMarca}
+              onChange={setSelectedMarca}
+              placeholder="Seleccionar"
+              isDisabled={!selectedFamilia}
+              className="form-input"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              Modelo <span className="obligatorio">*</span>
+            </label>
+            <Select
+              options={modelos}
+              value={selectedModelo}
+              onChange={setSelectedModelo}
+              placeholder="Seleccionar"
+              isDisabled={!selectedMarca}
+              className="form-input"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              Plazo de Entrega: <span className="obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              name="plazoEntrega"
+              value={formData.plazoEntrega}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              Forma de Pago: <span className="obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              name="formaPago"
+              value={formData.formaPago}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              Mantenimiento de Oferta: <span className="obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              name="mantenimientoOferta"
+              value={formData.mantenimientoOferta}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">
+              Lugar de Entrega: <span className="obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              name="lugarEntrega"
+              value={formData.lugarEntrega}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">
+              Garantía: <span className="obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              name="garantia"
+              value={formData.garantia}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              Entrega Técnica: <span className="obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              name="entregaTecnica"
+              value={formData.entregaTecnica}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">
+              Origen de Fabricación: <span className="obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              name="origenFabricacion"
+              value={formData.origenFabricacion}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">
+              Patentamiento: <span className="obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              name="patentamiento"
+              value={formData.patentamiento}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
         </div>
+
         {formData.cotizacionesIndividuales.map((cotizacion, index) => (
           <div key={index} className="postVentaContainer2">
             <div style={{ display: "flex", justifyContent: "center" }}>

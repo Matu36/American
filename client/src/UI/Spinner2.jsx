@@ -1,43 +1,42 @@
 import React from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 
-function Spinner({ loading }) {
+function Spinner2({ loading }) {
   return (
     <div
       style={{
-        position: "absolute",
-        left: "50%",
-        top: "70%",
-        transform: "translate(-50%, -50%)",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 9998,
       }}
     >
-      <BeatLoader
-        color="#ffc107"
-        cssOverride={{
-          position: "relative",
-          display: "block",
-          margin: "0 auto",
-          borderColor: "red",
-          zIndex: 9999,
-        }}
-        loading={true}
-        size={40}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
-
-      <span
-        style={{
-          display: "block",
-          fontSize: "20px",
-          textAlign: "center",
-          marginTop: "10px",
-        }}
-      >
-        Enviando Email..
-      </span>
+      <div style={{ textAlign: "center" }}>
+        <BeatLoader
+          color="#ffc107"
+          size={40}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+        <span
+          style={{
+            display: "block",
+            fontSize: "20px",
+            marginTop: "10px",
+            color: "#fff",
+          }}
+        >
+          Enviando Email...
+        </span>
+      </div>
     </div>
   );
 }
 
-export default Spinner;
+export default Spinner2;

@@ -4287,11 +4287,34 @@ margin-top: -10px;
   overflow-x:  auto;
 }
 
+
 .postVentaContainer2 .form-group {
   width: 100%;
   margin: auto;
   padding: 1rem;
   
+}
+
+@media (max-width: 900px) {
+  .postVentaContainer2 {
+    grid-template-columns: repeat(2, 1fr); 
+    padding: 20px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .postVentaContainer2 {
+    grid-template-columns: repeat(1, 1fr); 
+    padding: 20px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 700px) and (min-width: 600px) {
+  .postVentaContainer2 {
+    grid-template-columns: 1fr; 
+  }
 }
 
 .form-group input{
@@ -5423,15 +5446,20 @@ margin-top: -10px;
 .buttonEliminar {
   background-color: #ff4d4d; 
   color: white; 
-  margin-top: 45px;
+  margin-top: 45px; 
   border: none; 
-  padding: 10px 10px; 
+  padding: 10px 15px; 
   border-radius: 5px; 
   cursor: pointer; 
-  font-weight: bold; 
-  transition: background-color 0.3s ease; 
-  display: flex;
-  margin-left: auto;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  width: 100%; 
+  margin-left: auto; 
+  margin-right: auto;
+
 }
 
 .buttonEliminar:hover {
@@ -5441,6 +5469,21 @@ margin-top: -10px;
 .buttonEliminar:focus {
   outline: none; 
   box-shadow: 0 0 5px #ff4d4d; 
+}
+
+@media (max-width: 900px) {
+  .buttonEliminar {
+    width: 100%; 
+    font-size: 12px;
+   
+  }
+}
+
+@media (max-width: 600px) {
+  .buttonEliminar {
+    width: 100%; 
+    padding: 12px; 
+  }
 }
 
 
@@ -5822,6 +5865,22 @@ p {
 @media screen and (max-width: 800px) {
   .form-group .form-input{
     width: 300px !important;
+    font-size: 10px !important;
+    
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .postVentaContainer2 .form-group .form-input{
+    width: 100% !important;
+    font-size: 12px !important;
+    
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .postVentaContainer2 .form-group .form-input{
+    width: 100% !important;
     font-size: 10px !important;
     
   }
