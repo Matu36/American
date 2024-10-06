@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/img/LOGOAMERICANPRINCIPAL.png";
-import { useMensajes } from "../../hooks/useMensajes";
 import { FaBars } from "react-icons/fa";
 import SideBarResponsiva from "./SideBarResponsiva";
 import EditarUsuario from "../usuario/EditarUsuario";
@@ -12,7 +11,7 @@ export default function NavBarAdmin() {
   const { auth, setAuth } = useAuth();
   const token = localStorage.getItem("token");
   const idUsuario = token;
-  const { data } = useMensajes(idUsuario).MensajesCountQuery;
+
   const [sidebar, setSideBar] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [loading, setLoading] = useState(true);
