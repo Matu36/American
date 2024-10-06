@@ -108,12 +108,37 @@ export default function MailsMasivos() {
     setIsModalOpen(false);
   };
 
+  const handleSelectAll = () => {
+    const allEmails = clientesEmail
+      .flatMap((cliente) => [
+        cliente.mail,
+        cliente.mailAlternativo,
+        cliente.mailAlternativo1,
+      ])
+      .filter(Boolean);
+
+    setSelectedEmails(allEmails);
+  };
+
+  // Función para deseleccionar todos los emails
+  const handleDeselectAll = () => {
+    setSelectedEmails([]);
+  };
+
   return (
     <div className="postVentaContainer">
       <BackButton />
       <h2 className="tituloCompo">Notificar vía Email</h2>
       <hr />
       <form onSubmit={handleEnviarEmails}>
+        <div className="select-buttons">
+          <button type="button" onClick={handleSelectAll}>
+            Seleccionar Todos
+          </button>
+          <button type="button" onClick={handleDeselectAll}>
+            Deseleccionar Todos
+          </button>
+        </div>
         <div className="clientes-list">
           {clientesEmail?.map((cliente) => {
             const emails = [
@@ -123,12 +148,12 @@ export default function MailsMasivos() {
             ].filter(Boolean);
 
             return (
-              <div key={cliente.nombre}>
+              <div key={cliente.nombre} className="cliente">
                 <h4>
                   {cliente.nombre} {cliente.apellido}
                 </h4>
                 {emails.map((email) => (
-                  <div key={email}>
+                  <div key={email} className="email-item">
                     <input
                       type="checkbox"
                       value={email}
@@ -142,6 +167,7 @@ export default function MailsMasivos() {
             );
           })}
         </div>
+
         <hr />
         <div className="email-body">
           <label style={{ color: "black" }} htmlFor="cuerpoMensaje">
