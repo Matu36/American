@@ -5608,11 +5608,21 @@ margin-top: -10px;
  margin-bottom: 30px;
 }
 
+.detalle-cotizacion-generales h5 {
+  text-decoration: underline;
+  position: relative;
+  left: 15%; 
+  text-align: left;
+  margin: 10px 0; 
+}
+
+
 .especificaciones {
   text-align: left; 
-  margin: 0 auto; 
-  width: fit-content; 
+  left: 25%; 
+  position: relative;
   margin-top: 1rem;
+  width: 70%;
   
 }
 
