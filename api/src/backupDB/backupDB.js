@@ -24,8 +24,8 @@ const backupDatabase = () => {
   const date = moment().format("YYYY-MM-DD_HH-mm-ss"); // Formato para la fecha
   const backupFile = path.join("/mnt/data", `backup_${date}.sql`);
 
-  // Comando para realizar el backup
-  const command = `PGPASSWORD=${PGPASSWORD} pg_dump --host=${PGHOST} --port=${PGPORT} --username=${PGUSER} --no-password --verbose --file=${backupFile} --format=custom ${PGDATABASE}`;
+  // Comando para realizar el backup en Windows
+  const command = `set PGPASSWORD=${PGPASSWORD} && "C:\\Program Files\\PostgreSQL\\15\\bin\\pg_dump" --host=${PGHOST} --port=${PGPORT} --username=${PGUSER} --no-password --verbose --file="${backupFile}" --format=custom ${PGDATABASE}`;
 
   exec(command, (error, stdout, stderr) => {
     if (error) {
