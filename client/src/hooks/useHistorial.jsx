@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { HistorialAPI } from "../components/api/HistorialApi";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const postHistorialVendedor = async (data) => {
   return await HistorialAPI.post(`/vendedor`, data);
@@ -10,6 +11,8 @@ const postHistorialModelo = async (data) => {
 };
 
 export const useHistorial = () => {
+  const navigate = useNavigate();
+
   const historialVendedorMutation = useMutation({
     mutationKey: ["historialVendedor-mutation"],
     mutationFn: (data) => postHistorialVendedor(data),
@@ -29,6 +32,22 @@ export const useHistorial = () => {
               },
               showConfirmButton: false,
               timer: 5000,
+            });
+            break;
+          case 401:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "Tu sesión ha expirado",
+              showConfirmButton: false,
+              timer: 2000,
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+            }).then(() => {
+              navigate("/");
             });
             break;
           default:
@@ -83,6 +102,22 @@ export const useHistorial = () => {
               },
               showConfirmButton: false,
               timer: 5000,
+            });
+            break;
+          case 401:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "Tu sesión ha expirado",
+              showConfirmButton: false,
+              timer: 2000,
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+            }).then(() => {
+              navigate("/");
             });
             break;
           default:

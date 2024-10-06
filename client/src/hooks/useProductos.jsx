@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ProductosAPI } from "../components/api/ProductosApi";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const getProductos = async () => {
   const { data } = await ProductosAPI.get("/getAll");
@@ -44,6 +45,8 @@ const deleteProducto = async (data) => {
 };
 
 export const useProducto = (id, familia) => {
+  const navigate = useNavigate();
+
   const queryClient = useQueryClient();
   const productosQuery = useQuery({
     queryKey: ["productos"],
@@ -116,11 +119,11 @@ export const useProducto = (id, familia) => {
               timer: 5000,
             });
             break;
-          default:
+          case 401:
             Swal.fire({
               position: "center",
               icon: "warning",
-              title: "Hubo un error",
+              title: "Tu sesión ha expirado",
               showConfirmButton: false,
               timer: 2000,
               background: "#ffffff",
@@ -128,6 +131,8 @@ export const useProducto = (id, familia) => {
               customClass: {
                 title: "text-dark",
               },
+            }).then(() => {
+              navigate("/");
             });
             break;
         }
@@ -182,11 +187,11 @@ export const useProducto = (id, familia) => {
               timer: 5000,
             });
             break;
-          default:
+          case 401:
             Swal.fire({
               position: "center",
               icon: "warning",
-              title: "Hubo un error",
+              title: "Tu sesión ha expirado",
               showConfirmButton: false,
               timer: 2000,
               background: "#ffffff",
@@ -194,6 +199,8 @@ export const useProducto = (id, familia) => {
               customClass: {
                 title: "text-dark",
               },
+            }).then(() => {
+              navigate("/");
             });
             break;
         }

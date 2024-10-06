@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CotizacionesAPI } from "../components/api/CotizacionesApi";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const getVentaById = async (idUsuario) => {
   const { data } = await CotizacionesAPI.get(`/getVentas/${idUsuario}`);
@@ -93,6 +94,7 @@ export const useVentas = (idUsuario, id) => {
 };
 
 export const useCotizaciones = (idUsuario, id) => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const CotizacionesPendientesDeAprobacion = useQuery({
     queryKey: ["cotispendientesdeaprobacion"],
@@ -134,18 +136,20 @@ export const useCotizaciones = (idUsuario, id) => {
             });
             break;
 
-          default:
+          case 401:
             Swal.fire({
               position: "center",
-              icon: "info",
-              title: "Ocurrió un error inesperado, intente más tarde",
+              icon: "warning",
+              title: "Tu sesión ha expirado",
+              showConfirmButton: false,
+              timer: 2000,
               background: "#ffffff",
-              iconColor: "#dc3545",
+              iconColor: "#ffc107",
               customClass: {
                 title: "text-dark",
               },
-              showConfirmButton: false,
-              timer: 5000,
+            }).then(() => {
+              navigate("/");
             });
             break;
         }
@@ -187,11 +191,11 @@ export const useCotizaciones = (idUsuario, id) => {
               timer: 5000,
             });
             break;
-          default:
+          case 401:
             Swal.fire({
               position: "center",
               icon: "warning",
-              title: "Hubo un error",
+              title: "Tu sesión ha expirado",
               showConfirmButton: false,
               timer: 2000,
               background: "#ffffff",
@@ -199,6 +203,8 @@ export const useCotizaciones = (idUsuario, id) => {
               customClass: {
                 title: "text-dark",
               },
+            }).then(() => {
+              navigate("/");
             });
             break;
         }
@@ -253,11 +259,11 @@ export const useCotizaciones = (idUsuario, id) => {
               timer: 5000,
             });
             break;
-          default:
+          case 401:
             Swal.fire({
               position: "center",
               icon: "warning",
-              title: "Hubo un error",
+              title: "Tu sesión ha expirado",
               showConfirmButton: false,
               timer: 2000,
               background: "#ffffff",
@@ -265,6 +271,8 @@ export const useCotizaciones = (idUsuario, id) => {
               customClass: {
                 title: "text-dark",
               },
+            }).then(() => {
+              navigate("/");
             });
             break;
         }
@@ -322,17 +330,17 @@ export const useCotizaciones = (idUsuario, id) => {
           case 401:
             Swal.fire({
               position: "center",
-              icon: "info",
-              title: "Las credenciales no son válidas",
+              icon: "warning",
+              title: "Tu sesión ha expirado",
+              showConfirmButton: false,
+              timer: 2000,
               background: "#ffffff",
               iconColor: "#ffc107",
-              showConfirmButton: true,
-              confirmButtonText: "OK",
-              buttonsStyling: false,
               customClass: {
                 title: "text-dark",
-                confirmButton: "custom-confirm-button",
               },
+            }).then(() => {
+              navigate("/");
             });
             break;
 
@@ -340,7 +348,7 @@ export const useCotizaciones = (idUsuario, id) => {
             Swal.fire({
               position: "center",
               icon: "info",
-              title: "Ocurrió un error inesperado, intente más tarde",
+              title: "Las credenciales no son válidas",
               background: "#ffffff",
               iconColor: "#dc3545",
               customClass: {
@@ -362,7 +370,7 @@ export const useCotizaciones = (idUsuario, id) => {
     onError: (error) => {
       if (error.response) {
         switch (error.response.status) {
-          case 400:
+          case 404:
             Swal.fire({
               position: "center",
               icon: "warning",
@@ -377,12 +385,11 @@ export const useCotizaciones = (idUsuario, id) => {
               timer: 5000,
             });
             break;
-          default:
+          case 401:
             Swal.fire({
               position: "center",
-              icon: "info",
-              title:
-                "No se encontraron Cotizaciones con los valores ingresados",
+              icon: "warning",
+              title: "Tu sesión ha expirado",
               showConfirmButton: false,
               timer: 2000,
               background: "#ffffff",
@@ -390,6 +397,8 @@ export const useCotizaciones = (idUsuario, id) => {
               customClass: {
                 title: "text-dark",
               },
+            }).then(() => {
+              navigate("/");
             });
             break;
         }
@@ -459,18 +468,20 @@ export const useCotizaciones = (idUsuario, id) => {
             });
             break;
 
-          default:
+          case 401:
             Swal.fire({
               position: "center",
-              icon: "info",
-              title: "Ocurrió un error inesperado, intente más tarde",
+              icon: "warning",
+              title: "Tu sesión ha expirado",
+              showConfirmButton: false,
+              timer: 2000,
               background: "#ffffff",
-              iconColor: "#dc3545",
+              iconColor: "#ffc107",
               customClass: {
                 title: "text-dark",
               },
-              showConfirmButton: false,
-              timer: 5000,
+            }).then(() => {
+              navigate("/");
             });
             break;
         }
