@@ -37,7 +37,7 @@ exports.auth = (req, res, next) => {
 
     req.user = payload;
   } catch (error) {
-    return res.status(404).send({
+    return res.status(401).send({
       status: "error",
       message: "token inválido",
       error,
