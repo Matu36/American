@@ -30,13 +30,15 @@ const useAxiosInterceptor = () => {
         if (response) {
           if (response.status === 401) {
             if (response.data && response.data.message === "token inválido") {
+              console.log(response.data);
+              console.log(response.data.message);
+
               localStorage.removeItem("token");
               navigate("/");
-              return; // Evita que se propague el error después de redirigir
+              return Promise.reject(error);
             }
           }
         }
-        return Promise.reject(error);
       }
     );
 
