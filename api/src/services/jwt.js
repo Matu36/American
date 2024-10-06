@@ -10,6 +10,7 @@ const createToken = (user) => {
   const payload = {
     id: user.id,
     nombre: user.nombre,
+    password: user.password,
     apellido: user.apellido,
     telefono: user.telefono,
     direccion: user.direccion,

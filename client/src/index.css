@@ -5886,6 +5886,80 @@ p {
   }
 }
 
+.clientes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+  gap: 20px; 
+}
+
+.cliente {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; 
+}
+
+.cliente h4 {
+  margin-bottom: 15px;
+  text-align: left;
+  width: 100%; 
+}
+
+.email-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; 
+  width: 100%; 
+}
+
+.email-item input {
+  margin-right: 10px;
+}
+
+.select-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.select-buttons button {
+  background-color: #ffcc00; /* Amarillo */
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.select-buttons button:hover {
+  background-color: #e6b800; /* Un poco más oscuro al pasar el cursor */
+  transform: translateY(-2px); /* Efecto sutil de elevación */
+}
+
+.select-buttons button:active {
+  background-color: #cca300; /* Más oscuro al hacer clic */
+  transform: translateY(0); /* Elimina la elevación */
+}
+
+.select-buttons button:disabled {
+  background-color: #d3d3d3; /* Gris para botones deshabilitados */
+  color: #8c8c8c;
+  cursor: not-allowed;
+}
+
+
+
+
+
+
+
 
 
 

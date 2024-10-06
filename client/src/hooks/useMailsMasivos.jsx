@@ -65,7 +65,7 @@ export const useMails = () => {
             Swal.fire({
               position: "center",
               icon: "warning",
-              title: "Hubo un error",
+              title: "Las credenciales son inválidas",
               showConfirmButton: false,
               timer: 2000,
               background: "#ffffff",
