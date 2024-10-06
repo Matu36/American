@@ -44,7 +44,7 @@ export default function NavBarAdmin() {
   };
 
   const handleButtonClick = () => {
-    navigate("/");
+    navigate("/admin");
   };
 
   const updateAuthFromLocalStorage = () => {
