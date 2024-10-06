@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const iniciarCronJob = require("../src/controllers/EmailAutomaticoUnMes.js");
 const programarReporteDiario = require("../src/controllers/EmailReporteDiario.js");
+const backupDatabase = require("../src/backupDB/backupDB.js");
 
 require("./db.js");
 
@@ -32,6 +33,7 @@ server.use("/", routes);
 
 iniciarCronJob();
 programarReporteDiario();
+backupDatabase();
 
 // Error catching endware.
 server.use((err, req, res, next) => {

@@ -23,10 +23,15 @@ const useAxiosInterceptor = () => {
   axios.interceptors.response.use(
     (response) => response,
     (error) => {
-      if (error.response.status === 401) {
-        // Token expirado
-        localStorage.removeItem("token");
-        navigate("/"); // Redirigir a la página de inicio
+      const { response } = error;
+
+      if (response) {
+        if (response.status === 401) {
+          if (response.data && response.data.message === "token inválido") {
+            localStorage.removeItem("token");
+            navigate("/");
+          }
+        }
       }
       return Promise.reject(error);
     }
