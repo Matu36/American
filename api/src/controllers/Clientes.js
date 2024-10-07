@@ -288,24 +288,40 @@ const getClientesParaCotizar = async (req, res) => {
       // Vendedor: Ver solo los clientes cargados por el usuario
       clientes = await Clientes.findAll({
         where: {
-          [Op.or]: [
-            // Clientes creados por el vendedor
-            { idUsuario: idUsuario },
-            // Clientes sin actividad en los últimos 3 meses
-            {
-              id: {
-                [Op.notIn]: conn.literal(
-                  `(SELECT "idCliente" FROM "Cotizaciones" 
-                    WHERE ("fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
-                           "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
-                           "fechaVenta" > '${tresMesesAtras.toISOString()}'))`
-                ),
-              },
-            },
-          ],
+          id: {
+            [Op.in]: conn.literal(
+              `(SELECT "idCliente" FROM "Cotizaciones" 
+               WHERE "idUsuario" = '${idUsuario}' 
+               AND (
+                 "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                 "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                 "fechaVenta" > '${tresMesesAtras.toISOString()}'
+               ))`
+            ),
+          },
+          // Asegúrate de incluir una condición para filtrar solo aquellos clientes creados por el vendedor
+          idUsuario: idUsuario,
         },
         attributes: ["id", "nombre", "apellido", "mail", "CUIT"],
       });
+
+      // Si el usuario es vendedor, agregar clientes sin actividad en los últimos 3 meses
+      if (usuario.rol === false) {
+        const clientesSinActividad = await Clientes.findAll({
+          where: {
+            id: {
+              [Op.notIn]: conn.literal(
+                `(SELECT "idCliente" FROM "Cotizaciones" 
+                 WHERE ("fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                        "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                        "fechaVenta" > '${tresMesesAtras.toISOString()}'))`
+              ),
+            },
+          },
+        });
+
+        clientes = [...clientes, ...clientesSinActividad];
+      }
     }
 
     res.json(clientes);
