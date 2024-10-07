@@ -33,8 +33,8 @@ export default function ProductosDetalle() {
   // Función para separar los títulos compuestos y capitalizar la primera letra
   const formatFieldName = (field) => {
     return field
-      .replace(/([A-Z])/g, " $1") // Inserta espacio antes de las mayúsculas
-      .replace(/^./, (str) => str.toUpperCase()); // Capitaliza la primera letra
+      .replace(/([A-Z])/g, " $1")
+      .replace(/^./, (str) => str.toUpperCase());
   };
 
   const itemStyle = {

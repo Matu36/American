@@ -243,7 +243,6 @@ export default function CargaClientes() {
               }
               placeholder="Selecciona una provincia"
               isClearable
-              required
             />
           </div>
 
@@ -268,7 +267,6 @@ export default function CargaClientes() {
               }
               placeholder="Selecciona una ciudad"
               isClearable
-              required
             />
           </div>
           <div className="form-group">

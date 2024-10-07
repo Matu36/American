@@ -24,22 +24,30 @@ const cotizacionEmail = (cotizacion) => {
         <span style="position: absolute; left: -20px; top: 10px; width: 10px; height: 10px; border-radius: 50%; background-color: #000;"></span>
         <strong style="text-decoration: underline; margin-bottom: 5px; display: block;">${cuotasOption}:</strong> 
         <strong>${cotizacion.formaPago}</strong> ${
-        item.anticipoPorcentaje
-      }% - Anticipo USD: ${item.anticipo} equivalentes a $ ${
-        item.anticipo * item.cotizacionDolar
-      } <br />
+          item.anticipoPorcentaje
+        }% - Anticipo USD: ${item.anticipo} equivalentes a $ ${(
+          item.anticipo * item.cotizacionDolar
+        ).toLocaleString("es-ES", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+         <br />
         <span style="background-color: #ffeaa7;  border-radius: 3px;">
           <strong>Saldo en</strong> ${
             item.cuotas
-          } E-Cheq de $${cuotaValorEnPesos} cada 30 días fijos
+          } E-Cheq de $${cuotaValorEnPesos.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          cada 30 días fijos
         </span>  en pesos. <br />
-       <strong>IVA con otro E-Cheq a 30 días de:</strong> $${
-         item.anticipo > 0
-           ? (item.cuotaValorEnPesos * item.cuotas +
-               item.anticipo * item.cotizacionDolar) *
-             item.IVA
-           : item.cuotaValorEnPesos * item.cuotas * item.IVA
-       } <br />
+       <strong>IVA con otro E-Cheq a 30 días de:</strong> $${(item.anticipo > 0
+         ? (item.cuotaValorEnPesos * item.cuotas +
+             item.anticipo * item.cotizacionDolar) *
+           item.IVA
+         : item.cuotaValorEnPesos * item.cuotas * item.IVA
+       ).toLocaleString("es-ES", {
+         minimumFractionDigits: 2,
+         maximumFractionDigits: 2,
+       })}
+       <br />
       </li>`;
     })
     .join("");

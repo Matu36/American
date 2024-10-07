@@ -61,8 +61,8 @@ h1 {
   font-family: "merri";
   display: flex;
   color: #febb00;
-  text-decoration: underline; 
-  text-decoration-color: #febb00; 
+  text-decoration: underline;
+  text-decoration-color: #febb00;
   display: flex;
   justify-content: flex-start;
 }
@@ -71,12 +71,11 @@ h1 {
   font-family: "merri";
   display: flex;
   color: #febb00;
-  text-decoration: underline; 
-  text-decoration-color: #febb00; 
+  text-decoration: underline;
+  text-decoration-color: #febb00;
   display: flex;
   justify-content: center;
 }
-
 
 button {
   border-radius: 8px;
@@ -662,7 +661,7 @@ button:focus-visible {
   margin: 20px auto;
   display: flex;
   flex-direction: column;
-  align-items: center;  
+  align-items: center;
   background-color: #f4f4f4;
   padding: 15px;
   border-radius: 8px;
@@ -993,21 +992,18 @@ button:focus-visible {
 }
 
 .badge {
-  background-color: red; 
-  color: white; 
-  border-radius: 50%; 
-  padding: 0.2em; 
-  min-width: 24px; 
-  height: 24px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  margin-left: 8px; 
-  font-size: 0.75em; 
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 0.2em;
+  min-width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  font-size: 0.75em;
 }
-
-
-
 
 .copy {
   color: #000;
@@ -1521,7 +1517,6 @@ button:focus-visible {
   display: flex;
   justify-content: center;
   margin: auto;
-
 }
 
 .white-bar.fixed .fauser {
@@ -1863,16 +1858,13 @@ button:focus-visible {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2000;
- 
 }
 
 @media screen and (max-width: 1200px) {
   .login-container {
-  top: 60%;
+    top: 60%;
   }
 }
-
-
 
 .button-close-login {
   background: none;
@@ -1986,8 +1978,6 @@ button:focus-visible {
     font-size: 16px;
   }
 }
-
-
 
 /* ESTILOS PARA EL FORMULARIO DE REGISTRO DE USUARIO */
 
@@ -2327,14 +2317,11 @@ button:focus-visible {
   }
 }
 
-
 @media (min-width: 600px) {
   .burguer {
     display: none;
   }
 }
-
-
 
 .sidebarAdmin__header {
   display: flex;
@@ -2398,12 +2385,11 @@ button:focus-visible {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   top: 0;
   cursor: pointer;
-  
 }
 
 .user__info .burguer .burguer-icon {
   position: absolute;
-top:25px;
+  top: 25px;
   right: -120px;
 }
 
@@ -3256,15 +3242,14 @@ top:25px;
 }
 
 .cotizadorform .botoncotizador {
-background-color: #000;
-margin-top: -10px;
+  background-color: #000;
+  margin-top: -10px;
 }
 
 .cotizadorform .form-submit {
   margin-bottom: 25px;
   margin-top: -25px;
 }
-
 
 .form-container3 {
   width: 100%;
@@ -3289,7 +3274,7 @@ margin-top: -10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: grid;
-  
+
   gap: 20px;
   overflow-x: auto;
 }
@@ -3348,7 +3333,6 @@ margin-top: -10px;
   border: 1px solid #ffcc00;
   border-radius: 5px;
   background-color: white;
-  
 }
 
 /* Estilos para el botón de guardar cotización */
@@ -3362,12 +3346,11 @@ margin-top: -10px;
   margin-top: 2rem;
   align-self: flex-end;
 }
-  
+
 @media screen and (max-width: 600px) {
-  .buttonpdf .form-submit{
-    padding: 5px 10px !important; 
-    font-size: 0.5rem !important  ; 
-    
+  .buttonpdf .form-submit {
+    padding: 5px 10px !important;
+    font-size: 0.5rem !important  ;
   }
 }
 
@@ -3386,40 +3369,35 @@ margin-top: -10px;
 }
 
 .form-input {
-  font-size: 1rem; 
-  height: 2.5rem; 
-  border-radius: 5px; 
-  border: 1px solid #ccc; 
-  padding: 0 1rem; 
-  background-color: #f9f9f9; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  transition: border-color 0.3s ease; 
+  font-size: 1rem;
+  height: 2.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 0 1rem;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
 }
-
-
-
 
 .form-input:focus {
   border-color: #999;
-  outline: none; 
+  outline: none;
 }
 
-
 .datatable-container {
-  border: 1px solid #ddd; 
-  margin-top: 2rem; 
-  border-radius: 6px; 
-  padding: 1rem; 
-  background-color: #f4f4f4; 
+  border: 1px solid #ddd;
+  margin-top: 2rem;
+  border-radius: 6px;
+  padding: 1rem;
+  background-color: #f4f4f4;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease; 
+  transition: box-shadow 0.3s ease;
 }
 
 /* Efecto hover para dar una sensación interactiva */
 .datatable-container:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
-
 
 .cliente-info {
   display: flex;
@@ -4221,15 +4199,13 @@ margin-top: -10px;
 
 @media screen and (min-width: 600px) and (max-width: 900px) {
   .postVentaContainer {
-    width: 65%; 
+    width: 65%;
   }
 }
 
-
-
 @media screen and (max-width: 600px) {
   .postVentaContainer {
-    width: 95%; 
+    width: 95%;
   }
 }
 
@@ -4251,7 +4227,7 @@ margin-top: -10px;
 
 @media screen and (max-width: 600px) {
   .postVentaContainer1 {
-    width: 95%; 
+    width: 95%;
   }
 }
 
@@ -4284,20 +4260,18 @@ margin-top: -10px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  overflow-x:  auto;
+  overflow-x: auto;
 }
-
 
 .postVentaContainer2 .form-group {
   width: 100%;
   margin: auto;
   padding: 1rem;
-  
 }
 
 @media (max-width: 900px) {
   .postVentaContainer2 {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
     padding: 20px;
     gap: 10px;
   }
@@ -4305,7 +4279,7 @@ margin-top: -10px;
 
 @media (max-width: 500px) {
   .postVentaContainer2 {
-    grid-template-columns: repeat(1, 1fr); 
+    grid-template-columns: repeat(1, 1fr);
     padding: 20px;
     gap: 10px;
   }
@@ -4313,14 +4287,13 @@ margin-top: -10px;
 
 @media (max-width: 700px) and (min-width: 600px) {
   .postVentaContainer2 {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
 }
 
-.form-group input{
+.form-group input {
   border: solid 2px gray;
 }
-
 
 .postVentaTitle {
   font-size: 2.5rem;
@@ -4945,12 +4918,20 @@ margin-top: -10px;
 }
 
 .back-button:hover {
-  background-color: #e6b106; /* Color de fondo al pasar el cursor */
+  background-color: #e6b106;
 }
 
 @media screen and (max-width: 600px) {
   .back-button {
     right: 30px;
+    top: 165px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .back-button {
+    right: 120px;
     top: 165px;
     font-size: 14px;
   }
@@ -5432,8 +5413,6 @@ margin-top: -10px;
   margin-top: 4rem;
 }
 
-
-
 .datatable-container .rdt_TableRow:nth-child(even) {
   background-color: #ffcccc; /* Rojo claro */
 }
@@ -5442,50 +5421,46 @@ margin-top: -10px;
   background-color: #ffffcc; /* Amarillo claro */
 }
 
-
 .buttonEliminar {
-  background-color: #ff4d4d; 
-  color: white; 
-  margin-top: 45px; 
-  border: none; 
-  padding: 10px 15px; 
-  border-radius: 5px; 
-  cursor: pointer; 
+  background-color: #ff4d4d;
+  color: white;
+  margin-top: 45px;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s ease;
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  width: 100%; 
-  margin-left: auto; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-left: auto;
   margin-right: auto;
-
 }
 
 .buttonEliminar:hover {
-  background-color: #e60000; 
+  background-color: #e60000;
 }
 
 .buttonEliminar:focus {
-  outline: none; 
-  box-shadow: 0 0 5px #ff4d4d; 
+  outline: none;
+  box-shadow: 0 0 5px #ff4d4d;
 }
 
 @media (max-width: 900px) {
   .buttonEliminar {
-    width: 100%; 
+    width: 100%;
     font-size: 12px;
-   
   }
 }
 
 @media (max-width: 600px) {
   .buttonEliminar {
-    width: 100%; 
-    padding: 12px; 
+    width: 100%;
+    padding: 12px;
   }
 }
-
 
 .info-cliente-edit {
   color: #000;
@@ -5493,22 +5468,19 @@ margin-top: -10px;
   justify-content: space-around;
 }
 
-
 .cotizacionDetailSimilPdf {
-  width: 100%; 
-  border: solid 1px #dcdcdc; 
-  border-radius: 5px; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  padding: 16px; 
-  box-sizing: border-box; 
+  width: 100%;
+  border: solid 1px #dcdcdc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  box-sizing: border-box;
   margin: 20px;
   text-align: left;
 }
 
 .imagenesPDF {
   display: flex;
-  
-  
 }
 
 .imagenesPDF .sino {
@@ -5525,7 +5497,7 @@ margin-top: -10px;
 
 .bordeSINOMACH {
   border: 1px solid black;
-  margin-top: 20PX;
+  margin-top: 20px;
   text-align: center;
   font-size: 22px;
   line-height: 40px;
@@ -5533,28 +5505,26 @@ margin-top: -10px;
   margin-bottom: 20px;
 }
 
-
 .SINOMACH {
   position: relative;
 }
 
 .distribuidor {
-  position: relative; 
-  top: -10px; 
-  display: inline-block; 
+  position: relative;
+  top: -10px;
+  display: inline-block;
   font-size: 14px;
 }
 
 .hrdontorcuato {
-  position: relative; 
-  top: -25px; 
- 
+  position: relative;
+  top: -25px;
 }
 
 .dontorcuato {
-  position: relative; 
-  top: -40px; 
-  display: inline-block; 
+  position: relative;
+  top: -40px;
+  display: inline-block;
   font-size: 16px;
 }
 
@@ -5565,7 +5535,6 @@ margin-top: -10px;
 
 .razonSOCIAL {
   margin-top: -20px;
-
 }
 
 .LEYENDASINOMACH {
@@ -5595,45 +5564,42 @@ margin-top: -10px;
 }
 
 .caractcotizar p {
-  margin-bottom: 5px; 
-  line-height: 1.2;  
+  margin-bottom: 5px;
+  line-height: 1.2;
 }
 
 .caracgenerales {
   text-decoration: underline;
- margin-top: 20px;
- position: relative;
- justify-content: center;
- text-align: center;
- margin-bottom: 30px;
+  margin-top: 20px;
+  position: relative;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .detalle-cotizacion-generales h5 {
   text-decoration: underline;
   position: relative;
-  left: 15%; 
+  left: 15%;
   text-align: left;
-  margin: 10px 0; 
+  margin: 10px 0;
 }
 
-
 .especificaciones {
-  text-align: left; 
-  left: 25%; 
+  text-align: left;
+  left: 25%;
   position: relative;
   margin-top: 1rem;
   width: 70%;
-  
 }
 
 .especificaciones ul {
   padding-left: 0;
-  
 }
 
 .especificaciones li {
-  padding-left: 10px; 
-  margin-bottom: 5px; 
+  padding-left: 10px;
+  margin-bottom: 5px;
 }
 
 .parrafoSINOMACH {
@@ -5642,12 +5608,12 @@ margin-top: -10px;
 }
 
 .deptoComercial {
-  text-align: right; 
-  margin-right: 20px; 
+  text-align: right;
+  margin-right: 20px;
 }
 
 .deptoComercial span {
-  display: block; 
+  display: block;
 }
 
 .asesorComercial {
@@ -5657,44 +5623,40 @@ margin-top: -10px;
 .imagenDetail {
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
-  margin: 20px 0; 
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
 }
 
 .imagenDetail img {
-  width: 80%; 
-  max-width: 600px; 
-  height: auto; 
+  width: 80%;
+  max-width: 600px;
+  height: auto;
 }
 
 .footerDetail {
-  text-align: center; 
-  font-size: 14px; 
- 
+  text-align: center;
+  font-size: 14px;
 }
 
 .footerDetail span {
-  display: block; 
- 
+  display: block;
 }
 
 .buttonpdf {
   display: flex;
   justify-content: center;
   gap: 45px;
- 
 }
 
 .btn-concretar-venta {
-  background-color: #ffcc00; 
+  background-color: #ffcc00;
   color: black;
   padding: 10px 20px;
   border: none;
   cursor: pointer;
   font-weight: bold;
   margin-top: 10px;
-  
 }
 
 .concrectarVenta {
@@ -5703,7 +5665,7 @@ margin-top: -10px;
 }
 
 .btn-concretar-venta:hover {
-  background-color: #e6b800; 
+  background-color: #e6b800;
 }
 
 .ventasPendientes {
@@ -5750,9 +5712,8 @@ p {
   text-decoration: underline;
 }
 .cotizacion-general p {
- font-weight: bold;
+  font-weight: bold;
 }
-
 
 /* Distribución de información */
 .info-container {
@@ -5809,18 +5770,17 @@ p {
   margin-top: 20px; /* Espacio entre detalles y botón */
 }
 
-
 .email-body {
   margin: 20px 0;
 }
 
 .email-body textarea {
-  width: 100%; 
-  height: 150px; 
-  padding: 10px; 
-  border: 1px solid #ccc; 
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 .modal-overlay {
@@ -5829,11 +5789,11 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 .modal-content {
@@ -5841,7 +5801,7 @@ p {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 500px; 
+  width: 500px;
 }
 
 .modal-buttons {
@@ -5865,41 +5825,37 @@ p {
 }
 
 @media screen and (max-width: 1000px) {
-  .form-group .form-input{
+  .form-group .form-input {
     width: 300px !important;
     font-size: 12px !important;
-    
   }
 }
 
 @media screen and (max-width: 800px) {
-  .form-group .form-input{
+  .form-group .form-input {
     width: 300px !important;
     font-size: 10px !important;
-    
   }
 }
 
 @media screen and (max-width: 1000px) {
-  .postVentaContainer2 .form-group .form-input{
+  .postVentaContainer2 .form-group .form-input {
     width: 100% !important;
     font-size: 12px !important;
-    
   }
 }
 
 @media screen and (max-width: 800px) {
-  .postVentaContainer2 .form-group .form-input{
+  .postVentaContainer2 .form-group .form-input {
     width: 100% !important;
     font-size: 10px !important;
-    
   }
 }
 
 .clientes-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-  gap: 20px; 
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .cliente {
@@ -5909,20 +5865,20 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%; 
+  width: 100%;
 }
 
 .cliente h4 {
   margin-bottom: 15px;
   text-align: left;
-  width: 100%; 
+  width: 100%;
 }
 
 .email-item {
   display: flex;
   align-items: center;
-  justify-content: flex-start; 
-  width: 100%; 
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .email-item input {
@@ -5944,7 +5900,9 @@ p {
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -5963,18 +5921,3 @@ p {
   color: #8c8c8c;
   cursor: not-allowed;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
