@@ -60,15 +60,18 @@ export default function HistorialRanking() {
       <div className="ranking-item">
         <h2>Producto con más cotizaciones</h2>
         <p>
-          Modelo {data?.topProductCotizaciones?.nombre} con{" "}
+          {data?.topProductCotizaciones?.familia}{" "}
+          {data?.topProductCotizaciones?.marca}{" "}
+          {data?.topProductCotizaciones?.nombre} con{" "}
           {data.topProductCotizaciones?.count} cotizaciones.
         </p>
       </div>
       <div className="ranking-item">
         <h2>Producto con más ventas</h2>
         <p>
-          Modelo {data?.topProductVentas?.nombre} con{" "}
-          {data?.topProductVentas?.count} ventas.
+          {data?.topProductVentas?.familia} {data?.topProductVentas?.marca}{" "}
+          {data?.topProductVentas?.nombre} con {data?.topProductVentas?.count}{" "}
+          ventas.
         </p>
       </div>
     </div>
