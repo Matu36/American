@@ -15,6 +15,8 @@ export default function HistorialRanking() {
     );
   if (!data || !showRanking) return null;
 
+  console.log(data);
+
   return (
     <div className="contact-container">
       <button

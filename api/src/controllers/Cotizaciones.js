@@ -1596,14 +1596,14 @@ const getranking = async (req, res) => {
     // Obtener detalles del producto top para cotizaciones
     const topProductDetailsCotizaciones = topProductIdCotizaciones
       ? await Productos.findByPk(topProductIdCotizaciones, {
-          attributes: ["modelo"],
+          attributes: ["familia", "marca", "modelo"],
         })
       : null;
 
     // Obtener detalles del producto top para ventas
     const topProductDetailsVentas = topProductIdVentas
       ? await Productos.findByPk(topProductIdVentas, {
-          attributes: ["modelo"],
+          attributes: ["familia", "marca", "modelo"],
         })
       : null;
 
