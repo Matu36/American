@@ -15,6 +15,9 @@ const ClientesExcel = ({ data }) => {
       "Contacto Alternativo": item.contactoAlternativo,
       "Email Alternativo": item.mailAlternativo,
       "Teléfono Alternativo": item.telefonoAlternativo,
+      "Contacto Alternativo 1": item.contactoAlternativo1,
+      "Email Alternativo 1": item.mailAlternativo1,
+      "Teléfono Alternativo 1": item.telefonoAlternativo1,
       "Fecha de Registro": new Date(item.fechaDeCreacion).toLocaleDateString(),
     }));
 
