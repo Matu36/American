@@ -140,6 +140,7 @@ export default function MailsMasivos() {
             Deseleccionar Todos
           </button>
         </div>
+        <br />
         <div className="clientes-list">
           {clientesEmail?.map((cliente) => {
             const emails = [
