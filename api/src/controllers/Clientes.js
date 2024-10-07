@@ -295,24 +295,36 @@ const getClientesParaCotizar = async (req, res) => {
         attributes: ["id", "nombre", "apellido", "mail", "CUIT"],
       });
     } else {
-      // Vendedor: Ver solo los clientes cargados por el usuario
+      // Vendedor: Ver clientes exclusivos y aquellos sin cotizaciones recientes
       clientes = await Clientes.findAll({
         where: {
           [Op.or]: [
-            // Clientes creados por el vendedor
-            { idUsuario: idUsuario },
-            // Clientes sin actividad en los últimos 3 meses
+            // Clientes a los que el usuario ha realizado una cotización en los últimos 3 meses
+            {
+              id: {
+                [Op.in]: conn.literal(
+                  `(SELECT "idCliente" FROM "Cotizaciones"
+                  WHERE "idUsuario" = '${idUsuario}' 
+                  AND (
+                    "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                    "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                    "fechaVenta" > '${tresMesesAtras.toISOString()}'
+                  ))`
+                ),
+              },
+            },
+            // Clientes que no tienen cotizaciones recientes (más de 3 meses) y no están asociados a otros usuarios
             {
               id: {
                 [Op.notIn]: conn.literal(
-                  `(SELECT "idCliente" FROM "Cotizaciones" 
-                    WHERE ("fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
-                           "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
-                           "fechaVenta" > '${tresMesesAtras.toISOString()}'))`
+                  `(SELECT "idCliente" FROM "Cotizaciones"
+                  WHERE (
+                    "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                    "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                    "fechaVenta" > '${tresMesesAtras.toISOString()}'
+                  ))`
                 ),
               },
-              // Asegúrate de incluir una condición para filtrar solo aquellos clientes sin cotizaciones recientes
-              idUsuario: null, // Esto asegura que solo se traigan aquellos sin un vendedor asignado
             },
           ],
         },
