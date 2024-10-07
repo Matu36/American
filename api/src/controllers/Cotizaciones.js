@@ -1644,6 +1644,8 @@ const getranking = async (req, res) => {
         ? {
             id: topProductIdCotizaciones,
             nombre: topProductDetailsCotizaciones?.modelo,
+            familia: topProductDetailsCotizaciones?.familia,
+            marca: topProductDetailsCotizaciones?.marca,
             count: productCount.cotizaciones[topProductIdCotizaciones],
           }
         : null,
@@ -1651,6 +1653,8 @@ const getranking = async (req, res) => {
         ? {
             id: topProductIdVentas,
             nombre: topProductDetailsVentas?.modelo,
+            familia: topProductDetailsCotizaciones?.familia,
+            marca: topProductDetailsCotizaciones?.marca,
             count: productCount.ventas[topProductIdVentas],
           }
         : null,
