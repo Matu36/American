@@ -286,6 +286,7 @@ const getCotizaciones = async (req, res) => {
             "interes",
             "PrecioFinal",
             "fechaDeCreacion",
+            "anticipo",
           ],
         },
       ],

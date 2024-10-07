@@ -64,7 +64,8 @@ const cotizacionEmail = (cotizacion) => {
       <h2 style="text-align: center; color: #555; font-size: 20px; text-decoration: underline;margin-top: 35px;">Detalles de la Cotización</h2>
       <p style="text-align: center;">
         <strong>VALOR PAGO DE CONTADO:</strong> U$S ${primerCotizacion.precio} + IVA 10.5% <br />
-        <strong>Cotización Dólar BNA:</strong> Ejemplo Hoy BNA $ ${primerCotizacion.cotizacionDolar}, Precio en Pesos: $${primerCotizacion.precioEnPesos} + IVA 10.5%
+        <strong>Cotización Dólar BNA:</strong> Ejemplo Hoy BNA $ ${primerCotizacion.cotizacionDolar}, Precio en Pesos: $${primerCotizacion.precioEnPesos.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        + IVA 10.5%
       </p>
       <p style="text-align: center; font-weight: bold; color: #f00;">Propuesta de financiación POR TIEMPO LIMITADO sujeto a aprobación</p>
       <ul style="padding: 0; margin: 0; list-style-type: none; text-align: center;">

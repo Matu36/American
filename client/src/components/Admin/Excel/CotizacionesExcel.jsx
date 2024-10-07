@@ -6,6 +6,8 @@ const CotizacionesExcel = ({ data }) => {
   const handleExport = () => {
     const rows = [];
 
+    console.log(data);
+
     data.forEach((item) => {
       rows.push({
         NroCotización: item.codigoCotizacion,
