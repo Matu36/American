@@ -362,28 +362,48 @@ const getMailsPorIdDeUsuario = async (req, res) => {
       throw "Usuario no encontrado";
     }
 
+    // Fecha límite: 3 meses atrás desde hoy
+    const tresMesesAtras = new Date();
+    tresMesesAtras.setMonth(tresMesesAtras.getMonth() - 3);
+
     let emails;
 
     if (usuario.rol === true) {
-      // Administrador: Ver todos los teléfonos
+      // Administrador: Ver todos los emails
       emails = await Clientes.findAll({
         attributes: [
           "nombre",
           "apellido",
           "mail",
-          "contactoAlternativo",
           "mailAlternativo",
-          "contactoAlternativo1",
           "mailAlternativo1",
         ],
-        order: [["nombre", "ASC"]],
+        order: [["fechaDeCreacion", "DESC"]],
       });
     } else {
-      // Vendedor: Ver emails de clientes asociados a su usuario
+      // Vendedor: Ver emails de clientes a los que les haya creado, modificado una cotización o realizado una venta
       emails = await Clientes.findAll({
-        where: { idUsuario: idUsuario },
-        attributes: ["mail", "mailAlternativo", "mailAlternativo1"],
-        order: [["nombre", "ASC"]],
+        where: {
+          id: {
+            [Op.in]: conn.literal(
+              `(SELECT "idCliente" FROM "Cotizaciones"
+                WHERE "idUsuario" = '${idUsuario}'
+                AND (
+                  "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                  "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                  "fechaVenta" > '${tresMesesAtras.toISOString()}'
+                ))`
+            ),
+          },
+        },
+        attributes: [
+          "nombre",
+          "apellido",
+          "mail",
+          "mailAlternativo",
+          "mailAlternativo1",
+        ],
+        order: [["fechaDeCreacion", "DESC"]],
       });
     }
 
