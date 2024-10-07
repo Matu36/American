@@ -279,7 +279,7 @@ const getClientesParaCotizar = async (req, res) => {
 
     let clientes;
 
-    if (usuario.rol === true) {
+    if (usuario.rol) {
       // Administrador: Ver todos los clientes
       clientes = await Clientes.findAll({
         attributes: ["id", "nombre", "apellido", "mail", "CUIT"],
@@ -292,28 +292,30 @@ const getClientesParaCotizar = async (req, res) => {
             // Clientes a los que el usuario ha realizado una cotización en los últimos 3 meses
             {
               id: {
-                [Op.in]: conn.literal(
-                  `(SELECT "idCliente" FROM "Cotizaciones"
-                   WHERE "idUsuario" = ${idUsuario} 
-                   AND (
-                     "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
-                     "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
-                     "fechaVenta" > '${tresMesesAtras.toISOString()}'
-                   ))`
-                ),
+                [Op.in]: conn.literal(`(
+                  SELECT "idCliente" 
+                  FROM "Cotizaciones"
+                  WHERE "idUsuario" = ${idUsuario} 
+                  AND (
+                    "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                    "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                    "fechaVenta" > '${tresMesesAtras.toISOString()}'
+                  )
+                )`),
               },
             },
-            // Clientes que no tienen cotizaciones recientes (más de 3 meses)
+            // Clientes que no tienen cotizaciones recientes (más de 3 meses) y no están asociados a otros usuarios
             {
               id: {
-                [Op.notIn]: conn.literal(
-                  `(SELECT "idCliente" FROM "Cotizaciones"
-                   WHERE (
-                     "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
-                     "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
-                     "fechaVenta" > '${tresMesesAtras.toISOString()}'
-                   ))`
-                ),
+                [Op.notIn]: conn.literal(`(
+                  SELECT "idCliente" 
+                  FROM "Cotizaciones"
+                  WHERE (
+                    "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                    "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                    "fechaVenta" > '${tresMesesAtras.toISOString()}'
+                  )
+                )`),
               },
             },
           ],
