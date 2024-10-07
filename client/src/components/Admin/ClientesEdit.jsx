@@ -231,7 +231,6 @@ export default function ClientesEdit() {
               }
               placeholder="Selecciona una provincia"
               isClearable
-              required
             />
           </div>
 
@@ -256,7 +255,6 @@ export default function ClientesEdit() {
               }
               placeholder="Selecciona una ciudad"
               isClearable
-              required
             />
           </div>
           <div className="form-group">
