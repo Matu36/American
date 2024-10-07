@@ -285,38 +285,20 @@ const getClientesParaCotizar = async (req, res) => {
         attributes: ["id", "nombre", "apellido", "mail", "CUIT"],
       });
     } else {
-      // Vendedor: Ver clientes exclusivos y aquellos sin cotizaciones recientes
+      // Vendedor: Ver solo los clientes cargados por el usuario
       clientes = await Clientes.findAll({
         where: {
-          [Op.or]: [
-            // Clientes a los que el usuario ha realizado una cotización en los últimos 3 meses
-            {
-              id: {
-                [Op.in]: conn.literal(
-                  `(SELECT "idCliente" FROM "Cotizaciones"
-                   WHERE "idUsuario" = '${idUsuario}' 
-                   AND (
-                     "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
-                     "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
-                     "fechaVenta" > '${tresMesesAtras.toISOString()}'
-                   ))`
-                ),
-              },
-            },
-            // Clientes que no tienen cotizaciones recientes (más de 3 meses)
-            {
-              id: {
-                [Op.notIn]: conn.literal(
-                  `(SELECT "idCliente" FROM "Cotizaciones"
-                   WHERE (
-                     "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
-                     "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
-                     "fechaVenta" > '${tresMesesAtras.toISOString()}'
-                   ))`
-                ),
-              },
-            },
-          ],
+          id: {
+            [Op.in]: conn.literal(
+              `(SELECT "idCliente" FROM "Cotizaciones"
+               WHERE "idUsuario" = '${idUsuario}' 
+               AND (
+                 "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                 "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                 "fechaVenta" > '${tresMesesAtras.toISOString()}'
+               ))`
+            ),
+          },
         },
         attributes: ["id", "nombre", "apellido", "mail", "CUIT"],
       });
