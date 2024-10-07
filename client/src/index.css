@@ -4929,9 +4929,24 @@ button:focus-visible {
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (max-width: 800px) {
+  .back-button {
+  
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 800px) {
   .back-button {
     right: 120px;
+    top: 165px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .back-button {
+    right:70px;
     top: 165px;
     font-size: 14px;
   }
