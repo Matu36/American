@@ -519,6 +519,7 @@ export default function CotizacionDetail() {
   return (
     <div className="cotizacionDetailSimilPdf">
       <BackButton />
+
       <div className="imagenesPDF">
         <img className="sino" src={SINOMACH} alt="" />
         <img className="american" src={americanvial} alt="" />
@@ -661,8 +662,8 @@ export default function CotizacionDetail() {
               {cotizacion.estado === 3
                 ? "Pendiente de Aprobación"
                 : cotizacion.estado === 2
-                ? "Venta Concretada"
-                : "Concretar Venta"}
+                  ? "Venta Concretada"
+                  : "Concretar Venta"}
             </button>
           </div>
         </div>
