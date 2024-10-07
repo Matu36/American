@@ -130,6 +130,7 @@ export default function MailsMasivos() {
       <BackButton />
       <h2 className="tituloCompo">Notificar vía Email</h2>
       <hr />
+      <br />
       <form onSubmit={handleEnviarEmails}>
         <div className="select-buttons">
           <button type="button" onClick={handleSelectAll}>

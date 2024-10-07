@@ -5892,7 +5892,7 @@ p {
 }
 
 .select-buttons button {
-  background-color: #ffcc00; /* Amarillo */
+  background-color: #ffcc00;
   color: black;
   border: none;
   border-radius: 5px;
@@ -5907,17 +5907,28 @@ p {
 }
 
 .select-buttons button:hover {
-  background-color: #e6b800; /* Un poco más oscuro al pasar el cursor */
-  transform: translateY(-2px); /* Efecto sutil de elevación */
+  background-color: #e6b800;
+  transform: translateY(-2px);
 }
 
 .select-buttons button:active {
-  background-color: #cca300; /* Más oscuro al hacer clic */
-  transform: translateY(0); /* Elimina la elevación */
+  background-color: #cca300;
+  transform: translateY(0);
 }
 
 .select-buttons button:disabled {
-  background-color: #d3d3d3; /* Gris para botones deshabilitados */
+  background-color: #d3d3d3;
   color: #8c8c8c;
   cursor: not-allowed;
+}
+
+@media screen and (max-width: 750px) {
+  .select-buttons {
+    justify-content: space-around;
+  }
+
+  .select-buttons button {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
 }
