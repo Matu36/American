@@ -273,6 +273,10 @@ const getClientesParaCotizar = async (req, res) => {
       throw "Usuario no encontrado";
     }
 
+    // Fecha límite: 3 meses atrás desde hoy
+    const tresMesesAtras = new Date();
+    tresMesesAtras.setMonth(tresMesesAtras.getMonth() - 3);
+
     let clientes;
 
     if (usuario.rol === true) {
@@ -281,17 +285,24 @@ const getClientesParaCotizar = async (req, res) => {
         attributes: ["id", "nombre", "apellido", "mail", "CUIT"],
       });
     } else {
-      // Vendedor: Ver solo los clientes cargados por el usuario y sin cotizaciones
+      // Vendedor: Ver solo los clientes cargados por el usuario
       clientes = await Clientes.findAll({
         where: {
-          id: {
-            [Op.notIn]: conn.literal(
-              `(SELECT "idCliente" FROM "Cotizaciones" WHERE "idUsuario" = '${idUsuario}')`
-            ),
-          },
-          // Asegúrate de incluir una condición para filtrar solo aquellos clientes creados por el vendedor
-          // Suponiendo que tienes un campo `idUsuario` en la tabla Clientes que indica quién lo creó
-          idUsuario: idUsuario,
+          [Op.or]: [
+            // Clientes creados por el vendedor
+            { idUsuario: idUsuario },
+            // Clientes sin actividad en los últimos 3 meses
+            {
+              id: {
+                [Op.notIn]: conn.literal(
+                  `(SELECT "idCliente" FROM "Cotizaciones" 
+                    WHERE ("fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                           "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                           "fechaVenta" > '${tresMesesAtras.toISOString()}'))`
+                ),
+              },
+            },
+          ],
         },
         attributes: ["id", "nombre", "apellido", "mail", "CUIT"],
       });
