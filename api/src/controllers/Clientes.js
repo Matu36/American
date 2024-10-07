@@ -294,25 +294,25 @@ const getClientesParaCotizar = async (req, res) => {
               id: {
                 [Op.in]: conn.literal(
                   `(SELECT "idCliente" FROM "Cotizaciones"
-                  WHERE "idUsuario" = '${idUsuario}' 
-                  AND (
-                    "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
-                    "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
-                    "fechaVenta" > '${tresMesesAtras.toISOString()}'
-                  ))`
+                   WHERE "idUsuario" = ${idUsuario} 
+                   AND (
+                     "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                     "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                     "fechaVenta" > '${tresMesesAtras.toISOString()}'
+                   ))`
                 ),
               },
             },
-            // Clientes que no tienen cotizaciones recientes (más de 3 meses) y no están asociados a otros usuarios
+            // Clientes que no tienen cotizaciones recientes (más de 3 meses)
             {
               id: {
                 [Op.notIn]: conn.literal(
                   `(SELECT "idCliente" FROM "Cotizaciones"
-                  WHERE (
-                    "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
-                    "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
-                    "fechaVenta" > '${tresMesesAtras.toISOString()}'
-                  ))`
+                   WHERE (
+                     "fechaDeCreacion" > '${tresMesesAtras.toISOString()}' OR 
+                     "fechaModi" > '${tresMesesAtras.toISOString()}' OR 
+                     "fechaVenta" > '${tresMesesAtras.toISOString()}'
+                   ))`
                 ),
               },
             },
