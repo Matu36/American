@@ -35,7 +35,8 @@ const cotizacionEmail = (cotizacion) => {
         <span style="background-color: #ffeaa7;  border-radius: 3px;">
           <strong>Saldo en</strong> ${
             item.cuotas
-          } E-Cheq de $${cuotaValorEnPesos.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          } E-Cheq de $${(Number(cuotaValorEnPesos) || 0).toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+
           cada 30 días fijos
         </span>  en pesos. <br />
        <strong>IVA con otro E-Cheq a 30 días de:</strong> $${(item.anticipo > 0
@@ -64,7 +65,8 @@ const cotizacionEmail = (cotizacion) => {
       <h2 style="text-align: center; color: #555; font-size: 20px; text-decoration: underline;margin-top: 35px;">Detalles de la Cotización</h2>
       <p style="text-align: center;">
         <strong>VALOR PAGO DE CONTADO:</strong> U$S ${primerCotizacion.precio} + IVA 10.5% <br />
-        <strong>Cotización Dólar BNA:</strong> Ejemplo Hoy BNA $ ${primerCotizacion.cotizacionDolar}, Precio en Pesos: $${primerCotizacion.precioEnPesos.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        <strong>Cotización Dólar BNA:</strong> Ejemplo Hoy BNA $ ${primerCotizacion.cotizacionDolar}, Precio en Pesos: $$${(Number(primerCotizacion.precioEnPesos) || 0).toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+
         + IVA 10.5%
       </p>
       <p style="text-align: center; font-weight: bold; color: #f00;">Propuesta de financiación POR TIEMPO LIMITADO sujeto a aprobación</p>

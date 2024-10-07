@@ -76,7 +76,19 @@ export default function Cotizaciones() {
       width: "160px",
     },
     {
-      name: "Producto",
+      name: "Familia",
+      selector: (row) => row.Producto.familia,
+      sortable: true,
+      width: "160px",
+    },
+    {
+      name: "Marca",
+      selector: (row) => row.Producto.marca,
+      sortable: true,
+      width: "160px",
+    },
+    {
+      name: "Modelo",
       selector: (row) => row.Producto.modelo,
       sortable: true,
       width: "160px",
