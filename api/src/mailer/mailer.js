@@ -43,7 +43,7 @@ const enviarCotizacionPorEmail = async (req, res) => {
 
     const isPasswordValid = await bcrypt.compare(password, hashedPassword);
     if (!isPasswordValid) {
-      return res.status(401).json({ error: "Credenciales no válidas." });
+      return res.status(404).json({ error: "Credenciales no válidas." });
     }
 
     // Obtener la cotización y su relación con CotizacionIndividual, Clientes, Productos y Usuarios

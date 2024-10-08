@@ -344,6 +344,21 @@ export const useCotizaciones = (idUsuario, id) => {
             });
             break;
 
+          case 404:
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "Las credenciales son incorrectas",
+              showConfirmButton: false,
+              timer: 2000,
+              background: "#ffffff",
+              iconColor: "#ffc107",
+              customClass: {
+                title: "text-dark",
+              },
+            });
+            break;
+
           default:
             Swal.fire({
               position: "center",

@@ -5494,6 +5494,13 @@ button:focus-visible {
   text-align: left;
 }
 
+
+@media screen and (max-width: 600px) {
+  .cotizacionDetailSimilPdf {
+    width: 100%;
+  }
+}
+
 .imagenesPDF {
   display: flex;
 }
