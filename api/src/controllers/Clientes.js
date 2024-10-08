@@ -378,7 +378,7 @@ const getMailsPorIdDeUsuario = async (req, res) => {
           "mailAlternativo",
           "mailAlternativo1",
         ],
-        order: [["fechaDeCreacion", "DESC"]],
+        order: [["apellido", "ASC"]],
       });
     } else {
       // Vendedor: Ver emails de clientes a los que les haya creado, modificado una cotización o realizado una venta
@@ -403,7 +403,7 @@ const getMailsPorIdDeUsuario = async (req, res) => {
           "mailAlternativo",
           "mailAlternativo1",
         ],
-        order: [["fechaDeCreacion", "DESC"]],
+        order: [["apellido", "ASC"]],
       });
     }
 
