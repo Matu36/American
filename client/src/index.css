@@ -5767,7 +5767,7 @@ p {
 .cliente-info-pendiente:last-child,
 .producto-info-pendiente:last-child,
 .usuario-info-pendiente:last-child {
-  margin-right: 0; /* Eliminar margen derecho en el último elemento */
+  margin-right: 0; 
 }
 
 .precios-info-pendiente {
@@ -5782,7 +5782,7 @@ p {
 }
 
 .btn-concretar-venta {
-  margin-top: 20px; /* Espacio entre detalles y botón */
+  margin-top: 20px; 
 }
 
 .email-body {
