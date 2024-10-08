@@ -152,7 +152,7 @@ export default function MailsMasivos() {
             return (
               <div key={cliente.nombre} className="cliente">
                 <h4>
-                  {cliente.apellido} {cliente.nombre}
+                  {cliente.apellido}, {cliente.nombre}
                 </h4>
                 {emails.map((email) => (
                   <div key={email} className="email-item">
@@ -195,3 +195,5 @@ export default function MailsMasivos() {
     </div>
   );
 }
+
+//enviando apellido por email //
