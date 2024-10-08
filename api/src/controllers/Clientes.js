@@ -204,6 +204,8 @@ const updateCliente = async (req, res) => {
       apellido,
       mail,
       telefono,
+      provincia,
+      ciudad,
       contactoAlternativo,
       contactoAlternativo1,
       mailAlternativo,
@@ -246,6 +248,8 @@ const updateCliente = async (req, res) => {
       mailAlternativo: mailAlternativo ?? cliente.mailAlternativo,
       mailAlternativo1: mailAlternativo1 ?? cliente.mailAlternativo1,
       telefono: telefono ?? cliente.telefono,
+      provincia: provincia ?? cliente.provincia,
+      ciudad: ciudad ?? cliente.ciudad,
       telefonoAlternativo: telefonoAlternativo ?? cliente.telefonoAlternativo,
       telefonoAlternativo1:
         telefonoAlternativo1 ?? cliente.telefonoAlternativo1,
