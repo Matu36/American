@@ -98,7 +98,7 @@ const getClientesPorIdDeUsuario = async (req, res) => {
           "telefonoAlternativo1",
           "mailAlternativo1",
         ],
-        order: [["fechaDeCreacion", "DESC"]],
+        order: [["apellido", "ASC"]],
       });
     } else {
       // Vendedor: Ver clientes a los que les haya creado, modificado una cotización o realizado una venta
@@ -134,7 +134,7 @@ const getClientesPorIdDeUsuario = async (req, res) => {
           "telefonoAlternativo1",
           "mailAlternativo1",
         ],
-        order: [["fechaDeCreacion", "DESC"]],
+        order: [["apellido", "ASC"]],
       });
     }
 
@@ -155,7 +155,6 @@ const getClientePorId = async (req, res) => {
 
     const idCliente = req.params.idCliente;
 
-    // Busca el cliente en la base de datos por su ID
     const cliente = await Clientes.findByPk(idCliente, {
       include: [
         {
@@ -169,7 +168,6 @@ const getClientePorId = async (req, res) => {
       throw "Cliente no encontrado";
     }
 
-    // Devuelve la información del cliente encontrado
     return res.status(200).json(cliente);
   } catch (error) {
     console.error("Error al obtener cliente:", error);

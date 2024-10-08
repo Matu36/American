@@ -36,7 +36,7 @@ const HistorialVendedorExcel = ({ data }) => {
         "Fecha de Creación": new Date(
           item.fechaDeCreacion
         ).toLocaleDateString(),
-        "Fecha de Modificación": new Date(item.fechaModi).toLocaleDateString(),
+
         Estado: estado,
       };
     });

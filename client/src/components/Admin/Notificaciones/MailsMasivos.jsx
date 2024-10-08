@@ -22,6 +22,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
       <div className="modal-content">
         <h2>Ingresa tu contraseña</h2>
         <br />
+        <br />
         <form onSubmit={handleSubmit}>
           <input
             type="password"
@@ -29,10 +30,47 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Contraseña"
             required
+            style={{
+              borderRadius: "10px",
+              padding: "10px",
+              width: "60%",
+              color: "grey",
+            }}
           />
+          <br />
+          <br />
+          <br />
+
           <div className="modal-buttons">
-            <button type="submit">Enviar</button>
-            <button type="button" onClick={onClose}>
+            <button
+              style={{
+                backgroundColor: "#ffcc00",
+                color: "#000",
+                padding: "10px 20px",
+                fontSize: "16px",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                transition: "background-color 0.3s",
+              }}
+              type="submit"
+            >
+              Enviar
+            </button>
+            <button
+              style={{
+                backgroundColor: "#ffcc00",
+                color: "#000",
+                padding: "10px 20px",
+                fontSize: "16px",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                transition: "background-color 0.3s",
+              }}
+              type="button"
+              onClick={onClose}
+            >
               Cancelar
             </button>
           </div>

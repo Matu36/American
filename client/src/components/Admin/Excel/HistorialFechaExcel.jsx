@@ -37,9 +37,6 @@ const HistorialFechaExcel = ({ data, fechaDesde, fechaHasta }) => {
             "Fecha de Creación": new Date(
               item.fechaDeCreacion
             ).toLocaleDateString(),
-            "Fecha de Modificación": cotizacion.fechaModi
-              ? new Date(cotizacion.fechaModi).toLocaleDateString()
-              : "N/A",
 
             Estado: estado,
           };

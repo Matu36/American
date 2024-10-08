@@ -5823,6 +5823,7 @@ p {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+ 
 }
 
 .custom-confirm-button {
@@ -5834,6 +5835,7 @@ p {
   border-radius: 5px;
   cursor: pointer;
 }
+
 
 .custom-confirm-button:hover {
   background-color: #333;
