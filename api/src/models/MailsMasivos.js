@@ -28,6 +28,18 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
+      imagen: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      imagen1: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      pdf: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
     },
     {
       tableName: "MailsMasivos",

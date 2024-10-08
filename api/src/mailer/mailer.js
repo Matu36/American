@@ -210,7 +210,14 @@ const enviarCotizacionPorEmail = async (req, res) => {
 
 const enviarMailsMasivos = async (req, res) => {
   try {
-    const { emailEmisor, emailsReceptores, cuerpoMensaje, password } = req.body;
+    const {
+      emailEmisor,
+      emailsReceptores,
+      cuerpoMensaje,
+      password,
+      imagen,
+      pdf,
+    } = req.body;
 
     const token = req.headers.authorization;
     if (!token) {
@@ -262,12 +269,12 @@ const enviarMailsMasivos = async (req, res) => {
       ignoreDuplicates: true,
     });
 
-    const sendEmailWithTemplate = (to, cuerpoMensaje) => {
+    const sendEmailWithTemplate = (to, cuerpoMensaje, pdf, imagen) => {
       const emailOptions = {
         from: emailEmisor,
         to,
         subject: "NOTIFICACIONES / OFERTAS",
-        html: mailsMasivos(cuerpoMensaje),
+        html: mailsMasivos(cuerpoMensaje, pdf, imagen),
       };
 
       return transporter.sendMail(emailOptions);

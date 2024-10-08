@@ -22,7 +22,6 @@ const createCliente = async (req, res) => {
     if (
       !idUsuario ||
       !req.body?.CUIT ||
-      !req.body?.domicilio ||
       !req.body?.nombre ||
       !req.body?.apellido ||
       !req.body?.mail ||

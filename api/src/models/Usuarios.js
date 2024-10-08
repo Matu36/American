@@ -66,6 +66,10 @@ module.exports = (sequelize) => {
         defaultValue: false,
         allowNull: false,
       },
+      firma: {
+        type: DataTypes.TEXT,
+        defaultValue: null,
+      },
     },
     {
       updatedAt: false,

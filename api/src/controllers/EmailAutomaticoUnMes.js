@@ -26,10 +26,13 @@ const iniciarCronJob = () => {
   cron.schedule("0 0 * * *", async () => {
     // Ejecuta el cron job cada minuto (para pruebas)
     // cron.schedule("* * * * *", async () => {
+
+    // NO MODIFIQUE LAS VARIABLES, PERO MODIFIQUE EL VALOR (SON 5 DIAS POSTERIORES A LA COTI) //
+
     try {
       const hoy = new Date();
       const treintaDiasAtras = new Date(hoy);
-      treintaDiasAtras.setDate(hoy.getDate() - 30);
+      treintaDiasAtras.setDate(hoy.getDate() - 5);
 
       // Normaliza la fecha a medianoche
       treintaDiasAtras.setHours(0, 0, 0, 0);

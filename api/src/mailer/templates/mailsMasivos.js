@@ -1,4 +1,4 @@
-const mailsMasivos = (cuerpoMensaje) => {
+const mailsMasivos = (cuerpoMensaje, pdf, imagen) => {
   const americanVialImage =
     "https://res.cloudinary.com/dmfzplfra/image/upload/v1727536957/Images/american_ftok3h.png"; // URL de la imagen de American Vial
 
@@ -42,6 +42,7 @@ const mailsMasivos = (cuerpoMensaje) => {
         1611 - Don Torcuato - Bs. As.<br />
         Tel./Fax : (+54) 11 4748 5900 / int. 273
       </p>
+      
       <a href="http://www.americanvial.com" style="text-align: center; display: block; margin-bottom: 20px; font-weight: bold;">www.americanvial.com</a>
       </div>
     </body>

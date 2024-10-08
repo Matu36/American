@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
       },
       domicilio: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       nombre: {
         type: DataTypes.STRING,

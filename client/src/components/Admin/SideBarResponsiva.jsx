@@ -135,11 +135,11 @@ const SideBarResponsiva = ({ handleCerrarModalSideBar }) => {
           path: "/admin/Notificaciones/Emails",
           roles: ["administrador", "vendedor", "gerente"],
         },
-        {
-          label: "WhatsApp",
-          path: "/admin/Notificaciones/WhatsApp",
-          roles: ["administrador", "vendedor", "gerente"],
-        },
+        // {
+        //   label: "WhatsApp",
+        //   path: "/admin/Notificaciones/WhatsApp",
+        //   roles: ["administrador", "vendedor", "gerente"],
+        // },
       ],
       roles: ["administrador", "vendedor", "gerente"],
     },
