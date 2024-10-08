@@ -89,6 +89,8 @@ const getClientesPorIdDeUsuario = async (req, res) => {
           "CUIT",
           "razonSocial",
           "telefono",
+          "provincia",
+          "ciudad",
           "contactoAlternativo",
           "telefonoAlternativo",
           "mailAlternativo",
@@ -123,6 +125,8 @@ const getClientesPorIdDeUsuario = async (req, res) => {
           "CUIT",
           "razonSocial",
           "telefono",
+          "provincia",
+          "ciudad",
           "contactoAlternativo",
           "telefonoAlternativo",
           "mailAlternativo",
@@ -228,13 +232,6 @@ const updateCliente = async (req, res) => {
 
     if (!cliente) {
       return res.status(404).send("Cliente no encontrado");
-    }
-
-    // Verifica que el idUsuario coincida con el del cliente (opcional, para mayor seguridad)
-    if (cliente.idUsuario !== idUsuario) {
-      return res
-        .status(403)
-        .send("No tienes permiso para modificar este cliente");
     }
 
     // Actualiza los campos del cliente
