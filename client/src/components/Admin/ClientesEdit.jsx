@@ -282,20 +282,21 @@ export default function ClientesEdit() {
               onChange={handleChange}
               required
             />
-            <div className="form-group">
-              <label htmlFor="telefono">
-                Teléfono<span className="obligatorio">*</span>
-              </label>
-              <input
-                type="number"
-                id="telefono"
-                name="telefono"
-                value={formData.telefono}
-                onChange={(e) => handleChange(soloNumeros(e))}
-                required
-              />
-            </div>
           </div>
+          <div className="form-group">
+            <label htmlFor="telefono">
+              Teléfono<span className="obligatorio">*</span>
+            </label>
+            <input
+              type="number"
+              id="telefono"
+              name="telefono"
+              value={formData.telefono}
+              onChange={(e) => handleChange(soloNumeros(e))}
+              required
+            />
+          </div>
+
           <div className="form-group">
             <label htmlFor="contactoAlternativo">Contacto Alternativo</label>
             <input
