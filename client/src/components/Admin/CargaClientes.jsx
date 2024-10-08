@@ -270,16 +270,13 @@ export default function CargaClientes() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="domicilio">
-              Domicilio<span className="obligatorio">*</span>
-            </label>
+            <label htmlFor="domicilio">Domicilio</label>
             <input
               type="text"
               id="domicilio"
               name="domicilio"
               value={formData.domicilio}
               onChange={handleChange}
-              required
             />
           </div>
           <div className="form-group">

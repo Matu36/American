@@ -197,9 +197,18 @@ const putUser = async (req, res) => {
     }
 
     // Verificar si se proporciona una modificación en la solicitud
-    const { email, password, nombre, apellido, direccion, telefono } = req.body;
+    const { email, password, nombre, apellido, direccion, telefono, firma } =
+      req.body;
 
-    if (email || password || nombre || apellido || direccion || telefono) {
+    if (
+      email ||
+      password ||
+      nombre ||
+      apellido ||
+      direccion ||
+      telefono ||
+      firma
+    ) {
       // Si se proporciona un nuevo email, actualizarlo
       if (email) {
         user.email = email.toLowerCase();
@@ -225,6 +234,9 @@ const putUser = async (req, res) => {
         user.telefono = telefono;
       }
 
+      if (firma !== undefined) {
+        user.firma = firma;
+      }
       // Guardar los cambios en la base de datos
       await user.save();
       return res
