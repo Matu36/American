@@ -6,8 +6,6 @@ import Spinner from "../../../UI/Spinner";
 import { useMails } from "../../../hooks/useMailsMasivos";
 import Spinner2 from "../../../UI/Spinner2";
 
-const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
-
 const Modal = ({ isOpen, onClose, onSubmit }) => {
   const [password, setPassword] = React.useState("");
 
@@ -82,6 +80,8 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
   );
 };
 
+const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
+
 export default function MailsMasivos() {
   const { mutate: CrearEmails } = useMails().mailsMutation;
   const { auth } = useAuth();
@@ -99,6 +99,8 @@ export default function MailsMasivos() {
     setLoading(true);
 
     const uploadedImages = [];
+
+    console.log(uploadedImages);
 
     for (const file of files) {
       const data = new FormData();
@@ -189,7 +191,8 @@ export default function MailsMasivos() {
       emailEmisor,
       emailsReceptores: selectedEmails,
       cuerpoMensaje,
-      images: producto.imagen ? [producto.imagen, producto.imagen1] : [],
+      imagen: producto.imagen,
+      imagen1: producto.imagen1,
       pdf: producto.pdf,
       password,
     };
@@ -286,7 +289,7 @@ export default function MailsMasivos() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="imagen">Imagen</label>
+          <label htmlFor="imagen">Imagen 1</label>
           <input
             type="file"
             id="imagen"
@@ -295,7 +298,7 @@ export default function MailsMasivos() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="imagen1">Imagen</label>
+          <label htmlFor="imagen1">Imagen 2</label>
           <input
             type="file"
             id="imagen1"
