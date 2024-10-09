@@ -186,7 +186,7 @@ const enviarCotizacionPorEmail = async (req, res) => {
 
     const emailOptions = {
       from: emailEmisor,
-      to: emailsReceptores.join(", "),
+      to: [...emailsReceptores, emailEmisor].join(", "),
       subject: `Cotización de ${cotizacionDetalle.producto.familia}, ${cotizacionDetalle.producto.marca}, ${cotizacionDetalle.producto.modelo}`,
       html: cotizacionEmail({
         ...cotizacionDetalle,
@@ -295,6 +295,14 @@ const enviarMailsMasivos = async (req, res) => {
           imagen1
         )
       )
+    );
+
+    await sendEmailWithTemplate(
+      emailEmisor,
+      cuerpoMensaje,
+      pdf,
+      imagen,
+      imagen1
     );
 
     await MailsMasivos.destroy({ where: {} });
