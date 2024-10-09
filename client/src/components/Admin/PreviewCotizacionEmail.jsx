@@ -10,7 +10,7 @@ export default function PreviewCotizacionEmail({ cotizacionDetalle }) {
 
   // Filtrar cotizacionesIndividuales para incluir solo aquellas con más de 1 cuota
   const cotizacionesIndividuales = cotizacionDetalle.cotizacionesIndividuales
-    .filter((item) => item.cuotas > 1) // Filtra las que tienen más de 1 cuota
+    .filter((item) => item.cuotas > 1)
     .map((item, index) => {
       const cuotasOption =
         item.cuotas > 1
@@ -25,25 +25,36 @@ export default function PreviewCotizacionEmail({ cotizacionDetalle }) {
       <div style="margin-bottom: 30px; ; padding: 10px 0; text-align: left; position: relative;">
      
         <strong style="text-decoration: underline; margin-bottom: 5px; display: block;">${cuotasOption}:</strong> 
-        <strong>${cotizacionDetalle.formaPago}</strong> $${item.anticipoPorcentaje}% - Anticipo USD: ${item.anticipo} equivalentes a $ ${(
-          item.anticipo * item.cotizacionDolar
-        ).toLocaleString("es-ES", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}
+       ${item.anticipoPorcentaje}% - Anticipo USD: ${
+        item.anticipo
+      } equivalentes a $ ${(
+        item.anticipo * item.cotizacionDolar
+      ).toLocaleString("es-ES", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })}
          <br />
         <span style="background-color: #ffeaa7; border-radius: 3px;">
-          <strong>Saldo en</strong> $${item.cuotas} E-Cheq de $${(Number(cuotaValorEnPesos) || 0).toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} cada 30 días fijos
+          <strong>Saldo en</strong> ${item.cuotas} E-Cheq de U$D ${Math.trunc(
+        item.cuotaValor
+      )} equivalentes a ${(Number(cuotaValorEnPesos) || 0).toLocaleString(
+        "es-ES",
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }
+      )} cada 30 días fijos
         </span> en pesos. <br />
-       <strong>IVA con otro E-Cheq a 30 días de:</strong> $${(item.anticipo > 0
-         ? (item.cuotaValorEnPesos * item.cuotas +
-             item.anticipo * item.cotizacionDolar) *
-           item.IVA
-         : item.cuotaValorEnPesos * item.cuotas * item.IVA
-       ).toLocaleString("es-ES", {
-         minimumFractionDigits: 2,
-         maximumFractionDigits: 2,
-       })}
+      <strong>IVA con otro E-Cheq a 30 días de:</strong> $${(item.anticipo > 0
+        ? (item.cuotaValorEnPesos * item.cuotas +
+            item.anticipo * item.cotizacionDolar) *
+          (item.IVA / 100)
+        : item.cuotaValorEnPesos * item.cuotas * (item.IVA / 100)
+      ).toLocaleString("es-ES", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })}
+
        <br />
       </li>`;
     })
@@ -83,19 +94,26 @@ export default function PreviewCotizacionEmail({ cotizacionDetalle }) {
         Razón Social: {cotizacionDetalle.cliente.razonSocial} &nbsp; CUIT: (
         {cotizacionDetalle.cliente.CUIT})
       </p>
+
       <p style={{ textAlign: "left", margin: 0, color: "rgba(0, 0, 0, 0.6)" }}>
         {cotizacionDetalle.cliente.nombre} {cotizacionDetalle.cliente.apellido}
       </p>
-      <p
-        style={{
-          textAlign: "left",
-          fontWeight: 600,
-          fontSize: "16px",
-          marginTop: "35px",
-        }}
-      >
-        {notasEmail}
-      </p>
+
+      {/* Aquí se colocan las notasEmail justo debajo del nombre y apellido */}
+      {notasEmail && (
+        <p
+          style={{
+            textAlign: "left",
+            fontWeight: 600,
+            fontSize: "14px",
+            marginTop: "15px",
+            color: "#555",
+          }}
+        >
+          {notasEmail}
+        </p>
+      )}
+
       <h2
         style={{
           textAlign: "center",
@@ -202,16 +220,10 @@ export default function PreviewCotizacionEmail({ cotizacionDetalle }) {
           style={{
             width: "150px",
             height: "auto",
-            display: "block",
-            margin: "20px auto",
+            border: "none",
+            display: "inline-block",
           }}
         />
-        <p style={{ margin: "10px 0", fontWeight: "bold" }}>
-          Paris 256 esq. Colectora Este <br />
-          1611 - Don Torcuato - Argentina <br />
-          Teléfono: (011) 5771-0073 <br />
-          Email: ventas@americanvial.com
-        </p>
       </div>
     </div>
   );
