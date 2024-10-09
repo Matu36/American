@@ -216,6 +216,7 @@ const enviarMailsMasivos = async (req, res) => {
       cuerpoMensaje,
       password,
       imagen,
+      imagen1,
       pdf,
     } = req.body;
 
@@ -230,7 +231,6 @@ const enviarMailsMasivos = async (req, res) => {
       token.replace("Bearer ", ""),
       JWTSECRET
     );
-
     const email = decodedToken.email;
     const hashedPassword = decodedToken.password;
 
@@ -263,26 +263,37 @@ const enviarMailsMasivos = async (req, res) => {
       emailEmisor,
       emailReceptor,
       cuerpoMensaje,
+      imagen,
+      imagen1,
+      pdf,
     }));
 
+    // Guardar los correos en la base de datos
     const resultado = await MailsMasivos.bulkCreate(correosMasivos, {
       ignoreDuplicates: true,
     });
 
-    const sendEmailWithTemplate = (to, cuerpoMensaje, pdf, imagen) => {
+    const sendEmailWithTemplate = (to, cuerpoMensaje, pdf, imagen, imagen1) => {
       const emailOptions = {
         from: emailEmisor,
         to,
         subject: "NOTIFICACIONES / OFERTAS",
-        html: mailsMasivos(cuerpoMensaje, pdf, imagen),
+        html: mailsMasivos(cuerpoMensaje, pdf, imagen, imagen1),
       };
 
       return transporter.sendMail(emailOptions);
     };
 
+    // Enviar los correos
     await Promise.all(
       correosMasivos.map(({ emailReceptor }) =>
-        sendEmailWithTemplate(emailReceptor, cuerpoMensaje)
+        sendEmailWithTemplate(
+          emailReceptor,
+          cuerpoMensaje,
+          pdf,
+          imagen,
+          imagen1
+        )
       )
     );
 

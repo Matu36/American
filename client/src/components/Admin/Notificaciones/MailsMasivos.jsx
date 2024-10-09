@@ -6,6 +6,8 @@ import Spinner from "../../../UI/Spinner";
 import { useMails } from "../../../hooks/useMailsMasivos";
 import Spinner2 from "../../../UI/Spinner2";
 
+const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
+
 const Modal = ({ isOpen, onClose, onSubmit }) => {
   const [password, setPassword] = React.useState("");
 
@@ -85,6 +87,66 @@ export default function MailsMasivos() {
   const { auth } = useAuth();
   const emailEmisor = auth?.email;
 
+  //CLOUDDINARY//
+
+  const [images, setImages] = useState([]);
+  const [producto, setProducto] = useState();
+  const [loading, setLoading] = useState(false);
+
+  const uploadImage = async (e, imageNumber) => {
+    const files = e.target.files;
+
+    setLoading(true);
+
+    const uploadedImages = [];
+
+    for (const file of files) {
+      const data = new FormData();
+      data.append("file", file);
+      data.append("upload_preset", "Images");
+
+      const res = await fetch(Clouddinary, {
+        method: "POST",
+        body: data,
+      });
+
+      const imageData = await res.json();
+      uploadedImages.push(imageData.secure_url);
+    }
+
+    setLoading(false);
+    switch (imageNumber) {
+      case 0:
+        setProducto({ ...producto, imagen: uploadedImages[0] });
+        break;
+      case 1:
+        setProducto({ ...producto, imagen1: uploadedImages[0] });
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const uploadPDF = async (e) => {
+    const file = e.target.files[0];
+
+    setLoading(true);
+
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "Images");
+
+    const res = await fetch(Clouddinary, {
+      method: "POST",
+      body: data,
+    });
+
+    const pdfData = await res.json();
+    setLoading(false);
+    setProducto({ ...producto, pdf: pdfData.secure_url });
+  };
+
   const token = localStorage.getItem("token");
   const idUsuario = token;
 
@@ -127,8 +189,12 @@ export default function MailsMasivos() {
       emailEmisor,
       emailsReceptores: selectedEmails,
       cuerpoMensaje,
+      images: producto.imagen ? [producto.imagen, producto.imagen1] : [],
+      pdf: producto.pdf,
       password,
     };
+
+    console.log(emailData);
 
     setEnviando(true);
 
@@ -219,9 +285,36 @@ export default function MailsMasivos() {
             onChange={(e) => setCuerpoMensaje(e.target.value)}
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="imagen">Imagen</label>
+          <input
+            type="file"
+            id="imagen"
+            accept="image/png, image/jpeg"
+            onChange={(e) => uploadImage(e, 0)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="imagen1">Imagen</label>
+          <input
+            type="file"
+            id="imagen1"
+            accept="image/png, image/jpeg"
+            onChange={(e) => uploadImage(e, 1)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="fichaPDF">PDF</label>
+          <input
+            type="file"
+            id="fichaPDF"
+            accept="application/pdf"
+            onChange={uploadPDF}
+          />
+        </div>
 
         <button className="form-submit" type="submit" disabled={enviando}>
-          {enviando ? <Spinner2 /> : "Enviar Email"}
+          {enviando ? "Enviando..." : "Enviar Email"}
         </button>
       </form>
 

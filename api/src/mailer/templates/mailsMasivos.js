@@ -1,4 +1,4 @@
-const mailsMasivos = (cuerpoMensaje, pdf, imagen) => {
+const mailsMasivos = (cuerpoMensaje, pdf, imagen, imagen1) => {
   const americanVialImage =
     "https://res.cloudinary.com/dmfzplfra/image/upload/v1727536957/Images/american_ftok3h.png"; // URL de la imagen de American Vial
 
@@ -29,21 +29,33 @@ const mailsMasivos = (cuerpoMensaje, pdf, imagen) => {
           font-size: 12px;
           color: #999999;
         }
+        .product-image {
+          width: 150px;
+          height: auto;
+          display: block;
+          margin: 10px auto;
+        }
       </style>
     </head>
     <body>
       <div class="email-container">
         <h1>Mensaje Importante</h1>
         <p>${cuerpoMensaje}</p>
-      
-      <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 20px auto;" />
-      <p style="text-align: center; margin: 10px 0; font-weight: bold;">
-        Paris 256 esq. Colectora Este <br />
-        1611 - Don Torcuato - Bs. As.<br />
-        Tel./Fax : (+54) 11 4748 5900 / int. 273
-      </p>
-      
-      <a href="http://www.americanvial.com" style="text-align: center; display: block; margin-bottom: 20px; font-weight: bold;">www.americanvial.com</a>
+        
+        ${imagen ? `<img src="${imagen}" alt="Imagen" class="product-image" />` : ""}
+        ${imagen1 ? `<img src="${imagen1}" alt="Imagen Adicional" class="product-image" />` : ""}
+
+        <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 20px auto;" />
+        
+        ${pdf ? `<a href="${pdf}" target="_blank" style="display: block; margin: 20px auto; font-weight: bold;">Ver Documento PDF</a>` : ""}
+        
+        <p style="text-align: center; margin: 10px 0; font-weight: bold;">
+          Paris 256 esq. Colectora Este <br />
+          1611 - Don Torcuato - Bs. As.<br />
+          Tel./Fax : (+54) 11 4748 5900 / int. 273
+        </p>
+        
+        <a href="http://www.americanvial.com" style="text-align: center; display: block; margin-bottom: 20px; font-weight: bold;">www.americanvial.com</a>
       </div>
     </body>
   </html>
