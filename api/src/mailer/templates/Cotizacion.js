@@ -120,6 +120,7 @@ const cotizacionEmail = (cotizacion) => {
           } ${cotizacion.producto.marca} ${cotizacion.producto.modelo}</div>
         </div>
       </div>
+        <hr style="margin-top: 30px; margin-bottom: 10px;" />
       <div style="margin-top: 30px; text-align: center;">
         <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 20px auto;" />
         <p style="margin: 10px 0; font-weight: bold;">
