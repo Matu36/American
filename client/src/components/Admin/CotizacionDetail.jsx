@@ -297,7 +297,6 @@ export default function CotizacionDetail() {
         <View
           key={index}
           style={{
-            marginBottom: 30,
             padding: 10,
             textAlign: "left",
             position: "relative",
@@ -327,7 +326,8 @@ export default function CotizacionDetail() {
               fontSize: 12,
             }}
           >
-            Saldo en {item.cuotas} E-Cheq de $
+            Saldo en {item.cuotas} E-Cheq de U$D {Math.trunc(item.cuotaValor)}{" "}
+            equivalentes a $
             {(Number(cuotaValorEnPesos) || 0).toLocaleString("es-ES", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
@@ -339,8 +339,8 @@ export default function CotizacionDetail() {
             {(item.anticipo > 0
               ? (item.cuotaValorEnPesos * item.cuotas +
                   item.anticipo * item.cotizacionDolar) *
-                item.IVA
-              : item.cuotaValorEnPesos * item.cuotas * item.IVA
+                (item.IVA / 100)
+              : item.cuotaValorEnPesos * item.cuotas * (item.IVA / 100)
             ).toLocaleString("es-ES", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
@@ -424,7 +424,10 @@ export default function CotizacionDetail() {
 
           <Text style={styles.hr} />
         </View>
-
+        <br />
+        <Text style={[styles.especificacionesPrincipales, styles.centeredText]}>
+          Propuestas de financiación:
+        </Text>
         <View>{cotizacionesIndividualPDF}</View>
 
         {/* Características técnicas generales */}
@@ -746,8 +749,8 @@ export default function CotizacionDetail() {
               {cotizacion.estado === 3
                 ? "Pendiente de Aprobación"
                 : cotizacion.estado === 2
-                  ? "Venta Concretada"
-                  : "Concretar Venta"}
+                ? "Venta Concretada"
+                : "Concretar Venta"}
             </button>
           </div>
         </div>

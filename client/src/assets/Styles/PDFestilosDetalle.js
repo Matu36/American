@@ -165,4 +165,9 @@ export const styles = StyleSheet.create({
     height: "auto",
     zIndex: 0,
   },
+
+  centeredText: {
+    textAlign: "center",
+    marginTop: 20,
+  },
 });

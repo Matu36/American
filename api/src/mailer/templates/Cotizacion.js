@@ -23,31 +23,35 @@ const cotizacionEmail = (cotizacion) => {
       <li style="margin-bottom: 30px; list-style: none; padding: 10px 0; text-align: left; position: relative;">
         <span style="position: absolute; left: -20px; top: 10px; width: 10px; height: 10px; border-radius: 50%; background-color: #000;"></span>
         <strong style="text-decoration: underline; margin-bottom: 5px; display: block;">${cuotasOption}:</strong> 
-        <strong>${cotizacion.formaPago}</strong> ${
-          item.anticipoPorcentaje
-        }% - Anticipo USD: ${item.anticipo} equivalentes a $ ${(
-          item.anticipo * item.cotizacionDolar
-        ).toLocaleString("es-ES", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}
+        <strong>${cotizacion.formaPago}</strong>  ${
+        item.anticipoPorcentaje
+      }% - Anticipo USD: ${item.anticipo} equivalentes a $ ${(
+        item.anticipo * item.cotizacionDolar
+      ).toLocaleString("es-ES", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })}
          <br />
         <span style="background-color: #ffeaa7;  border-radius: 3px;">
-          <strong>Saldo en</strong> ${
-            item.cuotas
-          } E-Cheq de $${(Number(cuotaValorEnPesos) || 0).toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-
-          cada 30 días fijos
-        </span>  en pesos. <br />
-       <strong>IVA con otro E-Cheq a 30 días de:</strong> $${(item.anticipo > 0
-         ? (item.cuotaValorEnPesos * item.cuotas +
-             item.anticipo * item.cotizacionDolar) *
-           item.IVA
-         : item.cuotaValorEnPesos * item.cuotas * item.IVA
-       ).toLocaleString("es-ES", {
-         minimumFractionDigits: 2,
-         maximumFractionDigits: 2,
-       })}
+         <strong>Saldo en</strong> ${item.cuotas} E-Cheq de U$D ${Math.trunc(
+        item.cuotaValor
+      )} equivalentes a ${(Number(cuotaValorEnPesos) || 0).toLocaleString(
+        "es-ES",
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }
+      )} cada 30 días fijos
+        </span> en pesos. <br />
+      <strong>IVA con otro E-Cheq a 30 días de:</strong> $${(item.anticipo > 0
+        ? (item.cuotaValorEnPesos * item.cuotas +
+            item.anticipo * item.cotizacionDolar) *
+          (item.IVA / 100)
+        : item.cuotaValorEnPesos * item.cuotas * (item.IVA / 100)
+      ).toLocaleString("es-ES", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })}
        <br />
       </li>`;
     })
@@ -57,15 +61,30 @@ const cotizacionEmail = (cotizacion) => {
 
   return `
     <div style="font-family: 'Arial', sans-serif; color: #333; padding: 10px 10px 10px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 4px; width: 95%; margin: auto; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-      <h5 style="text-align: right; color: #444; font-weight: normal; font-size: 16px; opacity: 0.8;">Cotización N°: ${cotizacion.codigoCotizacion}</h5>
+      <h5 style="text-align: right; color: #444; font-weight: normal; font-size: 16px; opacity: 0.8;">Cotización N°: ${
+        cotizacion.codigoCotizacion
+      }</h5>
       <p style="text-align: left; margin: 0; font-weight: bold;">Cliente:</p>
-      <p style="text-align: left; margin: 0; color: rgba(0, 0, 0, 0.6);">Razón Social: ${cotizacion.cliente.razonSocial} &nbsp; CUIT: (${cotizacion.cliente.CUIT})</p>
-      <p style="text-align: left; margin: 0; color: rgba(0, 0, 0, 0.6);">${cotizacion.cliente.nombre} ${cotizacion.cliente.apellido}</p>
+      <p style="text-align: left; margin: 0; color: rgba(0, 0, 0, 0.6);">Razón Social: ${
+        cotizacion.cliente.razonSocial
+      } &nbsp; CUIT: (${cotizacion.cliente.CUIT})</p>
+      <p style="text-align: left; margin: 0; color: rgba(0, 0, 0, 0.6);">${
+        cotizacion.cliente.nombre
+      } ${cotizacion.cliente.apellido}</p>
       <p style="text-align: left; font-weight: 600; font-size: 16px; margin-top: 35px;">${notasEmail}</p>
       <h2 style="text-align: center; color: #555; font-size: 20px; text-decoration: underline;margin-top: 35px;">Detalles de la Cotización</h2>
       <p style="text-align: center;">
-        <strong>VALOR PAGO DE CONTADO:</strong> U$S ${primerCotizacion.precio} + IVA 10.5% <br />
-        <strong>Cotización Dólar BNA:</strong> Ejemplo Hoy BNA $ ${primerCotizacion.cotizacionDolar}, Precio en Pesos: $$${(Number(primerCotizacion.precioEnPesos) || 0).toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        <strong>VALOR PAGO DE CONTADO:</strong> U$S ${
+          primerCotizacion.precio
+        } + IVA 10.5% <br />
+        <strong>Cotización Dólar BNA:</strong> Ejemplo Hoy BNA $ ${
+          primerCotizacion.cotizacionDolar
+        }, Precio en Pesos: $$${(
+    Number(primerCotizacion.precioEnPesos) || 0
+  ).toLocaleString("es-ES", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}
 
         + IVA 10.5%
       </p>
@@ -83,16 +102,22 @@ const cotizacionEmail = (cotizacion) => {
       </div>
       <div style="display: flex; justify-content: space-around; gap: 40px; margin-bottom: 50px;">
         <div style="text-align: center;">
-          <a href="${cotizacion.CotizacionPDF}" download style="text-decoration: none;">
+          <a href="${
+            cotizacion.CotizacionPDF
+          }" download style="text-decoration: none;">
             <img src="${PDFUrl}" alt="Descargar PDF" style="width: 50px; height: auto; border: none;" />
           </a>
           <div style="margin-top: 5px; font-weight: bold; font-size: 16px;">Cotización</div>
         </div>
         <div style="text-align: center;">
-          <a href="${cotizacion.producto.fichaPDF}" download style="text-decoration: none;">
+          <a href="${
+            cotizacion.producto.fichaPDF
+          }" download style="text-decoration: none;">
             <img src="${PDFUrl}" alt="Descargar Ficha" style="width: 50px; height: auto; border: none;" />
           </a>
-          <div style="margin-top: 5px; font-weight: bold; font-size: 16px;">Ficha Técnica de ${cotizacion.producto.familia} ${cotizacion.producto.marca} ${cotizacion.producto.modelo}</div>
+          <div style="margin-top: 5px; font-weight: bold; font-size: 16px;">Ficha Técnica de ${
+            cotizacion.producto.familia
+          } ${cotizacion.producto.marca} ${cotizacion.producto.modelo}</div>
         </div>
       </div>
       <div style="margin-top: 30px; text-align: center;">
