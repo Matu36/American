@@ -55,16 +55,21 @@ const mailsMasivos = (cuerpoMensaje, pdf, imagen, imagen1) => {
           ${imagen1 ? `<img src="${imagen1}" alt="Imagen Adicional" class="product-image" />` : ""}
         </div>
 
-        <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 20px auto;" />
-        
         ${
           pdf
-            ? `  
-    <a href="${pdf}" target="_blank" style="display: block; margin: 20px auto; font-weight: bold;">
-      <img src="${PDFUrl}" alt="Descargar PDF" style="width: 50px; height: auto; border: none;" />
-    </a>`
+            ? `
+        <div style="text-align: center; margin: 20px auto;">
+          <a href="${pdf}" target="_blank" style="display: inline-block; margin: auto; font-weight: bold;">
+            <img src="${PDFUrl}" alt="Descargar PDF" style="width: 80px; height: auto; border: none;" />
+            <span style="display: block; font-size: 16px; margin-top: 5px;">Descargar PDF</span>
+          </a>
+        </div>`
             : ""
         }
+
+        <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 20px auto;" />
+        
+     
         
         <p class="center" style="margin: 10px 0; font-weight: bold;">
           Paris 256 esq. Colectora Este <br />
