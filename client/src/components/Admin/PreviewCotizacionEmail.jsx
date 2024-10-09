@@ -22,8 +22,8 @@ export default function PreviewCotizacionEmail({ cotizacionDetalle }) {
       const cuotaValorEnPesos = item.cuotaValorEnPesos || 0;
 
       return `        
-      <div style="margin-bottom: 30px; list-style: none; padding: 10px 0; text-align: left; position: relative;">
-        <span style="position: absolute; left: -20px; top: 10px; width: 10px; height: 10px; border-radius: 50%; background-color: #000;"></span>
+      <div style="margin-bottom: 30px; ; padding: 10px 0; text-align: left; position: relative;">
+     
         <strong style="text-decoration: underline; margin-bottom: 5px; display: block;">${cuotasOption}:</strong> 
         <strong>${cotizacionDetalle.formaPago}</strong> $${item.anticipoPorcentaje}% - Anticipo USD: ${item.anticipo} equivalentes a $ ${(
           item.anticipo * item.cotizacionDolar

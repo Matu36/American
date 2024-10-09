@@ -281,6 +281,75 @@ export default function CotizacionDetail() {
 
   const cotizacionUnicoElemento = cotizacionesIndividuales[0];
 
+  const cotizacionesIndividualPDF = cotizacionDetalle.cotizacionesIndividuales
+    .filter((item) => item.cuotas > 1)
+    .map((item, index) => {
+      const cuotasOption =
+        item.cuotas > 1
+          ? `Opción ${index + 1}: ${item.anticipoPorcentaje}% anticipo y ${
+              item.cuotas
+            } E-Cheq`
+          : `${item.anticipoPorcentaje}% anticipo y ${item.cuotas} E-Cheq`;
+      const saldoConInteres = item.saldoConInteres || 0;
+      const cuotaValorEnPesos = item.cuotaValorEnPesos || 0;
+
+      return (
+        <View
+          key={index}
+          style={{
+            marginBottom: 30,
+            padding: 10,
+            textAlign: "left",
+            position: "relative",
+          }}
+        >
+          <Text
+            style={{
+              textDecoration: "underline",
+              marginBottom: 5,
+              fontSize: 12,
+            }}
+          >
+            {cuotasOption}:
+          </Text>
+          <Text style={{ fontSize: 12 }}>
+            {cotizacionDetalle.formaPago} ${item.anticipoPorcentaje}% - Anticipo
+            USD: {item.anticipo} equivalentes a $
+            {(item.anticipo * item.cotizacionDolar).toLocaleString("es-ES", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </Text>
+          <Text
+            style={{
+              backgroundColor: "#ffeaa7",
+              borderRadius: 3,
+              fontSize: 12,
+            }}
+          >
+            Saldo en {item.cuotas} E-Cheq de $
+            {(Number(cuotaValorEnPesos) || 0).toLocaleString("es-ES", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}{" "}
+            cada 30 días fijos
+          </Text>
+          <Text style={{ fontSize: 12 }}>
+            IVA con otro E-Cheq a 30 días de: $
+            {(item.anticipo > 0
+              ? (item.cuotaValorEnPesos * item.cuotas +
+                  item.anticipo * item.cotizacionDolar) *
+                item.IVA
+              : item.cuotaValorEnPesos * item.cuotas * item.IVA
+            ).toLocaleString("es-ES", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </Text>
+        </View>
+      );
+    });
+
   const MyDocument = () => (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -354,19 +423,9 @@ export default function CotizacionDetail() {
           </Text>
 
           <Text style={styles.hr} />
-          {/* <View style={styles.cotizacion}>
-              <Text style={styles.cotizacionText}>
-                Anticipo: {cotizacion.moneda} {cotizacion.anticipo}
-              </Text>
-              <Text style={styles.cotizacionText}>
-                Financiación: {cotizacion.cuotas} Pagos de {cotizacion.moneda}{" "}
-                {cotizacion.cuotaValor}
-              </Text>
-              <Text style={styles.cotizacionText}>
-                Precio Final: {cotizacion.moneda} {cotizacion.PrecioFinal}
-              </Text>
-            </View> */}
         </View>
+
+        <View>{cotizacionesIndividualPDF}</View>
 
         {/* Características técnicas generales */}
 
