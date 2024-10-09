@@ -317,7 +317,7 @@ export default function CotizacionDetail() {
           </View>
           <Text style={styles.precioUnitario}>
             Precio Unitario del equipo:………….…… U$D {""}{" "}
-            {cotizacionUnicoElemento.precio} + IVA (
+            {Math.floor(cotizacionUnicoElemento.precio)} + IVA (
             {cotizacionUnicoElemento.IVA}%)
           </Text>
           <Text style={styles.dolares}>
