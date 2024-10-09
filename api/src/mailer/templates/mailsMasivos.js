@@ -67,15 +67,15 @@ const mailsMasivos = (cuerpoMensaje, pdf, imagen, imagen1) => {
             : ""
         }
 
+        <hr style="margin-top: 30px; margin-bottom: 10px;" />
+
         <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 20px auto;" />
         
-     
-        
-        <p class="center" style="margin: 10px 0; font-weight: bold;">
-          Paris 256 esq. Colectora Este <br />
-          1611 - Don Torcuato - Bs. As.<br />
-          Tel./Fax : (+54) 11 4748 5900 / int. 273
-        </p>
+        <p class="center" style="margin: 30px 0; font-weight: bold;"> 
+        Paris 256 esq. Colectora Este <br />
+        1611 - Don Torcuato - Bs. As.<br />
+        Tel./Fax : (+54) 11 4748 5900 / int. 273
+      </p>
         
         <a href="http://www.americanvial.com" style="text-align: center; display: block; margin-bottom: 20px; font-weight: bold;">www.americanvial.com</a>
       </div>
