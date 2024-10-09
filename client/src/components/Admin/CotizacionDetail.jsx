@@ -20,8 +20,24 @@ import {
 import { styles } from "../../assets/Styles/PDFestilosDetalle";
 import BackButton from "../../UI/BackButton";
 import Spinner2 from "../../UI/Spinner2";
+import PreviewCotizacionEmail from "./PreviewCotizacionEmail";
 
 const Clouddinary = import.meta.env.VITE_CLOUDINARY_URL;
+
+const Modal = ({ isOpen, onClose, children }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay1">
+      <div className="modal-content1">
+        <button className="modal-close" onClick={onClose}>
+          X
+        </button>
+        {children}
+      </div>
+    </div>
+  );
+};
 
 export default function CotizacionDetail() {
   const { id } = useParams();
@@ -31,6 +47,15 @@ export default function CotizacionDetail() {
   const [password, setPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loadingEnvio, setLoadingEnvio] = useState(false);
+  const [preview, setPreview] = useState(false);
+
+  const handlePreviewOpen = () => {
+    setPreview(true);
+  };
+
+  const handlePreviewClose = () => {
+    setPreview(false);
+  };
 
   const { mutate: envioDeCotiPorEmail } =
     useCotizaciones().cotizacionPorEmailMutation;
@@ -786,21 +811,19 @@ export default function CotizacionDetail() {
           />
         )}
       </div>
-
-      {/* <div className="asesorComercial">
-        <h4 style={{ textDecoration: "underline" }}>Asesor Comercial</h4>
-        <p>
-          <strong>Nombre:</strong> {usuario.nombre} {usuario.apellido}
-        </p>
-
-        <p>
-          <strong>Email:</strong> {usuario.email}
-        </p>
-      </div> */}
-      <div className="deptoComercial">
-        <span>Dto. Comercial.</span> <span> Lucas Pedro Pulice </span>{" "}
-        <span>1123404859</span>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          fontSize: "22px",
+          textDecoration: "underline",
+        }}
+      >
+        <button onClick={handlePreviewOpen}>Previsualización</button>
       </div>
+      <Modal isOpen={preview} onClose={handlePreviewClose}>
+        <PreviewCotizacionEmail cotizacionDetalle={cotizacionDetalle} />
+      </Modal>
       <div className="footerDetail">
         <hr />
         <span>

@@ -4931,7 +4931,6 @@ button:focus-visible {
 
 @media screen and (max-width: 800px) {
   .back-button {
-  
     font-size: 14px;
   }
 }
@@ -4946,7 +4945,7 @@ button:focus-visible {
 
 @media screen and (min-width: 1200px) {
   .back-button {
-    right:70px;
+    right: 70px;
     top: 165px;
     font-size: 14px;
   }
@@ -5494,7 +5493,6 @@ button:focus-visible {
   text-align: left;
 }
 
-
 @media screen and (max-width: 600px) {
   .cotizacionDetailSimilPdf {
     width: 100%;
@@ -5774,7 +5772,7 @@ p {
 .cliente-info-pendiente:last-child,
 .producto-info-pendiente:last-child,
 .usuario-info-pendiente:last-child {
-  margin-right: 0; 
+  margin-right: 0;
 }
 
 .precios-info-pendiente {
@@ -5789,7 +5787,7 @@ p {
 }
 
 .btn-concretar-venta {
-  margin-top: 20px; 
+  margin-top: 20px;
 }
 
 .email-body {
@@ -5826,11 +5824,35 @@ p {
   width: 500px;
 }
 
+.modal-overlay1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content1 {
+  background-color: white;
+  padding: 20px; /* Puedes reducir esto para hacerlo más compacto */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 1000px; /* Ajusta el ancho a un valor más pequeño */
+  max-width: 90%; /* Para asegurarte de que no exceda el tamaño de la pantalla */
+  height: auto; /* Permite que la altura se ajuste automáticamente */
+  max-height: 80%; /* Limita la altura máxima del modal */
+  overflow-y: auto; /* Agrega desplazamiento vertical si es necesario */
+}
+
 .modal-buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
- 
 }
 
 .custom-confirm-button {
@@ -5842,7 +5864,6 @@ p {
   border-radius: 5px;
   cursor: pointer;
 }
-
 
 .custom-confirm-button:hover {
   background-color: #333;

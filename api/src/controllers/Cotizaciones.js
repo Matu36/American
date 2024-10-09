@@ -326,6 +326,7 @@ const getCotizacionDetalle = async (req, res) => {
             "mail",
             "mailAlternativo",
             "mailAlternativo1",
+            "nombre",
           ],
         },
         {
@@ -421,6 +422,7 @@ const getCotizacionDetalle = async (req, res) => {
         apellido: cotizacion.Cliente.apellido,
         mailAlternativo: cotizacion.Cliente.mailAlternativo,
         mailAlternativo1: cotizacion.Cliente.mailAlternativo1,
+        nombre: cotizacion.Cliente.nombre,
       },
       usuario: {
         nombre: cotizacion.Usuario.nombre,

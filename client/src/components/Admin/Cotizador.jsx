@@ -254,17 +254,19 @@ const Cotizador = () => {
     let anticipo = parseFloat(cotizacion.anticipo) || 0;
     let IVA = parseFloat(cotizacion.IVA) || 0;
     let interes = parseFloat(cotizacion.interes) || 0;
-    let cotizacionDolar = parseFloat(cotizacion.cotizacionDolar) || 1; // Aseguramos que tenga un valor válido
+    let cotizacionDolar = parseFloat(cotizacion.cotizacionDolar) || 1;
 
-    // Calcular anticipoPorcentaje
+    // Calcular el porcentaje de anticipo
     let anticipoPorcentaje = (anticipo / precio) * 100 || 0;
 
     let saldoAFinanciar = precio - anticipo;
     let saldoConInteres = saldoAFinanciar * (1 + interes / 100);
     let cuotaValor = null;
+
     if (cotizacion.cuotas > 0) {
       cuotaValor = saldoConInteres / cotizacion.cuotas;
     }
+
     let PrecioFinal =
       cotizacion.cuotas === 1
         ? precio * (1 + IVA / 100)
@@ -277,7 +279,7 @@ const Cotizador = () => {
     let PrecioFinalEnPesos = PrecioFinal * cotizacionDolar;
 
     return {
-      anticipoPorcentaje: anticipoPorcentaje.toFixed(2), // Nuevo campo agregado
+      anticipoPorcentaje: anticipoPorcentaje.toFixed(2),
       saldoAFinanciar: saldoAFinanciar.toFixed(2),
       saldoConInteres: saldoConInteres.toFixed(2),
       cuotaValor: cuotaValor !== null ? cuotaValor.toFixed(2) : null,
@@ -289,6 +291,7 @@ const Cotizador = () => {
     };
   };
 
+  // useEffect para recalcular valores cuando cambian ciertos campos
   useEffect(() => {
     const updatedCotizaciones = formData.cotizacionesIndividuales.map(
       (cotizacion) => {
@@ -305,13 +308,15 @@ const Cotizador = () => {
       cotizacionesIndividuales: updatedCotizaciones,
     }));
   }, [
-    formData.cotizacionesIndividuales.map((c) => c.precio).join(),
-    formData.cotizacionesIndividuales.map((c) => c.anticipo).join(),
-    formData.cotizacionesIndividuales.map((c) => c.IVA).join(),
-    formData.cotizacionesIndividuales.map((c) => c.cuotas).join(),
-    formData.cotizacionesIndividuales.map((c) => c.interes).join(),
-    formData.cotizacionesIndividuales.map((c) => c.cotizacionDolar).join(),
+    // Asegúrate de pasar las propiedades directamente, no como cadenas
+    ...formData.cotizacionesIndividuales.map((c) => c.precio),
+    ...formData.cotizacionesIndividuales.map((c) => c.anticipo),
+    ...formData.cotizacionesIndividuales.map((c) => c.IVA),
+    ...formData.cotizacionesIndividuales.map((c) => c.cuotas),
+    ...formData.cotizacionesIndividuales.map((c) => c.interes),
+    ...formData.cotizacionesIndividuales.map((c) => c.cotizacionDolar),
   ]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     cotizacionCreate(formData);
@@ -418,11 +423,11 @@ const Cotizador = () => {
               styles={{
                 container: (provided) => ({
                   ...provided,
-                  width: "100%", // Asegura que el Select tenga un ancho del 100%
+                  width: "100%",
                 }),
                 control: (provided) => ({
                   ...provided,
-                  width: "100%", // Asegura que el control del Select tenga un ancho del 100%
+                  width: "100%",
                 }),
               }}
             />
@@ -779,7 +784,6 @@ const Cotizador = () => {
                     type="number"
                     name={`cotizacionesIndividuales[${index}].anticipo`}
                     value={cotizacion.anticipoPorcentaje}
-                    disabled
                     onChange={(e) =>
                       handleCotizacionIndividualChange(
                         index,
