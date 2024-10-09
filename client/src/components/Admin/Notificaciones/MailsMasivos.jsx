@@ -100,8 +100,6 @@ export default function MailsMasivos() {
 
     const uploadedImages = [];
 
-    console.log(uploadedImages);
-
     for (const file of files) {
       const data = new FormData();
       data.append("file", file);
@@ -196,8 +194,6 @@ export default function MailsMasivos() {
       pdf: producto.pdf,
       password,
     };
-
-    console.log(emailData);
 
     setEnviando(true);
 
@@ -294,26 +290,75 @@ export default function MailsMasivos() {
             type="file"
             id="imagen"
             accept="image/png, image/jpeg"
-            onChange={(e) => uploadImage(e, 0)}
+            onChange={(e) => {
+              uploadImage(e, 0);
+              setProducto({
+                ...producto,
+                previewImage: URL.createObjectURL(e.target.files[0]),
+              });
+            }}
           />
+          {producto?.previewImage && (
+            <div className="image-preview">
+              <img
+                src={producto.previewImage}
+                alt="Previsualización Imagen 1"
+                style={{ width: "200px" }}
+              />
+            </div>
+          )}
         </div>
+
         <div className="form-group">
           <label htmlFor="imagen1">Imagen 2</label>
           <input
             type="file"
             id="imagen1"
             accept="image/png, image/jpeg"
-            onChange={(e) => uploadImage(e, 1)}
+            onChange={(e) => {
+              uploadImage(e, 1);
+              setProducto({
+                ...producto,
+                previewImage1: URL.createObjectURL(e.target.files[0]),
+              });
+            }}
           />
+          {producto?.previewImage1 && (
+            <div className="image-preview">
+              <img
+                src={producto.previewImage1}
+                alt="Previsualización Imagen 2"
+                style={{ width: "200px" }}
+              />
+            </div>
+          )}
         </div>
+
         <div className="form-group">
           <label htmlFor="fichaPDF">PDF</label>
           <input
             type="file"
             id="fichaPDF"
             accept="application/pdf"
-            onChange={uploadPDF}
+            onChange={(e) => {
+              uploadPDF(e);
+              setProducto({
+                ...producto,
+                previewPDF: URL.createObjectURL(e.target.files[0]),
+              });
+            }}
           />
+          {producto?.previewPDF && (
+            <div className="pdf-preview">
+              <a
+                href={producto.previewPDF}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver Previsualización PDF
+              </a>
+            </div>
+          )}
         </div>
 
         <button className="form-submit" type="submit" disabled={enviando}>

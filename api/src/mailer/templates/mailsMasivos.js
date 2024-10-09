@@ -1,6 +1,8 @@
 const mailsMasivos = (cuerpoMensaje, pdf, imagen, imagen1) => {
   const americanVialImage =
-    "https://res.cloudinary.com/dmfzplfra/image/upload/v1727536957/Images/american_ftok3h.png"; // URL de la imagen de American Vial
+    "https://res.cloudinary.com/dmfzplfra/image/upload/v1727536957/Images/american_ftok3h.png";
+  const PDFUrl =
+    "https://res.cloudinary.com/dmfzplfra/image/upload/v1727730981/PDF_b1hsox.png";
 
   return `
   <html>
@@ -29,11 +31,17 @@ const mailsMasivos = (cuerpoMensaje, pdf, imagen, imagen1) => {
           font-size: 12px;
           color: #999999;
         }
+        .image-container {
+          display: flex;
+          justify-content: space-between;
+          margin: 20px 0;
+        }
         .product-image {
-          width: 150px;
+          width: 40%;
           height: auto;
-          display: block;
-          margin: 10px auto;
+        }
+        .center {
+          text-align: center;
         }
       </style>
     </head>
@@ -42,14 +50,23 @@ const mailsMasivos = (cuerpoMensaje, pdf, imagen, imagen1) => {
         <h1>Mensaje Importante</h1>
         <p>${cuerpoMensaje}</p>
         
-        ${imagen ? `<img src="${imagen}" alt="Imagen" class="product-image" />` : ""}
-        ${imagen1 ? `<img src="${imagen1}" alt="Imagen Adicional" class="product-image" />` : ""}
+        <div class="image-container">
+          ${imagen ? `<img src="${imagen}" alt="Imagen" class="product-image" />` : ""}
+          ${imagen1 ? `<img src="${imagen1}" alt="Imagen Adicional" class="product-image" />` : ""}
+        </div>
 
         <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 20px auto;" />
         
-        ${pdf ? `<a href="${pdf}" target="_blank" style="display: block; margin: 20px auto; font-weight: bold;">Ver Documento PDF</a>` : ""}
+        ${
+          pdf
+            ? `  
+    <a href="${pdf}" target="_blank" style="display: block; margin: 20px auto; font-weight: bold;">
+      <img src="${PDFUrl}" alt="Descargar PDF" style="width: 50px; height: auto; border: none;" />
+    </a>`
+            : ""
+        }
         
-        <p style="text-align: center; margin: 10px 0; font-weight: bold;">
+        <p class="center" style="margin: 10px 0; font-weight: bold;">
           Paris 256 esq. Colectora Este <br />
           1611 - Don Torcuato - Bs. As.<br />
           Tel./Fax : (+54) 11 4748 5900 / int. 273
