@@ -107,7 +107,9 @@ const cotizacionEmail = (cotizacion) => {
           }" download style="text-decoration: none;">
             <img src="${PDFUrl}" alt="Descargar PDF" style="width: 50px; height: auto; border: none;" />
           </a>
-          <div style="margin-top: 5px; font-weight: bold; font-size: 16px;">Cotización</div>
+          <div style="margin-top: 5px; font-weight: bold; font-size: 16px;">Cotización ${
+            cotizacion.codigoCotizacion
+          }</div>
         </div>
         <div style="text-align: center;">
           <a href="${

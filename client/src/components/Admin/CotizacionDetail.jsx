@@ -30,7 +30,11 @@ const Modal = ({ isOpen, onClose, children }) => {
   return (
     <div className="modal-overlay1">
       <div className="modal-content1">
-        <button className="modal-close" onClick={onClose}>
+        <button
+          className="modal-close"
+          onClick={onClose}
+          style={{ color: "black" }}
+        >
           X
         </button>
         {children}
@@ -881,8 +885,31 @@ export default function CotizacionDetail() {
           textDecoration: "underline",
         }}
       >
-        <button onClick={handlePreviewOpen}>Previsualización</button>
+        <button
+          onClick={handlePreviewOpen}
+          style={{
+            backgroundColor: "#f5f5f5",
+            border: "2px solid #ccc",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            fontSize: "16px",
+            cursor: "pointer",
+            transition: "background-color 0.3s, border-color 0.3s",
+            color: "#333",
+          }}
+          onMouseOver={(e) => {
+            e.target.style.backgroundColor = "#e0e0e0";
+            e.target.style.borderColor = "#aaa";
+          }}
+          onMouseOut={(e) => {
+            e.target.style.backgroundColor = "#f5f5f5";
+            e.target.style.borderColor = "#ccc";
+          }}
+        >
+          Previsualización
+        </button>
       </div>
+
       <Modal isOpen={preview} onClose={handlePreviewClose}>
         <PreviewCotizacionEmail cotizacionDetalle={cotizacionDetalle} />
       </Modal>

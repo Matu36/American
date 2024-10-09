@@ -189,7 +189,7 @@ export default function PreviewCotizacionEmail({ cotizacionDetalle }) {
           <div
             style={{ marginTop: "5px", fontWeight: "bold", fontSize: "16px" }}
           >
-            Cotización
+            Cotización {cotizacionDetalle.codigoCotizacion}
           </div>
         </div>
         <div style={{ textAlign: "center" }}>
@@ -213,6 +213,7 @@ export default function PreviewCotizacionEmail({ cotizacionDetalle }) {
           </div>
         </div>
       </div>
+      <hr />
       <div style={{ marginTop: "30px", textAlign: "center" }}>
         <img
           src={americanVialImage}
@@ -224,6 +225,23 @@ export default function PreviewCotizacionEmail({ cotizacionDetalle }) {
             display: "inline-block",
           }}
         />
+        <p style={{ margin: "10px 0", fontWeight: "bold" }}>
+          Paris 256 esq. Colectora Este <br />
+          1611 - Don Torcuato - Bs. As.
+          <br />
+          Tel./Fax : (+54) 11 4748 5900 / int. 273
+        </p>
+        <a
+          href="http://www.americanvial.com"
+          style={{
+            display: "block",
+            marginBottom: "20px",
+            fontWeight: "bold",
+            color: "blue",
+          }}
+        >
+          www.americanvial.com
+        </a>
       </div>
     </div>
   );
