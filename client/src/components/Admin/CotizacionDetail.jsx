@@ -435,11 +435,38 @@ export default function CotizacionDetail() {
           <Text style={styles.hr} />
         </View>
         <br />
+        <br />
         <Text style={[styles.especificacionesPrincipales, styles.centeredText]}>
           Propuestas de financiación:
         </Text>
         <View>{cotizacionesIndividualPDF}</View>
 
+        <View style={styles.footerDetail}>
+          <Text style={styles.hr} />
+          <Text>
+            Panamericana Km 28.250 Paris 256 esq. Colectora Este 1611 - Don
+            Torcuato - Bs. As. Argentina
+          </Text>
+          <Text>Tel./Fax: (5411) 4748-5900 </Text>{" "}
+          <Text>www.americanvial.com</Text>
+        </View>
+      </Page>
+      <Page size="A4" style={styles.page}>
+        <Image style={styles.watermark} src={americanvialDEGRADE} />
+        {/* Logos */}
+        <View style={styles.imagenesPDF}>
+          <Image style={styles.sino} src={SINOMACH} />
+          <Image style={styles.american} src={americanvial} />
+        </View>
+
+        {/* Título y fecha */}
+        <View style={styles.SINOMACH}>
+          <Text style={styles.SINOMACHtitle}>
+            SINOMACH CONSTRUCTION MACHINERY GROUP I/E CO., LTD.
+          </Text>
+          <Text style={styles.distribuidor}>Distribuidor en Argentina -</Text>
+          <Text style={styles.hr} />
+        </View>
         {/* Características técnicas generales */}
 
         <Text style={styles.caracgenerales}>
@@ -470,34 +497,6 @@ export default function CotizacionDetail() {
               </Text>
             ))}
         </View>
-
-        <View style={styles.footerDetail}>
-          <Text style={styles.hr} />
-          <Text>
-            Panamericana Km 28.250 Paris 256 esq. Colectora Este 1611 - Don
-            Torcuato - Bs. As. Argentina
-          </Text>
-          <Text>Tel./Fax: (5411) 4748-5900 </Text>{" "}
-          <Text>www.americanvial.com</Text>
-        </View>
-      </Page>
-      <Page size="A4" style={styles.page}>
-        <Image style={styles.watermark} src={americanvialDEGRADE} />
-        {/* Logos */}
-        <View style={styles.imagenesPDF}>
-          <Image style={styles.sino} src={SINOMACH} />
-          <Image style={styles.american} src={americanvial} />
-        </View>
-
-        {/* Título y fecha */}
-        <View style={styles.SINOMACH}>
-          <Text style={styles.SINOMACHtitle}>
-            SINOMACH CONSTRUCTION MACHINERY GROUP I/E CO., LTD.
-          </Text>
-          <Text style={styles.distribuidor}>Distribuidor en Argentina -</Text>
-          <Text style={styles.hr} />
-        </View>
-
         <Text style={styles.especificacionesPrincipales}>
           Sistema Hidráulico:
         </Text>
@@ -516,22 +515,7 @@ export default function CotizacionDetail() {
             </Text>
           ))}
         </View>
-        <Text style={styles.especificacionesPrincipales}>Capacidades:</Text>
-        <View style={styles.especificaciones}>
-          {producto.capacidades.split("\n").map((capacidad, index) => (
-            <Text key={index} style={styles.listItem}>
-              • {capacidad}
-            </Text>
-          ))}
-        </View>
-        <Text style={styles.especificacionesPrincipales}>Cabina:</Text>
-        <View style={styles.especificaciones}>
-          {producto.Cabina.split("\n").map((cabina, index) => (
-            <Text key={index} style={styles.listItem}>
-              • {cabina}
-            </Text>
-          ))}
-        </View>
+
         <View style={styles.footerDetail}>
           <Text style={styles.hr} />
           <Text>
@@ -558,7 +542,22 @@ export default function CotizacionDetail() {
           <Text style={styles.distribuidor}>Distribuidor en Argentina -</Text>
           <Text style={styles.hr} />
         </View>
-
+        <Text style={styles.especificacionesPrincipales}>Capacidades:</Text>
+        <View style={styles.especificaciones}>
+          {producto.capacidades.split("\n").map((capacidad, index) => (
+            <Text key={index} style={styles.listItem}>
+              • {capacidad}
+            </Text>
+          ))}
+        </View>
+        <Text style={styles.especificacionesPrincipales}>Cabina:</Text>
+        <View style={styles.especificaciones}>
+          {producto.Cabina.split("\n").map((cabina, index) => (
+            <Text key={index} style={styles.listItem}>
+              • {cabina}
+            </Text>
+          ))}
+        </View>
         <Text style={styles.especificacionesPrincipales}>
           Dimensiones Generales:
         </Text>
@@ -584,15 +583,6 @@ export default function CotizacionDetail() {
         {producto.imagen1 && <Image src={producto.imagen1} alt="Imagen 1" />}
         {producto.imagen2 && <Image src={producto.imagen2} alt="Imagen 2" />}
         {producto.imagen3 && <Image src={producto.imagen3} alt="Imagen 3" />}
-
-        {/* Asesor comercial */}
-        {/* <View>
-          <Text>Asesor Comercial</Text>
-          <Text>
-            Nombre: {usuario.nombre} {usuario.apellido}
-          </Text>
-          <Text>Email: {usuario.email}</Text>
-        </View> */}
 
         {/* Pie de página */}
 
@@ -662,7 +652,7 @@ export default function CotizacionDetail() {
           </div>
           <h5 className="precioUnitario">
             Precio Unitario del equipo:………….…… U$D {""}
-            {cotizacion.precio} + IVA.- ({cotizacion.IVA}%)
+            {Math.floor(cotizacion.precio)} + IVA.- ({cotizacion.IVA}%)
           </h5>
 
           <p style={{ marginTop: "-10px" }}>

@@ -68,6 +68,7 @@ export const styles = StyleSheet.create({
   consideracion: {
     fontSize: 12,
     marginVertical: 10,
+    marginTop: 30,
   },
 
   opcion: {
@@ -168,6 +169,6 @@ export const styles = StyleSheet.create({
 
   centeredText: {
     textAlign: "center",
-    marginTop: 20,
+    marginTop: 40,
   },
 });
