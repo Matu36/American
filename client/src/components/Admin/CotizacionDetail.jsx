@@ -30,14 +30,20 @@ const Modal = ({ isOpen, onClose, children }) => {
   return (
     <div className="modal-overlay1">
       <div className="modal-content1">
-        <button
-          className="modal-close"
-          onClick={onClose}
-          style={{ color: "black" }}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            height: "100%",
+          }}
         >
-          X
-        </button>
-        {children}
+          <button className="modal-close" onClick={onClose}>
+            X
+          </button>
+          {children}
+        </div>
       </div>
     </div>
   );

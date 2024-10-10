@@ -5839,15 +5839,33 @@ p {
 
 .modal-content1 {
   background-color: white;
-  padding: 20px; /* Puedes reducir esto para hacerlo más compacto */
+  padding: 20px; 
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 1000px; /* Ajusta el ancho a un valor más pequeño */
-  max-width: 90%; /* Para asegurarte de que no exceda el tamaño de la pantalla */
-  height: auto; /* Permite que la altura se ajuste automáticamente */
-  max-height: 80%; /* Limita la altura máxima del modal */
-  overflow-y: auto; /* Agrega desplazamiento vertical si es necesario */
+  width: 1000px; 
+  max-width: 90%;
+  height: auto; 
+  max-height: 80%; 
+  overflow-y: auto;
+  position: relative; /* Añadir esta línea */
 }
+
+.modal-close {
+  background-color: transparent; /* Fondo transparente */
+  color: black; /* Color del texto */
+  border: none; /* Sin borde */
+  font-size: 24px; /* Tamaño de la fuente */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  position: absolute; /* Para poder posicionarlo en el modal */
+  top: 0px; /* Ajusta la posición desde arriba */
+  right: -10px; /* Ajusta la posición desde la derecha */
+  transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.modal-close:hover {
+  color: red; /* Cambia el color al pasar el mouse */
+}
+
 
 .modal-buttons {
   display: flex;
