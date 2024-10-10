@@ -127,14 +127,14 @@ export default function PreviewCotizacionEmail({ cotizacionDetalle }) {
         Detalles de la Cotización
       </h2>
       <p style={{ textAlign: "center" }}>
-        <strong>VALOR PAGO DE CONTADO:</strong> U$S {primerCotizacion.precio} +
-        IVA 10.5% <br />
+        <strong>VALOR PAGO DE CONTADO:</strong> U$S{" "}
+        {Math.floor(primerCotizacion.precio)} + IVA 10.5% <br />
         <strong>Cotización Dólar BNA:</strong> Ejemplo Hoy BNA ${" "}
         {primerCotizacion.cotizacionDolar}, Precio en Pesos: $$
         {(Number(primerCotizacion.precioEnPesos) || 0).toLocaleString("es-ES", {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
-        })}
+        })}{" "}
         + IVA 10.5%
       </p>
       <p style={{ textAlign: "center", fontWeight: "bold", color: "#f00" }}>

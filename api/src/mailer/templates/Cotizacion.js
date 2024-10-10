@@ -74,9 +74,9 @@ const cotizacionEmail = (cotizacion) => {
       <p style="text-align: left; font-weight: 600; font-size: 16px; margin-top: 35px;">${notasEmail}</p>
       <h2 style="text-align: center; color: #555; font-size: 20px; text-decoration: underline;margin-top: 35px;">Detalles de la Cotización</h2>
       <p style="text-align: center;">
-        <strong>VALOR PAGO DE CONTADO:</strong> U$S ${
+        <strong>VALOR PAGO DE CONTADO:</strong> U$S ${Math.floor(
           primerCotizacion.precio
-        } + IVA 10.5% <br />
+        )} + IVA 10.5% <br />
         <strong>Cotización Dólar BNA:</strong> Ejemplo Hoy BNA $ ${
           primerCotizacion.cotizacionDolar
         }, Precio en Pesos: $$${(
