@@ -22,7 +22,7 @@ export default function PreviewCotizacionEmail({ cotizacionDetalle }) {
       const cuotaValorEnPesos = item.cuotaValorEnPesos || 0;
 
       return `        
-      <div style="margin-bottom: 30px; ; padding: 10px 0; text-align: left; position: relative;">
+      <div style="margin-bottom: 5px; ; padding: 10px 0; text-align: left; position: relative;">
      
         <strong style="text-decoration: underline; margin-bottom: 5px; display: block;">${cuotasOption}:</strong> 
          <strong>${cotizacionDetalle.formaPago}</strong>
