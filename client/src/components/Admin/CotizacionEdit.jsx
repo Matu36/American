@@ -287,13 +287,34 @@ export default function CotizacionEdit() {
     };
   };
 
+  const calcularIVA = (cotizacion) => {
+    const valores = calcularValoresCotizacion(cotizacion);
+    const { anticipo, IVA, cuotas } = cotizacion;
+    const cuotaValorEnPesos = valores.cuotaValorEnPesos || 0; // Obtener de valores calculados
+
+    // Cálculo del IVA según la fórmula proporcionada
+    const ivaResultado =
+      anticipo > 0
+        ? (cuotaValorEnPesos * cuotas + anticipo * cotizacion.cotizacionDolar) *
+          (IVA / 100)
+        : cuotaValorEnPesos * cuotas * (IVA / 100);
+
+    // Formato del resultado con toLocaleString
+    return ivaResultado.toLocaleString("es-ES", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
   useEffect(() => {
     const updatedCotizaciones = formData.cotizacionesIndividuales.map(
       (cotizacion) => {
         const valoresCalculados = calcularValoresCotizacion(cotizacion);
+        const ivaCalculado = calcularIVA(cotizacion);
         return {
           ...cotizacion,
           ...valoresCalculados,
+          IVAConECheq: ivaCalculado,
         };
       }
     );
@@ -726,7 +747,16 @@ export default function CotizacionEdit() {
                 className="form-input"
               />
             </div>
-
+            <div className="form-group">
+              <label className="form-label">IVA a 30 días:</label>
+              <input
+                type="text"
+                name={`cotizacionesIndividuales[${index}].IVAConECheq`}
+                value={cotizacion.IVAConECheq}
+                disabled
+                className="form-input"
+              />
+            </div>
             <div>
               {cotizacion.estado !== 2 && cotizacion.estado !== 3 && (
                 <button

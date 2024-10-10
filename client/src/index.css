@@ -5847,23 +5847,23 @@ p {
   height: auto; 
   max-height: 80%; 
   overflow-y: auto;
-  position: relative; /* Añadir esta línea */
+  position: relative; 
 }
 
 .modal-close {
-  background-color: transparent; /* Fondo transparente */
-  color: black; /* Color del texto */
-  border: none; /* Sin borde */
-  font-size: 24px; /* Tamaño de la fuente */
-  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-  position: absolute; /* Para poder posicionarlo en el modal */
-  top: 0px; /* Ajusta la posición desde arriba */
-  right: -10px; /* Ajusta la posición desde la derecha */
-  transition: color 0.3s ease; /* Transición suave para el color */
+  background-color: transparent; 
+  color: black; 
+  border: none; 
+  font-size: 24px; 
+  cursor: pointer; 
+  position: absolute; 
+  top: 0px; 
+  right: -10px; 
+  transition: color 0.3s ease; 
 }
 
 .modal-close:hover {
-  color: red; /* Cambia el color al pasar el mouse */
+  color: red; 
 }
 
 
