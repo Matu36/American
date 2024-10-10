@@ -130,7 +130,7 @@ export default function PreviewCotizacionEmail({ cotizacionDetalle }) {
         <strong>VALOR PAGO DE CONTADO:</strong> U$S{" "}
         {Math.floor(primerCotizacion.precio)} + IVA 10.5% <br />
         <strong>Cotización Dólar BNA:</strong> Ejemplo Hoy BNA ${" "}
-        {primerCotizacion.cotizacionDolar}, Precio en Pesos: $$
+        {primerCotizacion.cotizacionDolar}, Precio en Pesos: $
         {(Number(primerCotizacion.precioEnPesos) || 0).toLocaleString("es-ES", {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,

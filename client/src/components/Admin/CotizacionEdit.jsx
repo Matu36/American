@@ -113,74 +113,59 @@ export default function CotizacionEdit() {
   }, [isLoadingCotizacion, cotizacionDetalle, idUsuario, id]);
 
   const handleCotizacionIndividualChange = (index, field, value) => {
-    // Crea una copia del array de cotizaciones para no mutar el estado directamente
     const updatedCotizaciones = [...formData.cotizacionesIndividuales];
+    const newValue = field === "cuotas" ? parseInt(value, 10) : value;
+    let cotizacion = updatedCotizaciones[index];
+    let precio = parseFloat(cotizacion.precio) || 0;
 
-    // Convierte el valor a número si el campo es 'cuotas' o 'anticipo' para cálculos precisos
-    const newValue =
-      field === "cuotas" ||
-      field === "anticipo" ||
-      field === "precio" ||
-      field === "IVA"
-        ? parseFloat(value)
-        : value;
-
-    // Actualiza el campo específico en la cotización correspondiente
-    updatedCotizaciones[index] = {
-      ...updatedCotizaciones[index],
+    // Actualizar el campo que ha cambiado
+    cotizacion = {
+      ...cotizacion,
       [field]: newValue,
     };
 
-    // Recalcula los valores derivados si el campo cambiado afecta esos cálculos
-    const cotizacion = updatedCotizaciones[index];
-    if (field === "cuotas" || field === "anticipo" || field === "precio") {
-      // Recalcula saldoAFinanciar
-      cotizacion.saldoAFinanciar = (
-        cotizacion.precio - cotizacion.anticipo
-      ).toFixed(2);
-
-      // Recalcula saldoConInteres
-      cotizacion.saldoConInteres = (
-        cotizacion.saldoAFinanciar *
-        (1 + cotizacion.interes / 100)
-      ).toFixed(2);
-
-      // Recalcula cuotaValor
-      cotizacion.cuotaValor = (
-        cotizacion.saldoConInteres / cotizacion.cuotas
-      ).toFixed(2);
-
-      // Recalcula PrecioFinal
-      cotizacion.PrecioFinal = (
-        cotizacion.cuotaValor * cotizacion.cantidadProducto
-      ).toFixed(2);
-    }
-
-    // Actualiza el interés si el campo cambiado es cuotas
+    // Si se cambia el campo "cuotas", calcular el nuevo interés
     if (field === "cuotas") {
       const nuevoInteres = newValue > 1 ? newValue * 3.5 : 0;
-      cotizacion.interes = nuevoInteres;
-
-      // Recalcula los valores derivados que dependen de interés
-      cotizacion.saldoConInteres = (
-        cotizacion.saldoAFinanciar *
-        (1 + nuevoInteres / 100)
-      ).toFixed(2);
-      cotizacion.cuotaValor = (
-        cotizacion.saldoConInteres / cotizacion.cuotas
-      ).toFixed(2);
-      cotizacion.PrecioFinal = (
-        cotizacion.cuotaValor * cotizacion.cantidadProducto
-      ).toFixed(2);
+      cotizacion = {
+        ...cotizacion,
+        interes: nuevoInteres,
+      };
     }
 
-    // Actualiza el estado con las cotizaciones modificadas
+    // Si se modifica el anticipo en dólares, calcular el porcentaje
+    if (field === "anticipo") {
+      let anticipo = parseFloat(newValue) || 0;
+      let anticipoPorcentaje = (anticipo / precio) * 100 || 0;
+
+      cotizacion = {
+        ...cotizacion,
+        anticipo: newValue,
+        anticipoPorcentaje: anticipoPorcentaje.toFixed(2),
+      };
+    }
+
+    // Si se modifica el porcentaje, calcular el anticipo en dólares
+    if (field === "anticipoPorcentaje") {
+      let anticipoPorcentaje = parseFloat(newValue) || 0;
+      let anticipo = (anticipoPorcentaje / 100) * precio || 0;
+
+      cotizacion = {
+        ...cotizacion,
+        anticipoPorcentaje: newValue,
+        anticipo: anticipo.toFixed(2),
+      };
+    }
+
+    // Actualizar la cotización modificada
+    updatedCotizaciones[index] = cotizacion;
+
+    // Actualizar el estado con los nuevos valores
     setFormData({
       ...formData,
       cotizacionesIndividuales: updatedCotizaciones,
     });
   };
-
   const addCotizacionIndividual = () => {
     setFormData({
       ...formData,
@@ -639,7 +624,7 @@ export default function CotizacionEdit() {
                     onChange={(e) =>
                       handleCotizacionIndividualChange(
                         index,
-                        "anticipo",
+                        "anticipo", // Cambia el valor del anticipo en dólares
                         e.target.value
                       )
                     }
@@ -647,20 +632,24 @@ export default function CotizacionEdit() {
                   />
                 </div>
 
-                <div className="form-group" style={{ color: "GrayText" }}>
+                <div className="form-group">
                   <label className="form-label">Anticipo %:</label>
                   <input
                     type="number"
-                    name={`cotizacionesIndividuales[${index}].anticipo`}
-                    value={cotizacion.anticipoPorcentaje}
-                    disabled
-                    onChange={(e) =>
+                    name={`cotizacionesIndividuales[${index}].anticipoPorcentaje`}
+                    value={
+                      cotizacion.anticipoPorcentaje > 0
+                        ? Math.floor(cotizacion.anticipoPorcentaje)
+                        : ""
+                    } // No mostrar 0
+                    onChange={(e) => {
+                      const value = parseInt(e.target.value, 10);
                       handleCotizacionIndividualChange(
                         index,
-                        "anticipo",
-                        e.target.value
-                      )
-                    }
+                        "anticipoPorcentaje",
+                        isNaN(value) ? "" : Math.floor(value)
+                      );
+                    }}
                     className="form-input"
                   />
                 </div>

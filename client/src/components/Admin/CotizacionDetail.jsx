@@ -656,9 +656,8 @@ export default function CotizacionDetail() {
           </h5>
 
           <p style={{ marginTop: "-10px" }}>
-            Son dólares estadounidenses,{" "}
-            {numerosEnLetras(limpiarSeparadores(cotizacion.precio))}, más IVA.-
-            Ejemplo hoy BNA $ {cotizacion.cotizacionDolar} ( ${" "}
+            Son dólares estadounidenses, {numerosEnLetras(cotizacion.precio)},
+            más IVA.- Ejemplo hoy BNA $ {cotizacion.cotizacionDolar} ( ${" "}
             {cotizacion.precioEnPesos} + IVA {cotizacion.IVA} %)
           </p>
           <hr className="masIva" />
