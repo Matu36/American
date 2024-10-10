@@ -6,6 +6,7 @@ import InputMask from "react-input-mask";
 import { soloNumeros } from "../../utils/soloNumeros";
 import Select from "react-select";
 import Spinner from "../../UI/Spinner";
+import CreatableSelect from "react-select/creatable";
 
 export default function CargaClientes() {
   const { auth } = useAuth();
@@ -248,7 +249,7 @@ export default function CargaClientes() {
 
           <div className="form-group">
             <label htmlFor="ciudad">Ciudad</label>
-            <Select
+            <CreatableSelect
               id="ciudad"
               name="ciudad"
               options={municipios.map((municipio) => ({
@@ -267,6 +268,7 @@ export default function CargaClientes() {
               }
               placeholder="Selecciona una ciudad"
               isClearable
+              formatCreateLabel={(inputValue) => `Crear "${inputValue}"`}
             />
           </div>
           <div className="form-group">
