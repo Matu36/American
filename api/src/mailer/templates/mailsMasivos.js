@@ -77,7 +77,7 @@ const mailsMasivos = (cuerpoMensaje, pdf, imagen, imagen1) => {
 
         <hr style="margin-top: 30px; margin-bottom: 10px;" />
 
-        <img src="${americanVialImage}" alt="American Vial" style="width: 150px; height: auto; display: block; margin: 20px auto;" />
+        <img src="${americanVialImage}" alt="American Vial" style="width: 200px; height: auto; display: block; margin: 10px auto;" />
         
         <p class="center" style="margin: 30px 0; font-weight: bold;"> 
         Paris 256 esq. Colectora Este <br />
