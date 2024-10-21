@@ -154,6 +154,7 @@ export default function EditarUsuario({ handleCerrarModalEdit }) {
           className="registroform"
           style={{ width: "100%", marginTop: "10px" }}
         >
+          <h6 style={{ color: "black" }}>Adjuntar Firma</h6>
           <input
             style={{ width: "100%", textAlign: "center" }}
             type="file"

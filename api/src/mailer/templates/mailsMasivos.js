@@ -1,6 +1,6 @@
 const mailsMasivos = (cuerpoMensaje, pdf, imagen, imagen1) => {
   const americanVialImage =
-    "https://res.cloudinary.com/dmfzplfra/image/upload/v1727536957/Images/american_ftok3h.png";
+    "https://res.cloudinary.com/dr5okg3aq/image/upload/v1729551600/lqrtopb1j9msb03svol5.png";
   const PDFUrl =
     "https://res.cloudinary.com/dmfzplfra/image/upload/v1727730981/PDF_b1hsox.png";
 
@@ -51,8 +51,16 @@ const mailsMasivos = (cuerpoMensaje, pdf, imagen, imagen1) => {
         <p>${cuerpoMensaje}</p>
         
         <div class="image-container">
-          ${imagen ? `<img src="${imagen}" alt="Imagen" class="product-image" />` : ""}
-          ${imagen1 ? `<img src="${imagen1}" alt="Imagen Adicional" class="product-image" />` : ""}
+          ${
+            imagen
+              ? `<img src="${imagen}" alt="Imagen" class="product-image" />`
+              : ""
+          }
+          ${
+            imagen1
+              ? `<img src="${imagen1}" alt="Imagen Adicional" class="product-image" />`
+              : ""
+          }
         </div>
 
         ${
